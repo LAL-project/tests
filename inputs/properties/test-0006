@@ -1,0 +1,16 @@
+TYPE properties-general
+INPUT 9
+graphs/er/010-0.10 edge-list
+graphs/er/012-0.10 edge-list
+graphs/er/015-0.10 edge-list
+graphs/er/019-0.10 edge-list
+graphs/er/028-0.20 edge-list
+graphs/er/028-0.50 edge-list
+graphs/er/029-0.20 edge-list
+graphs/er/029-0.50 edge-list
+graphs/er/030-0.50 edge-list
+BODY
+	enumerate_Q
+	Q_size
+	2nd_mmt_deg
+	3rd_mmt_deg

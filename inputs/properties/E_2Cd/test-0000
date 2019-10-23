@@ -1,0 +1,7 @@
+TYPE properties-approx_exp_C
+INPUT 1 graphs/linear-tree/004 edge-list
+BODY
+	E_2[C|d]
+	2
+	0 1 2 3
+	3 1 2 0

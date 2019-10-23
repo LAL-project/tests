@@ -1,0 +1,22 @@
+TYPE generate-trees
+INPUT 0
+BODY
+	random-unlabelled 2
+	random-unlabelled 3
+	random-unlabelled 4
+	random-unlabelled 5
+	random-unlabelled 6
+	random-unlabelled 7
+	random-unlabelled 8
+	random-unlabelled 9
+	random-unlabelled 10
+	random-unlabelled 11
+	random-unlabelled 12
+	random-unlabelled 13
+	random-unlabelled 14
+	random-unlabelled 15
+	random-unlabelled 16
+	random-unlabelled 17
+	random-unlabelled 18
+	random-unlabelled 19
+	random-unlabelled 20

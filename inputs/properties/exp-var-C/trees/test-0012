@@ -1,0 +1,5 @@
+TYPE properties-exp_var_C
+INPUT 0
+BODY
+	all-trees
+	2	17 18

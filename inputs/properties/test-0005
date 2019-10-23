@@ -1,0 +1,9 @@
+TYPE properties-general
+INPUT 2
+graphs/complete/17 edge-list
+graphs/complete/18 edge-list
+BODY
+	enumerate_Q
+	Q_size
+	2nd_mmt_deg
+	3rd_mmt_deg

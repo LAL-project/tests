@@ -1,0 +1,11 @@
+TYPE generate-trees
+INPUT 0
+BODY
+	exhaustive-labelled 2
+	exhaustive-labelled 3
+	exhaustive-labelled 4
+	exhaustive-labelled 5
+	exhaustive-labelled 6
+	exhaustive-labelled 7
+	exhaustive-labelled 8
+	exhaustive-labelled 9

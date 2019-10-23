@@ -1,0 +1,24 @@
+TYPE properties-exp_var_D
+INPUT 19
+graphs/complete/02 edge-list
+graphs/complete/03 edge-list
+graphs/complete/04 edge-list
+graphs/complete/05 edge-list
+graphs/complete/06 edge-list
+graphs/complete/07 edge-list
+graphs/complete/08 edge-list
+graphs/complete/09 edge-list
+graphs/complete/10 edge-list
+graphs/complete/11 edge-list
+graphs/complete/12 edge-list
+graphs/complete/13 edge-list
+graphs/complete/14 edge-list
+graphs/complete/15 edge-list
+graphs/complete/16 edge-list
+graphs/complete/17 edge-list
+graphs/complete/18 edge-list
+graphs/complete/19 edge-list
+graphs/complete/20 edge-list
+BODY
+	formula
+	complete

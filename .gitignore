@@ -1,0 +1,7 @@
+*.html
+.out.*
+.err.*
+.vgd.*
+.time-*
+build-debug/
+build-release/

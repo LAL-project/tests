@@ -1,0 +1,69 @@
+Expectation and Variance of C tests' format
+===========================================
+
+Directories:
+* all-trees: to test the algorithm for computing V[C] on *all* the
+	trees of a given size.
+* brute-force: useful for generating new base outputs.
+* general-formula: to test the formula of V[C] on general trees.
+* trees: to test the algorithm for computing V[C] on trees stored
+	in files.
+
+Contents of input files:
+	
+- Type: the type is always the same:
+	TYPE properties-exp_var_C
+
+- Input: it is allowed to specify input 0.
+
+- Body:
+	* In order to test the brute-force algorithm, write:
+		BODY
+		brute-force
+	
+	* In order to test the algorithm implementing the general formula,
+	write:
+		BODY
+		formula
+	
+	* In order to test the algorithm for trees, write:
+		BODY
+		trees
+	
+	* In order to test the algorithm for trees, on all trees of a given
+	size, write:
+		BODY
+		all-trees
+		amount-sizes sizes
+	
+	For example, the test:
+		BODY
+		all-trees
+		7	2 3 4 5 6 7 8
+	tests all trees of 2 vertices, all trees of 3 vertices, ...
+
+	* In order to test the algorithm for forests, write:
+		BODY
+		forests
+	
+	* In order to test the algorithm for forests consisting on several
+	unlabelled trees, each generated uniformly at random, write
+		BODY
+		mixed-trees
+		replicas
+		amount-tests tests
+	Each test in "tests" is a pair (num-trees size-trees), where "num-trees"
+	is the amount of trees in the forest, and "size-trees" is the size
+	of each tree to be generated.
+	
+	For example, the test:
+		BODY
+		mixed-trees
+		1000
+		4   3 4   5 7   4 19   1 20
+	tests the algorithm on:
+	-> a forest of 3 unlabelled trees generated u.a.r. each of 4 vertices
+	-> a forest of 5 unlabelled trees generated u.a.r. each of 7 vertices
+	-> a forest of 4 unlabelled trees generated u.a.r. each of 19 vertices
+	-> a forest of 1 unlabelled tree generated u.a.r. of 20 vertices
+	Each of these forests will be generated 1000 times
