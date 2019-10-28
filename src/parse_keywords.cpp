@@ -82,6 +82,9 @@ void mark_wrong_keyword
 
 err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	const string& key = keywords[0];
+	if (key == "construction_graph") {
+		return call_construction(keywords, 1, fin);
+	}
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
 	}
@@ -95,10 +98,27 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 		return call_generate(keywords, 1, fin);
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_main") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
+}
+
+	// Functions to test construction of graphs
+
+err_type call_construction(const vector<string>& keywords, size_t i, ifstream& fin) {
+	const string& graph_type = keywords[i];
+	if (graph_type != "directed" and graph_type != "undirected") {
+		cerr << ERROR << endl;
+		cerr << "    Wrong keyword at " << i << ": '" << graph_type << "'." << endl;
+		mark_wrong_keyword(keywords, {i}, "    ");
+		return err_type::wrong_keyword;
+	}
+
+	if (graph_type == "directed") {
+		return exe_construction_directed(fin);
+	}
+	return exe_construction_undirected(fin);
 }
 
 	// Functions to test the integer and rational classes
@@ -106,7 +126,7 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	const string& num_type1 = keywords[i];
 	if (num_type1 != "integer" and num_type1 != "rational") {
-		cerr << ERROR("parse_keywords.cpp", "call_numeric") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
 		mark_wrong_keyword(keywords, {i}, "    ");
 		return err_type::wrong_keyword;
@@ -129,13 +149,13 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 			return err_type::no_error;
 		}
 
-		cerr << ERROR("parse_keywords.cpp", "call_numeric") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Wrong keyword at " << i + 1 << ": '" << num_type2 << "'." << endl;
 		mark_wrong_keyword(keywords, {i + 1}, "    ");
 		return err_type::wrong_keyword;
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_numeric") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
@@ -159,7 +179,7 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 		return exe_properties_ExpVar_D(fin);
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_properties") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
@@ -178,7 +198,7 @@ err_type call_linarr
 		return exe_linarr_compute_D(fin);
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_linarr") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
@@ -196,7 +216,7 @@ err_type call_linarr_C
 		return exe_linarr_compute_C_list(fin);
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_linarr_C") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
@@ -212,7 +232,7 @@ err_type call_generate
 		return exe_gen_trees(fin);
 	}
 
-	cerr << ERROR("parse_keywords.cpp", "call_generate") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;

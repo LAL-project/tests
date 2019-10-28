@@ -163,7 +163,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_properties_approx_exp_C.cpp", "exe_properties_approx_Exp_C") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -172,7 +172,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	size_t n_linarrs;
 	fin >> n_linarrs;
 	if (n_linarrs != 1) {
-		cerr << ERROR("exe_properties_approx_exp_C.cpp", "exe_properties_approx_Exp_C") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected only one input." << endl;
 		cerr << "    Instead, '" << n_linarrs << "' were found." << endl;
 		return err_type::test_format_error;
@@ -191,7 +191,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	// parse body field
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_properties_approx_exp_C.cpp", "exe_properties_approx_Exp_C") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -201,7 +201,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR("exe_properties_approx_exp_C.cpp", "exe_properties_approx_Exp_C") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Procedure '" << proc << "' was found." << endl;
 		return err_type::test_format_error;
@@ -225,7 +225,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 		rational ap_bf = E_2Cd_brute_force(G, arr);
 
 		if (ap_lib != ap_bf) {
-			cerr << ERROR("exe_properties_approx_exp_C.cpp", "exe_properties_approx_Exp_C") << endl;
+			cerr << ERROR << endl;
 			cerr << "    The value of E_2[C|d] using the library is not equal to the." << endl;
 			cerr << "    brute force value." << endl;
 			cerr << "    Library's value: " << ap_lib << endl;

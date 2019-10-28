@@ -59,7 +59,7 @@ err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 	fin >> field;
 
 	if (field != "TYPE") {
-		cerr << ERROR("main.cpp", "get_type_keyword") << endl;
+		cerr << ERROR << endl;
 		cerr << "    In input test file '" << filename << "'." << endl;
 		cerr << "    First field is not 'TYPE'." << endl;
 		cerr << "    Field found: '" << field << "'." << endl;
@@ -93,7 +93,7 @@ void get_keywords(const string& type, vector<string>& keywords) {
 int main(int argc, char *argv[]) {
 	// error checking
 	if (argc == 1) {
-		cerr << ERROR("main.cpp", "main") << endl;
+		cerr << ERROR << endl;
 		cerr << "    No arguments given. Use" << endl;
 		cerr << "        ./tests -i" << endl;
 		cerr << "        ./tests --input" << endl;
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 	if (argc > 3) {
-		cerr << ERROR("main.cpp", "main") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Too many arguments given. Use" << endl;
 		cerr << "        ./tests -i" << endl;
 		cerr << "        ./tests --input" << endl;
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 	if (strcmp(argv[1], "-i") != 0 and strcmp(argv[1], "--input") != 0) {
-		cerr << ERROR("main.cpp", "main") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Unrecognised parameter '" << string(argv[1]) << "'. Use" << endl;
 		cerr << "        ./tests -i" << endl;
 		cerr << "        ./tests --input" << endl;
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 	ifstream fin;
 	fin.open(input_file.c_str());
 	if (not fin.is_open()) {
-		cerr << ERROR("main.cpp", "main") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Could not open input test '" << input_file << "'" << endl;
 		return 1;
 	}

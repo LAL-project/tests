@@ -52,7 +52,7 @@ err_type read_graph(const string& file, const string& format, graph& G) {
 	if (format == "edge-list") {
 		bool r = io::read_edge_list(file, G);
 		if (not r) {
-			cerr << ERROR("io_wrapper.cpp", "read_graph") << endl;
+			cerr << ERROR << endl;
 			cerr << "    When attempting to read an edge-list-formatted" << endl;
 			cerr << "    graph from file: '" << file << "'." << endl;
 			return err_type::io_error;
@@ -61,7 +61,7 @@ err_type read_graph(const string& file, const string& format, graph& G) {
 		return err_type::no_error;
 	}
 
-	cerr << ERROR("io_wrapper.cpp", "read_graph") << endl;
+	cerr << ERROR << endl;
 	cerr << "    Unsupported format of file: '" << format << "'." << endl;
 	return err_type::test_format_error;
 }

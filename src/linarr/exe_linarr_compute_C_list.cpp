@@ -63,7 +63,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_linarr_compute_C.cpp", "exe_linarr_compute_C") << endl;
+		cerr <<ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -72,7 +72,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	size_t n_ins;
 	fin >> n_ins;
 	if (n_ins != 1) {
-		cerr << ERROR("exe_linarr_compute_C.cpp", "exe_linarr_compute_C") << endl;
+		cerr <<ERROR << endl;
 		cerr << "    Expected only one input." << endl;
 		cerr << "    Instead, '" << n_ins << "' were found." << endl;
 		return err_type::test_format_error;
@@ -91,7 +91,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	// parse body field
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_linarr_compute_C.cpp", "exe_linarr_compute_C") << endl;
+		cerr <<ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -101,7 +101,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR("exe_linarr_compute_C.cpp", "exe_linarr_compute_C") << endl;
+		cerr <<ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Procedure '" << proc << "' was found." << endl;
 		return err_type::test_format_error;
@@ -148,7 +148,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (Cbfs[i] != Cs[i]) {
-			cerr << ERROR("exe_linarr_compute_C_list.cpp", "exe_linarr_compute_C_list") << endl;
+			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
 			cerr << "        brute force: " << Cbfs[i] << endl;
 			cerr << "        " << proc << ": " << Cs[i] << endl;

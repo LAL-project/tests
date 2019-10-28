@@ -43,10 +43,12 @@
 
 // C++ inlcudes
 #include <cstdint>
+#include <string>
+#include <filesystem>
 
-#define ERROR(file, func) \
-	"Error [file " << file << ", function '" \
-	<< func << "', line " << __LINE__ << "]:"
+#define ERROR \
+	"Error [file " << std::filesystem::path(__FILE__).filename() << ", function '" \
+	<< __func__ << "', line " << __LINE__ << "]:"
 
 #define INVALID_KEYWORD "¡@/#/?234!"
 

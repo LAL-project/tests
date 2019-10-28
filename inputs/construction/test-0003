@@ -1,0 +1,24 @@
+TYPE construction_graph-directed
+INPUT 0
+BODY
+	create_graph g1 10
+	add_edge g1 0 2 false
+	add_edge g1 0 1 false
+	assert num_edges g1 2
+	assert not_normalised g1
+	normalise g1
+	assert normalised g1
+	
+	add_edge g1 5 6 true
+	add_edge g1 0 5 true
+	assert normalised g1
+
+	assert exists_edge g1 0 2
+	assert not_exists_edge g1 2 0
+	assert exists_edge g1 0 1
+	assert not_exists_edge g1 1 0
+	
+	assert exists_edge g1 5 6
+	assert not_exists_edge g1 6 5
+	assert exists_edge g1 0 5
+	assert not_exists_edge g1 5 0

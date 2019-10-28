@@ -60,6 +60,9 @@ using namespace std;
 
 namespace exe_tests {
 
+err_type exe_construction_directed(ifstream& fin);
+err_type exe_construction_undirected(ifstream& fin);
+
 err_type exe_numeric_integer(ifstream& fin);
 err_type exe_numeric_rational_integer(ifstream& fin);
 err_type exe_numeric_rational_rational(ifstream& fin);

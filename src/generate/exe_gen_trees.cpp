@@ -63,7 +63,7 @@ err_type exe_gen_trees(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_gen_trees.cpp", "exe_gen_trees") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -72,7 +72,7 @@ err_type exe_gen_trees(ifstream& fin) {
 	size_t n;
 	fin >> n;
 	if (n != 0) {
-		cerr << ERROR("exe_gen_trees.cpp", "exe_gen_trees") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected no inputs at all." << endl;
 		cerr << "    Instead, '" << n << "' were found." << endl;
 		return err_type::test_format_error;
@@ -81,7 +81,7 @@ err_type exe_gen_trees(ifstream& fin) {
 	// parse body field
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_gen_trees.cpp", "exe_gen_trees") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -162,7 +162,7 @@ err_type exe_gen_trees(ifstream& fin) {
 			integer total = (n^(n - 2));
 
 			if (gen != total) {
-				cerr << ERROR("exe_gen_trees.cpp", "exe_gen_trees") << endl;
+				cerr << ERROR << endl;
 				cerr << "    Exhaustive generation of free labelled trees" << endl;
 				cerr << "    Amount of trees should be: " << total << endl;
 				cerr << "    But generated: " << gen << endl;
@@ -180,7 +180,7 @@ err_type exe_gen_trees(ifstream& fin) {
 			}
 
 			if (amount < SIZE_UUF and gen != UUF[amount]) {
-				cerr << ERROR("exe_gen_trees.cpp", "exe_gen_trees") << endl;
+				cerr << ERROR << endl;
 				cerr << "    Exhaustive generation of free unlabelled trees" << endl;
 				cerr << "    Amount of trees should be: " << UUF[amount] << endl;
 				cerr << "    But generated: " << gen << endl;

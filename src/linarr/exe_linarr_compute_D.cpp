@@ -60,7 +60,7 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_linarr_compute_D.cpp", "exe_linarr_compute_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -69,7 +69,7 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	size_t n;
 	fin >> n;
 	if (n != 1) {
-		cerr << ERROR("exe_linarr_compute_D.cpp", "exe_linarr_compute_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected only one input." << endl;
 		cerr << "    Instead, '" << n << "' were found." << endl;
 		return err_type::test_format_error;
@@ -88,7 +88,7 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	// parse body field
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_linarr_compute_D.cpp", "exe_linarr_compute_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;

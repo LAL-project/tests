@@ -17,6 +17,7 @@ IN_DIRS=("numeric/integer" \
 		 "linear-arrangements/C/ladder-list" \
 		 "linear-arrangements/C/stack-based" \
 		 "generate" \
+		 "construction" \
 		)
 
 OUT_DIRS=("numeric/integer" \
@@ -35,6 +36,7 @@ OUT_DIRS=("numeric/integer" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \
 		 "generate" \
+		 "construction" \
 		 )
 
 ########################################################################

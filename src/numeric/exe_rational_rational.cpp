@@ -58,14 +58,14 @@ err_type exe_numeric_rational_rational(ifstream& fin) {
 
 	fin >> field;
 	if (field != "INPUT") {
-		cerr << ERROR("exe_numeric_rational_rational.cpp", "exe_numeric_rational_rational") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
 	}
 	fin >> n;
 	if (n != 0) {
-		cerr << ERROR("exe_numeric_rational_rational.cpp", "exe_numeric_rational_rational") << endl;
+		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << n << " were specified." << endl;
 		return err_type::test_format_error;
@@ -73,7 +73,7 @@ err_type exe_numeric_rational_rational(ifstream& fin) {
 	// parse body field
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_numeric_rational_rational.cpp", "exe_numeric_rational_rational") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;

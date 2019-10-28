@@ -76,7 +76,7 @@ err_type exe_properties_ExpVar_D(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_properties_ExpVar_D.cpp", "exe_properties_expvar_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -91,7 +91,7 @@ err_type exe_properties_ExpVar_D(ifstream& fin) {
 
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_properties_ExpVar_D.cpp", "exe_properties_expvar_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -101,7 +101,7 @@ err_type exe_properties_ExpVar_D(ifstream& fin) {
 	fin >> proc;
 
 	if (proc != "formula") {
-		cerr << ERROR("exe_properties_ExpVar_D.cpp", "exe_properties_expvar_D") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Received '" << proc << "'." << endl;
 		return err_type::test_format_error;

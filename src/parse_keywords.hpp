@@ -60,6 +60,11 @@ void mark_wrong_keyword
 // parses the first keyword and calls the appropriate main type function
 err_type call_main(const vector<string>& keywords, ifstream& fin);
 
+	// Functions to test construction of graphs
+
+err_type call_construction
+(const vector<string>& keywords, size_t i, ifstream& fin);
+
 	// Functions to test the integer and rational classes
 
 err_type call_numeric

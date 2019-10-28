@@ -1,0 +1,47 @@
+** create_graph GRAPH N
+	Creates a graph of a certain number of vertices
+	
+** add_edge GRAPH VERTEX1 VERTEX2 true/false
+	Adds an edge to a graph. Normalises (or not) the graph
+	
+** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
+	Adds N edges to a graph. Normalises (or not) the graph
+	
+** assert
+	Makes sure that something is true
+	
+	-- not_normalised GRAPH
+		asserts that a graph is NOT normalised
+		
+	-- normalised GRAPH
+		asserts that a graph IS normalised
+		
+	-- equal_graphs GRAPH1 GRAPH2
+		asserts that two graphs are equal (here "equal" is not the
+		same as "isomorphic"!)
+	
+	-- not_equal_graphs GRAPH1 GRAPH2
+		asserts that two graphs are equal (here "equal" is not the
+		same as "isomorphic"!)
+	
+	-- exists_edge GRAPH VERTEX1 VERTEX2
+		asserts that a given edge exists
+	
+	-- not_exists_edge GRAPH VERTEX1 VERTEX2
+		asserts that a given edge does NOT exist
+	
+	-- num_nodes GRAPH N
+		asserts that the number of nodes is N
+		
+	-- num_edges GRAPH N
+		asserts that the number of edges is N
+	
+** normalise GRAPH
+	Normalise a graph
+	
+** assign GRAPH1 GRAPH2
+	Assign graph 2 to graph 1
+	
+** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2
+	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
+	in GRAPH_RESULT

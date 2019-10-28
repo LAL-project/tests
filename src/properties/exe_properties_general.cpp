@@ -105,7 +105,7 @@ err_type exe_properties_general(ifstream& fin) {
 	fin >> field;
 
 	if (field != "INPUT") {
-		cerr << ERROR("exe_properties.cpp", "exe_properties") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'INPUT'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -120,7 +120,7 @@ err_type exe_properties_general(ifstream& fin) {
 
 	fin >> field;
 	if (field != "BODY") {
-		cerr << ERROR("exe_properties.cpp", "exe_properties") << endl;
+		cerr << ERROR << endl;
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
@@ -157,7 +157,7 @@ err_type exe_properties_general(ifstream& fin) {
 				trd_mmt_deg(G);
 			}
 			else {
-				cerr << ERROR("exe_properties.cpp", "exe_properties") << endl;
+				cerr << ERROR << endl;
 				cerr << "    Instruction not recognised." << endl;
 				cerr << "    Allowed instructions:" << endl;
 				cerr << "        enumerate_Q" << endl;

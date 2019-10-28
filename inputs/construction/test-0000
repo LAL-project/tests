@@ -1,0 +1,22 @@
+TYPE construction_graph-undirected
+INPUT 0
+BODY
+	create_graph g1 5
+	add_edge g1 0 2 false
+	add_edge g1 0 1 false
+	assert num_edges g1 2
+	assert not_normalised g1
+	normalise g1
+	assert normalised g1
+	
+	create_graph g2 0
+	assign g2 g1
+	assert equal_graphs g1 g2
+	assert equal_graphs g2 g1
+	
+	create_graph g3 0
+	disjoint_union g3 g1 g2
+
+	assert not_equal_graphs g1 g3
+	assert num_nodes g3 10
+	assert num_edges g3 4

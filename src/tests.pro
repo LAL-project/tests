@@ -28,6 +28,7 @@ LIBS += -lgmp
 LIBS += -fopenmp
 
 SOURCES += \
+    construction/exe_construction.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
