@@ -46,7 +46,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/properties/Q.hpp>
@@ -66,7 +66,7 @@ using namespace test_utils;
 
 namespace exe_tests {
 
-void output_ExpVar_C_BF(const graph& g) {
+void output_ExpVar_C_BF(const ugraph& g) {
 	vector<edge_pair> Q;
 	enumerate_Q(g, Q);
 
@@ -76,21 +76,21 @@ void output_ExpVar_C_BF(const graph& g) {
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
 
-void output_ExpVar_C_formula(const graph& g) {
+void output_ExpVar_C_formula(const ugraph& g) {
 	rational Vr = variance_C_rational(g);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
 
-void output_ExpVar_C_trees(const graph& g) {
+void output_ExpVar_C_trees(const ugraph& g) {
 	rational Vr = variance_C_tree_rational(g);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
 
-void output_ExpVar_C_forests(const graph& g) {
+void output_ExpVar_C_forests(const ugraph& g) {
 	rational Vr = variance_C_forest_rational(g);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
@@ -101,7 +101,7 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 	free_ulab_trees TreeGen;
 	TreeGen.init(n);
 
-	graph tree;
+	ugraph tree;
 	uint32_t k = 0;
 
 	while (TreeGen.has_next()) {
@@ -132,8 +132,8 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 
 bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_trees) {
 	rand_free_ulab_trees TreeGen(size_trees);
-	graph rand_tree;
-	graph forest;
+	ugraph rand_tree;
+	ugraph forest;
 
 	for (uint32_t i = 0; i < r; ++i) {
 		forest.clear();
@@ -213,7 +213,7 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 			bool r = check_ExpVar_C_all_trees(k);
 
 			if (not r) {
-				return err_type::test_error;
+				return err_type::test_exe_error;
 			}
 		}
 	}
@@ -225,12 +225,12 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 			fin >> n_trees >> size_trees;
 			bool r = check_ExpVar_C_mixed_trees(rep, n_trees, size_trees);
 			if (not r) {
-				return err_type::test_error;
+				return err_type::test_exe_error;
 			}
 		}
 	}
 	else {
-		graph G;
+		ugraph G;
 		for (size_t i = 0; i < n; ++i) {
 			err_type r = io_wrapper::read_graph(graph_name[i], graph_format[i], G);
 

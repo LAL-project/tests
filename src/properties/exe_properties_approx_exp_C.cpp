@@ -46,7 +46,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/linarr/C.hpp>
@@ -102,7 +102,7 @@ int64_t beta(int64_t n, int64_t d1, int64_t d2) {
 	return c;
 }
 
-rational E_2Cd_brute_force(graph& g, const vector<node>& T) {
+rational E_2Cd_brute_force(ugraph& g, const vector<node>& T) {
 	rational Ec2(0);
 	const uint32_t n = g.n_nodes();
 
@@ -182,7 +182,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	string graph_format;
 	fin >> graph_name >> graph_format;
 
-	graph G;
+	ugraph G;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;

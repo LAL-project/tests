@@ -51,29 +51,28 @@
 #define INVALID_KEYWORD "¡@/#/?234!"
 
 enum class err_type : int8_t {
-	// The test completed successfully
+	/// The test completed successfully
 	no_error = 0,
 
-	// wrong parameter value
+	/// wrong parameter value
 	invalid_param,
 
-	// The input file was not formatted correctly
+	/// The input file was not formatted correctly
 	test_format_error,
-	// The format for the input graph is not supported
+	/// The format for the input graph is not supported
 	graph_format_error,
 
-	// Some error occurred while performing the test
-	test_error,
+	/// Some error occurred while performing the test
+	test_exe_error,
 
-	// wrong keyword: either it is not known or it is
-	// incorrect given its parent test type
+	/// wrong keyword: either it is not known or it is incorrect given its parent test type
 	wrong_keyword,
-	// too many keywords
+	/// too many keywords
 	too_many_keywords,
 
-	// an error occurred when reading a file
+	/// an error occurred when reading a file
 	io_error,
 
-	// test not implemented
+	/// test not implemented
 	not_implemented
 };

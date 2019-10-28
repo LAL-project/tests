@@ -145,7 +145,7 @@ int main(int argc, char *argv[]) {
 		cerr << "Exiting with error type: ";
 		switch (r) {
 		case err_type::io_error: cerr << "io_error"; break;
-		case err_type::test_error: cerr << "test_error"; break;
+		case err_type::test_exe_error: cerr << "test_exe_error"; break;
 		case err_type::invalid_param: cerr << "invalid_param"; break;
 		case err_type::wrong_keyword: cerr << "wrong_keyword"; break;
 		case err_type::not_implemented: cerr << "not_implemented"; break;

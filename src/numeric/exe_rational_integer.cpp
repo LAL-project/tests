@@ -162,7 +162,7 @@ err_type exe_numeric_rational_integer(ifstream& fin) {
 			cerr << "        r2: " << r2.to_string() << " = ";
 			cerr << L1.to_string() << " " << op
 				 << " " << R2.get_string() << endl;
-			return err_type::test_error;
+			return err_type::test_exe_error;
 		}
 
 		cout << r1.to_string() << endl;

@@ -170,7 +170,7 @@ err_type exe_numeric_integer(ifstream& fin) {
 			cerr << "        r2: " << r2.get_string() << " = ";
 			cerr << L1.get_string() << " " << op
 				 << " " << R2.get_string() << endl;
-			return err_type::test_error;
+			return err_type::test_exe_error;
 		}
 
 		cout << r1.get_string() << endl;

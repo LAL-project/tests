@@ -136,7 +136,7 @@ err_type exe_gen_trees(ifstream& fin) {
 
 	/* do the tests */
 
-	graph T;
+	ugraph T;
 	string gen_type;
 
 	uint32_t amount;
@@ -167,7 +167,7 @@ err_type exe_gen_trees(ifstream& fin) {
 				cerr << "    Amount of trees should be: " << total << endl;
 				cerr << "    But generated: " << gen << endl;
 				cerr << "    For a size of " << amount << " vertices" << endl;
-				return err_type::test_error;
+				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "exhaustive-unlabelled") {
@@ -185,7 +185,7 @@ err_type exe_gen_trees(ifstream& fin) {
 				cerr << "    Amount of trees should be: " << UUF[amount] << endl;
 				cerr << "    But generated: " << gen << endl;
 				cerr << "    For a size of " << amount << " vertices" << endl;
-				return err_type::test_error;
+				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "random-labelled") {

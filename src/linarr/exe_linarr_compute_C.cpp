@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/linarr/C.hpp>
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 #include <lal/properties/Q.hpp>
 using namespace lal;
 
@@ -83,7 +83,7 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	string graph_format;
 	fin >> graph_name >> graph_format;
 
-	graph G;
+	ugraph G;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
@@ -168,7 +168,7 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 				cerr << "," << arr[j];
 			}
 			cerr << "]" << endl;
-			return err_type::test_error;
+			return err_type::test_exe_error;
 		}
 	}
 

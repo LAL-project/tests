@@ -44,7 +44,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/D_rla.hpp>
 #include <lal/properties/Q.hpp>
@@ -61,7 +61,7 @@ using namespace test_utils;
 
 namespace exe_tests {
 
-void output_ExpVar_D_formula(const graph& g) {
+void output_ExpVar_D_formula(const ugraph& g) {
 	rational Vr = variance_D_rational(g);
 	rational E1r = expectation_D_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
@@ -113,7 +113,7 @@ err_type exe_properties_ExpVar_D(ifstream& fin) {
 	string graph_type;
 	fin >> graph_type;
 
-	graph G;
+	ugraph G;
 	for (size_t i = 0; i < n; ++i) {
 		err_type r = io_wrapper::read_graph(graph_name[i], graph_format[i], G);
 		if (r != err_type::no_error) {

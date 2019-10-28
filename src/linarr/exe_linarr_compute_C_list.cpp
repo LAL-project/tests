@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/linarr/C.hpp>
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 using namespace lal;
 
 // custom includes
@@ -82,7 +82,7 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	string graph_format;
 	fin >> graph_name >> graph_format;
 
-	graph g;
+	ugraph g;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, g);
 	if (r != err_type::no_error) {
 		return r;

@@ -44,7 +44,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graph.hpp>
+#include <lal/ugraph.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/numeric/rational.hpp>
@@ -58,7 +58,7 @@ using namespace lal::properties;
 
 namespace exe_tests {
 
-void enum_Q(const graph& g) {
+void enum_Q(const ugraph& g) {
 	vector<edge_pair> Q;
 	enumerate_Q(g, Q);
 
@@ -73,7 +73,7 @@ void enum_Q(const graph& g) {
 	}
 }
 
-void Q_size(const graph& g) {
+void Q_size(const ugraph& g) {
 	integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
@@ -81,7 +81,7 @@ void Q_size(const graph& g) {
 	cout << "size of Q: " << dQ << endl;
 }
 
-void snd_mmt_deg(const graph& g) {
+void snd_mmt_deg(const ugraph& g) {
 	rational k2 = second_mmt_degree_rational(g);
 	cout << "<k^2>= " << k2 << endl;
 
@@ -89,7 +89,7 @@ void snd_mmt_deg(const graph& g) {
 	cout << "<k^2>= " << dk2 << endl;
 }
 
-void trd_mmt_deg(const graph& g) {
+void trd_mmt_deg(const ugraph& g) {
 	rational k3 = third_mmt_degree_rational(g);
 	cout << "<k^3>= " << k3 << endl;
 
@@ -136,7 +136,7 @@ err_type exe_properties_general(ifstream& fin) {
 	// It is time to execute the instructions
 	// for each graph.
 
-	graph G;
+	ugraph G;
 	for (size_t i = 0; i < n; ++i) {
 		err_type r = io_wrapper::read_graph(graph_name[i], graph_format[i], G);
 		if (r != err_type::no_error) {
