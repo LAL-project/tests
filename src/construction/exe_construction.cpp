@@ -39,6 +39,7 @@
  ********************************************************************/
 
 // C++ includes
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <set>
@@ -197,6 +198,33 @@ err_type process_assert(map<string, G>& variables, ifstream& fin) {
 			return err_type::test_exe_error;
 		}
 	}
+	else if (assert_what == "edges_are") {
+		fin >> g1 >> n;
+		assert_exists_variable(variables, g1)
+		vector<edge> v(n);
+		for (edge& e : v) { fin >> e.first >> e.second; }
+		sort(v.begin(), v.end());
+
+		vector<edge> gv = variables[g1].edges();
+		sort(gv.begin(), gv.end());
+		if (v != gv) {
+			cerr << ERROR << endl;
+			cerr << "    The edges in graph '" << g1 << "' do not coincide with those in the list." << endl;
+			cerr << "    List (" << v.size() << "):" << endl;
+			for (const edge& e : v) {
+				cerr << "    " << e.first << ", " << e.second;
+				if (find(gv.begin(), gv.end(), e) == gv.end()) {
+					cerr << " <- not in the graph!";
+				}
+				cerr << endl;
+			}
+			cerr << "    Graph (" << gv.size() << "):" << endl;
+			for (const edge& e : gv) {
+				cerr << "    " << e.first << ", " << e.second << endl;
+			}
+			return err_type::test_exe_error;
+		}
+	}
 	else {
 		cerr << ERROR << endl;
 		cerr << "    Invalid assertion '" << assert_what << "'." << endl;
@@ -261,13 +289,13 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == "disjoint_union") {
 			fin >> n1 >> n2 >> n3;
-			assert_exists_variable(variables, n1)
 			assert_exists_variable(variables, n2)
 			assert_exists_variable(variables, n3)
 
-			G& v1 = variables[n1];
+			G v1;
 			v1 = variables[n2];
 			v1.disjoint_union(variables[n3]);
+			variables[n1] = v1;
 		}
 		else {
 			cerr << ERROR << endl;
@@ -312,7 +340,7 @@ err_type exe_construction_directed(ifstream& fin) {
 	err_type e = consume_tokens(fin);
 	if (e != err_type::no_error) { return e; }
 	e = exe_construction_test<dgraph>(fin);
-	if (e != err_type::no_error) {
+	if (e == err_type::no_error) {
 		cout << "Test finished without apparent errors." << endl;
 	}
 	return e;
@@ -322,7 +350,7 @@ err_type exe_construction_undirected(ifstream& fin) {
 	err_type e = consume_tokens(fin);
 	if (e != err_type::no_error) { return e; }
 	e = exe_construction_test<ugraph>(fin);
-	if (e != err_type::no_error) {
+	if (e == err_type::no_error) {
 		cout << "Test finished without apparent errors." << endl;
 	}
 	return e;

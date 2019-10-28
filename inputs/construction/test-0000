@@ -20,3 +20,15 @@ BODY
 	assert not_equal_graphs g1 g3
 	assert num_nodes g3 10
 	assert num_edges g3 4
+
+	assert edges_are g1
+		2
+		0 2
+		0 1
+	assert edges_are g3
+		4
+		0 2
+		0 1
+		5 7
+		5 6
+	

@@ -36,6 +36,9 @@
 	-- num_edges GRAPH N
 		asserts that the number of edges is N
 	
+	-- edges_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n}
+		asserts that the edges in the graph are those specified in the list
+	
 ** normalise GRAPH
 	Normalise a graph
 	

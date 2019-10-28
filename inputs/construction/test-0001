@@ -12,3 +12,25 @@ BODY
 	add_edge g1 5 6 false
 	add_edge g1 0 5 false
 	assert not_normalised g1
+
+	create_graph g2 0
+	assign g2 g1
+	disjoint_union g3 g1 g2
+	
+	assert edges_are g1
+		4
+		0 2
+		0 1
+		5 6
+		0 5
+	assert edges_are g3
+		8
+		0 2
+		0 1
+		5 6
+		0 5
+		10 12
+		10 11
+		15 16
+		10 15
+	

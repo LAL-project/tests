@@ -26,32 +26,54 @@ BODY
 	add_edge g1 0 3 false
 	add_edge g1 0 4 false
 	assert not_normalised g1
+	assert num_edges g1 16
 
-	assert exists_edge g1 0 2
-	assert exists_edge g1 2 0
-	assert exists_edge g1 0 1
-	assert exists_edge g1 1 0
+	create_graph g2 10
+	add_edge g2 0 2 false
+	add_edge g2 0 1 false
+	add_edge g2 5 6 true
+	add_edge g2 5 0 true
+	add_edge g2 6 5 true
+	add_edge g2 3 4 false
+	add_edge g2 5 4 false
+	add_edge g2 0 6 false
+	add_edge g2 7 0 false
+	add_edge g2 0 8 false
+	add_edge g2 0 9 false
+	add_edge g2 0 3 false
+	add_edge g2 0 4 false
+	assert num_edges g2 13
 	
-	assert exists_edge g1 5 6
-	assert exists_edge g1 6 5
-	assert exists_edge g1 0 5
-	assert exists_edge g1 5 0
-	
-	assert edges_are g1
-		16
-		0 2
-		1 0
+	disjoint_union g3 g1 g2
+	assert edges_are g3
+		29
 		0 1
-		2 0
-		5 6
-		5 0
+		0 2
 		0 5
-		6 5
-		3 4
-		5 4
 		0 6
 		0 7
 		0 8
 		0 9
 		0 3
 		0 4
+		1 0
+		2 0
+		3 4
+		5 0
+		5 4
+		5 6
+		6 5
+		
+		10 12
+		10 11
+		15 16
+		15 10
+		16 15
+		13 14
+		15 14
+		10 16
+		17 10
+		10 18
+		10 19
+		10 13
+		10 14
