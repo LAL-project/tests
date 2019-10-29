@@ -1,6 +1,9 @@
 ** create_graph GRAPH N
 	Creates a graph of a certain number of vertices
-	
+
+** init_graph GRAPH N
+	Initialise an existing graph with a certain number of vertices
+
 ** add_edge GRAPH VERTEX1 VERTEX2 true/false
 	Adds an edge to a graph. Normalises (or not) the graph
 	
@@ -38,7 +41,11 @@
 	
 	-- edges_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n}
 		asserts that the edges in the graph are those specified in the list
-	
+
+** check_edge_iterator GRAPH
+	Builds the list of edges for a graph and asserts that is the same
+	as that returned by edges() method.
+
 ** normalise GRAPH
 	Normalise a graph
 	

@@ -1,0 +1,16 @@
+TYPE construction_graph-undirected
+INPUT 0
+BODY
+	create_graph g2 0
+	assert num_edges g2 0
+	assert normalised g2
+	check_edge_iterator g2
+	
+	assign g1 g2
+	assert num_edges g1 0
+	assert normalised g1
+	check_edge_iterator g1
+	
+	init_graph g1 10
+	assert num_edges g1 0
+	assert normalised g1

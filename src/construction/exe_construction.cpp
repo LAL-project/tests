@@ -48,6 +48,7 @@ using namespace std;
 // lal includes
 #include <lal/dgraph.hpp>
 #include <lal/ugraph.hpp>
+#include <lal/edge_iterator.hpp>
 using namespace lal;
 
 // custom includes
@@ -238,64 +239,97 @@ err_type exe_construction_test(ifstream& fin) {
 	map<string, G> variables;
 
 	string option, assert_what;
-	string n1, n2, n3;
+	string g1, g2, g3;
 	uint32_t n_nodes;
 	uint32_t u, v;
 
 	while (fin >> option) {
 		if (option == "create_graph") {
-			fin >> n1 >> n_nodes;
-			variables[n1] = G(n_nodes);
+			fin >> g1 >> n_nodes;
+			variables[g1] = G(n_nodes);
+		}
+		else if (option == "init_graph") {
+			fin >> g1 >> n_nodes;
+			assert_exists_variable(variables, g2)
+			variables[g1].init(n_nodes);
 		}
 		else if (option == "assign") {
-			fin >> n1 >> n2;
-			assert_exists_variable(variables, n2)
-			variables[n1] = variables[n2];
+			fin >> g1 >> g2;
+			assert_exists_variable(variables, g2)
+			variables[g1] = variables[g2];
 		}
 		else if (option == "add_edge") {
-			fin >> n1 >> u >> v >> n2;
-			assert_exists_variable(variables, n1)
-			if (n2 != "true" and n2 != "false") {
+			fin >> g1 >> u >> v >> g2;
+			assert_exists_variable(variables, g1)
+			if (g2 != "true" and g2 != "false") {
 				cerr << ERROR << endl;
 				cerr << "    Invalid value for boolean in add_edge command." << endl;
-				cerr << "    Received '" << n2 << "'. Valid values: true/false." << endl;
+				cerr << "    Received '" << g2 << "'. Valid values: true/false." << endl;
 				return err_type::test_exe_error;
 			}
-			variables[n1].add_edge(u, v, n2 == "true");
+			variables[g1].add_edge(u, v, g2 == "true");
 		}
 		else if (option == "add_edges") {
-			fin >> n1 >> n_nodes;
+			fin >> g1 >> n_nodes;
 			vector<edge> v(n_nodes);
 			for (edge& e : v) { fin >> e.first >> e.second; }
-			fin >> n2;
-
-			assert_exists_variable(variables, n1)
-			if (n2 != "true" and n2 != "false") {
+			fin >> g2;
+			assert_exists_variable(variables, g1)
+			if (g2 != "true" and g2 != "false") {
 				cerr << ERROR << endl;
 				cerr << "    Invalid value for boolean in add_edge command." << endl;
-				cerr << "    Received '" << n2 << "'. Valid values: true/false." << endl;
+				cerr << "    Received '" << g2 << "'. Valid values: true/false." << endl;
 				return err_type::test_exe_error;
 			}
-			variables[n1].add_edges(v, n2 == "true");
+			variables[g1].add_edges(v, g2 == "true");
 		}
 		else if (option == "assert") {
 			err_type e = process_assert(variables, fin);
 			if (e != err_type::no_error) { return e; }
 		}
 		else if (option == "normalise") {
-			fin >> n1;
-			assert_exists_variable(variables, n1)
-			variables[n1].normalise();
+			fin >> g1;
+			assert_exists_variable(variables, g1)
+			variables[g1].normalise();
 		}
 		else if (option == "disjoint_union") {
-			fin >> n1 >> n2 >> n3;
-			assert_exists_variable(variables, n2)
-			assert_exists_variable(variables, n3)
+			fin >> g1 >> g2 >> g3;
+			assert_exists_variable(variables, g2)
+			assert_exists_variable(variables, g3)
 
 			G v1;
-			v1 = variables[n2];
-			v1.disjoint_union(variables[n3]);
-			variables[n1] = v1;
+			v1 = variables[g2];
+			v1.disjoint_union(variables[g3]);
+			variables[g1] = v1;
+		}
+		else if (option == "check_edge_iterator") {
+			fin >> g1;
+			assert_exists_variable(variables, g1)
+			vector<edge> iter_edges;
+			edge_iterator e_it(variables[g1]);
+			while (e_it.has_next()) {
+				iter_edges.push_back(e_it.next());
+			}
+			sort(iter_edges.begin(), iter_edges.end());
+			vector<edge> graph_edges = variables[g1].edges();
+			sort(graph_edges.begin(), graph_edges.end());
+			if (iter_edges != graph_edges) {
+				cerr << ERROR << endl;
+				cerr << "    The edges in graph '" << g1 << "' do not coincide with those in the list." << endl;
+				cerr << "    List (" << iter_edges.size() << "):" << endl;
+				for (const edge& e : iter_edges) {
+					cerr << "    " << e.first << ", " << e.second;
+					if (find(graph_edges.begin(), graph_edges.end(), e) == graph_edges.end()) {
+						cerr << " <- not in the graph!";
+					}
+					cerr << endl;
+				}
+				cerr << "    Graph (" << graph_edges.size() << "):" << endl;
+				for (const edge& e : graph_edges) {
+					cerr << "    " << e.first << ", " << e.second << endl;
+				}
+				return err_type::test_exe_error;
+			}
 		}
 		else {
 			cerr << ERROR << endl;

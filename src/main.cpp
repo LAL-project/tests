@@ -43,6 +43,7 @@
 #include <string.h>
 
 // C++ includes
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -118,14 +119,14 @@ int main(int argc, char *argv[]) {
 	}
 
 	string input_file(argv[2]);
-	ifstream fin;
-	fin.open(input_file.c_str());
-	if (not fin.is_open()) {
+	if (not filesystem::exists(input_file)) {
 		cerr << ERROR << endl;
-		cerr << "    Could not open input test '" << input_file << "'" << endl;
+		cerr << "    Input test '" << input_file << "' does not exist." << endl;
 		return 1;
 	}
 
+	ifstream fin;
+	fin.open(input_file.c_str());
 	string type;
 	err_type r = get_type_keyword(input_file, fin, type);
 
