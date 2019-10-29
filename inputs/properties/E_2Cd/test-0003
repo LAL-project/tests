@@ -1,26 +1,15 @@
-TYPE linear_arrangements-compute_C
-INPUT 1 graphs/star-tree/005 edge-list
+TYPE properties-approx_exp_C
+INPUT 1 graphs/linear-tree/007 edge-list
 BODY
-	ladder
-	20
-	1 4 3 2 0
-	3 4 0 2 1
-	2 0 1 3 4
-	2 3 4 0 1
-	0 4 3 1 2
-	2 0 1 4 3
-	3 2 0 4 1
-	2 0 3 4 1
-	2 0 3 1 4
-	4 3 0 2 1
-	3 4 1 2 0
-	1 3 4 2 0
-	1 0 2 3 4
-	3 4 2 0 1
-	3 2 1 4 0
-	0 2 3 1 4
-	3 0 2 1 4
-	0 2 3 1 4
-	0 4 2 3 1
-	1 3 2 0 4
-	.time-ladder-test-0001
+	E_2[C|d]
+	10
+	6 1 2 3 5 4 0
+	2 1 6 4 3 0 5
+	0 4 3 2 6 1 5
+	6 4 3 0 5 1 2
+	6 3 4 5 0 1 2
+	5 3 1 6 2 0 4
+	4 1 0 5 3 2 6
+	0 4 1 6 2 3 5
+	3 2 6 4 0 5 1
+	0 2 1 4 3 5 6

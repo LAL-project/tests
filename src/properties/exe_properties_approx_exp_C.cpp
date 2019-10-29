@@ -156,9 +156,6 @@ rational E_2Cd_brute_force(ugraph& g, const vector<node>& T) {
 err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	set<string> allowed_procs({"E_2[C|d]"});
 
-	cout.setf(ios::fixed);
-	cout.precision(4);
-
 	string field;
 	fin >> field;
 
@@ -226,7 +223,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 
 		if (ap_lib != ap_bf) {
 			cerr << ERROR << endl;
-			cerr << "    The value of E_2[C|d] using the library is not equal to the." << endl;
+			cerr << "    The value of E_2[C|d] using the library is not equal to the" << endl;
 			cerr << "    brute force value." << endl;
 			cerr << "    Library's value: " << ap_lib << endl;
 			cerr << "    Brute force's value: " << ap_bf << endl;
