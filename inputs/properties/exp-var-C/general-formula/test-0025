@@ -100,4 +100,4 @@ graphs/cycle/098 edge-list
 graphs/cycle/099 edge-list
 graphs/cycle/100 edge-list
 BODY
-	formula-noreuse-computations
+	formula-reuse-computations

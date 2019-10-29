@@ -65,4 +65,4 @@ graphs/complete-bipartite/9-7 edge-list
 graphs/complete-bipartite/9-8 edge-list
 graphs/complete-bipartite/9-9 edge-list
 BODY
-	formula-noreuse-computations
+	formula-reuse-computations
