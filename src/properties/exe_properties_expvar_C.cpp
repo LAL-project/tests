@@ -77,7 +77,23 @@ void output_ExpVar_C_BF(const ugraph& g) {
 }
 
 void output_ExpVar_C_formula(const ugraph& g) {
-	rational Vr = variance_C_rational(g);
+	vector<edge_pair> Q;
+	enumerate_Q(g, Q);
+	rational Vr = variance_C_rational_Q(g, Q);
+	rational E1r = expectation_C_first_rational(g);
+	rational E2r = Vr + E1r*E1r;
+	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+}
+
+void output_ExpVar_C_formula_noreuse(const ugraph& g) {
+	rational Vr = variance_C_rational(g, false);
+	rational E1r = expectation_C_first_rational(g);
+	rational E2r = Vr + E1r*E1r;
+	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+}
+
+void output_ExpVar_C_formula_reuse(const ugraph& g) {
+	rational Vr = variance_C_rational(g, true);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
@@ -167,7 +183,9 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 	cout.precision(4);
 
 	const set<string> allowed_procs(
-		{"brute_force", "formula", "trees", "all-trees", "forests", "mixed-trees"}
+		{"brute_force", "formula",
+		 "formula-noreuse-computations", "formula-reuse-computations",
+		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
 
 	string field;
@@ -244,11 +262,22 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 			else if (proc == "formula") {
 				output_ExpVar_C_formula(G);
 			}
+			else if (proc == "formula-noreuse-computations") {
+				output_ExpVar_C_formula_noreuse(G);
+			}
+			else if (proc == "formula-reuse-computations") {
+				output_ExpVar_C_formula_reuse(G);
+			}
 			else if (proc == "trees") {
 				output_ExpVar_C_trees(G);
 			}
 			else if (proc == "forests") {
 				output_ExpVar_C_forests(G);
+			}
+			else {
+				cerr << ERROR << endl;
+				cerr << "    Procedure '" << proc << "' not captured." << endl;
+				return err_type::test_exe_error;
 			}
 		}
 	}
