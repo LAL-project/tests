@@ -55,3 +55,6 @@
 ** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2
 	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
 	in GRAPH_RESULT
+
+** to_undirected GRAPH_RESULT GRAPH
+	Converts the directed graph GRAPH into an undirected graph GRAPH_RESULT

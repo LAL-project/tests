@@ -1,7 +1,7 @@
-TYPE construction_graph-undirected
+TYPE construction_graph
 INPUT 0
 BODY
-	create_graph g1 10
+	create_graph undirected g1 10
 	add_edge g1 0 2 false
 	add_edge g1 0 1 false
 	assert num_edges g1 2
@@ -13,7 +13,7 @@ BODY
 	add_edge g1 0 5 false
 	assert not_normalised g1
 
-	create_graph g2 0
+	create_graph undirected g2 0
 	assign g2 g1
 	disjoint_union g3 g1 g2
 	

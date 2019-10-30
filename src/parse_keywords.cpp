@@ -83,7 +83,8 @@ void mark_wrong_keyword
 err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	const string& key = keywords[0];
 	if (key == "construction_graph") {
-		return call_construction(keywords, 1, fin);
+		// no more keywords
+		return exe_construction(fin);
 	}
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
@@ -102,23 +103,6 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
-}
-
-	// Functions to test construction of graphs
-
-err_type call_construction(const vector<string>& keywords, size_t i, ifstream& fin) {
-	const string& graph_type = keywords[i];
-	if (graph_type != "directed" and graph_type != "undirected") {
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i << ": '" << graph_type << "'." << endl;
-		mark_wrong_keyword(keywords, {i}, "    ");
-		return err_type::wrong_keyword;
-	}
-
-	if (graph_type == "directed") {
-		return exe_construction_directed(fin);
-	}
-	return exe_construction_undirected(fin);
 }
 
 	// Functions to test the integer and rational classes

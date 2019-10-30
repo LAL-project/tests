@@ -1,7 +1,7 @@
-TYPE construction_graph-directed
+TYPE construction_graph
 INPUT 0
 BODY
-	create_graph g2 0
+	create_graph directed g2 0
 	assert num_edges g2 0
 	assert normalised g2
 	check_edge_iterator g2

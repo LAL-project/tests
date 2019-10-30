@@ -1,7 +1,7 @@
-TYPE construction_graph-directed
+TYPE construction_graph
 INPUT 0
 BODY
-	create_graph g1 10
+	create_graph directed g1 10
 	add_edge g1 0 2 false
 	add_edge g1 1 0 false
 	add_edge g1 0 1 false
