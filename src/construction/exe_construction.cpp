@@ -38,6 +38,9 @@
  *
  ********************************************************************/
 
+// C includes
+#include <assert.h>
+
 // C++ includes
 #include <algorithm>
 #include <iostream>
@@ -49,21 +52,32 @@ using namespace std;
 // lal includes
 #include <lal/dgraph.hpp>
 #include <lal/ugraph.hpp>
-#include <lal/edge_iterator.hpp>
+#include <lal/iterators/edge_iterator.hpp>
+#include <lal/iterators/Q_iterator.hpp>
+#include <lal/io/edge_list.hpp>
 using namespace lal;
+using namespace iterators;
 
 // custom includes
 #include "exe_tests.hpp"
 
+#define edge_out(e) "(" << e.first << ", " << e.second << ")"
+#define edge_pair_out(p) "(" << edge_out(p.first) << ", " << edge_out(p.second) << ")"
+
 #define map_has(map, key) (map.find(key) != map.end())
 
-#define exists_variable(var)												\
-	map_has(gtypes, var)
+#define exists_variable(var) map_has(gtypes, var)
 
-#define graph_type(var)														\
-	(gtypes[var])
+#define graph_type(var)	(gtypes[var])
 
 /* ASSERTIONS */
+
+#define assert_correct_file_type(ft)										\
+	if (ft != "edge_list") {												\
+		cerr << ERROR << endl;												\
+		cerr << "    Invalid file type '" << ft << "'." << endl;			\
+		return err_type::test_format_error;									\
+	}
 
 #define assert_exists_variable(var)											\
 	if (not exists_variable(var)) {											\
@@ -72,7 +86,7 @@ using namespace lal;
 		return err_type::test_exe_error;									\
 	}
 
-#define assert_correct_type(type)											\
+#define assert_correct_graph_type(type)											\
 	if (type != "directed" and type != "undirected") {						\
 		cerr << ERROR << endl;												\
 		cerr << "    Graph type '" << type << "' is incorrect." << endl;	\
@@ -104,18 +118,19 @@ using namespace lal;
 		equal_graphs(uvars[var1], uvars[var2])								\
 	)
 
-#define apply_function(var, FUNC)											\
+#define apply_ffunction(var, FUNC)											\
+	(graph_type(var) == "directed" ? FUNC(dvars[var]) : FUNC(uvars[var]))
+
+#define apply_mfunction(var, FUNC)											\
 	(graph_type(var) == "directed" ? dvars[var].FUNC : uvars[var].FUNC)
 
-#define apply_if_function(var, FUNC)										\
+#define apply_if_mfunction(var, FUNC)										\
 	if (graph_type(var) == "directed") { dvars[var].FUNC; }					\
 	else { uvars[var].FUNC;	}
 
 #define output_graph(var)													\
 	if (graph_type(var) == "directed") { cerr << dvars[var] << endl; }		\
 	else { cerr << uvars[var] << endl; }
-
-namespace exe_tests {
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
@@ -134,6 +149,62 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 	if (g1.is_normalised() != g2.is_normalised()) { return false; }
 	return true;
 }
+
+inline vector<edge> enumerate_edges_brute_force(const graph& g) {
+	const uint32_t n = g.n_nodes();
+	set<edge> E;
+	for (node s = 0; s < n; ++s) {
+	for (auto t : g.get_neighbours(s)) {
+		edge st(s,t);
+		if (g.is_undirected()) {
+			if (s > t) { std::swap(st.first, st.second); }
+		}
+		E.insert(st);
+	}}
+	return vector<edge>(E.begin(), E.end());
+}
+
+inline bool share_vertices(const edge_pair& st_uv) {
+	const edge& st = st_uv.first;
+	const edge& uv = st_uv.second;
+	const node s = st.first;
+	const node t = st.second;
+	const node u = uv.first;
+	const node v = uv.second;
+	return s == u or s == v or t == u or t == v;
+}
+
+inline vector<edge_pair> enumerate_Q_brute_force(const graph& g) {
+	const uint32_t n = g.n_nodes();
+	set<edge_pair> Q;
+	for (node s = 0; s < n; ++s) {
+	for (node t : g.get_neighbours(s)) {
+
+		for (node u = s + 1; u < n; ++u) {
+		for (node v : g.get_neighbours(u)) {
+
+			// s != u and t != u
+			if (s == v or s == u) { continue; }
+			if (t == v or t == u) { continue; }
+
+			// an undirected edge should not be sorted
+			edge st(s,t);
+			edge uv(u,v);
+			if (g.is_undirected()) {
+				if (s > t) { std::swap(st.first, st.second); }
+				if (u > v) { std::swap(uv.first, uv.second); }
+			}
+			// the pair should be sorted
+			if (st > uv) { std::swap(st, uv); }
+
+			// no common endpoints
+			Q.insert( edge_pair(st, uv) );
+		}}
+	}}
+	return vector<edge_pair>(Q.begin(), Q.end());
+}
+
+namespace exe_tests {
 
 err_type process_assert(
 	map<string, dgraph>& dvars,
@@ -183,7 +254,7 @@ err_type process_assert(
 	else if (assert_what == "normalised") {
 		fin >> g1;
 		assert_exists_variable(g1)
-		if (not apply_function(g1, is_normalised())) {
+		if (not apply_mfunction(g1, is_normalised())) {
 			cerr << ERROR << endl;
 			cerr << "    In 'normalised' assertion:" << endl;
 			cerr << "    Graph '" << g1 << "' is not normalised." << endl;
@@ -195,7 +266,7 @@ err_type process_assert(
 	else if (assert_what == "not_normalised") {
 		fin >> g1;
 		assert_exists_variable(g1)
-		if (apply_function(g1, is_normalised())) {
+		if (apply_mfunction(g1, is_normalised())) {
 			cerr << ERROR << endl;
 			cerr << "    In 'normalised' assertion:" << endl;
 			cerr << "    Graph '" << g1 << "' is normalised." << endl;
@@ -207,7 +278,7 @@ err_type process_assert(
 	else if (assert_what == "exists_edge") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (not apply_function(g1, has_edge(u, v))) {
+		if (not apply_mfunction(g1, has_edge(u, v))) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
@@ -218,7 +289,7 @@ err_type process_assert(
 	else if (assert_what == "not_exists_edge") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (apply_function(g1, has_edge(u, v))) {
+		if (apply_mfunction(g1, has_edge(u, v))) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' has edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
@@ -229,10 +300,10 @@ err_type process_assert(
 	else if (assert_what == "num_nodes") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		if (apply_function(g1, n_nodes()) != n) {
+		if (apply_mfunction(g1, n_nodes()) != n) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have " << n << " nodes." << endl;
-			cerr << "    Graph '" << g1 << "' has " << apply_function(g1, n_nodes()) << " nodes." << endl;
+			cerr << "    Graph '" << g1 << "' has " << apply_mfunction(g1, n_nodes()) << " nodes." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -241,10 +312,10 @@ err_type process_assert(
 	else if (assert_what == "num_edges") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		if (apply_function(g1, n_edges()) != n) {
+		if (apply_mfunction(g1, n_edges()) != n) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have " << n << " edges." << endl;
-			cerr << "    Graph '" << g1 << "' has " << apply_function(g1, n_edges()) << " edges." << endl;
+			cerr << "    Graph '" << g1 << "' has " << apply_mfunction(g1, n_edges()) << " edges." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -257,23 +328,143 @@ err_type process_assert(
 		for (edge& e : v) { fin >> e.first >> e.second; }
 		sort(v.begin(), v.end());
 
-		vector<edge> gv = apply_function(g1, edges());
+		vector<edge> gv = apply_ffunction(g1, enumerate_edges_brute_force);
 		sort(gv.begin(), gv.end());
 		if (v != gv) {
 			cerr << ERROR << endl;
-			cerr << "    The edges in graph '" << g1 << "' do not coincide with those in the list." << endl;
+			cerr << "    The edges in graph '" << g1
+				 << "' do not coincide with those in the list." << endl;
 			cerr << "    List (" << v.size() << "):" << endl;
-			for (const edge& e : v) {
-				cerr << "    " << e.first << ", " << e.second;
+			for (auto e : v) {
+				cerr << "    " << edge_out(e);
 				if (find(gv.begin(), gv.end(), e) == gv.end()) {
 					cerr << " <- not in the graph!";
 				}
 				cerr << endl;
 			}
 			cerr << "    Graph (" << gv.size() << "):" << endl;
-			for (const edge& e : gv) {
-				cerr << "    " << e.first << ", " << e.second << endl;
+			for (auto e : gv) {
+				cerr << "    " << edge_out(e) << endl;
 			}
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "elements_Q_are") {
+		fin >> g1 >> n;
+		assert_exists_variable(g1)
+		vector<edge_pair> v(n);
+		for (edge_pair& e : v) {
+			fin >> e.first.first >> e.first.second
+				>> e.second.first >> e.second.second;
+			assert(not share_vertices(e));
+		}
+		sort(v.begin(), v.end());
+
+		vector<edge_pair> gv = apply_ffunction(g1, enumerate_Q_brute_force);
+		sort(gv.begin(), gv.end());
+		if (v != gv) {
+			cerr << ERROR << endl;
+			cerr << "    The edges in graph '" << g1
+				 << "' do not coincide with those in the list." << endl;
+			cerr << "    List (" << v.size() << "):" << endl;
+			for (auto e : v) {
+				cerr << "    " << edge_pair_out(e);
+				if (find(gv.begin(), gv.end(), e) == gv.end()) {
+					cerr << " <- not in the graph!";
+				}
+				cerr << endl;
+			}
+			cerr << "    Graph (" << gv.size() << "):" << endl;
+			for (auto e : gv) {
+				cerr << "    " << edge_pair_out(e) << endl;
+			}
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "directed") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		if (gtypes[g1] != "directed") {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is not directed." << endl;
+			return err_type::test_exe_error;
+		}
+		if (not apply_mfunction(g1, is_directed())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' does not return directed." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "not_directed") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		if (gtypes[g1] == "directed") {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is directed." << endl;
+			return err_type::test_exe_error;
+		}
+		if (apply_mfunction(g1, is_directed())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' returns directed." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "undirected") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		if (gtypes[g1] != "undirected") {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is not undirected." << endl;
+			return err_type::test_exe_error;
+		}
+		if (not apply_mfunction(g1, is_undirected())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' does not return undirected." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "not_undirected") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		if (gtypes[g1] == "undirected") {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is undirected." << endl;
+			return err_type::test_exe_error;
+		}
+		if (apply_mfunction(g1, is_undirected())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' returns undirected." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "degree") {
+		fin >> g1 >> u >> v;
+		assert_exists_variable(g1)
+		if (apply_mfunction(g1, degree(u)) != v) {
+			cerr << ERROR << endl;
+			cerr << "    The vertex '" << u << "' of graph '"
+				 << g1 << "' does not have (out) degree " << v << endl;
+			cerr << "    The vertex has (out) degree: " << apply_mfunction(g1, degree(u)) << endl;
+			cerr << "    Contents of " << g1 << ":" << endl;
+			output_graph(g1)
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "in_degree") {
+		fin >> g1 >> u >> v;
+		assert_exists_variable(g1)
+		if (graph_type(g1) != "directed") {
+			cerr << ERROR << endl;
+			cerr << "    Assertion 'in_degree' can only be applied to directed graphs." << endl;
+			return err_type::test_exe_error;
+		}
+		if (dvars[g1].in_degree(u) != v) {
+			cerr << ERROR << endl;
+			cerr << "    The vertex '" << u << "' of graph '"
+				 << g1 << "' does not have in-degree " << v << endl;
+			cerr << "    The vertex has in-degree: " << dvars[g1].in_degree(u) << endl;
+			cerr << "    Contents of " << g1 << ":" << endl;
+			output_graph(g1)
 			return err_type::test_exe_error;
 		}
 	}
@@ -302,14 +493,14 @@ err_type exe_construction_test(ifstream& fin) {
 	map<string, string> gtypes;
 
 	string option, assert_what;
-	string type, g1, g2, g3, norm;
+	string type, g1, g2, g3, file, file_type, norm;
 	uint32_t n_nodes;
 	uint32_t u, v;
 
 	while (fin >> option) {
 		if (option == "create_graph") {
 			fin >> type >> g1 >> n_nodes;
-			assert_correct_type(type)
+			assert_correct_graph_type(type)
 			gtypes[g1] = type;
 			if (type == "directed") {
 				dvars[g1] = dgraph(n_nodes);
@@ -318,10 +509,31 @@ err_type exe_construction_test(ifstream& fin) {
 				uvars[g1] = ugraph(n_nodes);
 			}
 		}
+		else if (option == "read_graph") {
+			fin >> type >> g1 >> file >> file_type >> norm;
+			assert_correct_graph_type(type)
+			assert_correct_file_type(file_type)
+			assert_correct_normalise(norm)
+			gtypes[g1] = type;
+			bool io_res;
+			if (type == "directed") {
+				dvars[g1] = dgraph();
+				io_res = io::read_edge_list(file, dvars[g1], norm == "true");
+			}
+			else {
+				uvars[g1] = ugraph();
+				io_res = io::read_edge_list(file, uvars[g1], norm == "true");
+			}
+			if (not io_res) {
+				cerr << ERROR << endl;
+				cerr << "    I/O operation failed when attempting to read file '" << file << "'." << endl;
+				return err_type::test_exe_error;
+			}
+		}
 		else if (option == "init_graph") {
 			fin >> g1 >> n_nodes;
 			assert_exists_variable(g1)
-			apply_if_function(g1, init(n_nodes))
+			apply_if_mfunction(g1, init(n_nodes))
 		}
 		else if (option == "assign") {
 			fin >> g1 >> g2;
@@ -334,7 +546,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1 >> u >> v >> norm;
 			assert_exists_variable(g1)
 			assert_correct_normalise(norm)
-			apply_if_function(g1, add_edge(u, v, norm == "true"))
+			apply_if_mfunction(g1, add_edge(u, v, norm == "true"))
 		}
 		else if (option == "add_edges") {
 			fin >> g1 >> n_nodes;
@@ -343,7 +555,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> norm;
 			assert_exists_variable(g1)
 			assert_correct_normalise(norm)
-			apply_if_function(g1, add_edges(v, norm == "true"))
+			apply_if_mfunction(g1, add_edges(v, norm == "true"))
 		}
 		else if (option == "assert") {
 			err_type e = process_assert(dvars, uvars, gtypes, fin);
@@ -352,7 +564,7 @@ err_type exe_construction_test(ifstream& fin) {
 		else if (option == "normalise") {
 			fin >> g1;
 			assert_exists_variable(g1)
-			apply_if_function(g1, normalise())
+			apply_if_mfunction(g1, normalise())
 		}
 		else if (option == "disjoint_union") {
 			fin >> g1 >> g2 >> g3;
@@ -372,35 +584,88 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(g1)
 			vector<edge> iter_edges;
 			if (graph_type(g1) == "directed") {
-				edge_iterator e_it(dvars[g1]);
-				while (e_it.has_next()) {
-					iter_edges.push_back(e_it.next());
+				edge_iterator it(dvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					iter_edges.push_back(it.get_edge());
 				}
 			}
 			else {
-				edge_iterator e_it(uvars[g1]);
-				while (e_it.has_next()) {
-					iter_edges.push_back(e_it.next());
+				edge_iterator it(uvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					iter_edges.push_back(it.get_edge());
 				}
 			}
 			sort(iter_edges.begin(), iter_edges.end());
-			vector<edge> graph_edges = apply_function(g1, edges());
+			vector<edge> graph_edges = apply_ffunction(g1, enumerate_edges_brute_force);
 			sort(graph_edges.begin(), graph_edges.end());
 			if (iter_edges != graph_edges) {
 				cerr << ERROR << endl;
-				cerr << "    The edges in graph '" << g1 << "' do not coincide with those in the list." << endl;
+				cerr << "    The edges in graph '" << g1
+					 << "' do not coincide with those in the list." << endl;
 				cerr << "    List (" << iter_edges.size() << "):" << endl;
-				for (const edge& e : iter_edges) {
-					cerr << "    " << e.first << ", " << e.second;
-					if (find(graph_edges.begin(), graph_edges.end(), e) == graph_edges.end()) {
+				for (auto e : iter_edges) {
+					cerr << "    " << edge_out(e);
+					auto it = find(graph_edges.begin(), graph_edges.end(), e);
+					if (it == graph_edges.end()) {
 						cerr << " <- not in the graph!";
 					}
 					cerr << endl;
 				}
 				cerr << "    Graph (" << graph_edges.size() << "):" << endl;
-				for (const edge& e : graph_edges) {
-					cerr << "    " << e.first << ", " << e.second << endl;
+				for (auto e : graph_edges) {
+					cerr << "    " << edge_out(e) << endl;
 				}
+				cerr << "    Contents:" << endl;
+				output_graph(g1)
+				return err_type::test_exe_error;
+			}
+		}
+		else if (option == "check_Q_iterator") {
+			fin >> g1;
+			assert_exists_variable(g1)
+			vector<edge_pair> iter_pair_edges;
+			if (graph_type(g1) == "directed") {
+				const dgraph& dg1 = dvars[g1];
+				Q_iterator it(dg1);
+				while (it.has_next()) {
+					it.next();
+					iter_pair_edges.push_back(it.get_pair());
+					assert(not share_vertices(it.get_pair()));
+				}
+			}
+			else {
+				const ugraph& ug1 = uvars[g1];
+				Q_iterator it(ug1);
+				while (it.has_next()) {
+					it.next();
+					iter_pair_edges.push_back(it.get_pair());
+					assert(not share_vertices(it.get_pair()));
+				}
+			}
+			sort(iter_pair_edges.begin(), iter_pair_edges.end());
+			vector<edge_pair> gpe = apply_ffunction(g1, enumerate_Q_brute_force);
+			sort(gpe.begin(), gpe.end());
+			if (iter_pair_edges != gpe) {
+				cerr << ERROR << endl;
+				cerr << "    The pairs in graph '" << g1
+					 << "' do not coincide with those in the list." << endl;
+				cerr << "    List (" << iter_pair_edges.size() << "):" << endl;
+				for (auto e : iter_pair_edges) {
+					cerr << "    " << edge_pair_out(e);
+					auto it = find(gpe.begin(), gpe.end(), e);
+					if (it == gpe.end()) {
+						cerr << " <- not in the graph!";
+					}
+					cerr << endl;
+				}
+				cerr << "    Graph (" << gpe.size() << "):" << endl;
+				for (auto e : gpe) {
+					cerr << "    " << edge_pair_out(e) << endl;
+				}
+				cerr << "    Contents:" << endl;
+				output_graph(g1)
 				return err_type::test_exe_error;
 			}
 		}

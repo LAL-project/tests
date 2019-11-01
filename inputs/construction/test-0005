@@ -1,79 +1,42 @@
 TYPE construction_graph
 INPUT 0
 BODY
-	create_graph directed g1 10
-	add_edge g1 0 2 false
-	add_edge g1 1 0 false
-	add_edge g1 0 1 false
-	add_edge g1 2 0 false
-	assert not_normalised g1
-	add_edge g1 5 6 true
-	assert normalised g1
-	add_edge g1 5 0 true
-	add_edge g1 0 5 true
-	add_edge g1 6 5 true
-	add_edge g1 3 4 false
-	assert normalised g1
-	add_edge g1 5 4 false
-	assert not_normalised g1
-	normalise g1
-	assert normalised g1
-	add_edge g1 0 6 false
-	add_edge g1 0 7 false
-	add_edge g1 0 8 false
-	add_edge g1 0 9 false
-	assert normalised g1
-	add_edge g1 0 3 false
-	add_edge g1 0 4 false
-	assert not_normalised g1
-	assert num_edges g1 16
-
-	create_graph directed g2 10
-	add_edge g2 0 2 false
-	add_edge g2 0 1 false
-	add_edge g2 5 6 true
-	add_edge g2 5 0 true
-	add_edge g2 6 5 true
-	add_edge g2 3 4 false
-	add_edge g2 5 4 false
-	add_edge g2 0 6 false
-	add_edge g2 7 0 false
-	add_edge g2 0 8 false
-	add_edge g2 0 9 false
-	add_edge g2 0 3 false
-	add_edge g2 0 4 false
-	assert num_edges g2 13
+	create_graph directed g 5
+	assert num_edges g 0
+	assert num_nodes g 5
 	
-	disjoint_union g3 g1 g2
-	assert edges_are g3
-		29
-		0 1
-		0 2
-		0 5
-		0 6
-		0 7
-		0 8
-		0 9
-		0 3
-		0 4
-		1 0
-		2 0
-		3 4
-		5 0
-		5 4
-		5 6
-		6 5
-		
-		10 12
-		10 11
-		15 16
-		15 10
-		16 15
-		13 14
-		15 14
-		10 16
-		17 10
-		10 18
-		10 19
-		10 13
-		10 14
+	add_edge g 0 1 false
+	assert exists_edge g 0 1
+	assert not_exists_edge g 1 0
+	assert num_edges g 1
+	assert num_nodes g 5
+	
+	add_edge g 0 3 false
+	assert exists_edge g 0 3
+	assert not_exists_edge g 3 0
+	assert num_edges g 2
+	assert num_nodes g 5
+	
+	add_edge g 4 2 false
+	assert not_exists_edge g 2 4
+	assert exists_edge g 4 2
+	assert num_edges g 3
+	assert num_nodes g 5
+	
+	add_edge g 3 2 false
+	assert not_exists_edge g 2 3
+	assert exists_edge g 3 2
+	assert num_edges g 4
+	assert num_nodes g 5
+	
+	add_edge g 1 4 false
+	assert exists_edge g 1 4
+	assert not_exists_edge g 4 1
+	assert num_edges g 5
+	assert num_nodes g 5
+	
+	add_edge g 0 4 false
+	assert exists_edge g 0 4
+	assert not_exists_edge g 4 0
+	assert num_edges g 6
+	assert num_nodes g 5

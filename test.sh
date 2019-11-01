@@ -4,6 +4,7 @@
 IN_DIRS=("numeric/integer" \
 		 "numeric/rational" \
 		 "properties" \
+		 "construction" \
 		 "properties/exp-var-C/general-formula" \
 		 "properties/exp-var-C/trees" \
 		 "properties/exp-var-C/forests" \
@@ -17,12 +18,12 @@ IN_DIRS=("numeric/integer" \
 		 "linear-arrangements/C/ladder-list" \
 		 "linear-arrangements/C/stack-based" \
 		 "generate" \
-		 "construction" \
 		)
 
 OUT_DIRS=("numeric/integer" \
 		 "numeric/rational" \
 		 "properties" \
+		 "construction" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
@@ -36,7 +37,6 @@ OUT_DIRS=("numeric/integer" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \
 		 "generate" \
-		 "construction" \
 		 )
 
 ########################################################################

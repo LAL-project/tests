@@ -1,12 +1,52 @@
 TYPE construction_graph
 INPUT 0
 BODY
-	create_graph undirected g1 0
-	create_graph undirected g2 0
-	disjoint_union g3 g1 g2
-	assert num_edges g3 0
-	assert normalised g3
+	create_graph undirected g 10
+	
+	add_edges g 2
+		0 1
+		2 3
+		false
+	assert degree g 0 1
+	assert degree g 1 1
+	assert degree g 2 1
+	assert degree g 3 1
+	assert degree g 4 0
+	assert degree g 5 0
+	assert degree g 6 0
+	assert degree g 7 0
+	assert degree g 8 0
+	assert degree g 9 0
 
-	init_graph g1 10
-	add_edge g1 0 1 true
-	assert num_edges g1 1
+	add_edges g 3
+		0 3
+		6 7
+		0 7
+		false
+	assert degree g 0 3
+	assert degree g 1 1
+	assert degree g 2 1
+	assert degree g 3 2
+	assert degree g 4 0
+	assert degree g 5 0
+	assert degree g 6 1
+	assert degree g 7 2
+	assert degree g 8 0
+	assert degree g 9 0
+	
+	add_edges g 4
+		1 4
+		5 8
+		9 8
+		7 9
+		false
+	assert degree g 0 3
+	assert degree g 1 2
+	assert degree g 2 1
+	assert degree g 3 2
+	assert degree g 4 1
+	assert degree g 5 1
+	assert degree g 6 1
+	assert degree g 7 3
+	assert degree g 8 2
+	assert degree g 9 2

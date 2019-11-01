@@ -67,8 +67,7 @@ using namespace test_utils;
 namespace exe_tests {
 
 void output_ExpVar_C_BF(const ugraph& g) {
-	vector<edge_pair> Q;
-	enumerate_Q(g, Q);
+	vector<edge_pair> Q = g.Q();
 
 	rational Vr = variance_C_freqs_Q_rational(Q);
 	rational E1r = expectation_C_first_rational(g);
@@ -77,8 +76,7 @@ void output_ExpVar_C_BF(const ugraph& g) {
 }
 
 void output_ExpVar_C_formula(const ugraph& g) {
-	vector<edge_pair> Q;
-	enumerate_Q(g, Q);
+	vector<edge_pair> Q = g.Q();
 	rational Vr = variance_C_rational_Q(g, Q);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;

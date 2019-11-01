@@ -4,6 +4,12 @@
 ** init_graph GRAPH N
 	Initialise an existing graph with a certain number of vertices
 
+** read_graph GRAPH_TYPE GRAPH FILE FILE_TYPE true/false
+	Reads a directed/undirected (type) graph from file FILE into variable GRAPH.
+	The type file is a string for the format of the graph stored in the file.
+	Allowed strings:
+		- edge_list
+
 ** add_edge GRAPH VERTEX1 VERTEX2 true/false
 	Adds an edge to a graph. Normalises (or not) the graph
 	
@@ -40,11 +46,43 @@
 		asserts that the number of edges is N
 	
 	-- edges_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n}
-		asserts that the edges in the graph are those specified in the list
-
+		asserts that the edges in the graph are those specified in the list.
+		In case of undirected graphs, the edges must be given in lexicographic
+		order, i.e., the edges (s,t) given must be such that s<t.
+	
+	-- elements_Q_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{4n-1} VERTEX_{4n}
+		asserts that the pairs of independent edges in the graph are
+		those specified in the list.
+		In case of undirected graphs, the edges must be given in lexicographic
+		order, i.e., the edges (s,t) given must be such that s < t.
+		For both directed and undirected graphs, the pairs ((s,t),(u,v))
+		must be given also in lexicographic order, i.e., s<u.
+	
+	-- directed GRAPH
+		asserts that the graph is directed
+	
+	-- not_directed GRAPH
+		asserts that the graph is directed
+		
+	-- undirected GRAPH
+		asserts that the graph is undirected
+	
+	-- not_undirected GRAPH
+		asserts that the graph is undirected
+	
+	-- degree GRAPH NODE d
+		asserts that the degree (out-degree for directed graphs) equals d
+		
+	-- in_degree GRAPH NODE d
+		asserts that the in-degree. Only for directed graphs
+	
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
-	as that returned by edges() method.
+	as that returned by a brute force method.
+
+** check_Q_iterator GRAPH
+	Builds the list of pairs of independent edges for a graph and asserts
+	that is the same as that returned by a brute force method method.
 
 ** normalise GRAPH
 	Normalise a graph

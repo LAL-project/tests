@@ -59,8 +59,7 @@ using namespace lal::properties;
 namespace exe_tests {
 
 void enum_Q(const ugraph& g) {
-	vector<edge_pair> Q;
-	enumerate_Q(g, Q);
+	vector<edge_pair> Q = g.Q();
 
 	cout << "Elements of Q (" << Q.size() << "):" << endl;
 	for (const edge_pair& ep : Q) {
@@ -77,24 +76,18 @@ void Q_size(const ugraph& g) {
 	integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
-	uint32_t dQ = size_Q(g);
+	uint64_t dQ = size_Q(g);
 	cout << "size of Q: " << dQ << endl;
 }
 
 void snd_mmt_deg(const ugraph& g) {
 	rational k2 = second_mmt_degree_rational(g);
 	cout << "<k^2>= " << k2 << endl;
-
-	double dk2 = second_mmt_degree(g);
-	cout << "<k^2>= " << dk2 << endl;
 }
 
 void trd_mmt_deg(const ugraph& g) {
 	rational k3 = third_mmt_degree_rational(g);
 	cout << "<k^3>= " << k3 << endl;
-
-	double dk3 = third_mmt_degree(g);
-	cout << "<k^3>= " << dk3 << endl;
 }
 
 err_type exe_properties_general(ifstream& fin) {

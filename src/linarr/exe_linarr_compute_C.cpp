@@ -117,7 +117,7 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 
 	vector<edge_pair> Q;
 	if (proc == "Q") {
-		properties::enumerate_Q(G, Q);
+		Q = G.Q();
 	}
 
 	// amount of linear arrangements
