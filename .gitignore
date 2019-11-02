@@ -1,5 +1,5 @@
 *.html
-.pro.user
+*.pro.user
 .out.*
 .err.*
 .vgd.*
