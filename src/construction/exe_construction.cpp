@@ -52,6 +52,7 @@ using namespace std;
 // lal includes
 #include <lal/dgraph.hpp>
 #include <lal/ugraph.hpp>
+#include <lal/rooted_directed_tree.hpp>
 #include <lal/iterators/edge_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
@@ -70,6 +71,15 @@ using namespace iterators;
 
 #define graph_type(var)	(gtypes[var])
 
+#define in_collection(k, C) (std::find(C.begin(), C.end(), k) != C.end())
+
+static const vector<string> dir_undir_types(
+	{"directed", "undirected"}
+);
+static const vector<string> all_types(
+	{"directed", "undirected", "rooted_directed_tree"}
+);
+
 /* ASSERTIONS */
 
 #define assert_correct_file_type(ft)										\
@@ -86,51 +96,67 @@ using namespace iterators;
 		return err_type::test_exe_error;									\
 	}
 
-#define assert_correct_graph_type(type)											\
-	if (type != "directed" and type != "undirected") {						\
+#define assert_correct_graph_type(type, TYPES)								\
+	if (not in_collection(type, TYPES)) {									\
 		cerr << ERROR << endl;												\
 		cerr << "    Graph type '" << type << "' is incorrect." << endl;	\
 		return err_type::test_exe_error;									\
 	}
 
-#define assert_equal_types(var1, var2)										\
-	if (graph_type(var1) != graph_type(var2)) {								\
-		cerr << ERROR << endl;												\
+#define assert_equal_types(var1, var2)																	\
+	if (graph_type(var1) != graph_type(var2)) {															\
+		cerr << ERROR << endl;																			\
 		cerr << "    Graphs '" << var1 << "' and '" << var2 << "' are not of the same type." << endl;	\
-		cerr << "    Type of graph " << var1 << ": " << graph_type(var1) << endl;	\
-		cerr << "    Type of graph " << var2 << ": " << graph_type(var2) << endl;	\
-		return err_type::test_exe_error;									\
+		cerr << "    Type of graph " << var1 << ": " << graph_type(var1) << endl;						\
+		cerr << "    Type of graph " << var2 << ": " << graph_type(var2) << endl;						\
+		return err_type::test_exe_error;																\
 	}
 
-#define assert_correct_normalise(str)										\
-	if (norm != "true" and norm != "false") {								\
-		cerr << ERROR << endl;												\
+#define assert_correct_normalise(str)												\
+	if (norm != "true" and norm != "false") {										\
+		cerr << ERROR << endl;														\
 		cerr << "    Invalid value for boolean in add_edge command." << endl;		\
 		cerr << "    Received '" << norm << "'. Valid values: true/false." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_exe_error;											\
 	}
 
 /* USEFUL FUNCTIONS */
 
-#define are_graphs_equal(var1, var2)										\
-	(graph_type(var1) == "directed" ?										\
-		equal_graphs(dvars[var1], dvars[var2]) :							\
-		equal_graphs(uvars[var1], uvars[var2])								\
-	)
+#define are_graphs_equal(var1, var2)																\
+	[&]() -> bool {																					\
+		if (graph_type(var1) == "directed") { return equal_graphs(dvars[var1], dvars[var2]); }		\
+		if (graph_type(var1) == "undirected") { return equal_graphs(uvars[var1], uvars[var2]); }	\
+		return equal_graphs(rdtvars[var1], rdtvars[var2]);											\
+	}()
+
+#define apply_if_ffunction(var, FUNC)									\
+	if (graph_type(var) == "directed") { FUNC(dvars[var]); }			\
+	else if (graph_type(var) == "undirected") { FUNC(uvars[var]); }		\
+	else { FUNC(rdtvars[var]); }
+
+#define apply_if_mfunction(var, FUNC)									\
+	if (graph_type(var) == "directed") { dvars[var].FUNC; }				\
+	else if (graph_type(var) == "undirected") { uvars[var].FUNC; }		\
+	else { rdtvars[var].FUNC; }
 
 #define apply_ffunction(var, FUNC)											\
-	(graph_type(var) == "directed" ? FUNC(dvars[var]) : FUNC(uvars[var]))
+	[&]() {																	\
+		if (graph_type(var) == "directed") { return FUNC(dvars[var]); }		\
+		if (graph_type(var) == "undirected") { return FUNC(uvars[var]); }	\
+		return FUNC(rdtvars[var]);											\
+	}()
 
 #define apply_mfunction(var, FUNC)											\
-	(graph_type(var) == "directed" ? dvars[var].FUNC : uvars[var].FUNC)
+	[&]() {																	\
+		if (graph_type(var) == "directed") { return dvars[var].FUNC; }		\
+		if (graph_type(var) == "undirected") { return uvars[var].FUNC; }	\
+		return rdtvars[var].FUNC;											\
+	}()
 
-#define apply_if_mfunction(var, FUNC)										\
-	if (graph_type(var) == "directed") { dvars[var].FUNC; }					\
-	else { uvars[var].FUNC;	}
-
-#define output_graph(var)													\
-	if (graph_type(var) == "directed") { cerr << dvars[var] << endl; }		\
-	else { cerr << uvars[var] << endl; }
+#define output_graph(var)														\
+	if (graph_type(var) == "directed") { cerr << dvars[var] << endl; }			\
+	else if (graph_type(var) == "undirected") { cerr << uvars[var] << endl; }	\
+	else { cerr << rdtvars[var] << endl; }
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
@@ -209,6 +235,7 @@ namespace exe_tests {
 err_type process_assert(
 	map<string, dgraph>& dvars,
 	map<string, ugraph>& uvars,
+	map<string, rooted_directed_tree>& rdtvars,
 	map<string, string>& gtypes,
 	ifstream& fin
 )
@@ -453,16 +480,25 @@ err_type process_assert(
 	else if (assert_what == "in_degree") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (graph_type(g1) != "directed") {
+		if (not apply_mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			cerr << "    Assertion 'in_degree' can only be applied to directed graphs." << endl;
 			return err_type::test_exe_error;
 		}
-		if (dvars[g1].in_degree(u) != v) {
+		if (graph_type(g1) == "directed" and dvars[g1].in_degree(u) != v) {
 			cerr << ERROR << endl;
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have in-degree " << v << endl;
 			cerr << "    The vertex has in-degree: " << dvars[g1].in_degree(u) << endl;
+			cerr << "    Contents of " << g1 << ":" << endl;
+			output_graph(g1)
+			return err_type::test_exe_error;
+		}
+		if (graph_type(g1) == "rooted_directed_tree" and rdtvars[g1].in_degree(u) != v) {
+			cerr << ERROR << endl;
+			cerr << "    The vertex '" << u << "' of graph '"
+				 << g1 << "' does not have in-degree " << v << endl;
+			cerr << "    The vertex has in-degree: " << rdtvars[g1].in_degree(u) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -490,6 +526,7 @@ void make_disjoint_union(
 err_type exe_construction_test(ifstream& fin) {
 	map<string, dgraph> dvars;
 	map<string, ugraph> uvars;
+	map<string, rooted_directed_tree> rdtvars;
 	map<string, string> gtypes;
 
 	string option, assert_what;
@@ -500,29 +537,37 @@ err_type exe_construction_test(ifstream& fin) {
 	while (fin >> option) {
 		if (option == "create_graph") {
 			fin >> type >> g1 >> n_nodes;
-			assert_correct_graph_type(type)
+			assert_correct_graph_type(type, all_types)
 			gtypes[g1] = type;
 			if (type == "directed") {
 				dvars[g1] = dgraph(n_nodes);
 			}
-			else {
+			else if (type == "undirected") {
 				uvars[g1] = ugraph(n_nodes);
+			}
+			else {
+				rdtvars[g1] = rooted_directed_tree(n_nodes);
 			}
 		}
 		else if (option == "read_graph") {
 			fin >> type >> g1 >> file >> file_type >> norm;
-			assert_correct_graph_type(type)
+			assert_correct_graph_type(type, all_types)
 			assert_correct_file_type(file_type)
 			assert_correct_normalise(norm)
 			gtypes[g1] = type;
-			bool io_res;
+			bool io_res = false;
 			if (type == "directed") {
 				dvars[g1] = dgraph();
 				io_res = io::read_edge_list(file, dvars[g1], norm == "true");
 			}
-			else {
+			else if (type == "undirected") {
 				uvars[g1] = ugraph();
 				io_res = io::read_edge_list(file, uvars[g1], norm == "true");
+			}
+			else if (type == "rooted_directed_trees") {
+				cerr << ERROR << endl;
+				cerr << "    I/O operation not implemented for rooted directed trees" << endl;
+				return err_type::test_exe_error;
 			}
 			if (not io_res) {
 				cerr << ERROR << endl;
@@ -558,7 +603,7 @@ err_type exe_construction_test(ifstream& fin) {
 			apply_if_mfunction(g1, add_edges(v, norm == "true"))
 		}
 		else if (option == "assert") {
-			err_type e = process_assert(dvars, uvars, gtypes, fin);
+			err_type e = process_assert(dvars, uvars, rdtvars, gtypes, fin);
 			if (e != err_type::no_error) { return e; }
 		}
 		else if (option == "normalise") {
@@ -575,8 +620,11 @@ err_type exe_construction_test(ifstream& fin) {
 			if (graph_type(g2) == "directed") {
 				make_disjoint_union<dgraph>(g1, g2, g3, dvars);
 			}
-			else {
+			else if (graph_type(g2) == "undirected") {
 				make_disjoint_union<ugraph>(g1, g2, g3, uvars);
+			}
+			else {
+				make_disjoint_union<rooted_directed_tree>(g1, g2, g3, rdtvars);
 			}
 		}
 		else if (option == "check_edge_iterator") {
@@ -675,10 +723,24 @@ err_type exe_construction_test(ifstream& fin) {
 			if (graph_type(g2) != "directed") {
 				cerr << ERROR << endl;
 				cerr << "    Graph '" << g2 << "' is not directed." << endl;
+				cerr << "    Graph '" << g2 << "' is " << graph_type(g2) << "." << endl;
 				return err_type::test_exe_error;
 			}
 			uvars[g1] = dvars[g2].to_undirected();
 			gtypes[g1] = "undirected";
+		}
+		else if (option == "to_rooted_directed") {
+			fin >> g1 >> g2 >> u;
+			assert_exists_variable(g2)
+			if (graph_type(g2) != "undirected") {
+				cerr << ERROR << endl;
+				cerr << "    Cannot apply 'to_root_directed' to a non-undirected graph." << endl;
+				cerr << "    Graph '" << g2 << "' is not undirected." << endl;
+				cerr << "    Graph '" << g2 << "' is " << graph_type(g2) << "." << endl;
+				return err_type::test_exe_error;
+			}
+			rdtvars[g1] = rooted_directed_tree(uvars[g2], u);
+			gtypes[g1] = "rooted_directed_tree";
 		}
 		else {
 			cerr << ERROR << endl;

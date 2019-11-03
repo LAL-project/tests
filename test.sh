@@ -3,8 +3,8 @@
 # all tests available
 IN_DIRS=("numeric/integer" \
 		 "numeric/rational" \
-		 "properties" \
 		 "construction" \
+		 "properties" \
 		 "properties/exp-var-C/general-formula" \
 		 "properties/exp-var-C/trees" \
 		 "properties/exp-var-C/forests" \
@@ -22,8 +22,8 @@ IN_DIRS=("numeric/integer" \
 
 OUT_DIRS=("numeric/integer" \
 		 "numeric/rational" \
-		 "properties" \
 		 "construction" \
+		 "properties" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \

@@ -48,6 +48,7 @@ using namespace std;
 #include <lal/generation/free_ulab_trees.hpp>
 #include <lal/generation/rand_free_lab_trees.hpp>
 #include <lal/generation/rand_free_ulab_trees.hpp>
+#include <lal/generation/rand_rooted_lab_dir_trees.hpp>
 using namespace lal;
 using namespace generate;
 #include <lal/numeric/integer.hpp>
@@ -139,25 +140,26 @@ err_type exe_gen_trees(ifstream& fin) {
 	ugraph T;
 	string gen_type;
 
-	uint32_t amount;
+	uint32_t num_nodes;
 	integer gen;
 
-	free_lab_trees AllFreeLabTreeGen;
-	free_ulab_trees AllFreeUlabTreeGen;
-	rand_free_lab_trees RandFreeLabTreeGen;
-	rand_free_ulab_trees RandFreeULabTreeGen;
+	free_lab_trees				AllFreeLabTreeGen;
+	free_ulab_trees				AllFreeUlabTreeGen;
+	rand_free_lab_trees			RandFreeLabTreeGen;
+	rand_free_ulab_trees		RandFreeULabTreeGen;
+	rand_rooted_lab_dir_trees	RandRootedLabTreeGen;
 
-	while (fin >> gen_type >> amount) {
+	while (fin >> gen_type >> num_nodes) {
 		if (gen_type == "exhaustive-labelled") {
 			gen = 0;
-			AllFreeLabTreeGen.init(amount);
+			AllFreeLabTreeGen.init(num_nodes);
 			while (AllFreeLabTreeGen.has_next()) {
 				AllFreeLabTreeGen.next();
 				T = AllFreeLabTreeGen.get_tree();
 				gen += 1;
 			}
 
-			integer n = amount;
+			integer n = num_nodes;
 			// Prüfer's formula
 			integer total = (n^(n - 2));
 
@@ -166,36 +168,42 @@ err_type exe_gen_trees(ifstream& fin) {
 				cerr << "    Exhaustive generation of free labelled trees" << endl;
 				cerr << "    Amount of trees should be: " << total << endl;
 				cerr << "    But generated: " << gen << endl;
-				cerr << "    For a size of " << amount << " vertices" << endl;
+				cerr << "    For a size of " << num_nodes << " vertices" << endl;
 				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "exhaustive-unlabelled") {
 			gen = 0;
-			AllFreeUlabTreeGen.init(amount);
+			AllFreeUlabTreeGen.init(num_nodes);
 			while (AllFreeUlabTreeGen.has_next()) {
 				AllFreeUlabTreeGen.next();
 				T = AllFreeUlabTreeGen.get_tree();
 				gen += 1;
 			}
 
-			if (amount < SIZE_UUF and gen != UUF[amount]) {
+			if (num_nodes < SIZE_UUF and gen != UUF[num_nodes]) {
 				cerr << ERROR << endl;
 				cerr << "    Exhaustive generation of free unlabelled trees" << endl;
-				cerr << "    Amount of trees should be: " << UUF[amount] << endl;
+				cerr << "    Amount of trees should be: " << UUF[num_nodes] << endl;
 				cerr << "    But generated: " << gen << endl;
-				cerr << "    For a size of " << amount << " vertices" << endl;
+				cerr << "    For a size of " << num_nodes << " vertices" << endl;
 				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "random-labelled") {
-			RandFreeLabTreeGen.init(amount, 100);
+			RandFreeLabTreeGen.init(num_nodes, 100);
 			for (uint32_t i = 0; i < 10000; ++i) {
 				T = RandFreeLabTreeGen.make_rand_tree();
 			}
 		}
 		else if (gen_type == "random-unlabelled") {
-			RandFreeULabTreeGen.init(amount, 100);
+			RandFreeULabTreeGen.init(num_nodes, 100);
+			for (uint32_t i = 0; i < 10000; ++i) {
+				T = RandFreeULabTreeGen.make_rand_tree();
+			}
+		}
+		else if (gen_type == "random-rooted-labelled-trees") {
+			RandRootedLabTreeGen.init(num_nodes, 100);
 			for (uint32_t i = 0; i < 10000; ++i) {
 				T = RandFreeULabTreeGen.make_rand_tree();
 			}

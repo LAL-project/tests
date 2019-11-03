@@ -1,0 +1,24 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph undirected G 2
+	assert num_nodes G 2
+	assert num_edges G 0
+	add_edge G 0 1 false
+	assert num_edges G 1
+	
+	to_rooted_directed DG_1 G 0
+	assert exists_edge DG_1 0 1
+	assert not_exists_edge DG_1 1 0
+	assert in_degree DG_1 0 0
+	assert in_degree DG_1 1 1
+	assert degree DG_1 0 1
+	assert degree DG_1 1 0
+	
+	to_rooted_directed DG_2 G 1
+	assert not_exists_edge DG_2 0 1
+	assert exists_edge DG_2 1 0
+	assert in_degree DG_2 0 1
+	assert in_degree DG_2 1 0
+	assert degree DG_2 0 0
+	assert degree DG_2 1 1

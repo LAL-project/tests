@@ -1,0 +1,17 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph undirected g1 0
+	to_rooted_directed dg1 g1 0
+	
+	create_graph undirected g2 1
+	to_rooted_directed dg2 g2 0
+	
+	create_graph undirected g3 2
+	to_rooted_directed dg3 g3 0
+	
+	create_graph undirected g4 3
+	to_rooted_directed dg4 g4 0
+	
+	create_graph undirected g5 4
+	to_rooted_directed dg5 g5 0
