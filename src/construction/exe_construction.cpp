@@ -623,9 +623,6 @@ err_type exe_construction_test(ifstream& fin) {
 			else if (graph_type(g2) == "undirected") {
 				make_disjoint_union<ugraph>(g1, g2, g3, uvars);
 			}
-			else {
-				make_disjoint_union<rooted_directed_tree>(g1, g2, g3, rdtvars);
-			}
 		}
 		else if (option == "check_edge_iterator") {
 			fin >> g1;
