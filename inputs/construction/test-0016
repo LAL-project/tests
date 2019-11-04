@@ -1,0 +1,84 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph undirected g1_1 5
+	add_edge g1_1 0 4 false
+	add_edge g1_1 1 2 false
+	add_edge g1_1 2 3 false
+	add_edge g1_1 0 1 false
+	add_edge g1_1 1 4 false
+	normalise g1_1
+	assert normalised g1_1
+	create_graph undirected g1_2 5
+	add_edge g1_2 0 3 false
+	add_edge g1_2 0 2 false
+	add_edge g1_2 1 4 false
+	add_edge g1_2 3 4 false
+	add_edge g1_2 1 3 false
+	add_edge g1_2 2 4 false
+	normalise g1_2
+	assert normalised g1_2
+	disjoint_union g1_3 g1_1 g1_2
+	assert normalised g1_3
+	
+	
+	
+	create_graph undirected g2_1 5
+	add_edge g2_1 0 4 false
+	add_edge g2_1 1 2 false
+	add_edge g2_1 2 3 false
+	add_edge g2_1 0 1 false
+	add_edge g2_1 1 4 false
+	assert not_normalised g2_1
+	create_graph undirected g2_2 5
+	add_edge g2_2 0 3 false
+	add_edge g2_2 0 2 false
+	add_edge g2_2 1 4 false
+	add_edge g2_2 3 4 false
+	add_edge g2_2 1 3 false
+	add_edge g2_2 2 4 false
+	normalise g2_2
+	assert normalised g2_2
+	disjoint_union g2_3 g2_1 g2_2
+	assert not_normalised g2_3
+	
+	
+	
+	create_graph undirected g3_1 5
+	add_edge g3_1 0 4 false
+	add_edge g3_1 1 2 false
+	add_edge g3_1 2 3 false
+	add_edge g3_1 0 1 false
+	add_edge g3_1 1 4 false
+	normalise g3_1
+	assert normalised g3_1
+	create_graph undirected g3_2 5
+	add_edge g3_2 0 3 false
+	add_edge g3_2 0 2 false
+	add_edge g3_2 1 4 false
+	add_edge g3_2 3 4 false
+	add_edge g3_2 1 3 false
+	add_edge g3_2 2 4 false
+	assert not_normalised g3_2
+	disjoint_union g3_3 g3_1 g3_2
+	assert not_normalised g3_3
+	
+	
+	
+	create_graph undirected g4_1 5
+	add_edge g4_1 0 4 false
+	add_edge g4_1 1 2 false
+	add_edge g4_1 2 3 false
+	add_edge g4_1 0 1 false
+	add_edge g4_1 1 4 false
+	assert not_normalised g4_1
+	create_graph undirected g4_2 5
+	add_edge g4_2 0 3 false
+	add_edge g4_2 0 2 false
+	add_edge g4_2 1 4 false
+	add_edge g4_2 3 4 false
+	add_edge g4_2 1 3 false
+	add_edge g4_2 2 4 false
+	assert not_normalised g4_2
+	disjoint_union g4_3 g4_1 g4_2
+	assert not_normalised g4_3
