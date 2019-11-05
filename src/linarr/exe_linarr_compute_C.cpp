@@ -70,12 +70,12 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	size_t n_linarrs;
-	fin >> n_linarrs;
-	if (n_linarrs != 1) {
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 1) {
 		cerr << ERROR << endl;
 		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_linarrs << "' were found." << endl;
+		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
 		return err_type::test_format_error;
 	}
 
@@ -121,6 +121,7 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	}
 
 	// amount of linear arrangements
+	size_t n_linarrs;
 	fin >> n_linarrs;
 
 	for (size_t i = 0; i < n_linarrs; ++i) {

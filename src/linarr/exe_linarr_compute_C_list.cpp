@@ -69,12 +69,12 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	size_t n_ins;
-	fin >> n_ins;
-	if (n_ins != 1) {
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 1) {
 		cerr <<ERROR << endl;
 		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_ins << "' were found." << endl;
+		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
 		return err_type::test_format_error;
 	}
 

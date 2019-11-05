@@ -43,7 +43,6 @@
 
 // C++ inlcudes
 #include <cstdint>
-#include <string>
 #include <filesystem>
 
 #define ERROR \

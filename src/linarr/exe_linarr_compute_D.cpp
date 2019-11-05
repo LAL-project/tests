@@ -66,12 +66,12 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	size_t n;
-	fin >> n;
-	if (n != 1) {
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 1) {
 		cerr << ERROR << endl;
 		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n << "' were found." << endl;
+		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
 		return err_type::test_format_error;
 	}
 
@@ -98,9 +98,10 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	vector<node> arr(G.n_nodes());
 
 	// amount of linear arrangements
-	fin >> n;
+	size_t n_linarrs;
+	fin >> n_linarrs;
 
-	for (size_t i = 0; i < n; ++i) {
+	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
 			fin >> arr[u];
