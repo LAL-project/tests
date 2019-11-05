@@ -47,7 +47,7 @@ using namespace lal;
 
 namespace io_wrapper {
 
-err_type read_graph(const string& file, const string& format, graph& G) {
+err_type read_graph(const string& file, const string& format, graphs::graph& G) {
 
 	if (format == "edge-list") {
 		bool r = io::read_edge_list(file, G);

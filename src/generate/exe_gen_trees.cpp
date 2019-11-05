@@ -50,6 +50,7 @@ using namespace std;
 #include <lal/generation/rand_free_ulab_trees.hpp>
 #include <lal/generation/rand_rooted_lab_dir_trees.hpp>
 using namespace lal;
+using namespace graphs;
 using namespace generate;
 #include <lal/numeric/integer.hpp>
 using namespace numeric;

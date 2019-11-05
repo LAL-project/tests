@@ -47,13 +47,13 @@
 using namespace std;
 
 // lal includes
-#include <lal/graph.hpp>
+#include <lal/graphs/graph.hpp>
 
 // custom includes
 #include "definitions.hpp"
 
 namespace io_wrapper {
 
-err_type read_graph(const string& file, const string& format, lal::graph& G);
+err_type read_graph(const string& file, const string& format, lal::graphs::graph& G);
 
 } // -- namespace io_wrapper

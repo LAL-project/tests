@@ -50,13 +50,14 @@
 using namespace std;
 
 // lal includes
-#include <lal/dgraph.hpp>
-#include <lal/ugraph.hpp>
-#include <lal/rooted_directed_tree.hpp>
+#include <lal/graphs/dgraph.hpp>
+#include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/rooted_directed_tree.hpp>
 #include <lal/iterators/edge_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
 using namespace lal;
+using namespace graphs;
 using namespace iterators;
 
 // custom includes

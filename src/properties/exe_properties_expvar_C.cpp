@@ -46,16 +46,17 @@
 using namespace std;
 
 // lal includes
-#include <lal/ugraph.hpp>
+#include <lal/graphs/ugraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/generation/free_ulab_trees.hpp>
 #include <lal/generation/rand_free_ulab_trees.hpp>
 using namespace lal;
-using namespace lal::numeric;
-using namespace lal::properties;
-using namespace lal::generate;
+using namespace graphs;
+using namespace numeric;
+using namespace properties;
+using namespace generate;
 
 // custom includes
 #include "../io_wrapper.hpp"

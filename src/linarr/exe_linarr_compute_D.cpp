@@ -45,8 +45,9 @@ using namespace std;
 
 // lal includes
 #include <lal/linarr/D.hpp>
-#include <lal/ugraph.hpp>
+#include <lal/graphs/ugraph.hpp>
 using namespace lal;
+using namespace graphs;
 
 // custom includes
 #include "../io_wrapper.hpp"

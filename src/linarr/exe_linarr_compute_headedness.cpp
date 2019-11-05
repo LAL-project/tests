@@ -45,10 +45,11 @@
 using namespace std;
 
 // lal includes
-#include <lal/dgraph.hpp>
+#include <lal/graphs/dgraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/linarr/headedness.hpp>
 using namespace lal;
+using namespace graphs;
 using namespace numeric;
 
 // custom includes

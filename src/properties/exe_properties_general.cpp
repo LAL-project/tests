@@ -45,13 +45,14 @@
 using namespace std;
 
 // lal includes
-#include <lal/ugraph.hpp>
+#include <lal/graphs/ugraph.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/numeric/rational.hpp>
 using namespace lal;
-using namespace lal::numeric;
-using namespace lal::properties;
+using namespace graphs;
+using namespace numeric;
+using namespace properties;
 
 // custom includes
 #include "../io_wrapper.hpp"
