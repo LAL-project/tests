@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <set>
 using namespace std;
 
 // lal includes
@@ -90,9 +91,18 @@ void trd_mmt_deg(const ugraph& g) {
 	cout << "<k^3>= " << k3 << endl;
 }
 
+void hubiness_coefficient(const ugraph& g) {
+	if (g.n_nodes() > 3) {
+		rational h = hubiness_rational(g);
+		cout << "hubiness= " << h << endl;
+	}
+}
+
 err_type exe_properties_general(ifstream& fin) {
-	cout.setf(ios::fixed);
-	cout.precision(8);
+	const set<string> allowed_instructions({
+		"enumerate_Q", "Q_size", "2nd_mmt_deg",
+		"3rd_mmt_deg", "hubiness_coefficient"
+	});
 
 	string field;
 	fin >> field;
@@ -149,17 +159,16 @@ err_type exe_properties_general(ifstream& fin) {
 			else if (op == "3rd_mmt_deg") {
 				trd_mmt_deg(G);
 			}
+			else if (op == "hubiness_coefficient") {
+				hubiness_coefficient(G);
+			}
 			else {
 				cerr << ERROR << endl;
 				cerr << "    Instruction not recognised." << endl;
 				cerr << "    Allowed instructions:" << endl;
-				cerr << "        enumerate_Q" << endl;
-				cerr << "        Q_size_rational" << endl;
-				cerr << "        Q_size_double" << endl;
-				cerr << "        2nd_mmt_deg_rational" << endl;
-				cerr << "        2nd_mmt_deg_rational" << endl;
-				cerr << "        3rd_mmt_deg_rational" << endl;
-				cerr << "        3rd_mmt_deg_double" << endl;
+				for (const string& s : allowed_instructions) {
+					cout << "        " << s << endl;
+				}
 				cerr << "    Instead, '" << op << "' was found." << endl;
 				return err_type::test_format_error;
 			}

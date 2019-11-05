@@ -9,6 +9,7 @@ size of Q: 1
 size of Q: 1
 <k^2>= 1
 <k^3>= 1
+hubiness= -3
 Elements of Q (3):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -17,6 +18,7 @@ size of Q: 3
 size of Q: 3
 <k^2>= 1
 <k^3>= 1
+hubiness= -1
 Elements of Q (6):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -28,6 +30,7 @@ size of Q: 6
 size of Q: 6
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/5
 Elements of Q (10):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -43,6 +46,7 @@ size of Q: 10
 size of Q: 10
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/7
 Elements of Q (15):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -63,6 +67,7 @@ size of Q: 15
 size of Q: 15
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/3
 Elements of Q (21):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -89,6 +94,7 @@ size of Q: 21
 size of Q: 21
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/11
 Elements of Q (28):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -122,6 +128,7 @@ size of Q: 28
 size of Q: 28
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/13
 Elements of Q (36):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -163,6 +170,7 @@ size of Q: 36
 size of Q: 36
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/5
 Elements of Q (45):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -213,6 +221,7 @@ size of Q: 45
 size of Q: 45
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/17
 Elements of Q (55):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -273,6 +282,7 @@ size of Q: 55
 size of Q: 55
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/19
 Elements of Q (66):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -344,6 +354,7 @@ size of Q: 66
 size of Q: 66
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/7
 Elements of Q (78):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -427,6 +438,7 @@ size of Q: 78
 size of Q: 78
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/23
 Elements of Q (91):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -523,6 +535,7 @@ size of Q: 91
 size of Q: 91
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/25
 Elements of Q (105):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -633,6 +646,7 @@ size of Q: 105
 size of Q: 105
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/9
 Elements of Q (120):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -758,6 +772,7 @@ size of Q: 120
 size of Q: 120
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/29
 Elements of Q (136):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -899,6 +914,7 @@ size of Q: 136
 size of Q: 136
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/31
 Elements of Q (153):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -1057,6 +1073,7 @@ size of Q: 153
 size of Q: 153
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/11
 Elements of Q (171):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -1233,6 +1250,7 @@ size of Q: 171
 size of Q: 171
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/35
 Elements of Q (190):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -1428,6 +1446,7 @@ size of Q: 190
 size of Q: 190
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/37
 Elements of Q (210):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -1643,6 +1662,7 @@ size of Q: 210
 size of Q: 210
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/13
 Elements of Q (231):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -1879,6 +1899,7 @@ size of Q: 231
 size of Q: 231
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/41
 Elements of Q (253):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -2137,6 +2158,7 @@ size of Q: 253
 size of Q: 253
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/43
 Elements of Q (276):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -2418,6 +2440,7 @@ size of Q: 276
 size of Q: 276
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/15
 Elements of Q (300):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -2723,6 +2746,7 @@ size of Q: 300
 size of Q: 300
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/47
 Elements of Q (325):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -3053,6 +3077,7 @@ size of Q: 325
 size of Q: 325
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/49
 Elements of Q (351):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -3409,6 +3434,7 @@ size of Q: 351
 size of Q: 351
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/17
 Elements of Q (378):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -3792,6 +3818,7 @@ size of Q: 378
 size of Q: 378
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/53
 Elements of Q (406):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -4203,6 +4230,7 @@ size of Q: 406
 size of Q: 406
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/55
 Elements of Q (435):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -4643,6 +4671,7 @@ size of Q: 435
 size of Q: 435
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/19
 Elements of Q (465):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -5113,6 +5142,7 @@ size of Q: 465
 size of Q: 465
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/59
 Elements of Q (496):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -5614,6 +5644,7 @@ size of Q: 496
 size of Q: 496
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/61
 Elements of Q (528):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -6147,6 +6178,7 @@ size of Q: 528
 size of Q: 528
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/21
 Elements of Q (561):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -6713,6 +6745,7 @@ size of Q: 561
 size of Q: 561
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/65
 Elements of Q (595):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -7313,6 +7346,7 @@ size of Q: 595
 size of Q: 595
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/67
 Elements of Q (630):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -7948,6 +7982,7 @@ size of Q: 630
 size of Q: 630
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/23
 Elements of Q (666):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -8619,6 +8654,7 @@ size of Q: 666
 size of Q: 666
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/71
 Elements of Q (703):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -9327,6 +9363,7 @@ size of Q: 703
 size of Q: 703
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/73
 Elements of Q (741):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -10073,6 +10110,7 @@ size of Q: 741
 size of Q: 741
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/25
 Elements of Q (780):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -10858,6 +10896,7 @@ size of Q: 780
 size of Q: 780
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/77
 Elements of Q (820):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -11683,6 +11722,7 @@ size of Q: 820
 size of Q: 820
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/79
 Elements of Q (861):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -12549,6 +12589,7 @@ size of Q: 861
 size of Q: 861
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/27
 Elements of Q (903):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -13457,6 +13498,7 @@ size of Q: 903
 size of Q: 903
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/83
 Elements of Q (946):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -14408,6 +14450,7 @@ size of Q: 946
 size of Q: 946
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/85
 Elements of Q (990):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -15403,6 +15446,7 @@ size of Q: 990
 size of Q: 990
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/29
 Elements of Q (1035):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -16443,6 +16487,7 @@ size of Q: 1035
 size of Q: 1035
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/89
 Elements of Q (1081):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -17529,6 +17574,7 @@ size of Q: 1081
 size of Q: 1081
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/91
 Elements of Q (1128):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -18662,6 +18708,7 @@ size of Q: 1128
 size of Q: 1128
 <k^2>= 1
 <k^3>= 1
+hubiness= -1/31
 Elements of Q (1176):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -19843,6 +19890,7 @@ size of Q: 1176
 size of Q: 1176
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/95
 Elements of Q (1225):
 ((0, 1), (2, 3))
 ((0, 1), (4, 5))
@@ -21073,3 +21121,4 @@ size of Q: 1225
 size of Q: 1225
 <k^2>= 1
 <k^3>= 1
+hubiness= -3/97
