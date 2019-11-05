@@ -10,6 +10,7 @@ IN_DIRS=("numeric/integer" \
 		 "properties/exp-var-C/forests" \
 		 "properties/exp-var-D/general-formula" \
 		 "properties/E_2Cd" \
+		 "linear-arrangements/headedness" \
 		 "linear-arrangements/D" \
 		 "linear-arrangements/C/brute-force-Q" \
 		 "linear-arrangements/C/dyn-prog" \
@@ -29,6 +30,7 @@ OUT_DIRS=("numeric/integer" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-D" \
 		 "properties/E_2Cd" \
+		 "linear-arrangements/headedness" \
 		 "linear-arrangements/D" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \

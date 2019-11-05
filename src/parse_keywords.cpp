@@ -181,6 +181,9 @@ err_type call_linarr
 	if (key == "compute_D") {
 		return exe_linarr_compute_D(fin);
 	}
+	if (key == "compute_headedness") {
+		return exe_linarr_compute_headedness(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;

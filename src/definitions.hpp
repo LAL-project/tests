@@ -58,7 +58,7 @@ enum class err_type : int8_t {
 	/// wrong parameter value
 	invalid_param,
 
-	/// The input file was not formatted correctly
+	/// The input test file was not formatted correctly
 	test_format_error,
 	/// The format for the input graph is not supported
 	graph_format_error,
