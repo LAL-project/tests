@@ -52,7 +52,7 @@ using namespace std;
 // lal includes
 #include <lal/graphs/dgraph.hpp>
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/rooted_directed_tree.hpp>
+#include <lal/graphs/rdtree.hpp>
 #include <lal/iterators/edge_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
@@ -236,7 +236,7 @@ namespace exe_tests {
 err_type process_assert(
 	map<string, dgraph>& dvars,
 	map<string, ugraph>& uvars,
-	map<string, rooted_directed_tree>& rdtvars,
+	map<string, rdtree>& rdtvars,
 	map<string, string>& gtypes,
 	ifstream& fin
 )
@@ -527,7 +527,7 @@ void make_disjoint_union(
 err_type exe_construction_test(ifstream& fin) {
 	map<string, dgraph> dvars;
 	map<string, ugraph> uvars;
-	map<string, rooted_directed_tree> rdtvars;
+	map<string, rdtree> rdtvars;
 	map<string, string> gtypes;
 
 	string option, assert_what;
@@ -547,7 +547,7 @@ err_type exe_construction_test(ifstream& fin) {
 				uvars[g1] = ugraph(n_nodes);
 			}
 			else {
-				rdtvars[g1] = rooted_directed_tree(n_nodes);
+				rdtvars[g1] = rdtree(n_nodes);
 			}
 		}
 		else if (option == "read_graph") {
@@ -737,7 +737,7 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << "    Graph '" << g2 << "' is " << graph_type(g2) << "." << endl;
 				return err_type::test_exe_error;
 			}
-			rdtvars[g1] = rooted_directed_tree(uvars[g2], u);
+			rdtvars[g1] = rdtree(uvars[g2], u);
 			gtypes[g1] = "rooted_directed_tree";
 		}
 		else {
