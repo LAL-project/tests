@@ -66,7 +66,8 @@ enum class err_type : int8_t {
 	/// Some error occurred while performing the test
 	test_exe_error,
 
-	/// wrong keyword: either it is not known or it is incorrect given its parent test type
+	/// Unknown keyword: either it is not known or it is incorrect
+	/// given its parent test type.
 	wrong_keyword,
 	/// too many keywords
 	too_many_keywords,

@@ -78,4 +78,6 @@ err_type exe_linarr_compute_headedness(ifstream& fin);
 
 err_type exe_gen_trees(ifstream& fin);
 
+err_type exe_utils_sorting(ifstream& fin);
+
 } // -- namespace exe_tests

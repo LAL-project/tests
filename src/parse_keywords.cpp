@@ -98,6 +98,9 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	if (key == "generate") {
 		return call_generate(keywords, 1, fin);
 	}
+	if (key == "utils") {
+		return call_utils(keywords, 1, fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
@@ -217,6 +220,22 @@ err_type call_generate
 	const string& key = keywords[i];
 	if (key == "trees") {
 		return exe_gen_trees(fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+	// Functions to test the library's utilities
+
+err_type call_utils
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "sorting") {
+		return exe_utils_sorting(fin);
 	}
 
 	cerr << ERROR << endl;

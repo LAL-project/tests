@@ -83,4 +83,9 @@ err_type call_linarr_C
 err_type call_generate
 (const vector<string>& keywords, size_t i, ifstream& fin);
 
+	// Functions to test the library's utilities
+
+err_type call_utils
+(const vector<string>& keywords, size_t i, ifstream& fin);
+
 } // -- namespace exe_tests
