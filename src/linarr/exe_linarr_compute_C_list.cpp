@@ -117,12 +117,15 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > arrs(n_linarrs, vector<node>(g.n_nodes()));
+	vector<vector<node> >
+		arrs(n_linarrs, vector<node>(g.n_nodes())),
+		pis(n_linarrs,  vector<node>(g.n_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < g.n_nodes(); ++u) {
 			fin >> arrs[i][u];
+			pis[i][ arrs[i][u] ] = u;
 		}
 	}
 
@@ -135,13 +138,13 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	vector<uint32_t> Cs;
 	if (proc == "dyn_prog") {
 		begin = timing::now();
-		linarr::n_crossings_dyn_prog_list(g, arrs, Cs);
+		Cs = linarr::n_crossings_dyn_prog_list(g, arrs);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "ladder") {
 		begin = timing::now();
-		linarr::n_crossings_ladder_list(g, arrs, Cs);
+		Cs = linarr::n_crossings_ladder_list(g, arrs);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}

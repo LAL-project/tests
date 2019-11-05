@@ -95,7 +95,8 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	}
 
 	// linear arrangement
-	vector<node> arr(G.n_nodes());
+	const uint32_t n = G.n_nodes();
+	vector<node> T(n), pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -104,16 +105,17 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
-			fin >> arr[u];
+			fin >> T[u];
+			pi[ T[u] ] = u;
 		}
 
 		// compute D
-		uint32_t D = linarr::sum_length_edges(G, arr);
+		uint32_t D = linarr::sum_length_edges(G, pi);
 
 		// output
-		cout << "[" << arr[0];
-		for (size_t i = 1; i < arr.size(); ++i) {
-			cout << ", " << arr[i];
+		cout << "[" << T[0];
+		for (size_t i = 1; i < T.size(); ++i) {
+			cout << ", " << T[i];
 		}
 		cout << "]: " << D << endl;
 	}

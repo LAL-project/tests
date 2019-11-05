@@ -112,8 +112,8 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	uint32_t n = G.n_nodes();
-	vector<node> arr(n);
+	const uint32_t n = G.n_nodes();
+	vector<node> T(n), pi(n);
 
 	vector<edge_pair> Q;
 	if (proc == "Q") {
@@ -127,33 +127,34 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
-			fin >> arr[u];
+			fin >> T[u];
+			pi[ T[u] ] = u;
 		}
 
-		uint32_t Cbf = linarr::n_crossings_brute_force(G, arr);
+		uint32_t Cbf = linarr::n_crossings_brute_force(G, pi);
 
 		uint32_t C = 0;
 		if (proc == "Q") {
 			begin = timing::now();
-			C = linarr::n_crossings_Q(Q, arr);
+			C = linarr::n_crossings_Q(Q, pi);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "dyn_prog") {
 			begin = timing::now();
-			C = linarr::n_crossings_dyn_prog(G, arr);
+			C = linarr::n_crossings_dyn_prog(G, pi);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "ladder") {
 			begin = timing::now();
-			C = linarr::n_crossings_ladder(G, arr);
+			C = linarr::n_crossings_ladder(G, pi);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "stack_based") {
 			begin = timing::now();
-			C = linarr::n_crossings_stack_based(G, arr);
+			C = linarr::n_crossings_stack_based(G, pi);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
@@ -163,10 +164,10 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 			cerr << "    Number of crossings do not coincide" << endl;
 			cerr << "        brute force: " << Cbf << endl;
 			cerr << "        " << proc << ": " << C << endl;
-			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << arr[0];
+			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+			cerr << "    [" << T[0];
 			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << arr[j];
+				cerr << "," << T[j];
 			}
 			cerr << "]" << endl;
 			return err_type::test_exe_error;
