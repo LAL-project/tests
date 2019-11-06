@@ -1,0 +1,14 @@
+TYPE properties-general
+INPUT 1
+graphs/quasi-star-tree/010 edge-list
+BODY
+	Mean_Hierarchical_Distance 0
+	Mean_Hierarchical_Distance 1
+	Mean_Hierarchical_Distance 2
+	Mean_Hierarchical_Distance 3
+	Mean_Hierarchical_Distance 4
+	Mean_Hierarchical_Distance 5
+	Mean_Hierarchical_Distance 6
+	Mean_Hierarchical_Distance 7
+	Mean_Hierarchical_Distance 8
+	Mean_Hierarchical_Distance 9

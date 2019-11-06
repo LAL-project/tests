@@ -33,6 +33,7 @@ SOURCES += \
 	main.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
+    properties/exe_properties_MHD_All_trees.cpp \
     test_utils.cpp \
     numeric/exe_integer.cpp \
     numeric/exe_rational_integer.cpp \

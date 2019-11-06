@@ -1,0 +1,37 @@
+TYPE properties-general
+INPUT 1
+graphs/quasi-star-tree/100 edge-list
+BODY
+	Mean_Hierarchical_Distance 0
+	Mean_Hierarchical_Distance 1
+	Mean_Hierarchical_Distance 2
+	Mean_Hierarchical_Distance 3
+	Mean_Hierarchical_Distance 4
+	Mean_Hierarchical_Distance 5
+	Mean_Hierarchical_Distance 6
+	Mean_Hierarchical_Distance 7
+	Mean_Hierarchical_Distance 8
+	Mean_Hierarchical_Distance 9
+	Mean_Hierarchical_Distance 10
+	Mean_Hierarchical_Distance 11
+	Mean_Hierarchical_Distance 12
+	Mean_Hierarchical_Distance 13
+	Mean_Hierarchical_Distance 14
+	Mean_Hierarchical_Distance 15
+	Mean_Hierarchical_Distance 16
+	Mean_Hierarchical_Distance 17
+	Mean_Hierarchical_Distance 18
+	Mean_Hierarchical_Distance 19
+	Mean_Hierarchical_Distance 20
+	Mean_Hierarchical_Distance 21
+	Mean_Hierarchical_Distance 22
+	Mean_Hierarchical_Distance 23
+	Mean_Hierarchical_Distance 24
+	Mean_Hierarchical_Distance 25
+	Mean_Hierarchical_Distance 26
+	Mean_Hierarchical_Distance 27
+	Mean_Hierarchical_Distance 28
+	Mean_Hierarchical_Distance 29
+	Mean_Hierarchical_Distance 98
+	Mean_Hierarchical_Distance 99
+	

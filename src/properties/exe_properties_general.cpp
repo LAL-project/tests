@@ -46,8 +46,10 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/rutree.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
+#include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
 using namespace lal;
 using namespace graphs;
@@ -99,10 +101,17 @@ void hubiness_coefficient(const ugraph& g) {
 	}
 }
 
+void MHD(const ugraph& g, node r) {
+	rutree R(g, r);
+	rational mhd = MHD_rational(R);
+	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
+}
+
 err_type exe_properties_general(ifstream& fin) {
 	const set<string> allowed_instructions({
 		"enumerate_Q", "Q_size", "2nd_mmt_deg",
-		"3rd_mmt_deg", "hubiness_coefficient"
+		"3rd_mmt_deg", "hubiness_coefficient",
+		"Mean_Hierarchical_Distance"
 	});
 
 	string field;
@@ -131,9 +140,9 @@ err_type exe_properties_general(ifstream& fin) {
 	}
 
 	string ins;
-	vector<string> instructions;
+	string all_instructions = "";
 	while (fin >> ins) {
-		instructions.push_back(ins);
+		all_instructions += ins + " ";
 	}
 
 	// The input file has been parsed completely.
@@ -147,21 +156,27 @@ err_type exe_properties_general(ifstream& fin) {
 			return r;
 		}
 
-		for (const string& op : instructions) {
-			if (op == "enumerate_Q") {
+		stringstream ss(all_instructions);
+		while (ss >> ins) {
+			if (ins == "enumerate_Q") {
 				enum_Q(G);
 			}
-			else if (op == "Q_size") {
+			else if (ins == "Q_size") {
 				Q_size(G);
 			}
-			else if (op == "2nd_mmt_deg") {
+			else if (ins == "2nd_mmt_deg") {
 				snd_mmt_deg(G);
 			}
-			else if (op == "3rd_mmt_deg") {
+			else if (ins == "3rd_mmt_deg") {
 				trd_mmt_deg(G);
 			}
-			else if (op == "hubiness_coefficient") {
+			else if (ins == "hubiness_coefficient") {
 				hubiness_coefficient(G);
+			}
+			else if (ins == "Mean_Hierarchical_Distance") {
+				node root;
+				ss >> root;
+				MHD(G, root);
 			}
 			else {
 				cerr << ERROR << endl;
@@ -170,7 +185,7 @@ err_type exe_properties_general(ifstream& fin) {
 				for (const string& s : allowed_instructions) {
 					cout << "        " << s << endl;
 				}
-				cerr << "    Instead, '" << op << "' was found." << endl;
+				cerr << "    Instead, '" << ins << "' was found." << endl;
 				return err_type::test_format_error;
 			}
 		}

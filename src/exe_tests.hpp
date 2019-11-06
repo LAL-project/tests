@@ -67,6 +67,7 @@ err_type exe_numeric_rational_integer(ifstream& fin);
 err_type exe_numeric_rational_rational(ifstream& fin);
 
 err_type exe_properties_general(ifstream& fin);
+err_type exe_properties_MHD_All_trees(ifstream& fin);
 err_type exe_properties_ExpVar_C(ifstream& fin);
 err_type exe_properties_ExpVar_D(ifstream& fin);
 err_type exe_properties_approx_Exp_C(ifstream& fin);

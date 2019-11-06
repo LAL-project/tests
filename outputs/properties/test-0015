@@ -1,0 +1,2026 @@
+----------------------------------------
+n= 2
+0)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 1
+----------------------------------------
+n= 3
+0)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 3/2
+----------------------------------------
+n= 4
+0)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 4/3
+Mean_Hierarchical_Distance(2)= 2
+Mean_Hierarchical_Distance(3)= 2
+1)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 5/3
+Mean_Hierarchical_Distance(3)= 5/3
+----------------------------------------
+n= 5
+0)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 7/4
+Mean_Hierarchical_Distance(4)= 5/2
+1)
+Mean_Hierarchical_Distance(0)= 5/4
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 9/4
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+2)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 7/4
+Mean_Hierarchical_Distance(3)= 7/4
+Mean_Hierarchical_Distance(4)= 7/4
+----------------------------------------
+n= 6
+0)
+Mean_Hierarchical_Distance(0)= 9/5
+Mean_Hierarchical_Distance(1)= 9/5
+Mean_Hierarchical_Distance(2)= 11/5
+Mean_Hierarchical_Distance(3)= 3
+Mean_Hierarchical_Distance(4)= 11/5
+Mean_Hierarchical_Distance(5)= 3
+1)
+Mean_Hierarchical_Distance(0)= 8/5
+Mean_Hierarchical_Distance(1)= 8/5
+Mean_Hierarchical_Distance(2)= 12/5
+Mean_Hierarchical_Distance(3)= 12/5
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 14/5
+2)
+Mean_Hierarchical_Distance(0)= 7/5
+Mean_Hierarchical_Distance(1)= 7/5
+Mean_Hierarchical_Distance(2)= 11/5
+Mean_Hierarchical_Distance(3)= 11/5
+Mean_Hierarchical_Distance(4)= 11/5
+Mean_Hierarchical_Distance(5)= 11/5
+3)
+Mean_Hierarchical_Distance(0)= 7/5
+Mean_Hierarchical_Distance(1)= 9/5
+Mean_Hierarchical_Distance(2)= 13/5
+Mean_Hierarchical_Distance(3)= 9/5
+Mean_Hierarchical_Distance(4)= 13/5
+Mean_Hierarchical_Distance(5)= 11/5
+4)
+Mean_Hierarchical_Distance(0)= 6/5
+Mean_Hierarchical_Distance(1)= 8/5
+Mean_Hierarchical_Distance(2)= 12/5
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 2
+5)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 9/5
+Mean_Hierarchical_Distance(2)= 9/5
+Mean_Hierarchical_Distance(3)= 9/5
+Mean_Hierarchical_Distance(4)= 9/5
+Mean_Hierarchical_Distance(5)= 9/5
+----------------------------------------
+n= 7
+0)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 13/6
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 13/6
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 7/2
+1)
+Mean_Hierarchical_Distance(0)= 11/6
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 17/6
+Mean_Hierarchical_Distance(6)= 17/6
+2)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 11/6
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 19/6
+Mean_Hierarchical_Distance(4)= 13/6
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 5/2
+3)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 7/3
+Mean_Hierarchical_Distance(4)= 7/3
+Mean_Hierarchical_Distance(5)= 13/6
+Mean_Hierarchical_Distance(6)= 3
+4)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 11/6
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 8/3
+Mean_Hierarchical_Distance(4)= 11/6
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 8/3
+5)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 5/2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 17/6
+Mean_Hierarchical_Distance(6)= 7/3
+6)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 7/3
+Mean_Hierarchical_Distance(4)= 13/6
+Mean_Hierarchical_Distance(5)= 13/6
+Mean_Hierarchical_Distance(6)= 13/6
+7)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 17/6
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 17/6
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 17/6
+8)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 11/6
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 11/6
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 13/6
+Mean_Hierarchical_Distance(6)= 13/6
+9)
+Mean_Hierarchical_Distance(0)= 7/6
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 2
+10)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 11/6
+Mean_Hierarchical_Distance(2)= 11/6
+Mean_Hierarchical_Distance(3)= 11/6
+Mean_Hierarchical_Distance(4)= 11/6
+Mean_Hierarchical_Distance(5)= 11/6
+Mean_Hierarchical_Distance(6)= 11/6
+----------------------------------------
+n= 8
+0)
+Mean_Hierarchical_Distance(0)= 16/7
+Mean_Hierarchical_Distance(1)= 16/7
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 22/7
+Mean_Hierarchical_Distance(4)= 4
+Mean_Hierarchical_Distance(5)= 18/7
+Mean_Hierarchical_Distance(6)= 22/7
+Mean_Hierarchical_Distance(7)= 4
+1)
+Mean_Hierarchical_Distance(0)= 15/7
+Mean_Hierarchical_Distance(1)= 15/7
+Mean_Hierarchical_Distance(2)= 17/7
+Mean_Hierarchical_Distance(3)= 23/7
+Mean_Hierarchical_Distance(4)= 23/7
+Mean_Hierarchical_Distance(5)= 17/7
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 27/7
+2)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 16/7
+Mean_Hierarchical_Distance(3)= 22/7
+Mean_Hierarchical_Distance(4)= 22/7
+Mean_Hierarchical_Distance(5)= 16/7
+Mean_Hierarchical_Distance(6)= 22/7
+Mean_Hierarchical_Distance(7)= 22/7
+3)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 24/7
+Mean_Hierarchical_Distance(4)= 20/7
+Mean_Hierarchical_Distance(5)= 16/7
+Mean_Hierarchical_Distance(6)= 20/7
+Mean_Hierarchical_Distance(7)= 26/7
+4)
+Mean_Hierarchical_Distance(0)= 13/7
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 17/7
+Mean_Hierarchical_Distance(3)= 23/7
+Mean_Hierarchical_Distance(4)= 19/7
+Mean_Hierarchical_Distance(5)= 15/7
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+5)
+Mean_Hierarchical_Distance(0)= 12/7
+Mean_Hierarchical_Distance(1)= 12/7
+Mean_Hierarchical_Distance(2)= 16/7
+Mean_Hierarchical_Distance(3)= 22/7
+Mean_Hierarchical_Distance(4)= 18/7
+Mean_Hierarchical_Distance(5)= 16/7
+Mean_Hierarchical_Distance(6)= 22/7
+Mean_Hierarchical_Distance(7)= 18/7
+6)
+Mean_Hierarchical_Distance(0)= 13/7
+Mean_Hierarchical_Distance(1)= 15/7
+Mean_Hierarchical_Distance(2)= 19/7
+Mean_Hierarchical_Distance(3)= 25/7
+Mean_Hierarchical_Distance(4)= 15/7
+Mean_Hierarchical_Distance(5)= 19/7
+Mean_Hierarchical_Distance(6)= 25/7
+Mean_Hierarchical_Distance(7)= 19/7
+7)
+Mean_Hierarchical_Distance(0)= 13/7
+Mean_Hierarchical_Distance(1)= 15/7
+Mean_Hierarchical_Distance(2)= 19/7
+Mean_Hierarchical_Distance(3)= 25/7
+Mean_Hierarchical_Distance(4)= 13/7
+Mean_Hierarchical_Distance(5)= 19/7
+Mean_Hierarchical_Distance(6)= 19/7
+Mean_Hierarchical_Distance(7)= 19/7
+8)
+Mean_Hierarchical_Distance(0)= 12/7
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 24/7
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 20/7
+Mean_Hierarchical_Distance(6)= 20/7
+Mean_Hierarchical_Distance(7)= 18/7
+9)
+Mean_Hierarchical_Distance(0)= 12/7
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 24/7
+Mean_Hierarchical_Distance(4)= 16/7
+Mean_Hierarchical_Distance(5)= 22/7
+Mean_Hierarchical_Distance(6)= 16/7
+Mean_Hierarchical_Distance(7)= 22/7
+10)
+Mean_Hierarchical_Distance(0)= 11/7
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 17/7
+Mean_Hierarchical_Distance(3)= 23/7
+Mean_Hierarchical_Distance(4)= 15/7
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 17/7
+Mean_Hierarchical_Distance(7)= 17/7
+11)
+Mean_Hierarchical_Distance(0)= 12/7
+Mean_Hierarchical_Distance(1)= 10/7
+Mean_Hierarchical_Distance(2)= 16/7
+Mean_Hierarchical_Distance(3)= 16/7
+Mean_Hierarchical_Distance(4)= 16/7
+Mean_Hierarchical_Distance(5)= 16/7
+Mean_Hierarchical_Distance(6)= 16/7
+Mean_Hierarchical_Distance(7)= 22/7
+12)
+Mean_Hierarchical_Distance(0)= 12/7
+Mean_Hierarchical_Distance(1)= 12/7
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 18/7
+Mean_Hierarchical_Distance(4)= 18/7
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 20/7
+Mean_Hierarchical_Distance(7)= 20/7
+13)
+Mean_Hierarchical_Distance(0)= 11/7
+Mean_Hierarchical_Distance(1)= 11/7
+Mean_Hierarchical_Distance(2)= 17/7
+Mean_Hierarchical_Distance(3)= 17/7
+Mean_Hierarchical_Distance(4)= 17/7
+Mean_Hierarchical_Distance(5)= 15/7
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 17/7
+14)
+Mean_Hierarchical_Distance(0)= 10/7
+Mean_Hierarchical_Distance(1)= 10/7
+Mean_Hierarchical_Distance(2)= 16/7
+Mean_Hierarchical_Distance(3)= 16/7
+Mean_Hierarchical_Distance(4)= 16/7
+Mean_Hierarchical_Distance(5)= 16/7
+Mean_Hierarchical_Distance(6)= 16/7
+Mean_Hierarchical_Distance(7)= 16/7
+15)
+Mean_Hierarchical_Distance(0)= 11/7
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 19/7
+Mean_Hierarchical_Distance(3)= 19/7
+Mean_Hierarchical_Distance(4)= 13/7
+Mean_Hierarchical_Distance(5)= 19/7
+Mean_Hierarchical_Distance(6)= 19/7
+Mean_Hierarchical_Distance(7)= 17/7
+16)
+Mean_Hierarchical_Distance(0)= 11/7
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 19/7
+Mean_Hierarchical_Distance(3)= 19/7
+Mean_Hierarchical_Distance(4)= 15/7
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 15/7
+Mean_Hierarchical_Distance(7)= 3
+17)
+Mean_Hierarchical_Distance(0)= 10/7
+Mean_Hierarchical_Distance(1)= 12/7
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 18/7
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 20/7
+Mean_Hierarchical_Distance(6)= 16/7
+Mean_Hierarchical_Distance(7)= 16/7
+18)
+Mean_Hierarchical_Distance(0)= 9/7
+Mean_Hierarchical_Distance(1)= 11/7
+Mean_Hierarchical_Distance(2)= 17/7
+Mean_Hierarchical_Distance(3)= 17/7
+Mean_Hierarchical_Distance(4)= 15/7
+Mean_Hierarchical_Distance(5)= 15/7
+Mean_Hierarchical_Distance(6)= 15/7
+Mean_Hierarchical_Distance(7)= 15/7
+19)
+Mean_Hierarchical_Distance(0)= 10/7
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 20/7
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 20/7
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 20/7
+Mean_Hierarchical_Distance(7)= 16/7
+20)
+Mean_Hierarchical_Distance(0)= 9/7
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 19/7
+Mean_Hierarchical_Distance(3)= 13/7
+Mean_Hierarchical_Distance(4)= 19/7
+Mean_Hierarchical_Distance(5)= 15/7
+Mean_Hierarchical_Distance(6)= 15/7
+Mean_Hierarchical_Distance(7)= 15/7
+21)
+Mean_Hierarchical_Distance(0)= 8/7
+Mean_Hierarchical_Distance(1)= 12/7
+Mean_Hierarchical_Distance(2)= 18/7
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 2
+Mean_Hierarchical_Distance(7)= 2
+22)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 13/7
+Mean_Hierarchical_Distance(2)= 13/7
+Mean_Hierarchical_Distance(3)= 13/7
+Mean_Hierarchical_Distance(4)= 13/7
+Mean_Hierarchical_Distance(5)= 13/7
+Mean_Hierarchical_Distance(6)= 13/7
+Mean_Hierarchical_Distance(7)= 13/7
+----------------------------------------
+n= 9
+0)
+Mean_Hierarchical_Distance(0)= 5/2
+Mean_Hierarchical_Distance(1)= 21/8
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 9/2
+Mean_Hierarchical_Distance(5)= 21/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 29/8
+Mean_Hierarchical_Distance(8)= 9/2
+1)
+Mean_Hierarchical_Distance(0)= 19/8
+Mean_Hierarchical_Distance(1)= 5/2
+Mean_Hierarchical_Distance(2)= 23/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 35/8
+Mean_Hierarchical_Distance(5)= 5/2
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 15/4
+Mean_Hierarchical_Distance(8)= 15/4
+2)
+Mean_Hierarchical_Distance(0)= 9/4
+Mean_Hierarchical_Distance(1)= 19/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 17/4
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 31/8
+Mean_Hierarchical_Distance(8)= 13/4
+3)
+Mean_Hierarchical_Distance(0)= 17/8
+Mean_Hierarchical_Distance(1)= 9/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 13/4
+Mean_Hierarchical_Distance(4)= 33/8
+Mean_Hierarchical_Distance(5)= 5/2
+Mean_Hierarchical_Distance(6)= 25/8
+Mean_Hierarchical_Distance(7)= 4
+Mean_Hierarchical_Distance(8)= 3
+4)
+Mean_Hierarchical_Distance(0)= 9/4
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 9/4
+Mean_Hierarchical_Distance(3)= 25/8
+Mean_Hierarchical_Distance(4)= 25/8
+Mean_Hierarchical_Distance(5)= 25/8
+Mean_Hierarchical_Distance(6)= 21/8
+Mean_Hierarchical_Distance(7)= 13/4
+Mean_Hierarchical_Distance(8)= 33/8
+5)
+Mean_Hierarchical_Distance(0)= 17/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 13/4
+Mean_Hierarchical_Distance(4)= 13/4
+Mean_Hierarchical_Distance(5)= 23/8
+Mean_Hierarchical_Distance(6)= 5/2
+Mean_Hierarchical_Distance(7)= 25/8
+Mean_Hierarchical_Distance(8)= 4
+6)
+Mean_Hierarchical_Distance(0)= 9/4
+Mean_Hierarchical_Distance(1)= 19/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 29/8
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 11/4
+Mean_Hierarchical_Distance(7)= 29/8
+Mean_Hierarchical_Distance(8)= 29/8
+7)
+Mean_Hierarchical_Distance(0)= 17/8
+Mean_Hierarchical_Distance(1)= 9/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 7/2
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 15/4
+Mean_Hierarchical_Distance(8)= 25/8
+8)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 27/8
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 31/8
+Mean_Hierarchical_Distance(8)= 23/8
+9)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 27/8
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 3
+10)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 13/4
+Mean_Hierarchical_Distance(4)= 13/4
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 25/8
+Mean_Hierarchical_Distance(7)= 25/8
+Mean_Hierarchical_Distance(8)= 11/4
+11)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 13/4
+Mean_Hierarchical_Distance(4)= 13/4
+Mean_Hierarchical_Distance(5)= 5/2
+Mean_Hierarchical_Distance(6)= 27/8
+Mean_Hierarchical_Distance(7)= 5/2
+Mean_Hierarchical_Distance(8)= 27/8
+12)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 9/4
+Mean_Hierarchical_Distance(3)= 25/8
+Mean_Hierarchical_Distance(4)= 25/8
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 13/4
+Mean_Hierarchical_Distance(7)= 21/8
+Mean_Hierarchical_Distance(8)= 21/8
+13)
+Mean_Hierarchical_Distance(0)= 17/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 21/8
+Mean_Hierarchical_Distance(5)= 7/2
+Mean_Hierarchical_Distance(6)= 5/2
+Mean_Hierarchical_Distance(7)= 25/8
+Mean_Hierarchical_Distance(8)= 4
+14)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 11/4
+Mean_Hierarchical_Distance(5)= 11/4
+Mean_Hierarchical_Distance(6)= 19/8
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 31/8
+15)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 11/4
+Mean_Hierarchical_Distance(7)= 29/8
+Mean_Hierarchical_Distance(8)= 3
+16)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 23/8
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 15/4
+Mean_Hierarchical_Distance(8)= 11/4
+17)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 23/8
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 23/8
+Mean_Hierarchical_Distance(8)= 23/8
+18)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 11/4
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 21/8
+19)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 11/4
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 13/4
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 13/4
+20)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 13/4
+Mean_Hierarchical_Distance(4)= 21/8
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 25/8
+Mean_Hierarchical_Distance(7)= 5/2
+Mean_Hierarchical_Distance(8)= 5/2
+21)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 9/4
+Mean_Hierarchical_Distance(2)= 23/8
+Mean_Hierarchical_Distance(3)= 15/4
+Mean_Hierarchical_Distance(4)= 9/4
+Mean_Hierarchical_Distance(5)= 23/8
+Mean_Hierarchical_Distance(6)= 15/4
+Mean_Hierarchical_Distance(7)= 5/2
+Mean_Hierarchical_Distance(8)= 27/8
+22)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 17/8
+Mean_Hierarchical_Distance(5)= 11/4
+Mean_Hierarchical_Distance(6)= 29/8
+Mean_Hierarchical_Distance(7)= 21/8
+Mean_Hierarchical_Distance(8)= 21/8
+23)
+Mean_Hierarchical_Distance(0)= 15/8
+Mean_Hierarchical_Distance(1)= 9/4
+Mean_Hierarchical_Distance(2)= 23/8
+Mean_Hierarchical_Distance(3)= 15/4
+Mean_Hierarchical_Distance(4)= 7/4
+Mean_Hierarchical_Distance(5)= 21/8
+Mean_Hierarchical_Distance(6)= 21/8
+Mean_Hierarchical_Distance(7)= 21/8
+Mean_Hierarchical_Distance(8)= 21/8
+24)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 15/8
+Mean_Hierarchical_Distance(5)= 11/4
+Mean_Hierarchical_Distance(6)= 11/4
+Mean_Hierarchical_Distance(7)= 11/4
+Mean_Hierarchical_Distance(8)= 21/8
+25)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 29/8
+Mean_Hierarchical_Distance(4)= 17/8
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 13/4
+26)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 23/8
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 5/2
+Mean_Hierarchical_Distance(8)= 5/2
+27)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 7/2
+Mean_Hierarchical_Distance(4)= 9/4
+Mean_Hierarchical_Distance(5)= 25/8
+Mean_Hierarchical_Distance(6)= 9/4
+Mean_Hierarchical_Distance(7)= 25/8
+Mean_Hierarchical_Distance(8)= 5/2
+28)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 27/8
+Mean_Hierarchical_Distance(4)= 17/8
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 19/8
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 19/8
+29)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 11/8
+Mean_Hierarchical_Distance(2)= 9/4
+Mean_Hierarchical_Distance(3)= 9/4
+Mean_Hierarchical_Distance(4)= 9/4
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 9/4
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 13/4
+30)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 13/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 5/2
+Mean_Hierarchical_Distance(4)= 5/2
+Mean_Hierarchical_Distance(5)= 5/2
+Mean_Hierarchical_Distance(6)= 17/8
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 3
+31)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 19/8
+Mean_Hierarchical_Distance(4)= 19/8
+Mean_Hierarchical_Distance(5)= 19/8
+Mean_Hierarchical_Distance(6)= 9/4
+Mean_Hierarchical_Distance(7)= 25/8
+Mean_Hierarchical_Distance(8)= 5/2
+32)
+Mean_Hierarchical_Distance(0)= 7/4
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 11/4
+Mean_Hierarchical_Distance(4)= 11/4
+Mean_Hierarchical_Distance(5)= 15/8
+Mean_Hierarchical_Distance(6)= 11/4
+Mean_Hierarchical_Distance(7)= 11/4
+Mean_Hierarchical_Distance(8)= 11/4
+33)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 21/8
+Mean_Hierarchical_Distance(4)= 21/8
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 23/8
+Mean_Hierarchical_Distance(8)= 5/2
+34)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 21/8
+Mean_Hierarchical_Distance(4)= 21/8
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 25/8
+Mean_Hierarchical_Distance(7)= 9/4
+Mean_Hierarchical_Distance(8)= 25/8
+35)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 13/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 5/2
+Mean_Hierarchical_Distance(4)= 5/2
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 19/8
+36)
+Mean_Hierarchical_Distance(0)= 11/8
+Mean_Hierarchical_Distance(1)= 3/2
+Mean_Hierarchical_Distance(2)= 19/8
+Mean_Hierarchical_Distance(3)= 19/8
+Mean_Hierarchical_Distance(4)= 19/8
+Mean_Hierarchical_Distance(5)= 9/4
+Mean_Hierarchical_Distance(6)= 9/4
+Mean_Hierarchical_Distance(7)= 9/4
+Mean_Hierarchical_Distance(8)= 9/4
+37)
+Mean_Hierarchical_Distance(0)= 13/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 23/8
+Mean_Hierarchical_Distance(3)= 23/8
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 23/8
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 9/4
+Mean_Hierarchical_Distance(8)= 25/8
+38)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 11/4
+Mean_Hierarchical_Distance(4)= 15/8
+Mean_Hierarchical_Distance(5)= 11/4
+Mean_Hierarchical_Distance(6)= 11/4
+Mean_Hierarchical_Distance(7)= 19/8
+Mean_Hierarchical_Distance(8)= 19/8
+39)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 11/4
+Mean_Hierarchical_Distance(4)= 17/8
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 17/8
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 19/8
+40)
+Mean_Hierarchical_Distance(0)= 11/8
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 21/8
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 23/8
+Mean_Hierarchical_Distance(6)= 9/4
+Mean_Hierarchical_Distance(7)= 9/4
+Mean_Hierarchical_Distance(8)= 9/4
+41)
+Mean_Hierarchical_Distance(0)= 5/4
+Mean_Hierarchical_Distance(1)= 13/8
+Mean_Hierarchical_Distance(2)= 5/2
+Mean_Hierarchical_Distance(3)= 5/2
+Mean_Hierarchical_Distance(4)= 17/8
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 17/8
+Mean_Hierarchical_Distance(7)= 17/8
+Mean_Hierarchical_Distance(8)= 17/8
+42)
+Mean_Hierarchical_Distance(0)= 3/2
+Mean_Hierarchical_Distance(1)= 17/8
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 17/8
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 17/8
+Mean_Hierarchical_Distance(8)= 3
+43)
+Mean_Hierarchical_Distance(0)= 11/8
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 23/8
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 23/8
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 23/8
+Mean_Hierarchical_Distance(7)= 9/4
+Mean_Hierarchical_Distance(8)= 9/4
+44)
+Mean_Hierarchical_Distance(0)= 5/4
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 11/4
+Mean_Hierarchical_Distance(3)= 15/8
+Mean_Hierarchical_Distance(4)= 11/4
+Mean_Hierarchical_Distance(5)= 17/8
+Mean_Hierarchical_Distance(6)= 17/8
+Mean_Hierarchical_Distance(7)= 17/8
+Mean_Hierarchical_Distance(8)= 17/8
+45)
+Mean_Hierarchical_Distance(0)= 9/8
+Mean_Hierarchical_Distance(1)= 7/4
+Mean_Hierarchical_Distance(2)= 21/8
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 2
+Mean_Hierarchical_Distance(7)= 2
+Mean_Hierarchical_Distance(8)= 2
+46)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 15/8
+Mean_Hierarchical_Distance(2)= 15/8
+Mean_Hierarchical_Distance(3)= 15/8
+Mean_Hierarchical_Distance(4)= 15/8
+Mean_Hierarchical_Distance(5)= 15/8
+Mean_Hierarchical_Distance(6)= 15/8
+Mean_Hierarchical_Distance(7)= 15/8
+Mean_Hierarchical_Distance(8)= 15/8
+----------------------------------------
+n= 10
+0)
+Mean_Hierarchical_Distance(0)= 25/9
+Mean_Hierarchical_Distance(1)= 25/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 37/9
+Mean_Hierarchical_Distance(5)= 5
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 31/9
+Mean_Hierarchical_Distance(8)= 37/9
+Mean_Hierarchical_Distance(9)= 5
+1)
+Mean_Hierarchical_Distance(0)= 8/3
+Mean_Hierarchical_Distance(1)= 8/3
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 38/9
+Mean_Hierarchical_Distance(5)= 38/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 10/3
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 44/9
+2)
+Mean_Hierarchical_Distance(0)= 23/9
+Mean_Hierarchical_Distance(1)= 23/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 37/9
+Mean_Hierarchical_Distance(5)= 37/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 37/9
+Mean_Hierarchical_Distance(9)= 37/9
+3)
+Mean_Hierarchical_Distance(0)= 23/9
+Mean_Hierarchical_Distance(1)= 23/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 13/3
+Mean_Hierarchical_Distance(5)= 11/3
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 43/9
+4)
+Mean_Hierarchical_Distance(0)= 22/9
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 38/9
+Mean_Hierarchical_Distance(5)= 32/9
+Mean_Hierarchical_Distance(6)= 8/3
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 4
+5)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 37/9
+Mean_Hierarchical_Distance(5)= 31/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 37/9
+Mean_Hierarchical_Distance(9)= 31/9
+6)
+Mean_Hierarchical_Distance(0)= 22/9
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 40/9
+Mean_Hierarchical_Distance(5)= 10/3
+Mean_Hierarchical_Distance(6)= 8/3
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 34/9
+Mean_Hierarchical_Distance(9)= 14/3
+7)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 13/3
+Mean_Hierarchical_Distance(5)= 29/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 35/9
+8)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 38/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 10/3
+9)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 37/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 37/9
+Mean_Hierarchical_Distance(9)= 3
+10)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 23/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 41/9
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 11/3
+Mean_Hierarchical_Distance(8)= 41/9
+Mean_Hierarchical_Distance(9)= 29/9
+11)
+Mean_Hierarchical_Distance(0)= 22/9
+Mean_Hierarchical_Distance(1)= 8/3
+Mean_Hierarchical_Distance(2)= 28/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 14/3
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 8/3
+Mean_Hierarchical_Distance(7)= 32/9
+Mean_Hierarchical_Distance(8)= 32/9
+Mean_Hierarchical_Distance(9)= 32/9
+12)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 23/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 41/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 11/3
+Mean_Hierarchical_Distance(8)= 11/3
+Mean_Hierarchical_Distance(9)= 29/9
+13)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 40/9
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 34/9
+Mean_Hierarchical_Distance(8)= 34/9
+Mean_Hierarchical_Distance(9)= 28/9
+14)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 23/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 41/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 35/9
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 35/9
+15)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 40/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 34/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 28/9
+16)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 13/3
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 35/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 3
+17)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 13/3
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 29/9
+Mean_Hierarchical_Distance(7)= 37/9
+Mean_Hierarchical_Distance(8)= 25/9
+Mean_Hierarchical_Distance(9)= 11/3
+18)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 38/9
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 4
+Mean_Hierarchical_Distance(8)= 26/9
+Mean_Hierarchical_Distance(9)= 26/9
+19)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 19/9
+Mean_Hierarchical_Distance(3)= 3
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 25/9
+Mean_Hierarchical_Distance(8)= 31/9
+Mean_Hierarchical_Distance(9)= 13/3
+20)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 20/9
+Mean_Hierarchical_Distance(3)= 28/9
+Mean_Hierarchical_Distance(4)= 28/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 8/3
+Mean_Hierarchical_Distance(8)= 10/3
+Mean_Hierarchical_Distance(9)= 38/9
+21)
+Mean_Hierarchical_Distance(0)= 7/3
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 31/9
+Mean_Hierarchical_Distance(5)= 31/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 35/9
+22)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 10/3
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 10/3
+23)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 29/9
+Mean_Hierarchical_Distance(5)= 29/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 37/9
+Mean_Hierarchical_Distance(9)= 3
+24)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 29/9
+Mean_Hierarchical_Distance(5)= 29/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 29/9
+25)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 32/9
+Mean_Hierarchical_Distance(7)= 8/3
+Mean_Hierarchical_Distance(8)= 10/3
+Mean_Hierarchical_Distance(9)= 38/9
+26)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 29/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 23/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 37/9
+27)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 32/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 34/9
+Mean_Hierarchical_Distance(9)= 34/9
+28)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 31/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 29/9
+29)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 26/9
+30)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 28/9
+31)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 29/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 25/9
+32)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 11/3
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 11/3
+Mean_Hierarchical_Distance(8)= 11/3
+Mean_Hierarchical_Distance(9)= 3
+33)
+Mean_Hierarchical_Distance(0)= 20/9
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 34/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 34/9
+Mean_Hierarchical_Distance(8)= 26/9
+Mean_Hierarchical_Distance(9)= 34/9
+34)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 11/3
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 11/3
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 3
+35)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 32/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 34/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 26/9
+36)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 32/9
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 4
+Mean_Hierarchical_Distance(8)= 8/3
+Mean_Hierarchical_Distance(9)= 32/9
+37)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 31/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 35/9
+Mean_Hierarchical_Distance(8)= 25/9
+Mean_Hierarchical_Distance(9)= 25/9
+38)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 32/9
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 26/9
+Mean_Hierarchical_Distance(9)= 26/9
+39)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 31/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 25/9
+40)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 31/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 29/9
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 31/9
+41)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 8/3
+Mean_Hierarchical_Distance(9)= 8/3
+42)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 10/3
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 10/3
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 10/3
+Mean_Hierarchical_Distance(9)= 8/3
+43)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 29/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 29/9
+Mean_Hierarchical_Distance(7)= 23/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+44)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 31/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 23/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 37/9
+45)
+Mean_Hierarchical_Distance(0)= 19/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 11/3
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 29/9
+46)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 32/9
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 4
+Mean_Hierarchical_Distance(9)= 26/9
+47)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 32/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 28/9
+48)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 31/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 25/9
+49)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 31/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 31/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 31/9
+50)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 8/3
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 4
+51)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 26/9
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 34/9
+Mean_Hierarchical_Distance(9)= 28/9
+52)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 35/9
+Mean_Hierarchical_Distance(9)= 25/9
+53)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 19/9
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 3
+54)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 8/3
+55)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 10/3
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 10/3
+56)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 29/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+57)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 11/3
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 25/9
+58)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 35/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 31/9
+59)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 26/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 34/9
+Mean_Hierarchical_Distance(8)= 8/3
+Mean_Hierarchical_Distance(9)= 8/3
+60)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 17/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 25/9
+Mean_Hierarchical_Distance(8)= 25/9
+Mean_Hierarchical_Distance(9)= 25/9
+61)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 26/9
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 26/9
+Mean_Hierarchical_Distance(9)= 8/3
+62)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 26/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 10/3
+63)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+64)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 29/9
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 23/9
+65)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 10/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 22/9
+66)
+Mean_Hierarchical_Distance(0)= 2
+Mean_Hierarchical_Distance(1)= 22/9
+Mean_Hierarchical_Distance(2)= 28/9
+Mean_Hierarchical_Distance(3)= 4
+Mean_Hierarchical_Distance(4)= 22/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 4
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 4
+67)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 35/9
+Mean_Hierarchical_Distance(4)= 7/3
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 35/9
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 29/9
+68)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 20/9
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 34/9
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 10/3
+Mean_Hierarchical_Distance(9)= 8/3
+69)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 11/3
+Mean_Hierarchical_Distance(7)= 23/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+70)
+Mean_Hierarchical_Distance(0)= 17/9
+Mean_Hierarchical_Distance(1)= 7/3
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 35/9
+Mean_Hierarchical_Distance(4)= 5/3
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 23/9
+Mean_Hierarchical_Distance(7)= 23/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+71)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 16/9
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 8/3
+Mean_Hierarchical_Distance(7)= 8/3
+Mean_Hierarchical_Distance(8)= 8/3
+Mean_Hierarchical_Distance(9)= 8/3
+72)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 10/3
+73)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 17/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 25/9
+Mean_Hierarchical_Distance(8)= 23/9
+Mean_Hierarchical_Distance(9)= 23/9
+74)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 20/9
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 34/9
+Mean_Hierarchical_Distance(4)= 20/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 28/9
+75)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 23/9
+76)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 22/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 22/9
+77)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 11/3
+Mean_Hierarchical_Distance(4)= 7/3
+Mean_Hierarchical_Distance(5)= 29/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 29/9
+78)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 32/9
+Mean_Hierarchical_Distance(4)= 20/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 22/9
+79)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 31/9
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 7/3
+80)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 4/3
+Mean_Hierarchical_Distance(2)= 20/9
+Mean_Hierarchical_Distance(3)= 20/9
+Mean_Hierarchical_Distance(4)= 20/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 10/3
+81)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 14/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 22/9
+Mean_Hierarchical_Distance(4)= 22/9
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 22/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 28/9
+82)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 13/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 7/3
+Mean_Hierarchical_Distance(4)= 7/3
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 29/9
+Mean_Hierarchical_Distance(9)= 23/9
+83)
+Mean_Hierarchical_Distance(0)= 16/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 8/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 8/3
+Mean_Hierarchical_Distance(6)= 2
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 26/9
+Mean_Hierarchical_Distance(9)= 26/9
+84)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 23/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 19/9
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 23/9
+85)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 23/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 23/9
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 29/9
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 29/9
+86)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 14/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 22/9
+Mean_Hierarchical_Distance(4)= 22/9
+Mean_Hierarchical_Distance(5)= 22/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 22/9
+87)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 13/9
+Mean_Hierarchical_Distance(2)= 7/3
+Mean_Hierarchical_Distance(3)= 7/3
+Mean_Hierarchical_Distance(4)= 7/3
+Mean_Hierarchical_Distance(5)= 7/3
+Mean_Hierarchical_Distance(6)= 7/3
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 7/3
+88)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 25/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 17/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 25/9
+Mean_Hierarchical_Distance(8)= 25/9
+Mean_Hierarchical_Distance(9)= 23/9
+89)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 25/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 29/9
+90)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 8/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 26/9
+Mean_Hierarchical_Distance(8)= 22/9
+Mean_Hierarchical_Distance(9)= 22/9
+91)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 8/3
+Mean_Hierarchical_Distance(4)= 8/3
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 28/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 22/9
+92)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 23/9
+Mean_Hierarchical_Distance(4)= 23/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 7/3
+93)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 14/9
+Mean_Hierarchical_Distance(2)= 22/9
+Mean_Hierarchical_Distance(3)= 22/9
+Mean_Hierarchical_Distance(4)= 22/9
+Mean_Hierarchical_Distance(5)= 20/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 20/9
+Mean_Hierarchical_Distance(9)= 20/9
+94)
+Mean_Hierarchical_Distance(0)= 5/3
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 3
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 19/9
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 3
+95)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 26/9
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 28/9
+Mean_Hierarchical_Distance(9)= 22/9
+96)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 25/9
+Mean_Hierarchical_Distance(4)= 17/9
+Mean_Hierarchical_Distance(5)= 25/9
+Mean_Hierarchical_Distance(6)= 25/9
+Mean_Hierarchical_Distance(7)= 7/3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 7/3
+97)
+Mean_Hierarchical_Distance(0)= 14/9
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 26/9
+Mean_Hierarchical_Distance(4)= 20/9
+Mean_Hierarchical_Distance(5)= 28/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 28/9
+Mean_Hierarchical_Distance(8)= 20/9
+Mean_Hierarchical_Distance(9)= 28/9
+98)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 25/9
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 3
+Mean_Hierarchical_Distance(6)= 19/9
+Mean_Hierarchical_Distance(7)= 3
+Mean_Hierarchical_Distance(8)= 7/3
+Mean_Hierarchical_Distance(9)= 7/3
+99)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 8/3
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 26/9
+Mean_Hierarchical_Distance(6)= 20/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 20/9
+Mean_Hierarchical_Distance(9)= 20/9
+100)
+Mean_Hierarchical_Distance(0)= 11/9
+Mean_Hierarchical_Distance(1)= 5/3
+Mean_Hierarchical_Distance(2)= 23/9
+Mean_Hierarchical_Distance(3)= 23/9
+Mean_Hierarchical_Distance(4)= 19/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 19/9
+Mean_Hierarchical_Distance(7)= 19/9
+Mean_Hierarchical_Distance(8)= 19/9
+Mean_Hierarchical_Distance(9)= 19/9
+101)
+Mean_Hierarchical_Distance(0)= 13/9
+Mean_Hierarchical_Distance(1)= 19/9
+Mean_Hierarchical_Distance(2)= 3
+Mean_Hierarchical_Distance(3)= 19/9
+Mean_Hierarchical_Distance(4)= 3
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 3
+Mean_Hierarchical_Distance(7)= 19/9
+Mean_Hierarchical_Distance(8)= 3
+Mean_Hierarchical_Distance(9)= 7/3
+102)
+Mean_Hierarchical_Distance(0)= 4/3
+Mean_Hierarchical_Distance(1)= 2
+Mean_Hierarchical_Distance(2)= 26/9
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 26/9
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 26/9
+Mean_Hierarchical_Distance(7)= 20/9
+Mean_Hierarchical_Distance(8)= 20/9
+Mean_Hierarchical_Distance(9)= 20/9
+103)
+Mean_Hierarchical_Distance(0)= 11/9
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 25/9
+Mean_Hierarchical_Distance(3)= 17/9
+Mean_Hierarchical_Distance(4)= 25/9
+Mean_Hierarchical_Distance(5)= 19/9
+Mean_Hierarchical_Distance(6)= 19/9
+Mean_Hierarchical_Distance(7)= 19/9
+Mean_Hierarchical_Distance(8)= 19/9
+Mean_Hierarchical_Distance(9)= 19/9
+104)
+Mean_Hierarchical_Distance(0)= 10/9
+Mean_Hierarchical_Distance(1)= 16/9
+Mean_Hierarchical_Distance(2)= 8/3
+Mean_Hierarchical_Distance(3)= 2
+Mean_Hierarchical_Distance(4)= 2
+Mean_Hierarchical_Distance(5)= 2
+Mean_Hierarchical_Distance(6)= 2
+Mean_Hierarchical_Distance(7)= 2
+Mean_Hierarchical_Distance(8)= 2
+Mean_Hierarchical_Distance(9)= 2
+105)
+Mean_Hierarchical_Distance(0)= 1
+Mean_Hierarchical_Distance(1)= 17/9
+Mean_Hierarchical_Distance(2)= 17/9
+Mean_Hierarchical_Distance(3)= 17/9
+Mean_Hierarchical_Distance(4)= 17/9
+Mean_Hierarchical_Distance(5)= 17/9
+Mean_Hierarchical_Distance(6)= 17/9
+Mean_Hierarchical_Distance(7)= 17/9
+Mean_Hierarchical_Distance(8)= 17/9
+Mean_Hierarchical_Distance(9)= 17/9

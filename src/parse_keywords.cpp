@@ -156,6 +156,9 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 	if (key == "general") {
 		return exe_properties_general(fin);
 	}
+	if (key == "MHD_All_Trees") {
+		return exe_properties_MHD_All_trees(fin);
+	}
 	if (key == "exp_var_C") {
 		return exe_properties_ExpVar_C(fin);
 	}
