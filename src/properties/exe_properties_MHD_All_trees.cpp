@@ -1,24 +1,25 @@
-/*********************************************************************
+/********************************************************************
  *
- *  Linear Arrangement Library - A library that implements a collection
- *  algorithms for linear arrangments of graphs.
+ *  Tests of the Linear Arrangement Library - Programs used to test the
+ *  algorithms in the linear arrangement library.
  *
  *  Copyright (C) 2019
  *
- *  This file is part of Linear Arrangement Library.
+ *  This file is part of Tests of the Linear Arrangement Library.
  *
- *  Linear Arrangement Library is free software: you can redistribute it
- *  and/or modify it under the terms of the GNU Affero General Public License
- *  as published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
+ *  Tests of the Linear Arrangement Library is free software: you can
+ *  redistribute it and/or modify it under the terms of the GNU Affero
+ *  General Public License as published by the Free Software Foundation,
+ *  either version 3 of the License, or (at your option) any later version.
  *
- *  Linear Arrangement Library is distributed in the hope that it will be
- *  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- *  GNU Affero General Public License for more details.
+ *  Tests of the Linear Arrangement Library is distributed in the hope
+ *  that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the GNU Affero General Public License for more details.
  *
  *  You should have received a copy of the GNU Affero General Public License
- *  along with Linear Arrangement Library.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Tests of the Linear Arrangement Library.  If not, see
+ *  <http://www.gnu.org/licenses/>.
  *
  *  Contact:
  *
@@ -45,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/rutree.hpp>
+#include <lal/graphs/urtree.hpp>
 #include <lal/generation/free_ulab_trees.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
@@ -98,13 +99,13 @@ err_type exe_properties_MHD_All_trees(ifstream& fin) {
 		int i = 0;
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			ugraph t = TreeGen.get_tree();
+			utree t = TreeGen.get_tree();
 
 			cout << i << ")" << endl;
 
 			// for each node, make a rooted tree at that node
 			for (node r = 0; r < t.n_nodes(); ++r) {
-				rutree R(t, r);
+				urtree R(t, r);
 				rational mhd = properties::MHD_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 			}

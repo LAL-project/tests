@@ -47,7 +47,8 @@ SOURCES += \
     linarr/exe_linarr_compute_C_list.cpp \
     generate/exe_gen_trees.cpp \
     properties/exe_properties_approx_exp_C.cpp \
-    utils/exe_utils_sorting.cpp
+    utils/exe_utils_sorting.cpp \
+    utils/exe_utils_traversal.cpp
 
 HEADERS += \
 	definitions.hpp \
