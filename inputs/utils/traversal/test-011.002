@@ -1,0 +1,22 @@
+TYPE utils-traversal
+INPUT 0
+BODY
+	dgraph
+	init 10
+	
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 3 4
+	
+	add_edge 5 6
+	add_edge 6 7
+	add_edge 7 8
+	output_graph
+	
+	is_reachable 0 5
+	is_reachable 5 0
+	is_reachable 0 9
+	is_reachable 9 0
+	is_reachable 5 7
+	is_reachable 7 5

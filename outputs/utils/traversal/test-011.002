@@ -1,0 +1,18 @@
+graph_type: dgraph
+0: 1
+1: 2
+2: 3
+3: 4
+4:
+5: 6
+6: 7
+7: 8
+8:
+9:
+Is '5' reachable from '0'? no
+Is '0' reachable from '5'? no
+Is '9' reachable from '0'? no
+Is '0' reachable from '9'? no
+Is '7' reachable from '5'? yes
+Is '5' reachable from '7'? no
+Test finished without apparent errors.

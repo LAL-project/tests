@@ -1,0 +1,32 @@
+INSTRUCTIONS
+============
+
+All tests start with a single string, one of:
+	-> ugraph
+	-> dgraph
+
+This tells the test what type of graph to use.
+
+
+1. When an input graph is given
+-------------------------------
+
+** is_reachable NODE_1 NODE_2
+	Output a message telling whether NODE_1 is reachable from NODE_2
+
+** has_cycle
+	Output a message telling whether the input graph has a cycle or not
+
+** output_graph
+	Outputs the graph to standard output.
+
+2. When no input graph is given
+-------------------------------
+
+** add_edge NODE_1 NODE_2
+	Adds an edge to the only graph that the test is dealing with.
+
+** init N
+	Initialise the graph with N vertices.
+
+All of the options of section 2 are also allowed.

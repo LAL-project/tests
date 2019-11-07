@@ -1,0 +1,5 @@
+TYPE utils-traversal
+INPUT 1 graphs/linear-tree/050 edge-list
+BODY
+	dgraph
+	has_cycle

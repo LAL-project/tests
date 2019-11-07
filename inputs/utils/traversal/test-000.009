@@ -1,0 +1,5 @@
+TYPE utils-traversal
+INPUT 1 graphs/star-tree/010 edge-list
+BODY
+	ugraph
+	has_cycle

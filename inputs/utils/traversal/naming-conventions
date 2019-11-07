@@ -1,0 +1,34 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+	test-
+
+Then follows the "family number" of the test. This is a three-digit number.
+Finally, a three-digit number indicating the test number within the family.
+Therefore
+
+
+          Test number
+        
+              |
+             ---
+	test-xxx.yyy
+	     ---
+	      |
+	      
+	  Family test   
+        number
+
+
+
+Family test numbers
+-------------------
+
+000: finding cycles on ugraph
+001: finding cycles on dgraph
+
+010: reachability on ugraph
+011: reachability on dgraph
