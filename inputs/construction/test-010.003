@@ -1,0 +1,26 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ugraph g0 0
+	assert edges_are g0 0
+	
+	create_graph ugraph g1 1
+	assert edges_are g1 0
+	
+	create_graph ugraph g2 2
+	assert edges_are g2 0
+	
+	create_graph ugraph g3 3
+	assert edges_are g3 0
+	
+	create_graph ugraph g4 4
+	assert edges_are g4 0
+	
+	create_graph ugraph g5 5
+	assert edges_are g5 0
+	
+	create_graph ugraph g6 6
+	assert edges_are g6 0
+	
+	create_graph ugraph g7 7
+	assert edges_are g7 0

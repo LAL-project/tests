@@ -1,0 +1,122 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ugraph G 10
+	output_graph G
+	add_edge G 0 1 false
+	add_edge G 1 2 false
+	add_edge G 2 3 false
+	add_edge G 3 4 false
+	add_edge G 4 5 false
+	add_edge G 5 6 false
+	add_edge G 6 7 false
+	add_edge G 7 8 false
+	add_edge G 8 9 false
+	
+	to_drtree DG1 G 0
+	output_graph DG1
+	assert exists_edge DG1 0 1
+	assert exists_edge DG1 1 2
+	assert exists_edge DG1 2 3
+	assert exists_edge DG1 3 4
+	assert exists_edge DG1 4 5
+	assert exists_edge DG1 5 6
+	assert exists_edge DG1 6 7
+	assert exists_edge DG1 7 8
+	assert exists_edge DG1 8 9
+	assert in_degree DG1 0 0
+	assert in_degree DG1 1 1
+	assert in_degree DG1 2 1
+	assert in_degree DG1 3 1
+	assert in_degree DG1 4 1
+	assert in_degree DG1 5 1
+	assert in_degree DG1 6 1
+	assert in_degree DG1 7 1
+	assert in_degree DG1 8 1
+	assert in_degree DG1 9 1
+	assert out_degree DG1 0 1
+	assert out_degree DG1 1 1
+	assert out_degree DG1 2 1
+	assert out_degree DG1 3 1
+	assert out_degree DG1 4 1
+	assert out_degree DG1 5 1
+	assert out_degree DG1 6 1
+	assert out_degree DG1 7 1
+	assert out_degree DG1 8 1
+	assert out_degree DG1 9 0
+	
+	to_drtree DG2 G 5
+	output_graph DG2
+	assert not_exists_edge DG2 0 1
+	assert not_exists_edge DG2 1 2
+	assert not_exists_edge DG2 2 3
+	assert not_exists_edge DG2 3 4
+	assert not_exists_edge DG2 4 5
+	assert exists_edge DG2 1 0
+	assert exists_edge DG2 2 1
+	assert exists_edge DG2 3 2
+	assert exists_edge DG2 4 3
+	assert exists_edge DG2 5 4
+	assert exists_edge DG2 5 6
+	assert exists_edge DG2 6 7
+	assert exists_edge DG2 7 8
+	assert exists_edge DG2 8 9
+	assert in_degree DG2 0 1
+	assert in_degree DG2 1 1
+	assert in_degree DG2 2 1
+	assert in_degree DG2 3 1
+	assert in_degree DG2 4 1
+	assert in_degree DG2 5 0
+	assert in_degree DG2 6 1
+	assert in_degree DG2 7 1
+	assert in_degree DG2 8 1
+	assert in_degree DG2 9 1
+	assert out_degree DG2 0 0
+	assert out_degree DG2 1 1
+	assert out_degree DG2 2 1
+	assert out_degree DG2 3 1
+	assert out_degree DG2 4 1
+	assert out_degree DG2 5 2
+	assert out_degree DG2 6 1
+	assert out_degree DG2 7 1
+	assert out_degree DG2 8 1
+	assert out_degree DG2 9 0
+	
+	to_drtree DG3 G 7
+	output_graph DG3
+	assert not_exists_edge DG3 0 1
+	assert not_exists_edge DG3 1 2
+	assert not_exists_edge DG3 2 3
+	assert not_exists_edge DG3 3 4
+	assert not_exists_edge DG3 4 5
+	assert not_exists_edge DG3 5 6
+	assert not_exists_edge DG3 6 7
+	assert exists_edge DG3 1 0
+	assert exists_edge DG3 2 1
+	assert exists_edge DG3 3 2
+	assert exists_edge DG3 4 3
+	assert exists_edge DG3 5 4
+	assert exists_edge DG3 6 5
+	assert exists_edge DG3 7 6
+	assert exists_edge DG3 7 8
+	assert exists_edge DG3 8 9
+	assert in_degree DG3 0 1
+	assert in_degree DG3 1 1
+	assert in_degree DG3 2 1
+	assert in_degree DG3 3 1
+	assert in_degree DG3 4 1
+	assert in_degree DG3 5 1
+	assert in_degree DG3 6 1
+	assert in_degree DG3 7 0
+	assert in_degree DG3 8 1
+	assert in_degree DG3 9 1
+	assert out_degree DG3 0 0
+	assert out_degree DG3 1 1
+	assert out_degree DG3 2 1
+	assert out_degree DG3 3 1
+	assert out_degree DG3 4 1
+	assert out_degree DG3 5 1
+	assert out_degree DG3 6 1
+	assert out_degree DG3 7 2
+	assert out_degree DG3 8 1
+	assert out_degree DG3 9 0

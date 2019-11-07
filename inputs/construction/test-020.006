@@ -1,0 +1,19 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ugraph g 5
+	
+	assert num_edges g 0
+	check_Q_iterator g
+	
+	add_edge g 0 1 false
+	assert num_edges g 1
+	check_Q_iterator g
+	
+	add_edge g 2 3 false
+	assert num_edges g 2
+	check_Q_iterator g
+	
+	add_edge g 0 4 false
+	assert num_edges g 3
+	check_Q_iterator g

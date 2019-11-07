@@ -1,0 +1,60 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+	test-
+
+Then follows the "family number" of the test. This is a three-digit number.
+Finally, a three-digit number indicating the test number within the family.
+Therefore
+
+
+         Test number
+        
+              |
+             ---
+	test-xxx.yyy
+	     ---
+	      |
+	      
+	  Family test   
+        number
+
+
+
+Family test numbers
+-------------------
+
+   Type of test
+     |
+     --
+     xxx
+       -
+       |
+       
+    Type of graph
+       
+       
+000: construction of ugraph
+001: construction of dgraph
+002: construction of utree
+003: construction of dtree
+004: construction of urtree
+005: construction of drtree
+
+010: inspection of edges and elements of Q in ugraph
+011: inspection of edges and elements of Q in dgraph
+
+020: check iterators of constructed ugraph
+021: check iterators of constructed dgraph
+
+030: read ugraph from disk
+031: read dgraph from disk
+032: read utree from disk
+033: read dtree from disk
+034: read urtree from disk
+035: read drtree from disk
+
+040: convert a ugraph to a drtree graph

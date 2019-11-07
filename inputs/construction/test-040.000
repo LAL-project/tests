@@ -1,0 +1,17 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ugraph g1 0
+	to_drtree dg1 g1 0
+	
+	create_graph ugraph g2 1
+	to_drtree dg2 g2 0
+	
+	create_graph ugraph g3 2
+	to_drtree dg3 g3 0
+	
+	create_graph ugraph g4 3
+	to_drtree dg4 g4 0
+	
+	create_graph ugraph g5 4
+	to_drtree dg5 g5 0

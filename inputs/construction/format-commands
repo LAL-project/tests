@@ -11,6 +11,9 @@
 	Allowed strings:
 		- edge_list
 
+** output_graph GRAPH
+	Outputs a graph to standard output
+
 ** add_edge GRAPH VERTEX1 VERTEX2 true/false
 	Adds an edge to a graph. Normalises (or not) the graph
 	
@@ -20,11 +23,11 @@
 ** assert
 	Makes sure that something is true
 	
-	-- not_normalised GRAPH
-		asserts that a graph is NOT normalised
-		
-	-- normalised GRAPH
+	-- is_normalised GRAPH
 		asserts that a graph IS normalised
+	
+	-- not_normalised GRAPH
+		asserts that a graph IS NOT normalised
 		
 	-- equal_graphs GRAPH1 GRAPH2
 		asserts that two graphs are equal (here "equal" is not the
@@ -59,28 +62,45 @@
 		For both directed and undirected graphs, the pairs ((s,t),(u,v))
 		must be given also in lexicographic order, i.e., s<u.
 	
-	-- directed GRAPH
+	-- is_directed GRAPH
 		asserts that the graph is directed
 	
 	-- not_directed GRAPH
 		asserts that the graph is directed
 		
-	-- undirected GRAPH
+	-- is_undirected GRAPH
 		asserts that the graph is undirected
 	
 	-- not_undirected GRAPH
 		asserts that the graph is undirected
 	
 	-- degree GRAPH NODE d
-		asserts that the degree (out-degree for directed graphs) equals d
+		asserts that the degree (out-degree + in-degree for directed
+		graphs) equals d
 	
 	DIRECTED GRAPHS
 	-- in_degree GRAPH NODE d
-		asserts that the in-degree. Only for directed graphs
+		asserts that the in-degree equals d. Only for directed graphs
+	
+	-- out_degree GRAPH NODE d
+		asserts that the out-degree equals d. Only for directed graphs
 	
 	ROOTED DIRECTED TREES
 	-- is_root GRAPH NODE
 		asserts that the node NODE is the root 
+	
+	UNDIRECTED TREES and DIRECTED TREES
+	-- can_add_edge GRAPH VERTEX_1 VERTEX_2
+		asserts that an edge can be added to the graph
+		
+	-- cant_add_edge GRAPH VERTEX_1 VERTEX_2
+		asserts that an edge can NOT be added to the graph
+	
+	-- can_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+		asserts that the edges in the list can be added to the graph
+		
+	-- cant_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+		asserts that the edges in the list cant be added to the graph
 	
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
@@ -100,11 +120,12 @@
 	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
 	in GRAPH_RESULT
 
+
+UNDIRECTED GRAPHS
+** to_drtree GRAPH_RESULT GRAPH ROOT_NODE
+	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
+	taking node ROOT_NODE as its root.
+
 DIRECTED GRAPHS
 ** to_undirected GRAPH_RESULT GRAPH
 	Converts the directed graph GRAPH into an undirected graph GRAPH_RESULT
-
-ROOTED DIRECTED TREES
-** to_rooted_directed GRAPH_RESULT GRAPH ROOT_NODE
-	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
-	taking node ROOT_NODE as its root.
