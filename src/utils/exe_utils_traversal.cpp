@@ -64,7 +64,7 @@ namespace exe_tests {
 template<class G>
 err_type process_instruction(const G& g, const string& command, ifstream& fin) {
 	if (command == "has_cycle") {
-		bool has_cycle = utils::graph_has_cycles(g);
+		bool has_cycle = utils::has_cycles(g);
 		cout << "Graph has cycle? "
 			 << (has_cycle ? "yes" : "no") << endl;
 		return err_type::no_error;
