@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
+#include <lal/utils/is_tree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -85,16 +86,17 @@ void Q_size(const ugraph& g) {
 }
 
 void snd_mmt_deg(const ugraph& g) {
-	rational k2 = second_mmt_degree_rational(g);
+	rational k2 = mmt_degree_rational(g, 2);
 	cout << "<k^2>= " << k2 << endl;
 }
 
 void trd_mmt_deg(const ugraph& g) {
-	rational k3 = third_mmt_degree_rational(g);
+	rational k3 = mmt_degree_rational(g, 3);
 	cout << "<k^3>= " << k3 << endl;
 }
 
 void hubiness_coefficient(const ugraph& g) {
+	if (not utils::is_tree(g)) { return; }
 	if (g.n_nodes() > 3) {
 		rational h = hubiness_rational(g);
 		cout << "hubiness= " << h << endl;
@@ -102,6 +104,7 @@ void hubiness_coefficient(const ugraph& g) {
 }
 
 void MHD(const ugraph& g, node r) {
+	if (not utils::is_tree(g)) { return; }
 	utree t(g);
 	urtree R(t, r);
 	rational mhd = MHD_rational(R);
