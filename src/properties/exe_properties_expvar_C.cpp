@@ -47,6 +47,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/utree.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/properties/Q.hpp>
@@ -99,8 +100,9 @@ void output_ExpVar_C_formula_reuse(const ugraph& g) {
 }
 
 void output_ExpVar_C_trees(const ugraph& g) {
-	rational Vr = variance_C_tree_rational(g);
-	rational E1r = expectation_C_first_rational(g);
+	utree t = g;
+	rational Vr = variance_C_tree_rational(t);
+	rational E1r = expectation_C_first_rational(t);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
@@ -116,7 +118,7 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 	free_ulab_trees TreeGen;
 	TreeGen.init(n);
 
-	ugraph tree;
+	utree tree;
 	uint32_t k = 0;
 
 	while (TreeGen.has_next()) {
@@ -147,7 +149,7 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 
 bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_trees) {
 	rand_free_ulab_trees TreeGen(size_trees);
-	ugraph rand_tree;
+	utree rand_tree;
 	ugraph forest;
 
 	for (uint32_t i = 0; i < r; ++i) {
