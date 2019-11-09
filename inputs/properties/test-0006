@@ -12,6 +12,5 @@ graphs/er/030-0.50 edge-list
 BODY
 	enumerate_Q
 	Q_size
-	2nd_mmt_deg
-	3rd_mmt_deg
-	hubiness_coefficient
+	mmt_deg 2
+	mmt_deg 3

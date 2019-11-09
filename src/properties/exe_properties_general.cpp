@@ -85,14 +85,9 @@ void Q_size(const ugraph& g) {
 	cout << "size of Q: " << dQ << endl;
 }
 
-void snd_mmt_deg(const ugraph& g) {
-	rational k2 = mmt_degree_rational(g, 2);
-	cout << "<k^2>= " << k2 << endl;
-}
-
-void trd_mmt_deg(const ugraph& g) {
-	rational k3 = mmt_degree_rational(g, 3);
-	cout << "<k^3>= " << k3 << endl;
+void mmt_deg(const ugraph& g, uint64_t p) {
+	rational kp = mmt_degree_rational(g, p);
+	cout << "<k^" << p << ">= " << kp << endl;
 }
 
 void hubiness_coefficient(const ugraph& g) {
@@ -113,9 +108,8 @@ void MHD(const ugraph& g, node r) {
 
 err_type exe_properties_general(ifstream& fin) {
 	const set<string> allowed_instructions({
-		"enumerate_Q", "Q_size", "2nd_mmt_deg",
-		"3rd_mmt_deg", "hubiness_coefficient",
-		"Mean_Hierarchical_Distance"
+		"enumerate_Q", "Q_size", "mmt_deg",
+		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
 
 	string field;
@@ -168,11 +162,10 @@ err_type exe_properties_general(ifstream& fin) {
 			else if (ins == "Q_size") {
 				Q_size(G);
 			}
-			else if (ins == "2nd_mmt_deg") {
-				snd_mmt_deg(G);
-			}
-			else if (ins == "3rd_mmt_deg") {
-				trd_mmt_deg(G);
+			else if (ins == "mmt_deg") {
+				uint64_t p;
+				ss >> p;
+				mmt_deg(G, p);
 			}
 			else if (ins == "hubiness_coefficient") {
 				hubiness_coefficient(G);

@@ -28,6 +28,5 @@ graphs/cycle/026 edge-list
 BODY
 	enumerate_Q
 	Q_size
-	2nd_mmt_deg
-	3rd_mmt_deg
-	hubiness_coefficient
+	mmt_deg 2
+	mmt_deg 3
