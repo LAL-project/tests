@@ -1,0 +1,78 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ugraph g 8
+	add_edge g 0 1 false
+	add_edge g 0 2 false
+	add_edge g 0 3 false
+	add_edge g 0 4 false
+	add_edge g 1 5 false
+	add_edge g 1 6 false
+	add_edge g 1 7 false
+	output_graph g
+	
+	to_drtree dg1 g 0
+	output_graph dg1
+	assert exists_edge dg1 0 1
+	assert exists_edge dg1 0 2
+	assert exists_edge dg1 0 3
+	assert exists_edge dg1 0 4
+	assert exists_edge dg1 1 5
+	assert exists_edge dg1 1 6
+	assert exists_edge dg1 1 7
+	assert not_exists_edge dg1 1 0
+	assert not_exists_edge dg1 2 0
+	assert not_exists_edge dg1 3 0
+	assert not_exists_edge dg1 4 0
+	assert not_exists_edge dg1 5 1
+	assert not_exists_edge dg1 6 1
+	assert not_exists_edge dg1 7 1
+	assert in_degree dg1 0 0
+	assert in_degree dg1 1 1
+	assert in_degree dg1 2 1
+	assert in_degree dg1 3 1
+	assert in_degree dg1 4 1
+	assert in_degree dg1 5 1
+	assert in_degree dg1 6 1
+	assert in_degree dg1 7 1
+	assert out_degree dg1 0 4
+	assert out_degree dg1 1 3
+	assert out_degree dg1 2 0
+	assert out_degree dg1 3 0
+	assert out_degree dg1 4 0
+	assert out_degree dg1 5 0
+	assert out_degree dg1 6 0
+	assert out_degree dg1 7 0
+	
+	to_drtree dg2 g 1
+	output_graph dg2
+	assert exists_edge dg2 1 0
+	assert exists_edge dg2 0 2
+	assert exists_edge dg2 0 3
+	assert exists_edge dg2 0 4
+	assert exists_edge dg2 1 5
+	assert exists_edge dg2 1 6
+	assert exists_edge dg2 1 7
+	assert not_exists_edge dg2 0 1
+	assert not_exists_edge dg2 2 0
+	assert not_exists_edge dg2 3 0
+	assert not_exists_edge dg2 4 0
+	assert not_exists_edge dg2 5 1
+	assert not_exists_edge dg2 6 1
+	assert not_exists_edge dg2 7 1
+	assert in_degree dg2 0 1
+	assert in_degree dg2 1 0
+	assert in_degree dg2 2 1
+	assert in_degree dg2 3 1
+	assert in_degree dg2 4 1
+	assert in_degree dg2 5 1
+	assert in_degree dg2 6 1
+	assert in_degree dg2 7 1
+	assert out_degree dg2 0 3
+	assert out_degree dg2 1 4
+	assert out_degree dg2 2 0
+	assert out_degree dg2 3 0
+	assert out_degree dg2 4 0
+	assert out_degree dg2 5 0
+	assert out_degree dg2 6 0
+	assert out_degree dg2 7 0

@@ -149,7 +149,7 @@ static const vector<string> all_types(
 		return false;																				\
 	}()
 
-#define apply_if_ffunction(v, FUNC)									\
+#define if_ffunction(v, FUNC)										\
 	if (graph_type(v) == UGRAPH)		{ FUNC(ugraphvars[v]); }	\
 	else if (graph_type(v) == DGRAPH)	{ FUNC(dgraphvars[v]); }	\
 	else if (graph_type(v) == UTREE)	{ FUNC(utreevars[v]); }		\
@@ -157,7 +157,7 @@ static const vector<string> all_types(
 	else if (graph_type(v) == URTREE)	{ FUNC(urtreevars[v]); }	\
 	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
 
-#define apply_if_mfunction(v, FUNC)									\
+#define if_mfunction(v, FUNC)										\
 	if (graph_type(v) == UGRAPH)		{ ugraphvars[v].FUNC; }		\
 	else if (graph_type(v) == DGRAPH)	{ dgraphvars[v].FUNC; }		\
 	else if (graph_type(v) == UTREE)	{ utreevars[v].FUNC; }		\
@@ -165,7 +165,7 @@ static const vector<string> all_types(
 	else if (graph_type(v) == URTREE)	{ urtreevars[v].FUNC; }		\
 	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
 
-#define apply_ffunction(v, FUNC)										\
+#define ffunction(v, FUNC)												\
 	[&]() {																\
 		if (graph_type(v) == UGRAPH)	{ return FUNC(ugraphvars[v]); }	\
 		if (graph_type(v) == DGRAPH)	{ return FUNC(dgraphvars[v]); }	\
@@ -175,7 +175,7 @@ static const vector<string> all_types(
 		return FUNC(drtreevars[v]);										\
 	}()
 
-#define apply_mfunction(v, FUNC)										\
+#define mfunction(v, FUNC)												\
 	[&]() {																\
 		if (graph_type(v) == UGRAPH)	{ return ugraphvars[v].FUNC; }	\
 		if (graph_type(v) == DGRAPH)	{ return dgraphvars[v].FUNC; }	\
@@ -187,19 +187,19 @@ static const vector<string> all_types(
 
 
 
-#define apply_if_ffunction_tree(v, FUNC)							\
+#define if_ffunction_trees(v, FUNC)									\
 	if (graph_type(v) == UTREE)			{ FUNC(utreevars[v]); }		\
 	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
 	else if (graph_type(v) == URTREE)	{ FUNC(urtreevars[v]); }	\
 	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
 
-#define apply_if_mfunction_tree(v, FUNC)							\
+#define if_mfunction_trees(v, FUNC)									\
 	if (graph_type(v) == UTREE)			{ utreevars[v].FUNC; }		\
 	else if (graph_type(v) == DTREE)	{ dtreevars[v].FUNC; }		\
 	else if (graph_type(v) == URTREE)	{ urtreevars[v].FUNC; }		\
 	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
 
-#define apply_ffunction_tree(v, FUNC)									\
+#define ffunction_trees(v, FUNC)										\
 	[&]() {																\
 		if (graph_type(v) == UTREE)		{ return FUNC(utreevars[v]); }	\
 		if (graph_type(v) == DTREE)		{ return FUNC(dtreevars[v]); }	\
@@ -207,12 +207,38 @@ static const vector<string> all_types(
 		return FUNC(drtreevars[v]);										\
 	}()
 
-#define apply_mfunction_tree(v, FUNC)									\
+#define mfunction_trees(v, FUNC)										\
 	[&]() {																\
 		if (graph_type(v) == UTREE)		{ return utreevars[v].FUNC; }	\
 		if (graph_type(v) == DTREE)		{ return dtreevars[v].FUNC; }	\
 		if (graph_type(v) == URTREE)	{ return urtreevars[v].FUNC; }	\
 		return drtreevars[v].FUNC;										\
+	}()
+
+
+
+#define if_ffunction_dir_graphs(v, FUNC)							\
+	if (graph_type(v) == DGRAPH)		{ FUNC(dgraphvars[v]); }	\
+	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
+	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+
+#define if_mfunction_dir_graphs(v, FUNC)							\
+	if (graph_type(v) == DGRAPH)		{ dgraphvars[v].FUNC; }		\
+	else if (graph_type(v) == DTREE)	{ dtreevars[v].FUNC; }		\
+	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+
+#define ffunction_dir_graphs(v, FUNC)										\
+	[&]() {																	\
+		if (graph_type(v) == DGRAPH)		{ return FUNC(dgraphvars[v]); }	\
+		else if (graph_type(v) == DTREE)	{ return FUNC(dtreevars[v]); }	\
+		return FUNC(drtreevars[v]);											\
+	}()
+
+#define mfunction_dir_graphs(v, FUNC)										\
+	[&]() {																	\
+		if (graph_type(v) == DGRAPH)		{ return dgraphvars[v].FUNC; }	\
+		else if (graph_type(v) == DTREE)	{ return dtreevars[v].FUNC; }	\
+		return drtreevars[v].FUNC;											\
 	}()
 
 
@@ -360,7 +386,7 @@ err_type process_assert(
 	else if (assert_what == "is_normalised") {
 		fin >> g1;
 		assert_exists_variable(g1)
-		if (not apply_mfunction(g1, is_normalised())) {
+		if (not mfunction(g1, is_normalised())) {
 			cerr << ERROR << endl;
 			cerr << "    In 'normalised' assertion:" << endl;
 			cerr << "    Graph '" << g1 << "' is not normalised." << endl;
@@ -372,7 +398,7 @@ err_type process_assert(
 	else if (assert_what == "not_normalised") {
 		fin >> g1;
 		assert_exists_variable(g1)
-		if (apply_mfunction(g1, is_normalised())) {
+		if (mfunction(g1, is_normalised())) {
 			cerr << ERROR << endl;
 			cerr << "    In 'normalised' assertion:" << endl;
 			cerr << "    Graph '" << g1 << "' is normalised." << endl;
@@ -384,7 +410,7 @@ err_type process_assert(
 	else if (assert_what == "exists_edge") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (not apply_mfunction(g1, has_edge(u, v))) {
+		if (not mfunction(g1, has_edge(u, v))) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
@@ -395,7 +421,7 @@ err_type process_assert(
 	else if (assert_what == "not_exists_edge") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (apply_mfunction(g1, has_edge(u, v))) {
+		if (mfunction(g1, has_edge(u, v))) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' has edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
@@ -406,10 +432,10 @@ err_type process_assert(
 	else if (assert_what == "num_nodes") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		if (apply_mfunction(g1, n_nodes()) != n) {
+		if (mfunction(g1, n_nodes()) != n) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have " << n << " nodes." << endl;
-			cerr << "    Graph '" << g1 << "' has " << apply_mfunction(g1, n_nodes()) << " nodes." << endl;
+			cerr << "    Graph '" << g1 << "' has " << mfunction(g1, n_nodes()) << " nodes." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -418,10 +444,10 @@ err_type process_assert(
 	else if (assert_what == "num_edges") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		if (apply_mfunction(g1, n_edges()) != n) {
+		if (mfunction(g1, n_edges()) != n) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not have " << n << " edges." << endl;
-			cerr << "    Graph '" << g1 << "' has " << apply_mfunction(g1, n_edges()) << " edges." << endl;
+			cerr << "    Graph '" << g1 << "' has " << mfunction(g1, n_edges()) << " edges." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -434,7 +460,7 @@ err_type process_assert(
 		for (edge& e : v) { fin >> e.first >> e.second; }
 		sort(v.begin(), v.end());
 
-		vector<edge> gv = apply_ffunction(g1, enumerate_edges_brute_force);
+		vector<edge> gv = ffunction(g1, enumerate_edges_brute_force);
 		sort(gv.begin(), gv.end());
 		if (v != gv) {
 			cerr << ERROR << endl;
@@ -466,7 +492,7 @@ err_type process_assert(
 		}
 		sort(v.begin(), v.end());
 
-		vector<edge_pair> gv = apply_ffunction(g1, enumerate_Q_brute_force);
+		vector<edge_pair> gv = ffunction(g1, enumerate_Q_brute_force);
 		sort(gv.begin(), gv.end());
 		if (v != gv) {
 			cerr << ERROR << endl;
@@ -495,7 +521,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is not undirected." << endl;
 			return err_type::test_exe_error;
 		}
-		if (not apply_mfunction(g1, is_undirected())) {
+		if (not mfunction(g1, is_undirected())) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not return undirected." << endl;
 			return err_type::test_exe_error;
@@ -509,7 +535,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is undirected." << endl;
 			return err_type::test_exe_error;
 		}
-		if (apply_mfunction(g1, is_undirected())) {
+		if (mfunction(g1, is_undirected())) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' returns undirected." << endl;
 			return err_type::test_exe_error;
@@ -523,7 +549,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is not directed." << endl;
 			return err_type::test_exe_error;
 		}
-		if (not apply_mfunction(g1, is_directed())) {
+		if (not mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' does not return directed." << endl;
 			return err_type::test_exe_error;
@@ -537,7 +563,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is directed." << endl;
 			return err_type::test_exe_error;
 		}
-		if (apply_mfunction(g1, is_directed())) {
+		if (mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			cerr << "    Graph '" << g1 << "' returns directed." << endl;
 			return err_type::test_exe_error;
@@ -546,11 +572,11 @@ err_type process_assert(
 	else if (assert_what == "degree") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (apply_mfunction(g1, degree(u)) != v) {
+		if (mfunction(g1, degree(u)) != v) {
 			cerr << ERROR << endl;
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have degree " << v << endl;
-			cerr << "    The vertex has degree: " << apply_mfunction(g1, degree(u)) << endl;
+			cerr << "    The vertex has degree: " << mfunction(g1, degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -559,25 +585,16 @@ err_type process_assert(
 	else if (assert_what == "in_degree") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (not apply_mfunction(g1, is_directed())) {
+		if (not mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			cerr << "    Assertion 'in_degree' can only be applied to directed graphs." << endl;
 			return err_type::test_exe_error;
 		}
-		if (graph_type(g1) == DGRAPH and dgraphvars[g1].in_degree(u) != v) {
+		if (mfunction_dir_graphs(g1, in_degree(u)) != v) {
 			cerr << ERROR << endl;
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have in-degree " << v << endl;
-			cerr << "    The vertex has in-degree: " << dgraphvars[g1].in_degree(u) << endl;
-			cerr << "    Contents of " << g1 << ":" << endl;
-			output_graph(g1)
-			return err_type::test_exe_error;
-		}
-		if (graph_type(g1) == "rooted_directed_tree" and drtreevars[g1].in_degree(u) != v) {
-			cerr << ERROR << endl;
-			cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have in-degree " << v << endl;
-			cerr << "    The vertex has in-degree: " << drtreevars[g1].in_degree(u) << endl;
+			cerr << "    The vertex has in-degree: " << mfunction_dir_graphs(g1, in_degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -586,25 +603,16 @@ err_type process_assert(
 	else if (assert_what == "out_degree") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
-		if (not apply_mfunction(g1, is_directed())) {
+		if (not mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			cerr << "    Assertion 'out_degree' can only be applied to directed graphs." << endl;
 			return err_type::test_exe_error;
 		}
-		if (graph_type(g1) == DGRAPH and dgraphvars[g1].out_degree(u) != v) {
+		if (mfunction_dir_graphs(g1, out_degree(u)) != v) {
 			cerr << ERROR << endl;
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have out-degree " << v << endl;
-			cerr << "    The vertex has out-degree: " << dgraphvars[g1].out_degree(u) << endl;
-			cerr << "    Contents of " << g1 << ":" << endl;
-			output_graph(g1)
-			return err_type::test_exe_error;
-		}
-		if (graph_type(g1) == "rooted_directed_tree" and drtreevars[g1].out_degree(u) != v) {
-			cerr << ERROR << endl;
-			cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have out-degree " << v << endl;
-			cerr << "    The vertex has out-degree: " << drtreevars[g1].out_degree(u) << endl;
+			cerr << "    The vertex has out-degree: " << mfunction_dir_graphs(g1, out_degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
@@ -619,7 +627,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
 			return err_type::test_exe_error;
 		}
-		bool can = apply_mfunction_tree(g1, can_add_edge(u,v));
+		bool can = mfunction_trees(g1, can_add_edge(u,v));
 		if (not can) {
 			cerr << ERROR << endl;
 			cerr << "    Cannot add edge with vertices " << u << ", " << v << " "
@@ -638,7 +646,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
 			return err_type::test_exe_error;
 		}
-		bool can = apply_mfunction_tree(g1, can_add_edge(u,v));
+		bool can = mfunction_trees(g1, can_add_edge(u,v));
 		if (can) {
 			cerr << ERROR << endl;
 			cerr << "    Edge with vertices " << u << ", " << v << " "
@@ -661,7 +669,7 @@ err_type process_assert(
 		vector<edge> edge_list(n);
 		for (edge& e : edge_list) { fin >> e.first >> e.second; }
 
-		bool can = apply_mfunction_tree(g1, can_add_edges(edge_list));
+		bool can = mfunction_trees(g1, can_add_edges(edge_list));
 		if (not can) {
 			cerr << ERROR << endl;
 			cerr << "    Cannot add edges" << endl;
@@ -687,7 +695,7 @@ err_type process_assert(
 		vector<edge> edge_list(n);
 		for (edge& e : edge_list) { fin >> e.first >> e.second; }
 
-		bool can = apply_mfunction_tree(g1, can_add_edges(edge_list));
+		bool can = mfunction_trees(g1, can_add_edges(edge_list));
 		if (can) {
 			cerr << ERROR << endl;
 			cerr << "    Cannot add edges" << endl;
@@ -778,9 +786,9 @@ err_type exe_construction_test(ifstream& fin) {
 				ugraphvars[g1] = ugraph();
 				io_res = io::read_edge_list(file, ugraphvars[g1], norm == "true");
 			}
-			else if (type == DRTREE) {
+			else {
 				cerr << ERROR << endl;
-				cerr << "    I/O operation not implemented for rooted directed trees" << endl;
+				cerr << "    I/O operation not implemented for " << gtypes[g1] << endl;
 				return err_type::test_exe_error;
 			}
 			if (not io_res) {
@@ -800,7 +808,7 @@ err_type exe_construction_test(ifstream& fin) {
 		else if (option == "init_graph") {
 			fin >> g1 >> n_nodes;
 			assert_exists_variable(g1)
-			apply_if_mfunction(g1, init(n_nodes))
+			if_mfunction(g1, init(n_nodes))
 		}
 		else if (option == "assign") {
 			fin >> g1 >> g2;
@@ -813,7 +821,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1 >> u >> v >> norm;
 			assert_exists_variable(g1)
 			assert_correct_normalise(norm)
-			apply_if_mfunction(g1, add_edge(u, v, norm == "true"))
+			if_mfunction(g1, add_edge(u, v, norm == "true"))
 		}
 		else if (option == "add_edges") {
 			fin >> g1 >> n_nodes;
@@ -822,7 +830,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> norm;
 			assert_exists_variable(g1)
 			assert_correct_normalise(norm)
-			apply_if_mfunction(g1, add_edges(v, norm == "true"))
+			if_mfunction(g1, add_edges(v, norm == "true"))
 		}
 		else if (option == "assert") {
 			err_type e = process_assert(
@@ -836,7 +844,7 @@ err_type exe_construction_test(ifstream& fin) {
 		else if (option == "normalise") {
 			fin >> g1;
 			assert_exists_variable(g1)
-			apply_if_mfunction(g1, normalise())
+			if_mfunction(g1, normalise())
 		}
 		else if (option == "disjoint_union") {
 			fin >> g1 >> g2 >> g3;
@@ -870,15 +878,15 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 			}
 			// check size
-			if (iter_edges.size() != apply_mfunction(g1, n_edges())) {
+			if (iter_edges.size() != mfunction(g1, n_edges())) {
 				cerr << ERROR << endl;
 				cerr << "    The amount of edges obtained differs from the amount of edges in the graph." << endl;
 				cerr << "    Number of edges obtained: " << iter_edges.size() << endl;
-				cerr << "    Number of edges in the graph: " << apply_mfunction(g1, n_edges()) << endl;
+				cerr << "    Number of edges in the graph: " << mfunction(g1, n_edges()) << endl;
 				return err_type::test_exe_error;
 			}
 			sort(iter_edges.begin(), iter_edges.end());
-			vector<edge> graph_edges = apply_ffunction(g1, enumerate_edges_brute_force);
+			vector<edge> graph_edges = ffunction(g1, enumerate_edges_brute_force);
 			sort(graph_edges.begin(), graph_edges.end());
 			if (iter_edges != graph_edges) {
 				cerr << ERROR << endl;
@@ -925,15 +933,15 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 			}
 			// check size
-			if (iter_pair_edges.size() != apply_ffunction(g1, properties::size_Q)) {
+			if (iter_pair_edges.size() != ffunction(g1, properties::size_Q)) {
 				cerr << ERROR << endl;
 				cerr << "    The amount of pairs obtained differs from the size of the set Q." << endl;
 				cerr << "    Number of pairs obtained: " << iter_pair_edges.size() << endl;
-				cerr << "    Size of the set Q: " << apply_ffunction(g1, properties::size_Q) << endl;
+				cerr << "    Size of the set Q: " << ffunction(g1, properties::size_Q) << endl;
 				return err_type::test_exe_error;
 			}
 			sort(iter_pair_edges.begin(), iter_pair_edges.end());
-			vector<edge_pair> gpe = apply_ffunction(g1, enumerate_Q_brute_force);
+			vector<edge_pair> gpe = ffunction(g1, enumerate_Q_brute_force);
 			sort(gpe.begin(), gpe.end());
 			if (iter_pair_edges != gpe) {
 				cerr << ERROR << endl;

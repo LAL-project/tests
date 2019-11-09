@@ -2,6 +2,7 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph dtree g 5
+	output_graph g
 	assert num_nodes g 5
 	assert num_edges g 0
 	
