@@ -49,8 +49,8 @@ using namespace std;
 // lal includes
 #include <lal/graphs/ugraph.hpp>
 #include <lal/graphs/dgraph.hpp>
-#include <lal/utils/cycles_undirected.hpp>
-#include <lal/utils/cycles_directed.hpp>
+#include <lal/utils/cycles.hpp>
+#include <lal/utils/reachability.hpp>
 using namespace lal;
 using namespace utils;
 using namespace graphs;
