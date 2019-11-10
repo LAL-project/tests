@@ -15,4 +15,3 @@ BODY
 	add_edge g2 0 1 false
 	assert num_edges g2 1
 	output_graph g2
-	
