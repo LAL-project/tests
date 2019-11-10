@@ -39,6 +39,9 @@
  *
  ********************************************************************/
 
+// C includes
+#include <assert.h>
+
 // C++ includes
 #include <iostream>
 #include <cmath>
@@ -47,11 +50,13 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
+#include <lal/iterators/Q_iterator.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/linarr/C.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace iterators;
 using namespace numeric;
 using namespace properties;
 using namespace linarr;
@@ -63,20 +68,29 @@ using namespace linarr;
 #include "../time.hpp"
 using namespace test_utils;
 
+#define to_int64(x) static_cast<int64_t>(x)
+#define to_uint64(x) static_cast<uint64_t>(x)
+
 namespace exe_tests {
 
-int64_t alpha(int64_t n, int64_t d1, int64_t d2) {
-	int64_t c = 0;
-	for (int64_t s1 = 1; s1 <= n; ++s1) {
+template<typename INT>
+inline bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
+	if (s1 == s2) { return true; }
+	if (s1 == s2 + d2) { return true; }
+	if (s1 + d1 == s2) { return true; }
+	if (s1 + d1 == s2 + d2) { return true; }
+	return false;
+}
+
+uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
+	uint64_t c = 0;
+	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-
-		for (int64_t s2 = 1; s2 <= n; ++s2) {
+		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			if (s2 + d2 > n) { continue; }
+			if (common_endpoints(s1,d1, s2,d2)) { continue; }
 
-			// no common endpoints (there are redundant checks, I know)
-			if (s1 == s2 or s1 + d1 == s2 or s1 + d1 == s2 + d2) { continue; }
-			if (s2 == s1 or s2 + d2 == s1 or s2 + d2 == s1 + d1) { continue; }
-
+			// no common endpoints
 			bool cross1 = s1 < s2 and s2 < s1 + d1 and s1 + d1 < s2 + d2;
 			bool cross2 = s2 < s1 and s1 < s2 + d2 and s2 + d2 < s1 + d1;
 			c += cross1 or cross2;
@@ -85,72 +99,56 @@ int64_t alpha(int64_t n, int64_t d1, int64_t d2) {
 	return c;
 }
 
-int64_t beta(int64_t n, int64_t d1, int64_t d2) {
-	int64_t c = 0;
-	for (int64_t s1 = 1; s1 <= n; ++s1) {
+uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
+	uint64_t c = 0;
+	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-
-		for (int64_t s2 = 1; s2 <= n; ++s2) {
+		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			if (s2 + d2 > n) { continue; }
+			if (common_endpoints(s1,d1, s2,d2)) { continue; }
 
-			// no common endpoints (there are redundant checks, I know)
-			if (s1 == s2 or s1 + d1 == s2 or s1 + d1 == s2 + d2) { continue; }
-			if (s2 == s1 or s2 + d2 == s1 or s2 + d2 == s1 + d1) { continue; }
-
+			// no common endpoints
 			++c;
 		}
 	}
 	return c;
 }
 
-rational E_2Cd_brute_force(ugraph& g, const vector<node>& T) {
+rational E_2Cd_brute_force(ugraph& g, const vector<node>& pi) {
 	rational Ec2(0);
 	const uint32_t n = g.n_nodes();
 
-	// actual linear arrangement (following notation used in the thesis):
-	// pi[u] = p <-> node u is at position p
-	int64_t *pi = static_cast<int64_t *>( malloc(n*sizeof(int64_t)) );
-	for (uint32_t i = 0; i < n; ++i) {
-		pi[ T[i] ] = i;
-	}
+	iterators::Q_iterator q(g);
+	while (q.has_next()) {
+		q.next();
+		const edge_pair st_uv = q.get_pair();
+		const edge st = st_uv.first;
+		const edge uv = st_uv.second;
+		const node s = st.first;
+		const node t = st.second;
+		const node u = uv.first;
+		const node v = uv.second;
 
-	for (node s = 0; s < n; ++s) {
-		const neighbourhood& Nu = g.get_neighbours(s);
-		for (node t : Nu) {
-			if (s > t) { continue; }
-			// unique edge {s,t}
+		uint64_t al;
+		uint64_t be;
 
-			for (node u = s + 1; u < n; ++u) {
-				const neighbourhood& Nw = g.get_neighbours(u);
-				for (node v : Nw) {
-					if (u > v) { continue; }
-					// unique edge {u,v}
+		uint64_t len_st = to_uint64(std::abs(to_int64(pi[s]) - to_int64(pi[t])));
+		uint64_t len_uv = to_uint64(std::abs(to_int64(pi[u]) - to_int64(pi[v])));
+		assert(len_st <= n);
+		assert(len_uv <= n);
 
-					// s != u and t != u
-					if (s == v or s == u) { continue; }
-					if (t == v or t == u) { continue; }
-
-					int64_t len_st = std::abs(pi[s] - pi[t]);
-					int64_t len_uv = std::abs(pi[u] - pi[v]);
-
-					int64_t al;
-					uint64_t be;
-					if (len_st <= len_uv) {
-						al = alpha(n, len_st, len_uv);
-						be = static_cast<uint64_t>(beta(n, len_st, len_uv));
-					}
-					else {
-						al = alpha(n, len_uv, len_st);
-						be = static_cast<uint64_t>(beta(n, len_uv, len_st));
-					}
-
-					Ec2 += rational(al, be);
-				}
-			}
+		if (len_st <= len_uv) {
+			al = alpha(n, len_st, len_uv);
+			be = beta(n, len_st, len_uv);
 		}
+		else {
+			al = alpha(n, len_uv, len_st);
+			be = beta(n, len_uv, len_st);
+		}
+
+		Ec2 += rational(to_int64(al), be);
 	}
 
-	free(pi);
 	return Ec2;
 }
 
