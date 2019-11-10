@@ -5,7 +5,7 @@ IN_DIRS=("numeric/integer" \
 		 "numeric/rational" \
 		 "construction" \
 		 "utils/sorting" \
-		 "utils/bfs" \
+		 "utils/traversal" \
 		 "properties" \
 		 "properties/exp-var-C/general-formula" \
 		 "properties/exp-var-C/trees" \
@@ -27,7 +27,7 @@ OUT_DIRS=("numeric/integer" \
 		 "numeric/rational" \
 		 "construction" \
 		 "utils/sorting" \
-		 "utils/bfs" \
+		 "utils/traversal" \
 		 "properties" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \

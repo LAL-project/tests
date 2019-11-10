@@ -120,7 +120,6 @@ err_type exe_properties_ExpVar_D(ifstream& fin) {
 		if (r != err_type::no_error) {
 			return r;
 		}
-
 		if (proc == "formula") {
 			output_ExpVar_D_formula(G);
 		}
