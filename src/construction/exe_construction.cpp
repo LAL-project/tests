@@ -61,6 +61,7 @@ using namespace std;
 #include <lal/iterators/edge_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace iterators;

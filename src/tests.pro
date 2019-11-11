@@ -30,6 +30,7 @@ LIBS += -fopenmp
 SOURCES += \
     construction/exe_construction.cpp \
     linarr/exe_linarr_compute_headedness.cpp \
+    linarr/exe_linarr_syn_dep_tree_type.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \

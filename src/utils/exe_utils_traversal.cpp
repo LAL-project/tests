@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/graphs/dgraph.hpp>
 #include <lal/utils/cycles.hpp>
 #include <lal/utils/reachability.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace utils;
 using namespace graphs;

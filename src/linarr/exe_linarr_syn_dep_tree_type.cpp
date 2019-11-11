@@ -1,25 +1,24 @@
-/********************************************************************
+/*********************************************************************
  *
- *  Tests of the Linear Arrangement Library - Programs used to test the
- *  algorithms in the linear arrangement library.
+ *  Linear Arrangement Library - A library that implements a collection
+ *  algorithms for linear arrangments of graphs.
  *
  *  Copyright (C) 2019
  *
- *  This file is part of Tests of the Linear Arrangement Library.
+ *  This file is part of Linear Arrangement Library.
  *
- *  Tests of the Linear Arrangement Library is free software: you can
- *  redistribute it and/or modify it under the terms of the GNU Affero
- *  General Public License as published by the Free Software Foundation,
- *  either version 3 of the License, or (at your option) any later version.
+ *  Linear Arrangement Library is free software: you can redistribute it
+ *  and/or modify it under the terms of the GNU Affero General Public License
+ *  as published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
  *
- *  Tests of the Linear Arrangement Library is distributed in the hope
- *  that it will be useful, but WITHOUT ANY WARRANTY; without even the
- *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *  See the GNU Affero General Public License for more details.
+ *  Linear Arrangement Library is distributed in the hope that it will be
+ *  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU Affero General Public License for more details.
  *
  *  You should have received a copy of the GNU Affero General Public License
- *  along with Tests of the Linear Arrangement Library.  If not, see
- *  <http://www.gnu.org/licenses/>.
+ *  along with Linear Arrangement Library.  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Contact:
  *
@@ -45,8 +44,8 @@
 using namespace std;
 
 // lal includes
-#include <lal/linarr/D.hpp>
-#include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/urtree.hpp>
+#include <lal/linarr/classification.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
@@ -57,9 +56,8 @@ using namespace graphs;
 
 namespace exe_tests {
 
-err_type exe_linarr_compute_D(ifstream& fin) {
+err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 	string field;
-
 	fin >> field;
 
 	if (field != "INPUT") {
@@ -82,8 +80,8 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	string graph_format;
 	fin >> graph_name >> graph_format;
 
-	ugraph G;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
+	urtree tree;
+	err_type r = io_wrapper::read_graph(graph_name, graph_format, tree);
 	if (r != err_type::no_error) {
 		return r;
 	}
@@ -98,29 +96,25 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint32_t n = G.n_nodes();
+	const uint32_t n = tree.n_nodes();
 	vector<node> T(n), pi(n);
+	node root;
 
 	// amount of linear arrangements
 	size_t n_linarrs;
 	fin >> n_linarrs;
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
+		// read root
+		fin >> root;
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
+		for (uint32_t u = 0; u < tree.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
-		// compute D
-		uint32_t D = linarr::sum_length_edges(G, pi);
-
-		// output
-		cout << "[" << T[0];
-		for (size_t i = 1; i < T.size(); ++i) {
-			cout << ", " << T[i];
-		}
-		cout << "]: " << D << endl;
+		tree.set_root(root);
+		linarr::get_syn_dep_tree_type(tree, pi);
 	}
 
 	return err_type::no_error;

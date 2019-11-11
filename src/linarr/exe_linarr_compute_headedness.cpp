@@ -39,9 +39,9 @@
  *
  ********************************************************************/
 
-
 // C++ includes
 #include <iostream>
+#include <fstream>
 #include <set>
 using namespace std;
 
@@ -49,6 +49,7 @@ using namespace std;
 #include <lal/graphs/dgraph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/linarr/headedness.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;

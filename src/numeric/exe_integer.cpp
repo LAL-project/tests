@@ -41,11 +41,14 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // lal includes
 #include <lal/numeric/integer.hpp>
-using namespace lal::numeric;
+#include <lal/io/basic_output.hpp>
+using namespace lal;
+using namespace numeric;
 
 // custom includes
 #include "../definitions.hpp"
@@ -165,15 +168,15 @@ err_type exe_numeric_integer(ifstream& fin) {
 			cerr << ERROR << endl;
 			cerr << "    Results do not agree." << endl;
 			cerr << "    In line: " << line << endl;
-			cerr << "        r1: " << r1.get_string() << " = ";
-			cerr << L1.get_string() << " " << op << " " << r << endl;
-			cerr << "        r2: " << r2.get_string() << " = ";
-			cerr << L1.get_string() << " " << op
-				 << " " << R2.get_string() << endl;
+			cerr << "        r1: " << r1.to_string() << " = ";
+			cerr << L1.to_string() << " " << op << " " << r << endl;
+			cerr << "        r2: " << r2.to_string() << " = ";
+			cerr << L1.to_string() << " " << op
+				 << " " << R2.to_string() << endl;
 			return err_type::test_exe_error;
 		}
 
-		cout << r1.get_string() << endl;
+		cout << r1.to_string() << endl;
 		++line;
 	}
 

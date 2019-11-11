@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 #include <set>
 using namespace std;
 
@@ -48,6 +49,7 @@ using namespace std;
 #include <lal/linarr/C.hpp>
 #include <lal/graphs/ugraph.hpp>
 #include <lal/properties/Q.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 

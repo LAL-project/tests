@@ -190,6 +190,9 @@ err_type call_linarr
 	if (key == "compute_headedness") {
 		return exe_linarr_compute_headedness(fin);
 	}
+	if (key == "syn_dep_tree_type") {
+		return exe_linarr_syn_dep_tree_type(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;

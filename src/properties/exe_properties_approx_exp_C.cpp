@@ -44,6 +44,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <set>
 using namespace std;
@@ -54,6 +55,7 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/linarr/C.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace iterators;

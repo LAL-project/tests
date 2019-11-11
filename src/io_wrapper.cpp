@@ -43,6 +43,7 @@
 
 // lal includes
 #include <lal/io/edge_list.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 
 namespace io_wrapper {
@@ -60,6 +61,8 @@ err_type read_graph(const string& file, const string& format, graphs::graph& G) 
 
 		return err_type::no_error;
 	}
+
+	cout << G << endl;
 
 	cerr << ERROR << endl;
 	cerr << "    Unsupported format of file: '" << format << "'." << endl;

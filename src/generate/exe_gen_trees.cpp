@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // lal includes
@@ -49,10 +50,11 @@ using namespace std;
 #include <lal/generation/rand_free_lab_trees.hpp>
 #include <lal/generation/rand_free_ulab_trees.hpp>
 #include <lal/generation/rand_rooted_lab_dir_trees.hpp>
+#include <lal/numeric/integer.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
-#include <lal/numeric/integer.hpp>
 using namespace numeric;
 
 // custom includes
@@ -60,7 +62,7 @@ using namespace numeric;
 
 namespace exe_tests {
 
-err_type exe_gen_trees(ifstream& fin) {
+err_type exe_gen_trees(std::ifstream& fin) {
 	string field;
 	fin >> field;
 

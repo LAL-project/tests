@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // lal includes
@@ -48,6 +49,7 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/D_rla.hpp>
 #include <lal/properties/Q.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;

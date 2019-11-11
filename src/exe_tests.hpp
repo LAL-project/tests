@@ -76,6 +76,7 @@ err_type exe_linarr_compute_C(ifstream& fin);
 err_type exe_linarr_compute_C_list(ifstream& fin);
 err_type exe_linarr_compute_D(ifstream& fin);
 err_type exe_linarr_compute_headedness(ifstream& fin);
+err_type exe_linarr_syn_dep_tree_type(ifstream& fin);
 
 err_type exe_gen_trees(ifstream& fin);
 

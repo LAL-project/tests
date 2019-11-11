@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 #include <set>
 using namespace std;
 
@@ -52,6 +53,7 @@ using namespace std;
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/utils/is_tree.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;

@@ -41,11 +41,14 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // lal includes
 #include <lal/numeric/rational.hpp>
-using namespace lal::numeric;
+#include <lal/io/basic_output.hpp>
+using namespace lal;
+using namespace numeric;
 
 // custom includes
 #include "../definitions.hpp"
@@ -124,7 +127,7 @@ err_type exe_numeric_rational_rational(ifstream& fin) {
 			r1 = L1; r1 /= R1;
 		}
 
-		cout << r1.to_string() << endl;
+		cout << r1 << endl;
 		++line;
 	}
 

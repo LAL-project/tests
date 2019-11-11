@@ -41,6 +41,7 @@
 
 // C++ includes
 #include <iostream>
+#include <fstream>
 #include <set>
 using namespace std;
 
@@ -50,6 +51,7 @@ using namespace std;
 #include <lal/generation/free_ulab_trees.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
+#include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace generate;
 using namespace graphs;
