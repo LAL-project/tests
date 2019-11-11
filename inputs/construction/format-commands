@@ -79,17 +79,17 @@
 		graphs) equals d
 	
 	DIRECTED GRAPHS
+	---------------
+	
 	-- in_degree GRAPH NODE d
 		asserts that the in-degree equals d. Only for directed graphs
 	
 	-- out_degree GRAPH NODE d
 		asserts that the out-degree equals d. Only for directed graphs
 	
-	ROOTED DIRECTED TREES
-	-- is_root GRAPH NODE
-		asserts that the node NODE is the root 
+	TREES
+	-----
 	
-	UNDIRECTED TREES and DIRECTED TREES
 	-- can_add_edge GRAPH VERTEX_1 VERTEX_2
 		asserts that an edge can be added to the graph
 		
@@ -101,6 +101,23 @@
 		
 	-- cant_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list cant be added to the graph
+	
+	-- is_rooted GRAPH
+		asserts that the tree is rooted
+	
+	-- is_not_rooted GRAPH
+		asserts that the tree is NOT rooted
+	
+	ROOTED DIRECTED TREES
+	---------------------
+	
+	-- is_drtree_type GRAPH TYPE
+		asserts that directed rooted tree GRAPH is of type TYPE.
+		Allowed strings for TYPE: "arborescence", "anti_arborescence", "none"
+	
+	-- is_not_drtree_type GRAPH TYPE
+		asserts that directed rooted tree GRAPH is NOT of type TYPE.
+		Allowed strings for TYPE: "arborescence", "anti_arborescence", "none"
 	
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
@@ -122,10 +139,22 @@
 
 
 UNDIRECTED GRAPHS
+-----------------
+
 ** to_drtree GRAPH_RESULT GRAPH ROOT_NODE
 	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
 	taking node ROOT_NODE as its root.
 
 DIRECTED GRAPHS
+---------------
+
 ** to_undirected GRAPH_RESULT GRAPH
 	Converts the directed graph GRAPH into an undirected graph GRAPH_RESULT
+
+ROOTED TREES
+------------
+
+** set_root GRAPH NODE
+	Sets the root NODE to GRAPH.
+	If the graph is a directed rooted tree then it calls the drtree class
+	method 'find_drtree_type()'.

@@ -4,6 +4,7 @@ BODY
 	create_graph drtree g 5
 	assert num_nodes g 5
 	assert num_edges g 0
+	assert is_rooted g
 	
 	assert can_add_edge g 0 1
 	assert can_add_edge g 0 2

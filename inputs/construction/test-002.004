@@ -4,6 +4,7 @@ BODY
 	create_graph utree g 5
 	assert num_nodes g 5
 	assert num_edges g 0
+	assert is_not_rooted g
 	
 	assert can_add_edges g 4
 		0 1

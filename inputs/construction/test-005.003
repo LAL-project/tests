@@ -4,6 +4,7 @@ BODY
 	create_graph drtree g 6
 	assert num_nodes g 6
 	assert num_edges g 0
+	assert is_rooted g
 	
 	assert can_add_edge g 0 1
 	assert can_add_edge g 0 2
@@ -120,3 +121,13 @@ BODY
 	assert cant_add_edge g 3 4
 	assert cant_add_edge g 3 5
 	assert cant_add_edge g 4 5
+	
+	set_root g 0
+	assert is_not_drtree_type g arborescence
+	assert is_not_drtree_type g anti_arborescence
+	assert is_drtree_type g none
+	
+	set_root g 5
+	assert is_not_drtree_type g arborescence
+	assert is_not_drtree_type g anti_arborescence
+	assert is_drtree_type g none

@@ -89,6 +89,9 @@ using namespace iterators;
 static const vector<string> dir_undir_types(
 	{UGRAPH, DGRAPH}
 );
+static const vector<string> rooted_types(
+	{URTREE, DRTREE}
+);
 static const vector<string> tree_types(
 	{UTREE, DTREE, URTREE, DRTREE}
 );
@@ -103,6 +106,21 @@ static const vector<string> all_types(
 		cerr << ERROR << endl;												\
 		cerr << "    Invalid file type '" << ft << "'." << endl;			\
 		return err_type::test_format_error;									\
+	}
+
+#define assert_correct_drtree_type(t)										\
+	if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
+		cerr << ERROR << endl;												\
+		cerr << "    Invalid drtree type '" << t << "'." << endl;			\
+		return err_type::test_format_error;									\
+	}
+
+#define assert_correct_normalise(str)												\
+	if (norm != "true" and norm != "false") {										\
+		cerr << ERROR << endl;														\
+		cerr << "    Invalid value for boolean in add_edge command." << endl;		\
+		cerr << "    Received '" << norm << "'. Valid values: true/false." << endl;	\
+		return err_type::test_format_error;											\
 	}
 
 #define assert_exists_variable(var)											\
@@ -128,14 +146,6 @@ static const vector<string> all_types(
 		return err_type::test_exe_error;																\
 	}
 
-#define assert_correct_normalise(str)												\
-	if (norm != "true" and norm != "false") {										\
-		cerr << ERROR << endl;														\
-		cerr << "    Invalid value for boolean in add_edge command." << endl;		\
-		cerr << "    Received '" << norm << "'. Valid values: true/false." << endl;	\
-		return err_type::test_exe_error;											\
-	}
-
 /* USEFUL FUNCTIONS */
 
 #define are_graphs_equal(v1, v2)																	\
@@ -149,6 +159,8 @@ static const vector<string> all_types(
 		return false;																				\
 	}()
 
+
+// macros for ALL graphs
 #define if_ffunction(v, FUNC)										\
 	if (graph_type(v) == UGRAPH)		{ FUNC(ugraphvars[v]); }	\
 	else if (graph_type(v) == DGRAPH)	{ FUNC(dgraphvars[v]); }	\
@@ -187,6 +199,7 @@ static const vector<string> all_types(
 
 
 
+// macros for ALL trees
 #define if_ffunction_trees(v, FUNC)									\
 	if (graph_type(v) == UTREE)			{ FUNC(utreevars[v]); }		\
 	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
@@ -217,6 +230,7 @@ static const vector<string> all_types(
 
 
 
+// macros for DIRECTED graphs
 #define if_ffunction_dir_graphs(v, FUNC)							\
 	if (graph_type(v) == DGRAPH)		{ FUNC(dgraphvars[v]); }	\
 	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
@@ -242,6 +256,27 @@ static const vector<string> all_types(
 	}()
 
 
+// macros for ROOTED trees
+#define if_ffunction_rooted_trees(v, FUNC)							\
+	if (graph_type(v) == URTREE)		{ FUNC(urtreevars[v]); }	\
+	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+
+#define if_mfunction_rooted_trees(v, FUNC)							\
+	if (graph_type(v) == URTREE)		{ urtreevars[v].FUNC; }		\
+	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+
+#define ffunction_rooted_trees(v, FUNC)									\
+	[&]() {																\
+		if (graph_type(v) == URTREE)	{ return FUNC(urtreevars[v]); }	\
+		return FUNC(drtreevars[v]);										\
+	}()
+
+#define mfunction_rooted_trees(v, FUNC)									\
+	[&]() {																\
+		if (graph_type(v) == URTREE)	{ return urtreevars[v].FUNC; }	\
+		return drtreevars[v].FUNC;										\
+	}()
+
 
 #define output_graph(v)														\
 	if (graph_type(v) == UGRAPH)		{ cerr << ugraphvars[v] << endl; }	\
@@ -259,6 +294,27 @@ static const vector<string> all_types(
 	else if (graph_type(v) == URTREE)	{ cout << urtreevars[v] << endl; }	\
 	else if (graph_type(v) == DRTREE)	{ cout << drtreevars[v] << endl; }
 
+
+#define WRONG_TYPE_EXT(g, T, my_type)										\
+	cerr << ERROR << endl;													\
+	cerr << "    Graph '" << g << "' is not " << T << "." << endl;			\
+	cerr << "    Graph '" << g << "' is " << my_type << "." << endl;
+
+#define WRONG_TYPE(g, T) WRONG_TYPE_EXT(g, T, graph_type(g))
+
+
+#define drtree_type drtree::rooted_directed_tree_type
+#define drtree_type_to_string(t)					\
+	[](drtree_type __t) -> std::string {			\
+		switch (__t) {								\
+			case drtree_type::arborescence:			\
+				return "arborescence";				\
+			case drtree_type::anti_arborescence:	\
+				return "anti_arborescence";			\
+			default:								\
+				return "none";						\
+		}											\
+	}(t)
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
@@ -582,6 +638,8 @@ err_type process_assert(
 			return err_type::test_exe_error;
 		}
 	}
+
+	// DIRECTED GRAPHS
 	else if (assert_what == "in_degree") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
@@ -618,13 +676,13 @@ err_type process_assert(
 			return err_type::test_exe_error;
 		}
 	}
+
+	// TREES
 	else if (assert_what == "can_add_edge") {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
 		if (not in_collection(graph_type(g1), tree_types)) {
-			cerr << ERROR << endl;
-			cerr << "    Graph '" << g1 << "' is not a tree (of any type)." << endl;
-			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
+			WRONG_TYPE(g1, "a tree (of any type)")
 			return err_type::test_exe_error;
 		}
 		bool can = mfunction_trees(g1, can_add_edge(u,v));
@@ -641,9 +699,7 @@ err_type process_assert(
 		fin >> g1 >> u >> v;
 		assert_exists_variable(g1)
 		if (not in_collection(graph_type(g1), tree_types)) {
-			cerr << ERROR << endl;
-			cerr << "    Graph '" << g1 << "' is not a tree (of any type)." << endl;
-			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
+			WRONG_TYPE(g1, "a tree (of any type)")
 			return err_type::test_exe_error;
 		}
 		bool can = mfunction_trees(g1, can_add_edge(u,v));
@@ -660,9 +716,7 @@ err_type process_assert(
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
 		if (not in_collection(graph_type(g1), tree_types)) {
-			cerr << ERROR << endl;
-			cerr << "    Graph '" << g1 << "' is not a tree (of any type)." << endl;
-			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
+			WRONG_TYPE(g1, "a tree (of any type)")
 			return err_type::test_exe_error;
 		}
 
@@ -686,9 +740,7 @@ err_type process_assert(
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
 		if (not in_collection(graph_type(g1), tree_types)) {
-			cerr << ERROR << endl;
-			cerr << "    Graph '" << g1 << "' is not a tree (of any type)." << endl;
-			cerr << "    Graph '" << g1 << "' is " << graph_type(g1) << endl;
+			WRONG_TYPE(g1, "a tree (of any type)")
 			return err_type::test_exe_error;
 		}
 
@@ -706,6 +758,86 @@ err_type process_assert(
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
 			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "is_rooted") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		assert_correct_graph_type(graph_type(g1), tree_types)
+		if (not mfunction_trees(g1, is_rooted())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is not rooted." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "is_not_rooted") {
+		fin >> g1;
+		assert_exists_variable(g1)
+		assert_correct_graph_type(graph_type(g1), tree_types)
+		if (mfunction_trees(g1, is_rooted())) {
+			cerr << ERROR << endl;
+			cerr << "    Graph '" << g1 << "' is rooted." << endl;
+			return err_type::test_exe_error;
+		}
+	}
+
+	// ROOTED DIRECTED TREES
+	else if (assert_what == "is_drtree_type") {
+		fin >> g1 >> g2;
+		assert_exists_variable(g1)
+		assert_correct_drtree_type(g2)
+		if (gtypes[g1] != DRTREE) {
+			WRONG_TYPE(g1, DRTREE)
+			return err_type::test_exe_error;
+		}
+		drtreevars[g1].find_drtree_type();
+		auto type = drtreevars[g1].get_drtree_type();
+		if (g2 == "arborescence") {
+			if (type != drtree::arborescence) {
+				WRONG_TYPE_EXT(g1, "not an arborescence (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
+		}
+		else if (g2 == "anti_arborescence") {
+			if (type != drtree::anti_arborescence) {
+				WRONG_TYPE_EXT(g1, "not an anti_arborescence (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
+		}
+		else if (g2 == "none") {
+			if (type != drtree::none) {
+				WRONG_TYPE_EXT(g1, "not an none (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
+		}
+	}
+	else if (assert_what == "is_not_drtree_type") {
+		fin >> g1 >> g2;
+		assert_exists_variable(g1)
+		assert_correct_drtree_type(g2)
+		if (gtypes[g1] != DRTREE) {
+			WRONG_TYPE(g1, DRTREE)
+			return err_type::test_exe_error;
+		}
+		drtreevars[g1].find_drtree_type();
+		auto type = drtreevars[g1].get_drtree_type();
+		if (g2 == "arborescence") {
+			if (type == drtree::arborescence) {
+				WRONG_TYPE_EXT(g1, "arborescence (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
+		}
+		else if (g2 == "anti_arborescence") {
+			if (type == drtree::anti_arborescence) {
+				WRONG_TYPE_EXT(g1, "anti_arborescence (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
+		}
+		else if (g2 == "none") {
+			if (type == drtree::none) {
+				WRONG_TYPE_EXT(g1, "none (drtree_type)", drtree_type_to_string(type))
+				return err_type::test_exe_error;
+			}
 		}
 	}
 	else {
@@ -858,6 +990,12 @@ err_type exe_construction_test(ifstream& fin) {
 			else if (graph_type(g2) == UGRAPH) {
 				make_disjoint_union<ugraph>(g1, g2, g3, ugraphvars);
 			}
+			else {
+				cerr << ERROR << endl;
+				cerr << "    Type of graphs '" << g1 << "' and '" << g2 << "' are not" << endl;
+				cerr << "    " << UGRAPH << " or " << DGRAPH << endl;
+				return err_type::test_exe_error;
+			}
 		}
 		else if (option == "check_edge_iterator") {
 			fin >> g1;
@@ -969,9 +1107,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1 >> g2;
 			assert_exists_variable(g2)
 			if (graph_type(g2) != DGRAPH) {
-				cerr << ERROR << endl;
-				cerr << "    Graph '" << g2 << "' is not directed." << endl;
-				cerr << "    Graph '" << g2 << "' is " << graph_type(g2) << "." << endl;
+				WRONG_TYPE(g2, DGRAPH)
 				return err_type::test_exe_error;
 			}
 			ugraphvars[g1] = dgraphvars[g2].to_undirected();
@@ -981,14 +1117,26 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1 >> g2 >> u;
 			assert_exists_variable(g2)
 			if (graph_type(g2) != UGRAPH) {
-				cerr << ERROR << endl;
+				WRONG_TYPE(g2, UGRAPH)
 				cerr << "    Cannot apply 'to_drtree' to a non-undirected graph." << endl;
-				cerr << "    Graph '" << g2 << "' is not undirected." << endl;
-				cerr << "    Graph '" << g2 << "' is " << graph_type(g2) << "." << endl;
 				return err_type::test_exe_error;
 			}
 			drtreevars[g1] = drtree(ugraphvars[g2], u);
 			gtypes[g1] = DRTREE;
+		}
+		else if (option == "set_root") {
+			fin >> g1 >> u;
+			assert_exists_variable(g1)
+			assert_correct_graph_type(graph_type(g1), rooted_types)
+			if (not mfunction_rooted_trees(g1, is_rooted())) {
+				cerr << "ERROR" << endl;
+				cerr << "    Graph '" << g1 << "' is not rooted." << endl;
+				return err_type::test_exe_error;
+			}
+			if_mfunction_rooted_trees(g1, set_root(u))
+			if (graph_type(g1) == DRTREE) {
+				drtreevars[g1].find_drtree_type();
+			}
 		}
 		else {
 			cerr << ERROR << endl;
