@@ -1,0 +1,5 @@
+TYPE linear_arrangements-syn_dep_tree_type
+INPUT 1 graphs/mixed-trees/tree-006-003 edge-list
+BODY
+	0	5 0 3 1 4 2
+	2	2 3 0 1 5 4
