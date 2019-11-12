@@ -66,9 +66,7 @@ using namespace linarr;
 // custom includes
 #include "../io_wrapper.hpp"
 #include "../definitions.hpp"
-#include "../test_utils.hpp"
 #include "../time.hpp"
-using namespace test_utils;
 
 #define to_int64(x) static_cast<int64_t>(x)
 #define to_uint64(x) static_cast<uint64_t>(x)

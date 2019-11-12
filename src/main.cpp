@@ -52,7 +52,6 @@ using namespace std;
 
 // custom includes
 #include "definitions.hpp"
-#include "test_utils.hpp"
 #include "parse_keywords.hpp"
 
 err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {

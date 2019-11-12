@@ -43,7 +43,7 @@
 
 // lal includes
 #include <lal/io/edge_list.hpp>
-#include <lal/io/basic_output.hpp>
+#include <lal/graphs/output.hpp>
 using namespace lal;
 
 namespace io_wrapper {

@@ -35,7 +35,6 @@ SOURCES += \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
     properties/exe_properties_MHD_All_trees.cpp \
-    test_utils.cpp \
     numeric/exe_integer.cpp \
     numeric/exe_rational_integer.cpp \
     numeric/exe_rational_rational.cpp \
@@ -56,7 +55,6 @@ HEADERS += \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \
-    test_utils.hpp \
     time.hpp
 
 DISTFILES += \

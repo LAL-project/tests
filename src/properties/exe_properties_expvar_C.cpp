@@ -64,9 +64,7 @@ using namespace generate;
 // custom includes
 #include "../io_wrapper.hpp"
 #include "../definitions.hpp"
-#include "../test_utils.hpp"
 #include "../time.hpp"
-using namespace test_utils;
 
 namespace exe_tests {
 

@@ -153,7 +153,7 @@ err_type exe_utils_sorting(ifstream& fin) {
 		else if (option == "sort_boolean") {
 			uint64_t r, n;
 			fin >> r >> n;
-			err_type e = check_sorting("boolean", r, n, sort_1_n);
+			err_type e = check_sorting("boolean", r, n, sort_1_n_inc);
 			if (e == err_type::test_exe_error) { return e; }
 		}
 		else {

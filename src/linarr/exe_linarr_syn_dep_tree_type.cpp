@@ -46,15 +46,37 @@ using namespace std;
 // lal includes
 #include <lal/graphs/urtree.hpp>
 #include <lal/linarr/classification.hpp>
+#include <lal/linarr/tree_structure_type.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace linarr;
 
 // custom includes
 #include "../io_wrapper.hpp"
 #include "../definitions.hpp"
 
 namespace exe_tests {
+
+string sdtt_to_string(const tree_structure_type& t) {
+	switch (t) {
+	case projective: return "projective";
+	case planar: return "planar";
+	case WG_1: return "WG_1";
+	case WG_2: return "WG_2";
+	case WG_3: return "WG_3";
+	case WG_4: return "WG_4";
+	case WG_5: return "WG_5";
+	case WG_6: return "WG_6";
+	case WG_7: return "WG_7";
+	case WG_8: return "WG_8";
+	case WG_9: return "WG_9";
+	case WG_10: return "WG_10";
+	case WG_k: return "WG_k";
+	case EC_1: return "EC_1";
+	default: return "?";
+	}
+}
 
 err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 	string field;
@@ -100,13 +122,7 @@ err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 	vector<node> T(n), pi(n);
 	node root;
 
-	// amount of linear arrangements
-	size_t n_linarrs;
-	fin >> n_linarrs;
-
-	for (size_t i = 0; i < n_linarrs; ++i) {
-		// read root
-		fin >> root;
+	while (fin >> root) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < tree.n_nodes(); ++u) {
 			fin >> T[u];
@@ -114,7 +130,11 @@ err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 		}
 
 		tree.set_root(root);
-		linarr::get_syn_dep_tree_type(tree, pi);
+		tree_structure_type t = linarr::get_tree_structure_type(tree, pi);
+		cout << sdtt_to_string(t) << endl;
+
+		char step;
+		cin >> step;
 	}
 
 	return err_type::no_error;
