@@ -51,7 +51,9 @@ using namespace std;
 #include <lal/generation/rand_free_ulab_trees.hpp>
 #include <lal/generation/rand_rooted_lab_dir_trees.hpp>
 #include <lal/numeric/integer.hpp>
-#include <lal/io/basic_output.hpp>
+#include <lal/numeric/rational.hpp>
+#include <lal/numeric/output.hpp>
+#include <lal/properties/degrees.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -60,46 +62,24 @@ using namespace numeric;
 // custom includes
 #include "../definitions.hpp"
 
+/* DATA FOR TESTING */
+
+// expected second moment of degree over all labelled trees
+#define exp_mmt_deg_2_lab_trees(n) (rational(1) - rational(1,n))*(rational(5) - rational(6,n))
+
+// size of the vector with the number of unlabelled free trees
+#define SIZE_UUF 37
+
+
 namespace exe_tests {
 
 err_type exe_gen_trees(std::ifstream& fin) {
-	string field;
-	fin >> field;
 
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n;
-	fin >> n;
-	if (n != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-#define SIZE_UUF 37
+	/* BUILD TESTING DATA */
 
 	// from: http://oeis.org/A000055/list
 	// amount of unique unlabelled free trees
-	integer *UUF = static_cast<integer *>(malloc(SIZE_UUF*sizeof(integer)));
-	for (int i = 0; i < SIZE_UUF; ++i) {
-		new (&(UUF[i])) integer();
-		UUF[i].init();
-	}
+	vector<integer> UUF(SIZE_UUF, 0);
 	UUF[0] = 1;
 	UUF[1] = 1;
 	UUF[2] = 1;
@@ -138,9 +118,39 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	UUF[35] = integer("2262366343746");
 	UUF[36] = integer("6226306037178");
 
+	// -------------------------------------------------------------------------
+
+	string field;
+	fin >> field;
+
+	if (field != "INPUT") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'INPUT'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+
+	size_t n;
+	fin >> n;
+	if (n != 0) {
+		cerr << ERROR << endl;
+		cerr << "    Expected no inputs at all." << endl;
+		cerr << "    Instead, '" << n << "' were found." << endl;
+		return err_type::test_format_error;
+	}
+
+	// parse body field
+	fin >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'BODY'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+
 	/* do the tests */
 
-	ugraph T;
+	utree T;
 	string gen_type;
 
 	uint32_t num_nodes;
@@ -153,19 +163,37 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	rand_rooted_lab_dir_trees	RandRootedLabTreeGen;
 
 	while (fin >> gen_type >> num_nodes) {
+		const integer n = num_nodes;
+
 		if (gen_type == "exhaustive-labelled") {
+			// expected second moment of degree
+			const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
+			rational mmtdeg2 = 0;
 			gen = 0;
+
+			// generate all trees
 			AllFreeLabTreeGen.init(num_nodes);
 			while (AllFreeLabTreeGen.has_next()) {
 				AllFreeLabTreeGen.next();
 				T = AllFreeLabTreeGen.get_tree();
+
+				// compute 'statistics'
+				mmtdeg2 += properties::mmt_degree_rational(T, 2);
 				gen += 1;
 			}
 
-			integer n = num_nodes;
-			// Prüfer's formula
-			integer total = (n^(n - 2));
+			// check that the expected second moment of degree is correct
+			mmtdeg2 /= gen;
+			if (mmtdeg2 != exp_mmtdeg2) {
+				cerr << ERROR << endl;
+				cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
+				cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
+				return err_type::test_exe_error;
+			}
 
+			// Prüfer's formula: make sure that the generator made
+			// as many trees as n^(n - 2)
+			const integer total = (n^(n - 2));
 			if (gen != total) {
 				cerr << ERROR << endl;
 				cerr << "    Exhaustive generation of free labelled trees" << endl;
@@ -213,11 +241,9 @@ err_type exe_gen_trees(std::ifstream& fin) {
 		}
 	}
 
-	for (int i = 0; i < SIZE_UUF; ++i) {
+	for (size_t i = 0; i < SIZE_UUF; ++i) {
 		UUF[i].clear();
 	}
-	free(UUF);
-
 	cout << "Test finished without apparent errors." << endl;
 	return err_type::no_error;
 }
