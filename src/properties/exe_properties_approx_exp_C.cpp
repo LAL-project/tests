@@ -217,7 +217,7 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 		}
 
 		// compute value using library and compare it with brute force method
-		rational ap_lib = approximate_C_2_rational(G, arr);
+		rational ap_lib = approximate_C_rational(G, arr);
 		rational ap_bf = E_2Cd_brute_force(G, arr);
 
 		if (ap_lib != ap_bf) {

@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace linarr;
 
 // custom includes
 #include "../io_wrapper.hpp"
@@ -60,7 +61,7 @@ using namespace graphs;
 namespace exe_tests {
 
 err_type exe_linarr_compute_C_list(ifstream& fin) {
-	set<string> allowed_procs({"brute_force", "dyn_prog", "ladder"});
+	set<string> allowed_procs({"brute_force", "dyn_prog", "ladder", "stack_based"});
 
 	string field;
 	fin >> field;
@@ -132,22 +133,25 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 		}
 	}
 
-	vector<uint32_t> Cbfs(n_linarrs);
-	for (uint32_t i = 0; i < n_linarrs; ++i) {
-		Cbfs[i] = linarr::n_crossings_brute_force(g, arrs[i]);
-	}
+	vector<uint64_t> Cbfs = linarr::n_crossings_list(g, arrs, algorithms_crossings::brute_force);
 
 	// compute all C
-	vector<uint32_t> Cs;
+	vector<uint64_t> Cs;
 	if (proc == "dyn_prog") {
 		begin = timing::now();
-		Cs = linarr::n_crossings_dyn_prog_list(g, arrs);
+		Cs = n_crossings_list(g, arrs, algorithms_crossings::dynamic_programming);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "ladder") {
 		begin = timing::now();
-		Cs = linarr::n_crossings_ladder_list(g, arrs);
+		Cs = n_crossings_list(g, arrs, algorithms_crossings::ladder);
+		end = timing::now();
+		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	}
+	else if (proc == "stack_based") {
+		begin = timing::now();
+		Cs = n_crossings_list(g, arrs, algorithms_crossings::stack_based);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}

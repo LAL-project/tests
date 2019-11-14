@@ -47,11 +47,14 @@ using namespace std;
 
 // lal includes
 #include <lal/linarr/C.hpp>
+#include <lal/iterators/Q_iterator.hpp>
 #include <lal/graphs/ugraph.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/io/basic_output.hpp>
+#include <lal/linarr/algorithms_crossings.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace linarr;
 
 // custom includes
 #include "../io_wrapper.hpp"
@@ -118,11 +121,6 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	const uint32_t n = G.n_nodes();
 	vector<node> T(n), pi(n);
 
-	vector<edge_pair> Q;
-	if (proc == "Q") {
-		Q = G.Q();
-	}
-
 	// amount of linear arrangements
 	size_t n_linarrs;
 	fin >> n_linarrs;
@@ -134,30 +132,24 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 			pi[ T[u] ] = u;
 		}
 
-		uint32_t Cbf = linarr::n_crossings_brute_force(G, pi);
+		const uint64_t Cbf = n_crossings(G, pi, algorithms_crossings::brute_force);
 
-		uint32_t C = 0;
-		if (proc == "Q") {
+		uint64_t C = 0;
+		if (proc == "dyn_prog") {
 			begin = timing::now();
-			C = linarr::n_crossings_Q(Q, pi);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else if (proc == "dyn_prog") {
-			begin = timing::now();
-			C = linarr::n_crossings_dyn_prog(G, pi);
+			C = n_crossings(G, pi, algorithms_crossings::dynamic_programming);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "ladder") {
 			begin = timing::now();
-			C = linarr::n_crossings_ladder(G, pi);
+			C = n_crossings(G, pi, algorithms_crossings::ladder);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "stack_based") {
 			begin = timing::now();
-			C = linarr::n_crossings_stack_based(G, pi);
+			C = n_crossings(G, pi, algorithms_crossings::stack_based);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}

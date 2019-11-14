@@ -14,12 +14,12 @@ IN_DIRS=("numeric/integer" \
 		 "properties/E_2Cd" \
 		 "linear-arrangements/headedness" \
 		 "linear-arrangements/D" \
-		 "linear-arrangements/C/brute-force-Q" \
 		 "linear-arrangements/C/dyn-prog" \
 		 "linear-arrangements/C/dyn-prog-list" \
 		 "linear-arrangements/C/ladder" \
 		 "linear-arrangements/C/ladder-list" \
 		 "linear-arrangements/C/stack-based" \
+		 "linear-arrangements/C/stack-based-list" \
 		 "generate" \
 		)
 

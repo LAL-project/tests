@@ -60,20 +60,20 @@ namespace exe_tests {
 
 string sdtt_to_string(const tree_structure_type& t) {
 	switch (t) {
-	case projective: return "projective";
-	case planar: return "planar";
-	case WG_1: return "WG_1";
-	case WG_2: return "WG_2";
-	case WG_3: return "WG_3";
-	case WG_4: return "WG_4";
-	case WG_5: return "WG_5";
-	case WG_6: return "WG_6";
-	case WG_7: return "WG_7";
-	case WG_8: return "WG_8";
-	case WG_9: return "WG_9";
-	case WG_10: return "WG_10";
-	case WG_k: return "WG_k";
-	case EC_1: return "EC_1";
+	case tree_structure_type::projective: return "projective";
+	case tree_structure_type::planar: return "planar";
+	case tree_structure_type::WG_1: return "WG_1";
+	case tree_structure_type::WG_2: return "WG_2";
+	case tree_structure_type::WG_3: return "WG_3";
+	case tree_structure_type::WG_4: return "WG_4";
+	case tree_structure_type::WG_5: return "WG_5";
+	case tree_structure_type::WG_6: return "WG_6";
+	case tree_structure_type::WG_7: return "WG_7";
+	case tree_structure_type::WG_8: return "WG_8";
+	case tree_structure_type::WG_9: return "WG_9";
+	case tree_structure_type::WG_10: return "WG_10";
+	case tree_structure_type::WG_k: return "WG_k";
+	case tree_structure_type::EC_1: return "EC_1";
 	default: return "?";
 	}
 }
