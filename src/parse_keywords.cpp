@@ -162,9 +162,6 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 	if (key == "exp_var_C") {
 		return exe_properties_ExpVar_C(fin);
 	}
-	if (key == "approx_exp_C") {
-		return exe_properties_approx_Exp_C(fin);
-	}
 	if (key == "exp_var_D") {
 		return exe_properties_ExpVar_D(fin);
 	}
@@ -181,6 +178,9 @@ err_type call_linarr
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
+	if (key == "approx_exp_C") {
+		return exe_linarr_approx_Exp_C(fin);
+	}
 	if (key == "compute_C") {
 		return call_linarr_C(keywords, i + 1, fin);
 	}

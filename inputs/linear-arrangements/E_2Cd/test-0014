@@ -1,4 +1,4 @@
-TYPE properties-approx_exp_C
+TYPE linear_arrangements-approx_exp_C
 INPUT 1 graphs/er/029-0.20 edge-list
 BODY
 	E_2[C|d]

@@ -70,8 +70,8 @@ err_type exe_properties_general(ifstream& fin);
 err_type exe_properties_MHD_All_trees(ifstream& fin);
 err_type exe_properties_ExpVar_C(ifstream& fin);
 err_type exe_properties_ExpVar_D(ifstream& fin);
-err_type exe_properties_approx_Exp_C(ifstream& fin);
 
+err_type exe_linarr_approx_Exp_C(ifstream& fin);
 err_type exe_linarr_compute_C(ifstream& fin);
 err_type exe_linarr_compute_C_list(ifstream& fin);
 err_type exe_linarr_compute_D(ifstream& fin);

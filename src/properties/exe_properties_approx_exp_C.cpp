@@ -152,7 +152,7 @@ rational E_2Cd_brute_force(ugraph& g, const vector<position>& pi) {
 	return Ec2;
 }
 
-err_type exe_properties_approx_Exp_C(ifstream& fin) {
+err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 	set<string> allowed_procs({"E_2[C|d]"});
 
 	string field;

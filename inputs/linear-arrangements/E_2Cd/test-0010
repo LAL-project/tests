@@ -1,4 +1,4 @@
-TYPE properties-approx_exp_C
+TYPE linear_arrangements-approx_exp_C
 INPUT 1 graphs/star-tree/033 edge-list
 BODY
 	E_2[C|d]
