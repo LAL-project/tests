@@ -9,6 +9,11 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3 -DNDEBUG
 QMAKE_CXXFLAGS += -fopenmp
 
+QMAKE_CXXFLAGS +=										\
+    -Wpedantic -Wshadow -Wall -Wextra -Wconversion		\
+    -Wold-style-cast -Wrestrict -Wduplicated-cond		\
+    -Wnon-virtual-dtor -Woverloaded-virtual
+
 # lal library
 LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library
 CONFIG(debug, debug|release) {

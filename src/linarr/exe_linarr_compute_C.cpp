@@ -118,8 +118,9 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint32_t n = G.n_nodes();
-	vector<node> T(n), pi(n);
+	const uint64_t n = G.n_nodes();
+	vector<node> T(n);
+	vector<position> pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;

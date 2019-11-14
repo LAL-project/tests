@@ -101,8 +101,9 @@ err_type exe_linarr_compute_headedness(ifstream& fin) {
 	}
 
 	// linear arrangement
-	uint32_t n = G.n_nodes();
-	vector<node> T(n), pi(n);
+	const uint64_t n = G.n_nodes();
+	vector<node> T(n);
+	vector<position> pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -110,7 +111,7 @@ err_type exe_linarr_compute_headedness(ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
+		for (node u = 0; u < G.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}

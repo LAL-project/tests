@@ -114,44 +114,43 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
-	uint32_t n = g.n_nodes();
+	const uint64_t n = g.n_nodes();
 
 	// amount of linear arrangements
 	uint32_t n_linarrs;
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> >
-		arrs(n_linarrs, vector<node>(g.n_nodes())),
-		pis(n_linarrs,  vector<node>(g.n_nodes()));
+	vector<vector<node> > T(n_linarrs, vector<node>(g.n_nodes()));
+	vector<vector<position> > pis(n_linarrs,  vector<position>(g.n_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < g.n_nodes(); ++u) {
-			fin >> arrs[i][u];
-			pis[i][ arrs[i][u] ] = u;
+			fin >> T[i][u];
+			pis[i][ T[i][u] ] = u;
 		}
 	}
 
-	vector<uint64_t> Cbfs = linarr::n_crossings_list(g, arrs, algorithms_crossings::brute_force);
+	vector<uint64_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_crossings::brute_force);
 
 	// compute all C
 	vector<uint64_t> Cs;
 	if (proc == "dyn_prog") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, arrs, algorithms_crossings::dynamic_programming);
+		Cs = n_crossings_list(g, T, algorithms_crossings::dynamic_programming);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "ladder") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, arrs, algorithms_crossings::ladder);
+		Cs = n_crossings_list(g, T, algorithms_crossings::ladder);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "stack_based") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, arrs, algorithms_crossings::stack_based);
+		Cs = n_crossings_list(g, T, algorithms_crossings::stack_based);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
@@ -163,9 +162,9 @@ err_type exe_linarr_compute_C_list(ifstream& fin) {
 			cerr << "        brute force: " << Cbfs[i] << endl;
 			cerr << "        " << proc << ": " << Cs[i] << endl;
 			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << arrs[i][0];
+			cerr << "    [" << T[i][0];
 			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << arrs[i][j];
+				cerr << "," << T[i][j];
 			}
 			cerr << "]" << endl;
 		}

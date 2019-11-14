@@ -320,7 +320,7 @@ static const vector<string> all_types(
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
 	if (g1.n_nodes() != g2.n_nodes()) { return false; }
-	uint32_t n = g1.n_nodes();
+	const uint64_t n = g1.n_nodes();
 	for (uint32_t i = 0; i < n; ++i) {
 		const neighbourhood& n1 = g1.get_neighbours(i);
 		const neighbourhood& n2 = g2.get_neighbours(i);
@@ -336,7 +336,7 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 }
 
 inline vector<edge> enumerate_edges_brute_force(const graph& g) {
-	const uint32_t n = g.n_nodes();
+	const uint64_t n = g.n_nodes();
 	set<edge> E;
 	for (node s = 0; s < n; ++s) {
 	for (auto t : g.get_neighbours(s)) {
@@ -360,7 +360,7 @@ inline bool share_vertices(const edge_pair& st_uv) {
 }
 
 inline vector<edge_pair> enumerate_Q_brute_force(const graph& g) {
-	const uint32_t n = g.n_nodes();
+	const uint64_t n = g.n_nodes();
 	set<edge_pair> Q;
 	for (node s = 0; s < n; ++s) {
 	for (node t : g.get_neighbours(s)) {
@@ -513,18 +513,18 @@ err_type process_assert(
 	else if (assert_what == "edges_are") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		vector<edge> v(n);
-		for (edge& e : v) { fin >> e.first >> e.second; }
-		sort(v.begin(), v.end());
+		vector<edge> edge_list(n);
+		for (edge& e : edge_list) { fin >> e.first >> e.second; }
+		sort(edge_list.begin(), edge_list.end());
 
 		vector<edge> gv = ffunction(g1, enumerate_edges_brute_force);
 		sort(gv.begin(), gv.end());
-		if (v != gv) {
+		if (edge_list != gv) {
 			cerr << ERROR << endl;
 			cerr << "    The edges in graph '" << g1
 				 << "' do not coincide with those in the list." << endl;
-			cerr << "    List (" << v.size() << "):" << endl;
-			for (auto e : v) {
+			cerr << "    List (" << edge_list.size() << "):" << endl;
+			for (auto e : edge_list) {
 				cerr << "    " << edge_out(e);
 				if (find(gv.begin(), gv.end(), e) == gv.end()) {
 					cerr << " <- not in the graph!";
@@ -541,22 +541,22 @@ err_type process_assert(
 	else if (assert_what == "elements_Q_are") {
 		fin >> g1 >> n;
 		assert_exists_variable(g1)
-		vector<edge_pair> v(n);
-		for (edge_pair& e : v) {
+		vector<edge_pair> edge_pair_list(n);
+		for (edge_pair& e : edge_pair_list) {
 			fin >> e.first.first >> e.first.second
 				>> e.second.first >> e.second.second;
 			assert(not share_vertices(e));
 		}
-		sort(v.begin(), v.end());
+		sort(edge_pair_list.begin(), edge_pair_list.end());
 
 		vector<edge_pair> gv = ffunction(g1, enumerate_Q_brute_force);
 		sort(gv.begin(), gv.end());
-		if (v != gv) {
+		if (edge_pair_list != gv) {
 			cerr << ERROR << endl;
 			cerr << "    The edges in graph '" << g1
 				 << "' do not coincide with those in the list." << endl;
-			cerr << "    List (" << v.size() << "):" << endl;
-			for (auto e : v) {
+			cerr << "    List (" << edge_pair_list.size() << "):" << endl;
+			for (auto e : edge_pair_list) {
 				cerr << "    " << edge_pair_out(e);
 				if (find(gv.begin(), gv.end(), e) == gv.end()) {
 					cerr << " <- not in the graph!";
@@ -958,12 +958,12 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == "add_edges") {
 			fin >> g1 >> n_nodes;
-			vector<edge> v(n_nodes);
-			for (edge& e : v) { fin >> e.first >> e.second; }
+			vector<edge> edge_list(n_nodes);
+			for (edge& e : edge_list) { fin >> e.first >> e.second; }
 			fin >> norm;
 			assert_exists_variable(g1)
 			assert_correct_normalise(norm)
-			if_mfunction(g1, add_edges(v, norm == "true"))
+			if_mfunction(g1, add_edges(edge_list, norm == "true"))
 		}
 		else if (option == "assert") {
 			err_type e = process_assert(

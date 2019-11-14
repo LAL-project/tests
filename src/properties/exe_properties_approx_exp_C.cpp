@@ -114,9 +114,9 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 	return c;
 }
 
-rational E_2Cd_brute_force(ugraph& g, const vector<node>& pi) {
+rational E_2Cd_brute_force(ugraph& g, const vector<position>& pi) {
 	rational Ec2(0);
-	const uint32_t n = g.n_nodes();
+	const uint64_t n = g.n_nodes();
 
 	iterators::Q_iterator q(g);
 	while (q.has_next()) {
@@ -204,21 +204,23 @@ err_type exe_properties_approx_Exp_C(ifstream& fin) {
 	}
 
 	// linear arrangement
-	uint32_t n = G.n_nodes();
-	vector<node> arr(n);
+	const uint64_t n = G.n_nodes();
+	vector<node> T(n);
+	vector<position> pi(n);
 
 	// amount of linear arrangements
 	fin >> n_linarrs;
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
-			fin >> arr[u];
+		for (node u = 0; u < G.n_nodes(); ++u) {
+			fin >> T[u];
+			pi[ T[u] ] = u;
 		}
 
 		// compute value using library and compare it with brute force method
-		rational ap_lib = approximate_C_rational(G, arr);
-		rational ap_bf = E_2Cd_brute_force(G, arr);
+		rational ap_lib = approximate_C_rational(G, pi);
+		rational ap_bf = E_2Cd_brute_force(G, pi);
 
 		if (ap_lib != ap_bf) {
 			cerr << ERROR << endl;
