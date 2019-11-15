@@ -75,6 +75,7 @@ void mark_wrong_keyword
 		if (it < k.size()) {
 			if (k[it] != i) {
 				cerr << string(l, ' ') << " ";
+				if (l < 2) { cerr << " "; }
 			}
 			else {
 				cerr << "/\\";
@@ -192,7 +193,7 @@ err_type call_linarr
 	if (key == "compute_C") {
 		return call_linarr_C(keywords, i + 1, fin);
 	}
-	if (key == "level") {
+	if (key == "klevel") {
 		return call_linarr_klevel(keywords, i + 1, fin);
 	}
 	if (key == "D") {
@@ -243,9 +244,9 @@ err_type call_linarr_klevel
 	const set<string> allowed_keywords({"MDD"});
 
 	const string& level = keywords[i];
-	const string& key = keywords[i + 1];
 	bool correct_level = allowed_levels.find(level) != allowed_levels.end();
-	bool correct_key = allowed_keywords.find(level) != allowed_keywords.end();
+	const string& key = keywords[i + 1];
+	bool correct_key = allowed_keywords.find(key) != allowed_keywords.end();
 
 	if (not correct_level or not correct_key) {
 		cerr << ERROR << endl;

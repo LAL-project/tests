@@ -39,6 +39,9 @@
  *
  ********************************************************************/
 
+// C includes
+#include <assert.h>
+
 // C++ includes
 #include <iostream>
 #include <fstream>
@@ -60,10 +63,6 @@ using namespace linarr;
 
 namespace exe_tests {
 
-rational empty(const vector<ugraph>&, const vector<LINARR >&) {
-	return 0;
-}
-
 err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fin) {
 
 	/* FUNCTIONS */
@@ -72,8 +71,9 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 		if (level == "1") { return linarr::MDD_1level_rational(Gs, pis); }
 		if (level == "2") { return linarr::MDD_2level_rational(Gs, pis); }
 
-		// return an empty function
-		return empty(Gs, pis);
+		// return invalid value
+		cerr << ERROR << endl;
+		return rational(-1);
 	};
 
 	/* TEST's CODE */
@@ -119,29 +119,35 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 	}
 
 	// linear arrangement
-	vector<vector<node> > Ts(n_inputs);
-	vector<LINARR > pis(n_inputs);
+	vector<vector<node> > Ts;
+	vector<LINARR> pis;
 
 	// amount of linear arrangements
 	size_t n_linarrs;
 	fin >> n_linarrs;
 
-	for (size_t i = 0; i < n_linarrs; ++i) {
-		const uint64_t Ni = Gs[i].n_nodes();
+	assert(n_linarrs == 0 or n_linarrs == Gs.size());
+	if (n_linarrs != 0) {
+		Ts = vector<vector<node> >(n_linarrs);
+		pis = vector<LINARR>(n_linarrs);
 
-		Ts[i] = vector<node>(Ni);
-		pis[i] = LINARR(Ni);
+		for (size_t i = 0; i < n_linarrs; ++i) {
+			const uint64_t Ni = Gs[i].n_nodes();
 
-		// read all linear arrangement
-		for (node u = 0; u < Ni; ++u) {
-			fin >> Ts[i][u];
-			pis[i][ Ts[i][u] ] = u;
+			Ts[i] = vector<node>(Ni);
+			pis[i] = LINARR(Ni);
+
+			// read all linear arrangement
+			for (node u = 0; u < Ni; ++u) {
+				fin >> Ts[i][u];
+				pis[i][ Ts[i][u] ] = u;
+			}
 		}
+	}
 
-		if (what == "MDD") {
-			rational MDD = MDD_F(Gs, pis);
-			cout << MDD << endl;
-		}
+	if (what == "MDD") {
+		rational MDD = MDD_F(Gs, pis);
+		cout << MDD << endl;
 	}
 
 	return err_type::no_error;

@@ -1,0 +1,35 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+    test-
+
+Then follows the "family number" of the test. This is a three-digit number.
+Finally, a three-digit number indicating the test number within the family.
+Therefore
+
+
+         Test number
+
+              |
+             ---
+    test-xxx.yyy
+         ---
+          |
+
+      Family test
+        number
+
+
+
+Family test numbers
+-------------------
+
+Family test numbers indicate the level of the metric. For example
+
+
+	001: 1-level computation
+	002: 2-level computation
+
