@@ -34,7 +34,11 @@ LIBS += -fopenmp
 
 SOURCES += \
     construction/exe_construction.cpp \
-    linarr/exe_linarr_compute_headedness.cpp \
+    linarr/exe_linarr_C.cpp \
+    linarr/exe_linarr_C_list.cpp \
+    linarr/exe_linarr_D.cpp \
+    linarr/exe_linarr_headedness.cpp \
+    linarr/exe_linarr_klevel.cpp \
     linarr/exe_linarr_syn_dep_tree_type.cpp \
 	main.cpp \
 	parse_keywords.cpp \
@@ -47,9 +51,6 @@ SOURCES += \
     properties/exe_properties_expvar_C.cpp \
     properties/exe_properties_expvar_D.cpp \
     time.cpp \
-    linarr/exe_linarr_compute_D.cpp \
-    linarr/exe_linarr_compute_C.cpp \
-    linarr/exe_linarr_compute_C_list.cpp \
     generate/exe_gen_trees.cpp \
     properties/exe_properties_approx_exp_C.cpp \
     utils/exe_utils_sorting.cpp \

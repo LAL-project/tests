@@ -1,4 +1,4 @@
-TYPE linear_arrangements-D-D
+TYPE linear_arrangements-D-MDD
 INPUT 1 graphs/er/020-0.50 edge-list
 BODY
 	20

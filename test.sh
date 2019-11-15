@@ -13,6 +13,7 @@ IN_DIRS=("numeric/integer" \
 		 "properties/exp-var-D/general-formula" \
 		 "linear-arrangements/E_2Cd" \
 		 "linear-arrangements/headedness" \
+		 "linear-arrangements/MDD" \
 		 "linear-arrangements/D" \
 		 "linear-arrangements/C/dyn-prog" \
 		 "linear-arrangements/C/dyn-prog-list" \
@@ -20,6 +21,8 @@ IN_DIRS=("numeric/integer" \
 		 "linear-arrangements/C/ladder-list" \
 		 "linear-arrangements/C/stack-based" \
 		 "linear-arrangements/C/stack-based-list" \
+		 "linear-arrangements/k-level/1-MDD" \
+		 "linear-arrangements/k-level/2-MDD" \
 		 "generate" \
 		)
 
@@ -35,6 +38,7 @@ OUT_DIRS=("numeric/integer" \
 		 "properties/exp-var-D" \
 		 "linear-arrangements/E_2Cd" \
 		 "linear-arrangements/headedness" \
+		 "linear-arrangements/MDD" \
 		 "linear-arrangements/D" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \
@@ -42,6 +46,8 @@ OUT_DIRS=("numeric/integer" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \
 		 "linear-arrangements/C" \
+		 "linear-arrangements/k-level/1-MDD" \
+		 "linear-arrangements/k-level/2-MDD" \
 		 "generate" \
 		 )
 

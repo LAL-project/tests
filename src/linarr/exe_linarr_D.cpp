@@ -45,11 +45,13 @@
 using namespace std;
 
 // lal includes
-#include <lal/linarr/D.hpp>
+#include <lal/numeric/rational.hpp>
 #include <lal/graphs/ugraph.hpp>
 #include <lal/io/basic_output.hpp>
+#include <lal/linarr/D.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace numeric;
 
 // custom includes
 #include "../io_wrapper.hpp"
@@ -57,7 +59,7 @@ using namespace graphs;
 
 namespace exe_tests {
 
-err_type exe_linarr_compute_D(ifstream& fin) {
+err_type exe_linarr_D(const string& what, ifstream& fin) {
 	string field;
 
 	fin >> field;
@@ -113,15 +115,22 @@ err_type exe_linarr_compute_D(ifstream& fin) {
 			pi[ T[u] ] = u;
 		}
 
-		// compute D
-		uint64_t D = linarr::sum_length_edges(G, pi);
-
 		// output
 		cout << "[" << T[0];
 		for (size_t j = 1; j < T.size(); ++j) {
 			cout << ", " << T[j];
 		}
-		cout << "]: " << D << endl;
+		cout << "]: ";
+
+		if (what == "D") {
+			// compute D
+			uint64_t D = linarr::sum_length_edges(G, pi);
+			cout << D << endl;
+		}
+		else if (what == "MDD") {
+			rational MDD = linarr::MDD_rational(G, pi);
+			cout << MDD << endl;
+		}
 	}
 
 	return err_type::no_error;

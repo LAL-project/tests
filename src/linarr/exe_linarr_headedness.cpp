@@ -46,15 +46,13 @@
 using namespace std;
 
 // lal includes
-#include <lal/linarr/C.hpp>
-#include <lal/iterators/Q_iterator.hpp>
-#include <lal/graphs/ugraph.hpp>
-#include <lal/properties/Q.hpp>
+#include <lal/graphs/dgraph.hpp>
+#include <lal/numeric/rational.hpp>
+#include <lal/linarr/headedness.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/linarr/algorithms_crossings.hpp>
 using namespace lal;
 using namespace graphs;
-using namespace linarr;
+using namespace numeric;
 
 // custom includes
 #include "../io_wrapper.hpp"
@@ -63,9 +61,7 @@ using namespace linarr;
 
 namespace exe_tests {
 
-err_type exe_linarr_compute_C(ifstream& fin) {
-	set<string> allowed_procs({"Q", "brute_force", "dyn_prog", "ladder", "stack_based"});
-
+err_type exe_linarr_headedness(ifstream& fin) {
 	string field;
 	fin >> field;
 
@@ -89,7 +85,7 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 	string graph_format;
 	fin >> graph_name >> graph_format;
 
-	ugraph G;
+	dgraph G;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
@@ -104,19 +100,6 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	string proc;
-	fin >> proc;
-
-	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Procedure '" << proc << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	timing::time_point begin, end;
-	double total_elapsed = 0.0;
-
 	// linear arrangement
 	const uint64_t n = G.n_nodes();
 	vector<node> T(n);
@@ -128,56 +111,15 @@ err_type exe_linarr_compute_C(ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
+		for (node u = 0; u < G.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
-		const uint64_t Cbf = n_crossings(G, pi, algorithms_crossings::brute_force);
-
-		uint64_t C = 0;
-		if (proc == "dyn_prog") {
-			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::dynamic_programming);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else if (proc == "ladder") {
-			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::ladder);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else if (proc == "stack_based") {
-			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::stack_based);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-
-		if (Cbf != C) {
-			cerr << ERROR << endl;
-			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        brute force: " << Cbf << endl;
-			cerr << "        " << proc << ": " << C << endl;
-			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-			cerr << "    [" << T[0];
-			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << T[j];
-			}
-			cerr << "]" << endl;
-			return err_type::test_exe_error;
-		}
+		rational h = linarr::headedness_rational(G, pi);
+		cout << h << endl;
 	}
 
-	string time_filename;
-	if (fin >> time_filename) {
-		ofstream fout;
-		fout.open(time_filename.c_str());
-		fout << "Total time: " << total_elapsed << " ms" << endl;
-	}
-
-	cout << "Test finished without apparent errors." << endl;
 	return err_type::no_error;
 }
 

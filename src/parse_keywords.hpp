@@ -78,6 +78,12 @@ err_type call_linarr
 err_type call_linarr_C
 (const vector<string>& keywords, size_t i, ifstream& fin);
 
+err_type call_linarr_klevel
+(const vector<string>& keywords, size_t i, ifstream& fin);
+
+err_type call_linarr_D_related
+(const vector<string>& keywords, size_t i, ifstream& fin);
+
 	// Functions to test the tree generation functions and classes
 
 err_type call_generate

@@ -43,6 +43,7 @@
 
 // C++ includes
 #include <iostream>
+#include <set>
 using namespace std;
 
 // custom includes
@@ -57,7 +58,12 @@ void mark_wrong_keyword
 	cerr << tab;
 	// sure 'keywords' has at least one keyword
 	for (size_t i = 0; i < keywords.size(); ++i) {
-		cerr << keywords[i] << " ";
+		if (keywords[i].length() >= 2) {
+			cerr << keywords[i] << " ";
+		}
+		else {
+			cerr << keywords[i] << "  ";
+		}
 	}
 	cerr << endl;
 
@@ -72,7 +78,12 @@ void mark_wrong_keyword
 			}
 			else {
 				cerr << "/\\";
-				cerr << string(l - 2, ' ') << " ";
+				if (l > 2) {
+					cerr << string(l - 2, ' ') << " ";
+				}
+				else {
+					cerr << "   ";
+				}
 				++it;
 			}
 		}
@@ -108,7 +119,7 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	return err_type::wrong_keyword;
 }
 
-	// Functions to test the integer and rational classes
+/* Functions to test the integer and rational classes */
 
 err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	const string& num_type1 = keywords[i];
@@ -148,7 +159,7 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	return err_type::wrong_keyword;
 }
 
-	// Functions to test the properties functions
+/* Functions to test the properties functions */
 
 err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
 {
@@ -172,23 +183,27 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 	return err_type::wrong_keyword;
 }
 
-	// Functions to test the linear arrangement-related functions
+/* Functions to test the linear arrangement-related functions */
 
 err_type call_linarr
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
-	if (key == "approx_exp_C") {
-		return exe_linarr_approx_Exp_C(fin);
-	}
 	if (key == "compute_C") {
 		return call_linarr_C(keywords, i + 1, fin);
 	}
-	if (key == "compute_D") {
-		return exe_linarr_compute_D(fin);
+	if (key == "level") {
+		return call_linarr_klevel(keywords, i + 1, fin);
+	}
+	if (key == "D") {
+		return call_linarr_D_related(keywords, i + 1, fin);
+	}
+
+	if (key == "approx_exp_C") {
+		return exe_linarr_approx_Exp_C(fin);
 	}
 	if (key == "compute_headedness") {
-		return exe_linarr_compute_headedness(fin);
+		return exe_linarr_headedness(fin);
 	}
 	if (key == "syn_dep_tree_type") {
 		return exe_linarr_syn_dep_tree_type(fin);
@@ -203,13 +218,16 @@ err_type call_linarr
 err_type call_linarr_C
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
+	// There is no need to give more keywords.
+	// If, after this keyword, there are no more of them,
+	// execute the simple test.
 	if (i == keywords.size()) {
-		return exe_linarr_compute_C(fin);
+		return exe_linarr_C(fin);
 	}
 
 	const string& key = keywords[i];
 	if (key == "list") {
-		return exe_linarr_compute_C_list(fin);
+		return exe_linarr_C_list(fin);
 	}
 
 	cerr << ERROR << endl;
@@ -218,7 +236,52 @@ err_type call_linarr_C
 	return err_type::wrong_keyword;
 }
 
-	// Functions to test the tree generation functions and classes
+err_type call_linarr_klevel
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const set<string> allowed_levels({"1", "2"});
+	const set<string> allowed_keywords({"MDD"});
+
+	const string& level = keywords[i];
+	const string& key = keywords[i + 1];
+	bool correct_level = allowed_levels.find(level) != allowed_levels.end();
+	bool correct_key = allowed_keywords.find(level) != allowed_keywords.end();
+
+	if (not correct_level or not correct_key) {
+		cerr << ERROR << endl;
+		vector<size_t> what_keys;
+		if (not correct_level) {
+			cerr << "    Wrong keyword at " << i << ": '" << level << "'." << endl;
+			what_keys.push_back(i);
+		}
+		if (not correct_key) {
+			cerr << "    Wrong keyword at " << i + 1 << ": '" << key << "'." << endl;
+			what_keys.push_back(i + 1);
+		}
+		mark_wrong_keyword(keywords, what_keys, "    ");
+		return err_type::wrong_keyword;
+	}
+
+	return exe_linarr_klevel(level, key, fin);
+}
+
+err_type call_linarr_D_related
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const set<string> allowed_keywords({"D", "MDD"});
+
+	const string& key = keywords[i];
+	if (allowed_keywords.find(key) == allowed_keywords.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Wrong keyword at " << i << ": '" << key << "'." << endl;
+		mark_wrong_keyword(keywords, {i}, "    ");
+		return err_type::wrong_keyword;
+	}
+
+	return exe_linarr_D(key, fin);
+}
+
+/* Functions to test the tree generation functions and classes */
 
 err_type call_generate
 (const vector<string>& keywords, size_t i, ifstream& fin)
@@ -234,7 +297,7 @@ err_type call_generate
 	return err_type::wrong_keyword;
 }
 
-	// Functions to test the library's utilities
+/* Functions to test the library's utilities */
 
 err_type call_utils
 (const vector<string>& keywords, size_t i, ifstream& fin)
