@@ -1,0 +1,4 @@
+TYPE linarr-syn_dep_tree_type
+INPUT 1 graphs/mixed-trees/tree-008-000 edge-list
+BODY
+	0	0 2 3 1 6 4 7 5

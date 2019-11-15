@@ -114,7 +114,7 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 	return c;
 }
 
-rational E_2Cd_brute_force(ugraph& g, const vector<position>& pi) {
+rational E_2Cd_brute_force(ugraph& g, const LINARR& pi) {
 	rational Ec2(0);
 	const uint64_t n = g.n_nodes();
 
@@ -206,7 +206,7 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 	// linear arrangement
 	const uint64_t n = G.n_nodes();
 	vector<node> T(n);
-	vector<position> pi(n);
+	LINARR pi(n);
 
 	// amount of linear arrangements
 	fin >> n_linarrs;

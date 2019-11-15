@@ -1,8 +1,0 @@
-TYPE linear_arrangements-approx_exp_C
-INPUT 1 graphs/linear-tree/006 edge-list
-BODY
-	E_2[C|d]
-	3
-	0 1 2 3 4 5
-	0 5 1 3 4 2
-	2 4 3 1 5 0

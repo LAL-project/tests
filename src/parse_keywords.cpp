@@ -103,7 +103,7 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	if (key == "properties") {
 		return call_properties(keywords, 1, fin);
 	}
-	if (key == "linear_arrangements") {
+	if (key == "linarr") {
 		return call_linarr(keywords, 1, fin);
 	}
 	if (key == "generate") {

@@ -130,12 +130,12 @@ err_type exe_gen_trees(std::ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	size_t n;
-	fin >> n;
-	if (n != 0) {
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 0) {
 		cerr << ERROR << endl;
 		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n << "' were found." << endl;
+		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
 		return err_type::test_format_error;
 	}
 
@@ -223,19 +223,19 @@ err_type exe_gen_trees(std::ifstream& fin) {
 		}
 		else if (gen_type == "random-labelled") {
 			RandFreeLabTreeGen.init(num_nodes, 100);
-			for (uint32_t i = 0; i < 10000; ++i) {
+			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeLabTreeGen.make_rand_tree();
 			}
 		}
 		else if (gen_type == "random-unlabelled") {
 			RandFreeULabTreeGen.init(num_nodes, 100);
-			for (uint32_t i = 0; i < 10000; ++i) {
+			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeULabTreeGen.make_rand_tree();
 			}
 		}
 		else if (gen_type == "random-rooted-labelled-trees") {
 			RandRootedLabTreeGen.init(num_nodes, 100);
-			for (uint32_t i = 0; i < 10000; ++i) {
+			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeULabTreeGen.make_rand_tree();
 			}
 		}

@@ -60,7 +60,7 @@ using namespace linarr;
 
 namespace exe_tests {
 
-rational empty(const vector<ugraph>&, const vector<vector<position> >&) {
+rational empty(const vector<ugraph>&, const vector<LINARR >&) {
 	return 0;
 }
 
@@ -68,7 +68,7 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 
 	/* FUNCTIONS */
 
-	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<vector<position> >& pis) {
+	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<LINARR>& pis) {
 		if (level == "1") { return linarr::MDD_1level_rational(Gs, pis); }
 		if (level == "2") { return linarr::MDD_2level_rational(Gs, pis); }
 
@@ -120,7 +120,7 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 
 	// linear arrangement
 	vector<vector<node> > Ts(n_inputs);
-	vector<vector<position> > pis(n_inputs);
+	vector<LINARR > pis(n_inputs);
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -130,7 +130,7 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 		const uint64_t Ni = Gs[i].n_nodes();
 
 		Ts[i] = vector<node>(Ni);
-		pis[i] = vector<position>(Ni);
+		pis[i] = LINARR(Ni);
 
 		// read all linear arrangement
 		for (node u = 0; u < Ni; ++u) {

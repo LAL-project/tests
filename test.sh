@@ -11,18 +11,18 @@ IN_DIRS=("numeric/integer" \
 		 "properties/exp-var-C/trees" \
 		 "properties/exp-var-C/forests" \
 		 "properties/exp-var-D/general-formula" \
-		 "linear-arrangements/E_2Cd" \
-		 "linear-arrangements/headedness" \
-		 "linear-arrangements/MDD" \
-		 "linear-arrangements/D" \
-		 "linear-arrangements/C/dyn-prog" \
-		 "linear-arrangements/C/dyn-prog-list" \
-		 "linear-arrangements/C/ladder" \
-		 "linear-arrangements/C/ladder-list" \
-		 "linear-arrangements/C/stack-based" \
-		 "linear-arrangements/C/stack-based-list" \
-		 "linear-arrangements/k-level/1-MDD" \
-		 "linear-arrangements/k-level/2-MDD" \
+		 "linarr/E_2Cd" \
+		 "linarr/headedness" \
+		 "linarr/MDD" \
+		 "linarr/D" \
+		 "linarr/C/dyn-prog" \
+		 "linarr/C/dyn-prog-list" \
+		 "linarr/C/ladder" \
+		 "linarr/C/ladder-list" \
+		 "linarr/C/stack-based" \
+		 "linarr/C/stack-based-list" \
+		 "linarr/k-level/1-MDD" \
+		 "linarr/k-level/2-MDD" \
 		 "generate" \
 		)
 
@@ -36,18 +36,18 @@ OUT_DIRS=("numeric/integer" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-D" \
-		 "linear-arrangements/E_2Cd" \
-		 "linear-arrangements/headedness" \
-		 "linear-arrangements/MDD" \
-		 "linear-arrangements/D" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/C" \
-		 "linear-arrangements/k-level/1-MDD" \
-		 "linear-arrangements/k-level/2-MDD" \
+		 "linarr/E_2Cd" \
+		 "linarr/headedness" \
+		 "linarr/MDD" \
+		 "linarr/D" \
+		 "linarr/C" \
+		 "linarr/C" \
+		 "linarr/C" \
+		 "linarr/C" \
+		 "linarr/C" \
+		 "linarr/C" \
+		 "linarr/k-level/1-MDD" \
+		 "linarr/k-level/2-MDD" \
 		 "generate" \
 		 )
 

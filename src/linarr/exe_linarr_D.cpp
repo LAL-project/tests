@@ -102,7 +102,7 @@ err_type exe_linarr_D(const string& what, ifstream& fin) {
 	// linear arrangement
 	const uint64_t n = G.n_nodes();
 	vector<node> T(n);
-	vector<position> pi(n);
+	LINARR pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -110,14 +110,14 @@ err_type exe_linarr_D(const string& what, ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
+		for (node u = 0; u < G.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
 		// output
 		cout << "[" << T[0];
-		for (size_t j = 1; j < T.size(); ++j) {
+		for (node j = 1; j < G.n_nodes(); ++j) {
 			cout << ", " << T[j];
 		}
 		cout << "]: ";

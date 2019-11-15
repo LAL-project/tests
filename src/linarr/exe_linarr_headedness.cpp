@@ -103,7 +103,7 @@ err_type exe_linarr_headedness(ifstream& fin) {
 	// linear arrangement
 	const uint64_t n = G.n_nodes();
 	vector<node> T(n);
-	vector<position> pi(n);
+	LINARR pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -115,6 +115,13 @@ err_type exe_linarr_headedness(ifstream& fin) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
+
+		// output
+		cout << "[" << T[0];
+		for (node j = 1; j < G.n_nodes(); ++j) {
+			cout << ", " << T[j];
+		}
+		cout << "]: ";
 
 		rational h = linarr::headedness_rational(G, pi);
 		cout << h << endl;

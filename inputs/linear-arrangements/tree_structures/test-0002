@@ -1,8 +1,0 @@
-TYPE linear_arrangements-syn_dep_tree_type
-INPUT 1 graphs/star-tree/005 edge-list
-BODY
-	0	4 1 0 2 3
-	1	4 1 0 2 3
-	2	4 1 0 2 3
-	3	4 1 0 2 3
-	4	4 1 0 2 3
