@@ -40,7 +40,6 @@
  ********************************************************************/
 
 // C includes
-#include <assert.h>
 
 // C++ includes
 #include <iostream>
@@ -52,6 +51,8 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/linarr/D.hpp>
+#include <lal/linarr/1level.hpp>
+#include <lal/linarr/2level.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -126,7 +127,15 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 	size_t n_linarrs;
 	fin >> n_linarrs;
 
-	assert(n_linarrs == 0 or n_linarrs == Gs.size());
+	if (not (n_linarrs == 0 or n_linarrs == Gs.size())) {
+		cerr << ERROR << endl;
+		cerr << "    The number of linear arrangements does not equal 0" << endl;
+		cerr << "    and it does not equal the amount of graphs given as input." << endl;
+		cerr << "    Amount of graphs given as input: " << Gs.size() << endl;
+		cerr << "    Number of linear arrangements: " << n_linarrs << endl;
+		return err_type::test_format_error;
+	}
+
 	if (n_linarrs != 0) {
 		Ts = vector<vector<node> >(n_linarrs);
 		pis = vector<LINARR>(n_linarrs);
