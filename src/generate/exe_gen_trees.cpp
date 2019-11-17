@@ -54,6 +54,7 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/output.hpp>
 #include <lal/properties/degrees.hpp>
+#include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -65,11 +66,66 @@ using namespace numeric;
 /* DATA FOR TESTING */
 
 // expected second moment of degree over all labelled trees
-#define exp_mmt_deg_2_lab_trees(n) (rational(1) - rational(1,n))*(rational(5) - rational(6,n))
+inline rational exp_mmt_deg_2_lab_trees(uint64_t n) {
+	rational p1 = 1;
+	p1 -= rational(1,n);
+	rational p2 = 5;
+	p2 -= rational(6,n);
+	return p1*p2;
+}
+
+// number of caterpillar trees of a given size
+inline uint64_t num_caterpillar_trees(uint64_t n) {
+	if (n == 1) { return 1; }
+	if (n == 2) { return 1; }
+	if (n == 3) { return 1; }
+	if (n == 4) { return 2; }
+	integer n1 = 2;
+	n1 ^= n - 4;
+	integer n2 = 2;
+	n2 ^= ((n - 4)/2);
+	n1 += n2;
+	return n1.to_uint();
+}
 
 // size of the vector with the number of unlabelled free trees
 #define SIZE_UUF 37
 
+inline bool is_caterpillar(const utree& t) {
+	// number of vertices
+	const uint64_t N = t.n_nodes();
+
+	// number of internal vertices
+	uint64_t n_internal = 0;
+	// degree of the internal vertices
+	vector<uint64_t> deg_internal(N, 0);
+	for (node u = 0; u < N; ++u) {
+		if (t.degree(u) > 1) {
+			deg_internal[u] = t.degree(u);
+			++n_internal;
+		}
+	}
+
+	// reduce the degree of the internal vertices
+	// as many times as leaves are connected to them
+	for (node u = 0; u < N; ++u) {
+		if (t.degree(u) == 1) {
+			deg_internal[ t.get_neighbours(u)[0] ] -= 1;
+		}
+	}
+
+	// If we are left with 2, or 0, vertices with degree 1,
+	// it means that after removing the leaves of the tree
+	// all vertices are internal (degree 2), i.e., they are
+	// part of a linear tree. Needless to say that these
+	// two vertices of degree 1 are the endpoints of the
+	// linear tree.
+	uint64_t n1 = 0;
+	for (node u = 0; u < N; ++u) {
+		n1 += deg_internal[u] == 1;
+	}
+	return n1 == 2 or n1 == 0;
+}
 
 namespace exe_tests {
 
@@ -153,7 +209,7 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	utree T;
 	string gen_type;
 
-	uint32_t num_nodes;
+	uint64_t num_vertices;
 	integer gen;
 
 	free_lab_trees				AllFreeLabTreeGen;
@@ -162,17 +218,18 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	rand_free_ulab_trees		RandFreeULabTreeGen;
 	rand_rooted_lab_dir_trees	RandRootedLabTreeGen;
 
-	while (fin >> gen_type >> num_nodes) {
-		const integer n = num_nodes;
+	while (fin >> gen_type >> num_vertices) {
+		const integer n = integer_from_ui(num_vertices);
 
 		if (gen_type == "exhaustive-labelled") {
 			// expected second moment of degree
-			const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
+			const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(num_vertices);
 			rational mmtdeg2 = 0;
+			// number of generated trees
 			gen = 0;
 
 			// generate all trees
-			AllFreeLabTreeGen.init(num_nodes);
+			AllFreeLabTreeGen.init(num_vertices);
 			while (AllFreeLabTreeGen.has_next()) {
 				AllFreeLabTreeGen.next();
 				T = AllFreeLabTreeGen.get_tree();
@@ -199,42 +256,64 @@ err_type exe_gen_trees(std::ifstream& fin) {
 				cerr << "    Exhaustive generation of free labelled trees" << endl;
 				cerr << "    Amount of trees should be: " << total << endl;
 				cerr << "    But generated: " << gen << endl;
-				cerr << "    For a size of " << num_nodes << " vertices" << endl;
+				cerr << "    For a size of " << num_vertices << " vertices" << endl;
 				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "exhaustive-unlabelled") {
+			// number of caterpillar trees
+			uint64_t n_caterpillar = 0;
+			// number of generated trees
 			gen = 0;
-			AllFreeUlabTreeGen.init(num_nodes);
+
+			// generate all trees
+			AllFreeUlabTreeGen.init(num_vertices);
 			while (AllFreeUlabTreeGen.has_next()) {
 				AllFreeUlabTreeGen.next();
 				T = AllFreeUlabTreeGen.get_tree();
+
+				// compute 'statistics'
+				bool is_cat = is_caterpillar(T);
+				n_caterpillar += is_cat;
 				gen += 1;
 			}
 
-			if (num_nodes < SIZE_UUF and gen != UUF[num_nodes]) {
+			// check the number of caterpillar trees is correct
+			const uint64_t n_cat = num_caterpillar_trees(num_vertices);
+			if (n_cat != n_caterpillar) {
+				cerr << ERROR << endl;
+				cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;
+				cerr << "    Number of vertices: " << num_vertices << endl;
+				cerr << "    Formula:  " << n_cat << endl;
+				cerr << "    Detected: " << n_caterpillar << endl;
+				return err_type::test_exe_error;
+			}
+
+			// make sure that the amount of trees generate coincides
+			// with the series from the OEIS
+			if (num_vertices < SIZE_UUF and gen != UUF[num_vertices]) {
 				cerr << ERROR << endl;
 				cerr << "    Exhaustive generation of free unlabelled trees" << endl;
-				cerr << "    Amount of trees should be: " << UUF[num_nodes] << endl;
+				cerr << "    Amount of trees should be: " << UUF[num_vertices] << endl;
 				cerr << "    But generated: " << gen << endl;
-				cerr << "    For a size of " << num_nodes << " vertices" << endl;
+				cerr << "    For a size of " << num_vertices << " vertices" << endl;
 				return err_type::test_exe_error;
 			}
 		}
 		else if (gen_type == "random-labelled") {
-			RandFreeLabTreeGen.init(num_nodes, 100);
+			RandFreeLabTreeGen.init(num_vertices, 100);
 			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeLabTreeGen.make_rand_tree();
 			}
 		}
 		else if (gen_type == "random-unlabelled") {
-			RandFreeULabTreeGen.init(num_nodes, 100);
+			RandFreeULabTreeGen.init(num_vertices, 100);
 			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeULabTreeGen.make_rand_tree();
 			}
 		}
 		else if (gen_type == "random-rooted-labelled-trees") {
-			RandRootedLabTreeGen.init(num_nodes, 100);
+			RandRootedLabTreeGen.init(num_vertices, 100);
 			for (int i = 0; i < 10000; ++i) {
 				T = RandFreeULabTreeGen.make_rand_tree();
 			}
