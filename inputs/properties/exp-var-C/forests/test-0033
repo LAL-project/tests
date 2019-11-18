@@ -1,0 +1,12 @@
+TYPE properties-exp_var_C
+INPUT 8
+graphs/forests/forest-2--4-17 edge-list
+graphs/forests/forest-2--5-16 edge-list
+graphs/forests/forest-2--8-13 edge-list
+graphs/forests/forest-2--9-12 edge-list
+graphs/forests/forest-3--4-4-13 edge-list
+graphs/forests/forest-3--4-5-12 edge-list
+graphs/forests/forest-3--4-8-9 edge-list
+graphs/forests/forest-4--4-4-5-8 edge-list
+BODY
+	forests
