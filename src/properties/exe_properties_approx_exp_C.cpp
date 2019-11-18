@@ -231,7 +231,7 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 		}
 	}
 
-	cout << "Test finished without apparent errors." << endl;
+	TEST_GOODBYE
 	return err_type::no_error;
 }
 

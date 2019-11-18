@@ -323,7 +323,7 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	for (size_t i = 0; i < SIZE_UUF; ++i) {
 		UUF[i].clear();
 	}
-	cout << "Test finished without apparent errors." << endl;
+	TEST_GOODBYE
 	return err_type::no_error;
 }
 

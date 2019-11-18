@@ -203,7 +203,7 @@ err_type exe_utils_bfs(ifstream& fin) {
 
 	if (r != err_type::no_error) { return r; }
 
-	cout << "Test finished without apparent errors." << endl;
+	TEST_GOODBYE
 	return err_type::no_error;
 }
 

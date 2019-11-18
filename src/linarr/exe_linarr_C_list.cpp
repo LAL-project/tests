@@ -177,7 +177,7 @@ err_type exe_linarr_C_list(ifstream& fin) {
 		fout << "Total time: " << total_elapsed << " ms" << endl;
 	}
 
-	cout << "Test finished without apparent errors." << endl;
+	TEST_GOODBYE
 	return err_type::no_error;
 }
 

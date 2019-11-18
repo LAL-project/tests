@@ -156,7 +156,7 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 
 	if (what == "MDD") {
 		rational MDD = MDD_F(Gs, pis);
-		cout << MDD << endl;
+		cout << level << "-level MDD= " << MDD << endl;
 	}
 
 	return err_type::no_error;

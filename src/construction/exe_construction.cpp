@@ -1178,7 +1178,7 @@ err_type exe_construction(ifstream& fin) {
 
 	err_type e = exe_construction_test(fin);
 	if (e == err_type::no_error) {
-		cout << "Test finished without apparent errors." << endl;
+		TEST_GOODBYE
 	}
 	return e;
 }

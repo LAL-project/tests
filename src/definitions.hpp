@@ -51,6 +51,8 @@
 
 #define INVALID_KEYWORD "¡@/#/?234!"
 
+#define TEST_GOODBYE cout << "Test finished without apparent errors." << endl;
+
 enum class err_type : int8_t {
 	/// The test completed successfully
 	no_error = 0,

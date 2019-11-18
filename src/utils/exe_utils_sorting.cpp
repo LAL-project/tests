@@ -125,12 +125,12 @@ err_type exe_utils_sorting(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	size_t n;
-	fin >> n;
-	if (n != 0) {
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n << " were specified." << endl;
+		cerr << "    Instead, " << n_inputs << " were specified." << endl;
 		return err_type::test_format_error;
 	}
 
@@ -167,7 +167,7 @@ err_type exe_utils_sorting(ifstream& fin) {
 		}
 	}
 
-	cout << "Test finished without apparent errors." << endl;
+	TEST_GOODBYE
 	return err_type::no_error;
 }
 

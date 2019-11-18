@@ -12,7 +12,7 @@ QMAKE_CXXFLAGS += -fopenmp
 QMAKE_CXXFLAGS +=										\
     -Wpedantic -Wshadow -Wall -Wextra -Wconversion		\
     -Wold-style-cast -Wrestrict -Wduplicated-cond		\
-    -Wnon-virtual-dtor -Woverloaded-virtual
+    -Wnon-virtual-dtor -Woverloaded-virtual -Wshadow
 
 # lal library
 LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library

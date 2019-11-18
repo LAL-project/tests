@@ -74,7 +74,7 @@ void output_ExpVar_C_BF(const ugraph& g) {
 	rational Vr = variance_C_freqs_Q_rational(Q);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula(const ugraph& g) {
@@ -82,21 +82,21 @@ void output_ExpVar_C_formula(const ugraph& g) {
 	rational Vr = variance_C_rational_Q(g, Q);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_noreuse(const ugraph& g) {
 	rational Vr = variance_C_rational(g, false);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_reuse(const ugraph& g) {
 	rational Vr = variance_C_rational(g, true);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_trees(const ugraph& g) {
@@ -104,14 +104,14 @@ void output_ExpVar_C_trees(const ugraph& g) {
 	rational Vr = variance_C_tree_rational(t);
 	rational E1r = expectation_C_first_rational(t);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_forests(const ugraph& g) {
 	rational Vr = variance_C_forest_rational(g);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 bool check_ExpVar_C_all_trees(uint32_t n) {
@@ -235,6 +235,7 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 				return err_type::test_exe_error;
 			}
 		}
+		TEST_GOODBYE
 	}
 	else if (proc == "mixed-trees") {
 		uint32_t rep, n_pairs, n_trees, size_trees;
@@ -247,6 +248,7 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 				return err_type::test_exe_error;
 			}
 		}
+		TEST_GOODBYE
 	}
 	else {
 		ugraph G;
