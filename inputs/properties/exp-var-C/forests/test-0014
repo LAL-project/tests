@@ -1,7 +1,7 @@
 TYPE properties-exp_var_C
 INPUT 0
 BODY
-	mixed-trees
+	exhaustive-trees
 	10
 	20	4 1
 		4 2

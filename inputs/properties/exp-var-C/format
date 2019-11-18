@@ -49,7 +49,7 @@ Contents of input files:
 	* In order to test the algorithm for forests consisting on several
 	unlabelled trees, each generated uniformly at random, write
 		BODY
-		mixed-trees
+		exhaustive-trees
 		replicas
 		amount-tests tests
 	Each test in "tests" is a pair (num-trees size-trees), where "num-trees"
@@ -58,7 +58,7 @@ Contents of input files:
 	
 	For example, the test:
 		BODY
-		mixed-trees
+		exhaustive-trees
 		1000
 		4   3 4   5 7   4 19   1 20
 	tests the algorithm on:

@@ -1,8 +1,8 @@
 TYPE linarr-klevel-2-MDD
 INPUT
 3
-graphs/mixed-trees/tree-008-008 edge-list
-graphs/mixed-trees/tree-005-000 edge-list
-graphs/mixed-trees/tree-007-004 edge-list
+graphs/exhaustive-trees/tree-008-008 edge-list
+graphs/exhaustive-trees/tree-005-000 edge-list
+graphs/exhaustive-trees/tree-007-004 edge-list
 BODY
 	0
