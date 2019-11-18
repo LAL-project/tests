@@ -1,0 +1,9 @@
+
+NAMING CONVENTIONS
+==================
+
+forest-N--n1-n2-...-nN
+
+N: number of connected components (trees).
+
+ni: Number of vertices of the i-th tree.
