@@ -175,6 +175,7 @@ err_type exe_linarr_C(ifstream& fin) {
 		ofstream fout;
 		fout.open(time_filename.c_str());
 		fout << "Total time: " << total_elapsed << " ms" << endl;
+		fout.close();
 	}
 
 	TEST_GOODBYE

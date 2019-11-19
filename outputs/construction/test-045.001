@@ -5,12 +5,20 @@ Contents of graph 'G'
 -----------------------------
 -----------------------------
 Contents of graph 'DG_1'
+out:
 *0: 1
  1:
+in:
+*0:
+ 1: 0
 -----------------------------
 -----------------------------
 Contents of graph 'DG_2'
+out:
  0:
 *1: 0
+in:
+ 0: 1
+*1:
 -----------------------------
 Test finished without apparent errors.

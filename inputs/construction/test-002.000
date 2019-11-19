@@ -2,31 +2,31 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph utree g 0
-	assert num_nodes g 0
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 0
+	assert_num_edges g 0
+	assert_is_not_rooted g
 	
 	create_graph utree g 1
-	assert num_nodes g 1
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 1
+	assert_num_edges g 0
+	assert_is_not_rooted g
 	
 	create_graph utree g 2
-	assert num_nodes g 2
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 2
+	assert_num_edges g 0
+	assert_is_not_rooted g
 	
 	create_graph utree g 3
-	assert num_nodes g 3
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 3
+	assert_num_edges g 0
+	assert_is_not_rooted g
 	
 	create_graph utree g 4
-	assert num_nodes g 4
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 4
+	assert_num_edges g 0
+	assert_is_not_rooted g
 	
 	create_graph utree g 5
-	assert num_nodes g 5
-	assert num_edges g 0
-	assert is_not_rooted g
+	assert_num_nodes g 5
+	assert_num_edges g 0
+	assert_is_not_rooted g

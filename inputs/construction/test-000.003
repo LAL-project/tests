@@ -2,36 +2,36 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph ugraph g0 0
-	assert is_undirected g0
-	assert num_nodes g0 0
-	assert num_edges g0 0
+	assert_is_undirected g0
+	assert_num_nodes g0 0
+	assert_num_edges g0 0
 	
 	create_graph ugraph g1 1
-	assert is_undirected g1
-	assert num_nodes g1 1
-	assert num_edges g0 0
+	assert_is_undirected g1
+	assert_num_nodes g1 1
+	assert_num_edges g0 0
 	
 	create_graph ugraph g2 2
-	assert is_undirected g2
-	assert num_nodes g2 2
-	assert num_edges g0 0
+	assert_is_undirected g2
+	assert_num_nodes g2 2
+	assert_num_edges g0 0
 	
 	create_graph ugraph g3 3
-	assert is_undirected g3
-	assert num_nodes g3 3
-	assert num_edges g0 0
+	assert_is_undirected g3
+	assert_num_nodes g3 3
+	assert_num_edges g0 0
 	
 	create_graph ugraph g4 4
-	assert is_undirected g4
-	assert num_nodes g4 4
-	assert num_edges g0 0
+	assert_is_undirected g4
+	assert_num_nodes g4 4
+	assert_num_edges g0 0
 	
 	create_graph ugraph g5 5
-	assert is_undirected g5
-	assert num_nodes g5 5
-	assert num_edges g0 0
+	assert_is_undirected g5
+	assert_num_nodes g5 5
+	assert_num_edges g0 0
 	
 	create_graph ugraph g6 6
-	assert is_undirected g6
-	assert num_nodes g6 6
-	assert num_edges g0 0
+	assert_is_undirected g6
+	assert_num_nodes g6 6
+	assert_num_edges g0 0

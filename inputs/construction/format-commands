@@ -20,41 +20,44 @@
 ** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
 	Adds N edges to a graph. Normalises (or not) the graph
 	
-** assert
+** assert_*
 	Makes sure that something is true
 	
-	-- is_normalised GRAPH
+	-- assert_normalised GRAPH
 		asserts that a graph IS normalised
 	
-	-- not_normalised GRAPH
+	-- assert_not_normalised GRAPH
 		asserts that a graph IS NOT normalised
 		
-	-- equal_graphs GRAPH1 GRAPH2
+	-- assert_equal_graphs GRAPH1 GRAPH2
 		asserts that two graphs are equal (here "equal" is not the
 		same as "isomorphic"!)
 	
-	-- not_equal_graphs GRAPH1 GRAPH2
+	-- assert_not_equal_graphs GRAPH1 GRAPH2
 		asserts that two graphs are equal (here "equal" is not the
 		same as "isomorphic"!)
 	
-	-- exists_edge GRAPH VERTEX1 VERTEX2
+	-- assert_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	
+	-- assert_exists_edge GRAPH VERTEX1 VERTEX2
 		asserts that a given edge exists
 	
-	-- not_exists_edge GRAPH VERTEX1 VERTEX2
+	-- assert_not_exists_edge GRAPH VERTEX1 VERTEX2
 		asserts that a given edge does NOT exist
 	
-	-- num_nodes GRAPH N
+	-- assert_num_nodes GRAPH N
 		asserts that the number of nodes is N
 		
-	-- num_edges GRAPH N
+	-- assert_num_edges GRAPH N
 		asserts that the number of edges is N
 	
-	-- edges_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n}
+	-- assert_edges_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n}
 		asserts that the edges in the graph are those specified in the list.
 		In case of undirected graphs, the edges must be given in lexicographic
 		order, i.e., the edges (s,t) given must be such that s<t.
 	
-	-- elements_Q_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{4n-1} VERTEX_{4n}
+	-- assert_elements_Q_are GRAPH N VERTEX1 VERTEX2 ... VERTEX_{4n-1} VERTEX_{4n}
 		asserts that the pairs of independent edges in the graph are
 		those specified in the list.
 		In case of undirected graphs, the edges must be given in lexicographic
@@ -62,62 +65,70 @@
 		For both directed and undirected graphs, the pairs ((s,t),(u,v))
 		must be given also in lexicographic order, i.e., s<u.
 	
-	-- is_directed GRAPH
+	-- assert_is_directed GRAPH
 		asserts that the graph is directed
 	
-	-- not_directed GRAPH
+	-- assert_not_directed GRAPH
 		asserts that the graph is directed
 		
-	-- is_undirected GRAPH
+	-- assert_is_undirected GRAPH
 		asserts that the graph is undirected
 	
-	-- not_undirected GRAPH
+	-- assert_not_undirected GRAPH
 		asserts that the graph is undirected
 	
-	-- degree GRAPH NODE d
+	-- assert_degree GRAPH NODE d
 		asserts that the degree (out-degree + in-degree for directed
 		graphs) equals d
 	
 	DIRECTED GRAPHS
 	---------------
 	
-	-- in_degree GRAPH NODE d
-		asserts that the in-degree equals d. Only for directed graphs
+	-- assert_in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
 	
-	-- out_degree GRAPH NODE d
-		asserts that the out-degree equals d. Only for directed graphs
+	-- assert_full_degree GRAPH NODE d
+		asserts that the in-degree plus out-degree equals d.
+	
+	-- assert_in_degree GRAPH NODE d
+		asserts that the in-degree equals d.
+	
+	-- assert_out_degree GRAPH NODE d
+		asserts that the out-degree equals d.
 	
 	TREES
 	-----
 	
-	-- can_add_edge GRAPH VERTEX_1 VERTEX_2
+	-- assert_can_add_edge GRAPH VERTEX_1 VERTEX_2
 		asserts that an edge can be added to the graph
 		
-	-- cant_add_edge GRAPH VERTEX_1 VERTEX_2
+	-- assert_cant_add_edge GRAPH VERTEX_1 VERTEX_2
 		asserts that an edge can NOT be added to the graph
 	
-	-- can_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+	-- assert_can_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list can be added to the graph
 		
-	-- cant_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+	-- assert_cant_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list cant be added to the graph
 	
-	-- is_rooted GRAPH
+	-- assert_is_rooted GRAPH
 		asserts that the tree is rooted
 	
-	-- is_not_rooted GRAPH
+	-- assert_is_not_rooted GRAPH
 		asserts that the tree is NOT rooted
 	
 	ROOTED DIRECTED TREES
 	---------------------
 	
-	-- is_drtree_type GRAPH TYPE
+	-- assert_is_drtree_type GRAPH TYPE
 		asserts that directed rooted tree GRAPH is of type TYPE.
-		Allowed strings for TYPE: "arborescence", "anti_arborescence", "none"
+		Allowed strings for TYPE:
+			"arborescence", "anti_arborescence", "none"
 	
-	-- is_not_drtree_type GRAPH TYPE
+	-- assert_is_not_drtree_type GRAPH TYPE
 		asserts that directed rooted tree GRAPH is NOT of type TYPE.
-		Allowed strings for TYPE: "arborescence", "anti_arborescence", "none"
+		Allowed strings for TYPE:
+			"arborescence", "anti_arborescence", "none"
 	
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same

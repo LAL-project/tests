@@ -37,6 +37,7 @@ SOURCES += \
     linarr/exe_linarr_C.cpp \
     linarr/exe_linarr_C_list.cpp \
     linarr/exe_linarr_D.cpp \
+    linarr/exe_linarr_approx_exp_C.cpp \
     linarr/exe_linarr_headedness.cpp \
     linarr/exe_linarr_klevel.cpp \
     linarr/exe_linarr_syn_dep_tree_type.cpp \
@@ -52,7 +53,6 @@ SOURCES += \
     properties/exe_properties_expvar_D.cpp \
     time.cpp \
     generate/exe_gen_trees.cpp \
-    properties/exe_properties_approx_exp_C.cpp \
     utils/exe_utils_sorting.cpp \
     utils/exe_utils_traversal.cpp
 

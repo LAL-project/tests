@@ -45,10 +45,11 @@
 #include <lal/io/edge_list.hpp>
 #include <lal/graphs/output.hpp>
 using namespace lal;
+using namespace graphs;
 
 namespace io_wrapper {
 
-err_type read_graph(const string& file, const string& format, graphs::graph& G) {
+err_type read_graph(const string& file, const string& format, graph& G) {
 
 	if (format == "edge-list") {
 		bool r = io::read_edge_list(file, G);
@@ -62,7 +63,13 @@ err_type read_graph(const string& file, const string& format, graphs::graph& G) 
 		return err_type::no_error;
 	}
 
-	cout << G << endl;
+	if (G.is_directed()) {
+		cout << dynamic_cast<const dgraph&>(G) << endl;
+	}
+	else {
+		cout << dynamic_cast<const ugraph&>(G) << endl;
+	}
+
 
 	cerr << ERROR << endl;
 	cerr << "    Unsupported format of file: '" << format << "'." << endl;

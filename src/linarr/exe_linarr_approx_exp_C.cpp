@@ -228,6 +228,11 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 			cerr << "    brute force value." << endl;
 			cerr << "    Library's value: " << ap_lib << endl;
 			cerr << "    Brute force's value: " << ap_bf << endl;
+			cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (size_t _i = 1; _i < T.size(); ++_i) {
+				cerr << ", " << T[_i];
+			}
+			cerr << "]" << endl;
 		}
 	}
 

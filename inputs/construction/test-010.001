@@ -8,9 +8,9 @@ BODY
 	add_edge g1 2 3 false
 	add_edge g1 1 4 false
 	add_edge g1 0 4 false
-	assert not_normalised g1
-	assert num_edges g1 6
-	assert edges_are g1 6
+	assert_not_normalised g1
+	assert_num_edges g1 6
+	assert_edges_are g1 6
 		0 1
 		0 3
 		2 4
@@ -25,9 +25,9 @@ BODY
 	add_edge g2 2 3 true
 	add_edge g2 1 4 true
 	add_edge g2 0 4 true
-	assert is_normalised g2
-	assert num_edges g2 6
-	assert edges_are g2 6
+	assert_normalised g2
+	assert_num_edges g2 6
+	assert_edges_are g2 6
 		0 1
 		0 3
 		2 4
@@ -44,9 +44,9 @@ BODY
 		1 4
 		0 4
 		false
-	assert not_normalised g3
-	assert num_edges g3 6
-	assert edges_are g3 6
+	assert_not_normalised g3
+	assert_num_edges g3 6
+	assert_edges_are g3 6
 		0 1
 		0 3
 		2 4
@@ -63,9 +63,9 @@ BODY
 		1 4
 		0 4
 		true
-	assert is_normalised g4
-	assert num_edges g4 6
-	assert edges_are g4 6
+	assert_normalised g4
+	assert_num_edges g4 6
+	assert_edges_are g4 6
 		0 1
 		0 3
 		2 4

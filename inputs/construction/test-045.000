@@ -10,8 +10,8 @@ BODY
 	output_graph dg1
 	
 	create_graph ugraph g2 2
-	assert num_nodes g2 2
-	assert num_edges g2 0
+	assert_num_nodes g2 2
+	assert_num_edges g2 0
 	add_edge g2 0 1 false
-	assert num_edges g2 1
+	assert_num_edges g2 1
 	output_graph g2

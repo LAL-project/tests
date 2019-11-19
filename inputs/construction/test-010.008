@@ -3,20 +3,20 @@ INPUT 0
 BODY
 	create_graph ugraph g 5
 	
-	assert num_edges g 0
-	assert elements_Q_are g 0
+	assert_num_edges g 0
+	assert_elements_Q_are g 0
 	
 	add_edge g 0 1 false
-	assert num_edges g 1
-	assert elements_Q_are g 0
+	assert_num_edges g 1
+	assert_elements_Q_are g 0
 	
 	add_edge g 2 3 false
-	assert num_edges g 2
-	assert elements_Q_are g 1
+	assert_num_edges g 2
+	assert_elements_Q_are g 1
 		0 1 2 3
 	
 	add_edge g 0 4 false
-	assert num_edges g 3
-	assert elements_Q_are g 2
+	assert_num_edges g 3
+	assert_elements_Q_are g 2
 		0 1 2 3
 		0 4 2 3

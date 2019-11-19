@@ -2,77 +2,77 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph drtree g 5
-	assert num_nodes g 5
-	assert num_edges g 0
-	assert is_rooted g
+	assert_num_nodes g 5
+	assert_num_edges g 0
+	assert_is_rooted g
 	
-	assert can_add_edge g 0 1
-	assert can_add_edge g 0 2
-	assert can_add_edge g 0 3
-	assert can_add_edge g 0 4
-	assert can_add_edge g 1 2
-	assert can_add_edge g 1 3
-	assert can_add_edge g 1 4
-	assert can_add_edge g 2 3
-	assert can_add_edge g 2 4
-	assert can_add_edge g 3 4
+	assert_can_add_edge g 0 1
+	assert_can_add_edge g 0 2
+	assert_can_add_edge g 0 3
+	assert_can_add_edge g 0 4
+	assert_can_add_edge g 1 2
+	assert_can_add_edge g 1 3
+	assert_can_add_edge g 1 4
+	assert_can_add_edge g 2 3
+	assert_can_add_edge g 2 4
+	assert_can_add_edge g 3 4
 	
 	add_edge g 0 1 false
-	assert num_edges g 1
+	assert_num_edges g 1
 	output_graph g
 	
-	assert cant_add_edge g 0 1
-	assert can_add_edge g 0 2
-	assert can_add_edge g 0 3
-	assert can_add_edge g 0 4
-	assert can_add_edge g 1 2
-	assert can_add_edge g 1 3
-	assert can_add_edge g 1 4
-	assert can_add_edge g 2 3
-	assert can_add_edge g 2 4
-	assert can_add_edge g 3 4
+	assert_cant_add_edge g 0 1
+	assert_can_add_edge g 0 2
+	assert_can_add_edge g 0 3
+	assert_can_add_edge g 0 4
+	assert_can_add_edge g 1 2
+	assert_can_add_edge g 1 3
+	assert_can_add_edge g 1 4
+	assert_can_add_edge g 2 3
+	assert_can_add_edge g 2 4
+	assert_can_add_edge g 3 4
 	
 	add_edge g 1 2 false
-	assert num_edges g 2
+	assert_num_edges g 2
 	output_graph g
 	
-	assert cant_add_edge g 0 1
-	assert cant_add_edge g 0 2
-	assert can_add_edge g 0 3
-	assert can_add_edge g 0 4
-	assert cant_add_edge g 1 2
-	assert can_add_edge g 1 3
-	assert can_add_edge g 1 4
-	assert can_add_edge g 2 3
-	assert can_add_edge g 2 4
-	assert can_add_edge g 3 4
+	assert_cant_add_edge g 0 1
+	assert_cant_add_edge g 0 2
+	assert_can_add_edge g 0 3
+	assert_can_add_edge g 0 4
+	assert_cant_add_edge g 1 2
+	assert_can_add_edge g 1 3
+	assert_can_add_edge g 1 4
+	assert_can_add_edge g 2 3
+	assert_can_add_edge g 2 4
+	assert_can_add_edge g 3 4
 	
 	add_edge g 2 3 false
-	assert num_edges g 3
+	assert_num_edges g 3
 	output_graph g
 	
-	assert cant_add_edge g 0 1
-	assert cant_add_edge g 0 2
-	assert cant_add_edge g 0 3
-	assert can_add_edge g 0 4
-	assert cant_add_edge g 1 2
-	assert cant_add_edge g 1 3
-	assert can_add_edge g 1 4
-	assert cant_add_edge g 2 3
-	assert can_add_edge g 2 4
-	assert can_add_edge g 3 4
+	assert_cant_add_edge g 0 1
+	assert_cant_add_edge g 0 2
+	assert_cant_add_edge g 0 3
+	assert_can_add_edge g 0 4
+	assert_cant_add_edge g 1 2
+	assert_cant_add_edge g 1 3
+	assert_can_add_edge g 1 4
+	assert_cant_add_edge g 2 3
+	assert_can_add_edge g 2 4
+	assert_can_add_edge g 3 4
 	
 	add_edge g 3 4 false
-	assert num_edges g 4
+	assert_num_edges g 4
 	output_graph g
 	
-	assert cant_add_edge g 0 1
-	assert cant_add_edge g 0 2
-	assert cant_add_edge g 0 3
-	assert cant_add_edge g 0 4
-	assert cant_add_edge g 1 2
-	assert cant_add_edge g 1 3
-	assert cant_add_edge g 1 4
-	assert cant_add_edge g 2 3
-	assert cant_add_edge g 2 4
-	assert cant_add_edge g 3 4
+	assert_cant_add_edge g 0 1
+	assert_cant_add_edge g 0 2
+	assert_cant_add_edge g 0 3
+	assert_cant_add_edge g 0 4
+	assert_cant_add_edge g 1 2
+	assert_cant_add_edge g 1 3
+	assert_cant_add_edge g 1 4
+	assert_cant_add_edge g 2 3
+	assert_cant_add_edge g 2 4
+	assert_cant_add_edge g 3 4
