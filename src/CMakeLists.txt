@@ -77,23 +77,28 @@ endif()
 
 project(tests)
 add_executable(tests "\
-io_wrapper.cpp;\
-main.cpp;\
-parse_keywords.cpp;\
-test_utils.cpp;\
-time.cpp;\
+construction/exe_construction.cpp;\
 generate/exe_gen_trees.cpp;\
-linarr/exe_linarr_compute_C.cpp;\
-linarr/exe_linarr_compute_C_list.cpp;\
-linarr/exe_linarr_compute_D.cpp;\
+linarr/exe_linarr_approx_exp_C.cpp;\
+linarr/exe_linarr_C.cpp;\
+linarr/exe_linarr_C_list.cpp;\
+linarr/exe_linarr_D.cpp;\
+linarr/exe_linarr_headedness.cpp;\
+linarr/exe_linarr_klevel.cpp;\
+linarr/exe_linarr_syn_dep_tree_type.cpp;\
 numeric/exe_integer.cpp;\
 numeric/exe_rational_integer.cpp;\
 numeric/exe_rational_rational.cpp;\
-properties/exe_properties_approx_exp_C.cpp;\
-properties/exe_properties_approx_exp_C.cpp;\
 properties/exe_properties_expvar_C.cpp;\
 properties/exe_properties_expvar_D.cpp;\
-properties/exe_properties_general.cpp\
+properties/exe_properties_general.cpp;\
+properties/exe_properties_MHD_All_trees.cpp;\
+utils/exe_utils_sorting.cpp;\
+utils/exe_utils_traversal.cpp;\
+io_wrapper.cpp;\
+main.cpp;\
+parse_keywords.cpp;\
+time.cpp\
 ")
 
 # **********************************************************************
