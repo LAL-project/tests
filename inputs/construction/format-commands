@@ -1,3 +1,7 @@
+
+COMMANDS AVAILABLE
+==================
+
 ** create_graph TYPE GRAPH N
 	Creates a graph of a certain TYPE and a given number of vertices N
 	Types supported:
@@ -82,7 +86,7 @@
 		graphs) equals d
 	
 	DIRECTED GRAPHS
-	---------------
+	===============
 	
 	-- assert_in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
 		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
@@ -97,7 +101,7 @@
 		asserts that the out-degree equals d.
 	
 	TREES
-	-----
+	=====
 	
 	-- assert_can_add_edge GRAPH VERTEX_1 VERTEX_2
 		asserts that an edge can be added to the graph
@@ -118,7 +122,7 @@
 		asserts that the tree is NOT rooted
 	
 	ROOTED DIRECTED TREES
-	---------------------
+	=====================
 	
 	-- assert_is_drtree_type GRAPH TYPE
 		asserts that directed rooted tree GRAPH is of type TYPE.
@@ -148,22 +152,21 @@
 	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
 	in GRAPH_RESULT
 
-
 UNDIRECTED GRAPHS
------------------
+=================
 
 ** to_drtree GRAPH_RESULT GRAPH ROOT_NODE
 	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
 	taking node ROOT_NODE as its root.
 
 DIRECTED GRAPHS
----------------
+===============
 
 ** to_undirected GRAPH_RESULT GRAPH
 	Converts the directed graph GRAPH into an undirected graph GRAPH_RESULT
 
 ROOTED TREES
-------------
+============
 
 ** set_root GRAPH NODE
 	Sets the root NODE to GRAPH.
