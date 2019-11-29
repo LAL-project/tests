@@ -411,4 +411,4 @@ graphs/er/050-0.80 edge-list
 graphs/er/050-0.90 edge-list
 graphs/er/050-1.00 edge-list
 BODY
-	formula
+	formula-no-Q-reuse

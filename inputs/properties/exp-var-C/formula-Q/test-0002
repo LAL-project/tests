@@ -51,4 +51,4 @@ graphs/one-regular/096 edge-list
 graphs/one-regular/098 edge-list
 graphs/one-regular/100 edge-list
 BODY
-	formula-reuse-computations
+	formula-Q

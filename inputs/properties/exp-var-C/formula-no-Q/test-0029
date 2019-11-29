@@ -98,4 +98,4 @@ graphs/star-tree/098 edge-list
 graphs/star-tree/099 edge-list
 graphs/star-tree/100 edge-list
 BODY
-	formula
+	formula-no-Q-reuse

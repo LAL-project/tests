@@ -44,6 +44,8 @@ SOURCES += \
 	main.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
+    properties/V_rla_C_brute_force_Q.cpp \
+    properties/V_rla_C_brute_force_freqs.cpp \
     properties/exe_properties_MHD_All_trees.cpp \
     numeric/exe_integer.cpp \
     numeric/exe_rational_integer.cpp \
@@ -61,6 +63,7 @@ HEADERS += \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \
+    properties/C_rla_brute_force_algorithms.hpp \
     time.hpp
 
 DISTFILES += \

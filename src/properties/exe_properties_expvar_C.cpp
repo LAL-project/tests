@@ -65,35 +65,26 @@ using namespace generate;
 #include "../io_wrapper.hpp"
 #include "../definitions.hpp"
 #include "../time.hpp"
+#include "C_rla_brute_force_algorithms.hpp"
 
 namespace exe_tests {
 
 void output_ExpVar_C_BF(const ugraph& g) {
-	vector<edge_pair> Q = g.Q();
-
-	rational Vr = variance_C_freqs_Q_rational(Q);
+	rational Vr = variance_C_freqs_Q_rational(g.Q());
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula(const ugraph& g) {
-	vector<edge_pair> Q = g.Q();
-	rational Vr = variance_C_rational_Q(g, Q);
+void output_ExpVar_C_formula_Q(const ugraph& g) {
+	rational Vr = variance_C_rational_Q(g, g.Q());
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula_noreuse(const ugraph& g) {
-	rational Vr = variance_C_rational(g, false);
-	rational E1r = expectation_C_first_rational(g);
-	rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
-}
-
-void output_ExpVar_C_formula_reuse(const ugraph& g) {
-	rational Vr = variance_C_rational(g, true);
+void output_ExpVar_C_formula_no_Q(const ugraph& g, bool reuse) {
+	rational Vr = variance_C_rational(g, reuse);
 	rational E1r = expectation_C_first_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
@@ -167,7 +158,8 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 		rational Vr_forests = variance_C_forest_rational(forest);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_forests) {
-			cerr << "Error in forest with " << n_trees  << " trees each of size " << size_trees << endl;
+			cerr << "Error in forest with " << n_trees
+				 << " trees each of size " << size_trees << endl;
 			cerr << "    Brute force alg: " << Vr_bf << endl
 				 << "    Alg for general: " << Vr_gen << endl
 				 << "    Alg for forests: " << Vr_forests
@@ -184,8 +176,8 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 	cout.precision(4);
 
 	const set<string> allowed_procs(
-		{"brute_force", "formula",
-		 "formula-noreuse-computations", "formula-reuse-computations",
+		{"brute_force", "formula-Q",
+		 "formula-no-Q-reuse", "formula-no-Q-no-reuse",
 		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
 
@@ -262,14 +254,14 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 			if (proc == "brute_force") {
 				output_ExpVar_C_BF(G);
 			}
-			else if (proc == "formula") {
-				output_ExpVar_C_formula(G);
+			else if (proc == "formula-Q") {
+				output_ExpVar_C_formula_Q(G);
 			}
-			else if (proc == "formula-noreuse-computations") {
-				output_ExpVar_C_formula_noreuse(G);
+			else if (proc == "formula-no-Q-reuse") {
+				output_ExpVar_C_formula_no_Q(G, true);
 			}
-			else if (proc == "formula-reuse-computations") {
-				output_ExpVar_C_formula_reuse(G);
+			else if (proc == "formula-no-Q-no-reuse") {
+				output_ExpVar_C_formula_no_Q(G, false);
 			}
 			else if (proc == "trees") {
 				output_ExpVar_C_trees(G);
