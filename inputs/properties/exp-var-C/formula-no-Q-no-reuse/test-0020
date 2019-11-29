@@ -100,4 +100,4 @@ graphs/quasi-star-tree/098 edge-list
 graphs/quasi-star-tree/099 edge-list
 graphs/quasi-star-tree/100 edge-list
 BODY
-	formula-noreuse-computations
+	formula-no-Q-no-reuse

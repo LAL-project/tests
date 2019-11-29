@@ -7,7 +7,8 @@ IN_DIRS=("numeric/integer" \
 		 "utils/sorting" \
 		 "utils/traversal" \
 		 "properties" \
-		 "properties/exp-var-C/formula-no-Q" \
+		 "properties/exp-var-C/formula-no-Q-reuse" \
+		 "properties/exp-var-C/formula-no-Q-no-reuse" \
 		 "properties/exp-var-C/formula-Q" \
 		 "properties/exp-var-C/trees" \
 		 "properties/exp-var-C/forests" \
@@ -33,6 +34,7 @@ OUT_DIRS=("numeric/integer" \
 		 "utils/sorting" \
 		 "utils/traversal" \
 		 "properties" \
+		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
 		 "properties/exp-var-C" \
