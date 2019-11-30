@@ -43,6 +43,7 @@
 
 // C includes
 #include <assert.h>
+#include <string.h>
 #include <omp.h>
 
 // C++ includes
@@ -197,9 +198,6 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 		rational(0)			// 8, f01:   0
 	};
 
-	// value of V_rla[C]
-	rational V(0);
-
 	// values of the frequencies
 	uint64_t f021(0), f022(0),	f03(0);
 	uint64_t f04(0),	f12(0),		f13(0);
@@ -218,9 +216,23 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	}
 	else {
 		// values of each frequency per thread
+		/*
 		vector<uint64_t> _f021(nthreads, 0), _f022(nthreads, 0), _f03(nthreads, 0);
 		vector<uint64_t> _f04(nthreads, 0), _f12(nthreads, 0), _f13(nthreads, 0);
 		vector<uint64_t> _f24(nthreads, 0);
+		*/
+
+		uint64_t * __restrict__ all_memory = static_cast<uint64_t *>(
+			malloc(7*nthreads*sizeof(uint64_t))
+		);
+		memset(all_memory, 0, 7*nthreads*sizeof(uint64_t));
+		uint64_t * __restrict__ _f021 = &all_memory[0*nthreads];
+		uint64_t * __restrict__ _f022 = &all_memory[1*nthreads];
+		uint64_t * __restrict__ _f03  = &all_memory[2*nthreads];
+		uint64_t * __restrict__ _f04  = &all_memory[3*nthreads];
+		uint64_t * __restrict__ _f12  = &all_memory[4*nthreads];
+		uint64_t * __restrict__ _f13  = &all_memory[5*nthreads];
+		uint64_t * __restrict__ _f24  = &all_memory[6*nthreads];
 
 		#pragma omp parallel num_threads(nthreads)
 		{
@@ -253,7 +265,12 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 			f04 += _f04[i];		f12 += _f12[i];		f13 += _f13[i];
 			f24 += _f24[i];
 		}
+
+		free(all_memory);
 	}
+
+	// value of V_rla[C]
+	rational V(0);
 
 	integer J(0);
 
