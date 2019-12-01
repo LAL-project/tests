@@ -49,10 +49,11 @@ using namespace graphs;
 
 namespace io_wrapper {
 
-err_type read_graph(const string& file, const string& format, graph& G) {
+template<class G>
+err_type __read_graph(const string& file, const string& format, G& g) {
 
 	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, G);
+		bool r = io::read_edge_list(file, g, true);
 		if (not r) {
 			cerr << ERROR << endl;
 			cerr << "    When attempting to read an edge-list-formatted" << endl;
@@ -63,17 +64,17 @@ err_type read_graph(const string& file, const string& format, graph& G) {
 		return err_type::no_error;
 	}
 
-	if (G.is_directed()) {
-		cout << dynamic_cast<const dgraph&>(G) << endl;
-	}
-	else {
-		cout << dynamic_cast<const ugraph&>(G) << endl;
-	}
-
-
 	cerr << ERROR << endl;
 	cerr << "    Unsupported format of file: '" << format << "'." << endl;
 	return err_type::test_format_error;
 }
+
+err_type read_graph(const string& file, const string& format, ugraph& G) {
+	return __read_graph(file, format, G);
+}
+err_type read_graph(const string& file, const string& format, dgraph& G) {
+	return __read_graph(file, format, G);
+}
+
 
 } // -- namespace io_wrapper

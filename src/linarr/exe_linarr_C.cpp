@@ -155,7 +155,9 @@ err_type exe_linarr_C(ifstream& fin) {
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 
-		if (Cbf != C) {
+		cout << "brute force: " << Cbf << endl;
+		cout << "algorithm: " << C << endl;
+
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
 			cerr << "        brute force: " << Cbf << endl;
@@ -167,7 +169,6 @@ err_type exe_linarr_C(ifstream& fin) {
 			}
 			cerr << "]" << endl;
 			return err_type::test_exe_error;
-		}
 	}
 
 	string time_filename;
