@@ -118,7 +118,7 @@ err_type exe_linarr_C(ifstream& fin) {
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint64_t n = G.n_nodes();
+	const uint32_t n = G.n_nodes();
 	vector<node> T(n);
 	LINARR pi(n);
 
@@ -133,9 +133,9 @@ err_type exe_linarr_C(ifstream& fin) {
 			pi[ T[u] ] = u;
 		}
 
-		const uint64_t Cbf = n_crossings(G, pi, algorithms_crossings::brute_force);
+		const uint32_t Cbf = n_crossings(G, pi, algorithms_crossings::brute_force);
 
-		uint64_t C = 0;
+		uint32_t C = 0;
 		if (proc == "dyn_prog") {
 			begin = timing::now();
 			C = n_crossings(G, pi, algorithms_crossings::dynamic_programming);
@@ -155,9 +155,7 @@ err_type exe_linarr_C(ifstream& fin) {
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 
-		cout << "brute force: " << Cbf << endl;
-		cout << "algorithm: " << C << endl;
-
+		if (C != Cbf) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
 			cerr << "        brute force: " << Cbf << endl;
@@ -169,6 +167,7 @@ err_type exe_linarr_C(ifstream& fin) {
 			}
 			cerr << "]" << endl;
 			return err_type::test_exe_error;
+		}
 	}
 
 	string time_filename;

@@ -50,7 +50,7 @@ using namespace lal;
 using namespace numeric;
 using namespace graphs;
 
-typedef uint64_t bigint;
+typedef uint32_t bigint;
 
 namespace exe_tests {
 
@@ -117,7 +117,7 @@ inline void compute_data_gen_graphs_Q
 		}
 	}
 
-	Qs = Q.size();
+	Qs = static_cast<uint32_t>(Q.size());
 	n_cycles_4 /= 2;
 }
 

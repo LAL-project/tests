@@ -83,7 +83,7 @@ err_type exe_numeric_rational_rational(ifstream& fin) {
 	}
 
 	/* Make the number to the left an integer: L1
-	 * -> (1) 'op' to it the number to the right as int64_t
+	 * -> (1) 'op' to it the number to the right as int32_t
 	 * -> (2) 'op' to it the number to the right as integer
 	 */
 

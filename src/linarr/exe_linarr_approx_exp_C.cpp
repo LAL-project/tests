@@ -68,8 +68,8 @@ using namespace linarr;
 #include "../definitions.hpp"
 #include "../time.hpp"
 
-#define to_int64(x) static_cast<int64_t>(x)
-#define to_uint64(x) static_cast<uint64_t>(x)
+#define to_int32(x) static_cast<int32_t>(x)
+#define to_uint32(x) static_cast<uint32_t>(x)
 
 namespace exe_tests {
 
@@ -82,11 +82,11 @@ inline bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
 	return false;
 }
 
-uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
-	uint64_t c = 0;
-	for (uint64_t s1 = 1; s1 <= n; ++s1) {
+uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
+	uint32_t c = 0;
+	for (uint32_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-		for (uint64_t s2 = 1; s2 <= n; ++s2) {
+		for (uint32_t s2 = 1; s2 <= n; ++s2) {
 			if (s2 + d2 > n) { continue; }
 			if (common_endpoints(s1,d1, s2,d2)) { continue; }
 
@@ -99,11 +99,11 @@ uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
 	return c;
 }
 
-uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
-	uint64_t c = 0;
-	for (uint64_t s1 = 1; s1 <= n; ++s1) {
+uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
+	uint32_t c = 0;
+	for (uint32_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-		for (uint64_t s2 = 1; s2 <= n; ++s2) {
+		for (uint32_t s2 = 1; s2 <= n; ++s2) {
 			if (s2 + d2 > n) { continue; }
 			if (common_endpoints(s1,d1, s2,d2)) { continue; }
 
@@ -116,7 +116,7 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 
 rational E_2Cd_brute_force(ugraph& g, const LINARR& pi) {
 	rational Ec2(0);
-	const uint64_t n = g.n_nodes();
+	const uint32_t n = g.n_nodes();
 
 	iterators::Q_iterator q(g);
 	while (q.has_next()) {
@@ -129,11 +129,11 @@ rational E_2Cd_brute_force(ugraph& g, const LINARR& pi) {
 		const node u = uv.first;
 		const node v = uv.second;
 
-		uint64_t al;
-		uint64_t be;
+		uint32_t al;
+		uint32_t be;
 
-		uint64_t len_st = to_uint64(std::abs(to_int64(pi[s]) - to_int64(pi[t])));
-		uint64_t len_uv = to_uint64(std::abs(to_int64(pi[u]) - to_int64(pi[v])));
+		uint32_t len_st = to_uint32(std::abs(to_int32(pi[s]) - to_int32(pi[t])));
+		uint32_t len_uv = to_uint32(std::abs(to_int32(pi[u]) - to_int32(pi[v])));
 		assert(len_st <= n);
 		assert(len_uv <= n);
 
@@ -146,7 +146,7 @@ rational E_2Cd_brute_force(ugraph& g, const LINARR& pi) {
 			be = beta(n, len_uv, len_st);
 		}
 
-		Ec2 += rational(to_int64(al), be);
+		Ec2 += rational(to_int32(al), be);
 	}
 
 	return Ec2;
@@ -204,7 +204,7 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint64_t n = G.n_nodes();
+	const uint32_t n = G.n_nodes();
 	vector<node> T(n);
 	LINARR pi(n);
 

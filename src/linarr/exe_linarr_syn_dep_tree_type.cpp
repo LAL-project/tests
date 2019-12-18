@@ -119,7 +119,7 @@ err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint64_t n = tree.n_nodes();
+	const uint32_t n = tree.n_nodes();
 	vector<node> T(n);
 	LINARR pi(n);
 	node root;

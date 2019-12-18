@@ -83,7 +83,7 @@ err_type exe_numeric_rational_integer(ifstream& fin) {
 	}
 
 	/* Make the number to the left an integer: L1
-	 * -> (1) 'op' to it the number to the right as int64_t
+	 * -> (1) 'op' to it the number to the right as int32_t
 	 * -> (2) 'op' to it the number to the right as integer
 	 */
 
@@ -94,7 +94,7 @@ err_type exe_numeric_rational_integer(ifstream& fin) {
 	R2.init();
 
 	string l, op;
-	int64_t r;
+	int32_t r;
 	size_t line = 4;
 
 	// results
@@ -125,7 +125,7 @@ err_type exe_numeric_rational_integer(ifstream& fin) {
 		}
 		else if (op == "^") {
 			R2.set_si(r);
-			uint64_t temp = static_cast<uint64_t>(r);
+			uint32_t temp = static_cast<uint32_t>(r);
 			r1 = L1 ^ temp;
 			r2 = L1 ^ R2;
 		}
@@ -151,7 +151,7 @@ err_type exe_numeric_rational_integer(ifstream& fin) {
 		}
 		else if (op == "^^") {
 			R2.set_si(r);
-			uint64_t temp = static_cast<uint64_t>(r);
+			uint32_t temp = static_cast<uint32_t>(r);
 			r1 = L1; r1 ^= temp;
 			r2 = L1; r2 ^= R2;
 		}

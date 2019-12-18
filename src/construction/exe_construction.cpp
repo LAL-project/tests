@@ -374,7 +374,7 @@ static const vector<string> all_types(
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
 	if (g1.n_nodes() != g2.n_nodes()) { return false; }
-	const uint64_t n = g1.n_nodes();
+	const uint32_t n = g1.n_nodes();
 	for (uint32_t i = 0; i < n; ++i) {
 		const neighbourhood& n1 = g1.get_neighbours(i);
 		const neighbourhood& n2 = g2.get_neighbours(i);
@@ -390,7 +390,7 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 }
 
 inline vector<edge> enumerate_edges_brute_force(const graph& g) {
-	const uint64_t n = g.n_nodes();
+	const uint32_t n = g.n_nodes();
 	set<edge> E;
 	for (node s = 0; s < n; ++s) {
 	for (auto t : g.get_neighbours(s)) {
@@ -414,7 +414,7 @@ inline bool share_vertices(const edge_pair& st_uv) {
 }
 
 inline vector<edge_pair> enumerate_Q_brute_force(const graph& g) {
-	const uint64_t n = g.n_nodes();
+	const uint32_t n = g.n_nodes();
 	set<edge_pair> Q;
 	for (node s = 0; s < n; ++s) {
 	for (node t : g.get_neighbours(s)) {
@@ -768,7 +768,7 @@ err_type process_assert(
 			cerr << "    Assertion can only be applied to directed graphs." << endl;
 			return err_type::test_exe_error;
 		}
-		const uint64_t fdegree =
+		const uint32_t fdegree =
 			mfunction_dir_graphs(g1, in_degree(u)) +
 			mfunction_dir_graphs(g1, out_degree(u));
 		if (fdegree != v) {

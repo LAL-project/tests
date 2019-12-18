@@ -114,7 +114,7 @@ err_type exe_linarr_C_list(ifstream& fin) {
 	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
-	const uint64_t n = g.n_nodes();
+	const uint32_t n = g.n_nodes();
 
 	// amount of linear arrangements
 	uint32_t n_linarrs;
@@ -132,10 +132,10 @@ err_type exe_linarr_C_list(ifstream& fin) {
 		}
 	}
 
-	vector<uint64_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_crossings::brute_force);
+	vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_crossings::brute_force);
 
 	// compute all C
-	vector<uint64_t> Cs;
+	vector<uint32_t> Cs;
 	if (proc == "dyn_prog") {
 		begin = timing::now();
 		Cs = n_crossings_list(g, T, algorithms_crossings::dynamic_programming);

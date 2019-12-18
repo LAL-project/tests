@@ -83,11 +83,11 @@ void Q_size(const ugraph& g) {
 	integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
-	uint64_t dQ = size_Q(g);
+	uint32_t dQ = size_Q(g);
 	cout << "size of Q: " << dQ << endl;
 }
 
-void mmt_deg(const ugraph& g, uint64_t p) {
+void mmt_deg(const ugraph& g, uint32_t p) {
 	rational kp = mmt_degree_rational(g, p);
 	cout << "<k^" << p << ">= " << kp << endl;
 }
@@ -165,7 +165,7 @@ err_type exe_properties_general(ifstream& fin) {
 				Q_size(G);
 			}
 			else if (ins == "mmt_deg") {
-				uint64_t p;
+				uint32_t p;
 				ss >> p;
 				mmt_deg(G, p);
 			}

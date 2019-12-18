@@ -100,7 +100,7 @@ err_type exe_linarr_D(const string& what, ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint64_t n = G.n_nodes();
+	const uint32_t n = G.n_nodes();
 	vector<node> T(n);
 	LINARR pi(n);
 
@@ -124,7 +124,7 @@ err_type exe_linarr_D(const string& what, ifstream& fin) {
 
 		if (what == "D") {
 			// compute D
-			uint64_t D = linarr::sum_length_edges(G, pi);
+			uint32_t D = linarr::sum_length_edges(G, pi);
 			cout << D << endl;
 		}
 		else if (what == "MDD") {

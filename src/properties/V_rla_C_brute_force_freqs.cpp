@@ -199,9 +199,9 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	};
 
 	// values of the frequencies
-	uint64_t f021(0), f022(0),	f03(0);
-	uint64_t f04(0),	f12(0),		f13(0);
-	uint64_t f24(0);
+	uint32_t f021(0), f022(0),	f03(0);
+	uint32_t f04(0),	f12(0),		f13(0);
+	uint32_t f24(0);
 
 	const size_t frac = Q.size()/nthreads;
 
@@ -217,22 +217,22 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	else {
 		// values of each frequency per thread
 		/*
-		vector<uint64_t> _f021(nthreads, 0), _f022(nthreads, 0), _f03(nthreads, 0);
-		vector<uint64_t> _f04(nthreads, 0), _f12(nthreads, 0), _f13(nthreads, 0);
-		vector<uint64_t> _f24(nthreads, 0);
+		vector<uint32_t> _f021(nthreads, 0), _f022(nthreads, 0), _f03(nthreads, 0);
+		vector<uint32_t> _f04(nthreads, 0), _f12(nthreads, 0), _f13(nthreads, 0);
+		vector<uint32_t> _f24(nthreads, 0);
 		*/
 
-		uint64_t * __restrict__ all_memory = static_cast<uint64_t *>(
-			malloc(7*nthreads*sizeof(uint64_t))
+		uint32_t * __restrict__ all_memory = static_cast<uint32_t *>(
+			malloc(7*nthreads*sizeof(uint32_t))
 		);
-		memset(all_memory, 0, 7*nthreads*sizeof(uint64_t));
-		uint64_t * __restrict__ _f021 = &all_memory[0*nthreads];
-		uint64_t * __restrict__ _f022 = &all_memory[1*nthreads];
-		uint64_t * __restrict__ _f03  = &all_memory[2*nthreads];
-		uint64_t * __restrict__ _f04  = &all_memory[3*nthreads];
-		uint64_t * __restrict__ _f12  = &all_memory[4*nthreads];
-		uint64_t * __restrict__ _f13  = &all_memory[5*nthreads];
-		uint64_t * __restrict__ _f24  = &all_memory[6*nthreads];
+		memset(all_memory, 0, 7*nthreads*sizeof(uint32_t));
+		uint32_t * __restrict__ _f021 = &all_memory[0*nthreads];
+		uint32_t * __restrict__ _f022 = &all_memory[1*nthreads];
+		uint32_t * __restrict__ _f03  = &all_memory[2*nthreads];
+		uint32_t * __restrict__ _f04  = &all_memory[3*nthreads];
+		uint32_t * __restrict__ _f12  = &all_memory[4*nthreads];
+		uint32_t * __restrict__ _f13  = &all_memory[5*nthreads];
+		uint32_t * __restrict__ _f24  = &all_memory[6*nthreads];
 
 		#pragma omp parallel num_threads(nthreads)
 		{

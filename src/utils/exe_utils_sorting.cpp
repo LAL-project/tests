@@ -56,18 +56,18 @@ using namespace utils;
 
 // size, values in range [0,n)
 static inline
-vector<uint64_t> random_vector(uint64_t r, uint64_t n) {
+vector<uint32_t> random_vector(uint32_t r, uint32_t n) {
 	// always use the same seed
 	std::mt19937 gen(1234);
 
 	// available values in [0,n)
-	vector<uint64_t> av(n);
+	vector<uint32_t> av(n);
 	iota(av.begin(), av.end(), 0);
 
 	// random vector
-	vector<uint64_t> R(r);
+	vector<uint32_t> R(r);
 	for (size_t i = 0; i < R.size(); ++i) {
-		std::uniform_int_distribution<uint64_t> U(0, av.size() - 1);
+		std::uniform_int_distribution<size_t> U(0, av.size() - 1);
 		size_t index = U(gen);
 
 		R[i] = av[index];
@@ -82,16 +82,16 @@ vector<uint64_t> random_vector(uint64_t r, uint64_t n) {
 namespace exe_tests {
 
 err_type check_sorting(
-	const string& algo, uint64_t r, uint64_t n,
-	void (*sort_F)(vector<uint64_t>::iterator begin, vector<uint64_t>::iterator end)
+	const string& algo, uint32_t r, uint32_t n,
+	void (*sort_F)(vector<uint32_t>::iterator begin, vector<uint32_t>::iterator end)
 )
 {
-	vector<uint64_t> R = random_vector(r, n);
+	vector<uint32_t> R = random_vector(r, n);
 
-	vector<uint64_t> Rc1 = R;
+	vector<uint32_t> Rc1 = R;
 	std::sort(Rc1.begin(), Rc1.end());
 
-	vector<uint64_t> Rc2 = R;
+	vector<uint32_t> Rc2 = R;
 	sort_F(Rc2.begin(), Rc2.end());
 
 	if (Rc1 != Rc2) {
@@ -145,13 +145,13 @@ err_type exe_utils_sorting(ifstream& fin) {
 	string option;
 	while (fin >> option) {
 		if (option == "sort_insertion") {
-			uint64_t r, n;
+			uint32_t r, n;
 			fin >> r >> n;
 			err_type e = check_sorting("insertion", r, n, insertion_sort);
 			if (e == err_type::test_exe_error) { return e; }
 		}
 		else if (option == "sort_boolean") {
-			uint64_t r, n;
+			uint32_t r, n;
 			fin >> r >> n;
 			err_type e = check_sorting("boolean", r, n, sort_1_n_inc);
 			if (e == err_type::test_exe_error) { return e; }

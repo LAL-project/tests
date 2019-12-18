@@ -141,7 +141,7 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 		pis = vector<LINARR>(n_linarrs);
 
 		for (size_t i = 0; i < n_linarrs; ++i) {
-			const uint64_t Ni = Gs[i].n_nodes();
+			const uint32_t Ni = Gs[i].n_nodes();
 
 			Ts[i] = vector<node>(Ni);
 			pis[i] = LINARR(Ni);

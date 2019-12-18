@@ -101,7 +101,7 @@ err_type exe_linarr_headedness(ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint64_t n = G.n_nodes();
+	const uint32_t n = G.n_nodes();
 	vector<node> T(n);
 	LINARR pi(n);
 

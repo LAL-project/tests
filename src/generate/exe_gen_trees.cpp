@@ -66,7 +66,7 @@ using namespace numeric;
 /* DATA FOR TESTING */
 
 // expected second moment of degree over all labelled trees
-inline rational exp_mmt_deg_2_lab_trees(uint64_t n) {
+inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 	rational p1 = 1;
 	p1 -= rational(1,n);
 	rational p2 = 5;
@@ -75,7 +75,7 @@ inline rational exp_mmt_deg_2_lab_trees(uint64_t n) {
 }
 
 // number of caterpillar trees of a given size
-inline uint64_t num_caterpillar_trees(uint64_t n) {
+inline uint64_t num_caterpillar_trees(uint32_t n) {
 	if (n == 1) { return 1; }
 	if (n == 2) { return 1; }
 	if (n == 3) { return 1; }
@@ -93,12 +93,12 @@ inline uint64_t num_caterpillar_trees(uint64_t n) {
 
 inline bool is_caterpillar(const utree& t) {
 	// number of vertices
-	const uint64_t N = t.n_nodes();
+	const uint32_t N = t.n_nodes();
 
 	// number of internal vertices
-	uint64_t n_internal = 0;
+	uint32_t n_internal = 0;
 	// degree of the internal vertices
-	vector<uint64_t> deg_internal(N, 0);
+	vector<uint32_t> deg_internal(N, 0);
 	for (node u = 0; u < N; ++u) {
 		if (t.degree(u) > 1) {
 			deg_internal[u] = t.degree(u);
@@ -120,7 +120,7 @@ inline bool is_caterpillar(const utree& t) {
 	// part of a linear tree. Needless to say that these
 	// two vertices of degree 1 are the endpoints of the
 	// linear tree.
-	uint64_t n1 = 0;
+	uint32_t n1 = 0;
 	for (node u = 0; u < N; ++u) {
 		n1 += deg_internal[u] == 1;
 	}
@@ -209,7 +209,7 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	utree T;
 	string gen_type;
 
-	uint64_t num_vertices;
+	uint32_t num_vertices;
 	integer gen;
 
 	free_lab_trees				AllFreeLabTreeGen;
@@ -273,8 +273,7 @@ err_type exe_gen_trees(std::ifstream& fin) {
 				T = AllFreeUlabTreeGen.get_tree();
 
 				// compute 'statistics'
-				bool is_cat = is_caterpillar(T);
-				n_caterpillar += is_cat;
+				n_caterpillar += is_caterpillar(T);
 				gen += 1;
 			}
 

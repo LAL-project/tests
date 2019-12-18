@@ -83,7 +83,7 @@ err_type exe_numeric_integer(ifstream& fin) {
 	}
 
 	/* Make the number to the left an integer: L1
-	 * -> (1) 'op' to it the number to the right as int64_t
+	 * -> (1) 'op' to it the number to the right as int32_t
 	 * -> (2) 'op' to it the number to the right as integer
 	 *
 	 */
@@ -93,8 +93,8 @@ err_type exe_numeric_integer(ifstream& fin) {
 	L1.init();
 	R2.init();
 
-	int64_t l = 0;
-	uint64_t r = 0;
+	int32_t l = 0;
+	uint32_t r = 0;
 	string op;
 	size_t line = 4;
 
