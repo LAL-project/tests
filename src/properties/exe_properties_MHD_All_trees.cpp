@@ -48,7 +48,7 @@ using namespace std;
 // lal includes
 #include <lal/graphs/ugraph.hpp>
 #include <lal/graphs/urtree.hpp>
-#include <lal/generation/free_ulab_trees.hpp>
+#include <lal/generation/ulab_free_trees.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
@@ -92,7 +92,7 @@ err_type exe_properties_MHD_All_trees(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	free_ulab_trees TreeGen;
+	ulab_free_trees TreeGen;
 	while (fin >> n) {
 		cout << "----------------------------------------" << endl;
 		cout << "n= " << n << endl;

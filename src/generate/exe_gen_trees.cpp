@@ -45,11 +45,11 @@
 using namespace std;
 
 // lal includes
-#include <lal/generation/free_lab_trees.hpp>
-#include <lal/generation/free_ulab_trees.hpp>
-#include <lal/generation/rand_free_lab_trees.hpp>
-#include <lal/generation/rand_free_ulab_trees.hpp>
-#include <lal/generation/rand_rooted_lab_dir_trees.hpp>
+#include <lal/generation/lab_free_trees.hpp>
+#include <lal/generation/ulab_free_trees.hpp>
+#include <lal/generation/rand_lab_free_trees.hpp>
+#include <lal/generation/rand_ulab_free_trees.hpp>
+#include <lal/generation/rand_lab_dir_rooted_trees.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/output.hpp>
@@ -212,11 +212,11 @@ err_type exe_gen_trees(std::ifstream& fin) {
 	uint32_t num_vertices;
 	integer gen;
 
-	free_lab_trees				AllFreeLabTreeGen;
-	free_ulab_trees				AllFreeUlabTreeGen;
-	rand_free_lab_trees			RandFreeLabTreeGen;
-	rand_free_ulab_trees		RandFreeULabTreeGen;
-	rand_rooted_lab_dir_trees	RandRootedLabTreeGen;
+	lab_free_trees				AllFreeLabTreeGen;
+	ulab_free_trees				AllFreeUlabTreeGen;
+	rand_lab_free_trees			RandFreeLabTreeGen;
+	rand_ulab_free_trees		RandFreeULabTreeGen;
+	rand_lab_dir_rooted_trees	RandRootedLabTreeGen;
 
 	while (fin >> gen_type >> num_vertices) {
 		const integer n = integer_from_ui(num_vertices);
