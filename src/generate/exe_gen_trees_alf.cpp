@@ -79,45 +79,6 @@ namespace exe_tests {
 
 err_type exe_gen_trees_alf(std::ifstream& fin) {
 
-	/* BUILD TESTING DATA */
-
-	// from: http://oeis.org/A000055/list
-	// amount of unlabelled free trees
-	vector<integer> LFT(SIZE_LFT, 0);
-	LFT[0] = 0;
-	LFT[1] = 1;
-	LFT[2] = 1;
-	LFT[3] = 2;
-	LFT[4] = 4;
-	LFT[5] = 9;
-	LFT[6] = 20;
-	LFT[7] = 48;
-	LFT[8] = 115;
-	LFT[9] = 286;
-	LFT[10] = 719;
-	LFT[11] = 1842;
-	LFT[12] = 4766;
-	LFT[13] = 12486;
-	LFT[14] = 32973;
-	LFT[15] = 87811;
-	LFT[16] = 235381;
-	LFT[17] = 634847;
-	LFT[18] = 1721159;
-	LFT[19] = 4688676;
-	LFT[20] = 12826228;
-	LFT[21] = 35221832;
-	LFT[22] = 97055181;
-	LFT[23] = 268282855;
-	LFT[24] = 743724984;
-	LFT[25] = integer("2067174645");
-	LFT[26] = integer("5759636510");
-	LFT[27] = integer("16083734329");
-	LFT[28] = integer("45007066269");
-	LFT[29] = integer("126186554308");
-	LFT[30] = integer("354426847597");
-
-	// -------------------------------------------------------------------------
-
 	string field;
 	fin >> field;
 
@@ -186,7 +147,7 @@ err_type exe_gen_trees_alf(std::ifstream& fin) {
 		// Prüfer's formula: make sure that the generator made
 		// as many trees as n^(n - 2)
 		const integer total = (nn^(nn - 2));
-		if (gen != total or gen != LFT[n]) {
+		if (gen != total) {
 			cerr << ERROR << endl;
 			cerr << "    Exhaustive generation of free labelled trees" << endl;
 			cerr << "    Amount of trees should be: " << total << endl;
