@@ -125,7 +125,7 @@ function check_res_no_valgrind() {
 }
 
 # Execute all tests in an input directory.
-function exe_group() {
+function execute_group() {
 	input=$1
 	output=$2
 	progress=$3
@@ -354,61 +354,50 @@ fi
 ########################################################################
 # Execute the tests
 
-IN_DIRS=()
-OUT_DIRS=()
-# choose input and output directories
-if [ "$exe_group" == "all" ]; then
-	IN_DIRS=("${all_IN_DIRS[@]}")
-	OUT_DIRS=("${all_OUT_DIRS[@]}")
-elif [ "$exe_group" == "exp_var_C" ]; then
-	IN_DIRS=("${exp_var_C_IN_DIRS[@]}")
-	OUT_DIRS=("${exp_var_C_OUT_DIRS[@]}")
-elif [ "$exe_group" == "exp_var_D" ]; then
-	IN_DIRS=("${exp_var_D_IN_DIRS[@]}")
-	OUT_DIRS=("${exp_var_D_OUT_DIRS[@]}")
-elif [ "$exe_group" == "linarr" ]; then
-	IN_DIRS=("${linarr_IN_DIRS[@]}")
-	OUT_DIRS=("${linarr_OUT_DIRS[@]}")
-elif [ "$exe_group" == "linarr_C" ]; then
-	IN_DIRS=("${linarr_C_IN_DIRS[@]}")
-	OUT_DIRS=("${linarr_C_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate" ]; then
-	IN_DIRS=("${generate_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate_alf" ]; then
-	IN_DIRS=("${generate_alf_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_alf_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate_auf" ]; then
-	IN_DIRS=("${generate_auf_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_auf_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate_rlf" ]; then
-	IN_DIRS=("${generate_rlf_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_rlf_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate_rlr" ]; then
-	IN_DIRS=("${generate_rlr_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_rlr_OUT_DIRS[@]}")
-elif [ "$exe_group" == "generate_ruf" ]; then
-	IN_DIRS=("${generate_ruf_IN_DIRS[@]}")
-	OUT_DIRS=("${generate_ruf_OUT_DIRS[@]}")
-elif [ "$exe_group" == "utils" ]; then
-	IN_DIRS=("${utils_IN_DIRS[@]}")
-	OUT_DIRS=("${utils_OUT_DIRS[@]}")
-else
-	echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
-	exit
-fi
-
 if [ $exe_group != 0 ]; then
-	n_tests="${#IN_DIRS[@]}"
-	lim=$(($n_tests - 1))
-	for i in `seq 0 $lim`; do
+	
+	# test that 'exe_group' value is valid
+	array_has=0
+	case "${groups_list[@]}" in
+		# the '*' are important!
+		*"$exe_group"*)
+			array_has=1
+			;;
+	esac
+	if [ $array_has == 0 ]; then
+		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
+		exit
+	fi
+
+	# if the group is valid, then execute it
+	echo "Executing group '$exe_group'"
+	
+	# variable names
+	in_dir_name="$exe_group""_IN_DIRS[@]"
+	out_dir_name="$exe_group""_OUT_DIRS[@]"
+	# actual arrays
+	IN_DIRS=("${!in_dir_name}")
+	OUT_DIRS=("${!out_dir_name}")
+	# size of each array
+	in_n=${#IN_DIRS[@]}
+	out_n=${#OUT_DIRS[@]}
+	# test that the arrays are equally long
+	if [ $in_n != $out_n ]; then
+		echo -e "\e[1;4;31mError:\e[0m For execution group $exe_group"
+		echo -e "    The list of input directories is not as long as list of output directories"
+		echo -e "    # input directories : $in_n"
+		echo -e "    # output directories: $out_n"
+		exit
+	fi
+	# execute
+	for ((i=0; i<$in_n; ++i)); do
 		idx=$(($i + 1))
 		in="${IN_DIRS[$i]}"
 		out="${OUT_DIRS[$i]}"
-		exe_group $in $out $idx/$n_tests
+		execute_group $in $out $idx/$in_n
 	done
 else
-	exe_group $input_dir $output_dir "1/1"
+	execute_group $input_dir $output_dir "1/1"
 fi
 
 
