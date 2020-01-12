@@ -34,6 +34,11 @@ LIBS += -fopenmp
 
 SOURCES += \
     construction/exe_construction.cpp \
+    generate/exe_gen_trees_alf.cpp \
+    generate/exe_gen_trees_auf.cpp \
+    generate/exe_gen_trees_rlf.cpp \
+    generate/exe_gen_trees_rlr.cpp \
+    generate/exe_gen_trees_ruf.cpp \
     linarr/exe_linarr_C.cpp \
     linarr/exe_linarr_C_list.cpp \
     linarr/exe_linarr_D.cpp \
@@ -54,7 +59,6 @@ SOURCES += \
     properties/exe_properties_expvar_C.cpp \
     properties/exe_properties_expvar_D.cpp \
     time.cpp \
-    generate/exe_gen_trees.cpp \
     utils/exe_utils_sorting.cpp \
     utils/exe_utils_traversal.cpp
 

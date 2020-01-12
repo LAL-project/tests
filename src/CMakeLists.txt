@@ -78,7 +78,11 @@ endif()
 project(tests)
 add_executable(tests "\
 construction/exe_construction.cpp;\
-generate/exe_gen_trees.cpp;\
+generate/exe_gen_trees_alf.cpp;\
+generate/exe_gen_trees_auf.cpp;\
+generate/exe_gen_trees_rlf.cpp;\
+generate/exe_gen_trees_rlr.cpp;\
+generate/exe_gen_trees_ruf.cpp;\
 linarr/exe_linarr_approx_exp_C.cpp;\
 linarr/exe_linarr_C.cpp;\
 linarr/exe_linarr_C_list.cpp;\

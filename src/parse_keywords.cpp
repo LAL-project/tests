@@ -289,7 +289,33 @@ err_type call_generate
 {
 	const string& key = keywords[i];
 	if (key == "trees") {
-		return exe_gen_trees(fin);
+		return call_generate_trees(keywords, i + 1, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+err_type call_generate_trees
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "alf") {
+		return exe_gen_trees_alf(fin);
+	}
+	else if (key == "auf") {
+		return exe_gen_trees_auf(fin);
+	}
+	else if (key == "rlf") {
+		return exe_gen_trees_rlf(fin);
+	}
+	else if (key == "rlr") {
+		return exe_gen_trees_rlr(fin);
+	}
+	else if (key == "ruf") {
+		return exe_gen_trees_ruf(fin);
 	}
 
 	cerr << ERROR << endl;

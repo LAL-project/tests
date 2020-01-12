@@ -84,9 +84,11 @@ err_type call_linarr_klevel
 err_type call_linarr_D_related
 (const vector<string>& keywords, size_t i, ifstream& fin);
 
-	// Functions to test the tree generation functions and classes
+	// Functions to test the generation functions and classes
 
 err_type call_generate
+(const vector<string>& keywords, size_t i, ifstream& fin);
+err_type call_generate_trees
 (const vector<string>& keywords, size_t i, ifstream& fin);
 
 	// Functions to test the library's utilities

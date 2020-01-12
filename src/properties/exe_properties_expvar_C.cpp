@@ -52,7 +52,7 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/properties/Q.hpp>
-#include <lal/generation/ulab_free_trees.hpp>
+#include <lal/generation/all_ulab_free_trees.hpp>
 #include <lal/generation/rand_ulab_free_trees.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
@@ -106,7 +106,7 @@ void output_ExpVar_C_forests(const ugraph& g) {
 }
 
 bool check_ExpVar_C_all_trees(uint32_t n) {
-	ulab_free_trees TreeGen;
+	all_ulab_free_trees TreeGen;
 	TreeGen.init(n);
 
 	utree tree;
