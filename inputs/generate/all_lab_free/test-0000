@@ -1,11 +1,11 @@
-TYPE generate-trees
+TYPE generate-trees-alf
 INPUT 0
 BODY
-	exhaustive-labelled 2
-	exhaustive-labelled 3
-	exhaustive-labelled 4
-	exhaustive-labelled 5
-	exhaustive-labelled 6
-	exhaustive-labelled 7
-	exhaustive-labelled 8
-	exhaustive-labelled 9
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9

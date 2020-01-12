@@ -1,22 +1,22 @@
-TYPE generate-trees
+TYPE generate-trees-rlr
 INPUT 0
 BODY
-	random-rooted-labelled-trees 2
-	random-rooted-labelled-trees 3
-	random-rooted-labelled-trees 4
-	random-rooted-labelled-trees 5
-	random-rooted-labelled-trees 6
-	random-rooted-labelled-trees 7
-	random-rooted-labelled-trees 8
-	random-rooted-labelled-trees 9
-	random-rooted-labelled-trees 10
-	random-rooted-labelled-trees 11
-	random-rooted-labelled-trees 12
-	random-rooted-labelled-trees 13
-	random-rooted-labelled-trees 14
-	random-rooted-labelled-trees 15
-	random-rooted-labelled-trees 16
-	random-rooted-labelled-trees 17
-	random-rooted-labelled-trees 18
-	random-rooted-labelled-trees 19
-	random-rooted-labelled-trees 20
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	10
+	11
+	12
+	13
+	14
+	15
+	16
+	17
+	18
+	19
+	20
