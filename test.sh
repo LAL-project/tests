@@ -1,108 +1,70 @@
 #!/bin/bash
 
-# all tests available
-IN_DIRS=("numeric/integer" \
-		 "numeric/rational" \
-		 "construction" \
-		 "utils/sorting" \
-		 "utils/traversal" \
-		 "properties" \
-		 "properties/exp-var-C/formula-no-Q-reuse" \
-		 "properties/exp-var-C/formula-no-Q-no-reuse" \
-		 "properties/exp-var-C/formula-Q" \
-		 "properties/exp-var-C/trees" \
-		 "properties/exp-var-C/forests" \
-		 "properties/exp-var-D/general-formula" \
-		 "linarr/E_2Cd" \
-		 "linarr/headedness" \
-		 "linarr/MDD" \
-		 "linarr/D" \
-		 "linarr/C/dyn-prog" \
-		 "linarr/C/dyn-prog-list" \
-		 "linarr/C/ladder" \
-		 "linarr/C/ladder-list" \
-		 "linarr/C/stack-based" \
-		 "linarr/C/stack-based-list" \
-		 "linarr/k-level/1-MDD" \
-		 "linarr/k-level/2-MDD" \
-		 "generate" \
-		)
+########################################################################
+# Data
 
-OUT_DIRS=("numeric/integer" \
-		 "numeric/rational" \
-		 "construction" \
-		 "utils/sorting" \
-		 "utils/traversal" \
-		 "properties" \
-		 "properties/exp-var-C" \
-		 "properties/exp-var-C" \
-		 "properties/exp-var-C" \
-		 "properties/exp-var-C" \
-		 "properties/exp-var-C" \
-		 "properties/exp-var-D" \
-		 "linarr/E_2Cd" \
-		 "linarr/headedness" \
-		 "linarr/MDD" \
-		 "linarr/D" \
-		 "linarr/C" \
-		 "linarr/C" \
-		 "linarr/C" \
-		 "linarr/C" \
-		 "linarr/C" \
-		 "linarr/C" \
-		 "linarr/k-level/1-MDD" \
-		 "linarr/k-level/2-MDD" \
-		 "generate" \
-		 )
+source test_directories.sh
 
 ########################################################################
 # Functions
 
 function show_usage() {
-	echo "Welcome to the LAL tester"
-	echo ""
-	echo "This script has several options, some of them mandatory, some"
-	echo "others optional."
-	echo ""
-	echo "In order to see this message again run this script with:"
-	echo ""
-	echo "    [-h, --help]: show the usage"
-	echo ""
-	echo "Mandatory parameters:"
-	echo ""
-	echo "    --input=d : specify the input directory 'd' of tests to be performed."
-	echo "        This string is the path to the directory with all the"
-	echo "        input tests. It can not contain the last slash ('/')"
-	echo "        and can not start with 'inputs'."
-	echo ""
-	echo "    --output=d : specify the output directory 'd' that will be"
-	echo "        compared against the outputs of the inputs tests."
-	echo "        This string is the path to the directory with the"
-	echo "        output tests. It can not contain the last slash ('/')"
-	echo "        and can not start with 'outputs'."
-	echo ""
-	echo "Optional parameters:"
-	echo ""
-	echo "    --all : execute tests automatically. This option does not"
-	echo "        need '--input' and '--output'. If indicated they are"
-	echo "        ignored. The tests execute are all the tests implemented"
-	echo "        so far, except for those 'brute-force'"
-	echo ""
-	echo "    --valgrind : use the memory error detector on every input"
-	echo "        test. This option makes the test ignore the output"
-	echo "        produced and errors are only reported when valgrind"
-	echo "        does so. Therefore, when this option is given, there"
-	echo "        is no need to specify an output (--output)."
-	echo "        The release mode should not be indicated."
-	echo ""
-	echo "    --debug --release: use one of these two options to indicate"
-	echo "        what type of build you want to run the tests with."
-	echo ""
-	echo "        --debug : suitable for valgrind in order to detect memory leaks"
-	echo "        --release : suitable when testing lengthy computations."
-	echo ""
-	echo "        The default option is '--debug'"
-	echo ""
+	echo "Welcome to the LAL tester                                                      "
+	echo "                                                                               "
+	echo "This script has several options, some of them mandatory, some                  "
+	echo "others optional.                                                               "
+	echo "                                                                               "
+	echo "In order to see this message again run this script with:                       "
+	echo "                                                                               "
+	echo "    [-h, --help]: show the usage                                               "
+	echo "                                                                               "
+	echo "Mandatory parameters:                                                          "
+	echo "                                                                               "
+	echo "    --input=d : specify the input directory 'd' of tests to be performed.      "
+	echo "        This string is the path to the directory with all the                  "
+	echo "        input tests. It can not contain the last slash ('/')                   "
+	echo "        and can not start with 'inputs'.                                       "
+	echo "                                                                               "
+	echo "    --output=d : specify the output directory 'd' that will be                 "
+	echo "        compared against the outputs of the inputs tests.                      "
+	echo "        This string is the path to the directory with the                      "
+	echo "        output tests. It can not contain the last slash ('/')                  "
+	echo "        and can not start with 'outputs'.                                      "
+	echo "                                                                               "
+	echo "    --exe-group=t : execute a group of tests. Available groups are:            "
+	echo "        all          : execute all tests                                       "
+	echo "        exp_var_C    : execute tests for the expectation and variance of C     "
+	echo "        exp_var_D    : execute tests for the expectation and variance of D     "
+	echo "        linarr       : execute linear arrangement tests                        "
+	echo "        linarr_C     : execute linear arrangement (crossings) tests            "
+	echo "        generate     : execute generation tests                                "
+	echo "        generate_alf : execute generation (All Labelled Free) tests            "
+	echo "        generate_auf : execute generation (All Unlabelled Free) tests          "
+	echo "        generate_rlf : execute generation (Rand Labelled Free) tests           "
+	echo "        generate_rlr : execute generation (Rand Labelled Rooted) tests         "
+	echo "        generate_ruf : execute generation (Rand Unlabelled Free) tests         "
+	echo "        utils        : execute utils tests                                     "
+	echo "                                                                               "	
+	echo "Optional parameters:                                                           "
+	echo "                                                                               "
+	echo "    --all : execute tests automatically. This is equivalent to                 "
+	echo "        --exe-group=all                                                        "
+	echo "                                                                               "
+	echo "    --valgrind : use the memory error detector on every input                  "
+	echo "        test. This option makes the test ignore the output                     "
+	echo "        produced and errors are only reported when valgrind                    "
+	echo "        does so. Therefore, when this option is given, there                   "
+	echo "        is no need to specify an output (--output).                            "
+	echo "        The release mode should not be indicated.                              "
+	echo "                                                                               "
+	echo "    --debug --release: use one of these two options to indicate                "
+	echo "        what type of build you want to run the tests with.                     "
+	echo "                                                                               "
+	echo "        --debug : suitable for valgrind in order to detect memory leaks        "
+	echo "        --release : suitable when testing lengthy computations.                "
+	echo "                                                                               "
+	echo "        The default option is '--debug'                                        "
+	echo "                                                                               "
 }
 
 # Check the result of the tester when valgrind is used.
@@ -257,8 +219,8 @@ use_valgrind=0
 # release or debug?
 debug=0
 release=0
-# execute all tests
-exe_all=0
+# execute tests of a certain type
+exe_group=0
 
 for i in "$@"; do
 	case $i in
@@ -275,6 +237,11 @@ for i in "$@"; do
 		
 		--output=*)
 		output_dir="${i#*=}"
+		shift
+		;;
+		
+		--exe-group=*)
+		exe_group="${i#*=}"
 		shift
 		;;
 		
@@ -296,7 +263,7 @@ for i in "$@"; do
 		;;
 		
 		--all)
-		exe_all=1
+		exe_group="all"
 		shift
 		;;
 		
@@ -315,12 +282,13 @@ fi
 ########################################################################
 # Parameter errors
 
-if [ $exe_all = 0 ] && [ -z $input_dir ]; then
+if [ $exe_group == 0 ] && [ -z $input_dir ]; then
 	echo -e "\e[1;4;31mError:\e[0m No input directory specified."
 	exit
 fi
-if [ $use_valgrind == 0 ]; then
-	if [ $exe_all = 0 ] && [ -z $output_dir ]; then
+if [ $exe_group == 0 ] && [ -z $output_dir ]; then
+	# we only care about output files if valgrind is not used
+	if [ $use_valgrind == 0 ]; then
 		echo -e "\e[1;4;31mError:\e[0m No output directory specified."
 		exit
 	fi
@@ -335,14 +303,12 @@ fi
 ########################################################################
 # Execution mode (debug/release)
 
-EXE_MODE=""
+# use debug by default
+EXE_MODE="debug"
 if [ $debug == 1 ]; then
 	EXE_MODE="debug"
 elif [ $release == 1 ]; then
 	EXE_MODE="release"
-else
-	# use debug by default
-	EXE_MODE="debug"
 fi
 
 ########################################################################
@@ -388,7 +354,51 @@ fi
 ########################################################################
 # Execute the tests
 
-if [ $exe_all == 1 ]; then
+IN_DIRS=()
+OUT_DIRS=()
+# choose input and output directories
+if [ "$exe_group" == "all" ]; then
+	IN_DIRS=("${all_IN_DIRS[@]}")
+	OUT_DIRS=("${all_OUT_DIRS[@]}")
+elif [ "$exe_group" == "exp_var_C" ]; then
+	IN_DIRS=("${exp_var_C_IN_DIRS[@]}")
+	OUT_DIRS=("${exp_var_C_OUT_DIRS[@]}")
+elif [ "$exe_group" == "exp_var_D" ]; then
+	IN_DIRS=("${exp_var_D_IN_DIRS[@]}")
+	OUT_DIRS=("${exp_var_D_OUT_DIRS[@]}")
+elif [ "$exe_group" == "linarr" ]; then
+	IN_DIRS=("${linarr_IN_DIRS[@]}")
+	OUT_DIRS=("${linarr_OUT_DIRS[@]}")
+elif [ "$exe_group" == "linarr_C" ]; then
+	IN_DIRS=("${linarr_C_IN_DIRS[@]}")
+	OUT_DIRS=("${linarr_C_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate" ]; then
+	IN_DIRS=("${generate_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate_alf" ]; then
+	IN_DIRS=("${generate_alf_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_alf_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate_auf" ]; then
+	IN_DIRS=("${generate_auf_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_auf_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate_rlf" ]; then
+	IN_DIRS=("${generate_rlf_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_rlf_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate_rlr" ]; then
+	IN_DIRS=("${generate_rlr_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_rlr_OUT_DIRS[@]}")
+elif [ "$exe_group" == "generate_ruf" ]; then
+	IN_DIRS=("${generate_ruf_IN_DIRS[@]}")
+	OUT_DIRS=("${generate_ruf_OUT_DIRS[@]}")
+elif [ "$exe_group" == "utils" ]; then
+	IN_DIRS=("${utils_IN_DIRS[@]}")
+	OUT_DIRS=("${utils_OUT_DIRS[@]}")
+else
+	echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
+	exit
+fi
+
+if [ $exe_group != 0 ]; then
 	n_tests="${#IN_DIRS[@]}"
 	lim=$(($n_tests - 1))
 	for i in `seq 0 $lim`; do
