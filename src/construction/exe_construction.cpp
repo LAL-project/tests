@@ -59,7 +59,7 @@ using namespace std;
 #include <lal/graphs/urtree.hpp>
 #include <lal/graphs/drtree.hpp>
 #include <lal/properties/Q.hpp>
-#include <lal/iterators/edge_iterator.hpp>
+#include <lal/iterators/E_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
 #include <lal/io/basic_output.hpp>
@@ -1149,14 +1149,14 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_CHECK_EDGE_IT, g1)
 			vector<edge> iter_edges;
 			if (graph_type(g1) == DGRAPH) {
-				edge_iterator it(dgraphvars[g1]);
+				E_iterator it(dgraphvars[g1]);
 				while (it.has_next()) {
 					it.next();
 					iter_edges.push_back(it.get_edge());
 				}
 			}
 			else {
-				edge_iterator it(ugraphvars[g1]);
+				E_iterator it(ugraphvars[g1]);
 				while (it.has_next()) {
 					it.next();
 					iter_edges.push_back(it.get_edge());
