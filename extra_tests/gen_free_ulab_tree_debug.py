@@ -6,6 +6,9 @@ import networkx as nx
 import sys
 import time
 
+import sys
+sys.path.append("/home/lluis/Documents/projects/linear-arrangement-library/python-interface/linux/64")
+
 import lal as lal
 
 ########################################################################
@@ -16,10 +19,6 @@ def lal_to_nx(lal_g):
 	nx_g = nx.Graph()
 	nx_g.add_edges_from(list(lal_g.edges()))
 	return nx_g
-
-# build the degree sequence of a networkx's graph 't'
-def get_degree_seq(g):
-	return [g.degree(u) for u in range(0,g.number_of_nodes())]
 
 # is a LAL's tree a caterpillar tree?
 def is_caterpillar(t):
@@ -49,9 +48,9 @@ def is_caterpillar(t):
 		n1 += (deg_internal[u] == 1)
 	return n1 == 2 or n1 == 0
 
-def binsearch_first(v, x):
-	l = 0
-	r = len(v) - 1
+def binsearch_first(__l, __r, v, x):
+	l = __l
+	r = __r
 	
 	while l < r and abs(l - r) > 1:
 		m = int((l + r)/2)
@@ -70,9 +69,9 @@ def binsearch_first(v, x):
 	if v[r] == x: return r
 	return -1
 
-def binsearch_last(v, x):
-	l = 0
-	r = len(v) - 1
+def binsearch_last(__l, __r, v, x):
+	l = __l
+	r = __r
 	
 	while l < r and abs(l - r) > 1:
 		m = int((l + r)/2)
@@ -97,8 +96,9 @@ the equivalence class (under graph isomorphism) of a given graph.
 
 Attributes:
 * _n: number of vertices
-* _deg_seqs: degree sequences of representative graphs
-* _iso_graphs: representative graphs of their equivalence class
+* _mmt_deg2s: second moment of degree of each graph
+* _var_Cs: variance of C (rla) of each graph
+* _iso_graphs: representative graph of their equivalence class
 * _n_classes: number of equivalence classes
 """
 class equivalence_classes_iso_graphs:
@@ -113,16 +113,17 @@ class equivalence_classes_iso_graphs:
 			tree = TreeGen.get_tree()
 			
 			g = lal_to_nx(tree)
-			deg_seq = get_degree_seq(g)
-			deg_seq = sorted(deg_seq)
+			mmt_deg = lal.properties.mmt_degree_rational(tree, 2)
+			var_C_rla = lal.properties.variance_C_tree_rational(tree)
 			
-			_iso_graphs.append((deg_seq, g))
+			_iso_graphs.append((mmt_deg, var_C_rla, g))
 		
 		# sort trees by degree sequence
-		_iso_graphs = sorted(_iso_graphs, key=lambda k: k[0])
+		_iso_graphs = sorted(_iso_graphs, key=lambda k: (k[0], k[1]))
 		
-		self._deg_seqs = list(map(lambda k: k[0], _iso_graphs))
-		self._iso_graphs = list(map(lambda k: k[1], _iso_graphs))
+		self._mmt_deg2s = list(map(lambda k: k[0], _iso_graphs))
+		self._var_Cs = list(map(lambda k: k[1], _iso_graphs))
+		self._iso_graphs = list(map(lambda k: k[2], _iso_graphs))
 	
 	"""
 	Initialises the class.
@@ -145,37 +146,59 @@ class equivalence_classes_iso_graphs:
 	Returns a positive index of the equivalence class of tree 't'.
 	Returns -1 if the class was not found.
 	"""
-	def find_class(self, t):
-		deg_sq = self._deg_seqs
+	def find_class(self, lal_t, nx_t):
+		mmt_deg2s = self._mmt_deg2s
+		var_Cs = self._var_Cs
 		iso_gs = self._iso_graphs
 		k = self._n_classes
 		
-		t_deg_seq = sorted(get_degree_seq(t))
+		t_mmt_deg2 = lal.properties.mmt_degree_rational(lal_t, 2)
 		
-		# Fewer trees + each tree has a unique degree sequence
+		# Each tree has a unique degree sequence ==>
+		# has a unique second moment of degree
 		if k <= 5:
 			for i in range(0, k):
-				if deg_sq[i] == t_deg_seq:
+				if mmt_deg2s[i] == t_mmt_deg2:
 					return i
 			return -1
 		
-		# Too many graphs: use binary search. Delimit the interval
-		# of graphs against which actual isomorphism test is required
-		first = binsearch_first(deg_sq, t_deg_seq)
-		last  = binsearch_last(deg_sq, t_deg_seq)
-		if first == last:
+		t_var_C = lal.properties.variance_C_tree_rational(lal_t)
+		
+		# Each tree has a unique value of the variance of C (rla)
+		if k <= 8:
+			for i in range(0, k):
+				if var_Cs[i] == t_var_C:
+					return i
+			return -1
+		
+		# Too many graphs
+		
+		# Use binary search on the list of second moment of degree values
+		# to delimit the interval of graphs against which actual
+		# isomorphism test is required
+		first_mmt = binsearch_first(0, k-1, mmt_deg2s, t_mmt_deg2)
+		last_mmt  = binsearch_last(0, k-1, mmt_deg2s, t_mmt_deg2)
+		
+		# Use binary search on the list of variance of C values to
+		# delimit the interval of graphs against which actual
+		# isomorphism test is required
+		first_var = binsearch_first(first_mmt, last_mmt, var_Cs, t_var_C)
+		last_var  = binsearch_last(first_mmt, last_mmt, var_Cs, t_var_C)
+		
+		if first_var == last_var:
 			# we have found the class
-			return first
+			return first_var
+		
 		# iterate through all candidates
-		for i in range(first, last+1):
-			if nx.is_isomorphic(t, iso_gs[i]):
+		for i in range(first_var, last_var+1):
+			if nx.is_isomorphic(nx_t, iso_gs[i]):
 				return i
 		# we could not find the equivalence class of tree 't'
 		return -1
 		
 		"""
 		for i in range(0, k):
-			if nx.is_isomorphic(t, iso_gs[i]):
+			if nx.is_isomorphic(nx_t, iso_gs[i]):
 				return i
 		return -1
 		"""
@@ -184,7 +207,7 @@ class equivalence_classes_iso_graphs:
 		return self._n_classes
 
 def debug_n_verts(n):
-	N = 100000
+	N = 1000000
 	
 	EQUIV = equivalence_classes_iso_graphs(n)
 	
@@ -220,10 +243,10 @@ def debug_n_verts(n):
 		lal_t = TreeGen.make_rand_tree()
 		
 		# find equivalence class
-		i = EQUIV.find_class(lal_to_nx(lal_t))
+		i = EQUIV.find_class(lal_t, lal_to_nx(lal_t))
 		if i == -1:
 			print("Error: could not find class for tree:")
-			print(t)
+			print(lal_t)
 			exit(1)
 		
 		# is this tree a caterpillar tree?
@@ -240,7 +263,8 @@ def debug_n_verts(n):
 	print("Number of equivalence classes:", n_non_iso)
 	num_caterpillar = pow(2,n-4) + pow(2, int((n-4)/2))
 	print("NUmber of caterpillar trees of", n, "vertices:", num_caterpillar)
-	r = lal.numeric.rational(num_caterpillar, n_non_iso)
+	r = lal.numeric.rational(0)
+	r.init_ui(num_caterpillar, n_non_iso)
 	print("Caterpillar trees:")
 	print("    Theoretical proportion=", r, "~ %.8f" % (num_caterpillar/n_non_iso))
 	print("    generated", n_caterpillar, "caterpillar trees ~ %.8f" % (n_caterpillar/N))
