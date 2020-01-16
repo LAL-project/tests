@@ -8,6 +8,7 @@ import time
 
 import sys
 sys.path.append("/home/lluis/Documents/projects/linear-arrangement-library/python-interface/linux/64")
+#sys.path.append("/home/usuaris/lalemany/installations/lib/python3.6")
 
 import lal as lal
 
@@ -207,36 +208,31 @@ class equivalence_classes_iso_graphs:
 		return self._n_classes
 
 def debug_n_verts(n):
-	N = 1000000
+	N = 1000
 	
 	EQUIV = equivalence_classes_iso_graphs(n)
 	
-	n_non_iso = EQUIV.n_classes()
-	print("Amount of non-isomorphic graphs:", n_non_iso)
+	n_classes = EQUIV.n_classes()
+	print("Amount of non-isomorphic graphs:", n_classes)
 	
 	# amount of trees generated for each equivalence class
-	count = [0 for _ in range(0, n_non_iso)]
+	count = [0 for _ in range(0, n_classes)]
 	# amount of caterpillar trees generated
 	n_caterpillar = 0
 	
 	# "iteration" execution time
 	start_it = time.time()
 	cumul_time = 0
-	first_time = True
 	# full execution time
 	begin = time.time()
 	
 	# generate trees
 	TreeGen = lal.generation.rand_ulab_free_trees(n)
 	for k in range(0,N):
-		if k%500 == 0:
+		if k > 0 and k%500 == 0:
 			now = time.time()
-			if first_time:
-				print("%d/%d" % (k, N))
-				first_time = False
-			else:
-				cumul_time += now - start_it
-				print("%d/%d" % (k, N), "-> it: %.4f s, cumul: %.4f s" % (now - start_it, cumul_time))
+			cumul_time += now - start_it
+			print("%d/%d" % (k, N), "-> it: %.4f s, cumul: %.4f s" % (now - start_it, cumul_time))
 			start_it = now
 		
 		# generate tree
@@ -255,18 +251,29 @@ def debug_n_verts(n):
 		# keep track of the count
 		count[i] += 1
 	
+	# print last iteration
+	now = time.time()
+	cumul_time += now - start_it
+	print("%d/%d" % (N, N), "-> it: %.4f s, cumul: %.4f s" % (now - start_it, cumul_time))
+	start_it = now
+
 	end = time.time()
 	
-	print("# trees per equivalence class:", list(map(lambda x: x/N, count)))
+	prop_count = list(map(lambda x: x/N, count))
+	print("# trees per equivalence class:")
+	print("    c(%.8f" % prop_count[0], end='')
+	for d in range(1,n_classes):
+		print(", %.8f" % prop_count[d], end='')
+	print(")")
 	print("--------------------------------------------------------")
 	print("Number of replicas:", N)
-	print("Number of equivalence classes:", n_non_iso)
+	print("Number of equivalence classes:", n_classes)
 	num_caterpillar = pow(2,n-4) + pow(2, int((n-4)/2))
 	print("NUmber of caterpillar trees of", n, "vertices:", num_caterpillar)
 	r = lal.numeric.rational(0)
-	r.init_ui(num_caterpillar, n_non_iso)
+	r.init_ui(num_caterpillar, n_classes)
 	print("Caterpillar trees:")
-	print("    Theoretical proportion=", r, "~ %.8f" % (num_caterpillar/n_non_iso))
+	print("    Theoretical proportion=", r, "~ %.8f" % (num_caterpillar/n_classes))
 	print("    generated", n_caterpillar, "caterpillar trees ~ %.8f" % (n_caterpillar/N))
 	print("Calculated in %.4f s" % (end - begin))
 
