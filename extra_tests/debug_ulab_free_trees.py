@@ -208,7 +208,7 @@ class equivalence_classes_iso_graphs:
 		return self._n_classes
 
 def debug_n_verts(n):
-	N = 1000
+	N = 1000000
 	
 	EQUIV = equivalence_classes_iso_graphs(n)
 	
