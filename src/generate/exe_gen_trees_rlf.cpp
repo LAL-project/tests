@@ -3,7 +3,7 @@
  *  Tests of the Linear Arrangement Library - Programs used to test the
  *  algorithms in the linear arrangement library.
  *
- *  Copyright (C) 2019
+ *  Copyright (C) 2019-2020
  *
  *  This file is part of Tests of the Linear Arrangement Library.
  *
@@ -90,7 +90,7 @@ err_type exe_gen_trees_rlf(std::ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	/* do the tests */
+	// --- do the tests
 
 	uint32_t n;
 	rand_lab_free_trees TreeGen;

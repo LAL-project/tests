@@ -3,7 +3,7 @@
  *  Tests of the Linear Arrangement Library - Programs used to test the
  *  algorithms in the linear arrangement library.
  *
- *  Copyright (C) 2019
+ *  Copyright (C) 2019-2020
  *
  *  This file is part of Tests of the Linear Arrangement Library.
  *
@@ -307,6 +307,9 @@ err_type call_generate_trees
 	}
 	else if (key == "auf") {
 		return exe_gen_trees_auf(fin);
+	}
+	else if (key == "aur") {
+		return exe_gen_trees_aur(fin);
 	}
 	else if (key == "rlf") {
 		return exe_gen_trees_rlf(fin);

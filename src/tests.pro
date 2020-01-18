@@ -36,6 +36,7 @@ SOURCES += \
     construction/exe_construction.cpp \
     generate/exe_gen_trees_alf.cpp \
     generate/exe_gen_trees_auf.cpp \
+    generate/exe_gen_trees_aur.cpp \
     generate/exe_gen_trees_rlf.cpp \
     generate/exe_gen_trees_rlr.cpp \
     generate/exe_gen_trees_ruf.cpp \

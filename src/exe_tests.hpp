@@ -3,7 +3,7 @@
  *  Tests of the Linear Arrangement Library - Programs used to test the
  *  algorithms in the linear arrangement library.
  *
- *  Copyright (C) 2019
+ *  Copyright (C) 2019-2020
  *
  *  This file is part of Tests of the Linear Arrangement Library.
  *
@@ -82,6 +82,7 @@ err_type exe_linarr_klevel
 
 err_type exe_gen_trees_alf(ifstream& fin);
 err_type exe_gen_trees_auf(ifstream& fin);
+err_type exe_gen_trees_aur(ifstream& fin);
 err_type exe_gen_trees_rlf(ifstream& fin);
 err_type exe_gen_trees_rlr(ifstream& fin);
 err_type exe_gen_trees_ruf(ifstream& fin);

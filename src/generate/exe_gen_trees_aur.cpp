@@ -39,28 +39,76 @@
  *
  ********************************************************************/
 
+// C includes
+#include <assert.h>
+
 // C++ includes
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 // lal includes
-#include <lal/generation/rand_lab_rooted_trees.hpp>
+#include <lal/generation/all_ulab_rooted_trees.hpp>
+#include <lal/numeric/integer.hpp>
+#include <lal/numeric/output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
+using namespace numeric;
 
 // custom includes
 #include "../definitions.hpp"
 
 /*
- * RANDOM LABELLED ROOTED TREES
+ * ALL UNLABELLED ROOTED TREES
  *
  */
 
 namespace exe_tests {
 
-err_type exe_gen_trees_rlr(std::ifstream& fin) {
+err_type exe_gen_trees_aur(std::ifstream& fin) {
+
+	/* BUILD TESTING DATA */
+
+	// size of the vector with the number of unlabelled rooted trees
+	const uint32_t SIZE_URT = 31;
+
+	// from: http://oeis.org/A000055/list
+	// amount of unlabelled free trees
+	vector<integer> URT(SIZE_URT, 0);
+	URT[0] = 0;
+	URT[1] = 1;
+	URT[2] = 1;
+	URT[3] = 2;
+	URT[4] = 4;
+	URT[5] = 9;
+	URT[6] = 20;
+	URT[7] = 48;
+	URT[8] = 115;
+	URT[9] = 286;
+	URT[10] = 719;
+	URT[11] = 1842;
+	URT[12] = 4766;
+	URT[13] = 12486;
+	URT[14] = 32973;
+	URT[15] = 87811;
+	URT[16] = 235381;
+	URT[17] = 634847;
+	URT[18] = 1721159;
+	URT[19] = 4688676;
+	URT[20] = 12826228;
+	URT[21] = 35221832;
+	URT[22] = 97055181;
+	URT[23] = 268282855;
+	URT[24] = 743724984;
+	URT[25] = integer("2067174645");
+	URT[26] = integer("5759636510");
+	URT[27] = integer("16083734329");
+	URT[28] = integer("45007066269");
+	URT[29] = integer("126186554308");
+	URT[30] = integer("354426847597");
+
+	// -------------------------------------------------------------------------
 
 	string field;
 	fin >> field;
@@ -93,14 +141,34 @@ err_type exe_gen_trees_rlr(std::ifstream& fin) {
 	// --- do the tests
 
 	uint32_t n;
+	integer gen;
 
-	rand_lab_rooted_trees TreeGen;
-	urtree T;
+	all_ulab_rooted_trees TreeGen;
+	urtree rT;
 
 	while (fin >> n) {
-		TreeGen.init(n, 100);
-		for (int i = 0; i < 10000; ++i) {
-			T = TreeGen.make_rand_tree();
+		// number of generated trees
+		gen = 0;
+
+		// generate all trees
+		TreeGen.init(n);
+		while (TreeGen.has_next()) {
+			TreeGen.next();
+			rT = TreeGen.get_tree();
+
+			// compute 'statistics'
+			gen += 1;
+		}
+
+		// make sure that the amount of trees generate coincides
+		// with the series from the OEIS
+		if (n < SIZE_URT and gen != URT[n]) {
+			cerr << ERROR << endl;
+			cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;
+			cerr << "    Amount of trees should be: " << URT[n] << endl;
+			cerr << "    But generated: " << gen << endl;
+			cerr << "    For a size of " << n << " vertices" << endl;
+			return err_type::test_exe_error;
 		}
 	}
 

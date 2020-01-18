@@ -3,7 +3,7 @@
  *  Tests of the Linear Arrangement Library - Programs used to test the
  *  algorithms in the linear arrangement library.
  *
- *  Copyright (C) 2019
+ *  Copyright (C) 2019-2020
  *
  *  This file is part of Tests of the Linear Arrangement Library.
  *
@@ -63,7 +63,7 @@ using namespace numeric;
  */
 
 // number of caterpillar trees of a given size
-inline uint64_t num_caterpillar_trees(uint32_t n) {
+inline integer num_caterpillar_trees(uint32_t n) {
 	if (n == 1) { return 1; }
 	if (n == 2) { return 1; }
 	if (n == 3) { return 1; }
@@ -73,7 +73,7 @@ inline uint64_t num_caterpillar_trees(uint32_t n) {
 	integer n2 = 2;
 	n2 ^= ((n - 4)/2);
 	n1 += n2;
-	return n1.to_uint();
+	return n1;
 }
 
 inline bool is_caterpillar(const utree& t) {
@@ -112,12 +112,12 @@ inline bool is_caterpillar(const utree& t) {
 	return n1 == 2 or n1 == 0;
 }
 
-// size of the vector with the number of unlabelled free trees
-#define SIZE_UFT 37
-
 namespace exe_tests {
 
 err_type exe_gen_trees_auf(std::ifstream& fin) {
+
+	// size of the vector with the number of unlabelled free trees
+	const uint32_t SIZE_UFT = 37;
 
 	/* BUILD TESTING DATA */
 
@@ -192,18 +192,20 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	/* do the tests */
+	// --- do the tests
 
 	uint32_t n;
+
+	// number of caterpillar trees
+	integer n_caterpillar;
+	// number of generated trees
 	integer gen;
 
 	all_ulab_free_trees TreeGen;
 	utree T;
 
 	while (fin >> n) {
-		// number of caterpillar trees
-		uint64_t n_caterpillar = 0;
-		// number of generated trees
+		n_caterpillar = 0;
 		gen = 0;
 
 		// generate all trees
@@ -218,7 +220,7 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 		}
 
 		// check the number of caterpillar trees is correct
-		const uint64_t n_cat = num_caterpillar_trees(n);
+		const integer n_cat = num_caterpillar_trees(n);
 		if (n_cat != n_caterpillar) {
 			cerr << ERROR << endl;
 			cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;
@@ -232,7 +234,7 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 		// with the series from the OEIS
 		if (n < SIZE_UFT and gen != UFT[n]) {
 			cerr << ERROR << endl;
-			cerr << "    Exhaustive generation of free unlabelled trees" << endl;
+			cerr << "    Exhaustive generation of unlabelled free trees" << endl;
 			cerr << "    Amount of trees should be: " << UFT[n] << endl;
 			cerr << "    But generated: " << gen << endl;
 			cerr << "    For a size of " << n << " vertices" << endl;
