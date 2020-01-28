@@ -3,6 +3,7 @@
 # all groups
 groups_list=(\
 	"all" \
+	"numeric" \
 	"exp_var_C" \
 	"exp_var_D" \
 	"linarr" \
@@ -80,6 +81,16 @@ all_OUT_DIRS=(\
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	)
+
+# numeric tests
+numeric_IN_DIRS=(\
+	"numeric/integer" \
+	"numeric/rational" \
+	)
+numeric_OUT_DIRS=(\
+	"numeric/integer" \
+	"numeric/rational" \
 	)
 
 # variance C tests
