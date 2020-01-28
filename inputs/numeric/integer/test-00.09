@@ -1,0 +1,66 @@
+TYPE numeric-integer
+INPUT 0
+BODY
+	let k1 integer int 0
+	let k2 integer int -13
+	let k3 integer int 2
+	let k4 integer int 1234
+	
+	let k5 integer string -5678
+	let k6 integer string 90
+	let k7 integer string 0
+	let k8 integer string 1234
+	
+	compare_lit k1 == 0
+	compare_lit k2 == -13
+	compare_lit k3 == 2
+	compare_lit k4 == 1234
+	compare_lit k5 == -5678
+	compare_lit k6 == 90
+	compare_lit k7 == 0
+	compare_lit k8 == 1234
+	
+	compare_lit k1 != 5
+	compare_lit k2 != 5
+	compare_lit k3 != 5
+	compare_lit k4 != 5
+	compare_lit k5 != 5
+	compare_lit k6 != 5
+	compare_lit k7 != 5
+	compare_lit k8 != 5
+	
+	compare_lit k1 <= 0
+	compare_lit k2 <= -13
+	compare_lit k3 <= 2
+	compare_lit k4 <= 1234
+	compare_lit k5 <= -5678
+	compare_lit k6 <= 90
+	compare_lit k7 <= 0
+	compare_lit k8 <= 1234
+	
+	compare_lit k1 <  1
+	compare_lit k2 <  -12
+	compare_lit k3 <  3
+	compare_lit k4 <  1235
+	compare_lit k5 <  -5677
+	compare_lit k6 <  91
+	compare_lit k7 <  1
+	compare_lit k8 <  1235
+	
+	compare_lit k1 >= 0
+	compare_lit k2 >= -13
+	compare_lit k3 >= 2
+	compare_lit k4 >= 1234
+	compare_lit k5 >= -5678
+	compare_lit k6 >= 90
+	compare_lit k7 >= 0
+	compare_lit k8 >= 1234
+	
+	compare_lit k1 >  -1
+	compare_lit k2 >  -14
+	compare_lit k3 >  1
+	compare_lit k4 >  1233
+	compare_lit k5 >  -5679
+	compare_lit k6 >  89
+	compare_lit k7 >  -1
+	compare_lit k8 >  1233

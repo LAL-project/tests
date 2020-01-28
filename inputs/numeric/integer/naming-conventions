@@ -1,0 +1,35 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+	test-
+
+Then follows the "family number" of the test. This is a two-digit number.
+Finally, a two-digit number indicating the test number within the family.
+Therefore
+
+         Test number
+
+             |
+            --
+	test-xx.yy
+	     --
+	      |
+
+	  Family test
+        number
+
+
+Family test numbers
+-------------------
+
+We are currently using the following names:
+
+	00: comparison of integers and literals
+	01: addition of integers and literals
+	02: substraction of integers and literals
+	03: multiplication of integers and literals
+	04: division of integers and literals
+	05: exponentiation of integers and literals

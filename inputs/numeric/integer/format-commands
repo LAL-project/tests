@@ -1,0 +1,48 @@
+
+COMMANDS AVAILABLE
+==================
+
+** let VAR_NAME VAR_TYPE VALUE_FORMAT VALUE
+	Creates a variable with name VAR_NAME of type VAR_TYPE with value VALUE which has format VALUE_FORMAT.
+	VAR_TYPE : {integer, int}
+	VALUE_FORMAT : {int, string}
+
+** assign VAR VALUE
+	Assigns value VALUE to variable VAR.
+	VAR must exist.
+
+** print VAR
+	Prints the value of variable VAR.
+	VAR must exist.
+
+** compare VAR1 OP VAR2
+	Compares two variables VAR1 and VAR2 using comparison operator OP, where
+	OP : {==, !=, <=, <, >=, >}
+	The variables' types must be one of the following combinations
+		int int
+		integer int
+		integer integer
+
+** compare_lit VAR1 OP VALUE
+	Compares two variables VAR1 and literal value VALUE, where
+	OP : {==, !=, <=, <, >=, >}.
+	Type for variable VAR1 can be either
+		int
+		integer
+
+** operate VAR0 VAR1 OP VAR2
+	Operates two variables VAR1 and VAR2 using operator OP, where OP : {+, -, *, /, ^}.
+	The result is stored in variable VAR0, which must exist.
+	Variable VAR0's type must be integer.
+	Types for variables VAR1 and VAR2 must be one of the following combinations
+		int int
+		integer int
+		integer integer
+
+** operate_lit VAR0 VAR1 OP VALUE
+	Operates two variables VAR1 and literal value VALUE, where OP : {+, -, *, /, ^}.
+	The result is stored in variable VAR0, which must exist.
+	Variable VAR0's type must be integer.
+	Type for variable VAR1 can be either
+		int
+		integer

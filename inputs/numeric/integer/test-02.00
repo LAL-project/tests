@@ -1,0 +1,23 @@
+TYPE numeric-integer
+INPUT 0
+BODY
+	let k0 integer int -1
+	let k1 integer int 0
+	let k2 integer int 3
+	
+	compare_lit k0 == -1
+	assign k0 0
+	
+	operate k0 k2 - k1
+	compare_lit k0 == 3
+	
+	operate k0 k1 - k2
+	compare_lit k0 == -3
+	
+	assign k0 0
+	operate_lit k0 k0 - +3
+	compare_lit k0 == -3
+	
+	assign k0 0
+	operate_lit k0 k0 - -3
+	compare_lit k0 == 3

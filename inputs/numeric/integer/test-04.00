@@ -1,0 +1,18 @@
+TYPE numeric-integer
+INPUT 0
+BODY
+	let k0 integer int -1
+	let k1 integer int 2
+	let k2 integer int 10
+	
+	compare_lit k0 == -1
+	assign k0 0
+	
+	operate k0 k2 / k1
+	compare_lit k0 == 5
+	
+	operate_lit k0 k2 / +5
+	compare_lit k0 == 2
+	
+	operate_lit k0 k2 / -5
+	compare_lit k0 == -2

@@ -132,8 +132,7 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	}
 
 	if (num_type1 == "integer") {
-		exe_numeric_integer(fin);
-		return err_type::no_error;
+		return exe_numeric_integer(fin);
 	}
 
 	if (num_type1 == "rational") {
@@ -144,8 +143,7 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 		}
 		if (num_type2 == "rational") {
 			// rational - rational
-			exe_numeric_rational_rational(fin);
-			return err_type::no_error;
+			return exe_numeric_rational_rational(fin);
 		}
 
 		cerr << ERROR << endl;

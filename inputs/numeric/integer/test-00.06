@@ -1,0 +1,31 @@
+TYPE numeric-integer
+INPUT 0
+BODY
+	let k1 int string 0
+	let k2 int string -1
+	let k3 int string 2
+	let k4 int string 1234
+	
+	let k5 int int 0
+	let k6 int int -1
+	let k7 int int 2
+	let k8 int int 1234
+	
+	compare k1 == k5
+	compare k2 <= k1
+	compare k2 <  k1
+	compare k1 >= k2
+	compare k1 >  k2
+	
+	compare k4 >  k1
+	compare k4 >  k2
+	compare k4 >  k3
+	compare k4 == k4
+	compare k4 == k8
+	
+	compare k1 != k2
+	compare k1 != k3
+	compare k1 != k4
+	compare k1 != k6
+	compare k1 != k7
+	compare k1 != k8
