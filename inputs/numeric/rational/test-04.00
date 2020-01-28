@@ -1,0 +1,35 @@
+TYPE numeric-rational
+INPUT 0
+BODY
+	let k0 rational int 3
+	let k1 rational int -4
+	let k2 rational string -1234/5678
+	let k3 rational string -10/2
+	let k4 rational string 10/2
+	
+	operate k0 k1 / k2
+	print k0
+	
+	operate_lit k0 k1 / 3
+	let k1div3 rational string -4/3
+	compare k0 == k1div3
+	print k0
+	
+	assign k0 -1
+	operate k0 k3 / k0
+	compare_lit k0 == 5
+	print k0
+	
+	operate_lit k0 k3 / -5
+	compare_lit k0 == 1
+	print k0
+	
+	assign k0 -1
+	operate k0 k4 / k0
+	compare_lit k0 == -5
+	print k0
+	
+	operate_lit k0 k4 / -5
+	compare_lit k0 == -1
+	print k0
+

@@ -63,8 +63,7 @@ namespace exe_tests {
 err_type exe_construction(ifstream& fin);
 
 err_type exe_numeric_integer(ifstream& fin);
-err_type exe_numeric_rational_integer(ifstream& fin);
-err_type exe_numeric_rational_rational(ifstream& fin);
+err_type exe_numeric_rational(ifstream& fin);
 
 err_type exe_properties_general(ifstream& fin);
 err_type exe_properties_MHD_All_trees(ifstream& fin);

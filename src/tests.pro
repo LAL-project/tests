@@ -48,14 +48,13 @@ SOURCES += \
     linarr/exe_linarr_klevel.cpp \
     linarr/exe_linarr_syn_dep_tree_type.cpp \
 	main.cpp \
+    numeric/exe_rational.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
     properties/V_rla_C_brute_force_Q.cpp \
     properties/V_rla_C_brute_force_freqs.cpp \
     properties/exe_properties_MHD_All_trees.cpp \
     numeric/exe_integer.cpp \
-    numeric/exe_rational_integer.cpp \
-    numeric/exe_rational_rational.cpp \
     properties/exe_properties_general.cpp \
     properties/exe_properties_expvar_C.cpp \
     properties/exe_properties_expvar_D.cpp \

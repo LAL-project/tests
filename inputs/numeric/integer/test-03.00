@@ -6,18 +6,26 @@ BODY
 	let k2 int 3
 	
 	compare_lit k0 == -1
+	print k0
 	assign k0 0
+	print k0
 	
 	operate k0 k2 * k1
+	print k0
 	compare_lit k0 == 3
 	
 	operate k0 k1 * k2
+	print k0
 	compare_lit k0 == 3
 	
 	assign k0 1
+	print k0
 	operate_lit k0 k0 * +5
+	print k0
 	compare_lit k0 == 5
 	
 	assign k0 1
+	print k0
 	operate_lit k0 k0 * -5
+	print k0
 	compare_lit k0 == -5

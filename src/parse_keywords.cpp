@@ -136,20 +136,7 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	}
 
 	if (num_type1 == "rational") {
-		string num_type2 = keywords[i + 1];
-		if (num_type2 == "integer") {
-			// rational - integer
-			return exe_numeric_rational_integer(fin);
-		}
-		if (num_type2 == "rational") {
-			// rational - rational
-			return exe_numeric_rational_rational(fin);
-		}
-
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i + 1 << ": '" << num_type2 << "'." << endl;
-		mark_wrong_keyword(keywords, {i + 1}, "    ");
-		return err_type::wrong_keyword;
+		return exe_numeric_rational(fin);
 	}
 
 	cerr << ERROR << endl;
