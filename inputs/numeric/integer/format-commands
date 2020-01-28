@@ -2,8 +2,8 @@
 COMMANDS AVAILABLE
 ==================
 
-** let VAR_NAME VAR_TYPE VALUE_FORMAT VALUE
-	Creates a variable with name VAR_NAME of type VAR_TYPE with value VALUE which has format VALUE_FORMAT.
+** let VAR_NAME VALUE_FORMAT VALUE
+	Creates a variable with name VAR_NAME with value VALUE which has format VALUE_FORMAT.
 	VAR_TYPE : {integer, int}
 	VALUE_FORMAT : {int, string}
 
@@ -20,8 +20,8 @@ COMMANDS AVAILABLE
 	OP : {==, !=, <=, <, >=, >}
 	The variables' types must be one of the following combinations
 		int int
-		integer int
-		integer integer
+		int
+		integer
 
 ** compare_lit VAR1 OP VALUE
 	Compares two variables VAR1 and literal value VALUE, where
@@ -36,8 +36,8 @@ COMMANDS AVAILABLE
 	Variable VAR0's type must be integer.
 	Types for variables VAR1 and VAR2 must be one of the following combinations
 		int int
-		integer int
-		integer integer
+		int
+		integer
 
 ** operate_lit VAR0 VAR1 OP VALUE
 	Operates two variables VAR1 and literal value VALUE, where OP : {+, -, *, /, ^}.

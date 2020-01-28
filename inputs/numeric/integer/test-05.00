@@ -1,9 +1,9 @@
 TYPE numeric-integer
 INPUT 0
 BODY
-	let k0 integer int -1
-	let k1 integer int 2
-	let k2 integer int 10
+	let k0 int -1
+	let k1 int 2
+	let k2 int 10
 	
 	compare_lit k0 == -1
 	assign k0 0
