@@ -33,3 +33,17 @@ BODY
 	assert_equal_graphs g1 g3
 	assert_equal_graphs g3 g1
 	output_graph g3
+	
+	create_graph dgraph g4 6
+	add_edge g4 5 0 false
+	add_edge g4 4 0 false
+	add_edge g4 3 5 false
+	add_edge g4 1 0 false
+	add_edge g4 2 5 false
+	add_edge g4 0 2 false
+	add_edge g4 3 0 false
+	output_graph g4
+	assert_not_normalised g4
+	normalise g4
+	assert_normalised g4
+	output_graph g4
