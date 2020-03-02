@@ -152,7 +152,7 @@ static const vector<string> all_types(
 #define assert_correct_file_type(assertion, ft)								\
 	if (ft != "edge_list") {												\
 		cerr << ERROR << endl;												\
-		message_in_func(assertion)										\
+		message_in_func(assertion)											\
 		cerr << "    Invalid file type '" << ft << "'." << endl;			\
 		return err_type::test_format_error;									\
 	}
@@ -160,7 +160,7 @@ static const vector<string> all_types(
 #define assert_correct_drtree_type(assertion, t)							\
 	if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
 		cerr << ERROR << endl;												\
-		message_in_func(assertion)										\
+		message_in_func(assertion)											\
 		cerr << "    Invalid drtree type '" << t << "'." << endl;			\
 		return err_type::test_format_error;									\
 	}
@@ -168,7 +168,7 @@ static const vector<string> all_types(
 #define assert_correct_normalise(assertion, str)									\
 	if (norm != "true" and norm != "false") {										\
 		cerr << ERROR << endl;														\
-		message_in_func(assertion)												\
+		message_in_func(assertion)													\
 		cerr << "    Invalid value for boolean in add_edge command." << endl;		\
 		cerr << "    Received '" << norm << "'. Valid values: true/false." << endl;	\
 		return err_type::test_format_error;											\
@@ -177,7 +177,7 @@ static const vector<string> all_types(
 #define assert_exists_variable(assertion, var)								\
 	if (not exists_variable(var)) {											\
 		cerr << ERROR << endl;												\
-		message_in_func(assertion)										\
+		message_in_func(assertion)											\
 		cerr << "    Variable graph '" << var << "' not declared." << endl;	\
 		return err_type::test_exe_error;									\
 	}
@@ -185,7 +185,7 @@ static const vector<string> all_types(
 #define assert_correct_graph_type(assertion, type, TYPES)					\
 	if (not in_collection(type, TYPES)) {									\
 		cerr << ERROR << endl;												\
-		message_in_func(assertion)										\
+		message_in_func(assertion)											\
 		cerr << "    Graph type '" << type << "' is incorrect." << endl;	\
 		return err_type::test_exe_error;									\
 	}
