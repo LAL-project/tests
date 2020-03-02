@@ -3,6 +3,7 @@
 # all groups
 groups_list=(\
 	"all" \
+	"construction" \
 	"numeric" \
 	"exp_var_C" \
 	"exp_var_D" \
@@ -21,9 +22,9 @@ groups_list=(\
 
 # all tests available
 all_IN_DIRS=(\
+	"construction" \
 	"numeric/integer" \
 	"numeric/rational" \
-	"construction" \
 	"utils/sorting" \
 	"utils/traversal" \
 	"properties" \
@@ -52,9 +53,9 @@ all_IN_DIRS=(\
 	"generate/rand_ulab_free" \
 	)
 all_OUT_DIRS=(\
+	"construction" \
 	"numeric/integer" \
 	"numeric/rational" \
-	"construction" \
 	"utils/sorting" \
 	"utils/traversal" \
 	"properties" \
@@ -81,6 +82,14 @@ all_OUT_DIRS=(\
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	)
+
+# construction tests
+construction_IN_DIRS=(\
+	"construction" \
+	)
+construction_OUT_DIRS=(\
+	"construction" \
 	)
 
 # numeric tests

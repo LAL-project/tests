@@ -33,6 +33,7 @@ function show_usage() {
 	echo "                                                                               "
 	echo "    --exe-group=t : execute a group of tests. Available groups are:            "
 	echo "        all          : execute all tests                                       "
+	echo "        construction : execute graph construction tests                        "
 	echo "        numeric      : execute numeric tests                                   "
 	echo "        exp_var_C    : execute tests for the expectation and variance of C     "
 	echo "        exp_var_D    : execute tests for the expectation and variance of D     "
