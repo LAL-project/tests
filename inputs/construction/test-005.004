@@ -82,15 +82,4 @@ BODY
 	assert cant_add_edge g 2 3
 	assert cant_add_edge g 2 4
 	assert cant_add_edge g 3 4
-
-	assert not_has_root g
-	set_root g 0
-	assert has_root g
-	assert is_not_drtree_type g arborescence
-	assert is_not_drtree_type g anti_arborescence
-	assert is_drtree_type g none
 	
-	set_root g 5
-	assert is_not_drtree_type g arborescence
-	assert is_not_drtree_type g anti_arborescence
-	assert is_drtree_type g none

@@ -23,16 +23,30 @@ COMMANDS AVAILABLE
 	
 ** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
 	Adds N edges to a graph. Normalises (or not) the graph
+
+** check_edge_iterator GRAPH
+	Builds the list of edges for a graph and asserts that is the same
+	as that returned by a brute force method.
+
+** check_Q_iterator GRAPH
+	Builds the list of pairs of independent edges for a graph and asserts
+	that is the same as that returned by a brute force method method.
+
+** normalise GRAPH
+	Normalise a graph
 	
+** assign GRAPH1 GRAPH2
+	Assign graph 2 to graph 1
+	
+** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2
+	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
+	in GRAPH_RESULT
+
++++++++++++++++++++++++++++++++++++++++++
+
 ** assert
 	Makes sure that something is true
 	
-	-- normalised GRAPH
-		asserts that a graph IS normalised
-	
-	-- not_normalised GRAPH
-		asserts that a graph IS NOT normalised
-		
 	-- equal_graphs GRAPH1 GRAPH2
 		asserts that two graphs are equal (here "equal" is not the
 		same as "isomorphic"!)
@@ -43,6 +57,12 @@ COMMANDS AVAILABLE
 	
 	-- neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
 		asserts that the neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	
+	-- normalised GRAPH
+		asserts that a graph IS normalised
+	
+	-- not_normalised GRAPH
+		asserts that a graph IS NOT normalised
 	
 	-- exists_edge GRAPH VERTEX1 VERTEX2
 		asserts that a given edge exists
@@ -69,23 +89,23 @@ COMMANDS AVAILABLE
 		For both directed and undirected graphs, the pairs ((s,t),(u,v))
 		must be given also in lexicographic order, i.e., s<u.
 	
-	-- is_directed GRAPH
-		asserts that the graph is directed
-	
-	-- not_directed GRAPH
-		asserts that the graph is directed
-		
 	-- is_undirected GRAPH
 		asserts that the graph is undirected
 	
 	-- not_undirected GRAPH
 		asserts that the graph is undirected
 	
+	-- is_directed GRAPH
+		asserts that the graph is directed
+	
+	-- not_directed GRAPH
+		asserts that the graph is directed
+	
 	-- degree GRAPH NODE d
 		asserts that the degree (out-degree + in-degree for directed
 		graphs) equals d
 	
-	DIRECTED GRAPHS
+	DIRECTED GRAPHS (including trees)
 	===============
 	
 	-- in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
@@ -124,14 +144,29 @@ COMMANDS AVAILABLE
 	ROOTED TREES
 	============
 	
+	-- num_verts_subtrees_valid GRAPH
+		asserts that the number of subtrees calculated is valid.
+	
+	-- num_verts_subtrees_not_valid GRAPH
+		asserts that the number of subtrees calculated is not valid.
+	
 	-- has_root GRAPH
-		asserts that the rooted tree has a root
+		asserts that the rooted tree has a root.
 	
 	-- not_has_root GRAPH
-		asserts that the rooted tree does not have a root
+		asserts that the rooted tree does not have a root.
+		
+	-- num_nodes_subtree GRAPH NODE SIZE
+		asserts that the subtree of GRAPH rooted at node NODE has size SIZE
 	
 	ROOTED DIRECTED TREES
 	=====================
+	
+	-- drtree_type_valid GRAPH
+		asserts that the type of rooted directed tree is valid.
+	
+	-- drtree_type_not_valid GRAPH
+		asserts that the type of rooted directed tree is not valid.
 	
 	-- is_drtree_type GRAPH TYPE
 		asserts that directed rooted tree GRAPH is of type TYPE.
@@ -142,37 +177,21 @@ COMMANDS AVAILABLE
 		asserts that directed rooted tree GRAPH is NOT of type TYPE.
 		Allowed strings for TYPE:
 			"arborescence", "anti_arborescence", "none"
-	
-** check_edge_iterator GRAPH
-	Builds the list of edges for a graph and asserts that is the same
-	as that returned by a brute force method.
 
-** check_Q_iterator GRAPH
-	Builds the list of pairs of independent edges for a graph and asserts
-	that is the same as that returned by a brute force method method.
++++++++++++++++++++++++++++++++++++++++++
 
-** normalise GRAPH
-	Normalise a graph
-	
-** assign GRAPH1 GRAPH2
-	Assign graph 2 to graph 1
-	
-** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2
-	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
-	in GRAPH_RESULT
-
-UNDIRECTED GRAPHS
-=================
-
-** to_drtree GRAPH_RESULT GRAPH ROOT_NODE
-	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
-	taking node ROOT_NODE as its root.
-
-DIRECTED GRAPHS
+DIRECTED GRAPHS (excluding trees)
 ===============
 
-** to_undirected GRAPH_RESULT GRAPH
+** dgraph_to_ugraph GRAPH_RESULT GRAPH
 	Converts the directed graph GRAPH into an undirected graph GRAPH_RESULT
+
+UNDIRECTED TREES
+================
+
+** utree_to_drtree GRAPH_RESULT GRAPH ROOT_NODE
+	Converts undirected graph GRAPH into a rooted directed tree GRAPH_RESULT
+	taking node ROOT_NODE as its root.
 
 ROOTED TREES
 ============
@@ -182,5 +201,13 @@ ROOTED TREES
 	If the graph is a directed rooted tree then it calls the drtree class
 	method 'find_drtree_type()'.
 
-** size_subtree GRAPH NODE
-	Outputs the size of the subtree rooted at NODE of GRAPH.
+** calculate_size_subtrees GRAPH
+	Calculates the size of each subtree of the rooted tree.
+	The tree must have a root.
+
+DIRECTED ROOTED TREES
+=====================
+
+** find_drtree_type GRAPH
+	Calculates the type of the directed rooted tree.
+	The tree must have a root.

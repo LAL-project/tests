@@ -71,7 +71,9 @@ We are currently using the following names:
 	034: read urtree from disk
 	035: read drtree from disk
 
-	045: convert a ugraph to a drtree graph
-
-	054: sizes of urtree (of the tree and of the subtrees)
-	055: sizes of drtree (of the tree and of the subtrees)
+	045: convert a utree to a drtree graph
+	
+	055: type of drtree
+	
+	064: sizes of urtree (of the tree and of the subtrees)
+	065: sizes of drtree (of the tree and of the subtrees)

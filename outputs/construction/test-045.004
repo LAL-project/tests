@@ -12,7 +12,7 @@ Contents of graph 'g'
 9: 0
 -----------------------------
 -----------------------------
-Contents of graph 'dg1'
+Contents of graph 'DRT_1'
 out:
 *0: 1 2 3 4 5 6 7 8 9
  1:
@@ -37,7 +37,7 @@ in:
  9: 0
 -----------------------------
 -----------------------------
-Contents of graph 'dg2'
+Contents of graph 'DRT_2'
 out:
  0: 2 3 4 5 6 7 8 9
 *1: 0

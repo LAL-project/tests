@@ -34,6 +34,8 @@ LIBS += -fopenmp
 
 SOURCES += \
     construction/exe_construction.cpp \
+    construction/exe_construction_assert.cpp \
+    construction/exe_construction_utils.cpp \
     generate/exe_gen_trees_alf.cpp \
     generate/exe_gen_trees_auf.cpp \
     generate/exe_gen_trees_aur.cpp \
@@ -63,6 +65,7 @@ SOURCES += \
     utils/exe_utils_traversal.cpp
 
 HEADERS += \
+    construction/exe_construction.hpp \
 	definitions.hpp \
     parse_keywords.hpp \
     exe_tests.hpp \

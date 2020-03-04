@@ -1,0 +1,79 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph drtree g 5
+	add_edges g 4
+		0 1
+		1 2
+		2 3
+		3 4
+		false
+	assert drtree_type_not_valid g
+	assert not_has_root g
+	set_root g 0
+	assert has_root g
+	assert is_tree g
+	find_drtree_type g
+	assert drtree_type_valid g
+	assert is_drtree_type g arborescence
+	
+	assert num_verts_subtrees_not_valid g
+	calculate_size_subtrees g
+	assert num_verts_subtrees_valid g
+	
+	assert num_nodes_subtree g 0 5
+	assert num_nodes_subtree g 1 4
+	assert num_nodes_subtree g 2 3
+	assert num_nodes_subtree g 3 2
+	assert num_nodes_subtree g 4 1
+	
+	create_graph drtree h 5
+	add_edges h 4
+		3 4
+		1 2
+		2 3
+		0 1
+		false
+	assert drtree_type_not_valid h
+	assert not_has_root h
+	set_root h 0
+	assert has_root h
+	assert is_tree h
+	find_drtree_type h
+	assert drtree_type_valid h
+	assert is_drtree_type h arborescence
+	
+	assert num_verts_subtrees_not_valid h
+	calculate_size_subtrees h
+	assert num_verts_subtrees_valid h
+	
+	assert num_nodes_subtree h 0 5
+	assert num_nodes_subtree h 1 4
+	assert num_nodes_subtree h 2 3
+	assert num_nodes_subtree h 3 2
+	assert num_nodes_subtree h 4 1
+	
+	create_graph drtree f 5
+	add_edges f 4
+		0 1
+		0 2
+		0 3
+		0 4
+		false
+	assert drtree_type_not_valid f
+	assert not_has_root f
+	set_root f 0
+	assert has_root f
+	assert is_tree f
+	find_drtree_type f
+	assert drtree_type_valid f
+	assert is_drtree_type f arborescence
+	
+	assert num_verts_subtrees_not_valid f
+	calculate_size_subtrees f
+	assert num_verts_subtrees_valid f
+	
+	assert num_nodes_subtree f 0 5
+	assert num_nodes_subtree f 1 1
+	assert num_nodes_subtree f 2 1
+	assert num_nodes_subtree f 3 1

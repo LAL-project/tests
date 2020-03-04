@@ -1,0 +1,70 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph drtree g 11
+	add_edges g 10
+		0 1
+		0 2
+		1 3
+		1 5
+		5 6
+		6 7
+		2 4
+		4 8
+		4 9
+		4 10
+		false
+	assert drtree_type_not_valid g
+	assert not_has_root g
+	set_root g 0
+	assert has_root g
+	assert is_tree g
+	find_drtree_type g
+	assert drtree_type_valid g
+	assert is_drtree_type g arborescence
+	
+	
+	create_graph drtree f 11
+	add_edges f 10
+		3 1
+		1 5
+		1 0
+		5 6
+		6 7
+		0 2
+		2 4
+		4 8
+		4 9
+		4 10
+		false
+	assert drtree_type_not_valid f
+	assert not_has_root f
+	set_root f 3
+	assert has_root f
+	assert is_tree f
+	find_drtree_type f
+	assert drtree_type_valid f
+	assert is_drtree_type f arborescence
+	
+	
+	create_graph drtree h 11
+	add_edges h 10
+		1 3
+		5 1
+		6 5
+		7 6
+		0 1
+		2 0
+		4 2
+		8 4
+		9 4
+		10 4
+		false
+	assert drtree_type_not_valid h
+	assert not_has_root h
+	set_root h 3
+	assert has_root h
+	assert is_tree h
+	find_drtree_type h
+	assert drtree_type_valid h
+	assert is_drtree_type h anti_arborescence

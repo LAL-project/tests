@@ -5,7 +5,7 @@ Contents of graph 'G'
 2: 1
 -----------------------------
 -----------------------------
-Contents of graph 'DG1'
+Contents of graph 'DRT_1'
 out:
 *0: 1
  1: 2
@@ -16,7 +16,7 @@ in:
  2: 1
 -----------------------------
 -----------------------------
-Contents of graph 'DG2'
+Contents of graph 'DRT_2'
 out:
  0:
 *1: 0 2
@@ -27,7 +27,7 @@ in:
  2: 1
 -----------------------------
 -----------------------------
-Contents of graph 'DG3'
+Contents of graph 'DRT_3'
 out:
  0:
  1: 0
