@@ -18,7 +18,7 @@ BODY
 	check_edge_iterator g
 	check_Q_iterator g
 	
-	assert_edges_are g 9
+	assert edges_are g 9
 		0 1
 		1 2
 		2 3
@@ -28,7 +28,7 @@ BODY
 		6 7
 		7 8
 		8 9
-	assert_elements_Q_are g 28
+	assert elements_Q_are g 28
 		0 1 2 3
 		0 1 3 4
 		0 1 4 5

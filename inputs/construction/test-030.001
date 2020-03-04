@@ -2,9 +2,9 @@ TYPE construction_graph
 INPUT 0
 BODY
 	read_graph ugraph g graphs/er/050-0.50 edge_list true
-	assert_normalised g
-	assert_num_edges g 631
-	assert_num_nodes g 50
+	assert normalised g
+	assert num_edges g 631
+	assert num_nodes g 50
 	
 	check_edge_iterator g
 	check_Q_iterator g

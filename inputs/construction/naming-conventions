@@ -36,6 +36,15 @@ Family test numbers
 
     Type of graph
 
+Codes and types of graphs
+-------------------------
+
+	0: ugraph
+	1: dgraph
+	2: utree
+	3: dtree
+	4: urtree
+	5: drtree
 
 We are currently using the following names:
 
@@ -63,3 +72,6 @@ We are currently using the following names:
 	035: read drtree from disk
 
 	045: convert a ugraph to a drtree graph
+
+	054: sizes of urtree (of the tree and of the subtrees)
+	055: sizes of drtree (of the tree and of the subtrees)

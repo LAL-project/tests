@@ -2,47 +2,47 @@ TYPE construction_graph
 INPUT 0
 BODY
 	read_graph ugraph g2 graphs/er/010-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/015-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/020-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 
 	read_graph ugraph g2 graphs/er/025-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/030-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/035-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/040-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/045-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/050-0.20 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
@@ -50,47 +50,47 @@ BODY
 
 
 	read_graph ugraph g2 graphs/er/010-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/015-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/020-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 
 	read_graph ugraph g2 graphs/er/025-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/030-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/035-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/040-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/045-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/050-0.30 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 
@@ -98,47 +98,47 @@ BODY
 
 
 	read_graph ugraph g2 graphs/er/010-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/015-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/020-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 
 	read_graph ugraph g2 graphs/er/025-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/030-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/035-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/040-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/045-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/050-0.40 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
@@ -146,46 +146,46 @@ BODY
 	
 
 	read_graph ugraph g2 graphs/er/010-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/015-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/020-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 
 	read_graph ugraph g2 graphs/er/025-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/030-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/035-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/040-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/045-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2
 	
 	read_graph ugraph g2 graphs/er/050-0.50 edge_list true
-	assert_normalised g2
+	assert normalised g2
 	check_edge_iterator g2
 	check_Q_iterator g2

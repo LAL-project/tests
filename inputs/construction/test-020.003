@@ -2,36 +2,36 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph ugraph g0 0
-	assert_num_edges g0 0
-	assert_num_nodes g0 0
+	assert num_edges g0 0
+	assert num_nodes g0 0
 	check_Q_iterator g0
 	
 	create_graph ugraph g1 1
-	assert_num_edges g1 0
-	assert_num_nodes g1 1
+	assert num_edges g1 0
+	assert num_nodes g1 1
 	check_Q_iterator g1
 	
 	create_graph ugraph g2 2
-	assert_num_edges g2 0
-	assert_num_nodes g2 2
+	assert num_edges g2 0
+	assert num_nodes g2 2
 	check_Q_iterator g2
 	
 	create_graph ugraph g3 3
-	assert_num_edges g3 0
-	assert_num_nodes g3 3
+	assert num_edges g3 0
+	assert num_nodes g3 3
 	check_Q_iterator g3
 	
 	create_graph ugraph g4 4
-	assert_num_edges g4 0
-	assert_num_nodes g4 4
+	assert num_edges g4 0
+	assert num_nodes g4 4
 	check_Q_iterator g4
 	
 	create_graph ugraph g5 5
-	assert_num_edges g5 0
-	assert_num_nodes g5 5
+	assert num_edges g5 0
+	assert num_nodes g5 5
 	check_Q_iterator g5
 	
 	create_graph ugraph g6 6
-	assert_num_edges g6 0
-	assert_num_nodes g6 6
+	assert num_edges g6 0
+	assert num_nodes g6 6
 	check_Q_iterator g6

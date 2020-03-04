@@ -2,54 +2,54 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph ugraph G 3
-	assert_num_nodes G 3
-	assert_num_edges G 0
+	assert num_nodes G 3
+	assert num_edges G 0
 	add_edge G 0 1 false
 	add_edge G 1 2 false
-	assert_num_edges G 2
+	assert num_edges G 2
 	output_graph G
 	
 	to_drtree DG1 G 0
 	output_graph DG1
-	assert_exists_edge DG1 0 1
-	assert_exists_edge DG1 1 2
-	assert_not_exists_edge DG1 1 0
-	assert_not_exists_edge DG1 2 1
-	assert_not_exists_edge DG1 2 0
-	assert_not_exists_edge DG1 0 2
-	assert_in_degree DG1 0 0
-	assert_in_degree DG1 1 1
-	assert_in_degree DG1 2 1
-	assert_out_degree DG1 0 1
-	assert_out_degree DG1 1 1
-	assert_out_degree DG1 2 0
+	assert exists_edge DG1 0 1
+	assert exists_edge DG1 1 2
+	assert not_exists_edge DG1 1 0
+	assert not_exists_edge DG1 2 1
+	assert not_exists_edge DG1 2 0
+	assert not_exists_edge DG1 0 2
+	assert in_degree DG1 0 0
+	assert in_degree DG1 1 1
+	assert in_degree DG1 2 1
+	assert out_degree DG1 0 1
+	assert out_degree DG1 1 1
+	assert out_degree DG1 2 0
 	
 	to_drtree DG2 G 1
 	output_graph DG2
-	assert_not_exists_edge DG2 0 1
-	assert_exists_edge DG2 1 2
-	assert_exists_edge DG2 1 0
-	assert_not_exists_edge DG2 2 1
-	assert_not_exists_edge DG2 2 0
-	assert_not_exists_edge DG2 0 2
-	assert_in_degree DG2 0 1
-	assert_in_degree DG2 1 0
-	assert_in_degree DG2 2 1
-	assert_out_degree DG2 0 0
-	assert_out_degree DG2 1 2
-	assert_out_degree DG2 2 0
+	assert not_exists_edge DG2 0 1
+	assert exists_edge DG2 1 2
+	assert exists_edge DG2 1 0
+	assert not_exists_edge DG2 2 1
+	assert not_exists_edge DG2 2 0
+	assert not_exists_edge DG2 0 2
+	assert in_degree DG2 0 1
+	assert in_degree DG2 1 0
+	assert in_degree DG2 2 1
+	assert out_degree DG2 0 0
+	assert out_degree DG2 1 2
+	assert out_degree DG2 2 0
 	
 	to_drtree DG3 G 2
 	output_graph DG3
-	assert_not_exists_edge DG3 0 1
-	assert_not_exists_edge DG3 1 2
-	assert_exists_edge DG3 1 0
-	assert_exists_edge DG3 2 1
-	assert_not_exists_edge DG3 2 0
-	assert_not_exists_edge DG3 0 2
-	assert_in_degree DG3 0 1
-	assert_in_degree DG3 1 1
-	assert_in_degree DG3 2 0
-	assert_out_degree DG3 0 0
-	assert_out_degree DG3 1 1
-	assert_out_degree DG3 2 1
+	assert not_exists_edge DG3 0 1
+	assert not_exists_edge DG3 1 2
+	assert exists_edge DG3 1 0
+	assert exists_edge DG3 2 1
+	assert not_exists_edge DG3 2 0
+	assert not_exists_edge DG3 0 2
+	assert in_degree DG3 0 1
+	assert in_degree DG3 1 1
+	assert in_degree DG3 2 0
+	assert out_degree DG3 0 0
+	assert out_degree DG3 1 1
+	assert out_degree DG3 2 1

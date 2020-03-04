@@ -3,17 +3,17 @@ INPUT 0
 BODY
 	create_graph dgraph g 5
 	
-	assert_num_edges g 0
+	assert num_edges g 0
 	check_Q_iterator g
 	
 	add_edge g 0 1 false
-	assert_num_edges g 1
+	assert num_edges g 1
 	check_Q_iterator g
 	
 	add_edge g 2 3 false
-	assert_num_edges g 2
+	assert num_edges g 2
 	check_Q_iterator g
 	
 	add_edge g 0 4 false
-	assert_num_edges g 3
+	assert num_edges g 3
 	check_Q_iterator g
