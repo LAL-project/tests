@@ -74,9 +74,9 @@ function check_res_valgrind() {
 	test_err=$1
 	valg_err=$2
 	
-	# When using valgrind, we only need to ensure that
-	# errors (memory leaks, out of bounds accesses, ...)
-	# were produced.
+	# When using valgrind, we only need to ensure that errors
+	# (memory leaks, out of bounds accesses, ...) were NOT produced.
+	# Here we can ignore base output files.
 	if [ -s $test_err ]; then
 		echo -en "\e[1;4;31mThe test produced errors\e[0m "
 		echo "See result in $valg_err"
@@ -95,33 +95,42 @@ function check_res_no_valgrind() {
 	prog_out=$4			# $PROG_OUT
 	base_out_file=$5	# $output_group/$f
 	
-	# replace Windows-like endlines with Linux-like endlines
-	prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
-	
-	# If the output is incorrect, store it into a file.
-	
-	# Check whether there were errors or not. If there were,
-	# issue an error message and stop. If there were not,
-	# check the output produced.
-	
-	if [ -s $temp_test_err ]; then
-		echo -en "\e[1;4;31mErrors were produced\e[0m "
-		echo "See errors in $test_err"
-		mv $temp_test_err $test_err
-		echo "$prog_out" > $test_out
-	else
-		# test whether the error output produced is empty or not
-		BASE_CONTENTS=$(cat $base_out_file)
+	# check if base output exists. If not, issue an error
+	# message and do not execute
+	if [ ! -f $base_out_file ]; then
 		
-		DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
-		if [ ! -z "$DIFF" ]; then
-			echo -en "\e[1;4;31mDifferent outputs\e[0m "
-			echo "See result in $test_out"
+		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping..."
+		
+	else
+		
+		# replace Windows-like endlines with Linux-like endlines
+		prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
+		
+		# If the output is incorrect, store it into a file.
+		
+		# Check whether there were errors or not. If there were,
+		# issue an error message and stop. If there were not,
+		# check the output produced.
+		
+		if [ -s $temp_test_err ]; then
+			echo -en "\e[1;4;31mErrors were produced\e[0m "
+			echo "See errors in $test_err"
+			mv $temp_test_err $test_err
 			echo "$prog_out" > $test_out
 		else
-			# output produced by library is
-			# equal to the output made by hand
-			echo -e "\e[1;1;32mOk\e[0m"
+			# test whether the error output produced is empty or not
+			BASE_CONTENTS=$(cat $base_out_file)
+			
+			DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
+			if [ ! -z "$DIFF" ]; then
+				echo -en "\e[1;4;31mDifferent outputs\e[0m "
+				echo "See result in $test_out"
+				echo "$prog_out" > $test_out
+			else
+				# output produced by library is
+				# equal to the output made by hand
+				echo -e "\e[1;1;32mOk\e[0m"
+			fi
 		fi
 	fi
 }
