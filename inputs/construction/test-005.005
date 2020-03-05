@@ -28,8 +28,8 @@ BODY
 	set_root t 0
 	assert has_root t
 	
-	calculate_size_subtrees t
 	find_drtree_type t
+	calculate_size_subtrees t
 	
 	assert num_verts_subtrees_valid t
 	assert drtree_type_valid t
