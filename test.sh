@@ -83,7 +83,7 @@ function check_res_valgrind() {
 		echo "See result in $valg_err"
 		mv $test_err $valg_err
 		
-		echo "$(date)    When executing test $test_name -- Valgrind produced errors..." >> execution_log
+		echo "$(date +"%Y/%M/%d.%T")    When executing test $test_name -- Valgrind produced errors..." >> execution_log
 	else
 		# no errors were detected
 		echo -e "\e[1;1;32mOk\e[0m"
@@ -104,7 +104,7 @@ function check_res_no_valgrind() {
 	if [ ! -f $base_out_file ]; then
 		
 		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping..."
-		echo "$(date)    When executing test $test_name -- Output base file does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%M/%d.%T")    When executing test $test_name -- Output base file does not exist. Skipping..." >> execution_log
 		
 	else
 		# replace Windows-like endlines with Linux-like endlines
@@ -122,7 +122,7 @@ function check_res_no_valgrind() {
 			mv $temp_test_err $test_err
 			echo "$prog_out" > $test_out
 			
-			echo "$(date)    When executing test $test_name -- Errors were produced" >> execution_log
+			echo "$(date +"%Y/%M/%d.%T")    When executing test $test_name -- Errors were produced" >> execution_log
 		else
 			# test whether the error output produced is empty or not
 			BASE_CONTENTS=$(cat $base_out_file)
@@ -132,7 +132,7 @@ function check_res_no_valgrind() {
 				echo -en "\e[1;4;31mDifferent outputs\e[0m "
 				echo "See result in $test_out"
 				echo "$prog_out" > $test_out
-				echo "$(date)    When executing test $test_name -- Output of test differs from base output" >> execution_log
+				echo "$(date +"%Y/%M/%d.%T")    When executing test $test_name -- Output of test differs from base output" >> execution_log
 			else
 				# output produced by library is
 				# equal to the output made by hand
@@ -374,7 +374,7 @@ fi
 ########################################################################
 # Execute the tests
 
-echo "$(date)    Started execution" >> execution_log
+echo "$(date +"%Y/%M/%d.%T")    Started execution" >> execution_log
 
 if [ $exe_group != 0 ]; then
 	
@@ -422,4 +422,6 @@ else
 	execute_group $input_dir $output_dir "1/1"
 fi
 
-echo "$(date)    Finished execution" >> execution_log
+echo "$(date +"%Y/%M/%d.%T")    Finished execution" >> execution_log
+
+echo "A summary of the test has been logged into file 'execution_log'"
