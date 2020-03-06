@@ -1,0 +1,10 @@
+TYPE utils-traversal
+INPUT 0
+BODY
+	dgraph
+	init 10
+	
+	add_edge 0 1
+	add_edge 1 2
+	output_graph
+	has_cycle
