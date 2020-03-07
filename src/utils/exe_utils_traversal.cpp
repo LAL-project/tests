@@ -63,42 +63,121 @@ using namespace graphs;
 namespace exe_tests {
 
 template<class G>
-err_type process_instruction(const G& g, const string& command, ifstream& fin) {
-	if (command == "has_cycle") {
-		bool has_cycle = utils::has_cycles(g);
-		cout << "Graph has cycle? "
-			 << (has_cycle ? "yes" : "no") << endl;
-		return err_type::no_error;
+err_type process_common_assertions(const G& g, const string& assert_what, ifstream& fin)
+{
+	node s, t;
+	if (assert_what == "is_reachable") {
+		fin >> s >> t;
+		const bool is = utils::is_node_reachable_from(g, s, t);
+		if (not is) {
+			cerr << ERROR << endl;
+			cerr << "    Vertex " << t << " is not reachable from " << s << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "is_not_reachable") {
+		fin >> s >> t;
+		const bool is = utils::is_node_reachable_from(g, s, t);
+		if (is) {
+			cerr << ERROR << endl;
+			cerr << "    Vertex " << t << " is reachable from " << s << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else {
+		cerr << ERROR << endl;
+		cerr << "    Unknow assertion '" << assert_what << "'." << endl;
+		return err_type::test_format_error;
+	}
+	return err_type::no_error;
+}
+
+err_type process_assert(const graphs::dgraph& g, ifstream& fin) {
+	string assert_what;
+	fin >> assert_what;
+	if (assert_what == "has_dir_cycle") {
+		const bool has = utils::has_directed_cycles(g);
+		if (not has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does not have directed cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "hasnt_dir_cycle") {
+		const bool has = utils::has_directed_cycles(g);
+		if (has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does have directed cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "has_undir_cycle") {
+		const bool has = utils::has_undirected_cycles(g);
+		if (not has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does not have undirected cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "hasnt_undir_cycle") {
+		const bool has = utils::has_undirected_cycles(g);
+		if (has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does have undirected cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else {
+		return process_common_assertions(g, assert_what, fin);
 	}
 
-	if (command == "is_reachable") {
-		node u, v;
-		fin >> u >> v;
-		bool reach = utils::is_node_reachable_from(g, u, v);
-		cout << "Is '" << v << "' reachable from '" << u << "'? "
-			 << (reach ? "yes" : "no") << endl;
-		return err_type::no_error;
+	return err_type::no_error;
+}
+
+err_type process_assert(const graphs::ugraph& g, ifstream& fin) {
+	string assert_what;
+	fin >> assert_what;
+	if (assert_what == "has_undir_cycle") {
+		const bool has = utils::has_undirected_cycles(g);
+		if (not has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does not have undirected cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else if (assert_what == "hasnt_undir_cycle") {
+		const bool has = utils::has_undirected_cycles(g);
+		if (has) {
+			cerr << ERROR << endl;
+			cerr << "    Graph does have undirected cycles" << endl;
+			return err_type::test_exe_error;
+		}
+	}
+	else {
+		return process_common_assertions(g, assert_what, fin);
 	}
 
-	if (command == "output_graph") {
-		cout << g << endl;
-		return err_type::no_error;
-	}
-
-	cerr << ERROR << endl;
-	cerr << "    Unrecognised command '" << command << "'" << endl;
-	return err_type::test_format_error;
+	return err_type::no_error;
 }
 
 template<class G>
-err_type test_with_graph(const G& g, ifstream& fin) {
-	string command;
-	while (fin >> command) {
-		err_type r = process_instruction(g, command, fin);
-		if (r != err_type::no_error) {
-			return r;
-		}
+err_type process_instruction(const G& g, const string& command, ifstream& fin) {
+	if (command == "output_graph") {
+		cout << g << endl;
 	}
+	else if (command == "is_reachable") {
+
+	}
+	else if (command == "assert") {
+		auto e = process_assert(g, fin);
+		if (e != err_type::no_error) { return e; }
+	}
+	else {
+		cerr << ERROR << endl;
+		cerr << "    Unrecognised command '" << command << "'" << endl;
+		return err_type::test_format_error;
+	}
+
 	return err_type::no_error;
 }
 
@@ -135,9 +214,15 @@ err_type execute_utils_bfs_test(
 )
 {
 	G g;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, g);
-	if (r != err_type::no_error) { return r; }
-	return test_with_graph(g, fin);
+	err_type r1 = io_wrapper::read_graph(graph_name, graph_format, g);
+	if (r1 != err_type::no_error) { return r1; }
+
+	string command;
+	while (fin >> command) {
+		r1 = process_instruction(g, command, fin);
+		if (r1 != err_type::no_error) { return r1; }
+	}
+	return err_type::no_error;
 }
 
 err_type exe_utils_bfs(ifstream& fin) {

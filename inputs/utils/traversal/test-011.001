@@ -10,5 +10,5 @@ BODY
 	add_edge 3 4
 	output_graph
 	
-	is_reachable 0 5
-	is_reachable 5 0
+	assert is_not_reachable 0 5
+	assert is_not_reachable 5 0

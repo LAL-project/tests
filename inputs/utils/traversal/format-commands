@@ -8,20 +8,32 @@ All tests start with a single string, one of:
 This tells the test what type of graph to use.
 
 
-1. When an input graph is given
--------------------------------
+The following commands are available whether an input graph has been given or not.
 
-** is_reachable NODE_1 NODE_2
-	Output a message telling whether NODE_1 is reachable from NODE_2
+** assert is_reachable NODE_1 NODE_2
+	asserts that whether NODE_1 is reachable from NODE_2
 
-** has_cycle
-	Output a message telling whether the input graph has a cycle or not
+** assert not_is_reachable NODE_1 NODE_2
+	asserts that whether NODE_1 is not reachable from NODE_2
+
+** assert has_dir_cycle
+	asserts that the input graph has a directed cycle
+
+** assert hasnt_dir_cycle
+	asserts that the input graph does not have a directed cycle
+
+** assert has_undir_cycle
+	asserts that the input graph does not have a undirected cycle
+
+** assert hasnt_undir_cycle
+	asserts that the input graph does not have an undirected cycle
 
 ** output_graph
 	Outputs the graph to standard output.
 
-2. When no input graph is given
--------------------------------
+
+
+The following commands are only available when no input graph has been given.
 
 ** add_edge NODE_1 NODE_2
 	Adds an edge to the only graph that the test is dealing with.
@@ -29,4 +41,3 @@ This tells the test what type of graph to use.
 ** init N
 	Initialise the graph with N vertices.
 
-All of the options of section 2 are also allowed.

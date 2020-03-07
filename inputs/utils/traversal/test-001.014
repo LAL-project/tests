@@ -2,4 +2,5 @@ TYPE utils-traversal
 INPUT 1 graphs/complete-bipartite/4-4 edge-list
 BODY
 	dgraph
-	has_cycle
+	assert hasnt_dir_cycle
+	assert has_undir_cycle

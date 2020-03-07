@@ -9,7 +9,4 @@ graph_type: ugraph
 7: 6 8
 8: 7
 9:
-Is '5' reachable from '0'? no
-Is '9' reachable from '0'? no
-Is '7' reachable from '5'? yes
 Test finished without apparent errors.

@@ -21,6 +21,4 @@ in:
 7:
 8:
 9:
-Is '5' reachable from '0'? no
-Is '0' reachable from '5'? no
 Test finished without apparent errors.

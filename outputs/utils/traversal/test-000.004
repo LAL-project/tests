@@ -9,5 +9,4 @@ graph_type: ugraph
 7: 6 8
 8: 7 9
 9: 8 5
-Graph has cycle? yes
 Test finished without apparent errors.

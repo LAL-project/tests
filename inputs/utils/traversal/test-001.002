@@ -13,12 +13,15 @@ BODY
 	add_edge 7 8
 	add_edge 8 9
 	output_graph
-	has_cycle
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
 	
 	add_edge 9 0
 	output_graph
-	has_cycle
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
 	
 	add_edge 4 5
 	output_graph
-	has_cycle
+	assert has_dir_cycle
+	assert has_undir_cycle

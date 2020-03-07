@@ -2,4 +2,6 @@ TYPE utils-traversal
 INPUT 1 graphs/complete/10 edge-list
 BODY
 	dgraph
-	has_cycle
+	output_graph
+	assert hasnt_dir_cycle
+	assert has_undir_cycle

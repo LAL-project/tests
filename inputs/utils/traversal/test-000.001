@@ -10,4 +10,4 @@ BODY
 	add_edge 3 4
 	add_edge 0 4
 	output_graph
-	has_cycle
+	assert has_undir_cycle
