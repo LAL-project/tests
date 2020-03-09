@@ -77,3 +77,6 @@ We are currently using the following names:
 	
 	064: sizes of urtree (of the tree and of the subtrees)
 	065: sizes of drtree (of the tree and of the subtrees)
+
+	074: retrieve subtree of a rooted undirected tree
+	075: retrieve subtree of a rooted directed tree

@@ -1,0 +1,65 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph drtree g1 5
+	add_edges g1 4
+		0 1
+		1 2
+		2 3
+		3 4
+		true
+	assert num_nodes g1 5
+	assert num_edges g1 4
+	assert not_has_root g1
+	set_root g1 0
+	assert has_root g1
+	assert is_tree g1
+	output_graph g1
+	
+	retrieve_subtree s1 g1 0
+	normalise s1
+	output_graph s1
+	assert is_tree s1
+	assert has_root s1
+	assert num_nodes s1 5
+	assert num_edges s1 4
+	
+	retrieve_subtree s2 g1 3
+	normalise s2
+	output_graph s2
+	assert is_tree s2
+	assert has_root s2
+	assert num_nodes s2 2
+	assert num_edges s2 1
+
+	create_graph drtree g2 5
+	add_edges g2 4
+		1 0
+		2 1
+		3 2
+		4 3
+		true
+	assert num_nodes g2 5
+	assert num_edges g2 4
+	assert not_has_root g2
+	set_root g2 0
+	assert has_root g2
+	assert is_tree g2
+	output_graph g2
+	
+	retrieve_subtree s3 g2 0
+	normalise s3
+	output_graph s3
+	assert is_tree s3
+	assert has_root s3
+	assert num_nodes s3 5
+	assert num_edges s3 4
+	
+	retrieve_subtree s4 g2 3
+	normalise s4
+	output_graph s4
+	assert is_tree s4
+	assert has_root s4
+	assert num_nodes s4 2
+	assert num_edges s4 1
+
