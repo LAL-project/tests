@@ -206,12 +206,12 @@ function execute_group() {
 		# depending on whether we are using valgrind or not.
 		if [ $use_valgrind == 1 ]; then
 			check_res_valgrind 		\
-				$f 					\
+				$input_group/$f 	\
 				$TEST_ERR 			\
 				$VALG_ERR.$ID
 		else
 			check_res_no_valgrind 	\
-				$f					\
+				$input_group/$f		\
 				$TEST_OUT.$ID 		\
 				$TEST_ERR 			\
 				$TEST_ERR.$ID		\
