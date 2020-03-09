@@ -33,6 +33,7 @@ LIBS += -lgmp
 LIBS += -fopenmp
 
 SOURCES += \
+    class_hierarchy.cpp \
     construction/exe_construction.cpp \
     construction/exe_construction_assert.cpp \
     construction/exe_construction_utils.cpp \
@@ -65,6 +66,7 @@ SOURCES += \
     utils/exe_utils_traversal.cpp
 
 HEADERS += \
+    class_hierarchy.hpp \
     construction/exe_construction.hpp \
 	definitions.hpp \
     parse_keywords.hpp \

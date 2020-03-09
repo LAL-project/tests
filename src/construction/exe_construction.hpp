@@ -175,6 +175,14 @@ static const std::vector<std::string> all_types(
 		return err_type::test_exe_error;									\
 	}
 
+#define assert_not_exists_variable(FUNC, var)								\
+	if (exists_variable(var)) {												\
+		cerr << ERROR << endl;												\
+		message_in_func(FUNC)												\
+		cerr << "    Variable graph '" << var << "' already declared." << endl;	\
+		return err_type::test_exe_error;									\
+	}
+
 #define assert_correct_graph_type(FUNC, type, TYPES)						\
 	if (not in_collection(type, TYPES)) {									\
 		cerr << ERROR << endl;												\
@@ -352,19 +360,19 @@ static const std::vector<std::string> all_types(
 
 #define WRONG_TYPE(my_assert, g, T) WRONG_TYPE_EXT(my_assert, g, T, graph_type(g))
 
-#define assert_is_rtree(g1, FUNC)										\
-	if (not mfunction_rtrees(g1, is_tree())) {							\
-		cerr << "ERROR" << endl;										\
-		message_in_func(FUNC)											\
-		cerr << "    Graph '" << g1 << "' is not a tree." << endl;		\
-		return err_type::test_exe_error;								\
-	}																	\
-	if (not mfunction_rtrees(g1, is_rooted())) {						\
-		cerr << "ERROR" << endl;										\
-		message_in_func(FUNC)											\
-		cerr << "    Tree '" << g1 << "' is not rooted." << endl;		\
-		return err_type::test_exe_error;								\
-	}																	\
+#define assert_is_rtree(g1, FUNC)											\
+	if (not mfunction_rtrees(g1, is_tree())) {								\
+		cerr << "ERROR" << endl;											\
+		message_in_func(FUNC)												\
+		cerr << "    Tree '" << g1 << "' is not an actual tree." << endl;	\
+		return err_type::test_exe_error;									\
+	}																		\
+	if (not mfunction_rtrees(g1, has_root())) {								\
+		cerr << "ERROR" << endl;											\
+		message_in_func(FUNC)												\
+		cerr << "    Tree '" << g1 << "' does not have a root." << endl;	\
+		return err_type::test_exe_error;									\
+	}																		\
 
 #define assert_is_drtree(g1, FUNC)										\
 	assert_is_rtree(g1, FUNC)											\

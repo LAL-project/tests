@@ -53,6 +53,7 @@ using namespace std;
 // custom includes
 #include "definitions.hpp"
 #include "parse_keywords.hpp"
+#include "class_hierarchy.hpp"
 
 err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 	string field;
@@ -91,6 +92,9 @@ void get_keywords(const string& type, vector<string>& keywords) {
 }
 
 int main(int argc, char *argv[]) {
+	// first and foremost, check that the class hierarchies are correct
+	exe_tests::test_class_hierarchy();
+
 	// error checking
 	if (argc == 1) {
 		cerr << ERROR << endl;
