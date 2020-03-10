@@ -46,6 +46,7 @@
 // C++ includes
 #include <algorithm>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <map>
 #include <set>
@@ -95,7 +96,7 @@ err_type exe_construction_test(ifstream& fin) {
 	map<string, string> gtypes;
 
 	string option, assert_what;
-	string type, g1, g2, g3, file, file_type, norm;
+	string type, g1, g2, g3, file, file_type, Boolean;
 	uint32_t n_nodes;
 	uint32_t u, v;
 
@@ -134,19 +135,19 @@ err_type exe_construction_test(ifstream& fin) {
 			}
 		}
 		else if (option == FUNC_GRAPH_READ) {
-			fin >> type >> g1 >> file >> file_type >> norm;
+			fin >> type >> g1 >> file >> file_type >> Boolean;
 			assert_correct_graph_type(FUNC_GRAPH_READ, type, all_types)
 			assert_correct_file_type(FUNC_GRAPH_READ, file_type)
-			assert_correct_normalise(FUNC_GRAPH_READ, norm)
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean)
 			gtypes[g1] = type;
 			bool io_res = false;
 			if (type == DGRAPH) {
 				dgraphvars[g1] = dgraph();
-				io_res = io::read_edge_list(file, dgraphvars[g1], norm == "true");
+				io_res = io::read_edge_list(file, dgraphvars[g1], Boolean == "true");
 			}
 			else if (type == UGRAPH) {
 				ugraphvars[g1] = ugraph();
-				io_res = io::read_edge_list(file, ugraphvars[g1], norm == "true");
+				io_res = io::read_edge_list(file, ugraphvars[g1], Boolean == "true");
 			}
 			else {
 				cerr << ERROR << endl;
@@ -183,19 +184,19 @@ err_type exe_construction_test(ifstream& fin) {
 			else { ugraphvars[g1] = ugraphvars[g2]; }
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGE) {
-			fin >> g1 >> u >> v >> norm;
+			fin >> g1 >> u >> v >> Boolean;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGE, g1)
-			assert_correct_normalise(FUNC_GRAPH_ADD_EDGE, norm)
-			if_mfunction(g1, add_edge(u, v, norm == "true"))
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean)
+			if_mfunction(g1, add_edge(u, v, Boolean == "true"))
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGES) {
 			fin >> g1 >> n_nodes;
 			vector<edge> edge_list(n_nodes);
 			for (edge& e : edge_list) { fin >> e.first >> e.second; }
-			fin >> norm;
+			fin >> Boolean;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGES, g1)
-			assert_correct_normalise(FUNC_GRAPH_ADD_EDGES, norm)
-			if_mfunction(g1, add_edges(edge_list, norm == "true"))
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean)
+			if_mfunction(g1, add_edges(edge_list, Boolean == "true"))
 		}
 		else if (option == FUNC_GRAPH_NORMALISE) {
 			fin >> g1;
@@ -371,7 +372,14 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_graph_type(FUNC_RTREE_CALC_SIZE_SUBTREE, graph_type(g1), rtree_types)
 			assert_is_rtree(g1, FUNC_RTREE_SET_ROOT)
 
-			mfunction_rtrees(g1, calculate_nodes_subtrees());
+			if (graph_type(g1) == DRTREE) {
+				fin >> Boolean;
+				assert_correct_boolean(FUNC_GRAPH_READ, Boolean)
+				drtreevars[g1].calculate_nodes_subtrees(g2 == "true");
+			}
+			else {
+				urtreevars[g1].calculate_nodes_subtrees();
+			}
 		}
 		else if (option == FUNC_RTREE_RETRIEVE_SUBTREE) {
 			fin >> g2 >> g1 >> u;

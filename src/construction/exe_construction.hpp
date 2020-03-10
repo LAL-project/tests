@@ -56,8 +56,7 @@
 #include <lal/graphs/drtree.hpp>
 
 // custom includes
-#include "exe_tests.hpp"
-
+#include "definitions.hpp"
 
 
 
@@ -158,12 +157,12 @@ static const std::vector<std::string> all_types(
 		return err_type::test_format_error;									\
 	}
 
-#define assert_correct_normalise(assertion, str)									\
-	if (norm != "true" and norm != "false") {										\
+#define assert_correct_boolean(assertion, str)										\
+	if (str != "true" and str != "false") {											\
 		cerr << ERROR << endl;														\
 		message_in_func(assertion)													\
-		cerr << "    Invalid value for boolean in add_edge command." << endl;		\
-		cerr << "    Received '" << norm << "'. Valid values: true/false." << endl;	\
+		cerr << "    Invalid Boolean value." << endl;								\
+		cerr << "    Received '" << str << "'. Valid values: true/false." << endl;	\
 		return err_type::test_format_error;											\
 	}
 
