@@ -1,0 +1,63 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph drtree h 11
+	add_edges h 10
+		1 3
+		5 1
+		6 5
+		7 6
+		0 1
+		2 0
+		4 2
+		8 4
+		9 4
+		10 4
+		false
+	assert drtree_type_not_valid h
+	assert not_has_root h
+	set_root h 3
+	assert has_root h
+	assert is_tree h
+	find_drtree_type h
+	assert drtree_type_valid h
+	assert is_drtree_type h anti_arborescence
+
+	calculate_size_subtrees h true
+	assert num_nodes_subtree h 0 6
+	assert num_nodes_subtree h 1 10
+	assert num_nodes_subtree h 2 5
+	assert num_nodes_subtree h 3 11
+	assert num_nodes_subtree h 4 4
+	assert num_nodes_subtree h 5 3
+	assert num_nodes_subtree h 6 2
+	assert num_nodes_subtree h 7 1
+	assert num_nodes_subtree h 8 1
+	assert num_nodes_subtree h 9 1
+	assert num_nodes_subtree h 10 1
+
+	set_root h 0
+	/*
+	we can't do "calculate_size_subtrees h false" because we don't have
+	a drtree type
+	*/
+	assert drtree_type_not_valid h
+	find_drtree_type h
+	assert drtree_type_valid h
+	/*
+	we still can't do "calculate_size_subtrees h false" because the drtree
+	type is not an arborescence
+	*/
+	
+	calculate_size_subtrees h true
+	assert num_nodes_subtree h 0 11
+	assert num_nodes_subtree h 1 5
+	assert num_nodes_subtree h 2 5
+	assert num_nodes_subtree h 3 1
+	assert num_nodes_subtree h 4 4
+	assert num_nodes_subtree h 5 3
+	assert num_nodes_subtree h 6 2
+	assert num_nodes_subtree h 7 1
+	assert num_nodes_subtree h 8 1
+	assert num_nodes_subtree h 9 1
+	assert num_nodes_subtree h 10 1

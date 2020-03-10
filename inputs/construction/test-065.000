@@ -17,15 +17,34 @@ BODY
 	assert drtree_type_valid g
 	assert is_drtree_type g arborescence
 	
-	assert num_verts_subtrees_not_valid g
-	calculate_size_subtrees g
-	assert num_verts_subtrees_valid g
+	assert need_recalc_subtree_size g
+	calculate_size_subtrees g false
+	assert no_need_recalc_subtree_size g
 	
 	assert num_nodes_subtree g 0 5
 	assert num_nodes_subtree g 1 4
 	assert num_nodes_subtree g 2 3
 	assert num_nodes_subtree g 3 2
 	assert num_nodes_subtree g 4 1
+	
+	set_root g 4
+	calculate_size_subtrees g true
+	assert num_nodes_subtree g 0 1
+	assert num_nodes_subtree g 1 2
+	assert num_nodes_subtree g 2 3
+	assert num_nodes_subtree g 3 4
+	assert num_nodes_subtree g 4 5
+	
+	assert drtree_type_not_valid g
+	find_drtree_type g
+	assert is_drtree_type g anti_arborescence
+	
+	/*
+	Note that we can't calculate the size of the subtrees with 'false' because
+	a false value means that the algorithm is not going to follow reversed edges,
+	implying that it can't calculate meaningful values.
+	*/
+	
 	
 	create_graph drtree h 5
 	add_edges h 4
@@ -43,15 +62,26 @@ BODY
 	assert drtree_type_valid h
 	assert is_drtree_type h arborescence
 	
-	assert num_verts_subtrees_not_valid h
-	calculate_size_subtrees h
-	assert num_verts_subtrees_valid h
+	assert need_recalc_subtree_size h
+	calculate_size_subtrees h false
+	assert no_need_recalc_subtree_size h
 	
 	assert num_nodes_subtree h 0 5
 	assert num_nodes_subtree h 1 4
 	assert num_nodes_subtree h 2 3
 	assert num_nodes_subtree h 3 2
 	assert num_nodes_subtree h 4 1
+	
+	set_root h 4
+	calculate_size_subtrees h true
+	assert num_nodes_subtree h 0 1
+	assert num_nodes_subtree h 1 2
+	assert num_nodes_subtree h 2 3
+	assert num_nodes_subtree h 3 4
+	assert num_nodes_subtree h 4 5
+	
+	
+	
 	
 	create_graph drtree f 5
 	add_edges f 4
@@ -69,11 +99,23 @@ BODY
 	assert drtree_type_valid f
 	assert is_drtree_type f arborescence
 	
-	assert num_verts_subtrees_not_valid f
-	calculate_size_subtrees f
-	assert num_verts_subtrees_valid f
+	assert need_recalc_subtree_size f
+	calculate_size_subtrees f false
+	assert no_need_recalc_subtree_size f
 	
 	assert num_nodes_subtree f 0 5
 	assert num_nodes_subtree f 1 1
 	assert num_nodes_subtree f 2 1
 	assert num_nodes_subtree f 3 1
+	
+	
+	set_root f 3
+	assert need_recalc_subtree_size f
+	calculate_size_subtrees f true
+	assert no_need_recalc_subtree_size f
+	
+	assert num_nodes_subtree f 0 4
+	assert num_nodes_subtree f 1 1
+	assert num_nodes_subtree f 2 1
+	assert num_nodes_subtree f 3 5
+	assert num_nodes_subtree f 4 1

@@ -14,16 +14,15 @@ BODY
 		4 10
 		6 7
 		false
-	output_graph g
-	
 	
 	assert not_has_root g
 	set_root g 0
+	output_graph g
 	assert has_root g
 	
-	assert num_verts_subtrees_not_valid g
+	assert need_recalc_subtree_size g
 	calculate_size_subtrees g
-	assert num_verts_subtrees_valid g
+	assert no_need_recalc_subtree_size g
 	
 	assert num_nodes_subtree g 0 11
 	assert num_nodes_subtree g 1 5
@@ -37,18 +36,21 @@ BODY
 	assert num_nodes_subtree g 9 1
 	assert num_nodes_subtree g 10 1
 	
-	normalise g
+	set_root g 8
+	output_graph g
+	assert need_recalc_subtree_size g
 	calculate_size_subtrees g
+	assert no_need_recalc_subtree_size g
 	
-	assert num_nodes_subtree g 0 11
+	assert num_nodes_subtree g 0 6
 	assert num_nodes_subtree g 1 5
-	assert num_nodes_subtree g 2 5
+	assert num_nodes_subtree g 2 7
 	assert num_nodes_subtree g 3 1
-	assert num_nodes_subtree g 4 4
+	assert num_nodes_subtree g 4 10
 	assert num_nodes_subtree g 5 3
 	assert num_nodes_subtree g 6 2
 	assert num_nodes_subtree g 7 1
-	assert num_nodes_subtree g 8 1
+	assert num_nodes_subtree g 8 11
 	assert num_nodes_subtree g 9 1
 	assert num_nodes_subtree g 10 1
 	

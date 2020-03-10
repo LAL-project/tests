@@ -15,9 +15,9 @@ BODY
 	set_root g 0
 	assert has_root g
 	
-	assert num_verts_subtrees_not_valid g
+	assert need_recalc_subtree_size g
 	calculate_size_subtrees g
-	assert num_verts_subtrees_valid g
+	assert no_need_recalc_subtree_size g
 	
 	assert num_nodes_subtree g 0 5
 	assert num_nodes_subtree g 1 1
@@ -30,9 +30,9 @@ BODY
 	
 	set_root g 1
 	
-	assert num_verts_subtrees_not_valid g
+	assert need_recalc_subtree_size g
 	calculate_size_subtrees g
-	assert num_verts_subtrees_valid g
+	assert no_need_recalc_subtree_size g
 	
 	assert num_nodes_subtree g 0 4
 	assert num_nodes_subtree g 1 5
