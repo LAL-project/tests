@@ -129,57 +129,67 @@ COMMANDS AVAILABLE
 	TREES
 	=====
 	
-	-- can_add_edge GRAPH VERTEX_1 VERTEX_2
+	-- is_tree TREE
+		Asserts that tree TREE has one edge less than the number of vertices.
+		Under a constrained addition of edges, this assertion not failing ensures
+		that TREE is an actual tree.
+		
+	-- is_not_tree TREE
+		Asserts that tree TREE has one edge less than the number of vertices.
+		Under a constrained addition of edges, this assertion failing ensures
+		that TREE is not an actual tree.
+	
+	-- can_add_edge TREE VERTEX_1 VERTEX_2
 		asserts that an edge can be added to the graph
 		
-	-- cant_add_edge GRAPH VERTEX_1 VERTEX_2
+	-- cant_add_edge TREE VERTEX_1 VERTEX_2
 		asserts that an edge can NOT be added to the graph
 	
-	-- can_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+	-- can_add_edges TREE N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list can be added to the graph
 		
-	-- cant_add_edges GRAPH N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
+	-- cant_add_edges TREE N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list cant be added to the graph
 	
-	-- is_rooted GRAPH
+	-- is_rooted TREE
 		asserts that the tree is rooted
 	
-	-- is_not_rooted GRAPH
+	-- is_not_rooted TREE
 		asserts that the tree is NOT rooted
 	
 	ROOTED TREES
 	============
 	
-	-- no_need_recalc_subtree_size GRAPH
+	-- no_need_recalc_subtree_size TREE
 		asserts that the number of subtrees calculated is valid.
 	
-	-- need_recalc_subtree_size GRAPH
+	-- need_recalc_subtree_size TREE
 		asserts that the number of subtrees calculated is not valid.
 	
-	-- has_root GRAPH
+	-- has_root TREE
 		asserts that the rooted tree has a root.
 	
-	-- not_has_root GRAPH
+	-- not_has_root TREE
 		asserts that the rooted tree does not have a root.
 		
-	-- num_nodes_subtree GRAPH NODE SIZE
+	-- num_nodes_subtree TREE NODE SIZE
 		asserts that the subtree of GRAPH rooted at node NODE has size SIZE
 	
 	ROOTED DIRECTED TREES
 	=====================
 	
-	-- drtree_type_valid GRAPH
+	-- drtree_type_valid TREE
 		asserts that the type of rooted directed tree is valid.
 	
-	-- drtree_type_not_valid GRAPH
+	-- drtree_type_not_valid TREE
 		asserts that the type of rooted directed tree is not valid.
 	
-	-- is_drtree_type GRAPH TYPE
+	-- is_drtree_type TREE TYPE
 		asserts that directed rooted tree GRAPH is of type TYPE.
 		Allowed strings for TYPE:
 			"arborescence", "anti_arborescence", "none"
 	
-	-- is_not_drtree_type GRAPH TYPE
+	-- is_not_drtree_type TREE TYPE
 		asserts that directed rooted tree GRAPH is NOT of type TYPE.
 		Allowed strings for TYPE:
 			"arborescence", "anti_arborescence", "none"
