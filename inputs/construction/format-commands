@@ -2,9 +2,11 @@
 COMMANDS AVAILABLE
 ==================
 
+** /* COMMENTS */
+	Comments are delimited by an opening '/*' and a closing '*/'.
+
 ** output STRING
-	outputs to standard output string STRING. A valid string is one
-	with no spaces.
+	Outputs to standard output string STRING. A valid string is one that is enclosed with ".
 
 ** create_graph TYPE GRAPH N
 	Creates a graph of a certain TYPE and a given number of vertices N
@@ -148,10 +150,10 @@ COMMANDS AVAILABLE
 	ROOTED TREES
 	============
 	
-	-- num_verts_subtrees_valid GRAPH
+	-- no_need_recalc_subtree_size GRAPH
 		asserts that the number of subtrees calculated is valid.
 	
-	-- num_verts_subtrees_not_valid GRAPH
+	-- need_recalc_subtree_size GRAPH
 		asserts that the number of subtrees calculated is not valid.
 	
 	-- has_root GRAPH
@@ -205,16 +207,24 @@ ROOTED TREES
 	If the graph is a directed rooted tree then it calls the drtree class
 	method 'find_drtree_type()'.
 
-** calculate_size_subtrees TREE
-	Calculates the size of each subtree of the rooted tree.
-	The tree must have a root.
-
 ** retrieve_subtree TREE_RESULT TREE NODE
 	Retrieves the subtree of a rooted tree TREE into tree TREE_RESULT.
 	The tree must have a root.
 
+UNDIRECTED ROOTED TREES
+=======================
+
+** calculate_size_subtrees TREE
+	Calculates the size of each subtree of the rooted tree.
+	The tree must have a root.
+
 DIRECTED ROOTED TREES
 =====================
+
+** calculate_size_subtrees TREE true/false
+	Calculates the size of each subtree of the rooted tree.
+	The tree must have a root. The Boolean value indicates that whether
+	reversed edges should be used or not.
 
 ** find_drtree_type GRAPH
 	Calculates the type of the directed rooted tree.

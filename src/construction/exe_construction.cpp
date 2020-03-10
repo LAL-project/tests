@@ -101,9 +101,23 @@ err_type exe_construction_test(ifstream& fin) {
 	uint32_t u, v;
 
 	while (fin >> option) {
-		if (option == "output") {
+		if (option == "/*" or option.find("/*") != string::npos) {
+			do {
+				fin >> g1;
+			}
+			while (g1.find("*/") == string::npos);
+		}
+		else if (option == "output") {
+			string total_message = "";
+			// first string
 			fin >> g1;
-			cout << g1 << endl;
+			total_message += g1.substr(1, g1.length());
+			// read the whole string
+			while (fin >> g1 and g1.find('"') == string::npos) {
+				total_message += " " + g1;
+			}
+			total_message += " " + g1.substr(0, g1.length() - 1);
+			cout << total_message << endl;
 		}
 		else if (option == FUNC_GRAPH_CREATE) {
 			fin >> type >> g1 >> n_nodes;
@@ -178,7 +192,7 @@ err_type exe_construction_test(ifstream& fin) {
 		else if (option == FUNC_GRAPH_ASSIGN) {
 			fin >> g1 >> g2;
 			assert_exists_variable(FUNC_GRAPH_ASSIGN, g2)
-			assert_not_exists_variable(FUNC_GRAPH_ASSIGN, g1)
+			//assert_not_exists_variable(FUNC_GRAPH_ASSIGN, g1)
 			gtypes[g1] = graph_type(g2);
 			if (graph_type(g2) == DGRAPH) { dgraphvars[g1] = dgraphvars[g2]; }
 			else { ugraphvars[g1] = ugraphvars[g2]; }
@@ -374,11 +388,11 @@ err_type exe_construction_test(ifstream& fin) {
 
 			if (graph_type(g1) == DRTREE) {
 				fin >> Boolean;
-				assert_correct_boolean(FUNC_GRAPH_READ, Boolean)
-				drtreevars[g1].calculate_nodes_subtrees(g2 == "true");
+				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean)
+				drtreevars[g1].recalc_size_subtrees(Boolean == "true");
 			}
 			else {
-				urtreevars[g1].calculate_nodes_subtrees();
+				urtreevars[g1].recalc_size_subtrees();
 			}
 		}
 		else if (option == FUNC_RTREE_RETRIEVE_SUBTREE) {
