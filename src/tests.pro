@@ -62,6 +62,7 @@ SOURCES += \
     properties/exe_properties_expvar_C.cpp \
     properties/exe_properties_expvar_D.cpp \
     time.cpp \
+    utils/exe_utils_centre.cpp \
     utils/exe_utils_sorting.cpp \
     utils/exe_utils_traversal.cpp
 

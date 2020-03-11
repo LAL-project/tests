@@ -27,6 +27,7 @@ all_IN_DIRS=(\
 	"numeric/rational" \
 	"utils/sorting" \
 	"utils/traversal" \
+	"utils/centre" \
 	"properties" \
 	"properties/exp-var-C/formula-no-Q-reuse" \
 	"properties/exp-var-C/formula-no-Q-no-reuse" \
@@ -237,8 +238,10 @@ generate_ruf_OUT_DIRS=(\
 utils_IN_DIRS=(\
 	"utils/sorting" \
 	"utils/traversal" \
+	"utils/centre" \
 	)
 utils_OUT_DIRS=(\
 	"utils/sorting" \
 	"utils/traversal" \
+	"utils/centre" \
 	)

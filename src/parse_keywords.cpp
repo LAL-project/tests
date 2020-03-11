@@ -324,6 +324,9 @@ err_type call_utils
 	if (key == "traversal") {
 		return exe_utils_bfs(fin);
 	}
+	if (key == "centre") {
+		return exe_utils_centre(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;

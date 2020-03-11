@@ -88,5 +88,6 @@ err_type exe_gen_trees_ruf(ifstream& fin);
 
 err_type exe_utils_sorting(ifstream& fin);
 err_type exe_utils_bfs(ifstream& fin);
+err_type exe_utils_centre(ifstream& fin);
 
 } // -- namespace exe_tests

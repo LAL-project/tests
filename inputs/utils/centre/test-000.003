@@ -1,0 +1,51 @@
+TYPE utils-centre
+INPUT 0
+BODY
+	utree
+	init 7
+	add_edges 6
+		0 4
+		1 4
+		2 5
+		3 5
+		4 5
+		6 5
+	find_centre 0
+	find_centre 1
+	find_centre 2
+	find_centre 3
+	find_centre 4
+	find_centre 5
+	find_centre 6
+	
+	init 7
+	add_edges 6
+		4 0
+		6 1
+		3 0
+		5 1
+		2 0
+		0 1
+	find_centre 0
+	find_centre 1
+	find_centre 2
+	find_centre 3
+	find_centre 4
+	find_centre 5
+	find_centre 6
+	
+	init 7
+	add_edges 6
+		4 0
+		6 1
+		3 0
+		5 1
+		2 1
+		0 1
+	find_centre 0
+	find_centre 1
+	find_centre 2
+	find_centre 3
+	find_centre 4
+	find_centre 5
+	find_centre 6
