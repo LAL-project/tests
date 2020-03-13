@@ -141,6 +141,11 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "output_graph") {
 			cout << t << endl;
 		}
+		else if (option == "remove_edge") {
+			node u,v;
+			fin >> u >> v;
+			t.remove_edge(u,v);
+		}
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Invalid command '" << option << "'." << endl;
