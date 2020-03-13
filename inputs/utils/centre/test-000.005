@@ -1,0 +1,42 @@
+TYPE utils-centre
+INPUT 0
+BODY
+	utree
+	
+	output "-- SINGLETON --"
+	
+	init 1
+	find_centre 0
+	
+	output "-- TWO VERTICES (0 edges) --"
+	
+	init 2
+	find_centre 0
+	find_centre 1
+	
+	output "-- TWO VERTICES (1 edges) --"
+	
+	add_edges 1 0 1
+	find_centre 0
+	find_centre 1
+	
+	output "-- THREE VERTICES (0 edges) --"
+	
+	init 3
+	find_centre 0
+	find_centre 1
+	find_centre 2
+	
+	output "-- THREE VERTICES (1 edges) --"
+	
+	add_edges 1 0 1
+	find_centre 0
+	find_centre 1
+	find_centre 2
+
+	output "-- THREE VERTICES (2 edges) --"
+	
+	add_edges 1 1 2
+	find_centre 0
+	find_centre 1
+	find_centre 2

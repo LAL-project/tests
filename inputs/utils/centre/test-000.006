@@ -1,0 +1,50 @@
+TYPE utils-centre
+INPUT 0
+BODY
+	utree
+	init 22
+	add_edges 18
+		0 2
+		1 2
+		3 5
+		4 5
+		2 6
+		5 6
+		6 7
+		9 10
+		9 11
+		11 12
+		11 13
+		14 15
+		14 16
+		16 17
+		17 18
+		18 19
+		18 20
+		18 21
+	output "0 to 7"
+	find_centre 0
+	find_centre 1
+	find_centre 2
+	find_centre 3
+	find_centre 4
+	find_centre 5
+	find_centre 6
+	find_centre 7
+	output "isolated 8"
+	find_centre 8
+	output "9 to 13"
+	find_centre 9
+	find_centre 10
+	find_centre 11
+	find_centre 12
+	find_centre 13
+	output "14 to 21"
+	find_centre 14
+	find_centre 15
+	find_centre 16
+	find_centre 17
+	find_centre 18
+	find_centre 19
+	find_centre 20
+	find_centre 21
