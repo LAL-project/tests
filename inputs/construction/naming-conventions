@@ -54,14 +54,14 @@ We are currently using the following names:
 	003: construction of dtree
 	004: construction of urtree
 	005: construction of drtree
-
+	
 	010: inspection of edges and elements of Q in ugraph
 	011: inspection of edges and elements of Q in dgraph
-
+	
 	020: check iterators of constructed ugraph
 	021: check iterators of constructed dgraph
 		# no need to check other graphs
-
+	
 	030: read ugraph from disk
 	031: read dgraph from disk
 		# tests
@@ -70,13 +70,13 @@ We are currently using the following names:
 		# are redundant
 	034: read urtree from disk
 	035: read drtree from disk
-
+	
 	045: convert a utree to a drtree graph
 	
 	055: type of drtree
 	
 	064: sizes of urtree (of the tree and of the subtrees)
 	065: sizes of drtree (of the tree and of the subtrees)
-
+	
 	074: retrieve subtree of a rooted undirected tree
 	075: retrieve subtree of a rooted directed tree
