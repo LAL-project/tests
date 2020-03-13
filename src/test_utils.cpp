@@ -39,54 +39,48 @@
  *
  ********************************************************************/
 
-#pragma once
-
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be compiled again.
- */
+#include "test_utils.hpp"
 
 // C++ includes
-#include <fstream>
-#include <vector>
+#include <iostream>
 #include <string>
-
-// custom includes
-#include "definitions.hpp"
+using namespace std;
 
 namespace exe_tests {
 
-err_type exe_construction(std::ifstream& fin);
+bool command_is_comment(const string& s)
+{ return (s == "/*") or (s.find("/*") != string::npos); }
 
-err_type exe_numeric_integer(std::ifstream& fin);
-err_type exe_numeric_rational(std::ifstream& fin);
+void process_comment(ifstream& fin) {
+	string comment;
+	do {
+		fin >> comment;
+	}
+	while (comment.find("*/") == string::npos);
+}
 
-err_type exe_properties_general(std::ifstream& fin);
-err_type exe_properties_MHD_All_trees(std::ifstream& fin);
-err_type exe_properties_ExpVar_C(std::ifstream& fin);
-err_type exe_properties_ExpVar_D(std::ifstream& fin);
+string read_output_string(ifstream& fin) {
 
-err_type exe_linarr_approx_Exp_C(std::ifstream& fin);
-err_type exe_linarr_C(std::ifstream& fin);
-err_type exe_linarr_C_list(ifstream& fin);
-err_type exe_linarr_D(const std::string& what, std::ifstream& fin);
-err_type exe_linarr_headedness(std::ifstream& fin);
-err_type exe_linarr_syn_dep_tree_type(std::ifstream& fin);
-err_type exe_linarr_klevel
-(const std::string& level, const std::string& what, std::ifstream& fin);
+	string total_message = "";
+	string msg;
 
-err_type exe_gen_trees_alf(std::ifstream& fin);
-err_type exe_gen_trees_auf(std::ifstream& fin);
-err_type exe_gen_trees_aur(std::ifstream& fin);
-err_type exe_gen_trees_rlf(std::ifstream& fin);
-err_type exe_gen_trees_rlr(std::ifstream& fin);
-err_type exe_gen_trees_ruf(std::ifstream& fin);
+	// first string
+	fin >> msg;
+	total_message += msg.substr(1, msg.length());
 
-err_type exe_utils_sorting(std::ifstream& fin);
-err_type exe_utils_bfs(std::ifstream& fin);
-err_type exe_utils_centre(std::ifstream& fin);
+	// first string is also last string
+	if (msg[msg.length() - 1] == '"') {
+		return total_message.substr(0, total_message.length() - 1);
+	}
+
+	// read the whole string
+	while (fin >> msg and msg.find('"') == string::npos) {
+		total_message += " " + msg;
+	}
+
+	// process last string
+	total_message += " " + msg.substr(0, msg.length() - 1);
+	return total_message;
+}
 
 } // -- namespace exe_tests

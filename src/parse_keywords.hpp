@@ -45,55 +45,57 @@
 #include <fstream>
 #include <vector>
 #include <string>
-using namespace std;
 
 // custom includes
 #include "definitions.hpp"
 
 namespace exe_tests {
 
-void mark_wrong_keyword
-(const vector<string>& keywords, const vector<size_t>& k, const string& tab = "");
+void mark_wrong_keyword(
+	const std::vector<std::string>& keywords,
+	const std::vector<size_t>& k,
+	const std::string& tab = ""
+);
 
 /* FUNCTIONS FOR KEYWORD PARSING */
 
 // parses the first keyword and calls the appropriate main type function
-err_type call_main(const vector<string>& keywords, ifstream& fin);
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
 
 	// Functions to test the integer and rational classes
 
 err_type call_numeric
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 	// Functions to test the properties functions
 
 err_type call_properties
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 	// Functions to test the linear arrangement-related functions
 
 err_type call_linarr
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 err_type call_linarr_C
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 err_type call_linarr_klevel
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 err_type call_linarr_D_related
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 	// Functions to test the generation functions and classes
 
 err_type call_generate
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 err_type call_generate_trees
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 	// Functions to test the library's utilities
 
 err_type call_utils
-(const vector<string>& keywords, size_t i, ifstream& fin);
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 } // -- namespace exe_tests

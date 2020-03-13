@@ -41,6 +41,9 @@
 
 #include "io_wrapper.hpp"
 
+// C++ includes
+using namespace std;
+
 // lal includes
 #include <lal/io/edge_list.hpp>
 #include <lal/graphs/output.hpp>

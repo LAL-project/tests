@@ -44,7 +44,6 @@
 // C++ includes
 #include <iostream>
 #include <string>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
@@ -55,7 +54,10 @@ using namespace std;
 
 namespace io_wrapper {
 
-err_type read_graph(const string& file, const string& format, lal::graphs::ugraph& G);
-err_type read_graph(const string& file, const string& format, lal::graphs::dgraph& G);
+err_type read_graph
+(const std::string& file, const std::string& format, lal::graphs::ugraph& G);
+
+err_type read_graph
+(const std::string& file, const std::string& format, lal::graphs::dgraph& G);
 
 } // -- namespace io_wrapper

@@ -61,6 +61,7 @@ SOURCES += \
     properties/exe_properties_general.cpp \
     properties/exe_properties_expvar_C.cpp \
     properties/exe_properties_expvar_D.cpp \
+    test_utils.cpp \
     time.cpp \
     utils/exe_utils_centre.cpp \
     utils/exe_utils_sorting.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
     exe_tests.hpp \
 	io_wrapper.hpp \
     properties/C_rla_brute_force_algorithms.hpp \
+    test_utils.hpp \
     time.hpp
 
 DISTFILES += \

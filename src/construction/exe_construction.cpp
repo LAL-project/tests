@@ -63,7 +63,9 @@ using namespace graphs;
 using namespace iterators;
 
 // Custom includes
+#include "exe_tests.hpp"
 #include "exe_construction.hpp"
+#include "test_utils.hpp"
 
 #define FUNC_GRAPH_CREATE "create_graph"
 #define FUNC_GRAPH_READ "read_graph"
@@ -101,23 +103,11 @@ err_type exe_construction_test(ifstream& fin) {
 	uint32_t u, v;
 
 	while (fin >> option) {
-		if (option == "/*" or option.find("/*") != string::npos) {
-			do {
-				fin >> g1;
-			}
-			while (g1.find("*/") == string::npos);
+		if (command_is_comment(option)) {
+			process_comment(fin);
 		}
 		else if (option == "output") {
-			string total_message = "";
-			// first string
-			fin >> g1;
-			total_message += g1.substr(1, g1.length());
-			// read the whole string
-			while (fin >> g1 and g1.find('"') == string::npos) {
-				total_message += " " + g1;
-			}
-			total_message += " " + g1.substr(0, g1.length() - 1);
-			cout << total_message << endl;
+			cout << read_output_string(fin) << endl;
 		}
 		else if (option == FUNC_GRAPH_CREATE) {
 			fin >> type >> g1 >> n_nodes;

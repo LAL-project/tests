@@ -49,24 +49,32 @@ using namespace std;
 // lal includes
 #include <lal/graphs/utree.hpp>
 #include <lal/graphs/dtree.hpp>
+#include <lal/graphs/output.hpp>
 #include <lal/utils/tree_centre.hpp>
 using namespace lal;
 using namespace utils;
 using namespace graphs;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
+#include "test_utils.hpp"
 
 namespace exe_tests {
 
 template<class G>
-void exe_commands_utils_centre(ifstream& fin) {
+err_type exe_commands_utils_centre(ifstream& fin) {
 	G t;
 	uint32_t n;
 
 	string option;
 	while (fin >> option) {
-		if (option == "init") {
+		if (command_is_comment(option)) {
+			process_comment(fin);
+		}
+		else if (option == "output") {
+			cout << read_output_string(fin) << endl;
+		}
+		else if (option == "init") {
 			fin >> n;
 			t.init(n);
 		}
@@ -81,13 +89,22 @@ void exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "find_centre") {
 			node s;
 			fin >> s;
-			const auto centre = t.get_centre();
+			auto centre = utils::retrieve_centre(t, s);
 			cout << "Centre size: " << (centre.second < t.n_nodes() ? 2 : 1) << endl;
 			cout << "Central vertices: " << centre.first;
 			if (centre.second < t.n_nodes()) { cout << " " << centre.second; }
 			cout << endl;
 		}
+		else if (option == "output_graph") {
+			cout << t << endl;
+		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "    Invalid command '" << option << "'." << endl;
+			return err_type::test_format_error;
+		}
 	}
+	return err_type::no_error;
 }
 
 err_type exe_utils_centre(ifstream& fin) {
@@ -127,9 +144,13 @@ err_type exe_utils_centre(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	graph_type == "utree" ?
+	const err_type e = (
+		graph_type == "utree" ?
 		exe_commands_utils_centre<utree>(fin) :
-		exe_commands_utils_centre<dtree>(fin);
+		exe_commands_utils_centre<dtree>(fin)
+	);
+
+	if (e != err_type::no_error) { return e; }
 
 	TEST_GOODBYE
 	return err_type::no_error;
