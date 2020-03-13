@@ -90,10 +90,53 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 			node s;
 			fin >> s;
 			auto centre = utils::retrieve_centre(t, s);
-			cout << "Centre size: " << (centre.second < t.n_nodes() ? 2 : 1) << endl;
-			cout << "Central vertices: " << centre.first;
+			cout << "centre: " << centre.first;
 			if (centre.second < t.n_nodes()) { cout << " " << centre.second; }
 			cout << endl;
+		}
+		else if (option == "centre_is") {
+			node s;
+			fin >> s;
+			auto centre = utils::retrieve_centre(t, s);
+
+			uint32_t centre_size;
+			fin >> centre_size;
+
+			if (centre_size == 1) {
+				node u;
+				fin >> u;
+
+				if (centre.first != u) {
+					cerr << ERROR << endl;
+					cerr << "    Centre does not coincide." << endl;
+					return err_type::test_exe_error;
+				}
+			}
+			else if (centre_size == 2) {
+				node u, v;
+				fin >> u >> v;
+				if (u > v) {
+					cerr << ERROR << endl;
+					cerr << "    The first vertex must be smaller than the second." << endl;
+					return err_type::test_format_error;
+				}
+				if (u == v) {
+					cerr << ERROR << endl;
+					cerr << "    The two vertices are the same: " << u << " <-> " << v << "." << endl;
+					return err_type::test_format_error;
+				}
+
+				if (centre.first != u and centre.second != v) {
+					cerr << ERROR << endl;
+					cerr << "    Centres do not coincide." << endl;
+					return err_type::test_exe_error;
+				}
+			}
+			else {
+				cerr << ERROR << endl;
+				cerr << "    Centre size has to be either 1 or 2. Instead, received '" << centre_size << "'." << endl;
+				return err_type::test_format_error;
+			}
 		}
 		else if (option == "output_graph") {
 			cout << t << endl;
