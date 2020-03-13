@@ -30,6 +30,12 @@ COMMANDS AVAILABLE
 ** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
 	Adds N edges to a graph. Normalises (or not) the graph
 
+** remove_edge GRAPH VERTEX1 VERTEX2 true/false
+	Removes an edge from a graph. Normalises (or not) the graph
+	
+** remove_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
+	Removes N edges from a graph. Normalises (or not) the graph
+
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
 	as that returned by a brute force method.
