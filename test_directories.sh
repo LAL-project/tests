@@ -59,6 +59,7 @@ all_OUT_DIRS=(\
 	"numeric/rational" \
 	"utils/sorting" \
 	"utils/traversal" \
+	"utils/centre" \
 	"properties" \
 	"properties/exp-var-C" \
 	"properties/exp-var-C" \
