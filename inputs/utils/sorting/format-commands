@@ -5,7 +5,7 @@ FORMAT OF COMMANDS
 	test R times a sorting algorithm * that sorts s random
 	values within the interval [0,n).
 
-	+ rand_sort_insertion: insertion sort
-	+ rand_sort_bit: bit sort
-	+ rand_sort_bit_mem: bit sort with memory
+	+ rand_insertion_sort: insertion sort
+	+ rand_bit_sort: bit sort
+	+ rand_bit_sort_mem: bit sort with memory
 	
