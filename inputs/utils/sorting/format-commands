@@ -1,0 +1,11 @@
+FORMAT OF COMMANDS
+==================
+
++ rand_sort_* R s n:
+	test R times a sorting algorithm * that sorts s random
+	values within the interval [0,n).
+
+	+ rand_sort_insertion: insertion sort
+	+ rand_sort_bit: bit sort
+	+ rand_sort_bit_mem: bit sort with memory
+	

@@ -40,6 +40,7 @@
  ********************************************************************/
 
 // C++ includes
+#include <functional>
 #include <iostream>
 #include <fstream>
 #include <random>
@@ -47,7 +48,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/utils/std/sort_integers.hpp>
+#include <lal/utils/sorting/bit_sort.hpp>
 using namespace lal;
 using namespace utils;
 
@@ -56,37 +57,39 @@ using namespace utils;
 
 // size, values in range [0,n)
 static inline
-vector<uint32_t> random_vector(uint32_t r, uint32_t n) {
+vector<uint32_t> random_vector(uint32_t s, uint32_t n) {
 	// always use the same seed
 	std::mt19937 gen(1234);
 
 	// available values in [0,n)
 	vector<uint32_t> av(n);
 	iota(av.begin(), av.end(), 0);
+	size_t max_idx = av.size() - 1;
 
 	// random vector
-	vector<uint32_t> R(r);
+	vector<uint32_t> R(s);
+
 	for (size_t i = 0; i < R.size(); ++i) {
-		std::uniform_int_distribution<size_t> U(0, av.size() - 1);
+		std::uniform_int_distribution<size_t> U(0, max_idx);
 		size_t index = U(gen);
 
 		R[i] = av[index];
-		auto it = av.begin();
-		std::advance(it, index);
-		av.erase(it);
+		std::swap(av[index], av[max_idx]);
+		--max_idx;
 	}
 	return R;
 }
 
+typedef vector<uint32_t>::iterator It;
 
 namespace exe_tests {
 
 err_type check_sorting(
-	const string& algo, uint32_t r, uint32_t n,
-	void (*sort_F)(vector<uint32_t>::iterator begin, vector<uint32_t>::iterator end)
+	const string& algo, uint32_t s, uint32_t n,
+	function<void (It begin, It end)> sort_F
 )
 {
-	vector<uint32_t> R = random_vector(r, n);
+	vector<uint32_t> R = random_vector(s, n);
 
 	vector<uint32_t> Rc1 = R;
 	std::sort(Rc1.begin(), Rc1.end());
@@ -144,17 +147,46 @@ err_type exe_utils_sorting(ifstream& fin) {
 
 	string option;
 	while (fin >> option) {
-		if (option == "sort_insertion") {
-			uint32_t r, n;
-			fin >> r >> n;
-			err_type e = check_sorting("insertion", r, n, insertion_sort);
-			if (e == err_type::test_exe_error) { return e; }
+		if (option == "rand_sort_insertion") {
+			uint32_t R, s, n;
+			fin >> R >> s >> n;
+			auto this_sort = [&](It begin, It end) -> void {
+				insertion_sort(begin, end);
+			};
+			for (uint32_t k = 0; k < R; ++k) {
+				err_type e = check_sorting("insertion", s, n, this_sort);
+				if (e == err_type::test_exe_error) { return e; }
+			}
 		}
-		else if (option == "sort_boolean") {
-			uint32_t r, n;
-			fin >> r >> n;
-			err_type e = check_sorting("boolean", r, n, sort_1_n_inc);
-			if (e == err_type::test_exe_error) { return e; }
+		else if (option == "rand_sort_bit") {
+			uint32_t R, s, n;
+			fin >> R >> s >> n;
+			auto this_sort = [&](It begin, It end) -> void {
+				bit_sort(begin, end);
+			};
+			for (uint32_t k = 0; k < R; ++k) {
+				err_type e = check_sorting("bit", s, n, this_sort);
+				if (e == err_type::test_exe_error) { return e; }
+			}
+		}
+		else if (option == "rand_sort_bit_mem") {
+			uint32_t R, s, n;
+			fin >> R >> s >> n;
+			// bit array
+			vector<bool> seen(n, false);
+			auto bsm = [&](It begin, It end) -> void {
+				bit_sort_mem(begin, end, seen);
+			};
+			// execute test
+			for (uint32_t k = 0; k < R; ++k) {
+				err_type e = check_sorting("bit_memory", s, n, bsm);
+				if (find(seen.begin(), seen.end(), true) != seen.end()) {
+					cerr << ERROR << endl;
+					cerr << "    Memory array 'seen' contains true values." << endl;
+					return err_type::test_exe_error;
+				}
+				if (e == err_type::test_exe_error) { return e; }
+			}
 		}
 		else {
 			cerr << ERROR << endl;

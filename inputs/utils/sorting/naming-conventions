@@ -1,0 +1,40 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+	test-
+
+Then follows the "family number" of the test. This is a three-digit number.
+Finally, a three-digit number indicating the test number within the family.
+Therefore
+
+
+         Test number
+
+              |
+             ---
+	test-xxx.yyy
+	     ---
+	      |
+
+	  Family test
+        number
+
+
+
+Family test numbers
+-------------------
+
+   Type of test
+      |
+     ---
+     xxx
+
+
+We are currently using the following codes for the types of tests
+
+	000: test insertion sort using random values
+	001: test bit sort using random values
+	001: test bit sort with memory using random values
