@@ -148,13 +148,17 @@ function execute_group() {
 	output=$2
 	progress=$3
 	
+	skip=0
+	
 	# Make sure the input directory exists
 	input_group=inputs/$input
 	if [ ! -d $input_group ]; then
 		echo -en "\e[1;4;31mError:\e[0m Input directory "
 		echo -en "\e[2;4;37m$input_group\e[0m"
-		echo -e " does not exist"
-		exit
+		echo -e " does not exist. Skipping..."
+		
+		echo "$(date +"%Y/%m/%d.%T")    Input group $input does not exist. Skipping..." >> execution_log
+		skip=1
 	fi
 	
 	# Make sure the output directory exists
@@ -162,67 +166,71 @@ function execute_group() {
 	if [ ! -d $output_group ]; then
 		echo -en "\e[1;4;31mError:\e[0m Output directory "
 		echo -en "\e[2;4;37m$output_group\e[0m"
-		echo -e " does not exist"
-		exit
+		echo -e " does not exist. Skipping..."
+		
+		echo "$(date +"%Y/%m/%d.%T")    Input group $output does not exist. Skipping..." >> execution_log
+		skip=1
 	fi
 	
-	# ------------------------------------------------
-	# Prepare filenames for standard and error outputs
-	
-	# Given an input directory a/b/c
-	# keys: is the list a b c
-	keys=$(echo $input | tr "/" "\n");
-	# id: is the string a.b.c
-	id=$(echo $keys | tr ' ' '.')
-	
-	# TEST_OUT and TEST_ERR are temporary files: a test named, for example,
-	# test-0015 will produce a standard output and an error output into
-	# $TEST_OUT and $TEST_ERR. Then, in case of errors, each file will be
-	# moved to a unique file for this test, namely into the files
-	# $TEST_OUT.0015 and $TEST_ERR.0015. In case of valgrind the contents
-	# of $TEST_ERR will be moved to $VALG_ERR.0015.
-	TEST_OUT=.out.$id
-	TEST_ERR=.err.$id
-	VALG_ERR=.vgd.$id
-	
-	echo -e "\e[1;1;33mExecuting tests in\e[0m \e[1;2;33m$input_group\e[0m ($progress)"
-	
-	# execute all tests
-	all_test_files=$(ls $input_group | grep test)
-	n_test_files=$(ls $input_group | grep test | wc -l)
-	nth_test=1
-	
-	for f in $all_test_files; do
-		# retrieve id number from input test file
-		# e.g.: 'test-0010' -> '0010'
-		INFILE_LENGTH=${#f}
-		ID=${f:5:($INFILE_LENGTH - 4)}
+	if [ $skip = 0 ]; then
+		# ------------------------------------------------
+		# Prepare filenames for standard and error outputs
 		
-		echo -en "    \e[1;1;34m$f\e[0m ($nth_test/$n_test_files) "
-		PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $TEST_ERR)
-		nth_test=$(($nth_test + 1))
+		# Given an input directory a/b/c
+		# keys: is the list a b c
+		keys=$(echo $input | tr "/" "\n");
+		# id: is the string a.b.c
+		id=$(echo $keys | tr ' ' '.')
 		
-		# parse result of execution command differently,
-		# depending on whether we are using valgrind or not.
-		if [ $use_valgrind == 1 ]; then
-			check_res_valgrind 		\
-				$input_group/$f 	\
-				$TEST_ERR 			\
-				$VALG_ERR.$ID
-		else
-			check_res_no_valgrind 	\
-				$input_group/$f		\
-				$TEST_OUT.$ID 		\
-				$TEST_ERR 			\
-				$TEST_ERR.$ID		\
-				"$PROG_OUT"			\
-				$output_group/$f
-		fi
-	done
-	
-	# Remove those unnecessary temporary files.
-	# File $VALG_ERR is never actually used 'as is'.
-	rm -f $TEST_OUT $TEST_ERR
+		# TEST_OUT and TEST_ERR are temporary files: a test named, for example,
+		# test-0015 will produce a standard output and an error output into
+		# $TEST_OUT and $TEST_ERR. Then, in case of errors, each file will be
+		# moved to a unique file for this test, namely into the files
+		# $TEST_OUT.0015 and $TEST_ERR.0015. In case of valgrind the contents
+		# of $TEST_ERR will be moved to $VALG_ERR.0015.
+		TEST_OUT=.out.$id
+		TEST_ERR=.err.$id
+		VALG_ERR=.vgd.$id
+		
+		echo -e "\e[1;1;33mExecuting tests in\e[0m \e[1;2;33m$input_group\e[0m ($progress)"
+		
+		# execute all tests
+		all_test_files=$(ls $input_group | grep test)
+		n_test_files=$(ls $input_group | grep test | wc -l)
+		nth_test=1
+		
+		for f in $all_test_files; do
+			# retrieve id number from input test file
+			# e.g.: 'test-0010' -> '0010'
+			INFILE_LENGTH=${#f}
+			ID=${f:5:($INFILE_LENGTH - 4)}
+			
+			echo -en "    \e[1;1;34m$f\e[0m ($nth_test/$n_test_files) "
+			PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $TEST_ERR)
+			nth_test=$(($nth_test + 1))
+			
+			# parse result of execution command differently,
+			# depending on whether we are using valgrind or not.
+			if [ $use_valgrind == 1 ]; then
+				check_res_valgrind 		\
+					$input_group/$f 	\
+					$TEST_ERR 			\
+					$VALG_ERR.$ID
+			else
+				check_res_no_valgrind 	\
+					$input_group/$f		\
+					$TEST_OUT.$ID 		\
+					$TEST_ERR 			\
+					$TEST_ERR.$ID		\
+					"$PROG_OUT"			\
+					$output_group/$f
+			fi
+		done
+		
+		# Remove those unnecessary temporary files.
+		# File $VALG_ERR is never actually used 'as is'.
+		rm -f $TEST_OUT $TEST_ERR
+	fi
 }
 
 ########################################################################
@@ -374,7 +382,7 @@ fi
 ########################################################################
 # Execute the tests
 
-echo "$(date +"%Y/%m/%d.%T")    Started execution" >> execution_log
+echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> execution_log
 
 if [ $exe_group != 0 ]; then
 	
@@ -386,42 +394,55 @@ if [ $exe_group != 0 ]; then
 			array_has=1
 			;;
 	esac
+	
+	cont=1
 	if [ $array_has == 0 ]; then
 		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
-		exit
+		
+		echo "$(date +"%Y/%m/%d.%T")    Test execution failed. Group '$exe_group' is not valid." >> execution_log
+		cont=0
 	fi
-
-	# if the group is valid, then execute it
-	echo "Executing group '$exe_group'"
 	
-	# variable names
-	in_dir_name="$exe_group""_IN_DIRS[@]"
-	out_dir_name="$exe_group""_OUT_DIRS[@]"
-	# actual arrays
-	IN_DIRS=("${!in_dir_name}")
-	OUT_DIRS=("${!out_dir_name}")
-	# size of each array
-	in_n=${#IN_DIRS[@]}
-	out_n=${#OUT_DIRS[@]}
-	# test that the arrays are equally long
-	if [ $in_n != $out_n ]; then
-		echo -e "\e[1;4;31mError:\e[0m For execution group $exe_group"
-		echo -e "    The list of input directories is not as long as list of output directories"
-		echo -e "    # input directories : $in_n"
-		echo -e "    # output directories: $out_n"
-		exit
+	if [ $cont = 1 ]; then
+		# if the group is valid, then execute it
+		echo "Executing group '$exe_group'"
+		
+		# variable names
+		in_dir_name="$exe_group""_IN_DIRS[@]"
+		out_dir_name="$exe_group""_OUT_DIRS[@]"
+		# actual arrays
+		IN_DIRS=("${!in_dir_name}")
+		OUT_DIRS=("${!out_dir_name}")
+		# size of each array
+		in_n=${#IN_DIRS[@]}
+		out_n=${#OUT_DIRS[@]}
+		
+		# test that the arrays are equally long
+		cont=1
+		if [ $in_n != $out_n ]; then
+			echo -e "\e[1;4;31mError:\e[0m For execution group $exe_group"
+			echo -e "    The list of input directories is not as long as list of output directories"
+			echo -e "    # input directories : $in_n"
+			echo -e "    # output directories: $out_n"
+			
+			echo "$(date +"%Y/%m/%d.%T")    Test execution failed. There are not as many input directories" >> execution_log
+			echo "$(date +"%Y/%m/%d.%T")    as output directories for group $exe_group" >> execution_log
+			cont=0
+		fi
+		if [ $cont = 1 ]; then
+			# execute
+			for ((i=0; i<$in_n; ++i)); do
+				idx=$(($i + 1))
+				in="${IN_DIRS[$i]}"
+				out="${OUT_DIRS[$i]}"
+				execute_group $in $out $idx/$in_n
+			done
+		fi
 	fi
-	# execute
-	for ((i=0; i<$in_n; ++i)); do
-		idx=$(($i + 1))
-		in="${IN_DIRS[$i]}"
-		out="${OUT_DIRS[$i]}"
-		execute_group $in $out $idx/$in_n
-	done
 else
 	execute_group $input_dir $output_dir "1/1"
 fi
 
-echo "$(date +"%Y/%m/%d.%T")    Finished execution" >> execution_log
+echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> execution_log
 
 echo "A summary of the test has been logged into file 'execution_log'"
