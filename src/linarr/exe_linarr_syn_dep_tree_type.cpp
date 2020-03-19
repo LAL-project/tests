@@ -46,8 +46,8 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/urtree.hpp>
-#include <lal/linarr/classification.hpp>
-#include <lal/linarr/tree_structure_type.hpp>
+#include <lal/linarr/tree_structure_class.hpp>
+#include <lal/linarr/tree_structure.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
@@ -59,22 +59,12 @@ using namespace linarr;
 
 namespace exe_tests {
 
-string sdtt_to_string(const tree_structure_type& t) {
+string sdtt_to_string(const tree_structure& t) {
 	switch (t) {
-	case tree_structure_type::projective: return "projective";
-	case tree_structure_type::planar: return "planar";
-	case tree_structure_type::WG_1: return "WG_1";
-	case tree_structure_type::WG_2: return "WG_2";
-	case tree_structure_type::WG_3: return "WG_3";
-	case tree_structure_type::WG_4: return "WG_4";
-	case tree_structure_type::WG_5: return "WG_5";
-	case tree_structure_type::WG_6: return "WG_6";
-	case tree_structure_type::WG_7: return "WG_7";
-	case tree_structure_type::WG_8: return "WG_8";
-	case tree_structure_type::WG_9: return "WG_9";
-	case tree_structure_type::WG_10: return "WG_10";
-	case tree_structure_type::WG_k: return "WG_k";
-	case tree_structure_type::EC_1: return "EC_1";
+	case tree_structure::projective: return "projective";
+	case tree_structure::planar: return "planar";
+	case tree_structure::WG_1: return "WG_1";
+	case tree_structure::EC_1: return "EC_1";
 	default: return "?";
 	}
 }
@@ -132,8 +122,8 @@ err_type exe_linarr_syn_dep_tree_type(ifstream& fin) {
 		}
 
 		tree.set_root(root);
-		tree_structure_type t = linarr::get_tree_structure_type(tree, pi);
-		cout << sdtt_to_string(t) << endl;
+		auto t = linarr::get_tree_structure_type(tree, pi);
+		//cout << sdtt_to_string(t) << endl;
 
 		char step;
 		cin >> step;

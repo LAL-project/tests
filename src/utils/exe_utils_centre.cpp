@@ -50,7 +50,7 @@ using namespace std;
 #include <lal/graphs/utree.hpp>
 #include <lal/graphs/dtree.hpp>
 #include <lal/graphs/output.hpp>
-#include <lal/utils/tree_centre.hpp>
+#include <lal/utils/graphs/trees/tree_centre.hpp>
 using namespace lal;
 using namespace utils;
 using namespace graphs;

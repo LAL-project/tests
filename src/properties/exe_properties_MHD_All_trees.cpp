@@ -48,7 +48,7 @@ using namespace std;
 // lal includes
 #include <lal/graphs/ugraph.hpp>
 #include <lal/graphs/urtree.hpp>
-#include <lal/generation/all_ulab_free_trees.hpp>
+#include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>

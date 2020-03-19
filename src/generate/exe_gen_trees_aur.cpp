@@ -48,7 +48,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/generation/all_ulab_rooted_trees.hpp>
+#include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/output.hpp>
 using namespace lal;

@@ -45,7 +45,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/generation/all_lab_free_trees.hpp>
+#include <lal/generate/all_lab_free_trees.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/output.hpp>

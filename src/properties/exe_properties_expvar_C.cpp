@@ -52,8 +52,8 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/C_rla.hpp>
 #include <lal/properties/Q.hpp>
-#include <lal/generation/all_ulab_free_trees.hpp>
-#include <lal/generation/rand_ulab_free_trees.hpp>
+#include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;

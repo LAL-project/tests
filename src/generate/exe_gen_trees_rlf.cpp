@@ -45,7 +45,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/generation/rand_lab_free_trees.hpp>
+#include <lal/generate/rand_lab_free_trees.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;

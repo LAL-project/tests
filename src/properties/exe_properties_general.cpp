@@ -52,8 +52,8 @@ using namespace std;
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
-#include <lal/utils/is_tree.hpp>
 #include <lal/io/basic_output.hpp>
+#include <lal/utils/graphs/trees/is_tree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -93,7 +93,7 @@ void mmt_deg(const ugraph& g, uint32_t p) {
 }
 
 void hubiness_coefficient(const ugraph& g) {
-	if (not utils::is_tree(g)) { return; }
+	if (not utils::is_graph_a_tree(g)) { return; }
 	if (g.n_nodes() > 3) {
 		rational h = hubiness_rational(g);
 		cout << "hubiness= " << h << endl;
@@ -101,7 +101,7 @@ void hubiness_coefficient(const ugraph& g) {
 }
 
 void MHD(const ugraph& g, node r) {
-	if (not utils::is_tree(g)) { return; }
+	if (not utils::is_graph_a_tree(g)) { return; }
 	utree t(g);
 	urtree R(t, r);
 	rational mhd = MHD_rational(R);
