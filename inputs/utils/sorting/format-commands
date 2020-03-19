@@ -8,4 +8,5 @@ FORMAT OF COMMANDS
 	+ rand_insertion_sort: insertion sort
 	+ rand_bit_sort: bit sort
 	+ rand_bit_sort_mem: bit sort with memory
+	+ rand_counting_sort: counting sort
 	

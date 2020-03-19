@@ -1,0 +1,155 @@
+TYPE utils-sorting
+INPUT 0
+BODY
+	rand_counting_sort 1 10 10 1
+	rand_counting_sort 1 10 10 2
+	rand_counting_sort 1 10 10 3
+	rand_counting_sort 1 10 10 4
+	rand_counting_sort 1 10 10 5
+	rand_counting_sort 1 10 10 6
+	rand_counting_sort 1 10 10 7
+	rand_counting_sort 1 10 10 8
+	rand_counting_sort 1 10 10 9
+	rand_counting_sort 1 10 10 10
+	
+	rand_counting_sort 1 10 20 1
+	rand_counting_sort 1 10 20 2
+	rand_counting_sort 1 10 20 3
+	rand_counting_sort 1 10 20 4
+	rand_counting_sort 1 10 20 5
+	rand_counting_sort 1 10 20 6
+	rand_counting_sort 1 10 20 7
+	rand_counting_sort 1 10 20 8
+	rand_counting_sort 1 10 20 9
+	rand_counting_sort 1 10 20 10
+	rand_counting_sort 1 10 20 15
+	rand_counting_sort 1 10 20 20
+	
+	
+	rand_counting_sort 2 10 10 1
+	rand_counting_sort 2 10 10 2
+	rand_counting_sort 2 10 10 3
+	rand_counting_sort 2 10 10 4
+	rand_counting_sort 2 10 10 5
+	rand_counting_sort 2 10 10 6
+	rand_counting_sort 2 10 10 7
+	rand_counting_sort 2 10 10 8
+	rand_counting_sort 2 10 10 9
+	rand_counting_sort 2 10 10 10
+	
+	rand_counting_sort 2 10 20 1
+	rand_counting_sort 2 10 20 2
+	rand_counting_sort 2 10 20 3
+	rand_counting_sort 2 10 20 4
+	rand_counting_sort 2 10 20 5
+	rand_counting_sort 2 10 20 6
+	rand_counting_sort 2 10 20 7
+	rand_counting_sort 2 10 20 8
+	rand_counting_sort 2 10 20 9
+	rand_counting_sort 2 10 20 10
+	rand_counting_sort 2 10 20 15
+	rand_counting_sort 2 10 20 20
+
+	
+	rand_counting_sort 3 10 10 1
+	rand_counting_sort 3 10 10 2
+	rand_counting_sort 3 10 10 3
+	rand_counting_sort 3 10 10 4
+	rand_counting_sort 3 10 10 5
+	rand_counting_sort 3 10 10 6
+	rand_counting_sort 3 10 10 7
+	rand_counting_sort 3 10 10 8
+	rand_counting_sort 3 10 10 9
+	rand_counting_sort 3 10 10 10
+	
+	rand_counting_sort 3 10 20 1
+	rand_counting_sort 3 10 20 2
+	rand_counting_sort 3 10 20 3
+	rand_counting_sort 3 10 20 4
+	rand_counting_sort 3 10 20 5
+	rand_counting_sort 3 10 20 6
+	rand_counting_sort 3 10 20 7
+	rand_counting_sort 3 10 20 8
+	rand_counting_sort 3 10 20 9
+	rand_counting_sort 3 10 20 10
+	rand_counting_sort 3 10 20 15
+	rand_counting_sort 3 10 20 20
+
+
+
+
+
+
+	rand_counting_sort 1 10 10 10
+	rand_counting_sort 1 10 10 20
+	rand_counting_sort 1 10 10 30
+	rand_counting_sort 1 10 10 40
+	rand_counting_sort 1 10 10 50
+	rand_counting_sort 1 10 10 60
+	rand_counting_sort 1 10 10 70
+	rand_counting_sort 1 10 10 80
+	rand_counting_sort 1 10 10 90
+	rand_counting_sort 1 10 10 100
+	
+	rand_counting_sort 1 10 20 10
+	rand_counting_sort 1 10 20 20
+	rand_counting_sort 1 10 20 30
+	rand_counting_sort 1 10 20 40
+	rand_counting_sort 1 10 20 50
+	rand_counting_sort 1 10 20 60
+	rand_counting_sort 1 10 20 70
+	rand_counting_sort 1 10 20 80
+	rand_counting_sort 1 10 20 90
+	rand_counting_sort 1 10 20 100
+	rand_counting_sort 1 10 20 150
+	rand_counting_sort 1 10 20 200
+	
+	
+	rand_counting_sort 2 10 10 10
+	rand_counting_sort 2 10 10 20
+	rand_counting_sort 2 10 10 30
+	rand_counting_sort 2 10 10 40
+	rand_counting_sort 2 10 10 50
+	rand_counting_sort 2 10 10 60
+	rand_counting_sort 2 10 10 70
+	rand_counting_sort 2 10 10 80
+	rand_counting_sort 2 10 10 90
+	rand_counting_sort 2 10 10 100
+	
+	rand_counting_sort 2 10 20 10
+	rand_counting_sort 2 10 20 20
+	rand_counting_sort 2 10 20 30
+	rand_counting_sort 2 10 20 40
+	rand_counting_sort 2 10 20 50
+	rand_counting_sort 2 10 20 60
+	rand_counting_sort 2 10 20 70
+	rand_counting_sort 2 10 20 80
+	rand_counting_sort 2 10 20 900
+	rand_counting_sort 2 10 20 100
+	rand_counting_sort 2 10 20 150
+	rand_counting_sort 2 10 20 200
+
+	
+	rand_counting_sort 3 10 10 10
+	rand_counting_sort 3 10 10 20
+	rand_counting_sort 3 10 10 30
+	rand_counting_sort 3 10 10 40
+	rand_counting_sort 3 10 10 50
+	rand_counting_sort 3 10 10 60
+	rand_counting_sort 3 10 10 70
+	rand_counting_sort 3 10 10 80
+	rand_counting_sort 3 10 10 90
+	rand_counting_sort 3 10 10 100
+	
+	rand_counting_sort 3 10 20 10
+	rand_counting_sort 3 10 20 20
+	rand_counting_sort 3 10 20 30
+	rand_counting_sort 3 10 20 40
+	rand_counting_sort 3 10 20 50
+	rand_counting_sort 3 10 20 60
+	rand_counting_sort 3 10 20 70
+	rand_counting_sort 3 10 20 80
+	rand_counting_sort 3 10 20 90
+	rand_counting_sort 3 10 20 100
+	rand_counting_sort 3 10 20 150
+	rand_counting_sort 3 10 20 200
