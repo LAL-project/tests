@@ -176,7 +176,7 @@ err_type __check_sorting
 		cerr << endl;
 		return err_type::test_exe_error;
 	}
-	return err_type::test_format_error;
+	return err_type::no_error;
 }
 
 // -----------------------------------------------------------------------------
@@ -213,6 +213,8 @@ err_type check_counting_sort(const string& algo, Ui k, Ui s, Ui n) {
 		utils::counting_sort<t3_vec_it, t3>(begin, end, n+1, key3);
 	};
 
+	err_type E = err_type::no_error;
+
 	if (k == 1) {
 		// vector of tuples
 		t1_vec R(s);
@@ -222,7 +224,7 @@ err_type check_counting_sort(const string& algo, Ui k, Ui s, Ui n) {
 			std::get<0>(R[i]) = r[i];
 		}
 		// check sorting algorithm
-		__check_sorting<t1,t1_vec_it>(algo, R,R, sort1);
+		E = __check_sorting<t1,t1_vec_it>(algo, R,R, sort1);
 	}
 	else if (k == 2) {
 		// vector of tuples
@@ -235,7 +237,7 @@ err_type check_counting_sort(const string& algo, Ui k, Ui s, Ui n) {
 			std::get<1>(R[i]) = r2[i];
 		}
 		// check sorting algorithm
-		__check_sorting<t2,t2_vec_it>(algo, R,R, sort2);
+		E = __check_sorting<t2,t2_vec_it>(algo, R,R, sort2);
 	}
 	else if (k == 3) {
 		// vector of tuples
@@ -250,8 +252,79 @@ err_type check_counting_sort(const string& algo, Ui k, Ui s, Ui n) {
 			std::get<2>(R[i]) = r3[i];
 		}
 		// check sorting algorithm
-		__check_sorting<t3,t3_vec_it>(algo, R,R, sort3);
+		E = __check_sorting<t3,t3_vec_it>(algo, R,R, sort3);
 	}
+	else {
+		cerr << ERROR << endl;
+		cerr << "    Size of tuple '" << k << "' not captured." << endl;
+		return err_type::test_format_error;
+	}
+	return E;
+}
+
+err_type exe_rand_sorting(const string& option, ifstream& fin) {
+	if (option == "rand_insertion_sort") {
+		Ui R, s, n;
+		fin >> R >> s >> n;
+		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
+			utils::insertion_sort(begin, end);
+		};
+		for (Ui k = 0; k < R; ++k) {
+			err_type e = check_sorting("insertion", s, n, this_sort);
+			if (e != err_type::no_error) { return e; }
+		}
+		return err_type::no_error;
+	}
+
+	if (option == "rand_bit_sort") {
+		Ui R, s, n;
+		fin >> R >> s >> n;
+		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
+			utils::bit_sort(begin, end);
+		};
+		for (Ui k = 0; k < R; ++k) {
+			err_type e = check_sorting("bit", s, n, this_sort);
+			if (e != err_type::no_error) { return e; }
+		}
+		return err_type::no_error;
+	}
+
+	if (option == "rand_bit_sort_mem") {
+		Ui R, s, n;
+		fin >> R >> s >> n;
+		// bit array
+		vector<char> seen(n, 0);
+		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
+			utils::bit_sort_mem(begin, end, &seen[0]);
+		};
+		// execute test
+		for (Ui k = 0; k < R; ++k) {
+			err_type e = check_sorting("bit_memory", s, n, bsm);
+			// check for two errors
+			if (find(seen.begin(), seen.end(), 1) != seen.end()) {
+				cerr << ERROR << endl;
+				cerr << "    Memory array 'seen' contains true values." << endl;
+				return err_type::test_exe_error;
+			}
+			if (e != err_type::no_error) { return e; }
+		}
+		return err_type::no_error;
+	}
+
+	if (option == "rand_counting_sort") {
+		Ui k, R, s, n;
+		fin >> k >> R >> s >> n;
+
+		// execute test
+		for (Ui rep = 0; rep < R; ++rep) {
+			err_type e = check_counting_sort("counting_sort", k, s, n);
+			if (e != err_type::no_error) { return e; }
+		}
+		return err_type::no_error;
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Option '" << option << "' not valid." << endl;
 	return err_type::test_format_error;
 }
 
@@ -290,56 +363,9 @@ err_type exe_utils_sorting(ifstream& fin) {
 
 	string option;
 	while (fin >> option) {
-		if (option == "rand_insertion_sort") {
-			Ui R, s, n;
-			fin >> R >> s >> n;
-			auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-				utils::insertion_sort(begin, end);
-			};
-			for (Ui k = 0; k < R; ++k) {
-				err_type e = check_sorting("insertion", s, n, this_sort);
-				if (e == err_type::test_exe_error) { return e; }
-			}
-		}
-		else if (option == "rand_bit_sort") {
-			Ui R, s, n;
-			fin >> R >> s >> n;
-			auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-				utils::bit_sort(begin, end);
-			};
-			for (Ui k = 0; k < R; ++k) {
-				err_type e = check_sorting("bit", s, n, this_sort);
-				if (e == err_type::test_exe_error) { return e; }
-			}
-		}
-		else if (option == "rand_bit_sort_mem") {
-			Ui R, s, n;
-			fin >> R >> s >> n;
-			// bit array
-			vector<bool> seen(n, false);
-			auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-				utils::bit_sort_mem(begin, end, seen);
-			};
-			// execute test
-			for (Ui k = 0; k < R; ++k) {
-				err_type e = check_sorting("bit_memory", s, n, bsm);
-				if (find(seen.begin(), seen.end(), true) != seen.end()) {
-					cerr << ERROR << endl;
-					cerr << "    Memory array 'seen' contains true values." << endl;
-					return err_type::test_exe_error;
-				}
-				if (e == err_type::test_exe_error) { return e; }
-			}
-		}
-		else if (option == "rand_counting_sort") {
-			Ui k, R, s, n;
-			fin >> k >> R >> s >> n;
-
-			// execute test
-			for (Ui rep = 0; rep < R; ++rep) {
-				err_type e = check_counting_sort("counting_sort", k, s, n);
-				if (e == err_type::test_exe_error) { return e; }
-			}
+		if (option.substr(0, 4) == "rand") {
+			err_type e = exe_rand_sorting(option, fin);
+			if (e != err_type::no_error) { return e; }
 		}
 		else {
 			cerr << ERROR << endl;
