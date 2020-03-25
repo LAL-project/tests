@@ -71,21 +71,21 @@ namespace exe_tests {
 
 void output_ExpVar_C_BF(const ugraph& g) {
 	rational Vr = variance_C_freqs_Q_rational(g.Q());
-	rational E1r = expectation_C_first_rational(g);
+	rational E1r = expectation_C_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_Q(const ugraph& g) {
 	rational Vr = variance_C_rational_Q(g, g.Q());
-	rational E1r = expectation_C_first_rational(g);
+	rational E1r = expectation_C_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_no_Q(const ugraph& g, bool reuse) {
 	rational Vr = variance_C_rational(g, reuse);
-	rational E1r = expectation_C_first_rational(g);
+	rational E1r = expectation_C_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
@@ -93,14 +93,14 @@ void output_ExpVar_C_formula_no_Q(const ugraph& g, bool reuse) {
 void output_ExpVar_C_trees(const ugraph& g) {
 	utree t = g;
 	rational Vr = variance_C_tree_rational(t);
-	rational E1r = expectation_C_first_rational(t);
+	rational E1r = expectation_C_rational(t);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_forests(const ugraph& g) {
 	rational Vr = variance_C_forest_rational(g);
-	rational E1r = expectation_C_first_rational(g);
+	rational E1r = expectation_C_rational(g);
 	rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
