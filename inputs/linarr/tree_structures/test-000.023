@@ -1,0 +1,4 @@
+TYPE linarr-syntree_classification
+INPUT 1
+graphs/projective-structures/all_23.sentences
+BODY
