@@ -1,0 +1,10 @@
+tree;classes
+0 1 1;1ec,mh4,mh5,pla,prj,wg1
+2 0 1;1ec,mh4,mh5,pla,wg1
+3 1 0;1ec,mh4,mh5,pla,prj,wg1
+0 1 2;1ec,mh4,mh5,pla,prj,wg1
+2 0 2;1ec,mh4,mh5,pla,prj,wg1
+2 3 0;1ec,mh4,mh5,pla,prj,wg1
+0 3 1;1ec,mh4,mh5,pla,prj,wg1
+3 0 2;1ec,mh4,mh5,pla,wg1
+3 3 0;1ec,mh4,mh5,pla,prj,wg1

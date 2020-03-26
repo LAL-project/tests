@@ -1,0 +1,23 @@
+SUMMARY
+=======
+
+The data in this folder was provided by CARLOS GÓMEZ-RODÍGUEZ, Ph. D, (LYS Group: http://www.grupolys.org/~cgomezr/).
+This data is a subset of the dataset published in the HARVARD DATAVERSE (https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XHRIYX&version=1.0)
+
+FILE NAMING
+===========
+
+Each file name has the following format
+
+	all_x.senteces
+
+where 'x' is a two-digit number indicating the number of vertices of the trees.
+
+FILE FORMAT
+===========
+
+Each file contains a single-line header
+
+	tree;classes
+
+The remaining lines contain an arrangement of a tree followed by a ';' and a comma-separated list of projective classes it belongs to.
