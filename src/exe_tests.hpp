@@ -71,12 +71,11 @@ err_type exe_properties_ExpVar_D(std::ifstream& fin);
 
 err_type exe_linarr_approx_Exp_C(std::ifstream& fin);
 err_type exe_linarr_C(std::ifstream& fin);
-err_type exe_linarr_C_list(ifstream& fin);
+err_type exe_linarr_C_list(std::ifstream& fin);
 err_type exe_linarr_D(const std::string& what, std::ifstream& fin);
 err_type exe_linarr_headedness(std::ifstream& fin);
-err_type exe_linarr_syn_dep_tree_type(std::ifstream& fin);
-err_type exe_linarr_klevel
-(const std::string& level, const std::string& what, std::ifstream& fin);
+err_type exe_linarr_syntree_classification(std::ifstream& fin);
+err_type exe_linarr_klevel(const std::string& level, const std::string& what, std::ifstream& fin);
 
 err_type exe_gen_trees_alf(std::ifstream& fin);
 err_type exe_gen_trees_auf(std::ifstream& fin);

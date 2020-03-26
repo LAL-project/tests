@@ -50,7 +50,7 @@ SOURCES += \
     linarr/exe_linarr_approx_exp_C.cpp \
     linarr/exe_linarr_headedness.cpp \
     linarr/exe_linarr_klevel.cpp \
-    linarr/exe_linarr_syn_dep_tree_type.cpp \
+    linarr/exe_linarr_syntree_classification.cpp \
 	main.cpp \
     numeric/exe_rational.cpp \
 	parse_keywords.cpp \

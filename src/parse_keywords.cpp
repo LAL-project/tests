@@ -191,8 +191,8 @@ err_type call_linarr
 	if (key == "compute_headedness") {
 		return exe_linarr_headedness(fin);
 	}
-	if (key == "syn_dep_tree_type") {
-		return exe_linarr_syn_dep_tree_type(fin);
+	if (key == "syntree_classification") {
+		return exe_linarr_syntree_classification(fin);
 	}
 
 	cerr << ERROR << endl;
