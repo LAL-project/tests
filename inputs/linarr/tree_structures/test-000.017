@@ -1,4 +1,13 @@
 TYPE linarr-syntree_classification
-INPUT 1
-graphs/projective-structures/all_17.sentences
+INPUT 10
+graphs/projective-structures/sen-17--0
+graphs/projective-structures/sen-17--1
+graphs/projective-structures/sen-17--2
+graphs/projective-structures/sen-17--3
+graphs/projective-structures/sen-17--4
+graphs/projective-structures/sen-17--5
+graphs/projective-structures/sen-17--6
+graphs/projective-structures/sen-17--7
+graphs/projective-structures/sen-17--8
+graphs/projective-structures/sen-17--9
 BODY

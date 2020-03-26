@@ -9,9 +9,10 @@ FILE NAMING
 
 Each file name has the following format
 
-	all_x.senteces
+	sen-x
+	sen-x--y
 
-where 'x' is a two-digit number indicating the number of vertices of the trees.
+where 'x' is a two-digit number indicating the number of vertices of the trees and 'y' is a one-digit number indicating the part of the original file (some files too large for Github, so they had to be split into several smaller files).
 
 FILE FORMAT
 ===========
