@@ -64,8 +64,8 @@ string sdtt_to_string(const tree_structure& t) {
 	switch (t) {
 	case tree_structure::projective: return "prj";
 	case tree_structure::planar: return "pla";
-	case tree_structure::WG_1: return "wg1";
-	case tree_structure::EC_1: return "1ec";
+	case tree_structure::WG1: return "wg1";
+	case tree_structure::EC1: return "1ec";
 	case tree_structure::MH4: return "mh4";
 	case tree_structure::MH5: return "mh5";
 	case tree_structure::none: return "?";
@@ -77,24 +77,14 @@ string sdtt_to_string(const tree_structure& t) {
 tree_structure string_to_sdtt(const string& s) {
 	if (s == "prj") { return tree_structure::projective; }
 	if (s == "pla") { return tree_structure::planar; }
-	if (s == "1ec") { return tree_structure::EC_1; }
-	if (s == "wg1") { return tree_structure::WG_1; }
+	if (s == "1ec") { return tree_structure::EC1; }
+	if (s == "wg1") { return tree_structure::WG1; }
 	if (s == "mh4") { return tree_structure::MH4; }
 	if (s == "mh5") { return tree_structure::MH5; }
 	cerr << ERROR << endl;
 	cerr << "    String could not be converted to LAL's tree_structure type." << endl;
 	cerr << "    Input string: " << s << endl;
 	return tree_structure::none;
-}
-
-void output_classes(const vector<bool>& classes, const string& tab) {
-	for (size_t i = 0; i < classes.size(); ++i) {
-		if (classes[i]) {
-			cout << tab
-				 << sdtt_to_string(static_cast<lal::linarr::tree_structure>(i))
-				 << endl;
-		}
-	}
 }
 
 urtree parse_tree_in_line(const string& s) {
@@ -111,6 +101,11 @@ urtree parse_tree_in_line(const string& s) {
 vector<bool> parse_classes(string s) {
 	// classes vector
 	vector<bool> classes(lal::linarr::__tree_structure_size, false);
+	if (s.length() == 0) {
+		const size_t idx = static_cast<size_t>(string_to_sdtt("none"));
+		classes[idx] = true;
+		return classes;
+	}
 
 	// parse classes in string
 	std::replace(s.begin(), s.end(), ',', ' ');
@@ -166,10 +161,24 @@ err_type parse_single_file(const string& file) {
 			cerr << ERROR << endl;
 			cerr << "    Classes detected by LAL are not a subset of the actual classes." << endl;
 			cerr << "    In line '" << lineno << "' of file '" << file << "'." << endl;
+			cerr << "    Line's content: " << line << endl;
 			cerr << "    Actual classes:" << endl;
-			output_classes(ground_classes, "        ");
+			for (size_t i = 0; i < ground_classes.size(); ++i) {
+				if (ground_classes[i]) {
+					cout << "        "
+						 << sdtt_to_string(static_cast<lal::linarr::tree_structure>(i))
+						 << endl;
+				}
+			}
 			cerr << "    LAL's classes:" << endl;
-			output_classes(LAL_classes, "        ");
+			for (size_t i = 0; i < LAL_classes.size(); ++i) {
+				if (LAL_classes[i]) {
+					cout << "        "
+						 << sdtt_to_string(static_cast<lal::linarr::tree_structure>(i))
+						 << (not ground_classes[i] ? "  <--- incorrect" : "")
+						 << endl;
+				}
+			}
 			return err_type::test_exe_error;
 		}
 	}
