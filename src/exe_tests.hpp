@@ -77,6 +77,7 @@ err_type exe_linarr_headedness(std::ifstream& fin);
 err_type exe_linarr_syntree_classification(std::ifstream& fin);
 err_type exe_linarr_klevel(const std::string& level, const std::string& what, std::ifstream& fin);
 
+err_type exe_gen_rand_arrangements(std::ifstream& fin);
 err_type exe_gen_trees_alf(std::ifstream& fin);
 err_type exe_gen_trees_auf(std::ifstream& fin);
 err_type exe_gen_trees_aur(std::ifstream& fin);

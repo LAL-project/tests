@@ -18,6 +18,7 @@ groups_list=(\
 	"gen_rlr" \
 	"gen_ruf" \
 	"gen_rur" \
+	"gen_rand_arr" \
 	"utils" \
 	)
 
@@ -54,6 +55,7 @@ all_IN_DIRS=(\
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
 	"generate/rand_ulab_rooted" \
+	"generate/rand_arrangements" \
 	)
 all_OUT_DIRS=(\
 	"construction" \
@@ -87,6 +89,7 @@ all_OUT_DIRS=(\
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
 	"generate/rand_ulab_rooted" \
+	"generate/rand_arrangements" \
 	)
 
 # construction tests
@@ -195,6 +198,7 @@ gen_IN_DIRS=(\
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
 	"generate/rand_ulab_rooted" \
+	"generate/rand_arrangements" \
 	)
 gen_OUT_DIRS=(\
 	"generate/all_lab_free" \
@@ -203,6 +207,7 @@ gen_OUT_DIRS=(\
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
 	"generate/rand_ulab_rooted" \
+	"generate/rand_arrangements" \
 	)
 # generate (all labelled free) tests : alf
 gen_alf_IN_DIRS=(\
@@ -245,6 +250,13 @@ gen_rur_IN_DIRS=(\
 	)
 gen_rur_OUT_DIRS=(\
 	"generate/rand_ulab_rooted" \
+	)
+# generate (rand unlabelled rooted) tests : ruf
+gen_rand_arr_IN_DIRS=(\
+	"generate/rand_arrangements" \
+	)
+gen_rand_arr_OUT_DIRS=(\
+	"generate/rand_arrangements" \
 	)
 
 # utils tests

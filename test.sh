@@ -46,6 +46,7 @@ function show_usage() {
 	echo "        gen_rlr      : execute generation (Rand Labelled Rooted) tests         "
 	echo "        gen_ruf      : execute generation (Rand Unlabelled Free) tests         "
 	echo "        gen_rur      : execute generation (Rand Unlabelled Rooted) tests       "
+	echo "        gen_rand_arr : execute generation (random linear arrangements) tests   "
 	echo "        utils        : execute utils tests                                     "
 	echo "                                                                               "	
 	echo "Optional parameters:                                                           "

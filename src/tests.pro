@@ -38,6 +38,7 @@ SOURCES += \
     construction/exe_construction.cpp \
     construction/exe_construction_assert.cpp \
     construction/exe_construction_utils.cpp \
+    generate/exe_gen_rand_arrangements.cpp \
     generate/exe_gen_trees_alf.cpp \
     generate/exe_gen_trees_auf.cpp \
     generate/exe_gen_trees_aur.cpp \

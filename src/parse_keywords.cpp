@@ -276,6 +276,9 @@ err_type call_generate
 	if (key == "trees") {
 		return call_generate_trees(keywords, i + 1, fin);
 	}
+	else if (key == "rand_arrangements") {
+		return exe_gen_rand_arrangements(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
