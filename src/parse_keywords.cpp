@@ -305,6 +305,9 @@ err_type call_generate_trees
 	else if (key == "ruf") {
 		return exe_gen_trees_ruf(fin);
 	}
+	else if (key == "rur") {
+		return exe_gen_trees_rur(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;

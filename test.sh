@@ -39,12 +39,13 @@ function show_usage() {
 	echo "        exp_var_D    : execute tests for the expectation and variance of D     "
 	echo "        linarr       : execute linear arrangement tests                        "
 	echo "        linarr_C     : execute linear arrangement (crossings) tests            "
-	echo "        generate     : execute generation tests                                "
-	echo "        generate_alf : execute generation (All Labelled Free) tests            "
-	echo "        generate_auf : execute generation (All Unlabelled Free) tests          "
-	echo "        generate_rlf : execute generation (Rand Labelled Free) tests           "
-	echo "        generate_rlr : execute generation (Rand Labelled Rooted) tests         "
-	echo "        generate_ruf : execute generation (Rand Unlabelled Free) tests         "
+	echo "        gen          : execute generation tests                                "
+	echo "        gen_alf      : execute generation (All Labelled Free) tests            "
+	echo "        gen_auf      : execute generation (All Unlabelled Free) tests          "
+	echo "        gen_rlf      : execute generation (Rand Labelled Free) tests           "
+	echo "        gen_rlr      : execute generation (Rand Labelled Rooted) tests         "
+	echo "        gen_ruf      : execute generation (Rand Unlabelled Free) tests         "
+	echo "        gen_rur      : execute generation (Rand Unlabelled Rooted) tests       "
 	echo "        utils        : execute utils tests                                     "
 	echo "                                                                               "	
 	echo "Optional parameters:                                                           "
@@ -367,6 +368,7 @@ fi
 
 ########################################################################
 # Display information about what software is being tested.
+
 echo -en "Testing "
 if [ "$EXE_MODE" == "debug" ]; then
 	echo -en "in \e[1;3;36mdebug\e[0m mode"

@@ -10,13 +10,14 @@ groups_list=(\
 	"linarr" \
 	"linarr_C" \
 	"generate" \
-	"generate_alf" \
-	"generate_ulf" \
-	"generate_alf" \
-	"generate_auf" \
-	"generate_rlf" \
-	"generate_rlr" \
-	"generate_ruf" \
+	"gen_alf" \
+	"gen_ulf" \
+	"gen_alf" \
+	"gen_auf" \
+	"gen_rlf" \
+	"gen_rlr" \
+	"gen_ruf" \
+	"gen_rur" \
 	"utils" \
 	)
 
@@ -52,6 +53,7 @@ all_IN_DIRS=(\
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	"generate/rand_ulab_rooted" \
 	)
 all_OUT_DIRS=(\
 	"construction" \
@@ -84,6 +86,7 @@ all_OUT_DIRS=(\
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	"generate/rand_ulab_rooted" \
 	)
 
 # construction tests
@@ -185,54 +188,63 @@ linarr_C_OUT_DIRS=(\
 	)
 
 # generate tests
-generate_IN_DIRS=(\
+gen_IN_DIRS=(\
 	"generate/all_lab_free" \
 	"generate/all_ulab_free" \
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	"generate/rand_ulab_rooted" \
 	)
-generate_OUT_DIRS=(\
+gen_OUT_DIRS=(\
 	"generate/all_lab_free" \
 	"generate/all_ulab_free" \
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
+	"generate/rand_ulab_rooted" \
 	)
 # generate (all labelled free) tests : alf
-generate_alf_IN_DIRS=(\
+gen_alf_IN_DIRS=(\
 	"generate/all_lab_free" \
 	)
-generate_alf_OUT_DIRS=(\
+gen_alf_OUT_DIRS=(\
 	"generate/all_lab_free" \
 	)
 # generate (all unlabelled free) tests : auf
-generate_auf_IN_DIRS=(\
+gen_auf_IN_DIRS=(\
 	"generate/all_ulab_free" \
 	)
-generate_auf_OUT_DIRS=(\
+gen_auf_OUT_DIRS=(\
 	"generate/all_ulab_free" \
 	)
 # generate (rand labelled free) tests : rlf
-generate_rlf_IN_DIRS=(\
+gen_rlf_IN_DIRS=(\
 	"generate/rand_lab_free" \
 	)
-generate_rlf_OUT_DIRS=(\
+gen_rlf_OUT_DIRS=(\
 	"generate/rand_lab_free" \
 	)
 # generate (rand labelled rooted) tests : rlr
-generate_rlr_IN_DIRS=(\
+gen_rlr_IN_DIRS=(\
 	"generate/rand_lab_rooted" \
 	)
-generate_rlr_OUT_DIRS=(\
+gen_rlr_OUT_DIRS=(\
 	"generate/rand_lab_rooted" \
 	)
-# generate (rand labelled rooted) tests : ruf
-generate_ruf_IN_DIRS=(\
-	"generate/rand_lab_free" \
+# generate (rand unlabelled rooted) tests : ruf
+gen_ruf_IN_DIRS=(\
+	"generate/rand_ulab_free" \
 	)
-generate_ruf_OUT_DIRS=(\
-	"generate/rand_lab_free" \
+gen_ruf_OUT_DIRS=(\
+	"generate/rand_ulab_free" \
+	)
+# generate (rand unlabelled rooted) tests : ruf
+gen_rur_IN_DIRS=(\
+	"generate/rand_ulab_rooted" \
+	)
+gen_rur_OUT_DIRS=(\
+	"generate/rand_ulab_rooted" \
 	)
 
 # utils tests

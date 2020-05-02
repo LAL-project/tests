@@ -39,54 +39,73 @@
  *
  ********************************************************************/
 
-#pragma once
-
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be compiled again.
- */
-
 // C++ includes
+#include <iostream>
 #include <fstream>
-#include <vector>
-#include <string>
+using namespace std;
+
+// lal includes
+#include <lal/generate/rand_ulab_rooted_trees.hpp>
+using namespace lal;
+using namespace graphs;
+using namespace generate;
 
 // custom includes
-#include "definitions.hpp"
+#include "../definitions.hpp"
+
+/*
+ * RANDOM UNLABELLED FREE TREES
+ *
+ */
 
 namespace exe_tests {
 
-err_type exe_construction(std::ifstream& fin);
+err_type exe_gen_trees_rur(std::ifstream& fin) {
 
-err_type exe_numeric_integer(std::ifstream& fin);
-err_type exe_numeric_rational(std::ifstream& fin);
+	string field;
+	fin >> field;
 
-err_type exe_properties_general(std::ifstream& fin);
-err_type exe_properties_MHD_All_trees(std::ifstream& fin);
-err_type exe_properties_ExpVar_C(std::ifstream& fin);
-err_type exe_properties_ExpVar_D(std::ifstream& fin);
+	if (field != "INPUT") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'INPUT'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
 
-err_type exe_linarr_approx_Exp_C(std::ifstream& fin);
-err_type exe_linarr_C(std::ifstream& fin);
-err_type exe_linarr_C_list(std::ifstream& fin);
-err_type exe_linarr_D(const std::string& what, std::ifstream& fin);
-err_type exe_linarr_headedness(std::ifstream& fin);
-err_type exe_linarr_syntree_classification(std::ifstream& fin);
-err_type exe_linarr_klevel(const std::string& level, const std::string& what, std::ifstream& fin);
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 0) {
+		cerr << ERROR << endl;
+		cerr << "    Expected no inputs at all." << endl;
+		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
+		return err_type::test_format_error;
+	}
 
-err_type exe_gen_trees_alf(std::ifstream& fin);
-err_type exe_gen_trees_auf(std::ifstream& fin);
-err_type exe_gen_trees_aur(std::ifstream& fin);
-err_type exe_gen_trees_rlf(std::ifstream& fin);
-err_type exe_gen_trees_rlr(std::ifstream& fin);
-err_type exe_gen_trees_ruf(std::ifstream& fin);
-err_type exe_gen_trees_rur(std::ifstream& fin);
+	// parse body field
+	fin >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'BODY'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
 
-err_type exe_utils_sorting(std::ifstream& fin);
-err_type exe_utils_bfs(std::ifstream& fin);
-err_type exe_utils_centre(std::ifstream& fin);
+	// --- do the tests
+
+	uint32_t n;
+
+	rand_ulab_rooted_trees TreeGen;
+	utree T;
+
+	while (fin >> n) {
+		TreeGen.init(n, 100);
+		for (int i = 0; i < 10000; ++i) {
+			T = TreeGen.make_rand_tree();
+		}
+	}
+
+	TEST_GOODBYE
+	return err_type::no_error;
+}
 
 } // -- namespace exe_tests

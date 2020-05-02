@@ -44,6 +44,7 @@ SOURCES += \
     generate/exe_gen_trees_rlf.cpp \
     generate/exe_gen_trees_rlr.cpp \
     generate/exe_gen_trees_ruf.cpp \
+    generate/exe_gen_trees_rur.cpp \
     linarr/exe_linarr_C.cpp \
     linarr/exe_linarr_C_list.cpp \
     linarr/exe_linarr_D.cpp \
