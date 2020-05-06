@@ -1,0 +1,37 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph rtree f 11
+	add_edges f 10
+		3 1
+		1 5
+		1 0
+		5 6
+		6 7
+		0 2
+		2 4
+		4 8
+		4 9
+		4 10
+		false
+	assert rtree_type_not_valid f
+	assert not_has_root f
+	set_root f 3
+	assert has_root f
+	assert is_tree f
+	find_rtree_type f
+	assert rtree_type_valid f
+	assert is_rtree_type f arborescence
+	
+	calculate_size_subtrees f false
+	assert num_nodes_subtree f 0 6
+	assert num_nodes_subtree f 1 10
+	assert num_nodes_subtree f 2 5
+	assert num_nodes_subtree f 3 11
+	assert num_nodes_subtree f 4 4
+	assert num_nodes_subtree f 5 3
+	assert num_nodes_subtree f 6 2
+	assert num_nodes_subtree f 7 1
+	assert num_nodes_subtree f 8 1
+	assert num_nodes_subtree f 9 1
+	assert num_nodes_subtree f 10 1

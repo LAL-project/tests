@@ -1,0 +1,121 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph rtree g 5
+	add_edges g 4
+		0 1
+		1 2
+		2 3
+		3 4
+		false
+	assert rtree_type_not_valid g
+	assert not_has_root g
+	set_root g 0
+	assert has_root g
+	assert is_tree g
+	find_rtree_type g
+	assert rtree_type_valid g
+	assert is_rtree_type g arborescence
+	
+	assert need_recalc_subtree_size g
+	calculate_size_subtrees g false
+	assert no_need_recalc_subtree_size g
+	
+	assert num_nodes_subtree g 0 5
+	assert num_nodes_subtree g 1 4
+	assert num_nodes_subtree g 2 3
+	assert num_nodes_subtree g 3 2
+	assert num_nodes_subtree g 4 1
+	
+	set_root g 4
+	calculate_size_subtrees g true
+	assert num_nodes_subtree g 0 1
+	assert num_nodes_subtree g 1 2
+	assert num_nodes_subtree g 2 3
+	assert num_nodes_subtree g 3 4
+	assert num_nodes_subtree g 4 5
+	
+	assert rtree_type_not_valid g
+	find_rtree_type g
+	assert is_rtree_type g anti_arborescence
+	
+	/*
+	Note that we can't calculate the size of the subtrees with 'false' because
+	a false value means that the algorithm is not going to follow reversed edges,
+	implying that it can't calculate meaningful values.
+	*/
+	
+	
+	create_graph rtree h 5
+	add_edges h 4
+		3 4
+		1 2
+		2 3
+		0 1
+		false
+	assert rtree_type_not_valid h
+	assert not_has_root h
+	set_root h 0
+	assert has_root h
+	assert is_tree h
+	find_rtree_type h
+	assert rtree_type_valid h
+	assert is_rtree_type h arborescence
+	
+	assert need_recalc_subtree_size h
+	calculate_size_subtrees h false
+	assert no_need_recalc_subtree_size h
+	
+	assert num_nodes_subtree h 0 5
+	assert num_nodes_subtree h 1 4
+	assert num_nodes_subtree h 2 3
+	assert num_nodes_subtree h 3 2
+	assert num_nodes_subtree h 4 1
+	
+	set_root h 4
+	calculate_size_subtrees h true
+	assert num_nodes_subtree h 0 1
+	assert num_nodes_subtree h 1 2
+	assert num_nodes_subtree h 2 3
+	assert num_nodes_subtree h 3 4
+	assert num_nodes_subtree h 4 5
+	
+	
+	
+	
+	create_graph rtree f 5
+	add_edges f 4
+		0 1
+		0 2
+		0 3
+		0 4
+		false
+	assert rtree_type_not_valid f
+	assert not_has_root f
+	set_root f 0
+	assert has_root f
+	assert is_tree f
+	find_rtree_type f
+	assert rtree_type_valid f
+	assert is_rtree_type f arborescence
+	
+	assert need_recalc_subtree_size f
+	calculate_size_subtrees f false
+	assert no_need_recalc_subtree_size f
+	
+	assert num_nodes_subtree f 0 5
+	assert num_nodes_subtree f 1 1
+	assert num_nodes_subtree f 2 1
+	assert num_nodes_subtree f 3 1
+	
+	
+	set_root f 3
+	assert need_recalc_subtree_size f
+	calculate_size_subtrees f true
+	assert no_need_recalc_subtree_size f
+	
+	assert num_nodes_subtree f 0 4
+	assert num_nodes_subtree f 1 1
+	assert num_nodes_subtree f 2 1
+	assert num_nodes_subtree f 3 5
+	assert num_nodes_subtree f 4 1

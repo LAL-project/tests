@@ -11,9 +11,10 @@ COMMANDS AVAILABLE
 ** create_graph TYPE GRAPH N
 	Creates a graph of a certain TYPE and a given number of vertices N
 	Types supported:
-		- undirected
-		- directed
-		- rooted_directed_tree
+		- ugraph
+		- dgraph
+		- ftree
+		- rtree
 
 ** read_graph GRAPH_TYPE GRAPH FILE FILE_TYPE true/false
 	Reads a directed/undirected (type) graph from file FILE into variable GRAPH.
@@ -117,7 +118,7 @@ COMMANDS AVAILABLE
 		asserts that the degree (out-degree + in-degree for directed
 		graphs) equals d
 	
-	DIRECTED GRAPHS (including trees)
+	DIRECTED GRAPHS (including rooted trees)
 	===============
 	
 	-- in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
@@ -181,22 +182,19 @@ COMMANDS AVAILABLE
 	-- num_nodes_subtree TREE NODE SIZE
 		asserts that the subtree of GRAPH rooted at node NODE has size SIZE
 	
-	ROOTED DIRECTED TREES
-	=====================
+	-- rtree_type_valid TREE
+		asserts that the type of rooted tree is valid.
 	
-	-- drtree_type_valid TREE
-		asserts that the type of rooted directed tree is valid.
+	-- rtree_type_not_valid TREE
+		asserts that the type of rooted tree is not valid.
 	
-	-- drtree_type_not_valid TREE
-		asserts that the type of rooted directed tree is not valid.
-	
-	-- is_drtree_type TREE TYPE
-		asserts that directed rooted tree GRAPH is of type TYPE.
+	-- is_rtree_type TREE TYPE
+		asserts that rooted tree GRAPH is of type TYPE.
 		Allowed strings for TYPE:
 			"arborescence", "anti_arborescence", "none"
 	
-	-- is_not_drtree_type TREE TYPE
-		asserts that directed rooted tree GRAPH is NOT of type TYPE.
+	-- is_not_rtree_type TREE TYPE
+		asserts that rooted tree GRAPH is NOT of type TYPE.
 		Allowed strings for TYPE:
 			"arborescence", "anti_arborescence", "none"
 
@@ -208,40 +206,34 @@ DIRECTED GRAPHS (excluding trees)
 ** dgraph_to_ugraph TREE_RESULT TREE
 	Converts the directed graph TREE into an undirected graph TREE_RESULT
 
-UNDIRECTED TREES
-================
+TREES
+=====
 
-** utree_to_drtree TREE_RESULT TREE ROOT_NODE
-	Converts the undirected tree TREE into a rooted directed tree TREE_RESULT
-	taking node ROOT_NODE as its root.
+** fftree_to_rtree TREE_RESULT TREE ROOT_NODE
+	Converts the tree TREE into a rooted tree TREE_RESULT taking
+	node ROOT_NODE as its root.
 
 ROOTED TREES
 ============
 
 ** set_root TREE NODE
 	Sets the root NODE to TREE.
-	If the graph is a directed rooted tree then it calls the drtree class
-	method 'find_drtree_type()'.
+	If the graph is a directed rooted tree then it calls the rtree class
+	method 'find_rtree_type()'.
 
 ** retrieve_subtree TREE_RESULT TREE NODE
 	Retrieves the subtree of a rooted tree TREE into tree TREE_RESULT.
 	The tree must have a root.
 
-UNDIRECTED ROOTED TREES
-=======================
-
 ** calculate_size_subtrees TREE
 	Calculates the size of each subtree of the rooted tree.
 	The tree must have a root.
-
-DIRECTED ROOTED TREES
-=====================
 
 ** calculate_size_subtrees TREE true/false
 	Calculates the size of each subtree of the rooted tree.
 	The tree must have a root. The Boolean value indicates that whether
 	reversed edges should be used or not.
 
-** find_drtree_type GRAPH
-	Calculates the type of the directed rooted tree.
+** find_rtree_type GRAPH
+	Calculates the type of the rooted tree.
 	The tree must have a root.

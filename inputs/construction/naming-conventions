@@ -23,7 +23,6 @@ Therefore
         number
 
 
-
 Family test numbers
 -------------------
 
@@ -41,19 +40,15 @@ Codes and types of graphs
 
 	0: ugraph
 	1: dgraph
-	2: utree
-	3: dtree
-	4: urtree
-	5: drtree
+	2: ftree
+	3: rtree
 
 We are currently using the following names:
 
 	000: construction of ugraph
 	001: construction of dgraph
-	002: construction of utree
-	003: construction of dtree
-	004: construction of urtree
-	005: construction of drtree
+	002: construction of ftree
+	003: construction of rtree
 	
 	010: inspection of edges and elements of Q in ugraph
 	011: inspection of edges and elements of Q in dgraph
@@ -65,18 +60,14 @@ We are currently using the following names:
 	030: read ugraph from disk
 	031: read dgraph from disk
 		# tests
-		#	032: read utree from disk
-		#	033: read dtree from disk
+		#	032: read ftree from disk
+		#	033: read rtree from disk
 		# are redundant
-	034: read urtree from disk
-	035: read drtree from disk
 	
-	045: convert a utree to a drtree graph
+	042: convert a ftree to a rtree graph
 	
-	055: type of drtree
+	053: type of rtree
 	
-	064: sizes of urtree (of the tree and of the subtrees)
-	065: sizes of drtree (of the tree and of the subtrees)
+	063: sizes of rtree (of the tree and of the subtrees)
 	
-	074: retrieve subtree of a rooted undirected tree
-	075: retrieve subtree of a rooted directed tree
+	073: retrieve subtree of a rooted tree

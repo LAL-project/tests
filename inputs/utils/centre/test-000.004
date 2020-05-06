@@ -1,7 +1,7 @@
 TYPE utils-centre
 INPUT 0
 BODY
-	utree
+	ftree
 	init 22
 	add_edges 21
 		0 2

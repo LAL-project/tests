@@ -1,7 +1,7 @@
 TYPE construction_graph
 INPUT 0
 BODY
-	create_graph utree g 5
+	create_graph ftree g 5
 	assert num_nodes g 5
 	assert num_edges g 0
 	assert is_not_rooted g
