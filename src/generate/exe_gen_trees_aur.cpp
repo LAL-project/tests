@@ -144,7 +144,7 @@ err_type exe_gen_trees_aur(std::ifstream& fin) {
 	integer gen;
 
 	all_ulab_rooted_trees TreeGen;
-	urtree rT;
+	rtree rT;
 
 	while (fin >> n) {
 		// number of generated trees

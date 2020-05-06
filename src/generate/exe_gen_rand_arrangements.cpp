@@ -59,19 +59,14 @@ using namespace iterators;
 // custom includes
 #include "../definitions.hpp"
 
-template<class Tree>
-bool is_root_covered(const Tree& rT, const linearrgmnt& pi) {
+bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
 	const node R = rT.get_root();
 	bool covered = false;
 
 	E_iterator e_it(rT);
-	uint32_t n_edges = 0;
-
 	while (e_it.has_next() and not covered) {
 		e_it.next();
-		++n_edges;
 		const edge e = e_it.get_edge();
-
 		const node s = e.first;
 		const node t = e.second;
 		covered =
@@ -82,36 +77,29 @@ bool is_root_covered(const Tree& rT, const linearrgmnt& pi) {
 	return covered;
 }
 
-bool is_linarr_projective(const urtree& t, const linearrgmnt& arr) {
-	uint32_t C = lal::linarr::n_crossings(t, arr);
-	if (C != 0) { return false; }
-	return not is_root_covered(t, arr);
-}
-bool is_linarr_projective(const drtree& t, const linearrgmnt& arr) {
+bool is_linarr_projective(const rtree& t, const linearrgmnt& arr) {
 	uint32_t C = lal::linarr::n_crossings(t.to_undirected(), arr);
 	if (C != 0) { return false; }
 	return not is_root_covered(t, arr);
 }
 
-template<class Tree>
-uint32_t is_rand_proj_arr_correct(const Tree& t, const linearrgmnt& arr) {
+string is_rand_proj_arr_correct(const rtree& t, const linearrgmnt& arr) {
 	set<position> setpos;
 	for (node u = 0; u < t.n_nodes(); ++u) {
 		setpos.insert(arr[u]);
 	}
 
 	if (setpos.size() != t.n_nodes()) {
-		// there are collisions in vertices' positions.
-		return 0x00000001;
+		return "There are collisions in vertices positions";
 	}
 
 	if (not is_linarr_projective(t, arr)) {
 		// the arrangement is not projective;
-		return 0x00000002;
+		return "The arrangement is not projective";
 	}
 
 	// no error
-	return 0x00000000;
+	return "No error";
 }
 
 vector<node> invlinarr(const linearrgmnt& arr) {
@@ -134,16 +122,6 @@ ostream& operator<< (ostream& os, const vector<T>& v) {
 
 namespace exe_tests {
 
-#define check_errors(tree_type, T, err, arr)											\
-	cerr << ERROR << endl;																\
-	cerr << "    Generation of random arrangement for " << tree_type << ":" << endl;	\
-	cerr << T << endl;																	\
-	cerr << "    Failed with code: " << err << endl;									\
-	cerr << "    Arrangement:" << endl;													\
-	cerr << "    " << arr << endl;														\
-	cerr << "    Inverse linear arrangement:" << endl;									\
-	cerr << "    " << invlinarr(arr) << endl;
-
 err_type test_rand_projective_arrangements(ifstream& fin) {
 	uint32_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
@@ -152,23 +130,22 @@ err_type test_rand_projective_arrangements(ifstream& fin) {
 
 		uint32_t nt = 0;
 		while (nt < ntrees) {
-			const urtree urT = TreeGen.make_rand_tree();
-			const drtree drT(urT, urT.get_root());
+			const rtree rT = TreeGen.make_rand_tree();
 
 			for (uint32_t it = 0; it < nit; ++it) {
-				const linearrgmnt urT_arr = rand_projective_arrgmnt(urT);
-				const linearrgmnt drT_arr = rand_projective_arrgmnt(drT);
+				const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
 
 				// Do some sanity checks.
-				const uint32_t urT_err = is_rand_proj_arr_correct(urT, urT_arr);
-				if (urT_err != 0) {
-					check_errors("urtree", urT, urT_err, urT_arr);
-					return err_type::test_exe_error;
-				}
-
-				const uint32_t drT_err = is_rand_proj_arr_correct(drT, drT_arr);
-				if (drT_err != 0) {
-					check_errors("drtree", drT, drT_err, drT_arr);
+				const string err = is_rand_proj_arr_correct(rT, arr);
+				if (err != "No error") {
+					cerr << ERROR << endl;
+					cerr << "    Generation of random arrangement for rtree:" << endl;
+					cerr << rT << endl;
+					cerr << "    Failed with error: '" << err << "'" << endl;
+					cerr << "    Arrangement:" << endl;
+					cerr << "    " << arr << endl;
+					cerr << "    Inverse linear arrangement:" << endl;
+					cerr << "    " << invlinarr(arr) << endl;
 					return err_type::test_exe_error;
 				}
 			}

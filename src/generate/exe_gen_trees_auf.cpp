@@ -76,7 +76,7 @@ inline integer num_caterpillar_trees(uint32_t n) {
 	return n1;
 }
 
-inline bool is_caterpillar(const utree& t) {
+inline bool is_caterpillar(const tree& t) {
 	// number of vertices
 	const uint32_t N = t.n_nodes();
 
@@ -202,7 +202,7 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 	integer gen;
 
 	all_ulab_free_trees TreeGen;
-	utree T;
+	ftree T;
 
 	while (fin >> n) {
 		n_caterpillar = 0;

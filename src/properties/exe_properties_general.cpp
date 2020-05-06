@@ -47,7 +47,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/urtree.hpp>
+#include <lal/graphs/rtree.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mhd.hpp>
@@ -102,8 +102,8 @@ void hubiness_coefficient(const ugraph& g) {
 
 void MHD(const ugraph& g, node r) {
 	if (not utils::is_graph_a_tree(g)) { return; }
-	utree t(g);
-	urtree R(t, r);
+	ftree t(g);
+	rtree R(t, r);
 	rational mhd = MHD_rational(R);
 	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 }

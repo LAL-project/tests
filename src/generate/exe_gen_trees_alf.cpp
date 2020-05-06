@@ -113,7 +113,7 @@ err_type exe_gen_trees_alf(std::ifstream& fin) {
 	integer gen;
 
 	all_lab_free_trees TreeGen;
-	utree T;
+	ftree T;
 
 	while (fin >> n) {
 		const integer nn = integer_from_ui(n);

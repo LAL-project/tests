@@ -81,21 +81,19 @@ using namespace iterators;
 #define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
-#define FUNC_UTREE_TO_DRTREE "utree_to_drtree"
+#define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
-#define FUNC_DRTREE_FIND_TYPE "find_drtree_type"
+#define FUNC_RTREE_FIND_TYPE "find_rtree_type"
 
 namespace exe_tests {
 
 err_type exe_construction_test(ifstream& fin) {
 	map<string, ugraph> ugraphvars;
 	map<string, dgraph> dgraphvars;
-	map<string, utree> utreevars;
-	map<string, dtree> dtreevars;
-	map<string, urtree> urtreevars;
-	map<string, drtree> drtreevars;
+	map<string, ftree> ftreevars;
+	map<string, rtree> rtreevars;
 
 	map<string, string> gtypes;
 
@@ -121,17 +119,11 @@ err_type exe_construction_test(ifstream& fin) {
 			else if (type == DGRAPH) {
 				dgraphvars[g1] = dgraph(n_nodes);
 			}
-			else if (type == UTREE) {
-				utreevars[g1] = utree(n_nodes);
+			else if (type == FTREE) {
+				ftreevars[g1] = ftree(n_nodes);
 			}
-			else if (type == DTREE) {
-				dtreevars[g1] = dtree(n_nodes);
-			}
-			else if (type == URTREE) {
-				urtreevars[g1] = urtree(n_nodes);
-			}
-			else if (type == DRTREE) {
-				drtreevars[g1] = drtree(n_nodes);
+			else if (type == RTREE) {
+				rtreevars[g1] = rtree(n_nodes);
 			}
 			else {
 				cerr << ERROR << endl;
@@ -370,63 +362,63 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 
 		// UTREE
-		else if (option == FUNC_UTREE_TO_DRTREE) {
+		else if (option == FUNC_FTREE_TO_RTREE) {
 			fin >> g1 >> g2 >> u;
-			assert_exists_variable(FUNC_UTREE_TO_DRTREE, g2)
-			assert_not_exists_variable(FUNC_UTREE_TO_DRTREE, g1)
-			assert_correct_graph_type(FUNC_UTREE_TO_DRTREE, graph_type(g2), utree_types)
-			drtreevars[g1] = drtree(utreevars[g2], u);
-			gtypes[g1] = DRTREE;
+			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2)
+			assert_not_exists_variable(FUNC_FTREE_TO_RTREE, g1)
+			assert_correct_graph_type(FUNC_FTREE_TO_RTREE, graph_type(g2), free_tree_types)
+			rtreevars[g1] = rtree(ftreevars[g2], u);
+			gtypes[g1] = RTREE;
 		}
 
 		// RTREE
 		else if (option == FUNC_RTREE_SET_ROOT) {
 			fin >> g1 >> u;
 			assert_exists_variable(FUNC_RTREE_SET_ROOT, g1)
-			assert_correct_graph_type(FUNC_RTREE_SET_ROOT, graph_type(g1), rtree_types)
+			assert_correct_graph_type(FUNC_RTREE_SET_ROOT, graph_type(g1), rooted_tree_types)
 
 			if_mfunction_rtrees(g1, set_root(u))
 		}
 		else if (option == FUNC_RTREE_CALC_SIZE_SUBTREE) {
 			fin >> g1;
 			assert_exists_variable(FUNC_RTREE_CALC_SIZE_SUBTREE, g1)
-			assert_correct_graph_type(FUNC_RTREE_CALC_SIZE_SUBTREE, graph_type(g1), rtree_types)
+			assert_correct_graph_type(FUNC_RTREE_CALC_SIZE_SUBTREE, graph_type(g1), rooted_tree_types)
 			assert_is_rtree(g1, FUNC_RTREE_SET_ROOT)
 
-			if (graph_type(g1) == DRTREE) {
+			if (graph_type(g1) == RTREE) {
 				fin >> Boolean;
 				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean)
-				drtreevars[g1].recalc_size_subtrees(Boolean == "true");
+				rtreevars[g1].recalc_size_subtrees(Boolean == "true");
 			}
 			else {
-				urtreevars[g1].recalc_size_subtrees();
+				rtreevars[g1].recalc_size_subtrees();
 			}
 		}
 		else if (option == FUNC_RTREE_RETRIEVE_SUBTREE) {
 			fin >> g2 >> g1 >> u;
 			assert_not_exists_variable(FUNC_RTREE_RETRIEVE_SUBTREE, g2)
 			assert_exists_variable(FUNC_RTREE_RETRIEVE_SUBTREE, g1)
-			assert_correct_graph_type(FUNC_RTREE_RETRIEVE_SUBTREE, graph_type(g1), rtree_types)
+			assert_correct_graph_type(FUNC_RTREE_RETRIEVE_SUBTREE, graph_type(g1), rooted_tree_types)
 			assert_is_rtree(g1, FUNC_RTREE_RETRIEVE_SUBTREE)
 
 			if (mfunction_rtrees(g1, is_directed())) {
-				drtreevars[g2] = drtreevars[g1].get_subtree(u);
-				gtypes[g2] = DRTREE;
+				rtreevars[g2] = rtreevars[g1].get_subtree(u);
+				gtypes[g2] = RTREE;
 			}
 			else {
-				urtreevars[g2] = urtreevars[g1].get_subtree(u);
-				gtypes[g2] = URTREE;
+				rtreevars[g2] = rtreevars[g1].get_subtree(u);
+				gtypes[g2] = RTREE;
 			}
 		}
 
 		// DRTREE
-		else if (option == FUNC_DRTREE_FIND_TYPE) {
+		else if (option == FUNC_RTREE_FIND_TYPE) {
 			fin >> g1;
-			assert_exists_variable(FUNC_DRTREE_FIND_TYPE, g1)
-			assert_correct_graph_type(FUNC_DRTREE_FIND_TYPE, graph_type(g1), drtree_types)
-			assert_is_drtree(g1, FUNC_DRTREE_FIND_TYPE)
+			assert_exists_variable(FUNC_RTREE_FIND_TYPE, g1)
+			assert_correct_graph_type(FUNC_RTREE_FIND_TYPE, graph_type(g1), rooted_tree_types)
+			assert_is_rtree(g1, FUNC_RTREE_FIND_TYPE)
 
-			drtreevars[g1].find_drtree_type();
+			rtreevars[g1].find_rtree_type();
 		}
 
 		// ASSERT
@@ -435,8 +427,7 @@ err_type exe_construction_test(ifstream& fin) {
 			err_type e = process_assert(
 				option,
 				ugraphvars, dgraphvars,
-				utreevars, dtreevars,
-				urtreevars, drtreevars,
+				ftreevars, rtreevars,
 				gtypes, fin
 			);
 			if (e != err_type::no_error) { return e; }

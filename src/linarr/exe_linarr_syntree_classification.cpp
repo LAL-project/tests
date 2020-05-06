@@ -46,7 +46,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/urtree.hpp>
+#include <lal/graphs/rtree.hpp>
 #include <lal/linarr/tree_structure_class.hpp>
 #include <lal/linarr/tree_structure.hpp>
 #include <lal/utils/graphs/trees/conversions.hpp>
@@ -87,7 +87,7 @@ tree_structure string_to_sdtt(const string& s) {
 	return tree_structure::none;
 }
 
-urtree parse_tree_in_line(const string& s) {
+rtree parse_tree_in_line(const string& s) {
 	// read numbers in line
 	stringstream ss(s);
 	vector<uint32_t> L(1, 0);
@@ -150,7 +150,7 @@ err_type parse_single_file(const string& file) {
 		const string classlist = line.substr(semicolon+1, line.length()-semicolon);
 
 		// parse data in line
-		const urtree T = parse_tree_in_line(treestr);
+		const rtree T = parse_tree_in_line(treestr);
 		const vector<bool> ground_classes = parse_classes(classlist);
 
 		// classify tree

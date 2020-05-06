@@ -50,10 +50,8 @@
 #include <lal/graphs/graph.hpp>
 #include <lal/graphs/dgraph.hpp>
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/utree.hpp>
-#include <lal/graphs/dtree.hpp>
-#include <lal/graphs/urtree.hpp>
-#include <lal/graphs/drtree.hpp>
+#include <lal/graphs/ftree.hpp>
+#include <lal/graphs/rtree.hpp>
 
 // custom includes
 #include "definitions.hpp"
@@ -102,41 +100,36 @@ void make_disjoint_union(
 
 #define UGRAPH "ugraph"
 #define DGRAPH "dgraph"
-#define UTREE "utree"
-#define DTREE "dtree"
-#define URTREE "urtree"
-#define DRTREE "drtree"
+#define FTREE "ftree"
+#define RTREE "rtree"
 
 // directed rooted tree types
-#define DRTREE_arborescence drtree::drtree_type::arborescence
-#define DRTREE_anti_arborescence drtree::drtree_type::anti_arborescence
-#define DRTREE_none drtree::drtree_type::none
+#define RTREE_arborescence rtree::rtree_type::arborescence
+#define RTREE_anti_arborescence rtree::rtree_type::anti_arborescence
+#define RTREE_none rtree::rtree_type::none
 
 #define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
 
-static const std::vector<std::string> dir_undir_types(
+static const std::vector<std::string> graph_types(
 	{UGRAPH, DGRAPH}
 );
 static const std::vector<std::string> directed_types(
-	{DGRAPH, DRTREE, DTREE}
+	{DGRAPH, RTREE}
 );
-static const std::vector<std::string> drtree_types(
-	{DRTREE}
-);
-static const std::vector<std::string> urtree_types(
-	{URTREE}
-);
-static const std::vector<std::string> utree_types(
-	{UTREE}
-);
-static const std::vector<std::string> rtree_types(
-	{URTREE, DRTREE}
+static const std::vector<std::string> undirected_types(
+	{UGRAPH, FTREE}
 );
 static const std::vector<std::string> tree_types(
-	{UTREE, DTREE, URTREE, DRTREE}
+	{FTREE, RTREE}
+);
+static const std::vector<std::string> rooted_tree_types(
+	{RTREE}
+);
+static const std::vector<std::string> free_tree_types(
+	{FTREE}
 );
 static const std::vector<std::string> all_types(
-	{UGRAPH, DGRAPH, UTREE, DTREE, URTREE, DRTREE}
+	{UGRAPH, DGRAPH, FTREE, RTREE}
 );
 
 /* ASSERTIONS */
@@ -149,7 +142,7 @@ static const std::vector<std::string> all_types(
 		return err_type::test_format_error;									\
 	}
 
-#define assert_string_is_drtree_type(assertion, t)							\
+#define assert_string_is_rtree_type(assertion, t)							\
 	if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
@@ -206,10 +199,8 @@ static const std::vector<std::string> all_types(
 	[&]() -> bool {																					\
 		if (graph_type(v1) == UGRAPH)	{ return equal_graphs(dgraphvars[v1], dgraphvars[v2]); }	\
 		if (graph_type(v1) == DGRAPH)	{ return equal_graphs(ugraphvars[v1], ugraphvars[v2]); }	\
-		if (graph_type(v1) == UTREE)	{ return equal_graphs(utreevars[v1], utreevars[v2]); }		\
-		if (graph_type(v1) == DTREE)	{ return equal_graphs(dtreevars[v1], dtreevars[v2]); }		\
-		if (graph_type(v1) == URTREE)	{ return equal_graphs(urtreevars[v1], urtreevars[v2]); }	\
-		if (graph_type(v1) == DRTREE)	{ return equal_graphs(drtreevars[v1], drtreevars[v2]); }	\
+		if (graph_type(v1) == FTREE)	{ return equal_graphs(ftreevars[v1], ftreevars[v2]); }		\
+		if (graph_type(v1) == RTREE)	{ return equal_graphs(rtreevars[v1], rtreevars[v2]); }	\
 		return false;																				\
 	}()
 
@@ -218,68 +209,51 @@ static const std::vector<std::string> all_types(
 #define if_ffunction(v, FUNC)										\
 	if (graph_type(v) == UGRAPH)		{ FUNC(ugraphvars[v]); }	\
 	else if (graph_type(v) == DGRAPH)	{ FUNC(dgraphvars[v]); }	\
-	else if (graph_type(v) == UTREE)	{ FUNC(utreevars[v]); }		\
-	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
-	else if (graph_type(v) == URTREE)	{ FUNC(urtreevars[v]); }	\
-	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+	else if (graph_type(v) == FTREE)	{ FUNC(ftreevars[v]); }		\
+	else if (graph_type(v) == RTREE)	{ FUNC(rtreevars[v]); }
 
 #define if_mfunction(v, FUNC)										\
 	if (graph_type(v) == UGRAPH)		{ ugraphvars[v].FUNC; }		\
 	else if (graph_type(v) == DGRAPH)	{ dgraphvars[v].FUNC; }		\
-	else if (graph_type(v) == UTREE)	{ utreevars[v].FUNC; }		\
-	else if (graph_type(v) == DTREE)	{ dtreevars[v].FUNC; }		\
-	else if (graph_type(v) == URTREE)	{ urtreevars[v].FUNC; }		\
-	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+	else if (graph_type(v) == FTREE)	{ ftreevars[v].FUNC; }		\
+	else if (graph_type(v) == RTREE)	{ rtreevars[v].FUNC; }
 
 #define ffunction(v, FUNC)												\
 	[&]() {																\
 		if (graph_type(v) == UGRAPH)	{ return FUNC(ugraphvars[v]); }	\
 		if (graph_type(v) == DGRAPH)	{ return FUNC(dgraphvars[v]); }	\
-		if (graph_type(v) == UTREE)		{ return FUNC(utreevars[v]); }	\
-		if (graph_type(v) == DTREE)		{ return FUNC(dtreevars[v]); }	\
-		if (graph_type(v) == URTREE)	{ return FUNC(urtreevars[v]); }	\
-		return FUNC(drtreevars[v]);										\
+		if (graph_type(v) == FTREE)		{ return FUNC(ftreevars[v]); }	\
+		return FUNC(rtreevars[v]);										\
 	}()
 
 #define mfunction(v, FUNC)												\
 	[&]() {																\
 		if (graph_type(v) == UGRAPH)	{ return ugraphvars[v].FUNC; }	\
 		if (graph_type(v) == DGRAPH)	{ return dgraphvars[v].FUNC; }	\
-		if (graph_type(v) == UTREE)		{ return utreevars[v].FUNC; }	\
-		if (graph_type(v) == DTREE)		{ return dtreevars[v].FUNC; }	\
-		if (graph_type(v) == URTREE)	{ return urtreevars[v].FUNC; }	\
-		return drtreevars[v].FUNC;										\
+		if (graph_type(v) == FTREE)		{ return ftreevars[v].FUNC; }	\
+		return rtreevars[v].FUNC;										\
 	}()
-
 
 
 // macros for ALL trees
 #define if_ffunction_trees(v, FUNC)									\
-	if (graph_type(v) == UTREE)			{ FUNC(utreevars[v]); }		\
-	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
-	else if (graph_type(v) == URTREE)	{ FUNC(urtreevars[v]); }	\
-	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+	if (graph_type(v) == FTREE)			{ FUNC(ftreevars[v]); }		\
+	else if (graph_type(v) == RTREE)	{ FUNC(rtreevars[v]); }
 
 #define if_mfunction_trees(v, FUNC)									\
-	if (graph_type(v) == UTREE)			{ utreevars[v].FUNC; }		\
-	else if (graph_type(v) == DTREE)	{ dtreevars[v].FUNC; }		\
-	else if (graph_type(v) == URTREE)	{ urtreevars[v].FUNC; }		\
-	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+	if (graph_type(v) == FTREE)			{ ftreevars[v].FUNC; }		\
+	else if (graph_type(v) == RTREE)	{ rtreevars[v].FUNC; }
 
 #define ffunction_trees(v, FUNC)										\
 	[&]() {																\
-		if (graph_type(v) == UTREE)		{ return FUNC(utreevars[v]); }	\
-		if (graph_type(v) == DTREE)		{ return FUNC(dtreevars[v]); }	\
-		if (graph_type(v) == URTREE)	{ return FUNC(urtreevars[v]); }	\
-		return FUNC(drtreevars[v]);										\
+		if (graph_type(v) == FTREE)		{ return FUNC(ftreevars[v]); }	\
+		return FUNC(rtreevars[v]);										\
 	}()
 
 #define mfunction_trees(v, FUNC)										\
 	[&]() {																\
-		if (graph_type(v) == UTREE)		{ return utreevars[v].FUNC; }	\
-		if (graph_type(v) == DTREE)		{ return dtreevars[v].FUNC; }	\
-		if (graph_type(v) == URTREE)	{ return urtreevars[v].FUNC; }	\
-		return drtreevars[v].FUNC;										\
+		if (graph_type(v) == FTREE)		{ return ftreevars[v].FUNC; }	\
+		return rtreevars[v].FUNC;										\
 	}()
 
 
@@ -287,26 +261,22 @@ static const std::vector<std::string> all_types(
 // macros for DIRECTED graphs
 #define if_ffunction_dir_graphs(v, FUNC)							\
 	if (graph_type(v) == DGRAPH)		{ FUNC(dgraphvars[v]); }	\
-	else if (graph_type(v) == DTREE)	{ FUNC(dtreevars[v]); }		\
-	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+	else if (graph_type(v) == RTREE)	{ FUNC(rtreevars[v]); }
 
 #define if_mfunction_dir_graphs(v, FUNC)							\
 	if (graph_type(v) == DGRAPH)		{ dgraphvars[v].FUNC; }		\
-	else if (graph_type(v) == DTREE)	{ dtreevars[v].FUNC; }		\
-	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+	else if (graph_type(v) == RTREE)	{ rtreevars[v].FUNC; }
 
 #define ffunction_dir_graphs(v, FUNC)										\
 	[&]() {																	\
 		if (graph_type(v) == DGRAPH)		{ return FUNC(dgraphvars[v]); }	\
-		else if (graph_type(v) == DTREE)	{ return FUNC(dtreevars[v]); }	\
-		return FUNC(drtreevars[v]);											\
+		return FUNC(rtreevars[v]);											\
 	}()
 
 #define mfunction_dir_graphs(v, FUNC)										\
 	[&]() {																	\
 		if (graph_type(v) == DGRAPH)		{ return dgraphvars[v].FUNC; }	\
-		else if (graph_type(v) == DTREE)	{ return dtreevars[v].FUNC; }	\
-		return drtreevars[v].FUNC;											\
+		return rtreevars[v].FUNC;											\
 	}()
 
 
@@ -314,41 +284,33 @@ static const std::vector<std::string> all_types(
 // macros for ROOTED trees
 
 #define if_ffunction_rtrees(v, FUNC)								\
-	if (graph_type(v) == URTREE)		{ FUNC(urtreevars[v]); }	\
-	else if (graph_type(v) == DRTREE)	{ FUNC(drtreevars[v]); }
+	if (graph_type(v) == RTREE)			{ FUNC(rtreevars[v]); }
 
 #define if_mfunction_rtrees(v, FUNC)								\
-	if (graph_type(v) == URTREE)		{ urtreevars[v].FUNC; }		\
-	else if (graph_type(v) == DRTREE)	{ drtreevars[v].FUNC; }
+	if (graph_type(v) == RTREE)			{ rtreevars[v].FUNC; }
 
-#define ffunction_rtrees(v, FUNC)										\
-	[&]() {																\
-		if (graph_type(v) == URTREE)	{ return FUNC(urtreevars[v]); }	\
-		return FUNC(drtreevars[v]);										\
+#define ffunction_rtrees(v, FUNC)		\
+	[&]() {								\
+		 return FUNC(rtreevars[v]);		\
 	}()
 
-#define mfunction_rtrees(v, FUNC)										\
-	[&]() {																\
-		if (graph_type(v) == URTREE)	{ return urtreevars[v].FUNC; }	\
-		return drtreevars[v].FUNC;										\
+#define mfunction_rtrees(v, FUNC)		\
+	[&]() {								\
+		return rtreevars[v].FUNC;		\
 	}()
 
 
 #define output_graph(v)														\
 	if (graph_type(v) == UGRAPH)		{ cerr << ugraphvars[v] << endl; }	\
 	else if (graph_type(v) == DGRAPH)	{ cerr << dgraphvars[v] << endl; }	\
-	else if (graph_type(v) == UTREE)	{ cerr << utreevars[v] << endl; }	\
-	else if (graph_type(v) == DTREE)	{ cerr << dtreevars[v] << endl; }	\
-	else if (graph_type(v) == URTREE)	{ cerr << urtreevars[v] << endl; }	\
-	else if (graph_type(v) == DRTREE)	{ cerr << drtreevars[v] << endl; }
+	else if (graph_type(v) == FTREE)	{ cerr << ftreevars[v] << endl; }	\
+	else if (graph_type(v) == RTREE)	{ cerr << rtreevars[v] << endl; }
 
 #define output_graph_stdout(v)												\
 	if (graph_type(v) == UGRAPH)		{ cout << ugraphvars[v] << endl; }	\
 	else if (graph_type(v) == DGRAPH)	{ cout << dgraphvars[v] << endl; }	\
-	else if (graph_type(v) == UTREE)	{ cout << utreevars[v] << endl; }	\
-	else if (graph_type(v) == DTREE)	{ cout << dtreevars[v] << endl; }	\
-	else if (graph_type(v) == URTREE)	{ cout << urtreevars[v] << endl; }	\
-	else if (graph_type(v) == DRTREE)	{ cout << drtreevars[v] << endl; }
+	else if (graph_type(v) == FTREE)	{ cout << ftreevars[v] << endl; }	\
+	else if (graph_type(v) == RTREE)	{ cout << rtreevars[v] << endl; }
 
 
 #define WRONG_TYPE_EXT(my_assert, g, T, my_type)						\
@@ -372,23 +334,20 @@ static const std::vector<std::string> all_types(
 		cerr << "    Tree '" << g1 << "' does not have a root." << endl;	\
 		return err_type::test_exe_error;									\
 	}																		\
-
-#define assert_is_drtree(g1, FUNC)										\
-	assert_is_rtree(g1, FUNC)											\
-	if (not mfunction_rtrees(g1, is_directed())) {						\
-		cerr << "ERROR" << endl;										\
-		message_in_func(FUNC)											\
-		cerr << "    Tree '" << g1 << "' is not directed." << endl;		\
-		return err_type::test_exe_error;								\
+	if (not mfunction_rtrees(g1, is_directed())) {							\
+		cerr << "ERROR" << endl;											\
+		message_in_func(FUNC)												\
+		cerr << "    Tree '" << g1 << "' is not directed." << endl;			\
+		return err_type::test_exe_error;									\
 	}
 
 
-#define drtree_type_to_string(t)							\
-	[](drtree::drtree_type __t) -> std::string {			\
+#define rtree_type_to_string(t)							\
+	[](rtree::rtree_type __t) -> std::string {				\
 		switch (__t) {										\
-			case drtree::drtree_type::arborescence:			\
+			case rtree::rtree_type::arborescence:			\
 				return "arborescence";						\
-			case drtree::drtree_type::anti_arborescence:	\
+			case rtree::rtree_type::anti_arborescence:	\
 				return "anti_arborescence";					\
 			default:										\
 				return "none";								\
@@ -405,10 +364,8 @@ err_type process_assert(
 	const std::string& assert_what,
 	std::map<std::string, lal::graphs::ugraph>& ugraphvars,
 	std::map<std::string, lal::graphs::dgraph>& dgraphvars,
-	std::map<std::string, lal::graphs::utree>& utreevars,
-	std::map<std::string, lal::graphs::dtree>& dtreevars,
-	std::map<std::string, lal::graphs::urtree>& urtreevars,
-	std::map<std::string, lal::graphs::drtree>& drtreevars,
+	std::map<std::string, lal::graphs::ftree>& treevars,
+	std::map<std::string, lal::graphs::rtree>& rtreevars,
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
 );

@@ -92,9 +92,6 @@ void get_keywords(const string& type, vector<string>& keywords) {
 }
 
 int main(int argc, char *argv[]) {
-	// first and foremost, check that the class hierarchies are correct
-	exe_tests::test_class_hierarchy();
-
 	// error checking
 	if (argc == 1) {
 		cerr << ERROR << endl;

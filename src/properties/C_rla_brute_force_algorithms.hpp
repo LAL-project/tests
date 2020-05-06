@@ -43,7 +43,6 @@
 
 #include <lal/numeric.hpp>
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/utree.hpp>
 
 namespace exe_tests {
 

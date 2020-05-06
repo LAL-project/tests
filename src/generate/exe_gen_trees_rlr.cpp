@@ -95,7 +95,7 @@ err_type exe_gen_trees_rlr(std::ifstream& fin) {
 	uint32_t n;
 
 	rand_lab_rooted_trees TreeGen;
-	urtree T;
+	rtree T;
 
 	while (fin >> n) {
 		TreeGen.init(n, 100);

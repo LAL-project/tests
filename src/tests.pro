@@ -34,7 +34,6 @@ LIBS += -lgmp
 LIBS += -fopenmp
 
 SOURCES += \
-    class_hierarchy.cpp \
     construction/exe_construction.cpp \
     construction/exe_construction_assert.cpp \
     construction/exe_construction_utils.cpp \

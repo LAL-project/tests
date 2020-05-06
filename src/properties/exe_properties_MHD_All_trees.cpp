@@ -47,7 +47,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/urtree.hpp>
+#include <lal/graphs/rtree.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/properties/mhd.hpp>
 #include <lal/numeric/rational.hpp>
@@ -101,13 +101,13 @@ err_type exe_properties_MHD_All_trees(ifstream& fin) {
 		int i = 0;
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			utree t = TreeGen.get_tree();
+			ftree t = TreeGen.get_tree();
 
 			cout << i << ")" << endl;
 
 			// for each node, make a rooted tree at that node
 			for (node r = 0; r < t.n_nodes(); ++r) {
-				urtree R(t, r);
+				rtree R(t, r);
 				rational mhd = properties::MHD_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 			}

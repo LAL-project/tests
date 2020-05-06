@@ -47,8 +47,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/utree.hpp>
-#include <lal/graphs/dtree.hpp>
+#include <lal/graphs/tree.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/utils/graphs/trees/tree_centre.hpp>
 using namespace lal;
@@ -185,17 +184,17 @@ err_type exe_utils_centre(ifstream& fin) {
 
 	string graph_type;
 	fin >> graph_type;
-	if (graph_type != "utree" and graph_type != "dtree") {
+	if (graph_type != "ftree" and graph_type != "rtree") {
 		cerr << ERROR << endl;
-		cerr << "    Expected graph type 'utree' or 'dtree'." << endl;
+		cerr << "    Expected graph type 'ftree' or 'rtree'." << endl;
 		cerr << "    Found '" << graph_type << "'" << endl;
 		return err_type::test_format_error;
 	}
 
 	const err_type e = (
-		graph_type == "utree" ?
-		exe_commands_utils_centre<utree>(fin) :
-		exe_commands_utils_centre<dtree>(fin)
+		graph_type == "ftree" ?
+		exe_commands_utils_centre<ftree>(fin) :
+		exe_commands_utils_centre<rtree>(fin)
 	);
 
 	if (e != err_type::no_error) { return e; }
