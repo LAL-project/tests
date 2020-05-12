@@ -137,19 +137,21 @@ err_type test_Dmin_rtree_Projective(rtree& t) {
 	}
 
 	// compute Dmin using the library's algorithm
-	pair<uint32_t, linearrgmnt> res = compute_Dmin(t, algorithms_Dmin::Projective);
+	const pair<uint32_t, linearrgmnt> res_library
+		= compute_Dmin(t, algorithms_Dmin::Projective);
 
 	// compute Dmin by brute force
-	pair<uint32_t, linearrgmnt> res_bf = Dmin_projective_bruteforce(t);
+	const pair<uint32_t, linearrgmnt> res_bf
+		= Dmin_projective_bruteforce(t);
 
 	// compare results
-	if (res_bf.first != res.first) {
+	if (res_library.first != res_bf.first) {
 		cerr << ERROR << endl;
-		cerr << "    Values of Dmin do not coincide." << endl;
+		cerr << "    Values of projective Dmin do not coincide." << endl;
 		cerr << "    Library:" << endl;
-		cerr << "        Value: " << res.first << endl;
-		cerr << "        Arrangement:     " << res.second << endl;
-		cerr << "        Inv Arrangement: " << ilinarr(res.second) << endl;
+		cerr << "        Value: " << res_library.first << endl;
+		cerr << "        Arrangement:     " << res_library.second << endl;
+		cerr << "        Inv Arrangement: " << ilinarr(res_library.second) << endl;
 		cerr << "    Bruteforce:" << endl;
 		cerr << "        Value: " << res_bf.first << endl;
 		cerr << "        Arrangement:     " << res_bf.second << endl;
@@ -211,6 +213,7 @@ err_type test_projective(ifstream& fin) {
 	// read number of nodes
 	uint32_t n;
 	while (fin >> n) {
+		cout << n << endl;
 
 		generate::all_ulab_rooted_trees TreeGen(n);
 		while (TreeGen.has_next()) {
@@ -222,21 +225,21 @@ err_type test_projective(ifstream& fin) {
 				return r;
 			}
 		}
-
 	}
 
 	return err_type::no_error;
 }
 
 err_type exe_linarr_Dmin_rooted(const string& alg, ifstream& fin) {
-	err_type r = [&]() -> err_type {
-		if (alg == "Projective") {
-			return test_projective(fin);
-		}
+	err_type r;
+	if (alg == "Projective") {
+		r = test_projective(fin);
+	}
+	else {
 		cerr << ERROR << endl;
 		cerr << "    Test not implemented for algorithm 'alg'." << endl;
-		return err_type::not_implemented;
-	}();
+		r = err_type::not_implemented;
+	}
 
 	if (r != err_type::no_error) { return r; }
 
