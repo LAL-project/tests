@@ -184,6 +184,10 @@ err_type call_linarr
 	if (key == "D") {
 		return call_linarr_D_related(keywords, i + 1, fin);
 	}
+	if (key == "Dmin") {
+		return call_linarr_Dmin(keywords, i + 1, fin);
+	}
+
 
 	if (key == "approx_exp_C") {
 		return exe_linarr_approx_Exp_C(fin);
@@ -265,6 +269,36 @@ err_type call_linarr_D_related
 	}
 
 	return exe_linarr_D(key, fin);
+}
+
+err_type call_linarr_Dmin
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const set<string> allowed_keywords({"Projective", "Unconstrained_YS", "Unconstrained_FC"});
+	// Dmin algorithms for rooted trees
+	const set<string> rooted_algorithms({"Projective"});
+	// Dmin algorithms for free trees
+	const set<string> free_algorithms({"Unconstrained_YS", "Unconstrained_FC"});
+
+	const string& key = keywords[i];
+	if (allowed_keywords.find(key) == allowed_keywords.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Wrong keyword at " << i << ": '" << key << "'." << endl;
+		mark_wrong_keyword(keywords, {i}, "    ");
+		return err_type::wrong_keyword;
+	}
+
+	if (rooted_algorithms.find(key) != rooted_algorithms.end()) {
+		return exe_linarr_Dmin_rooted(key, fin);
+	}
+	if (free_algorithms.find(key) != free_algorithms.end()) {
+		return exe_linarr_Dmin_free(key, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Key '" << key << "' is not classified as an algorithm for" << endl;
+	cerr << "    free trees or for rooted trees." << endl;
+	return err_type::not_implemented;
 }
 
 /* Functions to test the tree generation functions and classes */

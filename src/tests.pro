@@ -48,6 +48,8 @@ SOURCES += \
     linarr/exe_linarr_C.cpp \
     linarr/exe_linarr_C_list.cpp \
     linarr/exe_linarr_D.cpp \
+    linarr/exe_linarr_Dmin_free.cpp \
+    linarr/exe_linarr_Dmin_rooted.cpp \
     linarr/exe_linarr_approx_exp_C.cpp \
     linarr/exe_linarr_headedness.cpp \
     linarr/exe_linarr_klevel.cpp \
