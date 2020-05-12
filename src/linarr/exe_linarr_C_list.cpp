@@ -132,25 +132,25 @@ err_type exe_linarr_C_list(ifstream& fin) {
 		}
 	}
 
-	vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_crossings::brute_force);
+	vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_C::brute_force);
 
 	// compute all C
 	vector<uint32_t> Cs;
 	if (proc == "dyn_prog") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_crossings::dynamic_programming);
+		Cs = n_crossings_list(g, T, algorithms_C::dynamic_programming);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "ladder") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_crossings::ladder);
+		Cs = n_crossings_list(g, T, algorithms_C::ladder);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}
 	else if (proc == "stack_based") {
 		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_crossings::stack_based);
+		Cs = n_crossings_list(g, T, algorithms_C::stack_based);
 		end = timing::now();
 		total_elapsed += timing::elapsed_milliseconds(begin, end);
 	}

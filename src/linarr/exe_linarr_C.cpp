@@ -51,7 +51,7 @@ using namespace std;
 #include <lal/graphs/ugraph.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/linarr/algorithms_crossings.hpp>
+#include <lal/linarr/algorithms_C.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -133,24 +133,24 @@ err_type exe_linarr_C(ifstream& fin) {
 			pi[ T[u] ] = u;
 		}
 
-		const uint32_t Cbf = n_crossings(G, pi, algorithms_crossings::brute_force);
+		const uint32_t Cbf = n_crossings(G, pi, algorithms_C::brute_force);
 
 		uint32_t C = 0;
 		if (proc == "dyn_prog") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::dynamic_programming);
+			C = n_crossings(G, pi, algorithms_C::dynamic_programming);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "ladder") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::ladder);
+			C = n_crossings(G, pi, algorithms_C::ladder);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "stack_based") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_crossings::stack_based);
+			C = n_crossings(G, pi, algorithms_C::stack_based);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
