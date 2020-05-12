@@ -170,7 +170,7 @@ function execute_group() {
 		echo -en "\e[2;4;37m$output_group\e[0m"
 		echo -e " does not exist. Skipping..."
 		
-		echo "$(date +"%Y/%m/%d.%T")    Input group $output does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")    Output group $output does not exist. Skipping..." >> execution_log
 		skip=1
 	fi
 	
