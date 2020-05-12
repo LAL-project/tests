@@ -66,6 +66,14 @@ using namespace linarr;
 #include "../io_wrapper.hpp"
 #include "../definitions.hpp"
 
+inline std::vector<lal::node> ilinarr(const lal::linearrgmnt& linarr) {
+	std::vector<lal::node> ilin(linarr.size());
+	for (uint32_t p : linarr) {
+		ilin[ linarr[p] ] = p;
+	}
+	return ilin;
+}
+
 namespace std {
 template<class T>
 ostream& operator<< (ostream& os, const vector<T>& v) {
@@ -98,6 +106,28 @@ inline bool is_projective(const ftree& ft, node root, const linearrgmnt& arr) {
 	return true;
 }
 
+pair<uint32_t, linearrgmnt> Dmin_projective_bruteforce(const rtree& t) {
+	const uint32_t n = t.n_nodes();
+	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
+
+	const ftree ft = t.to_undirected();
+	uint32_t Dmin = numeric_limits<uint32_t>::max();
+	linearrgmnt arrMin;
+	vector<position> arr(n);
+	std::iota(arr.begin(), arr.end(), 0);
+	do {
+		if (is_projective(ft, t.get_root(), arr)) {
+			const uint32_t D = sum_length_edges(t, arr);
+			if (Dmin > D) {
+				Dmin = D;
+				arrMin = arr;
+			}
+		}
+	}
+	while (std::next_permutation(arr.begin(), arr.end()));
+	return make_pair(Dmin, arrMin);
+}
+
 err_type test_Dmin_rtree_Projective(rtree& t) {
 	if (not t.rtree_type_valid()) {
 		t.find_rtree_type();
@@ -109,34 +139,21 @@ err_type test_Dmin_rtree_Projective(rtree& t) {
 	// compute Dmin using the library's algorithm
 	pair<uint32_t, linearrgmnt> res = compute_Dmin(t, algorithms_Dmin::Projective);
 
-	const ftree ft = t.to_undirected();
-
 	// compute Dmin by brute force
-	uint32_t Dmin = numeric_limits<uint32_t>::max();
-	linearrgmnt arrMin;
-	vector<position> arr(t.n_nodes());
-	std::iota(arr.begin(), arr.end(), 0);
-	do {
-		if (is_projective(ft, t.get_root(), arr)) {
-			const uint32_t D = sum_length_edges(t, arr);
-			if (Dmin < D) {
-				Dmin = D;
-				arrMin = arr;
-			}
-		}
-	}
-	while (std::next_permutation(arr.begin(), arr.end()));
+	pair<uint32_t, linearrgmnt> res_bf = Dmin_projective_bruteforce(t);
 
 	// compare results
-	if (Dmin != res.first) {
+	if (res_bf.first != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Values of Dmin do not coincide." << endl;
 		cerr << "    Library:" << endl;
 		cerr << "        Value: " << res.first << endl;
-		cerr << "        Arrangement: " << res.second << endl;
+		cerr << "        Arrangement:     " << res.second << endl;
+		cerr << "        Inv Arrangement: " << ilinarr(res.second) << endl;
 		cerr << "    Bruteforce:" << endl;
-		cerr << "        Value: " << Dmin << endl;
-		cerr << "        Arrangement: " << arrMin << endl;
+		cerr << "        Value: " << res_bf.first << endl;
+		cerr << "        Arrangement:     " << res_bf.second << endl;
+		cerr << "        Inv Arrangement: " << ilinarr(res_bf.second) << endl;
 		cerr << "    For tree: " << endl;
 		cerr << t << endl;
 		return err_type::test_exe_error;
@@ -193,17 +210,19 @@ err_type test_projective(ifstream& fin) {
 
 	// read number of nodes
 	uint32_t n;
-	fin >> n;
+	while (fin >> n) {
 
-	generate::all_ulab_rooted_trees TreeGen(n);
-	while (TreeGen.has_next()) {
-		TreeGen.next();
-		rtree tree = TreeGen.get_tree();
+		generate::all_ulab_rooted_trees TreeGen(n);
+		while (TreeGen.has_next()) {
+			TreeGen.next();
+			rtree tree = TreeGen.get_tree();
 
-		err_type r = test_Dmin_rtree_Projective(tree);
-		if (r != err_type::no_error) {
-			return r;
+			err_type r = test_Dmin_rtree_Projective(tree);
+			if (r != err_type::no_error) {
+				return r;
+			}
 		}
+
 	}
 
 	return err_type::no_error;
