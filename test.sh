@@ -39,6 +39,7 @@ function show_usage() {
 	echo "        exp_var_D    : execute tests for the expectation and variance of D     "
 	echo "        linarr       : execute linear arrangement tests                        "
 	echo "        linarr_C     : execute linear arrangement (crossings) tests            "
+	echo "        Dmin         : execute Minimum Linear Arrangement tests                "
 	echo "        gen          : execute generation tests                                "
 	echo "        gen_alf      : execute generation (All Labelled Free) tests            "
 	echo "        gen_auf      : execute generation (All Unlabelled Free) tests          "

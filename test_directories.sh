@@ -9,7 +9,8 @@ groups_list=(\
 	"exp_var_D" \
 	"linarr" \
 	"linarr_C" \
-	"generate" \
+	"Dmin" \
+	"gen" \
 	"gen_alf" \
 	"gen_ulf" \
 	"gen_alf" \
@@ -41,6 +42,7 @@ all_IN_DIRS=(\
 	"linarr/headedness" \
 	"linarr/MDD" \
 	"linarr/D" \
+	"linarr/Dmin" \
 	"linarr/C/dyn-prog" \
 	"linarr/C/dyn-prog-list" \
 	"linarr/C/ladder" \
@@ -51,6 +53,7 @@ all_IN_DIRS=(\
 	"linarr/k-level/2-MDD" \
 	"generate/all_lab_free" \
 	"generate/all_ulab_free" \
+	"generate/all_ulab_rooted" \
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
@@ -75,6 +78,7 @@ all_OUT_DIRS=(\
 	"linarr/headedness" \
 	"linarr/MDD" \
 	"linarr/D" \
+	"linarr/Dmin" \
 	"linarr/C" \
 	"linarr/C" \
 	"linarr/C" \
@@ -85,6 +89,7 @@ all_OUT_DIRS=(\
 	"linarr/k-level/2-MDD" \
 	"generate/all_lab_free" \
 	"generate/all_ulab_free" \
+	"generate/all_ulab_rooted" \
 	"generate/rand_lab_free" \
 	"generate/rand_lab_rooted" \
 	"generate/rand_ulab_free" \
@@ -188,6 +193,14 @@ linarr_C_OUT_DIRS=(\
 	"linarr/C" \
 	"linarr/C" \
 	"linarr/C" \
+	)
+
+# Dmin (MLA) tests
+Dmin_IN_DIRS=(\
+	"linarr/Dmin"\
+	)
+Dmin_OUT_DIRS=(\
+	"linarr/Dmin"\
 	)
 
 # generate tests
