@@ -8,19 +8,18 @@ The format of the test files' names is as follows. All test files start with
 
 Then follows the "family number" of the test. This is a three-digit number.
 Finally, a three-digit number indicating the test number within the family.
-Therefore
 
 
-         Test number
+              Test number
 
-              |
-             ---
-	test-xxx.yyy
+                  |
+                 ---
+        test-xxx.yyy
 	     ---
 	      |
 
 	  Family test
-        number
+           number
 
 
 Family test numbers
