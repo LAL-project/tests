@@ -213,8 +213,6 @@ err_type test_projective(ifstream& fin) {
 	// read number of nodes
 	uint32_t n;
 	while (fin >> n) {
-		cout << n << endl;
-
 		generate::all_ulab_rooted_trees TreeGen(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
