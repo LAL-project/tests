@@ -1,0 +1,12 @@
+TYPE generate-arrangements-all_proj
+INPUT 0
+BODY
+	1 10
+	2 10
+	3 100
+	4 100
+	5 500
+	6 500
+	7 1000
+	8 1000
+	9 2000
