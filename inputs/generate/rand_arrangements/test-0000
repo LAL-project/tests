@@ -2,6 +2,7 @@ TYPE generate-rand_arrangements
 INPUT 0
 BODY
 	projective
+	1 1 100
 	2 1 100
 	3 10 1000
 	4 10 1000
