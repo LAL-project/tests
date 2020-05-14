@@ -8,6 +8,24 @@ source test_directories.sh
 ########################################################################
 # Functions
 
+function display_two() {
+	test=$1
+	total=$2
+	echo -n " ("
+	if [ $total -lt 100 ]; then
+		if [ $test -lt 10 ]; then
+			echo -n "0"
+		fi
+	elif [ $total -lt 1000 ]; then
+		if [ $test -lt 10 ]; then
+			echo -n "00"
+		elif [ $test -lt 100 ]; then
+			echo -n "0"
+		fi
+	fi
+	echo -n "$test/$total) "
+}
+
 function show_usage() {
 	echo "Welcome to the LAL tester                                                      "
 	echo "                                                                               "
@@ -149,7 +167,8 @@ function check_res_no_valgrind() {
 function execute_group() {
 	input=$1
 	output=$2
-	progress=$3
+	progress_1=$3
+	progress_2=$4
 	
 	skip=0
 	
@@ -195,7 +214,9 @@ function execute_group() {
 		TEST_ERR=.err.$id
 		VALG_ERR=.vgd.$id
 		
-		echo -e "\e[1;1;33mExecuting tests in\e[0m \e[1;2;33m$input_group\e[0m ($progress)"
+		echo -en "\e[1;1;33mExecuting tests in\e[0m \e[1;2;33m$input_group\e[0m"
+		display_two $progress_1 $progress_2
+		echo ""
 		
 		# execute all tests
 		all_test_files=$(ls $input_group | grep test)
@@ -208,7 +229,12 @@ function execute_group() {
 			INFILE_LENGTH=${#f}
 			ID=${f:5:($INFILE_LENGTH - 4)}
 			
-			echo -en "    \e[1;1;34m$f\e[0m ($nth_test/$n_test_files) "
+			# Display the progress within this group:
+			# output the name of the test file plus the index of the
+			# file with respect to the total tests within the group.
+			echo -en "    \e[1;1;34m$f\e[0m"
+			display_two $nth_test $n_test_files
+			
 			PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $TEST_ERR)
 			nth_test=$(($nth_test + 1))
 			
@@ -439,12 +465,12 @@ if [ $exe_group != 0 ]; then
 				idx=$(($i + 1))
 				in="${IN_DIRS[$i]}"
 				out="${OUT_DIRS[$i]}"
-				execute_group $in $out $idx/$in_n
+				execute_group $in $out $idx $in_n
 			done
 		fi
 	fi
 else
-	execute_group $input_dir $output_dir "1/1"
+	execute_group $input_dir $output_dir 1 1
 fi
 
 echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> execution_log

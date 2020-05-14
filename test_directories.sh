@@ -21,6 +21,7 @@ groups_list=(\
 	"gen_rur" \
 	"gen_rand_arr" \
 	"utils" \
+	"utils_centre" \
 	)
 
 # all tests available
@@ -281,5 +282,13 @@ utils_IN_DIRS=(\
 utils_OUT_DIRS=(\
 	"utils/sorting" \
 	"utils/traversal" \
+	"utils/centre" \
+	)
+
+# utils_centre tests
+utils_centre_IN_DIRS=(\
+	"utils/centre" \
+	)
+utils_centre_OUT_DIRS=(\
 	"utils/centre" \
 	)
