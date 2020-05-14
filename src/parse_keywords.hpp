@@ -94,6 +94,8 @@ err_type call_generate
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 err_type call_generate_trees
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+err_type call_generate_arrangements
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 	// Functions to test the library's utilities
 

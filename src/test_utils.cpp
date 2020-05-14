@@ -43,6 +43,7 @@
 // C++ includes
 #include <iostream>
 #include <string>
+#include <set>
 using namespace std;
 
 // lal includes
@@ -124,6 +125,28 @@ bool is_linarr_projective(
 	uint32_t C = lal::linarr::n_crossings(fT, arr);
 	if (C != 0) { return false; }
 	return not is_root_covered(rT, arr);
+}
+
+string is_rand_proj_arr_correct(
+	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+)
+{
+	set<position> setpos;
+	for (node u = 0; u < rT.n_nodes(); ++u) {
+		setpos.insert(arr[u]);
+	}
+
+	if (setpos.size() != rT.n_nodes()) {
+		return "There are collisions in vertices positions";
+	}
+
+	if (not is_linarr_projective(rT, fT, arr)) {
+		// the arrangement is not projective;
+		return "The arrangement is not projective";
+	}
+
+	// no error
+	return "No error";
 }
 
 } // -- namespace exe_tests

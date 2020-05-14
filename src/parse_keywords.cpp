@@ -309,8 +309,8 @@ err_type call_generate
 	if (key == "trees") {
 		return call_generate_trees(keywords, i + 1, fin);
 	}
-	else if (key == "rand_arrangements") {
-		return exe_gen_rand_arrangements(fin);
+	else if (key == "arrangements") {
+		return call_generate_arrangements(keywords, i + 1, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -343,6 +343,23 @@ err_type call_generate_trees
 	}
 	else if (key == "rur") {
 		return exe_gen_trees_rur(fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+err_type call_generate_arrangements
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "all_proj") {
+		return exe_gen_arr_ap(fin);
+	}
+	else if (key == "rand_proj") {
+		return exe_gen_arr_rp(fin);
 	}
 
 	cerr << ERROR << endl;

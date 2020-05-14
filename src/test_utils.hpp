@@ -66,4 +66,9 @@ bool is_linarr_projective(
 	const lal::linearrgmnt& arr
 );
 
+std::string is_rand_proj_arr_correct(
+	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
+	const lal::linearrgmnt& arr
+);
+
 } // -- namespace exe_tests
