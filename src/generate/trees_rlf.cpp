@@ -45,6 +45,7 @@ using namespace std;
 
 // lal includes
 #include <lal/generate/rand_lab_free_trees.hpp>
+#include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -93,13 +94,31 @@ err_type exe_gen_trees_rlf(std::ifstream& fin) {
 
 	uint32_t n;
 	rand_lab_free_trees TreeGen;
-	ftree T;
 
 	while (fin >> n) {
 
 		TreeGen.init(n, 100);
 		for (int i = 0; i < 10000; ++i) {
-			T = TreeGen.make_rand_tree();
+			const ftree T = TreeGen.make_rand_tree();
+
+			if (not T.is_tree()) {
+				cerr << ERROR << endl;
+				cerr << "    Graph generated is not a tree." << endl;
+				cerr << T << endl;
+				return err_type::test_exe_error;
+			}
+			if (T.n_nodes() != n) {
+				cerr << ERROR << endl;
+				cerr << "    Number of vertices of the tree is not '" << n << "'." << endl;
+				cerr << "    T.n_nodes()= " << T.n_nodes() << endl;
+				return err_type::test_exe_error;
+			}
+			if (T.n_edges() != n - 1) {
+				cerr << ERROR << endl;
+				cerr << "    Number of edges of the tree is not '" << n-1 << "'." << endl;
+				cerr << "    T.n_edges()= " << T.n_edges() << endl;
+				return err_type::test_exe_error;
+			}
 		}
 	}
 

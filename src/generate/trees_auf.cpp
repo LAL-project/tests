@@ -45,6 +45,7 @@ using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/output.hpp>
@@ -201,7 +202,6 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 	integer gen;
 
 	all_ulab_free_trees TreeGen;
-	ftree T;
 
 	while (fin >> n) {
 		n_caterpillar = 0;
@@ -211,7 +211,25 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			T = TreeGen.get_tree();
+			const ftree T = TreeGen.get_tree();
+			if (not T.is_tree()) {
+				cerr << ERROR << endl;
+				cerr << "    Graph generated is not a tree." << endl;
+				cerr << T << endl;
+				return err_type::test_exe_error;
+			}
+			if (T.n_nodes() != n) {
+				cerr << ERROR << endl;
+				cerr << "    Number of vertices of the tree is not '" << n << "'." << endl;
+				cerr << "    T.n_nodes()= " << T.n_nodes() << endl;
+				return err_type::test_exe_error;
+			}
+			if (T.n_edges() != n - 1) {
+				cerr << ERROR << endl;
+				cerr << "    Number of edges of the tree is not '" << n-1 << "'." << endl;
+				cerr << "    T.n_edges()= " << T.n_edges() << endl;
+				return err_type::test_exe_error;
+			}
 
 			// compute 'statistics'
 			n_caterpillar += is_caterpillar(T);
