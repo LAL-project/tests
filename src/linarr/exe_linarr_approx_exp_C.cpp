@@ -64,9 +64,9 @@ using namespace properties;
 using namespace linarr;
 
 // custom includes
-#include "../io_wrapper.hpp"
-#include "../definitions.hpp"
-#include "../time.hpp"
+#include "io_wrapper.hpp"
+#include "definitions.hpp"
+#include "time.hpp"
 
 #define to_int32(x) static_cast<int32_t>(x)
 #define to_uint32(x) static_cast<uint32_t>(x)

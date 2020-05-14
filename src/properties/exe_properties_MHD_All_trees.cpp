@@ -59,8 +59,8 @@ using namespace numeric;
 using namespace properties;
 
 // custom includes
-#include "../io_wrapper.hpp"
-#include "../definitions.hpp"
+#include "io_wrapper.hpp"
+#include "definitions.hpp"
 
 namespace exe_tests {
 

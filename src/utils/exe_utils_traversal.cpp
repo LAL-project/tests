@@ -57,8 +57,8 @@ using namespace utils;
 using namespace graphs;
 
 // custom includes
-#include "../io_wrapper.hpp"
-#include "../definitions.hpp"
+#include "io_wrapper.hpp"
+#include "definitions.hpp"
 
 namespace exe_tests {
 

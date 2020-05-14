@@ -56,7 +56,7 @@ using namespace std;
 using namespace lal;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
 
 typedef uint32_t Ui;
 typedef vector<uint32_t>::iterator Ui_it;

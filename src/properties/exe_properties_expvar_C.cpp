@@ -62,9 +62,9 @@ using namespace properties;
 using namespace generate;
 
 // custom includes
-#include "../io_wrapper.hpp"
-#include "../definitions.hpp"
-#include "../time.hpp"
+#include "io_wrapper.hpp"
+#include "definitions.hpp"
+#include "time.hpp"
 #include "C_rla_brute_force_algorithms.hpp"
 
 namespace exe_tests {

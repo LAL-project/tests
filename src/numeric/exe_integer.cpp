@@ -52,7 +52,7 @@ using namespace lal;
 using namespace numeric;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
 
 #define map_has(M, v) (M.find(v) != M.end())
 

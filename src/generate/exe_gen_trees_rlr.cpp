@@ -52,7 +52,7 @@ using namespace graphs;
 using namespace generate;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
 
 /*
  * RANDOM LABELLED ROOTED TREES

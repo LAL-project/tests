@@ -56,7 +56,7 @@ using namespace generate;
 using namespace numeric;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
 
 /*
  * ALL LABELLED FREE TREES
