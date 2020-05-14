@@ -50,10 +50,10 @@ using namespace std;
 // lal includes
 #include <lal/numeric/rational.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
+#include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/graphs/rtree.hpp>
 #include <lal/iterators/E_iterator.hpp>
 #include <lal/linarr/D.hpp>
-#include <lal/linarr/C.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
@@ -61,70 +61,34 @@ using namespace graphs;
 using namespace numeric;
 using namespace iterators;
 using namespace linarr;
+using namespace generate;
 
 // custom includes
-#include "../io_wrapper.hpp"
-#include "../definitions.hpp"
-
-inline std::vector<lal::node> ilinarr(const lal::linearrgmnt& linarr) {
-	std::vector<lal::node> ilin(linarr.size());
-	for (uint32_t p : linarr) {
-		ilin[ linarr[p] ] = p;
-	}
-	return ilin;
-}
-
-namespace std {
-template<class T>
-ostream& operator<< (ostream& os, const vector<T>& v) {
-	if (v.size() == 0) { return os; }
-	os << v[0];
-	for (size_t i = 1; i < v.size(); ++i) {
-		os << " " << v[i];
-	}
-	return os;
-}
-}
+#include "io_wrapper.hpp"
+#include "definitions.hpp"
+#include "test_utils.hpp"
 
 namespace exe_tests {
-
-inline bool is_projective(const ftree& ft, node root, const linearrgmnt& arr) {
-	const uint32_t C = n_crossings(ft, arr);
-	if (C != 0) { return false; }
-	E_iterator it(ft);
-	while (it.has_next()) {
-		it.next();
-		const edge e = it.get_edge();
-		const node s = e.first;
-		const node t = e.second;
-		const bool st_cover = arr[s] < arr[root] and arr[root] < arr[t];
-		const bool ts_cover = arr[t] < arr[root] and arr[root] < arr[s];
-		if (st_cover or ts_cover) {
-			return false;
-		}
-	}
-	return true;
-}
 
 pair<uint32_t, linearrgmnt> Dmin_projective_bruteforce(const rtree& t) {
 	const uint32_t n = t.n_nodes();
 	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
 
-	const ftree ft = t.to_undirected();
-	uint32_t Dmin = numeric_limits<uint32_t>::max();
 	linearrgmnt arrMin;
-	vector<position> arr(n);
-	std::iota(arr.begin(), arr.end(), 0);
-	do {
-		if (is_projective(ft, t.get_root(), arr)) {
-			const uint32_t D = sum_length_edges(t, arr);
-			if (Dmin > D) {
-				Dmin = D;
-				arrMin = arr;
-			}
+	uint32_t Dmin = numeric_limits<uint32_t>::max();
+
+	all_proj_arr ArrGen(t);
+	while (ArrGen.has_next()) {
+		ArrGen.next();
+		const linearrgmnt arr = ArrGen.get_arrangement();
+
+		const uint32_t D = sum_length_edges(t, arr);
+		if (Dmin > D) {
+			Dmin = D;
+			arrMin = arr;
 		}
 	}
-	while (std::next_permutation(arr.begin(), arr.end()));
+
 	return make_pair(Dmin, arrMin);
 }
 
@@ -151,11 +115,11 @@ err_type test_Dmin_rtree_Projective(rtree& t) {
 		cerr << "    Library:" << endl;
 		cerr << "        Value: " << res_library.first << endl;
 		cerr << "        Arrangement:     " << res_library.second << endl;
-		cerr << "        Inv Arrangement: " << ilinarr(res_library.second) << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
 		cerr << "    Bruteforce:" << endl;
 		cerr << "        Value: " << res_bf.first << endl;
 		cerr << "        Arrangement:     " << res_bf.second << endl;
-		cerr << "        Inv Arrangement: " << ilinarr(res_bf.second) << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
 		cerr << "    For tree: " << endl;
 		cerr << t << endl;
 		return err_type::test_exe_error;
@@ -176,18 +140,11 @@ err_type test_projective(ifstream& fin) {
 
 	size_t n_inputs;
 	fin >> n_inputs;
-	if (n_inputs >= 1) {
+	if (n_inputs != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected at most one input." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << n_inputs << " were specified." << endl;
 		return err_type::test_format_error;
-	}
-
-	string graph_name;
-	string graph_format;
-
-	if (n_inputs == 1) {
-		fin >> graph_name >> graph_format;
 	}
 
 	// parse body field
@@ -197,17 +154,6 @@ err_type test_projective(ifstream& fin) {
 		cerr << "    Expected field 'BODY'." << endl;
 		cerr << "    Instead, '" << field << "' was found." << endl;
 		return err_type::test_format_error;
-	}
-
-	if (n_inputs == 1) {
-		rtree tree;
-		const err_type r = io_wrapper::read_graph(graph_name, graph_format, tree);
-		if (r != err_type::no_error) {
-			return r;
-		}
-
-		// execute tests for this particular tree
-		return test_Dmin_rtree_Projective(tree);
 	}
 
 	// read number of nodes
