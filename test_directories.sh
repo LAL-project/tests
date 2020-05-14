@@ -12,9 +12,8 @@ groups_list=(\
 	"Dmin" \
 	"gen" \
 	"gen_alf" \
-	"gen_ulf" \
-	"gen_alf" \
 	"gen_auf" \
+	"gen_aur" \
 	"gen_rlf" \
 	"gen_rlr" \
 	"gen_ruf" \
@@ -236,6 +235,13 @@ gen_auf_IN_DIRS=(\
 	)
 gen_auf_OUT_DIRS=(\
 	"generate/all_ulab_free" \
+	)
+# generate (all unlabelled rooted) tests : aur
+gen_aur_IN_DIRS=(\
+	"generate/all_ulab_rooted" \
+	)
+gen_aur_OUT_DIRS=(\
+	"generate/all_ulab_rooted" \
 	)
 # generate (rand labelled free) tests : rlf
 gen_rlf_IN_DIRS=(\

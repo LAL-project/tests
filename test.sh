@@ -12,7 +12,10 @@ function display_two() {
 	test=$1
 	total=$2
 	echo -n " ("
-	if [ $total -lt 100 ]; then
+	if [ $total -lt 10 ]; then
+		# do nothing
+		echo -n ""
+	elif [ $total -lt 100 ]; then
 		if [ $test -lt 10 ]; then
 			echo -n "0"
 		fi
@@ -61,6 +64,7 @@ function show_usage() {
 	echo "        gen          : execute generation tests                                "
 	echo "        gen_alf      : execute generation (All Labelled Free) tests            "
 	echo "        gen_auf      : execute generation (All Unlabelled Free) tests          "
+	echo "        gen_aur      : execute generation (All Unlabelled Rooted) tests        "
 	echo "        gen_rlf      : execute generation (Rand Labelled Free) tests           "
 	echo "        gen_rlr      : execute generation (Rand Labelled Rooted) tests         "
 	echo "        gen_ruf      : execute generation (Rand Unlabelled Free) tests         "
