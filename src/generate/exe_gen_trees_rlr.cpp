@@ -46,6 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/generate/rand_lab_rooted_trees.hpp>
+#include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -101,6 +102,12 @@ err_type exe_gen_trees_rlr(std::ifstream& fin) {
 		TreeGen.init(n, 100);
 		for (int i = 0; i < 10000; ++i) {
 			T = TreeGen.make_rand_tree();
+			if (not T.has_root()) {
+				cerr << ERROR << endl;
+				cerr << "    Tree '" << i << "' does not have a root." << endl;
+				cerr << T << endl;
+				return err_type::test_exe_error;
+			}
 		}
 	}
 

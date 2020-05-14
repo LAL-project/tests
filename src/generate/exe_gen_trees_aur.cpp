@@ -49,6 +49,7 @@ using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_rooted_trees.hpp>
+#include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/output.hpp>
 using namespace lal;
@@ -144,7 +145,7 @@ err_type exe_gen_trees_aur(std::ifstream& fin) {
 	integer gen;
 
 	all_ulab_rooted_trees TreeGen;
-	rtree rT;
+	rtree T;
 
 	while (fin >> n) {
 		// number of generated trees
@@ -154,7 +155,13 @@ err_type exe_gen_trees_aur(std::ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			rT = TreeGen.get_tree();
+			T = TreeGen.get_tree();
+			if (not T.has_root()) {
+				cerr << ERROR << endl;
+				cerr << "    Tree does not have a root." << endl;
+				cerr << T << endl;
+				return err_type::test_exe_error;
+			}
 
 			// compute 'statistics'
 			gen += 1;
