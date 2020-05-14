@@ -78,8 +78,8 @@ err_type exe_linarr_klevel(const std::string& level, const std::string& what, st
 err_type exe_linarr_Dmin_rooted(const std::string& algorithm, std::ifstream& fin);
 err_type exe_linarr_Dmin_free(const std::string& algorithm, std::ifstream& fin);
 
-err_type exe_gen_arr_ap(std::ifstream& fin);
-err_type exe_gen_arr_rp(std::ifstream& fin);
+err_type exe_gen_arr_all_proj(std::ifstream& fin);
+err_type exe_gen_arr_rand_proj(std::ifstream& fin);
 err_type exe_gen_trees_alf(std::ifstream& fin);
 err_type exe_gen_trees_auf(std::ifstream& fin);
 err_type exe_gen_trees_aur(std::ifstream& fin);

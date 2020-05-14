@@ -75,7 +75,7 @@ integer amount_projective(const rtree& rT) {
 	return k;
 }
 
-err_type exe_gen_arr_ap(ifstream& fin) {
+err_type exe_gen_arr_all_proj(ifstream& fin) {
 	string field;
 	fin >> field;
 
@@ -104,56 +104,56 @@ err_type exe_gen_arr_ap(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	uint32_t n, ntrees, nit;
-	while (fin >> n >> ntrees >> nit) {
-	// do 'ntrees' trees of 'n' vertices
-	rand_ulab_rooted_trees TreeGen(n);
+	uint32_t n, ntrees;
+	while (fin >> n >> ntrees) {
+		// do 'ntrees' trees of 'n' vertices
+		rand_ulab_rooted_trees TreeGen(n);
 
-	uint32_t nt = 0;
-	while (nt < ntrees) {
-		const rtree rT = TreeGen.make_rand_tree();
-		const ftree fT = rT.to_undirected();
+		uint32_t nt = 0;
+		while (nt < ntrees) {
+			const rtree rT = TreeGen.make_rand_tree();
+			const ftree fT = rT.to_undirected();
 
-		uint32_t amount = 0;
-		set<linearrgmnt> list_arrs;
+			uint32_t amount = 0;
+			set<linearrgmnt> list_arrs;
 
-		all_proj_arr ArrGen(rT);
-		while (ArrGen.has_next()) {
-			ArrGen.next();
-			const linearrgmnt arr = ArrGen.get_arrangement();
+			all_proj_arr ArrGen(rT);
+			while (ArrGen.has_next()) {
+				ArrGen.next();
+				const linearrgmnt arr = ArrGen.get_arrangement();
 
-			// Do some sanity checks.
-			const string err = is_rand_proj_arr_correct(rT, fT, arr);
-			if (err != "No error") {
+				// Do some sanity checks.
+				const string err = is_rand_proj_arr_correct(rT, fT, arr);
+				if (err != "No error") {
+					cerr << ERROR << endl;
+					cerr << "    Generation of random arrangement for rtree:" << endl;
+					cerr << rT << endl;
+					cerr << "    Failed with error: '" << err << "'" << endl;
+					cerr << "    Arrangement:" << endl;
+					cerr << "    " << arr << endl;
+					cerr << "    Inverse linear arrangement:" << endl;
+					cerr << "    " << invlinarr(arr) << endl;
+					return err_type::test_exe_error;
+				}
+
+				++amount;
+				list_arrs.insert(arr);
+			}
+
+			const integer formula = amount_projective(rT);
+			if (formula != amount or formula != list_arrs.size()) {
 				cerr << ERROR << endl;
-				cerr << "    Generation of random arrangement for rtree:" << endl;
+				cerr << "    Number of projective arrangements generated" << endl;
+				cerr << "    does not agree with the formula." << endl;
+				cerr << "        formula= " << formula << endl;
+				cerr << "        iterations= " << amount << endl;
+				cerr << "        unique amount= " << list_arrs.size() << endl;
 				cerr << rT << endl;
-				cerr << "    Failed with error: '" << err << "'" << endl;
-				cerr << "    Arrangement:" << endl;
-				cerr << "    " << arr << endl;
-				cerr << "    Inverse linear arrangement:" << endl;
-				cerr << "    " << invlinarr(arr) << endl;
 				return err_type::test_exe_error;
 			}
 
-			++amount;
-			list_arrs.insert(arr);
+			++nt;
 		}
-
-		const integer formula = amount_projective(rT);
-		if (formula != amount or formula != list_arrs.size()) {
-			cerr << ERROR << endl;
-			cerr << "    Number of projective arrangements generated" << endl;
-			cerr << "    does not agree with the formula." << endl;
-			cerr << "        formula= " << formula << endl;
-			cerr << "        iterations= " << amount << endl;
-			cerr << "        unique amount= " << list_arrs.size() << endl;
-			cerr << rT << endl;
-			return err_type::test_exe_error;
-		}
-
-		++nt;
-	}
 	}
 
 	TEST_GOODBYE

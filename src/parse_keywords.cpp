@@ -356,10 +356,10 @@ err_type call_generate_arrangements
 {
 	const string& key = keywords[i];
 	if (key == "all_proj") {
-		return exe_gen_arr_ap(fin);
+		return exe_gen_arr_all_proj(fin);
 	}
 	else if (key == "rand_proj") {
-		return exe_gen_arr_rp(fin);
+		return exe_gen_arr_rand_proj(fin);
 	}
 
 	cerr << ERROR << endl;

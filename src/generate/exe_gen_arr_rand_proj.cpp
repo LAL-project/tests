@@ -61,7 +61,7 @@ using namespace iterators;
 
 namespace exe_tests {
 
-err_type exe_gen_arr_rp(ifstream& fin) {
+err_type exe_gen_arr_rand_proj(ifstream& fin) {
 	string field;
 	fin >> field;
 
@@ -92,34 +92,34 @@ err_type exe_gen_arr_rp(ifstream& fin) {
 
 	uint32_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
-	// do 'ntrees' trees of 'n' vertices
-	rand_ulab_rooted_trees TreeGen(n);
+		// do 'ntrees' trees of 'n' vertices
+		rand_ulab_rooted_trees TreeGen(n);
 
-	uint32_t nt = 0;
-	while (nt < ntrees) {
-		const rtree rT = TreeGen.make_rand_tree();
-		const ftree fT = rT.to_undirected();
+		uint32_t nt = 0;
+		while (nt < ntrees) {
+			const rtree rT = TreeGen.make_rand_tree();
+			const ftree fT = rT.to_undirected();
 
-		for (uint32_t it = 0; it < nit; ++it) {
-			const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
+			for (uint32_t it = 0; it < nit; ++it) {
+				const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
 
-			// Do some sanity checks.
-			const string err = is_rand_proj_arr_correct(rT, fT, arr);
-			if (err != "No error") {
-				cerr << ERROR << endl;
-				cerr << "    Generation of random arrangement for rtree:" << endl;
-				cerr << rT << endl;
-				cerr << "    Failed with error: '" << err << "'" << endl;
-				cerr << "    Arrangement:" << endl;
-				cerr << "    " << arr << endl;
-				cerr << "    Inverse linear arrangement:" << endl;
-				cerr << "    " << invlinarr(arr) << endl;
-				return err_type::test_exe_error;
+				// Do some sanity checks.
+				const string err = is_rand_proj_arr_correct(rT, fT, arr);
+				if (err != "No error") {
+					cerr << ERROR << endl;
+					cerr << "    Generation of random arrangement for rtree:" << endl;
+					cerr << rT << endl;
+					cerr << "    Failed with error: '" << err << "'" << endl;
+					cerr << "    Arrangement:" << endl;
+					cerr << "    " << arr << endl;
+					cerr << "    Inverse linear arrangement:" << endl;
+					cerr << "    " << invlinarr(arr) << endl;
+					return err_type::test_exe_error;
+				}
 			}
-		}
 
-		++nt;
-	}
+			++nt;
+		}
 	}
 
 	TEST_GOODBYE
