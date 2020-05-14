@@ -11,14 +11,15 @@ groups_list=(\
 	"linarr_C" \
 	"Dmin" \
 	"gen" \
-	"gen_alf" \
-	"gen_auf" \
-	"gen_aur" \
-	"gen_rlf" \
-	"gen_rlr" \
-	"gen_ruf" \
-	"gen_rur" \
-	"gen_rand_arr" \
+	"gen_trees_alf" \
+	"gen_trees_auf" \
+	"gen_trees_aur" \
+	"gen_trees_rlf" \
+	"gen_trees_rlr" \
+	"gen_trees_ruf" \
+	"gen_trees_rur" \
+	"gen_arr_rand_proj" \
+	"gen_arr_all_proj" \
 	"utils" \
 	"utils_centre" \
 	)
@@ -51,14 +52,15 @@ all_IN_DIRS=(\
 	"linarr/C/stack-based-list" \
 	"linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" \
-	"generate/all_lab_free" \
-	"generate/all_ulab_free" \
-	"generate/all_ulab_rooted" \
-	"generate/rand_lab_free" \
-	"generate/rand_lab_rooted" \
-	"generate/rand_ulab_free" \
-	"generate/rand_ulab_rooted" \
-	"generate/rand_arrangements" \
+	"generate/trees/all_lab_free" \
+	"generate/trees/all_ulab_free" \
+	"generate/trees/all_ulab_rooted" \
+	"generate/trees/rand_lab_free" \
+	"generate/trees/rand_lab_rooted" \
+	"generate/trees/rand_ulab_free" \
+	"generate/trees/rand_ulab_rooted" \
+	"generate/arrangements/all_proj" \
+	"generate/arrangements/rand_proj" \
 	)
 all_OUT_DIRS=(\
 	"construction" \
@@ -87,14 +89,15 @@ all_OUT_DIRS=(\
 	"linarr/C" \
 	"linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" \
-	"generate/all_lab_free" \
-	"generate/all_ulab_free" \
-	"generate/all_ulab_rooted" \
-	"generate/rand_lab_free" \
-	"generate/rand_lab_rooted" \
-	"generate/rand_ulab_free" \
-	"generate/rand_ulab_rooted" \
-	"generate/rand_arrangements" \
+	"generate/trees/all_lab_free" \
+	"generate/trees/all_ulab_free" \
+	"generate/trees/all_ulab_rooted" \
+	"generate/trees/rand_lab_free" \
+	"generate/trees/rand_lab_rooted" \
+	"generate/trees/rand_ulab_free" \
+	"generate/trees/rand_ulab_rooted" \
+	"generate/arrangements/all_proj" \
+	"generate/arrangements/rand_proj" \
 	)
 
 # construction tests
@@ -205,78 +208,87 @@ Dmin_OUT_DIRS=(\
 
 # generate tests
 gen_IN_DIRS=(\
-	"generate/all_lab_free" \
-	"generate/all_ulab_free" \
-	"generate/rand_lab_free" \
-	"generate/rand_lab_rooted" \
-	"generate/rand_ulab_free" \
-	"generate/rand_ulab_rooted" \
-	"generate/rand_arrangements" \
+	"generate/trees/all_lab_free" \
+	"generate/trees/all_ulab_free" \
+	"generate/trees/rand_lab_free" \
+	"generate/trees/rand_lab_rooted" \
+	"generate/trees/rand_ulab_free" \
+	"generate/trees/rand_ulab_rooted" \
+	"generate/arrangements/rand_all" \
+	"generate/arrangements/rand_proj" \
 	)
 gen_OUT_DIRS=(\
-	"generate/all_lab_free" \
-	"generate/all_ulab_free" \
-	"generate/rand_lab_free" \
-	"generate/rand_lab_rooted" \
-	"generate/rand_ulab_free" \
-	"generate/rand_ulab_rooted" \
-	"generate/rand_arrangements" \
+	"generate/trees/all_lab_free" \
+	"generate/trees/all_ulab_free" \
+	"generate/trees/rand_lab_free" \
+	"generate/trees/rand_lab_rooted" \
+	"generate/trees/rand_ulab_free" \
+	"generate/trees/rand_ulab_rooted" \
+	"generate/arrangements/rand_all" \
+	"generate/arrangements/rand_proj" \
 	)
 # generate (all labelled free) tests : alf
-gen_alf_IN_DIRS=(\
-	"generate/all_lab_free" \
+gen_trees_alf_IN_DIRS=(\
+	"generate/trees/all_lab_free" \
 	)
-gen_alf_OUT_DIRS=(\
-	"generate/all_lab_free" \
+gen_trees_alf_OUT_DIRS=(\
+	"generate/trees/all_lab_free" \
 	)
 # generate (all unlabelled free) tests : auf
-gen_auf_IN_DIRS=(\
-	"generate/all_ulab_free" \
+gen_trees_auf_IN_DIRS=(\
+	"generate/trees/all_ulab_free" \
 	)
-gen_auf_OUT_DIRS=(\
-	"generate/all_ulab_free" \
+gen_trees_auf_OUT_DIRS=(\
+	"generate/trees/all_ulab_free" \
 	)
 # generate (all unlabelled rooted) tests : aur
-gen_aur_IN_DIRS=(\
-	"generate/all_ulab_rooted" \
+gen_trees_aur_IN_DIRS=(\
+	"generate/trees/all_ulab_rooted" \
 	)
-gen_aur_OUT_DIRS=(\
-	"generate/all_ulab_rooted" \
+gen_trees_aur_OUT_DIRS=(\
+	"generate/trees/all_ulab_rooted" \
 	)
 # generate (rand labelled free) tests : rlf
-gen_rlf_IN_DIRS=(\
-	"generate/rand_lab_free" \
+gen_trees_rlf_IN_DIRS=(\
+	"generate/trees/rand_lab_free" \
 	)
-gen_rlf_OUT_DIRS=(\
-	"generate/rand_lab_free" \
+gen_trees_rlf_OUT_DIRS=(\
+	"generate/trees/rand_lab_free" \
 	)
 # generate (rand labelled rooted) tests : rlr
-gen_rlr_IN_DIRS=(\
-	"generate/rand_lab_rooted" \
+gen_trees_rlr_IN_DIRS=(\
+	"generate/trees/rand_lab_rooted" \
 	)
-gen_rlr_OUT_DIRS=(\
-	"generate/rand_lab_rooted" \
-	)
-# generate (rand unlabelled rooted) tests : ruf
-gen_ruf_IN_DIRS=(\
-	"generate/rand_ulab_free" \
-	)
-gen_ruf_OUT_DIRS=(\
-	"generate/rand_ulab_free" \
+gen_trees_rlr_OUT_DIRS=(\
+	"generate/trees/rand_lab_rooted" \
 	)
 # generate (rand unlabelled rooted) tests : ruf
-gen_rur_IN_DIRS=(\
-	"generate/rand_ulab_rooted" \
+gen_trees_ruf_IN_DIRS=(\
+	"generate/trees/rand_ulab_free" \
 	)
-gen_rur_OUT_DIRS=(\
-	"generate/rand_ulab_rooted" \
+gen_trees_ruf_OUT_DIRS=(\
+	"generate/trees/rand_ulab_free" \
 	)
 # generate (rand unlabelled rooted) tests : ruf
-gen_rand_arr_IN_DIRS=(\
-	"generate/rand_arrangements" \
+gen_trees_rur_IN_DIRS=(\
+	"generate/trees/rand_ulab_rooted" \
 	)
-gen_rand_arr_OUT_DIRS=(\
-	"generate/rand_arrangements" \
+gen_trees_rur_OUT_DIRS=(\
+	"generate/trees/rand_ulab_rooted" \
+	)
+# generate (all projective arrangements) tests
+gen_arr_all_proj_IN_DIRS=(\
+	"generate/arrangements/all_proj" \
+	)
+gen_arr_all_proj_OUT_DIRS=(\
+	"generate/arrangements/all_proj" \
+	)
+# generate (rand projective arrangements) tests
+gen_arr_rand_proj_IN_DIRS=(\
+	"generate/arrangements/rand_proj" \
+	)
+gen_arr_rand_proj_OUT_DIRS=(\
+	"generate/arrangements/rand_proj" \
 	)
 
 # utils tests
