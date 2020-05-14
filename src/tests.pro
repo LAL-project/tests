@@ -34,43 +34,43 @@ LIBS += -lgmp
 LIBS += -fopenmp
 
 SOURCES += \
-    construction/exe_construction.cpp \
-    construction/exe_construction_assert.cpp \
-    construction/exe_construction_utils.cpp \
-    generate/exe_gen_arr_all_proj.cpp \
-    generate/exe_gen_arr_rand_proj.cpp \
-    generate/exe_gen_trees_alf.cpp \
-    generate/exe_gen_trees_auf.cpp \
-    generate/exe_gen_trees_aur.cpp \
-    generate/exe_gen_trees_rlf.cpp \
-    generate/exe_gen_trees_rlr.cpp \
-    generate/exe_gen_trees_ruf.cpp \
-    generate/exe_gen_trees_rur.cpp \
-    linarr/exe_linarr_C.cpp \
-    linarr/exe_linarr_C_list.cpp \
-    linarr/exe_linarr_D.cpp \
-    linarr/exe_linarr_Dmin_free.cpp \
-    linarr/exe_linarr_Dmin_rooted.cpp \
-    linarr/exe_linarr_approx_exp_C.cpp \
-    linarr/exe_linarr_headedness.cpp \
-    linarr/exe_linarr_klevel.cpp \
-    linarr/exe_linarr_syntree_classification.cpp \
+    construction/construct.cpp \
+    construction/construct_assert.cpp \
+    construction/construct_utils.cpp \
+    generate/arr_all_proj.cpp \
+    generate/arr_rand_proj.cpp \
+    generate/trees_alf.cpp \
+    generate/trees_auf.cpp \
+    generate/trees_aur.cpp \
+    generate/trees_rlf.cpp \
+    generate/trees_rlr.cpp \
+    generate/trees_ruf.cpp \
+    generate/trees_rur.cpp \
+    linarr/C.cpp \
+    linarr/C_list.cpp \
+    linarr/D.cpp \
+    linarr/Dmin_free.cpp \
+    linarr/Dmin_rooted.cpp \
+    linarr/approx_exp_C.cpp \
+    linarr/headedness.cpp \
+    linarr/klevel.cpp \
+    linarr/syntree_classification.cpp \
 	main.cpp \
-    numeric/exe_rational.cpp \
+    numeric/integer.cpp \
+    numeric/rational.cpp \
 	parse_keywords.cpp \
 	io_wrapper.cpp \
+    properties/MHD_All_trees.cpp \
     properties/V_rla_C_brute_force_Q.cpp \
     properties/V_rla_C_brute_force_freqs.cpp \
-    properties/exe_properties_MHD_All_trees.cpp \
-    numeric/exe_integer.cpp \
-    properties/exe_properties_general.cpp \
-    properties/exe_properties_expvar_C.cpp \
-    properties/exe_properties_expvar_D.cpp \
+    properties/expvar_C.cpp \
+    properties/expvar_D.cpp \
+    properties/general.cpp \
     test_utils.cpp \
     time.cpp \
-    utils/exe_utils_centre.cpp \
-    utils/exe_utils_sorting.cpp \
-    utils/exe_utils_traversal.cpp
+    utils/centre.cpp \
+    utils/sorting.cpp \
+    utils/traversal.cpp
 
 HEADERS += \
     class_hierarchy.hpp \
