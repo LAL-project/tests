@@ -385,9 +385,8 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_is_rtree(g1, FUNC_RTREE_SET_ROOT)
 
 			if (graph_type(g1) == RTREE) {
-				fin >> Boolean;
 				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean)
-				rtreevars[g1].recalc_size_subtrees(Boolean == "true");
+				rtreevars[g1].recalc_size_subtrees();
 			}
 			else {
 				rtreevars[g1].recalc_size_subtrees();

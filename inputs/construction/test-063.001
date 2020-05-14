@@ -19,12 +19,13 @@ BODY
 	set_root g 0
 	assert has_root g
 	assert is_tree g
+	
 	find_rtree_type g
 	assert rtree_type_valid g
 	assert is_rtree_type g arborescence
 	
 	/* size of each subtree using  */
-	calculate_size_subtrees g false
+	calculate_size_subtrees g
 	
 	assert num_nodes_subtree g 0 11
 	assert num_nodes_subtree g 1 5
@@ -38,24 +39,3 @@ BODY
 	assert num_nodes_subtree g 9 1
 	assert num_nodes_subtree g 10 1
 	
-	/* size of each subtree when following reversed edges */
-	set_root g 10
-	assert need_recalc_subtree_size g
-	calculate_size_subtrees g true
-	assert no_need_recalc_subtree_size g
-	assert rtree_type_not_valid g
-	find_rtree_type g
-	assert rtree_type_valid g
-	assert is_rtree_type g none
-	
-	assert num_nodes_subtree g 0 6
-	assert num_nodes_subtree g 1 5
-	assert num_nodes_subtree g 2 7
-	assert num_nodes_subtree g 3 1
-	assert num_nodes_subtree g 4 10
-	assert num_nodes_subtree g 5 3
-	assert num_nodes_subtree g 6 2
-	assert num_nodes_subtree g 7 1
-	assert num_nodes_subtree g 8 1
-	assert num_nodes_subtree g 9 1
-	assert num_nodes_subtree g 10 11

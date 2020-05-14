@@ -91,8 +91,8 @@ BODY
 	assert need_recalc_subtree_size g
 	
 	find_rtree_type g
-	calculate_size_subtrees g true
-	calculate_size_subtrees g false
+	calculate_size_subtrees g
+	calculate_size_subtrees g
 	
 	assert rtree_type_valid g
 	assert no_need_recalc_subtree_size g
@@ -101,8 +101,8 @@ BODY
 	assert need_recalc_subtree_size g
 	
 	find_rtree_type g
-	calculate_size_subtrees g true
-	calculate_size_subtrees g false
+	calculate_size_subtrees g
+	calculate_size_subtrees g
 	
 	set_root g 1
 	assert rtree_type_not_valid g

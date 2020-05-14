@@ -23,7 +23,7 @@ BODY
 	assert rtree_type_valid f
 	assert is_rtree_type f arborescence
 	
-	calculate_size_subtrees f false
+	calculate_size_subtrees f
 	assert num_nodes_subtree f 0 6
 	assert num_nodes_subtree f 1 10
 	assert num_nodes_subtree f 2 5

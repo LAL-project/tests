@@ -16,6 +16,9 @@ BODY
 	assert is_tree g1
 	output_graph g1
 	
+	find_rtree_type g1
+	assert is_rtree_type g1 arborescence
+	
 	retrieve_subtree s1 g1 0
 	normalise s1
 	output_graph s1
@@ -50,6 +53,9 @@ BODY
 	assert is_tree g2
 	output_graph g2
 	
+	find_rtree_type g2
+	assert is_rtree_type g2 anti_arborescence
+	
 	retrieve_subtree s3 g2 0
 	normalise s3
 	output_graph s3
@@ -69,6 +75,10 @@ BODY
 	assert num_edges s4 1
 	
 	set_root g2 4
+	
+	find_rtree_type g2
+	assert is_rtree_type g2 arborescence
+	
 	retrieve_subtree s41 g2 3
 	normalise s41
 	output_graph s41
@@ -76,8 +86,6 @@ BODY
 	assert has_root s41
 	assert num_nodes s41 4
 	assert num_edges s41 3
-
-
 
 
 	create_graph rtree g3 5
@@ -90,20 +98,21 @@ BODY
 	assert num_nodes g3 5
 	assert num_edges g3 4
 	assert not_has_root g3
-	set_root g3 0
+	set_root g3 1
 	assert has_root g3
 	assert is_tree g3
 	output_graph g3
+	
+	find_rtree_type g3
+	assert is_rtree_type g3 anti_arborescence
 	
 	retrieve_subtree s5 g3 0
 	normalise s5
 	output_graph s5
 	assert is_tree s5
 	assert has_root s5
-	assert num_nodes s5 5
-	assert num_edges s5 4
-	assert exists_edge s5 0 1
-	assert not_exists_edge s5 1 0
+	assert num_nodes s5 1
+	assert num_edges s5 0
 	
 	retrieve_subtree s6 g3 3
 	normalise s6
@@ -113,11 +122,3 @@ BODY
 	assert num_nodes s6 2
 	assert num_edges s6 1
 	
-	set_root g3 4
-	retrieve_subtree s61 g3 3
-	normalise s61
-	output_graph s61
-	assert is_tree s61
-	assert has_root s61
-	assert num_nodes s61 4
-	assert num_edges s61 3

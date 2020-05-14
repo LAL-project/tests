@@ -29,8 +29,8 @@ BODY
 	assert has_root t
 	
 	find_rtree_type t
-	calculate_size_subtrees t true
-	calculate_size_subtrees t false
+	calculate_size_subtrees t
+	calculate_size_subtrees t
 	
 	assert no_need_recalc_subtree_size t
 	assert rtree_type_valid t

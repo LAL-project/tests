@@ -11,42 +11,28 @@ BODY
 	assert num_nodes g1 5
 	assert num_edges g1 4
 	assert not_has_root g1
-	set_root g1 0
+	set_root g1 2
 	assert has_root g1
 	assert is_tree g1
 	output_graph g1
+	
+	find_rtree_type g1
+	assert is_rtree_type g1 anti_arborescence 
 	
 	retrieve_subtree s1 g1 0
 	normalise s1
 	output_graph s1
 	assert is_tree s1
 	assert has_root s1
-	assert num_nodes s1 5
-	assert num_edges s1 4
+	assert num_nodes s1 1
+	assert num_edges s1 0
 	
 	retrieve_subtree s2 g1 2
 	normalise s2
 	output_graph s2
 	assert is_tree s2
 	assert has_root s2
-	assert num_nodes s2 3
-	assert num_edges s2 2
+	assert num_nodes s2 5
+	assert num_edges s2 4
 
 
-	set_root g1 2
-
-	retrieve_subtree s3 g1 0
-	normalise s3
-	output_graph s3
-	assert is_tree s3
-	assert has_root s3
-	assert num_nodes s3 1
-	assert num_edges s3 0
-	
-	retrieve_subtree s4 g1 2
-	normalise s4
-	output_graph s4
-	assert is_tree s4
-	assert has_root s4
-	assert num_nodes s4 5
-	assert num_edges s4 4

@@ -23,7 +23,7 @@ BODY
 	assert rtree_type_valid h
 	assert is_rtree_type h anti_arborescence
 
-	calculate_size_subtrees h true
+	calculate_size_subtrees h
 	assert num_nodes_subtree h 0 6
 	assert num_nodes_subtree h 1 10
 	assert num_nodes_subtree h 2 5
@@ -38,26 +38,16 @@ BODY
 
 	set_root h 0
 	/*
-	we can't do "calculate_size_subtrees h false" because we don't have
+	we can't do "calculate_size_subtrees h" because we don't have
 	a rtree type
 	*/
 	assert rtree_type_not_valid h
 	find_rtree_type h
 	assert rtree_type_valid h
 	/*
-	we still can't do "calculate_size_subtrees h false" because the rtree
+	we still can't do "calculate_size_subtrees h" because the rtree
 	type is not an arborescence
 	*/
 	
-	calculate_size_subtrees h true
-	assert num_nodes_subtree h 0 11
-	assert num_nodes_subtree h 1 5
-	assert num_nodes_subtree h 2 5
-	assert num_nodes_subtree h 3 1
-	assert num_nodes_subtree h 4 4
-	assert num_nodes_subtree h 5 3
-	assert num_nodes_subtree h 6 2
-	assert num_nodes_subtree h 7 1
-	assert num_nodes_subtree h 8 1
-	assert num_nodes_subtree h 9 1
-	assert num_nodes_subtree h 10 1
+	assert is_rtree_type h none
+	
