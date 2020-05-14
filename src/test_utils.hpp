@@ -41,7 +41,12 @@
 
 // C++ includes
 #include <fstream>
+#include <vector>
 #include <string>
+
+// lal includes
+#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/ftree.hpp>
 
 namespace exe_tests {
 
@@ -50,5 +55,15 @@ bool command_is_comment(const std::string& s);
 void process_comment(std::ifstream& fin);
 
 std::string read_output_string(std::ifstream& fin);
+
+/* -------------------------------------------------------------------------- */
+/* ----- Utilities related to the library -- not so much to the tests ------- */
+
+std::vector<lal::node> invlinarr(const lal::linearrgmnt& arr);
+
+bool is_linarr_projective(
+	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
+	const lal::linearrgmnt& arr
+);
 
 } // -- namespace exe_tests

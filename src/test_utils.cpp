@@ -46,6 +46,14 @@
 #include <string>
 using namespace std;
 
+// lal includes
+#include <lal/linarr/C.hpp>
+#include <lal/iterators/E_iterator.hpp>
+using namespace lal;
+using namespace graphs;
+using namespace linarr;
+using namespace iterators;
+
 namespace exe_tests {
 
 bool command_is_comment(const string& s)
@@ -81,6 +89,42 @@ string read_output_string(ifstream& fin) {
 	// process last string
 	total_message += " " + msg.substr(0, msg.length() - 1);
 	return total_message;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ----- Utilities related to the library -- not so much to the tests ------- */
+
+vector<node> invlinarr(const linearrgmnt& arr) {
+	vector<node> ilin(arr.size());
+	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
+	return ilin;
+}
+
+bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
+	const node R = rT.get_root();
+	bool covered = false;
+
+	E_iterator e_it(rT);
+	while (e_it.has_next() and not covered) {
+		e_it.next();
+		const edge e = e_it.get_edge();
+		const node s = e.first;
+		const node t = e.second;
+		covered =
+			((pi[s] < pi[R]) and (pi[R] < pi[t])) or
+			((pi[t] < pi[R]) and (pi[R] < pi[s]));
+	}
+
+	return covered;
+}
+
+bool is_linarr_projective(
+	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+)
+{
+	uint32_t C = lal::linarr::n_crossings(fT, arr);
+	if (C != 0) { return false; }
+	return not is_root_covered(rT, arr);
 }
 
 } // -- namespace exe_tests
