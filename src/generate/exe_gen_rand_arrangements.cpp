@@ -47,7 +47,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/output.hpp>
-#include <lal/generate/rand_arrangements.hpp>
+#include <lal/generate/rand_projective_arrangements.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
 #include <lal/linarr/C.hpp>
 #include <lal/iterators/E_iterator.hpp>
@@ -57,43 +57,27 @@ using namespace generate;
 using namespace iterators;
 
 // custom includes
-#include "../definitions.hpp"
+#include "definitions.hpp"
+#include "test_utils.hpp"
 
-bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
-	const node R = rT.get_root();
-	bool covered = false;
+namespace exe_tests {
 
-	E_iterator e_it(rT);
-	while (e_it.has_next() and not covered) {
-		e_it.next();
-		const edge e = e_it.get_edge();
-		const node s = e.first;
-		const node t = e.second;
-		covered =
-			((pi[s] < pi[R]) and (pi[R] < pi[t])) or
-			((pi[t] < pi[R]) and (pi[R] < pi[s]));
-	}
+/* ---- RANDOM PROJECTIVE ARRANGEMENTS ---- */
 
-	return covered;
-}
-
-bool is_linarr_projective(const rtree& t, const linearrgmnt& arr) {
-	uint32_t C = lal::linarr::n_crossings(t.to_undirected(), arr);
-	if (C != 0) { return false; }
-	return not is_root_covered(t, arr);
-}
-
-string is_rand_proj_arr_correct(const rtree& t, const linearrgmnt& arr) {
+string is_rand_proj_arr_correct(
+	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+)
+{
 	set<position> setpos;
-	for (node u = 0; u < t.n_nodes(); ++u) {
+	for (node u = 0; u < rT.n_nodes(); ++u) {
 		setpos.insert(arr[u]);
 	}
 
-	if (setpos.size() != t.n_nodes()) {
+	if (setpos.size() != rT.n_nodes()) {
 		return "There are collisions in vertices positions";
 	}
 
-	if (not is_linarr_projective(t, arr)) {
+	if (not is_linarr_projective(rT, fT, arr)) {
 		// the arrangement is not projective;
 		return "The arrangement is not projective";
 	}
@@ -102,62 +86,42 @@ string is_rand_proj_arr_correct(const rtree& t, const linearrgmnt& arr) {
 	return "No error";
 }
 
-vector<node> invlinarr(const linearrgmnt& arr) {
-	vector<node> ilin(arr.size());
-	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
-	return ilin;
-}
-
-namespace std {
-template<class T>
-ostream& operator<< (ostream& os, const vector<T>& v) {
-	if (v.size() == 0) { return os; }
-	os << v[0];
-	for (size_t i = 1; i < v.size(); ++i) {
-		os << " " << v[i];
-	}
-	return os;
-}
-}
-
-namespace exe_tests {
-
 err_type test_rand_projective_arrangements(ifstream& fin) {
 	uint32_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
-		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n);
+	// do 'ntrees' trees of 'n' vertices
+	rand_ulab_rooted_trees TreeGen(n);
 
-		uint32_t nt = 0;
-		while (nt < ntrees) {
-			const rtree rT = TreeGen.make_rand_tree();
+	uint32_t nt = 0;
+	while (nt < ntrees) {
+		const rtree rT = TreeGen.make_rand_tree();
+		const ftree fT = rT.to_undirected();
 
-			for (uint32_t it = 0; it < nit; ++it) {
-				const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
+		for (uint32_t it = 0; it < nit; ++it) {
+			const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
 
-				// Do some sanity checks.
-				const string err = is_rand_proj_arr_correct(rT, arr);
-				if (err != "No error") {
-					cerr << ERROR << endl;
-					cerr << "    Generation of random arrangement for rtree:" << endl;
-					cerr << rT << endl;
-					cerr << "    Failed with error: '" << err << "'" << endl;
-					cerr << "    Arrangement:" << endl;
-					cerr << "    " << arr << endl;
-					cerr << "    Inverse linear arrangement:" << endl;
-					cerr << "    " << invlinarr(arr) << endl;
-					return err_type::test_exe_error;
-				}
+			// Do some sanity checks.
+			const string err = is_rand_proj_arr_correct(rT, fT, arr);
+			if (err != "No error") {
+				cerr << ERROR << endl;
+				cerr << "    Generation of random arrangement for rtree:" << endl;
+				cerr << rT << endl;
+				cerr << "    Failed with error: '" << err << "'" << endl;
+				cerr << "    Arrangement:" << endl;
+				cerr << "    " << arr << endl;
+				cerr << "    Inverse linear arrangement:" << endl;
+				cerr << "    " << invlinarr(arr) << endl;
+				return err_type::test_exe_error;
 			}
-
-			++nt;
 		}
+
+		++nt;
+	}
 	}
 	return err_type::no_error;
 }
 
 err_type exe_gen_rand_arrangements(ifstream& fin) {
-
 	string field;
 	fin >> field;
 

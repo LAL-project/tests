@@ -47,6 +47,7 @@
 // lal includes
 #include <lal/graphs/rtree.hpp>
 #include <lal/graphs/ftree.hpp>
+#include <lal/utils/std_utils.hpp>
 
 namespace exe_tests {
 
