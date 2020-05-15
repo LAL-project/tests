@@ -39,6 +39,8 @@ SOURCES += \
     construction/construct_utils.cpp \
     generate/arr_all_proj.cpp \
     generate/arr_rand_proj.cpp \
+    generate/arrgmnt_validity_check.cpp \
+    generate/tree_validity_check.cpp \
     generate/trees_alf.cpp \
     generate/trees_auf.cpp \
     generate/trees_aur.cpp \
@@ -76,6 +78,8 @@ HEADERS += \
     class_hierarchy.hpp \
     construction/exe_construction.hpp \
 	definitions.hpp \
+    generate/arrgmnt_validity_check.hpp \
+    generate/tree_validity_check.hpp \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \

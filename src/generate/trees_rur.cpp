@@ -52,6 +52,7 @@ using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
+#include "generate/tree_validity_check.hpp"
 
 /*
  * RANDOM UNLABELLED FREE TREES
@@ -101,31 +102,14 @@ err_type exe_gen_trees_rur(std::ifstream& fin) {
 		for (int i = 0; i < 10000; ++i) {
 			const rtree T = TreeGen.make_rand_tree();
 
-			if (not T.is_tree()) {
+			const rtree_check err = test_validity_tree(n, T);
+			if (err != rtree_check::correct) {
 				cerr << ERROR << endl;
-				cerr << "    Graph generated is not a tree." << endl;
+				cerr << "    Tree of is not correct." << endl;
+				cerr << "    Error: " << rtree_check_to_string(err) << endl;
 				cerr << T << endl;
 				return err_type::test_exe_error;
 			}
-			if (T.n_nodes() != n) {
-				cerr << ERROR << endl;
-				cerr << "    Number of vertices of the tree is not '" << n << "'." << endl;
-				cerr << "    T.n_nodes()= " << T.n_nodes() << endl;
-				return err_type::test_exe_error;
-			}
-			if (T.n_edges() != n - 1) {
-				cerr << ERROR << endl;
-				cerr << "    Number of edges of the tree is not '" << n-1 << "'." << endl;
-				cerr << "    T.n_edges()= " << T.n_edges() << endl;
-				return err_type::test_exe_error;
-			}
-			if (not T.has_root()) {
-				cerr << ERROR << endl;
-				cerr << "    Tree '" << i << "' does not have a root." << endl;
-				cerr << T << endl;
-				return err_type::test_exe_error;
-			}
-
 		}
 	}
 

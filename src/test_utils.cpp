@@ -47,12 +47,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/linarr/C.hpp>
-#include <lal/iterators/E_iterator.hpp>
 using namespace lal;
-using namespace graphs;
-using namespace linarr;
-using namespace iterators;
 
 namespace exe_tests {
 
@@ -98,55 +93,6 @@ vector<node> invlinarr(const linearrgmnt& arr) {
 	vector<node> ilin(arr.size());
 	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;
-}
-
-bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
-	const node R = rT.get_root();
-	bool covered = false;
-
-	E_iterator e_it(rT);
-	while (e_it.has_next() and not covered) {
-		e_it.next();
-		const edge e = e_it.get_edge();
-		const node s = e.first;
-		const node t = e.second;
-		covered =
-			((pi[s] < pi[R]) and (pi[R] < pi[t])) or
-			((pi[t] < pi[R]) and (pi[R] < pi[s]));
-	}
-
-	return covered;
-}
-
-bool is_linarr_projective(
-	const rtree& rT, const ftree& fT, const linearrgmnt& arr
-)
-{
-	uint32_t C = lal::linarr::n_crossings(fT, arr);
-	if (C != 0) { return false; }
-	return not is_root_covered(rT, arr);
-}
-
-string is_rand_proj_arr_correct(
-	const rtree& rT, const ftree& fT, const linearrgmnt& arr
-)
-{
-	set<position> setpos;
-	for (node u = 0; u < rT.n_nodes(); ++u) {
-		setpos.insert(arr[u]);
-	}
-
-	if (setpos.size() != rT.n_nodes()) {
-		return "There are collisions in vertices positions";
-	}
-
-	if (not is_linarr_projective(rT, fT, arr)) {
-		// the arrangement is not projective;
-		return "The arrangement is not projective";
-	}
-
-	// no error
-	return "No error";
 }
 
 } // -- namespace exe_tests

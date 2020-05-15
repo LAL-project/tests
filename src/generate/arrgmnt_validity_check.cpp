@@ -38,48 +38,71 @@
  *
  ********************************************************************/
 
-#include "io_wrapper.hpp"
+#include "generate/arrgmnt_validity_check.hpp"
 
 // C++ includes
+#include <set>
 using namespace std;
 
 // lal includes
-#include <lal/io/edge_list.hpp>
-#include <lal/graphs/output.hpp>
+#include <lal/iterators/E_iterator.hpp>
+#include <lal/linarr/C.hpp>
+#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/ftree.hpp>
+#include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
+using namespace linarr;
+using namespace iterators;
 
 namespace exe_tests {
-namespace io_wrapper {
 
+bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
+	const node R = rT.get_root();
+	bool covered = false;
 
-template<class G>
-err_type __read_graph(const string& file, const string& format, G& g) {
-
-	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, g, true);
-		if (not r) {
-			cerr << ERROR << endl;
-			cerr << "    When attempting to read an edge-list-formatted" << endl;
-			cerr << "    graph from file: '" << file << "'." << endl;
-			return err_type::io_error;
-		}
-
-		return err_type::no_error;
+	E_iterator e_it(rT);
+	while (e_it.has_next() and not covered) {
+		e_it.next();
+		const edge e = e_it.get_edge();
+		const node s = e.first;
+		const node t = e.second;
+		covered =
+			((pi[s] < pi[R]) and (pi[R] < pi[t])) or
+			((pi[t] < pi[R]) and (pi[R] < pi[s]));
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unsupported format of file: '" << format << "'." << endl;
-	return err_type::test_format_error;
+	return covered;
 }
 
-err_type read_graph(const string& file, const string& format, ugraph& G) {
-	return __read_graph(file, format, G);
-}
-err_type read_graph(const string& file, const string& format, dgraph& G) {
-	return __read_graph(file, format, G);
+bool is_linarr_projective(
+	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+)
+{
+	uint32_t C = lal::linarr::n_crossings(fT, arr);
+	if (C != 0) { return false; }
+	return not is_root_covered(rT, arr);
 }
 
+bool is_permutation(const linearrgmnt& arr) {
+	set<position> setpos;
+	for (size_t i = 0; i < arr.size(); ++i) {
+		setpos.insert(arr[i]);
+	}
+	return setpos.size() == arr.size();
+}
 
-} // -- namespace io_wrapper
+string is_arrgmnt_projective(
+	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+)
+{
+	if (not is_permutation(arr)) {
+		return "The arrangement is not a permutation of the vertices.";
+	}
+	if (not is_linarr_projective(rT, fT, arr)) {
+		return "The arrangement is not projective";
+	}
+	return "No error";
+}
+
 } // -- namespace exe_tests

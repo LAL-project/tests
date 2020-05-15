@@ -50,6 +50,7 @@ using namespace std;
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
 #include <lal/linarr/C.hpp>
 #include <lal/iterators/E_iterator.hpp>
+#include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -58,6 +59,7 @@ using namespace iterators;
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
+#include "generate/arrgmnt_validity_check.hpp"
 
 namespace exe_tests {
 
@@ -104,7 +106,7 @@ err_type exe_gen_arr_rand_proj(ifstream& fin) {
 				const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
 
 				// Do some sanity checks.
-				const string err = is_rand_proj_arr_correct(rT, fT, arr);
+				const string err = is_arrgmnt_projective(rT, fT, arr);
 				if (err != "No error") {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement for rtree:" << endl;

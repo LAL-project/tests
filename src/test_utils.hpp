@@ -44,9 +44,7 @@
 #include <string>
 
 // lal includes
-#include <lal/graphs/rtree.hpp>
-#include <lal/graphs/ftree.hpp>
-#include <lal/utils/std_utils.hpp>
+#include <lal/definitions.hpp>
 
 namespace exe_tests {
 
@@ -60,15 +58,5 @@ std::string read_output_string(std::ifstream& fin);
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
 std::vector<lal::node> invlinarr(const lal::linearrgmnt& arr);
-
-bool is_linarr_projective(
-	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
-	const lal::linearrgmnt& arr
-);
-
-std::string is_rand_proj_arr_correct(
-	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
-	const lal::linearrgmnt& arr
-);
 
 } // -- namespace exe_tests

@@ -38,48 +38,82 @@
  *
  ********************************************************************/
 
-#include "io_wrapper.hpp"
+#include "generate/tree_validity_check.hpp"
 
 // C++ includes
+#include <iostream>
 using namespace std;
 
 // lal includes
-#include <lal/io/edge_list.hpp>
 #include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
 
 namespace exe_tests {
-namespace io_wrapper {
 
+/* FREE TREES */
 
-template<class G>
-err_type __read_graph(const string& file, const string& format, G& g) {
-
-	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, g, true);
-		if (not r) {
-			cerr << ERROR << endl;
-			cerr << "    When attempting to read an edge-list-formatted" << endl;
-			cerr << "    graph from file: '" << file << "'." << endl;
-			return err_type::io_error;
-		}
-
-		return err_type::no_error;
+string ftree_check_to_string(const ftree_check& fc) {
+	switch (fc) {
+	case ftree_check::not_a_tree: return "Input free tree is not a tree.";
+	case ftree_check::diff_n_verts: return "Input free tree has an incorrect number of vertices.";
+	case ftree_check::diff_n_edges: return "Input free tree has an incorrect number of edges.";
+	default:
+		return "Input free tree seems to be correct.";
 	}
-
-	cerr << ERROR << endl;
-	cerr << "    Unsupported format of file: '" << format << "'." << endl;
-	return err_type::test_format_error;
+	return "";
 }
 
-err_type read_graph(const string& file, const string& format, ugraph& G) {
-	return __read_graph(file, format, G);
-}
-err_type read_graph(const string& file, const string& format, dgraph& G) {
-	return __read_graph(file, format, G);
+ftree_check test_validity_tree(const uint32_t n, const ftree& T) {
+	if (not T.is_tree()) {
+		return ftree_check::diff_n_verts;
+	}
+	if (T.n_nodes() != n) {
+		return ftree_check::diff_n_verts;
+	}
+	if (T.n_edges() != n - 1) {
+		return ftree_check::diff_n_edges;
+	}
+	return ftree_check::correct;
 }
 
+/* ROOTED TREES */
 
-} // -- namespace io_wrapper
+string rtree_check_to_string(const rtree_check& fc) {
+	switch (fc) {
+	case rtree_check::not_a_tree: return "Input rooted tree is not a tree.";
+	case rtree_check::diff_n_verts: return "Input rooted tree has an incorrect number of vertices.";
+	case rtree_check::diff_n_edges: return "Input rooted tree has an incorrect number of edges.";
+	case rtree_check::without_root: return "Input rooted tree does not have a root.";
+	case rtree_check::invalid_rtree_type: return "Input rooted tree does not have a valid rooted tree type.";
+	case rtree_check::rtree_type_is_none: return "Input rooted tree is not an arborescence or an anti-arborescence.";
+	default:
+		return "Input rooted tree seems to be correct.";
+	}
+	return "";
+}
+
+rtree_check test_validity_tree(const uint32_t n, const rtree& T) {
+	if (not T.is_tree()) {
+		return rtree_check::diff_n_verts;
+	}
+	if (T.n_nodes() != n) {
+		return rtree_check::diff_n_verts;
+	}
+	if (T.n_edges() != n - 1) {
+		return rtree_check::diff_n_edges;
+	}
+	if (not T.has_root()) {
+		return rtree_check::without_root;
+	}
+	if (not T.rtree_type_valid()) {
+		return rtree_check::invalid_rtree_type;
+	}
+	const rtree::rtree_type type = T.get_rtree_type();
+	if (type == rtree::rtree_type::none) {
+		return rtree_check::rtree_type_is_none;
+	}
+	return rtree_check::correct;
+}
+
 } // -- namespace exe_tests

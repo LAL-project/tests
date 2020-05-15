@@ -53,6 +53,7 @@ using namespace std;
 #include "definitions.hpp"
 #include "parse_keywords.hpp"
 #include "class_hierarchy.hpp"
+using namespace exe_tests;
 
 err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 	string field;

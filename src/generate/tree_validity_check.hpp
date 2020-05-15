@@ -38,48 +38,47 @@
  *
  ********************************************************************/
 
-#include "io_wrapper.hpp"
+#pragma once
 
 // C++ includes
-using namespace std;
+#include <string>
 
 // lal includes
-#include <lal/io/edge_list.hpp>
-#include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
+#include <lal/graphs/ftree.hpp>
+#include <lal/graphs/rtree.hpp>
+
+// custom includes
+#include "definitions.hpp"
 
 namespace exe_tests {
-namespace io_wrapper {
 
+/* FREE TREES */
 
-template<class G>
-err_type __read_graph(const string& file, const string& format, G& g) {
+enum class ftree_check : int8_t {
+	not_a_tree,
+	diff_n_verts,
+	diff_n_edges,
 
-	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, g, true);
-		if (not r) {
-			cerr << ERROR << endl;
-			cerr << "    When attempting to read an edge-list-formatted" << endl;
-			cerr << "    graph from file: '" << file << "'." << endl;
-			return err_type::io_error;
-		}
+	correct
+};
 
-		return err_type::no_error;
-	}
+std::string ftree_check_to_string(const ftree_check& fc);
+ftree_check test_validity_tree(const uint32_t n, const lal::graphs::ftree& T);
 
-	cerr << ERROR << endl;
-	cerr << "    Unsupported format of file: '" << format << "'." << endl;
-	return err_type::test_format_error;
-}
+/* ROOTED TREES */
 
-err_type read_graph(const string& file, const string& format, ugraph& G) {
-	return __read_graph(file, format, G);
-}
-err_type read_graph(const string& file, const string& format, dgraph& G) {
-	return __read_graph(file, format, G);
-}
+enum class rtree_check : int8_t {
+	not_a_tree,
+	diff_n_verts,
+	diff_n_edges,
+	without_root,
+	invalid_rtree_type,
+	rtree_type_is_none,
 
+	correct
+};
 
-} // -- namespace io_wrapper
+std::string rtree_check_to_string(const rtree_check& fc);
+rtree_check test_validity_tree(const uint32_t n, const lal::graphs::rtree& T);
+
 } // -- namespace exe_tests

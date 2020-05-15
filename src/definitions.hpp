@@ -53,6 +53,7 @@
 #define TEST_GOODBYE \
 	cout << "Test finished without apparent errors." << endl;
 
+namespace exe_tests {
 enum class err_type : int8_t {
 	/// The test completed successfully
 	no_error = 0,
@@ -80,3 +81,4 @@ enum class err_type : int8_t {
 	/// test not implemented
 	not_implemented
 };
+} // -- namespace exe_tests

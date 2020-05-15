@@ -38,48 +38,26 @@
  *
  ********************************************************************/
 
-#include "io_wrapper.hpp"
-
 // C++ includes
-using namespace std;
+#include <vector>
+#include <string>
 
 // lal includes
-#include <lal/io/edge_list.hpp>
-#include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
+#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/ftree.hpp>
 
 namespace exe_tests {
-namespace io_wrapper {
 
+bool is_linarr_projective(
+	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
+	const lal::linearrgmnt& arr
+);
 
-template<class G>
-err_type __read_graph(const string& file, const string& format, G& g) {
+bool is_permutation(const lal::linearrgmnt& arr);
 
-	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, g, true);
-		if (not r) {
-			cerr << ERROR << endl;
-			cerr << "    When attempting to read an edge-list-formatted" << endl;
-			cerr << "    graph from file: '" << file << "'." << endl;
-			return err_type::io_error;
-		}
+std::string is_arrgmnt_projective(
+	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
+	const lal::linearrgmnt& arr
+);
 
-		return err_type::no_error;
-	}
-
-	cerr << ERROR << endl;
-	cerr << "    Unsupported format of file: '" << format << "'." << endl;
-	return err_type::test_format_error;
-}
-
-err_type read_graph(const string& file, const string& format, ugraph& G) {
-	return __read_graph(file, format, G);
-}
-err_type read_graph(const string& file, const string& format, dgraph& G) {
-	return __read_graph(file, format, G);
-}
-
-
-} // -- namespace io_wrapper
 } // -- namespace exe_tests

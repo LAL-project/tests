@@ -51,6 +51,7 @@
 // custom includes
 #include "definitions.hpp"
 
+namespace exe_tests {
 namespace io_wrapper {
 
 err_type read_graph
@@ -60,3 +61,4 @@ err_type read_graph
 (const std::string& file, const std::string& format, lal::graphs::dgraph& G);
 
 } // -- namespace io_wrapper
+} // -- namespace exe_tests
