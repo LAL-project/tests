@@ -44,7 +44,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/generate/all_lab_free_trees.hpp>
+#include <lal/generate/all_lab_rooted_trees.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
@@ -60,22 +60,13 @@ using namespace numeric;
 #include "generate/tree_validity_check.hpp"
 
 /*
- * ALL LABELLED FREE TREES
+ * ALL LABELLED ROOTED TREES
  *
  */
 
-// expected second moment of degree over all labelled trees
-inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
-	rational p1 = 1;
-	p1 -= rational(1,n);
-	rational p2 = 5;
-	p2 -= rational(6,n);
-	return p1*p2;
-}
-
 namespace exe_tests {
 
-err_type exe_gen_trees_alf(std::ifstream& fin) {
+err_type exe_gen_trees_alr(std::ifstream& fin) {
 
 	string field;
 	fin >> field;
@@ -110,14 +101,11 @@ err_type exe_gen_trees_alf(std::ifstream& fin) {
 	uint32_t n;
 	integer gen;
 
-	all_lab_free_trees TreeGen;
+	all_lab_rooted_trees TreeGen;
 
 	while (fin >> n) {
 		const integer nn = integer_from_ui(n);
 
-		// expected second moment of degree
-		const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
-		rational mmtdeg2 = 0;
 		// number of generated trees
 		gen = 0;
 
@@ -125,38 +113,29 @@ err_type exe_gen_trees_alf(std::ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			const ftree T = TreeGen.get_tree();
-			const ftree_check err = test_validity_tree(n, T);
-			if (err != ftree_check::correct) {
+			const rtree T = TreeGen.get_tree();
+			const rtree_check err = test_validity_tree(n, T);
+			if (err != rtree_check::correct) {
 				cerr << ERROR << endl;
 				cerr << "    Tree of index " << gen << " is not correct." << endl;
-				cerr << "    Error: " << ftree_check_to_string(err) << endl;
+				cerr << "    Error: " << rtree_check_to_string(err) << endl;
 				cerr << T << endl;
 				return err_type::test_exe_error;
 			}
 
 			// compute 'statistics'
-			mmtdeg2 += properties::mmt_degree_rational(T, 2);
 			gen += 1;
 		}
 
-		// check that the expected second moment of degree is correct
-		mmtdeg2 /= gen;
-		if (mmtdeg2 != exp_mmtdeg2) {
-			cerr << ERROR << endl;
-			cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
-			cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
-			return err_type::test_exe_error;
-		}
-
 		// Prüfer's formula: make sure that the generator made
-		// as many trees as n^(n - 2)
-		// also: https://oeis.org/A000272/list
-		const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
+		// as many trees as n^(n - 1) <- note that we are dealing
+		// with labelled ROOTED trees!
+		// https://oeis.org/A000169/list
+		const integer total = (n == 1 ? 1 : (nn^(nn - 1)));
 		if (gen != total) {
 			cerr << ERROR << endl;
-			cerr << "    Exhaustive generation of labelled free trees" << endl;
-			cerr << "    Amount of trees should be: " << total << endl;
+			cerr << "    Exhaustive generation of labelled rooted trees" << endl;
+			cerr << "    Amount of trees of " << n << " vertices should be: " << total << endl;
 			cerr << "    But generated: " << gen << endl;
 			cerr << "    For a size of " << n << " vertices" << endl;
 			return err_type::test_exe_error;

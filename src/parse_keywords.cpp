@@ -326,6 +326,9 @@ err_type call_generate_trees
 	if (key == "alf") {
 		return exe_gen_trees_alf(fin);
 	}
+	else if (key == "alr") {
+		return exe_gen_trees_alr(fin);
+	}
 	else if (key == "auf") {
 		return exe_gen_trees_auf(fin);
 	}

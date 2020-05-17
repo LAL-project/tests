@@ -63,6 +63,7 @@ function show_usage() {
 	echo "        Dmin : execute Minimum Linear Arrangement tests"
 	echo "        gen : execute generation tests"
 	echo "        gen_trees_alf : execute generation (All Labelled Free) tests"
+	echo "        gen_trees_alr : execute generation (All Labelled Rooted) tests"
 	echo "        gen_trees_auf : execute generation (All Unlabelled Free) tests"
 	echo "        gen_trees_aur : execute generation (All Unlabelled Rooted) tests"
 	echo "        gen_trees_rlf : execute generation (Rand Labelled Free) tests"

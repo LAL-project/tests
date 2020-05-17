@@ -12,6 +12,7 @@ groups_list=(\
 	"Dmin" \
 	"gen" \
 	"gen_trees_alf" \
+	"gen_trees_alr" \
 	"gen_trees_auf" \
 	"gen_trees_aur" \
 	"gen_trees_rlf" \
@@ -53,6 +54,7 @@ all_IN_DIRS=(\
 	"linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" \
 	"generate/trees/all_lab_free" \
+	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
 	"generate/trees/all_ulab_rooted" \
 	"generate/trees/rand_lab_free" \
@@ -90,6 +92,7 @@ all_OUT_DIRS=(\
 	"linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" \
 	"generate/trees/all_lab_free" \
+	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
 	"generate/trees/all_ulab_rooted" \
 	"generate/trees/rand_lab_free" \
@@ -209,6 +212,7 @@ Dmin_OUT_DIRS=(\
 # generate tests
 gen_IN_DIRS=(\
 	"generate/trees/all_lab_free" \
+	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
 	"generate/trees/rand_lab_free" \
 	"generate/trees/rand_lab_rooted" \
@@ -219,6 +223,7 @@ gen_IN_DIRS=(\
 	)
 gen_OUT_DIRS=(\
 	"generate/trees/all_lab_free" \
+	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
 	"generate/trees/rand_lab_free" \
 	"generate/trees/rand_lab_rooted" \
@@ -233,6 +238,13 @@ gen_trees_alf_IN_DIRS=(\
 	)
 gen_trees_alf_OUT_DIRS=(\
 	"generate/trees/all_lab_free" \
+	)
+# generate (all labelled rooted) tests : alr
+gen_trees_alr_IN_DIRS=(\
+	"generate/trees/all_lab_rooted" \
+	)
+gen_trees_alr_OUT_DIRS=(\
+	"generate/trees/all_lab_rooted" \
 	)
 # generate (all unlabelled free) tests : auf
 gen_trees_auf_IN_DIRS=(\

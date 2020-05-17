@@ -42,6 +42,7 @@ SOURCES += \
     generate/arrgmnt_validity_check.cpp \
     generate/tree_validity_check.cpp \
     generate/trees_alf.cpp \
+    generate/trees_alr.cpp \
     generate/trees_auf.cpp \
     generate/trees_aur.cpp \
     generate/trees_rlf.cpp \
