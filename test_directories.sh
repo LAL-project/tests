@@ -214,7 +214,7 @@ gen_IN_DIRS=(\
 	"generate/trees/rand_lab_rooted" \
 	"generate/trees/rand_ulab_free" \
 	"generate/trees/rand_ulab_rooted" \
-	"generate/arrangements/rand_all" \
+	"generate/arrangements/all_proj" \
 	"generate/arrangements/rand_proj" \
 	)
 gen_OUT_DIRS=(\
@@ -224,7 +224,7 @@ gen_OUT_DIRS=(\
 	"generate/trees/rand_lab_rooted" \
 	"generate/trees/rand_ulab_free" \
 	"generate/trees/rand_ulab_rooted" \
-	"generate/arrangements/rand_all" \
+	"generate/arrangements/all_proj" \
 	"generate/arrangements/rand_proj" \
 	)
 # generate (all labelled free) tests : alf
