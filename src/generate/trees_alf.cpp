@@ -154,6 +154,7 @@ err_type exe_gen_trees_alf(std::ifstream& fin) {
 
 		// Prüfer's formula: make sure that the generator made
 		// as many trees as n^(n - 2)
+		// also: https://oeis.org/A000272/list
 		const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
 		if (gen != total) {
 			cerr << ERROR << endl;

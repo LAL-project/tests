@@ -74,8 +74,8 @@ err_type exe_gen_trees_aur(std::ifstream& fin) {
 	// size of the vector with the number of unlabelled rooted trees
 	const uint32_t SIZE_URT = 31;
 
-	// from: http://oeis.org/A000055/list
-	// amount of unlabelled free trees
+	// from: https://oeis.org/A000081/list
+	// amount of unlabelled rooted trees
 	vector<integer> URT(SIZE_URT, 0);
 	URT[0] = 0;
 	URT[1] = 1;
