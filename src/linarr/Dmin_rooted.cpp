@@ -92,14 +92,7 @@ pair<uint32_t, linearrgmnt> Dmin_projective_bruteforce(const rtree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-err_type test_Dmin_rtree_Projective(rtree& t) {
-	if (not t.rtree_type_valid()) {
-		t.find_rtree_type();
-	}
-	if (t.need_recalc_size_subtrees()) {
-		t.recalc_size_subtrees();
-	}
-
+err_type test_Dmin_rtree_Projective(const rtree& t) {
 	// compute Dmin using the library's algorithm
 	const pair<uint32_t, linearrgmnt> res_library
 		= compute_Dmin(t, algorithms_Dmin::Projective);
@@ -163,8 +156,9 @@ err_type test_projective(ifstream& fin) {
 		while (TreeGen.has_next()) {
 			TreeGen.next();
 			rtree tree = TreeGen.get_tree();
+			tree.recalc_size_subtrees();
 
-			err_type r = test_Dmin_rtree_Projective(tree);
+			const err_type r = test_Dmin_rtree_Projective(tree);
 			if (r != err_type::no_error) {
 				return r;
 			}
