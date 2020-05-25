@@ -10,6 +10,7 @@ groups_list=(\
 	"linarr" \
 	"linarr_C" \
 	"Dmin" \
+	"Dmin_Projective" \
 	"gen" \
 	"gen_trees_alf" \
 	"gen_trees_alr" \
@@ -44,7 +45,7 @@ all_IN_DIRS=(\
 	"linarr/headedness" \
 	"linarr/MDD" \
 	"linarr/D" \
-	"linarr/Dmin" \
+	"linarr/Dmin/projective" \
 	"linarr/C/dyn-prog" \
 	"linarr/C/dyn-prog-list" \
 	"linarr/C/ladder" \
@@ -82,7 +83,7 @@ all_OUT_DIRS=(\
 	"linarr/headedness" \
 	"linarr/MDD" \
 	"linarr/D" \
-	"linarr/Dmin" \
+	"linarr/Dmin/projective" \
 	"linarr/C" \
 	"linarr/C" \
 	"linarr/C" \
@@ -203,10 +204,17 @@ linarr_C_OUT_DIRS=(\
 
 # Dmin (MLA) tests
 Dmin_IN_DIRS=(\
-	"linarr/Dmin"\
+	"linarr/Dmin/projective"\
 	)
 Dmin_OUT_DIRS=(\
-	"linarr/Dmin"\
+	"linarr/Dmin/projective"\
+	)
+# Dmin Projective tests
+Dmin_Projective_IN_DIRS=(\
+	"linarr/Dmin/projective"\
+	)
+Dmin_Projective_OUT_DIRS=(\
+	"linarr/Dmin/projective"\
 	)
 
 # generate tests
@@ -214,6 +222,7 @@ gen_IN_DIRS=(\
 	"generate/trees/all_lab_free" \
 	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
+	"generate/trees/all_ulab_rooted" \
 	"generate/trees/rand_lab_free" \
 	"generate/trees/rand_lab_rooted" \
 	"generate/trees/rand_ulab_free" \
@@ -225,6 +234,7 @@ gen_OUT_DIRS=(\
 	"generate/trees/all_lab_free" \
 	"generate/trees/all_lab_rooted" \
 	"generate/trees/all_ulab_free" \
+	"generate/trees/all_ulab_rooted" \
 	"generate/trees/rand_lab_free" \
 	"generate/trees/rand_lab_rooted" \
 	"generate/trees/rand_ulab_free" \
