@@ -75,17 +75,6 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 	return true;
 }
 
-template<class G>
-void make_disjoint_union(
-	const std::string& v1, const std::string& v2, const std::string& v3,
-	std::map<std::string, G>& vars
-)
-{
-	G g1 = vars[v2];
-	g1.disjoint_union(vars[v3]);
-	vars[v1] = g1;
-}
-
 #define edge_out(e) "(" << e.first << ", " << e.second << ")"
 #define edge_pair_out(p) "(" << edge_out(p.first) << ", " << edge_out(p.second) << ")"
 

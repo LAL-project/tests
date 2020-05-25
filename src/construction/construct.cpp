@@ -220,19 +220,39 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_DISJ_UNION, g2)
 			assert_exists_variable(FUNC_GRAPH_DISJ_UNION, g3)
 			assert_equal_types(FUNC_GRAPH_DISJ_UNION, g2,g3)
-			assert_not_exists_variable(FUNC_GRAPH_DISJ_UNION, g1)
+			//assert_not_exists_variable(FUNC_GRAPH_DISJ_UNION, g1)
 			gtypes[g1] = graph_type(g2);
-			if (graph_type(g2) == DGRAPH) {
-				make_disjoint_union<dgraph>(g1, g2, g3, dgraphvars);
+			if (graph_type(g2) == UGRAPH) {
+				ugraph uG = ugraphvars[g2];
+				uG.disjoint_union(ugraphvars[g3]);
+				ugraphvars[g1] = uG;
 			}
-			else if (graph_type(g2) == UGRAPH) {
-				make_disjoint_union<ugraph>(g1, g2, g3, ugraphvars);
+			else if (graph_type(g2) == DGRAPH) {
+				dgraph dG = dgraphvars[g2];
+				dG.disjoint_union(dgraphvars[g3]);
+				dgraphvars[g1] = dG;
+			}
+			else if (graph_type(g2) == FTREE) {
+				ftree fT = ftreevars[g2];
+				fT.disjoint_union(ftreevars[g3]);
+				ftreevars[g1] = fT;
+			}
+			else if (graph_type(g2) == RTREE) {
+				fin >> Boolean;
+				assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean)
+
+				rtree rT = rtreevars[g2];
+				rT.disjoint_union(rtreevars[g3], Boolean == "true");
+				rtreevars[g1] = rT;
 			}
 			else {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_DISJ_UNION)
-				cerr << "    Type of graphs '" << g1 << "' and '" << g2 << "' are not" << endl;
-				cerr << "    " << UGRAPH << " or " << DGRAPH << endl;
+				cerr << "    Type of graph '" << g1 << "' and '" << g2 << "' is not" << endl;
+				cerr << "    " << UGRAPH << endl;
+				cerr << "    " << DGRAPH << endl;
+				cerr << "    " << FTREE << endl;
+				cerr << "    " << RTREE << endl;
 				return err_type::test_exe_error;
 			}
 		}
