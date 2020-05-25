@@ -1,0 +1,35 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ftree t1 6
+	add_edges t1 4
+		0 1
+		1 2
+		3 4
+		4 5
+		false
+	assert normalised t1
+	assert not_exists_edge t1 2 3
+	
+	create_graph ftree t2 4
+	add_edges t2 3
+		0 1
+		1 2
+		2 3
+		false
+	assert normalised t2
+	assert exists_edge t2 2 3
+	
+	create_graph ftree T 0
+	disjoint_union T T t1
+	disjoint_union T T t2
+	
+	assert not_exists_edge T 2 3
+	assert exists_edge T 8 9
+	assert num_nodes T 10
+	assert num_edges T 7
+	assert is_not_tree T
+
+	add_edge T 2 3 false
+	add_edge T 5 6 false
+	assert is_tree T

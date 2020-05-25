@@ -1,0 +1,16 @@
+TYPE construction_graph
+INPUT 0
+BODY
+	create_graph ftree g1 0
+	create_graph ftree g2 0
+	create_graph ftree g3 0
+	create_graph ftree g4 0
+	
+	create_graph ftree G 0
+	disjoint_union G G g1
+	disjoint_union G G g2
+	disjoint_union G G g3
+	disjoint_union G G g4
+	
+	assert num_nodes G 0
+	assert num_edges G 0

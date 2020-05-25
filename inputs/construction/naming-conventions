@@ -49,6 +49,12 @@ We are currently using the following names:
 	002: construction of ftree
 	003: construction of rtree
 	
+	     (these are tests meant to test the 'disjoint_union' function)
+	004: construction of ugraph using disjoint_union
+	005: construction of dgraph using disjoint_union
+	006: construction of ftree using disjoint_union
+	007: construction of rtree using disjoint_union
+	
 	010: inspection of edges and elements of Q in ugraph
 	011: inspection of edges and elements of Q in dgraph
 	

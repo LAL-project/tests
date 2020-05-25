@@ -51,9 +51,13 @@ COMMANDS AVAILABLE
 ** assign GRAPH1 GRAPH2
 	Assign graph 2 to graph 1
 	
-** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2
+** disjoint_union GRAPH_RESULT GRAPH1 GRAPH2 (true/false)
 	Make the disjoint union of GRAPH1 and GRAPH2 and store the result
-	in GRAPH_RESULT
+	in GRAPH_RESULT. For undirected/directed graphs, and for free trees,
+	the Boolean parameter should not be given.
+	
+	If the graphs are rooted trees, then the command requires an extra
+	Boolean parameter true/false.
 
 +++++++++++++++++++++++++++++++++++++++++
 
