@@ -102,8 +102,10 @@ err_type exe_gen_arr_rand_proj(ifstream& fin) {
 			const rtree rT = TreeGen.make_rand_tree();
 			const ftree fT = rT.to_undirected();
 
+			rand_projective_arrgmnt RandArr(rT, false);
+
 			for (uint32_t it = 0; it < nit; ++it) {
-				const linearrgmnt arr = rand_projective_arrgmnt(rT, false);
+				const linearrgmnt arr = RandArr.make_rand_arrgmnt();
 
 				// Do some sanity checks.
 				const string err = is_arrgmnt_projective(rT, fT, arr);
