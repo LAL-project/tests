@@ -47,30 +47,25 @@
 using namespace std;
 
 // lal includes
-#include <lal/numeric/rational.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/graphs/rtree.hpp>
-#include <lal/iterators/E_iterator.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
-using namespace numeric;
-using namespace iterators;
 using namespace linarr;
 using namespace generate;
 
 // custom includes
-#include "io_wrapper.hpp"
 #include "definitions.hpp"
 #include "test_utils.hpp"
 
 namespace exe_tests {
 
-pair<uint32_t, linearrgmnt> Dmin_projective_bruteforce(const rtree& t) {
+pair<uint32_t, linearrgmnt> Dmin_Projective_bruteforce(const rtree& t) {
 	const uint32_t n = t.n_nodes();
 	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
 
@@ -92,35 +87,7 @@ pair<uint32_t, linearrgmnt> Dmin_projective_bruteforce(const rtree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-err_type test_Dmin_rtree_Projective(const rtree& t) {
-	// compute Dmin using the library's algorithm
-	const pair<uint32_t, linearrgmnt> res_library
-		= compute_Dmin(t, algorithms_Dmin::Projective);
-
-	// compute Dmin by brute force
-	const pair<uint32_t, linearrgmnt> res_bf
-		= Dmin_projective_bruteforce(t);
-
-	// compare results
-	if (res_library.first != res_bf.first) {
-		cerr << ERROR << endl;
-		cerr << "    Values of projective Dmin do not coincide." << endl;
-		cerr << "    Library:" << endl;
-		cerr << "        Value: " << res_library.first << endl;
-		cerr << "        Arrangement:     " << res_library.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
-		cerr << "    Bruteforce:" << endl;
-		cerr << "        Value: " << res_bf.first << endl;
-		cerr << "        Arrangement:     " << res_bf.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
-		cerr << "    For tree: " << endl;
-		cerr << t << endl;
-		return err_type::test_exe_error;
-	}
-	return err_type::no_error;
-}
-
-err_type test_projective(ifstream& fin) {
+err_type test_Projective_GT(ifstream& fin) {
 	string field;
 
 	fin >> field;
@@ -158,9 +125,29 @@ err_type test_projective(ifstream& fin) {
 			rtree tree = TreeGen.get_tree();
 			tree.recalc_size_subtrees();
 
-			const err_type r = test_Dmin_rtree_Projective(tree);
-			if (r != err_type::no_error) {
-				return r;
+			// compute Dmin using the library's algorithm
+			const pair<uint32_t, linearrgmnt> res_library
+				= compute_Dmin(tree, algorithms_Dmin::Projective);
+
+			// compute Dmin by brute force
+			const pair<uint32_t, linearrgmnt> res_bf
+				= Dmin_Projective_bruteforce(tree);
+
+			// compare results
+			if (res_library.first != res_bf.first) {
+				cerr << ERROR << endl;
+				cerr << "    Values of projective Dmin do not coincide." << endl;
+				cerr << "    Library:" << endl;
+				cerr << "        Value: " << res_library.first << endl;
+				cerr << "        Arrangement:     " << res_library.second << endl;
+				cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
+				cerr << "    Bruteforce:" << endl;
+				cerr << "        Value: " << res_bf.first << endl;
+				cerr << "        Arrangement:     " << res_bf.second << endl;
+				cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
+				cerr << "    For tree: " << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
 			}
 		}
 	}
@@ -170,8 +157,8 @@ err_type test_projective(ifstream& fin) {
 
 err_type exe_linarr_Dmin_rooted(const string& alg, ifstream& fin) {
 	err_type r;
-	if (alg == "Projective") {
-		r = test_projective(fin);
+	if (alg == "Projective_GT") {
+		r = test_Projective_GT(fin);
 	}
 	else {
 		cerr << ERROR << endl;

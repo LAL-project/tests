@@ -39,32 +39,143 @@
  ********************************************************************/
 
 // C++ includes
+#include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <fstream>
 #include <set>
 using namespace std;
 
 // lal includes
-#include <lal/numeric/rational.hpp>
-#include <lal/graphs/ugraph.hpp>
-#include <lal/io/basic_output.hpp>
+#include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/graphs/ftree.hpp>
 #include <lal/linarr/D.hpp>
+#include <lal/linarr/Dmin.hpp>
+#include <lal/io/basic_output.hpp>
+#include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
-using namespace numeric;
+using namespace linarr;
+using namespace generate;
 
 // custom includes
-#include "io_wrapper.hpp"
 #include "definitions.hpp"
+#include "test_utils.hpp"
 
 namespace exe_tests {
 
+pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
+	const uint32_t n = t.n_nodes();
+	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
+
+	linearrgmnt arr(n);
+	std::iota(arr.begin(), arr.end(), 0);
+
+	linearrgmnt arrMin;
+	uint32_t Dmin = numeric_limits<uint32_t>::max();
+
+	do {
+		const uint32_t D = sum_length_edges(t, arr);
+		if (Dmin > D) {
+			Dmin = D;
+			arrMin = arr;
+		}
+	}
+	while (std::next_permutation(arr.begin(), arr.end()));
+
+	return make_pair(Dmin, arrMin);
+}
+
+err_type test_Unconstrained(ifstream& fin) {
+
+	return err_type::no_error;
+}
+
+err_type test_Unconstrained_YS(ifstream& fin) {
+	string field;
+
+	fin >> field;
+	if (field != "INPUT") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'INPUT'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+
+	size_t n_inputs;
+	fin >> n_inputs;
+	if (n_inputs != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << n_inputs << " were specified." << endl;
+		return err_type::test_format_error;
+	}
+
+	// parse body field
+	fin >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'BODY'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+
+	// read number of nodes
+	uint32_t n;
+	while (fin >> n) {
+		generate::all_ulab_free_trees TreeGen(n);
+		while (TreeGen.has_next()) {
+			TreeGen.next();
+			const ftree tree = TreeGen.get_tree();
+
+			// compute Dmin using the library's algorithm
+			const pair<uint32_t, linearrgmnt> res_library
+				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_YS);
+
+			// compute Dmin by brute force
+			const pair<uint32_t, linearrgmnt> res_bf
+				= Dmin_Unconstrained_bruteforce(tree);
+
+			// compare results
+			if (res_library.first != res_bf.first) {
+				cerr << ERROR << endl;
+				cerr << "    Values of projective Dmin do not coincide." << endl;
+				cerr << "    Library:" << endl;
+				cerr << "        Value: " << res_library.first << endl;
+				cerr << "        Arrangement:     " << res_library.second << endl;
+				cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
+				cerr << "    Bruteforce:" << endl;
+				cerr << "        Value: " << res_bf.first << endl;
+				cerr << "        Arrangement:     " << res_bf.second << endl;
+				cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
+				cerr << "    For tree: " << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
+			}
+		}
+	}
+
+	return err_type::no_error;
+}
+
 err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
+	err_type r;
+	if (alg == "Unconstrained") {
+		r = test_Unconstrained(fin);
+	}
+	else if (alg == "Unconstrained_YS") {
+		r = test_Unconstrained_YS(fin);
+	}
+	else {
+		cerr << ERROR << endl;
+		cerr << "    Test not implemented for algorithm '" << alg << "'." << endl;
+		r = err_type::not_implemented;
+	}
 
+	if (r != err_type::no_error) { return r; }
 
-	cerr << ERROR << endl;
-	cerr << "    Test not implemented for algorithm 'alg'." << endl;
-	return err_type::not_implemented;
+	TEST_GOODBYE
+	return err_type::no_error;
 }
 
 } // -- namespace exe_tests

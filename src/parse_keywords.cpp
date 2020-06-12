@@ -273,11 +273,28 @@ err_type call_linarr_D_related
 err_type call_linarr_Dmin
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
-	const set<string> allowed_keywords({"Projective", "Unconstrained_YS", "Unconstrained_FC"});
+	const set<string> allowed_keywords({
+		// Projective arrangements
+		// Unconstrained arrangements
+		// -- Gidlea & Temperley's algorithm
+		"Projective_GT",
+		// Unconstrained arrangements
+		// -- test algorithms against one another
+		"Unconstrained",
+		// -- Yossi Shiloach's algorithm
+		"Unconstrained_YS",
+		// -- Fan Chung's algorithm
+		"Unconstrained_FC"
+	});
+
 	// Dmin algorithms for rooted trees
-	const set<string> rooted_algorithms({"Projective"});
+	const set<string> rooted_algorithms({
+		"Projective_GT"
+	});
 	// Dmin algorithms for free trees
-	const set<string> free_algorithms({"Unconstrained_YS", "Unconstrained_FC"});
+	const set<string> free_algorithms({
+		"Unconstrained", "Unconstrained_YS", "Unconstrained_FC"
+	});
 
 	const string& key = keywords[i];
 	if (allowed_keywords.find(key) == allowed_keywords.end()) {
@@ -295,8 +312,8 @@ err_type call_linarr_Dmin
 	}
 
 	cerr << ERROR << endl;
-	cerr << "    Key '" << key << "' is not classified as an algorithm for" << endl;
-	cerr << "    free trees or for rooted trees." << endl;
+	cerr << "    Key '" << key << "' is classified as an algorithm for" << endl;
+	cerr << "    neither free trees nor rooted trees." << endl;
 	return err_type::not_implemented;
 }
 
