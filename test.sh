@@ -453,37 +453,24 @@ if [ $exe_group != 0 ]; then
 		# if the group is valid, then execute it
 		echo "Executing group '$exe_group'"
 		
-		# variable names
-		in_dir_name="$exe_group""_IN_DIRS[@]"
-		out_dir_name="$exe_group""_OUT_DIRS[@]"
-		# actual arrays
-		IN_DIRS=("${!in_dir_name}")
-		OUT_DIRS=("${!out_dir_name}")
-		# size of each array
-		in_n=${#IN_DIRS[@]}
-		out_n=${#OUT_DIRS[@]}
+		# variable name
+		dir_name="$exe_group""_DIRS[@]"
+		# actual array
+		DIRS_TO_PROCESS=("${!dir_name}")
+		# size of the array
+		n_dirs=${#DIRS_TO_PROCESS[@]}
+		# number of input directories
+		n_dirs=$(($n_dirs/2))
 		
-		# test that the arrays are equally long
-		cont=1
-		if [ $in_n != $out_n ]; then
-			echo -e "\e[1;4;31mError:\e[0m For execution group $exe_group"
-			echo -e "    The list of input directories is not as long as list of output directories"
-			echo -e "    # input directories : $in_n"
-			echo -e "    # output directories: $out_n"
-			
-			echo "$(date +"%Y/%m/%d.%T")    Test execution failed. There are not as many input directories" >> execution_log
-			echo "$(date +"%Y/%m/%d.%T")    as output directories for group $exe_group" >> execution_log
-			cont=0
-		fi
-		if [ $cont = 1 ]; then
-			# execute
-			for ((i=0; i<$in_n; ++i)); do
-				idx=$(($i + 1))
-				in="${IN_DIRS[$i]}"
-				out="${OUT_DIRS[$i]}"
-				execute_group $in $out $idx $in_n
-			done
-		fi
+		# execute
+		for ((i=0; i<$n_dirs; ++i)); do
+			idx=$(($i + 1))
+			i1=$((2*$i    ))
+			i2=$((2*$i + 1))
+			in="${DIRS_TO_PROCESS[$i1]}"
+			out="${DIRS_TO_PROCESS[$i2]}"
+			execute_group $in $out $idx $n_dirs
+		done
 	fi
 else
 	execute_group $input_dir $output_dir 1 1
