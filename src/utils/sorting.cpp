@@ -201,15 +201,15 @@ err_type check_counting_sort(const string& algo, Ui k, Ui s, Ui n) {
 
 	auto sort1 =
 	[&](t1_vec_it begin, t1_vec_it end) -> void {
-		utils::counting_sort<t1_vec_it, t1>(begin, end, n+1, key1);
+		utils::counting_sort<t1_vec_it, t1>(begin, end, n, key1);
 	};
 	auto sort2 =
 	[&](t2_vec_it begin, t2_vec_it end) -> void {
-		utils::counting_sort<t2_vec_it, t2>(begin, end, n+1, key2);
+		utils::counting_sort<t2_vec_it, t2>(begin, end, n, key2);
 	};
 	auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
-		utils::counting_sort<t3_vec_it, t3>(begin, end, n+1, key3);
+		utils::counting_sort<t3_vec_it, t3>(begin, end, n, key3);
 	};
 
 	err_type E = err_type::no_error;
