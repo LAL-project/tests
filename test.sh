@@ -81,6 +81,7 @@ function show_usage() {
 	echo "        gen_arr_rand_proj : execute generation (Rand Projective Arrangements) tests"
 	echo ""
 	echo "        utils : execute utils tests "
+	echo "        utils_sorting : execute sorting utils tests "
 	echo "        utils_centre : execute centre utils tests "
 	echo ""	
 	echo "Optional parameters:"

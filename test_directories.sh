@@ -24,6 +24,7 @@ groups_list=(\
 	"gen_arr_all_proj" \
 	"utils" \
 	"utils_centre" \
+	"utils_sorting" \
 	)
 
 # all tests available
@@ -323,6 +324,14 @@ utils_OUT_DIRS=(\
 	"utils/sorting" \
 	"utils/traversal" \
 	"utils/centre" \
+	)
+
+# sorting tests
+utils_sorting_IN_DIRS=(\
+	"utils/sorting" \
+	)
+utils_sorting_OUT_DIRS=(\
+	"utils/sorting" \
 	)
 
 # utils_centre tests
