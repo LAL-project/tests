@@ -61,6 +61,7 @@ using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
+#include "arrgmnt_validity_check.hpp"
 #include "test_utils.hpp"
 
 namespace exe_tests {
@@ -125,15 +126,25 @@ err_type test_Projective_GT(ifstream& fin) {
 			rtree tree = TreeGen.get_tree();
 			tree.recalc_size_subtrees();
 
-			// compute Dmin using the library's algorithm
+			// execute library's algorithm
 			const pair<uint32_t, linearrgmnt> res_library
 				= compute_Dmin(tree, algorithms_Dmin::Projective);
+			const linearrgmnt& arr = res_library.second;
 
-			// compute Dmin by brute force
-			const pair<uint32_t, linearrgmnt> res_bf
-				= Dmin_Projective_bruteforce(tree);
+			// ensure that the arrangement is a permutation and a projective arrangement
+			const string err = is_arrgmnt_projective(tree, tree.to_undirected(), arr);
+			if (err != "No error") {
+				cerr << ERROR << endl;
+				cerr << "    Generation of random arrangement for rtree:" << endl;
+				cerr << tree << endl;
+				cerr << "    Failed with error: '" << err << "'" << endl;
+				cerr << "    Arrangement:     " << arr << endl;
+				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+				return err_type::test_exe_error;
+			}
 
-			// compare results
+			// ensure that the value of D is actually minimum
+			const pair<uint32_t, linearrgmnt> res_bf = Dmin_Projective_bruteforce(tree);
 			if (res_library.first != res_bf.first) {
 				cerr << ERROR << endl;
 				cerr << "    Values of projective Dmin do not coincide." << endl;
@@ -145,6 +156,20 @@ err_type test_Projective_GT(ifstream& fin) {
 				cerr << "        Value: " << res_bf.first << endl;
 				cerr << "        Arrangement:     " << res_bf.second << endl;
 				cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
+				cerr << "    For tree: " << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
+			}
+
+			// ensure that value of D is correct
+			const uint32_t D = sum_length_edges(tree, res_library.second);
+			if (D != res_library.first) {
+				cerr << ERROR << endl;
+				cerr << "    Value of D returned by method is incorrect." << endl;
+				cerr << "    Arrangement:     " << res_library.second << endl;
+				cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
+				cerr << "    Value of D returned: " << res_library.first << endl;
+				cerr << "    Actual value of D:   " << D << endl;
 				cerr << "    For tree: " << endl;
 				cerr << tree << endl;
 				return err_type::test_exe_error;
