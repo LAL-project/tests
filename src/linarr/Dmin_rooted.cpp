@@ -132,14 +132,15 @@ err_type test_Projective_GT(ifstream& fin) {
 			const linearrgmnt& arr = res_library.second;
 
 			// ensure that the arrangement is a permutation and a projective arrangement
-			const string err = is_arrgmnt_projective(tree, tree.to_undirected(), arr);
+			const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);
 			if (err != "No error") {
 				cerr << ERROR << endl;
-				cerr << "    Generation of random arrangement for rtree:" << endl;
-				cerr << tree << endl;
-				cerr << "    Failed with error: '" << err << "'" << endl;
+				cerr << "    Arrangement is not correct." << endl;
+				cerr << "    Error: '" << err << "'" << endl;
 				cerr << "    Arrangement:     " << arr << endl;
 				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+				cerr << "    For tree: " << endl;
+				cerr << tree << endl;
 				return err_type::test_exe_error;
 			}
 
