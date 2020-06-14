@@ -92,7 +92,7 @@ bool is_permutation(const linearrgmnt& arr) {
 	return setpos.size() == arr.size();
 }
 
-string is_arrgmnt_projective(
+string is_arrangement_projective(
 	const rtree& rT, const ftree& fT, const linearrgmnt& arr
 )
 {
