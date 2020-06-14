@@ -59,7 +59,7 @@ using namespace generate;
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
-#include "generate/arrgmnt_validity_check.hpp"
+#include "arrgmnt_validity_check.hpp"
 
 namespace exe_tests {
 
@@ -131,10 +131,8 @@ err_type exe_gen_arr_all_proj(ifstream& fin) {
 					cerr << "    Generation of random arrangement for rtree:" << endl;
 					cerr << rT << endl;
 					cerr << "    Failed with error: '" << err << "'" << endl;
-					cerr << "    Arrangement:" << endl;
-					cerr << "    " << arr << endl;
-					cerr << "    Inverse linear arrangement:" << endl;
-					cerr << "    " << invlinarr(arr) << endl;
+					cerr << "    Arrangement:     " << arr << endl;
+					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					return err_type::test_exe_error;
 				}
 

@@ -38,7 +38,7 @@
  *
  ********************************************************************/
 
-#include "generate/arrgmnt_validity_check.hpp"
+#include "arrgmnt_validity_check.hpp"
 
 // C++ includes
 #include <set>
