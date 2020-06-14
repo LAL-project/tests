@@ -67,6 +67,8 @@ function show_usage() {
 	echo ""
 	echo "        Dmin : execute all Minimum Linear Arrangement (MLA) tests"
 	echo "        Dmin_Projectve : execute MLA tests for projective arrangements"
+	echo "        Dmin_Unconstrained : execute MLA tests for unconstrained arrangements -- algorithms: all"
+	echo "        Dmin_Unconstrained_YS : execute MLA tests for unconstrained arrangements -- algorithms: Yossi Shiloach's"
 	echo ""
 	echo "        gen : execute generation tests"
 	echo "        gen_trees_alf : execute generation (All Labelled Free) tests"

@@ -12,6 +12,8 @@ groups_list=(\
 	"linarr_C" \
 	"Dmin" \
 	"Dmin_Projective" \
+	"Dmin_Unconstrained" \
+	"Dmin_Unconstrained_YS" \
 	"gen" \
 	"gen_trees_alf" \
 	"gen_trees_alr" \
@@ -131,6 +133,16 @@ Dmin_DIRS=(\
 # Dmin Projective tests
 Dmin_Projective_DIRS=(\
 	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	)
+
+# Dmin Unconstrained tests -- all
+Dmin_Unconstrained_DIRS=(\
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
+	)
+
+# Dmin Unconstrained tests -- Yossi Shiloach
+Dmin_Unconstrained_YS_DIRS=(\
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
 	)
 
 # generate tests
