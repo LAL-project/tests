@@ -97,8 +97,7 @@ err_type exe_gen_arr_rand_proj(ifstream& fin) {
 		// do 'ntrees' trees of 'n' vertices
 		rand_ulab_rooted_trees TreeGen(n);
 
-		uint32_t nt = 0;
-		while (nt < ntrees) {
+		for (uint32_t nt = 0; nt < ntrees; ++nt) {
 			const rtree rT = TreeGen.make_rand_tree();
 			const ftree fT = rT.to_undirected();
 
@@ -108,19 +107,18 @@ err_type exe_gen_arr_rand_proj(ifstream& fin) {
 				const linearrgmnt arr = RandArr.make_rand_arrgmnt();
 
 				// Do some sanity checks.
-				const string err = is_arrgmnt_projective(rT, fT, arr);
+				const string err = is_arrangement_projective(rT, fT, arr);
 				if (err != "No error") {
 					cerr << ERROR << endl;
-					cerr << "    Generation of random arrangement for rtree:" << endl;
-					cerr << rT << endl;
-					cerr << "    Failed with error: '" << err << "'" << endl;
+					cerr << "    Generation of random arrangement failed with error:" << endl;
+					cerr << "    '" << err << "'" << endl;
 					cerr << "    Arrangement:     " << arr << endl;
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+					cerr << "    For tree:" << endl;
+					cerr << rT << endl;
 					return err_type::test_exe_error;
 				}
 			}
-
-			++nt;
 		}
 	}
 
