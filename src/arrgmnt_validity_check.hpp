@@ -53,7 +53,7 @@ bool is_linarr_projective(
 	const lal::linearrgmnt& arr
 );
 
-bool is_permutation(const lal::linearrgmnt& arr);
+bool is_arrangement(const lal::linearrgmnt& arr);
 
 std::string is_arrangement_projective(
 	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,

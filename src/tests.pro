@@ -52,8 +52,8 @@ SOURCES += \
     linarr/C.cpp \
     linarr/C_list.cpp \
     linarr/D.cpp \
-    linarr/Dmin_free.cpp \
-    linarr/Dmin_rooted.cpp \
+    linarr/Dmin_projective.cpp \
+    linarr/Dmin_unconstrained.cpp \
     linarr/approx_exp_C.cpp \
     linarr/headedness.cpp \
     linarr/klevel.cpp \

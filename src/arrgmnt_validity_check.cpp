@@ -84,7 +84,7 @@ bool is_linarr_projective(
 	return not is_root_covered(rT, arr);
 }
 
-bool is_permutation(const linearrgmnt& arr) {
+bool is_arrangement(const linearrgmnt& arr) {
 	set<position> setpos;
 	for (size_t i = 0; i < arr.size(); ++i) {
 		setpos.insert(arr[i]);
@@ -96,7 +96,7 @@ string is_arrangement_projective(
 	const rtree& rT, const ftree& fT, const linearrgmnt& arr
 )
 {
-	if (not is_permutation(arr)) {
+	if (not is_arrangement(arr)) {
 		return "The arrangement is not a permutation of the vertices.";
 	}
 	if (not is_linarr_projective(rT, fT, arr)) {

@@ -275,9 +275,9 @@ err_type call_linarr_Dmin
 {
 	const set<string> allowed_keywords({
 		// Projective arrangements
-		// Unconstrained arrangements
+		// Projective arrangements
 		// -- Gidlea & Temperley's algorithm
-		"Projective_GT",
+		"Projective",
 		// Unconstrained arrangements
 		// -- test algorithms against one another
 		"Unconstrained",
@@ -289,7 +289,7 @@ err_type call_linarr_Dmin
 
 	// Dmin algorithms for rooted trees
 	const set<string> rooted_algorithms({
-		"Projective_GT"
+		"Projective"
 	});
 	// Dmin algorithms for free trees
 	const set<string> free_algorithms({

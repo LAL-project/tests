@@ -88,7 +88,7 @@ pair<uint32_t, linearrgmnt> Dmin_Projective_bruteforce(const rtree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-err_type test_Projective_GT(ifstream& fin) {
+err_type test_Projective(ifstream& fin) {
 	string field;
 
 	fin >> field;
@@ -131,14 +131,28 @@ err_type test_Projective_GT(ifstream& fin) {
 				= compute_Dmin(tree, algorithms_Dmin::Projective);
 			const linearrgmnt& arr = res_library.second;
 
-			// ensure that the arrangement is a permutation and a projective arrangement
+			// ensure that the arrangement is a projective permutation
 			const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);
 			if (err != "No error") {
 				cerr << ERROR << endl;
-				cerr << "    Arrangement is not correct." << endl;
+				cerr << "    The result is not a projective arrangement." << endl;
 				cerr << "    Error: '" << err << "'" << endl;
 				cerr << "    Arrangement:     " << arr << endl;
 				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+				cerr << "    For tree: " << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
+			}
+
+			// ensure that value of D is correct
+			const uint32_t D = sum_length_edges(tree, res_library.second);
+			if (D != res_library.first) {
+				cerr << ERROR << endl;
+				cerr << "    Value of D returned by method is incorrect." << endl;
+				cerr << "    Arrangement:     " << res_library.second << endl;
+				cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
+				cerr << "    Value of D returned: " << res_library.first << endl;
+				cerr << "    Actual value of D:   " << D << endl;
 				cerr << "    For tree: " << endl;
 				cerr << tree << endl;
 				return err_type::test_exe_error;
@@ -161,20 +175,6 @@ err_type test_Projective_GT(ifstream& fin) {
 				cerr << tree << endl;
 				return err_type::test_exe_error;
 			}
-
-			// ensure that value of D is correct
-			const uint32_t D = sum_length_edges(tree, res_library.second);
-			if (D != res_library.first) {
-				cerr << ERROR << endl;
-				cerr << "    Value of D returned by method is incorrect." << endl;
-				cerr << "    Arrangement:     " << res_library.second << endl;
-				cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
-				cerr << "    Value of D returned: " << res_library.first << endl;
-				cerr << "    Actual value of D:   " << D << endl;
-				cerr << "    For tree: " << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
 		}
 	}
 
@@ -183,8 +183,8 @@ err_type test_Projective_GT(ifstream& fin) {
 
 err_type exe_linarr_Dmin_rooted(const string& alg, ifstream& fin) {
 	err_type r;
-	if (alg == "Projective_GT") {
-		r = test_Projective_GT(fin);
+	if (alg == "Projective") {
+		r = test_Projective(fin);
 	}
 	else {
 		cerr << ERROR << endl;
