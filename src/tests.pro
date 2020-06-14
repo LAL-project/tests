@@ -77,7 +77,6 @@ SOURCES += \
 
 HEADERS += \
     arrgmnt_validity_check.hpp \
-    class_hierarchy.hpp \
     construction/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
