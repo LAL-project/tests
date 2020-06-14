@@ -181,7 +181,7 @@ err_type test_Unconstrained_YS(ifstream& fin) {
 			const pair<uint32_t, linearrgmnt> res_library
 				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_YS);
 
-			test_correctness_result(tree, res_library);
+			test_correctness_result(tree, res_library)
 		}
 	}
 
@@ -204,7 +204,7 @@ err_type test_Unconstrained_FC(ifstream& fin) {
 			const pair<uint32_t, linearrgmnt> res_library
 				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_FC);
 
-			test_correctness_result(tree, res_library);
+			test_correctness_result(tree, res_library)
 		}
 	}
 
