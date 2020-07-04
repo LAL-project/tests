@@ -16,7 +16,7 @@ QMAKE_CXXFLAGS +=										\
     -Wnon-virtual-dtor -Woverloaded-virtual -Wshadow
 
 # lal library
-LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library
+LAL_DIR = ../../linear-arrangement-library
 CONFIG(debug, debug|release) {
     LIBS += -L$${LAL_DIR}/lal-debug/ -llaldebug
     PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.a
