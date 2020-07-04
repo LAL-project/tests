@@ -98,8 +98,8 @@ namespace exe_tests {
 	/* ensure that the result is an arrangement */										\
 	if (not is_arrangement(arr)) {														\
 		cerr << ERROR << endl;															\
-		cerr << "    The result is not an arrangement." << endl;						\
-		cerr << "    Arrangement:     " << arr << endl;									\
+		cerr << "    The result is not an arrangement (permutation)." << endl;			\
+		cerr << "    Arrangement: " << arr << endl;										\
 		cerr << "    For tree: " << endl;												\
 		cerr << tree << endl;															\
 		return err_type::test_exe_error;												\
