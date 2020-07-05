@@ -1,0 +1,155 @@
+TYPE utils-sorting
+INPUT 0
+BODY
+	counting_sort_rand increasing 1 10 100 1
+	counting_sort_rand increasing 1 10 100 2
+	counting_sort_rand increasing 1 10 100 3
+	counting_sort_rand increasing 1 10 100 4
+	counting_sort_rand increasing 1 10 100 5
+	counting_sort_rand increasing 1 10 100 6
+	counting_sort_rand increasing 1 10 100 7
+	counting_sort_rand increasing 1 10 100 8
+	counting_sort_rand increasing 1 10 100 9
+	counting_sort_rand increasing 1 10 100 10
+	
+	counting_sort_rand increasing 1 10 200 1
+	counting_sort_rand increasing 1 10 200 2
+	counting_sort_rand increasing 1 10 200 3
+	counting_sort_rand increasing 1 10 200 4
+	counting_sort_rand increasing 1 10 200 5
+	counting_sort_rand increasing 1 10 200 6
+	counting_sort_rand increasing 1 10 200 7
+	counting_sort_rand increasing 1 10 200 8
+	counting_sort_rand increasing 1 10 200 9
+	counting_sort_rand increasing 1 10 200 10
+	counting_sort_rand increasing 1 10 200 15
+	counting_sort_rand increasing 1 10 200 20
+	
+	
+	counting_sort_rand increasing 2 10 100 1
+	counting_sort_rand increasing 2 10 100 2
+	counting_sort_rand increasing 2 10 100 3
+	counting_sort_rand increasing 2 10 100 4
+	counting_sort_rand increasing 2 10 100 5
+	counting_sort_rand increasing 2 10 100 6
+	counting_sort_rand increasing 2 10 100 7
+	counting_sort_rand increasing 2 10 100 8
+	counting_sort_rand increasing 2 10 100 9
+	counting_sort_rand increasing 2 10 100 10
+	
+	counting_sort_rand increasing 2 10 200 1
+	counting_sort_rand increasing 2 10 200 2
+	counting_sort_rand increasing 2 10 200 3
+	counting_sort_rand increasing 2 10 200 4
+	counting_sort_rand increasing 2 10 200 5
+	counting_sort_rand increasing 2 10 200 6
+	counting_sort_rand increasing 2 10 200 7
+	counting_sort_rand increasing 2 10 200 8
+	counting_sort_rand increasing 2 10 200 9
+	counting_sort_rand increasing 2 10 200 10
+	counting_sort_rand increasing 2 10 200 15
+	counting_sort_rand increasing 2 10 200 20
+
+	
+	counting_sort_rand increasing 3 10 100 1
+	counting_sort_rand increasing 3 10 100 2
+	counting_sort_rand increasing 3 10 100 3
+	counting_sort_rand increasing 3 10 100 4
+	counting_sort_rand increasing 3 10 100 5
+	counting_sort_rand increasing 3 10 100 6
+	counting_sort_rand increasing 3 10 100 7
+	counting_sort_rand increasing 3 10 100 8
+	counting_sort_rand increasing 3 10 100 9
+	counting_sort_rand increasing 3 10 100 10
+	
+	counting_sort_rand increasing 3 10 200 1
+	counting_sort_rand increasing 3 10 200 2
+	counting_sort_rand increasing 3 10 200 3
+	counting_sort_rand increasing 3 10 200 4
+	counting_sort_rand increasing 3 10 200 5
+	counting_sort_rand increasing 3 10 200 6
+	counting_sort_rand increasing 3 10 200 7
+	counting_sort_rand increasing 3 10 200 8
+	counting_sort_rand increasing 3 10 200 9
+	counting_sort_rand increasing 3 10 200 10
+	counting_sort_rand increasing 3 10 200 15
+	counting_sort_rand increasing 3 10 200 20
+
+
+
+
+
+
+	counting_sort_rand increasing 1 10 100 10
+	counting_sort_rand increasing 1 10 100 20
+	counting_sort_rand increasing 1 10 100 30
+	counting_sort_rand increasing 1 10 100 40
+	counting_sort_rand increasing 1 10 100 50
+	counting_sort_rand increasing 1 10 100 60
+	counting_sort_rand increasing 1 10 100 70
+	counting_sort_rand increasing 1 10 100 80
+	counting_sort_rand increasing 1 10 100 90
+	counting_sort_rand increasing 1 10 100 100
+	
+	counting_sort_rand increasing 1 10 200 10
+	counting_sort_rand increasing 1 10 200 20
+	counting_sort_rand increasing 1 10 200 30
+	counting_sort_rand increasing 1 10 200 40
+	counting_sort_rand increasing 1 10 200 50
+	counting_sort_rand increasing 1 10 200 60
+	counting_sort_rand increasing 1 10 200 70
+	counting_sort_rand increasing 1 10 200 80
+	counting_sort_rand increasing 1 10 200 90
+	counting_sort_rand increasing 1 10 200 100
+	counting_sort_rand increasing 1 10 200 150
+	counting_sort_rand increasing 1 10 200 200
+	
+	
+	counting_sort_rand increasing 2 10 100 10
+	counting_sort_rand increasing 2 10 100 20
+	counting_sort_rand increasing 2 10 100 30
+	counting_sort_rand increasing 2 10 100 40
+	counting_sort_rand increasing 2 10 100 50
+	counting_sort_rand increasing 2 10 100 60
+	counting_sort_rand increasing 2 10 100 70
+	counting_sort_rand increasing 2 10 100 80
+	counting_sort_rand increasing 2 10 100 90
+	counting_sort_rand increasing 2 10 100 100
+	
+	counting_sort_rand increasing 2 10 200 10
+	counting_sort_rand increasing 2 10 200 20
+	counting_sort_rand increasing 2 10 200 30
+	counting_sort_rand increasing 2 10 200 40
+	counting_sort_rand increasing 2 10 200 50
+	counting_sort_rand increasing 2 10 200 60
+	counting_sort_rand increasing 2 10 200 70
+	counting_sort_rand increasing 2 10 200 80
+	counting_sort_rand increasing 2 10 200 900
+	counting_sort_rand increasing 2 10 200 100
+	counting_sort_rand increasing 2 10 200 150
+	counting_sort_rand increasing 2 10 200 200
+
+	
+	counting_sort_rand increasing 3 10 100 10
+	counting_sort_rand increasing 3 10 100 20
+	counting_sort_rand increasing 3 10 100 30
+	counting_sort_rand increasing 3 10 100 40
+	counting_sort_rand increasing 3 10 100 50
+	counting_sort_rand increasing 3 10 100 60
+	counting_sort_rand increasing 3 10 100 70
+	counting_sort_rand increasing 3 10 100 80
+	counting_sort_rand increasing 3 10 100 90
+	counting_sort_rand increasing 3 10 100 100
+	
+	counting_sort_rand increasing 3 10 200 10
+	counting_sort_rand increasing 3 10 200 20
+	counting_sort_rand increasing 3 10 200 30
+	counting_sort_rand increasing 3 10 200 40
+	counting_sort_rand increasing 3 10 200 50
+	counting_sort_rand increasing 3 10 200 60
+	counting_sort_rand increasing 3 10 200 70
+	counting_sort_rand increasing 3 10 200 80
+	counting_sort_rand increasing 3 10 200 90
+	counting_sort_rand increasing 3 10 200 100
+	counting_sort_rand increasing 3 10 200 150
+	counting_sort_rand increasing 3 10 200 200

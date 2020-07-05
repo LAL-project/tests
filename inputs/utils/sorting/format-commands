@@ -1,12 +1,26 @@
 FORMAT OF COMMANDS
 ==================
 
-+ rand_sort_* R s n:
-	test R times a sorting algorithm * that sorts s random
-	values within the interval [0,n).
++ insertion_sort_rand R s n:
 
-	+ rand_insertion_sort: insertion sort
-	+ rand_bit_sort: bit sort
-	+ rand_bit_sort_mem: bit sort with memory
-	+ rand_counting_sort: counting sort
+	Sorts the 's' random values within the range [0,n] INCREASINGLY. The random values are generated 'R' times.
+
++ bit_sort_rand R s n:
+
+	Sorts the 's' random values within the range [0,n] INCREASINGLY. The random values are generated 'R' times.
 	
+	The algorithm used is the memoriless bit sort.
+
++ bit_sort_mem_rand R s n:
+
+	Sorts the 's' random values within the range [0,n] INCREASINGLY. The random values are generated 'R' times.
+	
+	The algorithm used is the bit sort with memory.
+
++ counting_sort_rand ORDER k R s n:
+
+	Sorts the 's' random values within the range [0,n] either INCREASINGLY or DECREASINGLY. Each value is a 'k'-tuple. The random values are generated 'R' times.
+
++ counting_sort_nrand ORDER n a_1 .. a_n:
+	
+	Sorts the values a_1 ... a_n either INCREASINGLY or DECREASINGLY

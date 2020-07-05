@@ -35,6 +35,29 @@ Family test numbers
 
 We are currently using the following codes for the types of tests
 
-	000: test insertion sort using random values
-	001: test bit sort using random values
-	001: test bit sort with memory using random values
+insertion sort
+++++++++++++++
+	
+	000: test using random values (increasingly)
+	
+bit sort
++++++++++
+	
+	without memory
+	--------------
+	
+	010: test using random values (increasingly)
+	
+	with memory
+	-----------
+	
+	020: test using random values (increasingly)
+	
+counting sort
++++++++++++++
+	
+	030: test with random values (increasingly)
+	031: test with random values (decreasingly)
+	
+	032: test with concrete values (increasingly)
+	033: test with concrete values (decreasingly)
