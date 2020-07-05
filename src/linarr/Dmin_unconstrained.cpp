@@ -122,7 +122,7 @@ namespace exe_tests {
 	/* compare results obtained by the library and by brute force */					\
 	if (res_library.first != res_bf.first) {											\
 		cerr << ERROR << endl;															\
-		cerr << "    Values of projective Dmin do not coincide." << endl;				\
+		cerr << "    Values of unconstrained Dmin do not coincide." << endl;			\
 		cerr << "    Library:" << endl;													\
 		cerr << "        Value: " << res_library.first << endl;							\
 		cerr << "        Arrangement:     " << res_library.second << endl;				\
