@@ -65,76 +65,31 @@ using namespace generate;
 
 namespace exe_tests {
 
-#define consume_beginning(F)												\
-{																			\
-	string field;															\
-	F >> field;																\
-	if (field != "INPUT") {													\
-		cerr << ERROR << endl;												\
-		cerr << "    Expected field 'INPUT'." << endl;						\
-		cerr << "    Instead, '" << field << "' was found." << endl;		\
-		return err_type::test_format_error;									\
-	}																		\
-	size_t n_inputs;														\
-	F >> n_inputs;															\
-	if (n_inputs != 0) {													\
-		cerr << ERROR << endl;												\
-		cerr << "    No input files are allowed in this test." << endl;		\
-		cerr << "    Instead, " << n_inputs << " were specified." << endl;	\
-		return err_type::test_format_error;									\
-	}																		\
-	F >> field;																\
-	if (field != "BODY") {													\
-		cerr << ERROR << endl;												\
-		cerr << "    Expected field 'BODY'." << endl;						\
-		cerr << "    Instead, '" << field << "' was found." << endl;		\
-		return err_type::test_format_error;									\
-	}																		\
-}
-
-#define test_correctness_result(tree, res_library)										\
-{																						\
-	const linearrgmnt& arr = res_library.second;										\
-	/* ensure that the result is an arrangement */										\
-	if (not is_arrangement(arr)) {														\
-		cerr << ERROR << endl;															\
-		cerr << "    The result is not an arrangement (permutation)." << endl;			\
-		cerr << "    Arrangement: " << arr << endl;										\
-		cerr << "    For tree: " << endl;												\
-		cerr << tree << endl;															\
-		return err_type::test_exe_error;												\
-	}																					\
-	/* ensure that value of D is correct */												\
-	const uint32_t D = sum_length_edges(tree, res_library.second);						\
-	if (D != res_library.first) {														\
-		cerr << ERROR << endl;															\
-		cerr << "    Value of D returned by method is incorrect." << endl;				\
-		cerr << "    Arrangement:     " << res_library.second << endl;					\
-		cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;		\
-		cerr << "    Value of D returned: " << res_library.first << endl;				\
-		cerr << "    Actual value of D:   " << D << endl;								\
-		cerr << "    For tree: " << endl;												\
-		cerr << tree << endl;															\
-		return err_type::test_exe_error;												\
-	}																					\
-	/* compute Dmin by brute force */													\
-	const pair<uint32_t, linearrgmnt> res_bf = Dmin_Unconstrained_bruteforce(tree);		\
-	/* compare results obtained by the library and by brute force */					\
-	if (res_library.first != res_bf.first) {											\
-		cerr << ERROR << endl;															\
-		cerr << "    Values of unconstrained Dmin do not coincide." << endl;			\
-		cerr << "    Library:" << endl;													\
-		cerr << "        Value: " << res_library.first << endl;							\
-		cerr << "        Arrangement:     " << res_library.second << endl;				\
-		cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;	\
-		cerr << "    Bruteforce:" << endl;												\
-		cerr << "        Value: " << res_bf.first << endl;								\
-		cerr << "        Arrangement:     " << res_bf.second << endl;					\
-		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;		\
-		cerr << "    For tree: " << endl;												\
-		cerr << tree << endl;															\
-		return err_type::test_exe_error;												\
-	}																					\
+err_type consume_beginning(ifstream& F) {
+	string field;
+	F >> field;
+	if (field != "INPUT") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'INPUT'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+	size_t n_inputs;
+	F >> n_inputs;
+	if (n_inputs != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << n_inputs << " were specified." << endl;
+		return err_type::test_format_error;
+	}
+	F >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field 'BODY'." << endl;
+		cerr << "    Instead, '" << field << "' was found." << endl;
+		return err_type::test_format_error;
+	}
+	return err_type::no_error;
 }
 
 pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
@@ -159,6 +114,54 @@ pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
+err_type test_correctness_result(
+	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_library
+)
+{
+	const linearrgmnt& arr = res_library.second;
+	/* ensure that the result is an arrangement */
+	if (not is_arrangement(arr)) {
+		cerr << ERROR << endl;
+		cerr << "    The result is not an arrangement (permutation)." << endl;
+		cerr << "    Arrangement: " << arr << endl;
+		cerr << "    For tree: " << endl;
+		cerr << tree << endl;
+		return err_type::test_exe_error;
+	}
+	/* ensure that value of D is correct */
+	const uint32_t D = sum_length_edges(tree, res_library.second);
+	if (D != res_library.first) {
+		cerr << ERROR << endl;
+		cerr << "    Value of D returned by method is incorrect." << endl;
+		cerr << "    Arrangement:     " << res_library.second << endl;
+		cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
+		cerr << "    Value of D returned: " << res_library.first << endl;
+		cerr << "    Actual value of D:   " << D << endl;
+		cerr << "    For tree: " << endl;
+		cerr << tree << endl;
+		return err_type::test_exe_error;
+	}
+	/* compute Dmin by brute force */
+	const pair<uint32_t, linearrgmnt> res_bf = Dmin_Unconstrained_bruteforce(tree);
+	/* compare results obtained by the library and by brute force */
+	if (res_library.first != res_bf.first) {
+		cerr << ERROR << endl;
+		cerr << "    Values of unconstrained Dmin do not coincide." << endl;
+		cerr << "    Library:" << endl;
+		cerr << "        Value: " << res_library.first << endl;
+		cerr << "        Arrangement:     " << res_library.second << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
+		cerr << "    Bruteforce:" << endl;
+		cerr << "        Value: " << res_bf.first << endl;
+		cerr << "        Arrangement:     " << res_bf.second << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
+		cerr << "    For tree: " << endl;
+		cerr << tree << endl;
+		return err_type::test_exe_error;
+	}
+	return err_type::no_error;
+}
+
 // -----------------------------------------------------------------------------
 
 err_type test_Unconstrained(ifstream& fin) {
@@ -166,7 +169,9 @@ err_type test_Unconstrained(ifstream& fin) {
 }
 
 err_type test_Unconstrained_YS(ifstream& fin) {
-	consume_beginning(fin)
+	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
+		return err;
+	}
 
 	// read number of vertices
 	uint32_t n;
@@ -181,7 +186,8 @@ err_type test_Unconstrained_YS(ifstream& fin) {
 			const pair<uint32_t, linearrgmnt> res_library
 				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_YS);
 
-			test_correctness_result(tree, res_library)
+			const auto err = test_correctness_result(tree, res_library);
+			if (err != err_type::no_error) { return err; }
 		}
 	}
 
@@ -189,7 +195,9 @@ err_type test_Unconstrained_YS(ifstream& fin) {
 }
 
 err_type test_Unconstrained_FC(ifstream& fin) {
-	consume_beginning(fin)
+	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
+		return err;
+	}
 
 	// read number of vertices
 	uint32_t n;
@@ -204,7 +212,8 @@ err_type test_Unconstrained_FC(ifstream& fin) {
 			const pair<uint32_t, linearrgmnt> res_library
 				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_FC);
 
-			test_correctness_result(tree, res_library)
+			const auto err = test_correctness_result(tree, res_library);
+			if (err != err_type::no_error) { return err; }
 		}
 	}
 
