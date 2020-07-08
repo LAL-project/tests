@@ -76,34 +76,75 @@ endif()
 # PROJECT
 
 project(tests)
-add_executable(tests "\
-construction/exe_construction.cpp;\
-generate/exe_gen_trees_alf.cpp;\
-generate/exe_gen_trees_auf.cpp;\
-generate/exe_gen_trees_rlf.cpp;\
-generate/exe_gen_trees_rlr.cpp;\
-generate/exe_gen_trees_ruf.cpp;\
-linarr/exe_linarr_approx_exp_C.cpp;\
-linarr/exe_linarr_C.cpp;\
-linarr/exe_linarr_C_list.cpp;\
-linarr/exe_linarr_D.cpp;\
-linarr/exe_linarr_headedness.cpp;\
-linarr/exe_linarr_klevel.cpp;\
-linarr/exe_linarr_syn_dep_tree_type.cpp;\
-numeric/exe_integer.cpp;\
-numeric/exe_rational_integer.cpp;\
-numeric/exe_rational_rational.cpp;\
-properties/exe_properties_expvar_C.cpp;\
-properties/exe_properties_expvar_D.cpp;\
-properties/exe_properties_general.cpp;\
-properties/exe_properties_MHD_All_trees.cpp;\
-utils/exe_utils_sorting.cpp;\
-utils/exe_utils_traversal.cpp;\
-io_wrapper.cpp;\
-main.cpp;\
-parse_keywords.cpp;\
-time.cpp\
-")
+set(
+	SOURCES
+		construction/exe_construction.hpp
+		construction/construct.cpp
+		construction/construct_assert.cpp
+		construction/construct_utils.cpp
+
+		generate/tree_validity_check.hpp
+		generate/arr_all_proj.cpp
+		generate/arr_rand_proj.cpp
+		generate/tree_validity_check.cpp
+		generate/tree_alf.cpp
+		generate/tree_alr.cpp
+		generate/tree_auf.cpp
+		generate/tree_aur.cpp
+		generate/tree_rlf.cpp
+		generate/tree_rlr.cpp
+		generate/tree_ruf.cpp
+		generate/tree_rur.cpp
+
+		linarr/approx_exp_C.cpp
+		linarr/C.cpp
+		linarr/C_list.cpp
+		linarr/D.cpp
+		linarr/D_min_projective.cpp
+		linarr/D_min_unconstrained.cpp
+		linarr/headedness.cpp
+		linarr/klevel.cpp
+		linarr/syntree_classification.cpp
+
+		numeric/integer.cpp
+		numeric/rational.cpp
+
+		properties/C_rla_brute_force_algorithms.hpp
+		properties/expvar_C.cpp
+		properties/expvar_D.cpp
+		properties/general.cpp
+		properties/MHD_All_trees.cpp
+		properties/V_rla_C_brute_force_freqs.cpp
+		properties/V_rla_C_brute_force_Q.cpp
+
+		utils/centre.cpp
+		utils/sorting.cpp
+		utils/traversal.cpp
+
+		arrgmnt_validity_check.hpp
+		arrgmnt_validity_check.cpp
+
+		definitions.hpp
+		definitions.cpp
+
+		exe_tests.hpp
+		exe_tests.cpp
+
+		io_wrapper.hpp
+		io_wrapper.cpp
+
+		parse_keywords.hpp
+		parse_keywords.cpp
+
+		test_utils.hpp
+		test_utils.cpp
+
+		time.hpp
+		time.cpp
+
+		tree_classification.hpp
+		tree_classification.cpp
+)
 
 # **********************************************************************
 # LIBRARIES
