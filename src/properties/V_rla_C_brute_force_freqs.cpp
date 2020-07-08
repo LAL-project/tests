@@ -238,10 +238,7 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 		const size_t tid = static_cast<size_t>(omp_get_thread_num());
 
 		const size_t begin = tid*frac;
-		const size_t end = (tid + 1)*frac;
-		if (tid == nthreads - 1) {
-			end = Q.size();
-		}
+        const size_t end = (tid == nthreads - 1 ? Q.size() : (tid + 1)*frac);
 
 		for (size_t p_q1 = begin; p_q1 < end; ++p_q1) {
 			for (size_t p_q2 = 0; p_q2 < Q.size(); ++p_q2) {
