@@ -282,9 +282,17 @@ err_type call_linarr_Dmin
 		// -- test algorithms against one another
 		"Unconstrained",
 		// -- Yossi Shiloach's algorithm
-		"Unconstrained_YS",
+		//    -> Tested by bruteforce
+		"Unconstrained_bruteforce_YS",
+		// -- Yossi Shiloach's algorithm
+		//    -> Tested by formulas for classes of trees
+		"Unconstrained_class_YS",
 		// -- Fan Chung's algorithm
-		"Unconstrained_FC"
+		//    -> Tested by bruteforce
+		"Unconstrained_bruteforce_FC",
+		// -- Fan Chung's algorithm
+		//    -> Tested by formulas for classes of trees
+		"Unconstrained_class_FC",
 	});
 
 	// Dmin algorithms for rooted trees
@@ -293,7 +301,11 @@ err_type call_linarr_Dmin
 	});
 	// Dmin algorithms for free trees
 	const set<string> free_algorithms({
-		"Unconstrained", "Unconstrained_YS", "Unconstrained_FC"
+		"Unconstrained",
+		"Unconstrained_bruteforce_YS",
+		"Unconstrained_class_YS",
+		"Unconstrained_bruteforce_FC",
+		"Unconstrained_class_FC"
 	});
 
 	const string& key = keywords[i];

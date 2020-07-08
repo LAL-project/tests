@@ -57,6 +57,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
+#include "tree_classification.hpp"
 
 /*
  * ALL UNLABELLED FREE TREES
@@ -75,42 +76,6 @@ inline integer num_caterpillar_trees(uint32_t n) {
 	n2 ^= ((n - 4)/2);
 	n1 += n2;
 	return n1;
-}
-
-inline bool is_caterpillar(const tree& t) {
-	// number of vertices
-	const uint32_t N = t.n_nodes();
-
-	// number of internal vertices
-	uint32_t n_internal = 0;
-	// degree of the internal vertices
-	vector<uint32_t> deg_internal(N, 0);
-	for (node u = 0; u < N; ++u) {
-		if (t.degree(u) > 1) {
-			deg_internal[u] = t.degree(u);
-			++n_internal;
-		}
-	}
-
-	// reduce the degree of the internal vertices
-	// as many times as leaves are connected to them
-	for (node u = 0; u < N; ++u) {
-		if (t.degree(u) == 1) {
-			deg_internal[ t.get_neighbours(u)[0] ] -= 1;
-		}
-	}
-
-	// If we are left with 2, or 0, vertices with degree 1,
-	// it means that after removing the leaves of the tree
-	// all vertices are internal (degree 2), i.e., they are
-	// part of a linear tree. Needless to say that these
-	// two vertices of degree 1 are the endpoints of the
-	// linear tree.
-	uint32_t n1 = 0;
-	for (node u = 0; u < N; ++u) {
-		n1 += deg_internal[u] == 1;
-	}
-	return n1 == 2 or n1 == 0;
 }
 
 namespace exe_tests {

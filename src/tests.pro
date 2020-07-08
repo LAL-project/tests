@@ -71,6 +71,7 @@ SOURCES += \
     properties/general.cpp \
     test_utils.cpp \
     time.cpp \
+	tree_classification.cpp \
     utils/centre.cpp \
     utils/sorting.cpp \
     utils/traversal.cpp
@@ -85,6 +86,7 @@ HEADERS += \
 	io_wrapper.hpp \
     properties/C_rla_brute_force_algorithms.hpp \
     test_utils.hpp \
-    time.hpp
+    time.hpp \
+	tree_classification.hpp
 
 DISTFILES += \

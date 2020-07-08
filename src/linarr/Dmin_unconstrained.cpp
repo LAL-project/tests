@@ -43,6 +43,8 @@
 #include <iostream>
 #include <numeric>
 #include <fstream>
+#include <cassert>
+#include <queue>
 #include <set>
 using namespace std;
 
@@ -51,17 +53,21 @@ using namespace std;
 #include <lal/graphs/ftree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
+#include <lal/numeric/integer.hpp>
+#include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
+using namespace numeric;
 using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
 #include "arrgmnt_validity_check.hpp"
 #include "test_utils.hpp"
+#include "tree_classification.hpp"
 
 namespace exe_tests {
 
@@ -114,11 +120,8 @@ pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-err_type test_correctness_result(
-	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_library
-)
-{
-	const linearrgmnt& arr = res_library.second;
+bool test_correctness_arr_1(const ftree& tree, const pair<uint32_t, linearrgmnt>& res) {
+	const linearrgmnt& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not is_arrangement(arr)) {
 		cerr << ERROR << endl;
@@ -126,40 +129,75 @@ err_type test_correctness_result(
 		cerr << "    Arrangement: " << arr << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
-		return err_type::test_exe_error;
+		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint32_t D = sum_length_edges(tree, res_library.second);
-	if (D != res_library.first) {
+	const uint32_t D = sum_length_edges(tree, arr);
+	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
-		cerr << "    Arrangement:     " << res_library.second << endl;
-		cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
-		cerr << "    Value of D returned: " << res_library.first << endl;
+		cerr << "    Arrangement:     " << res.second << endl;
+		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
+		cerr << "    Value of D returned: " << res.first << endl;
 		cerr << "    Actual value of D:   " << D << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
-		return err_type::test_exe_error;
+		return false;
+	}
+	return true;
+}
+
+bool test_correctness_arr_bf(
+	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_lib
+)
+{
+	if (not test_correctness_arr_1(tree, res_lib)) {
+		return false;
 	}
 	/* compute Dmin by brute force */
 	const pair<uint32_t, linearrgmnt> res_bf = Dmin_Unconstrained_bruteforce(tree);
 	/* compare results obtained by the library and by brute force */
-	if (res_library.first != res_bf.first) {
+	if (res_lib.first != res_bf.first) {
 		cerr << ERROR << endl;
 		cerr << "    Values of unconstrained Dmin do not coincide." << endl;
 		cerr << "    Library:" << endl;
-		cerr << "        Value: " << res_library.first << endl;
-		cerr << "        Arrangement:     " << res_library.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
+		cerr << "        Value: " << res_lib.first << endl;
+		cerr << "        Arrangement:     " << res_lib.second << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << endl;
 		cerr << "    Bruteforce:" << endl;
 		cerr << "        Value: " << res_bf.first << endl;
 		cerr << "        Arrangement:     " << res_bf.second << endl;
 		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
-		return err_type::test_exe_error;
+		return false;
 	}
-	return err_type::no_error;
+	return true;
+}
+
+bool test_correctness_arr_formula(
+	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_lib,
+	const string& tree_class, const uint32_t val_formula
+)
+{
+	if (not test_correctness_arr_1(tree, res_lib)) {
+		return false;
+	}
+	/* compare results obtained by the library and by a formula */
+	if (res_lib.first != val_formula) {
+		cerr << ERROR << endl;
+		cerr << "    Values of unconstrained Dmin do not coincide." << endl;
+		cerr << "    Library:" << endl;
+		cerr << "        Value: " << res_lib.first << endl;
+		cerr << "        Arrangement:     " << res_lib.second << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << endl;
+		cerr << "    Formula for class of trees '" << tree_class << "':" << endl;
+		cerr << "        Value: " << val_formula << endl;
+		cerr << "    For tree: " << endl;
+		cerr << tree << endl;
+		return false;
+	}
+	return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -168,33 +206,145 @@ err_type test_Unconstrained(ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type test_Unconstrained_YS(ifstream& fin) {
+err_type test_Unconstrained_class_algorithm(
+	const function< pair<uint32_t, linearrgmnt> (const ftree&) >& A,
+	ifstream& fin
+)
+{
 	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
 		return err;
 	}
 
-	// read number of vertices
+	string tree_class;
 	uint32_t n;
-	while (fin >> n) {
-		// enumerate all trees of 'n' vertices
-		generate::all_ulab_free_trees TreeGen(n);
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			const ftree tree = TreeGen.get_tree();
+
+	// read class of tree to test
+	// read size of the tree
+	while (fin >> tree_class) {
+		fin >> n;
+		if (tree_class == "linear-tree") {
+			ftree T(n);
+
+			if (n > 1) {
+				for (uint32_t u = 0; u < n - 1; ++u) { T.add_edge(u, u+1, false); }
+			}
+
+			// Dmin for linear tree is
+			const uint32_t Dmin_lintree = n - 1;
+			// Dmin from the algorithm is
+			const auto algo_res = A(T);
+
+			const bool correct =
+			test_correctness_arr_formula(T, algo_res, "Linear", Dmin_lintree);
+			if (not correct) { return err_type::test_exe_error; }
+		}
+		else if (tree_class == "caterpillar") {
+			generate::all_ulab_free_trees TreeGen(n);
+			while (TreeGen.has_next()) {
+				TreeGen.next();
+				const ftree tree = TreeGen.get_tree();
+
+				// filter non-caterpillar
+				if (not is_caterpillar(tree)) { continue; }
+
+				// Dmin for caterpillar trees
+				uint32_t Dmin_cat = 0;
+				for (node u = 0; u < n; ++u) {
+					const uint32_t du = tree.degree(u);
+					Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
+				}
+				Dmin_cat /= 4;
+
+				// compute Dmin using the library's algorithm
+				const auto res_algo = A(tree);
+
+				const bool correct =
+				test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
+				if (not correct) { return err_type::test_exe_error; }
+			}
+		}
+		else if (tree_class == "binary-complete") {
+			// We should interpret 'n' as the *heigh*.
+			// The height of a single vertex is h=1
+			const uint32_t h = n;
+
+			// total amount of vertices
+			uint32_t N;
+			{
+			integer _N = 2;
+			_N ^= h;
+			_N -= 1;
+			N = static_cast<uint32_t>(_N.to_uint());
+			}
+
+			// build k-complete tree of height h
+			ftree T(N);
+			{
+			node next_node = 1;
+			queue<node> attach_to;
+			attach_to.push(0);
+
+			while (not attach_to.empty()) {
+				const node s = attach_to.front();
+				attach_to.pop();
+
+				for (uint32_t d = 0; d < 2 and next_node < n; ++d, ++next_node) {
+					const node t = next_node;
+					attach_to.push(t);
+
+					T.add_edge(s, t, false);
+				}
+			}
+			}
+
+			uint32_t Dmin_bin_complete = 0;
+			{
+			rational F = h;
+			F /= 3; // k/3
+			F += rational(5,18); // k/3 + 5/18
+			F *= integer(2)^h; // 2^k(k/3 + 5/18)
+
+			F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
+			F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
+			Dmin_bin_complete = static_cast<uint32_t>(F.to_integer().to_uint());
+
+			assert(F == Dmin_bin_complete);
+			}
 
 			// compute Dmin using the library's algorithm
-			const pair<uint32_t, linearrgmnt> res_library
-				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_YS);
+			const auto res_algo = A(T);
 
-			const auto err = test_correctness_result(tree, res_library);
-			if (err != err_type::no_error) { return err; }
+			const bool correct =
+			test_correctness_arr_formula(T, res_algo, "Binary complete", Dmin_bin_complete);
+			if (not correct) { return err_type::test_exe_error; }
+		}
+		else if (tree_class == "star") {
+			ftree T(n);
+			for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
+
+			const uint32_t Dmin_star = (n*n - n%2)/4;
+
+			// compute Dmin using the library's algorithm
+			const auto res_algo = A(T);
+
+			const bool correct =
+			test_correctness_arr_formula(T, res_algo, "Star", Dmin_star);
+			if (not correct) { return err_type::test_exe_error; }
+		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "    Tree class '" << tree_class << "' not recognised." << endl;
+			return err_type::test_format_error;
 		}
 	}
-
 	return err_type::no_error;
 }
 
-err_type test_Unconstrained_FC(ifstream& fin) {
+err_type test_Unconstrained_bf_algorithm(
+	const function< pair<uint32_t, linearrgmnt> (const ftree&) >& A,
+	ifstream& fin
+)
+{
 	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
 		return err;
 	}
@@ -209,14 +359,12 @@ err_type test_Unconstrained_FC(ifstream& fin) {
 			const ftree tree = TreeGen.get_tree();
 
 			// compute Dmin using the library's algorithm
-			const pair<uint32_t, linearrgmnt> res_library
-				= compute_Dmin(tree, algorithms_Dmin::Unconstrained_FC);
+			const auto res_algo = A(tree);
 
-			const auto err = test_correctness_result(tree, res_library);
-			if (err != err_type::no_error) { return err; }
+			const bool correct = test_correctness_arr_bf(tree, res_algo);
+			if (not correct) { return err_type::test_exe_error; }
 		}
 	}
-
 	return err_type::no_error;
 }
 
@@ -225,11 +373,41 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 	if (alg == "Unconstrained") {
 		r = test_Unconstrained(fin);
 	}
-	else if (alg == "Unconstrained_YS") {
-		r = test_Unconstrained_YS(fin);
+	else if (alg == "Unconstrained_bruteforce_YS") {
+		r =
+		test_Unconstrained_bf_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+			}
+		, fin
+		);
 	}
-	else if (alg == "Unconstrained_FC") {
-		r = test_Unconstrained_FC(fin);
+	else if (alg == "Unconstrained_class_YS") {
+		r =
+		test_Unconstrained_class_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+			}
+		, fin
+		);
+	}
+	else if (alg == "Unconstrained_bruteforce_FC") {
+		r =
+		test_Unconstrained_bf_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+			}
+		, fin
+		);
+	}
+	else if (alg == "Unconstrained_class_FC") {
+		r =
+		test_Unconstrained_class_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+			}
+		, fin
+		);
 	}
 	else {
 		cerr << ERROR << endl;
