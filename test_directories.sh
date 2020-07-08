@@ -26,6 +26,7 @@ groups_list=(\
 	"gen_trees_rur" \
 	"gen_arr_rand_proj" \
 	"gen_arr_all_proj" \
+	"properties" \
 	"utils" \
 	"utils_centre" \
 	"utils_sorting" \
@@ -108,7 +109,7 @@ linarr_DIRS=(\
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
-	"linarr/C/dyn-prog" \
+	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
 	"linarr/C/ladder-list" "linarr/C" \
@@ -213,6 +214,17 @@ gen_arr_all_proj_DIRS=(\
 # generate (rand projective arrangements) tests
 gen_arr_rand_proj_DIRS=(\
 	"generate/arrangements/rand_proj" "generate/arrangements/rand_proj" \
+	)
+
+# properties
+properties_DIRS=(\
+	"properties" "properties" \
+	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
+	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
+	"properties/exp-var-C/formula-Q" "properties/exp-var-C" \
+	"properties/exp-var-C/trees" "properties/exp-var-C" \
+	"properties/exp-var-C/forests" "properties/exp-var-C" \
+	"properties/exp-var-D/general-formula" "properties/exp-var-D" \
 	)
 
 # utils tests
