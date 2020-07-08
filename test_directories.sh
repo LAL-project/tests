@@ -14,6 +14,7 @@ groups_list=(\
 	"Dmin_Projective" \
 	"Dmin_Unconstrained" \
 	"Dmin_Unconstrained_YS" \
+	"Dmin_Unconstrained_FC" \
 	"gen" \
 	"gen_trees_alf" \
 	"gen_trees_alr" \
@@ -50,6 +51,8 @@ all_DIRS=(\
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
 	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained" \
+	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
@@ -139,10 +142,13 @@ Dmin_Projective_DIRS=(\
 Dmin_Unconstrained_DIRS=(\
 	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
 	)
-
 # Dmin Unconstrained tests -- Yossi Shiloach
 Dmin_Unconstrained_YS_DIRS=(\
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/" \
+	)
+# Dmin Unconstrained tests -- Fan Chung
+Dmin_Unconstrained_YS_DIRS=(\
+	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/" \
 	)
 
 # generate tests
