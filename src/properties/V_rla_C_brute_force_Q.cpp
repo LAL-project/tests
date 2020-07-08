@@ -45,7 +45,9 @@
 using namespace std;
 
 // lal includes
+#include <lal/iterators/E_iterator.hpp>
 using namespace lal;
+using namespace iterators;
 using namespace numeric;
 using namespace graphs;
 
@@ -64,8 +66,14 @@ inline void compute_data_gen_graphs_Q
 )
 {
 	// adjacency matrix
-	vector<vector<bool> > A;
-	g.get_adjacency_matrix(A);
+	vector<vector<bool> > A(g.n_nodes(), vector<bool>(g.n_nodes(), false));
+	E_iterator it(g);
+	while (it.has_next()) {
+		it.next();
+		const edge e = it.get_edge();
+		A[e.first][e.second] = true;
+		A[e.second][e.first] = true;
+	}
 
 	for (const edge_pair& ep : Q) {
 		const node s = ep.first.first;
