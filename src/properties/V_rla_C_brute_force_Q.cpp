@@ -177,38 +177,17 @@ rational variance_C_rational_Q(const ugraph& g, const vector<edge_pair>& Q) {
 
 	// V[C]
 	rational V(0);
-	J.init_ui((m + 2)*Qs);
-	V += rational(2,45)*J;
-
-	J.init_ui((2*m + 7)*n_paths_4);
-	V -= rational(1,180)*J;
-
-	J.init_ui(n_paths_5);
-	V -= rational(1,180)*J;
-
-	J.init_ui(Kg);
-	V += rational(1,90)*J;
-
-	J.init_ui(n_cycles_4);
-	V -= rational(3,45)*J;
-
-	J.init_ui(Lambda_1);
-	V -= rational(1,60)*J;
-
-	J.init_ui(Lambda_2);
-	V += rational(1,180)*J;
-
-	J.init_ui(Phi_2);
-	V += rational(1,180)*J;
-
-	J.init_ui(Phi_1);
-	V -= rational(1,90)*J;
-
-	J.init_ui(graphlet);
-	V += rational(1,30)*J;
-
-	J.init_ui(pair_C3_L2);
-	V += rational(1,90)*J;
+	J.init_ui((m + 2)*Qs);			V += rational(2,45)*J;
+	J.init_ui((2*m + 7)*n_paths_4);	V -= rational(1,180)*J;
+	J.init_ui(n_paths_5);			V -= rational(1,180)*J;
+	J.init_ui(Kg);					V += rational(1,90)*J;
+	J.init_ui(n_cycles_4);			V -= rational(3,45)*J;
+	J.init_ui(Lambda_1);			V -= rational(1,60)*J;
+	J.init_ui(Lambda_2);			V += rational(1,180)*J;
+	J.init_ui(Phi_2);				V += rational(1,180)*J;
+	J.init_ui(Phi_1);				V -= rational(1,90)*J;
+	J.init_ui(graphlet);			V += rational(1,30)*J;
+	J.init_ui(pair_C3_L2);			V += rational(1,90)*J;
 	return V;
 }
 

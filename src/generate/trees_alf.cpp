@@ -76,7 +76,6 @@ inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 namespace exe_tests {
 
 err_type exe_gen_trees_alf(std::ifstream& fin) {
-
 	string field;
 	fin >> field;
 

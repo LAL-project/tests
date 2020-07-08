@@ -69,38 +69,38 @@ using namespace generate;
 namespace exe_tests {
 
 void output_ExpVar_C_BF(const ugraph& g) {
-	rational Vr = variance_C_freqs_Q_rational(g.Q());
-	rational E1r = expectation_C_rational(g);
-	rational E2r = Vr + E1r*E1r;
+	const rational Vr = variance_C_freqs_Q_rational(g.Q());
+	const rational E1r = expectation_C_rational(g);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_Q(const ugraph& g) {
-	rational Vr = variance_C_rational_Q(g, g.Q());
-	rational E1r = expectation_C_rational(g);
-	rational E2r = Vr + E1r*E1r;
+	const rational Vr = variance_C_rational_Q(g, g.Q());
+	const rational E1r = expectation_C_rational(g);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_no_Q(const ugraph& g, bool reuse) {
-	rational Vr = variance_C_rational(g, reuse);
-	rational E1r = expectation_C_rational(g);
-	rational E2r = Vr + E1r*E1r;
+	const rational Vr = variance_C_rational(g, reuse);
+	const rational E1r = expectation_C_rational(g);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_trees(const ugraph& g) {
-	ftree t = g;
-	rational Vr = variance_C_tree_rational(t);
-	rational E1r = expectation_C_rational(t);
-	rational E2r = Vr + E1r*E1r;
+	const ftree t = g;
+	const rational Vr = variance_C_tree_rational(t);
+	const rational E1r = expectation_C_rational(t);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_forests(const ugraph& g) {
-	rational Vr = variance_C_forest_rational(g);
-	rational E1r = expectation_C_rational(g);
-	rational E2r = Vr + E1r*E1r;
+	const rational Vr = variance_C_forest_rational(g);
+	const rational E1r = expectation_C_rational(g);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
@@ -118,9 +118,9 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 			tree.normalise();
 		}
 
-		rational Vr_bf = variance_C_freqs_rational(tree);
-		rational Vr_gen = variance_C_rational(tree);
-		rational Vr_trees = variance_C_tree_rational(tree);
+		const rational Vr_bf = variance_C_freqs_rational(tree);
+		const rational Vr_gen = variance_C_rational(tree);
+		const rational Vr_trees = variance_C_tree_rational(tree);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_trees) {
 			cerr << "Error in tree " << k << " of size " << n << endl;
@@ -152,9 +152,9 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 			forest.normalise();
 		}
 
-		rational Vr_bf = variance_C_freqs_rational(forest);
-		rational Vr_gen = variance_C_rational(forest);
-		rational Vr_forests = variance_C_forest_rational(forest);
+		const rational Vr_bf = variance_C_freqs_rational(forest);
+		const rational Vr_gen = variance_C_rational(forest);
+		const rational Vr_forests = variance_C_forest_rational(forest);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_forests) {
 			cerr << "Error in forest with " << n_trees

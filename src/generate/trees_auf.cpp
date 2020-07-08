@@ -81,7 +81,6 @@ inline integer num_caterpillar_trees(uint32_t n) {
 namespace exe_tests {
 
 err_type exe_gen_trees_auf(std::ifstream& fin) {
-
 	// size of the vector with the number of unlabelled free trees
 	const uint32_t SIZE_UFT = 37;
 

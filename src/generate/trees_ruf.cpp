@@ -62,7 +62,6 @@ using namespace generate;
 namespace exe_tests {
 
 err_type exe_gen_trees_ruf(std::ifstream& fin) {
-
 	string field;
 	fin >> field;
 

@@ -203,7 +203,7 @@ static inline err_type op_integer(
 	const integer& val1 = get_var_value(integer_vars, var1);
 	const integer& val2 = get_var_value(integer_vars, var2);
 
-	integer R = resolve_integer_operation(val1, op, val2);
+	const integer R = resolve_integer_operation(val1, op, val2);
 	integer_vars[var0] = R;
 	return err_type::no_error;
 }
@@ -223,7 +223,7 @@ static inline err_type op_integer_lit(
 
 	const integer& val1 = get_var_value(integer_vars, var1);
 
-	integer R = resolve_integer_operation(val1, op, val2);
+	const integer R = resolve_integer_operation(val1, op, val2);
 	integer_vars[var0] = R;
 	return err_type::no_error;
 }

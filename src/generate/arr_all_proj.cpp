@@ -65,7 +65,7 @@ namespace exe_tests {
 
 integer factorial(int64_t f) {
 	if (f == 0) { return 1; }
-	integer f1 = factorial(f - 1);
+	const integer f1 = factorial(f - 1);
 	return f1*f;
 }
 

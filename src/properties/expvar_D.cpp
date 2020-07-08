@@ -62,9 +62,9 @@ using namespace properties;
 namespace exe_tests {
 
 void output_ExpVar_D_formula(const ugraph& g) {
-	rational Vr = variance_D_rational(g);
-	rational E1r = expectation_D_rational(g);
-	rational E2r = Vr + E1r*E1r;
+	const rational Vr = variance_D_rational(g);
+	const rational E1r = expectation_D_rational(g);
+	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
 

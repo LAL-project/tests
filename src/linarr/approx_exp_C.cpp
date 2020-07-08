@@ -131,8 +131,8 @@ rational E_2Cd_brute_force(ugraph& g, const linearrgmnt& pi) {
 		uint32_t al;
 		uint32_t be;
 
-		uint32_t len_st = to_uint32(std::abs(to_int32(pi[s]) - to_int32(pi[t])));
-		uint32_t len_uv = to_uint32(std::abs(to_int32(pi[u]) - to_int32(pi[v])));
+		const uint32_t len_st = to_uint32(std::abs(to_int32(pi[s]) - to_int32(pi[t])));
+		const uint32_t len_uv = to_uint32(std::abs(to_int32(pi[u]) - to_int32(pi[v])));
 		assert(len_st <= n);
 		assert(len_uv <= n);
 
@@ -218,8 +218,8 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 		}
 
 		// compute value using library and compare it with brute force method
-		rational ap_lib = approximate_C_rational(G, pi);
-		rational ap_bf = E_2Cd_brute_force(G, pi);
+		const rational ap_lib = approximate_C_rational(G, pi);
+		const rational ap_bf = E_2Cd_brute_force(G, pi);
 
 		if (ap_lib != ap_bf) {
 			cerr << ERROR << endl;

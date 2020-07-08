@@ -65,7 +65,7 @@ using namespace properties;
 namespace exe_tests {
 
 void enum_Q(const ugraph& g) {
-	vector<edge_pair> Q = g.Q();
+	const vector<edge_pair> Q = g.Q();
 
 	cout << "Elements of Q (" << Q.size() << "):" << endl;
 	for (const edge_pair& ep : Q) {
@@ -79,15 +79,15 @@ void enum_Q(const ugraph& g) {
 }
 
 void Q_size(const ugraph& g) {
-	integer Q = size_Q_integer(g);
+	const integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
-	uint32_t dQ = size_Q(g);
+	const uint32_t dQ = size_Q(g);
 	cout << "size of Q: " << dQ << endl;
 }
 
 void mmt_deg(const ugraph& g, uint32_t p) {
-	rational kp = mmt_degree_rational(g, p);
+	const rational kp = mmt_degree_rational(g, p);
 	cout << "<k^" << p << ">= " << kp << endl;
 }
 
@@ -101,9 +101,9 @@ void hubiness_coefficient(const ugraph& g) {
 
 void MHD(const ugraph& g, node r) {
 	if (not utils::is_graph_a_tree(g)) { return; }
-	ftree t(g);
-	rtree R(t, r);
-	rational mhd = MHD_rational(R);
+	const ftree t(g);
+	const rtree R(t, r);
+	const rational mhd = MHD_rational(R);
 	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 }
 

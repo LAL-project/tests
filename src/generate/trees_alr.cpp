@@ -67,7 +67,6 @@ using namespace numeric;
 namespace exe_tests {
 
 err_type exe_gen_trees_alr(std::ifstream& fin) {
-
 	string field;
 	fin >> field;
 
