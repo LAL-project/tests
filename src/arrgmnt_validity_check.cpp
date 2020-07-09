@@ -85,11 +85,17 @@ bool is_linarr_projective(
 }
 
 bool is_arrangement(const linearrgmnt& arr) {
+	const uint32_t n = static_cast<uint32_t>(arr.size());
+	bool all_lt_n = true;
+	for (position p : arr) {
+		all_lt_n = (p >= n ? false : all_lt_n);
+	}
+
 	set<position> setpos;
 	for (size_t i = 0; i < arr.size(); ++i) {
 		setpos.insert(arr[i]);
 	}
-	return setpos.size() == arr.size();
+	return setpos.size() == arr.size() and all_lt_n;
 }
 
 string is_arrangement_projective(
