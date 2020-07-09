@@ -222,7 +222,7 @@ err_type test_Unconstrained_class_algorithm(
 	// read size of the tree
 	while (fin >> tree_class) {
 		fin >> n;
-		if (tree_class == "linear-tree") {
+		if (tree_class == "linear") {
 			ftree T(n);
 
 			if (n > 1) {
@@ -239,6 +239,7 @@ err_type test_Unconstrained_class_algorithm(
 			if (not correct) { return err_type::test_exe_error; }
 		}
 		else if (tree_class == "caterpillar") {
+
 			generate::all_ulab_free_trees TreeGen(n);
 			while (TreeGen.has_next()) {
 				TreeGen.next();
@@ -284,17 +285,22 @@ err_type test_Unconstrained_class_algorithm(
 			queue<node> attach_to;
 			attach_to.push(0);
 
+			vector<edge> edges(N - 1);
+			size_t e_it = 0;
+
 			while (not attach_to.empty()) {
 				const node s = attach_to.front();
 				attach_to.pop();
 
-				for (uint32_t d = 0; d < 2 and next_node < n; ++d, ++next_node) {
+				for (uint32_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
 					const node t = next_node;
 					attach_to.push(t);
 
-					T.add_edge(s, t, false);
+					edges[e_it] = edge(s,t);
+					++e_it;
 				}
 			}
+			T.add_edges(edges, false);
 			}
 
 			uint32_t Dmin_bin_complete = 0;
