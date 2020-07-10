@@ -216,30 +216,46 @@ err_type test_Unconstrained_class_algorithm(
 	}
 
 	string tree_class;
-	uint32_t n;
+	uint32_t n1, n2;
 
 	// read class of tree to test
 	// read size of the tree
 	while (fin >> tree_class) {
-		fin >> n;
+		fin >> n1;
+		cout << tree_class;
+
 		if (tree_class == "linear") {
-			ftree T(n);
+			fin >> n2;
+			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			if (n > 1) {
-				for (uint32_t u = 0; u < n - 1; ++u) { T.add_edge(u, u+1, false); }
+			for (uint32_t n = n1; n <= n2; ++n) {
+				cout << "    " << n << endl;
+				ftree T(n);
+
+				if (n > 1) {
+					for (node u = 0; u < n - 1; ++u) { T.add_edge(u, u+1, false); }
+				}
+
+				// Dmin for linear tree is
+				const uint32_t Dmin_lintree = n - 1;
+				// Dmin from the algorithm is
+				const auto algo_res = A(T);
+
+				const bool correct =
+				test_correctness_arr_formula(T, algo_res, "Linear", Dmin_lintree);
+				if (not correct) {
+					cerr << ERROR << endl;
+					cerr << "    When dealing with a linear tree of " << n << " vertices." << endl;
+					cerr << "    Tree:" << endl;
+					cerr << T << endl;
+					return err_type::test_exe_error;
+				}
 			}
-
-			// Dmin for linear tree is
-			const uint32_t Dmin_lintree = n - 1;
-			// Dmin from the algorithm is
-			const auto algo_res = A(T);
-
-			const bool correct =
-			test_correctness_arr_formula(T, algo_res, "Linear", Dmin_lintree);
-			if (not correct) { return err_type::test_exe_error; }
 		}
 		else if (tree_class == "caterpillar") {
+			cout << " -> " << n1 << endl;
 
+			const uint32_t n = n1;
 			generate::all_ulab_free_trees TreeGen(n);
 			while (TreeGen.has_next()) {
 				TreeGen.next();
@@ -261,81 +277,113 @@ err_type test_Unconstrained_class_algorithm(
 
 				const bool correct =
 				test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
-				if (not correct) { return err_type::test_exe_error; }
+				if (not correct) {
+					cerr << ERROR << endl;
+					cerr << "    When dealing with a caterpillat tree of " << n << " vertices." << endl;
+					cerr << "    Tree:" << endl;
+					cerr << tree << endl;
+					return err_type::test_exe_error;
+				}
 			}
 		}
 		else if (tree_class == "binary-complete") {
-			// We should interpret 'n' as the *heigh*.
-			// The height of a single vertex is h=1
-			const uint32_t h = n;
+			fin >> n2;
+			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			// total amount of vertices
-			uint32_t N;
-			{
-			integer _N = 2;
-			_N ^= h;
-			_N -= 1;
-			N = static_cast<uint32_t>(_N.to_uint());
-			}
+			for (uint32_t n = n1; n <= n2; ++n) {
+				cout << "    " << n << endl;
 
-			// build k-complete tree of height h
-			ftree T(N);
-			{
-			node next_node = 1;
-			queue<node> attach_to;
-			attach_to.push(0);
+				// We should interpret 'n' as the *heigh*.
+				// The height of a single vertex is h=1
+				const uint32_t h = n;
 
-			vector<edge> edges(N - 1);
-			size_t e_it = 0;
+				// total amount of vertices
+				uint32_t N;
+				{
+				integer _N = 2;
+				_N ^= h;
+				_N -= 1;
+				N = static_cast<uint32_t>(_N.to_uint());
+				}
 
-			while (not attach_to.empty()) {
-				const node s = attach_to.front();
-				attach_to.pop();
+				// build k-complete tree of height h
+				ftree T(N);
+				{
+				node next_node = 1;
+				queue<node> attach_to;
+				attach_to.push(0);
 
-				for (uint32_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
-					const node t = next_node;
-					attach_to.push(t);
+				vector<edge> edges(N - 1);
+				size_t e_it = 0;
 
-					edges[e_it] = edge(s,t);
-					++e_it;
+				while (not attach_to.empty()) {
+					const node s = attach_to.front();
+					attach_to.pop();
+
+					for (uint32_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
+						const node t = next_node;
+						attach_to.push(t);
+
+						edges[e_it] = edge(s,t);
+						++e_it;
+					}
+				}
+				T.add_edges(edges, false);
+				}
+
+				uint32_t Dmin_bin_complete = 0;
+				{
+				rational F = h;
+				F /= 3; // k/3
+				F += rational(5,18); // k/3 + 5/18
+				F *= integer(2)^h; // 2^k(k/3 + 5/18)
+
+				F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
+				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
+				Dmin_bin_complete = static_cast<uint32_t>(F.to_integer().to_uint());
+
+				assert(F == Dmin_bin_complete);
+				}
+
+				// compute Dmin using the library's algorithm
+				const auto res_algo = A(T);
+
+				const bool correct =
+				test_correctness_arr_formula(T, res_algo, "Binary complete", Dmin_bin_complete);
+				if (not correct) {
+					cerr << ERROR << endl;
+					cerr << "    When dealing with a complete binary tree of " << n << " vertices." << endl;
+					cerr << "    Tree:" << endl;
+					cerr << T << endl;
+					return err_type::test_exe_error;
 				}
 			}
-			T.add_edges(edges, false);
-			}
-
-			uint32_t Dmin_bin_complete = 0;
-			{
-			rational F = h;
-			F /= 3; // k/3
-			F += rational(5,18); // k/3 + 5/18
-			F *= integer(2)^h; // 2^k(k/3 + 5/18)
-
-			F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
-			F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
-			Dmin_bin_complete = static_cast<uint32_t>(F.to_integer().to_uint());
-
-			assert(F == Dmin_bin_complete);
-			}
-
-			// compute Dmin using the library's algorithm
-			const auto res_algo = A(T);
-
-			const bool correct =
-			test_correctness_arr_formula(T, res_algo, "Binary complete", Dmin_bin_complete);
-			if (not correct) { return err_type::test_exe_error; }
 		}
 		else if (tree_class == "star") {
-			ftree T(n);
-			for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
+			fin >> n2;
+			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			const uint32_t Dmin_star = (n*n - n%2)/4;
+			for (uint32_t n = n1; n <= n2; ++n) {
+				cout << "    " << n << endl;
 
-			// compute Dmin using the library's algorithm
-			const auto res_algo = A(T);
+				ftree T(n);
+				for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
 
-			const bool correct =
-			test_correctness_arr_formula(T, res_algo, "Star", Dmin_star);
-			if (not correct) { return err_type::test_exe_error; }
+				const uint32_t Dmin_star = (n*n - n%2)/4;
+
+				// compute Dmin using the library's algorithm
+				const auto res_algo = A(T);
+
+				const bool correct =
+				test_correctness_arr_formula(T, res_algo, "Star", Dmin_star);
+				if (not correct) {
+					cerr << ERROR << endl;
+					cerr << "    When dealing with a star tree of " << n << " vertices." << endl;
+					cerr << "    Tree:" << endl;
+					cerr << T << endl;
+					return err_type::test_exe_error;
+				}
+			}
 		}
 		else {
 			cerr << ERROR << endl;
@@ -358,9 +406,15 @@ err_type test_Unconstrained_bf_algorithm(
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
+		cout << "Exhaustive " << n << endl;
+		size_t idx = 1;
+
 		// enumerate all trees of 'n' vertices
 		generate::all_ulab_free_trees TreeGen(n);
 		while (TreeGen.has_next()) {
+			cout << "    " << idx << endl;
+			++idx;
+
 			TreeGen.next();
 			const ftree tree = TreeGen.get_tree();
 
@@ -368,7 +422,13 @@ err_type test_Unconstrained_bf_algorithm(
 			const auto res_algo = A(tree);
 
 			const bool correct = test_correctness_arr_bf(tree, res_algo);
-			if (not correct) { return err_type::test_exe_error; }
+			if (not correct) {
+				cerr << ERROR << endl;
+				cerr << "    When dealing with a tree of " << n << " vertices." << endl;
+				cerr << "    Tree:" << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
+			}
 		}
 	}
 	return err_type::no_error;
