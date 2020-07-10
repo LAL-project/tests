@@ -1,81 +1,8 @@
-TYPE linarr-Dmin-Unconstrained_class_YS
+TYPE linarr-Dmin-Unconstrained_class_FC
 INPUT 0
 BODY
-	linear 1
-	linear 2
-	linear 3
-	linear 4
-	linear 5
-	linear 6
-	linear 7
-	linear 8
-	linear 9
-	linear 10
-	linear 20
-	linear 30
-	linear 40
-	linear 50
-	linear 60
-	linear 70
-	linear 80
-	linear 90
-	linear 100
-	linear 200
-	linear 243
-	linear 300
-	linear 354
-	linear 323
-	linear 400
-	linear 478
-	linear 499
-	linear 412
-	linear 443
-	linear 500
-	linear 600
-	linear 612
-	linear 643
-	linear 613
-	linear 678
-	linear 623
-	linear 697
-	
-	star 1
-	star 2
-	star 3
-	star 4
-	star 5
-	star 6
-	star 7
-	star 8
-	star 9
-	star 10
-	star 20
-	star 30
-	star 40
-	star 50
-	star 60
-	star 70
-	star 80
-	star 90
-	star 100
-	star 200
-	star 243
-	star 300
-	star 354
-	star 323
-	star 400
-	star 478
-	star 499
-	star 412
-	star 443
-	star 500
-	star 600
-	star 612
-	star 643
-	star 613
-	star 678
-	star 623
-	star 697
+	linear 1 700
+	star 1 700
 	
 	caterpillar 1
 	caterpillar 2
@@ -100,15 +27,4 @@ BODY
 	caterpillar 21
 	caterpillar 22
 	
-	binary-complete 2
-	binary-complete 3
-	binary-complete 4
-	binary-complete 5
-	binary-complete 6
-	binary-complete 7
-	binary-complete 8
-	binary-complete 9
-	binary-complete 10
-	binary-complete 12
-	binary-complete 13
-	binary-complete 14
+	binary-complete 2 14
