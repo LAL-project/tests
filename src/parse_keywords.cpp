@@ -275,7 +275,6 @@ err_type call_linarr_Dmin
 {
 	const set<string> allowed_keywords({
 		// Projective arrangements
-		// Projective arrangements
 		// -- Gidlea & Temperley's algorithm
 		"Projective",
 		// Unconstrained arrangements
@@ -283,16 +282,22 @@ err_type call_linarr_Dmin
 		"Unconstrained",
 		// -- Yossi Shiloach's algorithm
 		//    -> Tested by bruteforce
-		"Unconstrained_bruteforce_YS",
+		"Unconstrained_YS_bruteforce",
 		// -- Yossi Shiloach's algorithm
 		//    -> Tested by formulas for classes of trees
-		"Unconstrained_class_YS",
+		"Unconstrained_YS_class",
+		// -- Yossi Shiloach's algorithm
+		//    -> Tested in particular trees
+		"Unconstrained_YS_tree",
 		// -- Fan Chung's algorithm
 		//    -> Tested by bruteforce
-		"Unconstrained_bruteforce_FC",
+		"Unconstrained_FC_bruteforce",
 		// -- Fan Chung's algorithm
 		//    -> Tested by formulas for classes of trees
-		"Unconstrained_class_FC",
+		"Unconstrained_FC_class",
+		// -- Fan Chung's algorithm
+		//    -> Tested in particular trees
+		"Unconstrained_FC_tree",
 	});
 
 	// Dmin algorithms for rooted trees
@@ -302,10 +307,12 @@ err_type call_linarr_Dmin
 	// Dmin algorithms for free trees
 	const set<string> free_algorithms({
 		"Unconstrained",
-		"Unconstrained_bruteforce_YS",
-		"Unconstrained_class_YS",
-		"Unconstrained_bruteforce_FC",
-		"Unconstrained_class_FC"
+		"Unconstrained_YS_bruteforce",
+		"Unconstrained_YS_class",
+		"Unconstrained_YS_tree",
+		"Unconstrained_FC_bruteforce",
+		"Unconstrained_FC_class",
+		"Unconstrained_FC_tree",
 	});
 
 	const string& key = keywords[i];
