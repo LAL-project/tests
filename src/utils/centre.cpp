@@ -48,14 +48,108 @@ using namespace std;
 // lal includes
 #include <lal/graphs/tree.hpp>
 #include <lal/graphs/output.hpp>
+#include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/generate/all_ulab_rooted_trees.hpp>
+#include <lal/generate/rand_ulab_free_trees.hpp>
+#include <lal/generate/rand_ulab_rooted_trees.hpp>
 #include <lal/utils/graphs/trees/tree_centre.hpp>
 using namespace lal;
 using namespace utils;
 using namespace graphs;
+using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
+
+inline uint32_t test_degree_for_centre(const graphs::rtree& t, const node s)
+{ return t.out_degree(s) + t.in_degree(s); }
+
+inline uint32_t test_degree_for_centre(const graphs::ftree& t, const node s)
+{ return t.degree(s); }
+
+// this is a very simple algorithm to calculate the centre
+template<class T>
+pair<node, node> straightforward_centre(const T& tree, node u) {
+	const auto n = tree.n_nodes();
+
+	// First simple case:
+	// in case the component of x has only one node (node x)...
+	if (test_degree_for_centre(tree, u) == 0) {
+		return make_pair(u, n);
+	}
+
+	BFS<T> bfs(tree);
+	bfs.set_use_rev_edges(tree.is_directed());
+
+	// ------------------------------------
+	// 1. find vertex 'v' farthest from 'u'
+
+	vector<uint32_t> dists(tree.n_nodes());
+	dists[u] = 0;
+
+	// farthest vertex from 'u' and distance
+	uint32_t max_dist = 0;
+	node v;
+
+	bfs.set_process_neighbour(
+	[&](const auto&, node s, node t, bool) {
+		dists[t] = dists[s] + 1;
+		if (max_dist < dists[t]) {
+			max_dist = dists[t];
+			v = t;
+		}
+	}
+	);
+	bfs.start_at(u);
+
+	// early termination
+	if (v == u) {
+		return make_pair(u, n);
+	}
+
+	// ------------------------------------
+	// 2. find vertex 'w' farthest from 'v' and keep
+	// track of the vertices from 'v' to 'w'
+
+	fill(dists.begin(), dists.end(), 0);
+	vector<vector<node>> paths(tree.n_nodes());
+	paths[v] = vector<node>(1, v);
+
+	max_dist = 0;
+	vector<node> longest_path;
+	node w;
+
+	bfs.reset_visited();
+	bfs.set_process_neighbour(
+	[&](const auto&, node s, node t, bool) {
+		dists[t] = dists[s] + 1;
+
+		paths[t] = paths[s];
+		paths[t].push_back(t);
+
+		if (max_dist < dists[t]) {
+			max_dist = dists[t];
+			w = t;
+			longest_path = paths[t];
+		}
+	}
+	);
+	bfs.start_at(v);
+
+	// return centre
+
+	if (longest_path.size()%2 == 0) {
+		const size_t hm1 = longest_path.size()/2 - 1;
+		const size_t h = longest_path.size()/2;
+
+		const node c1 = longest_path[hm1];
+		const node c2 = longest_path[h];
+		return (c1 < c2 ? make_pair(c1,c2) : make_pair(c2,c1));
+	}
+	const size_t h = longest_path.size()/2;
+	return make_pair(longest_path[h], n);
+}
 
 namespace exe_tests {
 
@@ -153,6 +247,82 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 	return err_type::no_error;
 }
 
+err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
+	string how;
+	fin >> how;
+	if (how != "exhaustive" and how != "random") {
+		cerr << ERROR << endl;
+		cerr << "    Method of enumeration '" << how << "' is invalid." << endl;
+		cerr << "    It must be either 'exhaustive' or 'random'." << endl;
+		return err_type::test_format_error;
+	}
+
+#define test_correctness(T)										\
+{																\
+	const auto lib_centre = utils::retrieve_centre(T, 0);		\
+	const auto easy_centre = straightforward_centre(T, 0);		\
+	if (lib_centre != easy_centre) {							\
+		cerr << ERROR << endl;									\
+		cerr << "    Centres differ." << endl;					\
+		cerr << "    Library: " << lib_centre.first;			\
+		if (lib_centre.second != n) {							\
+			cerr << " " << lib_centre.second;					\
+		}														\
+		cerr << endl;											\
+		cerr << "    Straightforward: " << easy_centre.first;	\
+		if (lib_centre.second != n) {							\
+			cerr << " " << easy_centre.second;					\
+		}														\
+		cerr << endl;											\
+		cerr << "    For tree:" << endl;						\
+		cerr << T << endl;										\
+		return err_type::test_exe_error;						\
+	}															\
+}
+
+#define exe_exhaustive(G, n)			\
+{										\
+	G Gen(n);							\
+	while (Gen.has_next()) {			\
+		Gen.next();						\
+		const auto T = Gen.get_tree();	\
+		test_correctness(T)				\
+	}									\
+}
+
+#define exe_random(G, n)						\
+{												\
+	uint32_t N;									\
+	fin >> N;									\
+	G Gen(n);									\
+	for (uint32_t i = 0; i < N; ++i) {			\
+		const auto T = Gen.make_rand_tree();	\
+		test_correctness(T)						\
+	}											\
+}
+
+	uint32_t n;
+	while (fin >> n) {
+		if (graph_type == "ftree") {
+			if (how == "exhaustive") {
+				exe_exhaustive(all_ulab_free_trees, n)
+			}
+			else {
+				exe_random(rand_ulab_free_trees, n)
+			}
+		}
+		else {
+			if (how == "exhaustive") {
+				exe_exhaustive(all_ulab_rooted_trees, n)
+			}
+			else {
+				exe_random(rand_ulab_free_trees, n)
+			}
+		}
+	}
+	return err_type::no_error;
+}
+
 err_type exe_utils_centre(ifstream& fin) {
 	string field;
 	fin >> field;
@@ -181,8 +351,16 @@ err_type exe_utils_centre(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	string graph_type;
-	fin >> graph_type;
+	string mode, graph_type;
+	fin >> mode >> graph_type;
+
+	if (mode != "manual" and mode != "automatic") {
+		cerr << ERROR << endl;
+		cerr << "    Expected execution mode 'manual' or 'automatic'." << endl;
+		cerr << "    Found '" << mode << "'" << endl;
+		return err_type::test_format_error;
+	}
+
 	if (graph_type != "ftree" and graph_type != "rtree") {
 		cerr << ERROR << endl;
 		cerr << "    Expected graph type 'ftree' or 'rtree'." << endl;
@@ -190,13 +368,19 @@ err_type exe_utils_centre(ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	const err_type e = (
-		graph_type == "ftree" ?
+	const err_type err =
+	(mode == "manual" ?
+		(graph_type == "ftree" ?
 		exe_commands_utils_centre<ftree>(fin) :
-		exe_commands_utils_centre<rtree>(fin)
+		exe_commands_utils_centre<rtree>(fin))
+		:
+		exe_full_utils_centre(graph_type, fin)
 	);
 
-	if (e != err_type::no_error) { return e; }
+	if (err != err_type::no_error) {
+		// avoid TEST_GOODBYE
+		return err;
+	}
 
 	TEST_GOODBYE
 	return err_type::no_error;
