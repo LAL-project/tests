@@ -120,7 +120,7 @@ pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-bool test_correctness_arr_1(const ftree& tree, const pair<uint32_t, linearrgmnt>& res) {
+bool check_correctness_arr(const ftree& tree, const pair<uint32_t, linearrgmnt>& res) {
 	const linearrgmnt& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not is_arrangement(arr)) {
@@ -151,7 +151,7 @@ bool test_correctness_arr_bf(
 	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_lib
 )
 {
-	if (not test_correctness_arr_1(tree, res_lib)) {
+	if (not check_correctness_arr(tree, res_lib)) {
 		return false;
 	}
 	/* compute Dmin by brute force */
@@ -180,7 +180,7 @@ bool test_correctness_arr_formula(
 	const string& tree_class, const uint32_t val_formula
 )
 {
-	if (not test_correctness_arr_1(tree, res_lib)) {
+	if (not check_correctness_arr(tree, res_lib)) {
 		return false;
 	}
 	/* compare results obtained by the library and by a formula */
@@ -203,6 +203,74 @@ bool test_correctness_arr_formula(
 // -----------------------------------------------------------------------------
 
 err_type test_Unconstrained(ifstream& fin) {
+	consume_beginning(fin);
+
+	const auto FC = [](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+		return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+	};
+	const auto YS = [](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+		return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+	};
+
+#define correct_algo_str(algo)												\
+{																			\
+	if (algo != "YS" and algo != "FC") {									\
+		cerr << ERROR << endl;												\
+		cerr << "    Algorithm name '" << algo << "' is invalid." << endl;	\
+		cerr << "    Must be one of: 'YS', 'FC'." << endl;					\
+		return err_type::test_format_error;									\
+	}																		\
+}
+
+	string mode;
+	while (fin >> mode) {
+		if (mode != "exhaustive" and mode != "random") {
+			cerr << ERROR << endl;
+			cerr << "    Mode '" << mode << "' is invalid." << endl;
+			cerr << "    Must be either 'exhaustive' or 'random'." << endl;
+			return err_type::test_format_error;
+		}
+
+		string algo1, comp, algo2;
+		fin >> algo1 >> comp >> algo2;
+		correct_algo_str(algo1);
+		if (comp != "<" and comp != "<=" and comp != ">=" and comp != ">" and comp != "==") {
+			cerr << ERROR << endl;
+			cerr << "    Comparison '" << comp << "' is invalid." << endl;
+			cerr << "    Must be one of: '<', '<=', '>=', '>', '=='." << endl;
+			return err_type::test_format_error;
+		}
+		correct_algo_str(algo2);
+
+		const auto F1 = (algo1 == "YS" ? YS : FC);
+		const auto F2 = (algo2 == "YS" ? YS : FC);
+
+		uint32_t n;
+		fin >> n;
+
+		cout << "Testing " << algo1 << " " << comp << " " << algo2 << " " << n << endl;
+
+		generate::all_ulab_free_trees TreeGen(n);
+		while (TreeGen.has_next()) {
+			TreeGen.next();
+			const ftree tree = TreeGen.get_tree();
+
+			const auto res1 = F1(tree);
+			const auto res2 = F2(tree);
+			check_correctness_arr(tree, res1);
+			check_correctness_arr(tree, res2);
+			if (res1.first != res2.first) {
+				cerr << ERROR << endl;
+				cerr << "    Result of algorithm '" << algo1 << "' does not agree "
+					 << "with the result of algorithm '" << algo2 << "'." << endl;
+				cerr << "    Algorithm: " << algo1 << endl;
+				cerr << "        D= " << res1.first << endl;
+				cerr << "    Algorithm: " << algo2 << endl;
+				cerr << "        D= " << res2.first << endl;
+				return err_type::test_exe_error;
+			}
+		}
+	}
 	return err_type::no_error;
 }
 
@@ -221,11 +289,10 @@ err_type test_Unconstrained_class_algorithm(
 	// read class of tree to test
 	// read size of the tree
 	while (fin >> tree_class) {
-		fin >> n1;
+		fin >> n1 >> n2;
 		cout << tree_class;
 
 		if (tree_class == "linear") {
-			fin >> n2;
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
 			for (uint32_t n = n1; n <= n2; ++n) {
@@ -253,41 +320,41 @@ err_type test_Unconstrained_class_algorithm(
 			}
 		}
 		else if (tree_class == "caterpillar") {
-			cout << " -> " << n1 << endl;
+			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			const uint32_t n = n1;
-			generate::all_ulab_free_trees TreeGen(n);
-			while (TreeGen.has_next()) {
-				TreeGen.next();
-				const ftree tree = TreeGen.get_tree();
+			for (uint32_t n = n1; n <= n2; ++n) {
+				generate::all_ulab_free_trees TreeGen(n);
+				while (TreeGen.has_next()) {
+					TreeGen.next();
+					const ftree tree = TreeGen.get_tree();
 
-				// filter non-caterpillar
-				if (not is_caterpillar(tree)) { continue; }
+					// filter non-caterpillar
+					if (not is_caterpillar(tree)) { continue; }
 
-				// Dmin for caterpillar trees
-				uint32_t Dmin_cat = 0;
-				for (node u = 0; u < n; ++u) {
-					const uint32_t du = tree.degree(u);
-					Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
-				}
-				Dmin_cat /= 4;
+					// Dmin for caterpillar trees
+					uint32_t Dmin_cat = 0;
+					for (node u = 0; u < n; ++u) {
+						const uint32_t du = tree.degree(u);
+						Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
+					}
+					Dmin_cat /= 4;
 
-				// compute Dmin using the library's algorithm
-				const auto res_algo = A(tree);
+					// compute Dmin using the library's algorithm
+					const auto res_algo = A(tree);
 
-				const bool correct =
-				test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
-				if (not correct) {
-					cerr << ERROR << endl;
-					cerr << "    When dealing with a caterpillat tree of " << n << " vertices." << endl;
-					cerr << "    Tree:" << endl;
-					cerr << tree << endl;
-					return err_type::test_exe_error;
+					const bool correct =
+					test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
+					if (not correct) {
+						cerr << ERROR << endl;
+						cerr << "    When dealing with a caterpillat tree of " << n << " vertices." << endl;
+						cerr << "    Tree:" << endl;
+						cerr << tree << endl;
+						return err_type::test_exe_error;
+					}
 				}
 			}
 		}
 		else if (tree_class == "binary-complete") {
-			fin >> n2;
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
 			for (uint32_t n = n1; n <= n2; ++n) {
@@ -360,7 +427,6 @@ err_type test_Unconstrained_class_algorithm(
 			}
 		}
 		else if (tree_class == "star") {
-			fin >> n2;
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
 			for (uint32_t n = n1; n <= n2; ++n) {
