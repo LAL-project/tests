@@ -1,6 +1,16 @@
 TYPE linarr-Dmin-Unconstrained
 INPUT 0
 BODY
+	exhaustive YS == FC 1
+	exhaustive YS == FC 2
+	exhaustive YS == FC 3
+	exhaustive YS == FC 4
+	exhaustive YS == FC 5
+	exhaustive YS == FC 6
+	exhaustive YS == FC 7
+	exhaustive YS == FC 8
+	exhaustive YS == FC 9
+	exhaustive YS == FC 10
 	exhaustive YS == FC 11
 	exhaustive YS == FC 12
 	exhaustive YS == FC 13
