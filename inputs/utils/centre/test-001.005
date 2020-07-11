@@ -1,7 +1,7 @@
 TYPE utils-centre
 INPUT 0
 BODY
-	rtree
+	manual rtree
 	init 6
 	add_edges 5
 		4 0

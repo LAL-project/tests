@@ -1,7 +1,7 @@
 TYPE utils-centre
 INPUT 0
 BODY
-	rtree
+	manual rtree
 	
 	init 1
 	centre_is 0 1 0
