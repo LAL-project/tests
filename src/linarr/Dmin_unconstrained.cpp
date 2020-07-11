@@ -69,6 +69,15 @@ using namespace generate;
 #include "test_utils.hpp"
 #include "tree_classification.hpp"
 
+typedef pair<uint32_t, linearrgmnt> algo_result;
+
+bool lt(const algo_result& r1, const algo_result& r2) { return r1.first < r2.first; }
+bool le(const algo_result& r1, const algo_result& r2) { return r1.first <= r2.first; }
+bool eq(const algo_result& r1, const algo_result& r2) { return r1.first == r2.first; }
+bool ge(const algo_result& r1, const algo_result& r2) { return r1.first >= r2.first; }
+bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.first; }
+
+
 namespace exe_tests {
 
 err_type consume_beginning(ifstream& F) {
@@ -205,11 +214,22 @@ bool test_correctness_arr_formula(
 err_type test_Unconstrained(ifstream& fin) {
 	consume_beginning(fin);
 
-	const auto FC = [](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+	const auto FC =
+	[](const ftree& t) -> algo_result {
 		return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
 	};
-	const auto YS = [](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+	const auto YS =
+	[](const ftree& t) -> algo_result {
 		return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+	};
+
+	auto get_comp =
+	[&](const string& comp) {
+		if (comp == "<") { return lt; }
+		if (comp == "<=") { return le; }
+		if (comp == "==") { return eq; }
+		if (comp == ">=") { return ge; }
+		return gt;
 	};
 
 #define correct_algo_str(algo)												\
@@ -244,6 +264,7 @@ err_type test_Unconstrained(ifstream& fin) {
 
 		const auto F1 = (algo1 == "YS" ? YS : FC);
 		const auto F2 = (algo2 == "YS" ? YS : FC);
+		auto compare = get_comp(comp);
 
 		uint32_t n;
 		fin >> n;
@@ -257,16 +278,65 @@ err_type test_Unconstrained(ifstream& fin) {
 
 			const auto res1 = F1(tree);
 			const auto res2 = F2(tree);
+
 			check_correctness_arr(tree, res1);
 			check_correctness_arr(tree, res2);
-			if (res1.first != res2.first) {
+
+			if (not compare(res1, res2)) {
 				cerr << ERROR << endl;
-				cerr << "    Result of algorithm '" << algo1 << "' does not agree "
-					 << "with the result of algorithm '" << algo2 << "'." << endl;
+				cerr << "    Result of algorithm '" << algo1 << "' is not "
+					 << "'" << comp << "'"
+					 << " with respect to the result of algorithm "
+					 << "'" << algo2 << "'."
+					 << endl;
 				cerr << "    Algorithm: " << algo1 << endl;
 				cerr << "        D= " << res1.first << endl;
+				cerr << "        Arrangement: " << res1.second << endl;
 				cerr << "    Algorithm: " << algo2 << endl;
 				cerr << "        D= " << res2.first << endl;
+				cerr << "        Arrangement: " << res2.second << endl;
+				cerr << " In tree:" << endl;
+				cerr << tree << endl;
+				return err_type::test_exe_error;
+			}
+		}
+	}
+	return err_type::no_error;
+}
+
+err_type test_Unconstrained_bf_algorithm(
+	const function< pair<uint32_t, linearrgmnt> (const ftree&) >& A,
+	ifstream& fin
+)
+{
+	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
+		return err;
+	}
+
+	// read number of vertices
+	uint32_t n;
+	while (fin >> n) {
+		cout << "Exhaustive " << n << endl;
+		size_t idx = 1;
+
+		// enumerate all trees of 'n' vertices
+		generate::all_ulab_free_trees TreeGen(n);
+		while (TreeGen.has_next()) {
+			cout << "    " << idx << endl;
+			++idx;
+
+			TreeGen.next();
+			const ftree tree = TreeGen.get_tree();
+
+			// compute Dmin using the library's algorithm
+			const auto res_algo = A(tree);
+
+			const bool correct = test_correctness_arr_bf(tree, res_algo);
+			if (not correct) {
+				cerr << ERROR << endl;
+				cerr << "    When dealing with a tree of " << n << " vertices." << endl;
+				cerr << "    Tree:" << endl;
+				cerr << tree << endl;
 				return err_type::test_exe_error;
 			}
 		}
@@ -323,6 +393,8 @@ err_type test_Unconstrained_class_algorithm(
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
 			for (uint32_t n = n1; n <= n2; ++n) {
+				cout << "    " << n << endl;
+
 				generate::all_ulab_free_trees TreeGen(n);
 				while (TreeGen.has_next()) {
 					TreeGen.next();
@@ -460,7 +532,7 @@ err_type test_Unconstrained_class_algorithm(
 	return err_type::no_error;
 }
 
-err_type test_Unconstrained_bf_algorithm(
+err_type test_Unconstrained_tree_algorithm(
 	const function< pair<uint32_t, linearrgmnt> (const ftree&) >& A,
 	ifstream& fin
 )
@@ -472,31 +544,17 @@ err_type test_Unconstrained_bf_algorithm(
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
-		cout << "Exhaustive " << n << endl;
-		size_t idx = 1;
-
-		// enumerate all trees of 'n' vertices
-		generate::all_ulab_free_trees TreeGen(n);
-		while (TreeGen.has_next()) {
-			cout << "    " << idx << endl;
-			++idx;
-
-			TreeGen.next();
-			const ftree tree = TreeGen.get_tree();
-
-			// compute Dmin using the library's algorithm
-			const auto res_algo = A(tree);
-
-			const bool correct = test_correctness_arr_bf(tree, res_algo);
-			if (not correct) {
-				cerr << ERROR << endl;
-				cerr << "    When dealing with a tree of " << n << " vertices." << endl;
-				cerr << "    Tree:" << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
+		ftree T(n);
+		node u,v;
+		for (uint32_t i = 0; i < n - 1; ++i) {
+			fin >> u >> v;
+			T.add_edge(u,v);
 		}
+
+		const auto& r = A(T);
+		cout << r.first << endl;
 	}
+
 	return err_type::no_error;
 }
 
@@ -505,7 +563,8 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 	if (alg == "Unconstrained") {
 		r = test_Unconstrained(fin);
 	}
-	else if (alg == "Unconstrained_bruteforce_YS") {
+	// YOSSI SHILOACH
+	else if (alg == "Unconstrained_YS_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -514,7 +573,7 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_class_YS") {
+	else if (alg == "Unconstrained_YS_class") {
 		r =
 		test_Unconstrained_class_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -523,7 +582,17 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_bruteforce_FC") {
+	else if (alg == "Unconstrained_YS_tree") {
+		r =
+		test_Unconstrained_tree_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+			}
+		, fin
+		);
+	}
+	// FAN CHUNG
+	else if (alg == "Unconstrained_FC_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -532,9 +601,18 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_class_FC") {
+	else if (alg == "Unconstrained_FC_class") {
 		r =
 		test_Unconstrained_class_algorithm(
+			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
+				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+			}
+		, fin
+		);
+	}
+	else if (alg == "Unconstrained_FC_tree") {
+		r =
+		test_Unconstrained_tree_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
 				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
