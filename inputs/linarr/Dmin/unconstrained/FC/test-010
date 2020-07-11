@@ -1,30 +1,7 @@
 TYPE linarr-Dmin-Unconstrained_class_FC
 INPUT 0
 BODY
-	linear 1 700
-	star 1 700
-	
-	caterpillar 1
-	caterpillar 2
-	caterpillar 3
-	caterpillar 4
-	caterpillar 5
-	caterpillar 6
-	caterpillar 7
-	caterpillar 8
-	caterpillar 9
-	caterpillar 10
-	caterpillar 11
-	caterpillar 12
-	caterpillar 13
-	caterpillar 14
-	caterpillar 15
-	caterpillar 16
-	caterpillar 17
-	caterpillar 18
-	caterpillar 19
-	caterpillar 20
-	caterpillar 21
-	caterpillar 22
-	
-	binary-complete 2 14
+	linear 1 100
+	star 1 100
+	caterpillar 1 22
+	binary-complete 2 10
