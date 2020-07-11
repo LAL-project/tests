@@ -1,4 +1,4 @@
-TYPE linarr-Dmin-Unconstrained_class_FC
+TYPE linarr-Dmin-Unconstrained_FC_class
 INPUT 0
 BODY
 	linear 1 100
