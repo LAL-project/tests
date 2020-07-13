@@ -1,7 +1,7 @@
 TYPE utils-centre
 INPUT 0
 BODY
-	ftree
+	manual ftree
 	init 22
 	add_edges 18
 		0 2
