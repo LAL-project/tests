@@ -86,6 +86,7 @@ function show_usage() {
 	echo "        utils : execute utils tests "
 	echo "        utils_sorting : execute sorting utils tests "
 	echo "        utils_centre : execute centre utils tests "
+	echo "        utils_traversal : execute traversal utils tests "
 	echo ""	
 	echo "Optional parameters:"
 	echo ""

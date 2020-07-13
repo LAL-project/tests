@@ -30,6 +30,7 @@ groups_list=(\
 	"utils" \
 	"utils_centre" \
 	"utils_sorting" \
+	"utils_traversal" \
 	)
 
 # all tests available
@@ -242,4 +243,9 @@ utils_sorting_DIRS=(\
 # utils_centre tests
 utils_centre_DIRS=(\
 	"utils/centre" "utils/centre" \
+	)
+
+# utils_traversal tests
+utils_traversal_DIRS=(\
+	"utils/traversal" "utils/traversal" \
 	)
