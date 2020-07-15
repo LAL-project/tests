@@ -13,7 +13,7 @@ BODY
 		6 7
 		7 8
 		8 9
-		false
+		false true
 	
 	check_edge_iterator g
 	check_Q_iterator g

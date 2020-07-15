@@ -4,7 +4,7 @@ BODY
 	create_graph ftree G 2
 	assert num_nodes G 2
 	assert num_edges G 0
-	add_edge G 0 1 false
+	add_edge G 0 1 false true
 	assert num_edges G 1
 	output_graph G
 	

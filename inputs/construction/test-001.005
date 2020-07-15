@@ -3,20 +3,20 @@ INPUT 0
 BODY
 	create_graph dgraph g 10
 	
-	add_edge g 0 1 false
+	add_edge g 0 1 false true
 	assert exists_edge g 0 1
-	remove_edge g 0 1 false
+	remove_edge g 0 1 false true
 	assert not_exists_edge g 0 1
 	
-	add_edge g 0 3 false
-	add_edge g 0 2 false
-	add_edge g 9 1 false
-	add_edge g 4 1 false
-	add_edge g 0 1 false
+	add_edge g 0 3 false true
+	add_edge g 0 2 false true
+	add_edge g 9 1 false true
+	add_edge g 4 1 false true
+	add_edge g 0 1 false true
 	output_graph g
 	
 	assert not_normalised g
-	remove_edge g 0 3 true
+	remove_edge g 0 3 true true
 	output_graph g
 	assert normalised g
 	
@@ -24,19 +24,19 @@ BODY
 	
 	create_graph dgraph h 10
 	
-	add_edge h 0 1 false
+	add_edge h 0 1 false true
 	assert exists_edge h 0 1
-	remove_edge h 0 1 false
+	remove_edge h 0 1 false true
 	assert not_exists_edge h 0 1
 	
-	add_edge h 0 3 false
-	add_edge h 0 2 false
-	add_edge h 9 1 false
-	add_edge h 4 1 false
-	add_edge h 0 1 false
+	add_edge h 0 3 false true
+	add_edge h 0 2 false true
+	add_edge h 9 1 false true
+	add_edge h 4 1 false true
+	add_edge h 0 1 false true
 	output_graph h
 	
 	assert not_normalised h
-	remove_edge h 0 3 false
+	remove_edge h 0 3 false true
 	output_graph h
 	assert not_normalised h

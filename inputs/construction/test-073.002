@@ -7,7 +7,7 @@ BODY
 		1 2
 		3 2
 		4 3
-		true
+		true true
 	assert num_nodes g1 5
 	assert num_edges g1 4
 	assert not_has_root g1

@@ -3,7 +3,7 @@ INPUT 0
 BODY
 	create_graph dgraph g 10
 	
-	add_edge g 0 1 false
+	add_edge g 0 1 false true
 	output_graph g
 	assert full_degree g 0 1
 	assert full_degree g 1 1
@@ -36,7 +36,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 	
-	add_edge g 2 3 false
+	add_edge g 2 3 false true
 	output_graph g
 	assert full_degree g 0 1
 	assert full_degree g 1 1
@@ -69,7 +69,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 
-	add_edge g 0 3 false
+	add_edge g 0 3 false true
 	output_graph g
 	assert full_degree g 0 2
 	assert full_degree g 1 1
@@ -102,7 +102,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 	
-	add_edge g 6 7 false
+	add_edge g 6 7 false true
 	output_graph g
 	assert full_degree g 0 2
 	assert full_degree g 1 1
@@ -135,7 +135,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 	
-	add_edge g 0 7 false
+	add_edge g 0 7 false true
 	output_graph g
 	assert full_degree g 0 3
 	assert full_degree g 1 1
@@ -168,7 +168,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 	
-	add_edge g 1 4 false
+	add_edge g 1 4 false true
 	output_graph g
 	assert full_degree g 0 3
 	assert full_degree g 1 2
@@ -201,7 +201,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 
-	add_edge g 5 8 false
+	add_edge g 5 8 false true
 	output_graph g
 	assert full_degree g 0 3
 	assert full_degree g 1 2
@@ -234,7 +234,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 0
 
-	add_edge g 9 8 false
+	add_edge g 9 8 false true
 	output_graph g
 	assert full_degree g 0 3
 	assert full_degree g 1 2
@@ -267,7 +267,7 @@ BODY
 	assert out_degree g 8 0
 	assert out_degree g 9 1
 	
-	add_edge g 7 9 false
+	add_edge g 7 9 false true
 	output_graph g
 	assert full_degree g 0 3
 	assert full_degree g 1 2

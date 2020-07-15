@@ -12,7 +12,7 @@ BODY
 		0 7
 		0 8
 		0 9
-		false
+		false true
 	assert rtree_type_not_valid g10
 	assert not_has_root g10
 	set_root g10 0
@@ -34,7 +34,7 @@ BODY
 		7 0
 		8 0
 		9 0
-		false
+		false true
 	assert rtree_type_not_valid f10
 	assert not_has_root f10
 	set_root f10 0

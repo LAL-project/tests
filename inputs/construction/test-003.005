@@ -14,10 +14,10 @@ BODY
 	set_root t 1
 	assert has_root t
 	
-	add_edge t 0 1 false
-	add_edge t 1 2 false
-	add_edge t 2 3 false
-	add_edge t 3 4 false
+	add_edge t 0 1 false true
+	add_edge t 1 2 false true
+	add_edge t 2 3 false true
+	add_edge t 3 4 false true
 	assert is_tree t
 	assert normalised t
 	

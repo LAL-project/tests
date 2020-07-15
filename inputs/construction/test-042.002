@@ -4,8 +4,8 @@ BODY
 	create_graph ftree G 3
 	assert num_nodes G 3
 	assert num_edges G 0
-	add_edge G 0 1 false
-	add_edge G 1 2 false
+	add_edge G 0 1 false true
+	add_edge G 1 2 false true
 	assert num_edges G 2
 	output_graph G
 	

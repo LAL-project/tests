@@ -25,17 +25,21 @@ COMMANDS AVAILABLE
 ** output_graph GRAPH
 	Outputs a graph to standard output
 
-** add_edge GRAPH VERTEX1 VERTEX2 true/false
-	Adds an edge to a graph. Normalises (or not) the graph
+** add_edge GRAPH VERTEX1 VERTEX2 true/false true/false
+	Adds an edge to a graph. Normalises (or not) the graph. After the addition,
+	check if the result is normalised or not.
 	
-** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
-	Adds N edges to a graph. Normalises (or not) the graph
+** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
+	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
+	check if the result is normalised or not.
 
-** remove_edge GRAPH VERTEX1 VERTEX2 true/false
-	Removes an edge from a graph. Normalises (or not) the graph
+** remove_edge GRAPH VERTEX1 VERTEX2 true/false true/false
+	Removes an edge from a graph. Normalises (or not) the graph. After the removal,
+	check if the result is normalised or not.
 	
-** remove_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false
-	Removes N edges from a graph. Normalises (or not) the graph
+** remove_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
+	Removes N edges from a graph. Normalises (or not) the graph. After the removal,
+	check if the result is normalised or not.
 
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same

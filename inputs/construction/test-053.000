@@ -2,10 +2,10 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph rtree g 5
-	add_edge g 0 1 false
-	add_edge g 1 2 false
-	add_edge g 2 3 false
-	add_edge g 3 4 false
+	add_edge g 0 1 false true
+	add_edge g 1 2 false true
+	add_edge g 2 3 false true
+	add_edge g 3 4 false true
 	assert rtree_type_not_valid g
 	
 	

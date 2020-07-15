@@ -19,7 +19,7 @@ BODY
 	assert can_add_edge g 2 4
 	assert can_add_edge g 3 4
 	
-	add_edge g 0 1 false
+	add_edge g 0 1 false true
 	assert num_edges g 1
 	assert is_not_tree g
 	output_graph g
@@ -35,7 +35,7 @@ BODY
 	assert can_add_edge g 2 4
 	assert can_add_edge g 3 4
 	
-	add_edge g 0 2 false
+	add_edge g 0 2 false true
 	assert num_edges g 2
 	assert is_not_tree g
 	output_graph g
@@ -51,7 +51,7 @@ BODY
 	assert can_add_edge g 2 4
 	assert can_add_edge g 3 4
 	
-	add_edge g 0 3 false
+	add_edge g 0 3 false true
 	assert num_edges g 3
 	assert is_not_tree g
 	output_graph g
@@ -67,7 +67,7 @@ BODY
 	assert can_add_edge g 2 4
 	assert can_add_edge g 3 4
 	
-	add_edge g 0 4 false
+	add_edge g 0 4 false true
 	assert num_edges g 4
 	assert is_tree g
 	output_graph g

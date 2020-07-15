@@ -6,15 +6,15 @@ BODY
 	assert num_edges g 0
 	assert elements_Q_are g 0
 	
-	add_edge g 0 1 false
+	add_edge g 0 1 false true
 	assert num_edges g 1
 	check_Q_iterator g
 	
-	add_edge g 2 3 false
+	add_edge g 2 3 false true
 	assert num_edges g 2
 	check_Q_iterator g
 	
-	add_edge g 0 2 false
-	add_edge g 1 3 false
+	add_edge g 0 2 false true
+	add_edge g 1 3 false true
 	assert num_edges g 4
 	check_Q_iterator g

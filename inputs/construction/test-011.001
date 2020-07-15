@@ -2,12 +2,12 @@ TYPE construction_graph
 INPUT 0
 BODY
 	create_graph dgraph g1 5
-	add_edge g1 0 1 false
-	add_edge g1 0 3 false
-	add_edge g1 4 2 false
-	add_edge g1 3 2 false
-	add_edge g1 1 4 false
-	add_edge g1 0 4 false
+	add_edge g1 0 1 false true
+	add_edge g1 0 3 false true
+	add_edge g1 4 2 false true
+	add_edge g1 3 2 false true
+	add_edge g1 1 4 false true
+	add_edge g1 0 4 false true
 	output_graph g1
 	assert not_normalised g1
 	assert num_edges g1 6
@@ -20,12 +20,12 @@ BODY
 		3 2
 	
 	create_graph dgraph g2 5
-	add_edge g2 0 1 true
-	add_edge g2 0 3 true
-	add_edge g2 4 2 true
-	add_edge g2 3 2 true
-	add_edge g2 1 4 true
-	add_edge g2 0 4 true
+	add_edge g2 0 1 true true
+	add_edge g2 0 3 true true
+	add_edge g2 4 2 true true
+	add_edge g2 3 2 true true
+	add_edge g2 1 4 true true
+	add_edge g2 0 4 true true
 	output_graph g2
 	assert normalised g2
 	assert num_edges g2 6
@@ -45,7 +45,7 @@ BODY
 		3 2
 		1 4
 		0 4
-		false
+		false true
 	output_graph g3
 	assert not_normalised g3
 	assert num_edges g3 6
@@ -65,7 +65,7 @@ BODY
 		3 2
 		1 4
 		0 4
-		true
+		true true
 	output_graph g4
 	assert normalised g4
 	assert num_edges g4 6
