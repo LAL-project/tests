@@ -97,9 +97,9 @@ err_type exe_construction_test(ifstream& fin) {
 	map<string, string> gtypes;
 
 	string option, assert_what;
-	string type, g1, g2, g3, file, file_type, Boolean;
-	uint32_t n_nodes;
-	uint32_t u, v;
+	string type, g1, g2, g3, file, file_type, Boolean1, Boolean2;
+	uint32_t n_nodes, n_edges;
+	node u, v;
 
 	while (fin >> option) {
 		if (command_is_comment(option)) {
@@ -132,19 +132,19 @@ err_type exe_construction_test(ifstream& fin) {
 			}
 		}
 		else if (option == FUNC_GRAPH_READ) {
-			fin >> type >> g1 >> file >> file_type >> Boolean;
+			fin >> type >> g1 >> file >> file_type >> Boolean1;
 			assert_correct_graph_type(FUNC_GRAPH_READ, type, all_types)
 			assert_correct_file_type(FUNC_GRAPH_READ, file_type)
-			assert_correct_boolean(FUNC_GRAPH_READ, Boolean)
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1)
 			gtypes[g1] = type;
 			bool io_res = false;
 			if (type == DGRAPH) {
 				dgraphvars[g1] = dgraph();
-				io_res = io::read_edge_list(file, dgraphvars[g1], Boolean == "true");
+				io_res = io::read_edge_list(file, dgraphvars[g1], Boolean1 == "true");
 			}
 			else if (type == UGRAPH) {
 				ugraphvars[g1] = ugraph();
-				io_res = io::read_edge_list(file, ugraphvars[g1], Boolean == "true");
+				io_res = io::read_edge_list(file, ugraphvars[g1], Boolean1 == "true");
 			}
 			else {
 				cerr << ERROR << endl;
@@ -181,34 +181,38 @@ err_type exe_construction_test(ifstream& fin) {
 			else { ugraphvars[g1] = ugraphvars[g2]; }
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGE) {
-			fin >> g1 >> u >> v >> Boolean;
+			fin >> g1 >> u >> v >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGE, g1)
-			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean)
-			if_mfunction(g1, add_edge(u, v, Boolean == "true"))
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean2)
+			if_mfunction(g1, add_edge(u, v, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGES) {
-			fin >> g1 >> n_nodes;
-			vector<edge> edge_list(n_nodes);
+			fin >> g1 >> n_edges;
+			vector<edge> edge_list(n_edges);
 			for (edge& e : edge_list) { fin >> e.first >> e.second; }
-			fin >> Boolean;
+			fin >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGES, g1)
-			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean)
-			if_mfunction(g1, add_edges(edge_list, Boolean == "true"))
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean2)
+			if_mfunction(g1, add_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGE) {
-			fin >> g1 >> u >> v >> Boolean;
+			fin >> g1 >> u >> v >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGE, g1)
-			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean)
-			if_mfunction(g1, remove_edge(u, v, Boolean == "true"))
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean2)
+			if_mfunction(g1, remove_edge(u, v, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGES) {
-			fin >> g1 >> n_nodes;
-			vector<edge> edge_list(n_nodes);
+			fin >> g1 >> n_edges;
+			vector<edge> edge_list(n_edges);
 			for (edge& e : edge_list) { fin >> e.first >> e.second; }
-			fin >> Boolean;
+			fin >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGES, g1)
-			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean)
-			if_mfunction(g1, remove_edges(edge_list, Boolean == "true"))
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean2)
+			if_mfunction(g1, remove_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_NORMALISE) {
 			fin >> g1;
@@ -238,11 +242,11 @@ err_type exe_construction_test(ifstream& fin) {
 				ftreevars[g1] = fT;
 			}
 			else if (graph_type(g2) == RTREE) {
-				fin >> Boolean;
-				assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean)
+				fin >> Boolean1;
+				assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1)
 
 				rtree rT = rtreevars[g2];
-				rT.disjoint_union(rtreevars[g3], Boolean == "true");
+				rT.disjoint_union(rtreevars[g3], Boolean1 == "true");
 				rtreevars[g1] = rT;
 			}
 			else {
@@ -405,7 +409,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_is_rtree(g1, FUNC_RTREE_SET_ROOT)
 
 			if (graph_type(g1) == RTREE) {
-				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean)
+				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean1)
 				rtreevars[g1].recalc_size_subtrees();
 			}
 			else {
