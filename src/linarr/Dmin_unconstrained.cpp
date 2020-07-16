@@ -45,7 +45,6 @@
 #include <fstream>
 #include <cassert>
 #include <queue>
-#include <set>
 using namespace std;
 
 // lal includes
@@ -76,7 +75,6 @@ bool le(const algo_result& r1, const algo_result& r2) { return r1.first <= r2.fi
 bool eq(const algo_result& r1, const algo_result& r2) { return r1.first == r2.first; }
 bool ge(const algo_result& r1, const algo_result& r2) { return r1.first >= r2.first; }
 bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.first; }
-
 
 namespace exe_tests {
 
@@ -316,7 +314,7 @@ err_type test_Unconstrained_bf_algorithm(
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
-		cout << "Exhaustive " << n << endl;
+		cout << "Bruteforce " << n << endl;
 		size_t idx = 1;
 
 		// enumerate all trees of 'n' vertices
