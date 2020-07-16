@@ -73,6 +73,7 @@ SOURCES += \
     time.cpp \
 	tree_classification.cpp \
     utils/centre.cpp \
+    utils/centroid.cpp \
     utils/sorting.cpp \
     utils/traversal.cpp
 

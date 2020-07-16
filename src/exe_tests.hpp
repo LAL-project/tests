@@ -92,5 +92,6 @@ err_type exe_gen_trees_rur(std::ifstream& fin);
 err_type exe_utils_sorting(std::ifstream& fin);
 err_type exe_utils_bfs(std::ifstream& fin);
 err_type exe_utils_centre(std::ifstream& fin);
+err_type exe_utils_centroid(std::ifstream& fin);
 
 } // -- namespace exe_tests

@@ -422,6 +422,9 @@ err_type call_utils
 	if (key == "centre") {
 		return exe_utils_centre(fin);
 	}
+	if (key == "centroid") {
+		return exe_utils_centroid(fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
