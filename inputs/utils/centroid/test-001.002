@@ -1,0 +1,28 @@
+TYPE utils-centroid
+INPUT 0
+BODY
+	manual rtree
+	
+	init 6
+	add_edges 2
+		2 1
+		1 0
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	
+	add_edges 2
+		5 4
+		4 3
+	find_centroid 3
+	find_centroid 4
+	find_centroid 5
+	
+	add_edges 1
+		4 2
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+	find_centroid 4
+	find_centroid 5

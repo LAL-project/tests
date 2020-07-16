@@ -1,0 +1,37 @@
+TYPE utils-centroid
+INPUT 0
+BODY
+	manual ftree
+	
+	init 15
+	add_edges 14
+		0 1
+		1 2
+		2 3
+		3 4
+		4 5
+		4 6
+		5 7
+		5 8
+		5 9
+		5 10
+		6 11
+		6 12
+		6 13
+		6 14
+	
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+	find_centroid 4
+	find_centroid 5
+	find_centroid 6
+	find_centroid 7
+	find_centroid 8
+	find_centroid 9
+	find_centroid 10
+	find_centroid 11
+	find_centroid 12
+	find_centroid 13
+	find_centroid 14
