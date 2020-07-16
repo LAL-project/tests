@@ -58,16 +58,4 @@ double elapsed_microseconds(const time_point& begin, const time_point& end) {
 	return duration<double, microseconds::period>( end - begin ).count();
 }
 
-void sleep_seconds(double s) {
-	sleep_for(duration<double, seconds::period>(s));
-}
-
-void sleep_milliseconds(double ms) {
-	sleep_for(duration<double, milliseconds::period>(ms));
-}
-
-void sleep_microseconds(double us) {
-	sleep_for(duration<double, microseconds::period>(us));
-}
-
 }

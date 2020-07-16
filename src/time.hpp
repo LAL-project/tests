@@ -62,13 +62,4 @@ double elapsed_milliseconds(const time_point& begin, const time_point& end);
 // Returns the elapsed time between 'begin' and 'end' in microseconds
 double elapsed_microseconds(const time_point& begin, const time_point& end);
 
-// This thread will pause for 's' seconds.
-void sleep_seconds(double s);
-
-// This thread will pause for 's' milliseconds.
-void sleep_milliseconds(double ms);
-
-// This thread will pause for 's' microseconds.
-void sleep_microseconds(double us);
-
 } // -- namespace timing
