@@ -53,8 +53,9 @@ all_DIRS=(\
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
 	"linarr/Dmin/projective" "linarr/Dmin/projective" \
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained" \
-	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained" \
+	"linarr/Dmin/unconstrained" "linarr/Dmin/unconstrained" \
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
+	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/FC" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
@@ -142,15 +143,15 @@ Dmin_Projective_DIRS=(\
 
 # Dmin Unconstrained tests -- all
 Dmin_Unconstrained_DIRS=(\
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
+	"linarr/Dmin/unconstrained" "linarr/Dmin/unconstrained" \
 	)
 # Dmin Unconstrained tests -- Yossi Shiloach
 Dmin_Unconstrained_YS_DIRS=(\
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/" \
+	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
 	)
 # Dmin Unconstrained tests -- Fan Chung
-Dmin_Unconstrained_YS_DIRS=(\
-	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/" \
+Dmin_Unconstrained_FC_DIRS=(\
+	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/FC" \
 	)
 
 # generate tests
