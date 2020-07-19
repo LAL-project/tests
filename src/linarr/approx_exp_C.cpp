@@ -38,11 +38,9 @@
  *
  ********************************************************************/
 
-// C includes
-#include <assert.h>
-
 // C++ includes
 #include <iostream>
+#include <cassert>
 #include <fstream>
 #include <cmath>
 #include <set>
@@ -90,8 +88,8 @@ uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
 			if (common_endpoints(s1,d1, s2,d2)) { continue; }
 
 			// no common endpoints
-			bool cross1 = s1 < s2 and s2 < s1 + d1 and s1 + d1 < s2 + d2;
-			bool cross2 = s2 < s1 and s1 < s2 + d2 and s2 + d2 < s1 + d1;
+			const bool cross1 = s1 < s2 and s2 < s1 + d1 and s1 + d1 < s2 + d2;
+			const bool cross2 = s2 < s1 and s1 < s2 + d2 and s2 + d2 < s1 + d1;
 			c += cross1 or cross2;
 		}
 	}
@@ -151,45 +149,24 @@ rational E_2Cd_brute_force(ugraph& g, const linearrgmnt& pi) {
 	return Ec2;
 }
 
-err_type exe_linarr_approx_Exp_C(ifstream& fin) {
+err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	set<string> allowed_procs({"E_2[C|d]"});
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+	if (inputs.size() != 1) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Only one input file si allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
-
-	size_t n_linarrs;
-	fin >> n_linarrs;
-	if (n_linarrs != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_linarrs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	string graph_name;
-	string graph_format;
-	fin >> graph_name >> graph_format;
 
 	ugraph G;
+	{
+	const string graph_name = inputs[0].first;
+	const string graph_format = inputs[0].second;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
 	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
 	}
 
 	string proc;
@@ -208,6 +185,7 @@ err_type exe_linarr_approx_Exp_C(ifstream& fin) {
 	linearrgmnt pi(n);
 
 	// amount of linear arrangements
+	uint32_t n_linarrs;
 	fin >> n_linarrs;
 
 	for (size_t i = 0; i < n_linarrs; ++i) {

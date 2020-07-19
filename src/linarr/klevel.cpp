@@ -43,6 +43,7 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+#include <set>
 using namespace std;
 
 // lal includes
@@ -63,9 +64,39 @@ using namespace linarr;
 
 namespace exe_tests {
 
-err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fin) {
+err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
+	const set<string> allowed_levels(
+	{"1", "2"}
+	);
+
+	const set<string> allowed_procs(
+	{"MDD"}
+	);
 
 	/* FUNCTIONS */
+
+	string level, proc;
+	fin >> level >> proc;
+	if (allowed_levels.find(level) == allowed_levels.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Wrong value for level." << endl;
+		cerr << "    Level '" << level << "' was found." << endl;
+		cerr << "    Valid values:" << endl;
+		for (const string& l : allowed_levels) {
+		cerr << "    - " << l << endl;
+		}
+		return err_type::test_format_error;
+	}
+	if (allowed_procs.find(level) == allowed_procs.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Wrong value for procedure." << endl;
+		cerr << "    Procedure '" << proc << "' was found." << endl;
+		cerr << "    Valid values:" << endl;
+		for (const string& p : allowed_procs) {
+		cerr << "    - " << p << endl;
+		}
+		return err_type::test_format_error;
+	}
 
 	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<linearrgmnt>& pis) {
 		if (level == "1") { return linarr::MDD_1level_rational(Gs, pis); }
@@ -78,30 +109,18 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 
 	/* TEST's CODE */
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs == 0) {
+	if (inputs.size() == 1) {
 		cerr << ERROR << endl;
 		cerr << "    Expected at least one input." << endl;
 		cerr << "    Instead, none were given." << endl;
 		return err_type::test_format_error;
 	}
 
+	const size_t n_inputs = inputs.size();
 	vector<ugraph> Gs(n_inputs);
 	for (size_t i = 0; i < n_inputs; ++i) {
-		string graph_name;
-		string graph_format;
-		fin >> graph_name >> graph_format;
+		const string graph_name = inputs[i].first;
+		const string graph_format = inputs[i].second;
 
 		err_type r = io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
 		if (r != err_type::no_error) {
@@ -109,17 +128,8 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 		}
 	}
 
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
 	// linear arrangement
-	vector<vector<node> > Ts;
+	vector<vector<position>> Ts;
 	vector<linearrgmnt> pis;
 
 	// amount of linear arrangements
@@ -136,13 +146,13 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 	}
 
 	if (n_linarrs != 0) {
-		Ts = vector<vector<node> >(n_linarrs);
+		Ts = vector<vector<position>>(n_linarrs);
 		pis = vector<linearrgmnt>(n_linarrs);
 
 		for (size_t i = 0; i < n_linarrs; ++i) {
 			const uint32_t Ni = Gs[i].n_nodes();
 
-			Ts[i] = vector<node>(Ni);
+			Ts[i] = vector<position>(Ni);
 			pis[i] = linearrgmnt(Ni);
 
 			// read all linear arrangement
@@ -153,8 +163,8 @@ err_type exe_linarr_klevel(const string& level, const string& what, ifstream& fi
 		}
 	}
 
-	if (what == "MDD") {
-		rational MDD = MDD_F(Gs, pis);
+	if (proc == "MDD") {
+		const rational MDD = MDD_F(Gs, pis);
 		cout << level << "-level MDD= " << MDD << endl;
 	}
 

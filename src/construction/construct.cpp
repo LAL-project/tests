@@ -38,14 +38,12 @@
  *
  ********************************************************************/
 
-// C includes
-#include <assert.h>
-#include <string.h>
-
 // C++ includes
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <cassert>
+#include <cstring>
 #include <string>
 #include <map>
 #include <set>
@@ -464,30 +462,11 @@ err_type exe_construction_test(ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_construction(ifstream& fin) {
-	string field;
-	size_t n;
-
-	fin >> field;
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-	fin >> n;
-	if (n != 0) {
+err_type exe_construction(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 

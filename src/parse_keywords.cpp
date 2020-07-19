@@ -95,7 +95,7 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	const string& key = keywords[0];
 	if (key == "construction_graph") {
 		// no more keywords
-		return exe_construction(fin);
+		return parse_header(exe_construction, fin);
 	}
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
@@ -131,11 +131,11 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	}
 
 	if (num_type1 == "integer") {
-		return exe_numeric_integer(fin);
+		return parse_header(exe_numeric_integer, fin);
 	}
 
 	if (num_type1 == "rational") {
-		return exe_numeric_rational(fin);
+		return parse_header(exe_numeric_rational, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -150,16 +150,16 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 {
 	const string& key = keywords[i];
 	if (key == "general") {
-		return exe_properties_general(fin);
+		return parse_header(exe_properties_general, fin);
 	}
 	if (key == "MHD_All_Trees") {
-		return exe_properties_MHD_All_trees(fin);
+		return parse_header(exe_properties_MHD_All_trees, fin);
 	}
 	if (key == "exp_var_C") {
-		return exe_properties_ExpVar_C(fin);
+		return parse_header(exe_properties_ExpVar_C, fin);
 	}
 	if (key == "exp_var_D") {
-		return exe_properties_ExpVar_D(fin);
+		return parse_header(exe_properties_ExpVar_D, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -181,21 +181,20 @@ err_type call_linarr
 		return call_linarr_klevel(keywords, i + 1, fin);
 	}
 	if (key == "D") {
-		return call_linarr_D_related(keywords, i + 1, fin);
+		return parse_header(exe_linarr_D, fin);
 	}
 	if (key == "Dmin") {
 		return call_linarr_Dmin(keywords, i + 1, fin);
 	}
 
-
 	if (key == "approx_exp_C") {
-		return exe_linarr_approx_Exp_C(fin);
+		return parse_header(exe_linarr_approx_Exp_C, fin);
 	}
 	if (key == "compute_headedness") {
-		return exe_linarr_headedness(fin);
+		return parse_header(exe_linarr_headedness, fin);
 	}
 	if (key == "syntree_classification") {
-		return exe_linarr_syntree_classification(fin);
+		return parse_header(exe_linarr_syntree_classification, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -211,12 +210,12 @@ err_type call_linarr_C
 	// If, after this keyword, there are no more of them,
 	// execute the simple test.
 	if (i == keywords.size()) {
-		return exe_linarr_C(fin);
+		return parse_header(exe_linarr_C, fin);
 	}
 
 	const string& key = keywords[i];
 	if (key == "list") {
-		return exe_linarr_C_list(fin);
+		return parse_header(exe_linarr_C_list, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -251,68 +250,15 @@ err_type call_linarr_klevel
 		return err_type::wrong_keyword;
 	}
 
-	return exe_linarr_klevel(level, key, fin);
-}
-
-err_type call_linarr_D_related
-(const vector<string>& keywords, size_t i, ifstream& fin)
-{
-	const set<string> allowed_keywords({"D", "MDD"});
-
-	const string& key = keywords[i];
-	if (allowed_keywords.find(key) == allowed_keywords.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i << ": '" << key << "'." << endl;
-		mark_wrong_keyword(keywords, {i}, "    ");
-		return err_type::wrong_keyword;
-	}
-
-	return exe_linarr_D(key, fin);
+	return parse_header(exe_linarr_klevel, fin);
 }
 
 err_type call_linarr_Dmin
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const set<string> allowed_keywords({
-		// Projective arrangements
-		// -- Gidlea & Temperley's algorithm
 		"Projective",
-		// Unconstrained arrangements
-		// -- test algorithms against one another
-		"Unconstrained",
-		// -- Yossi Shiloach's algorithm
-		//    -> Tested by bruteforce
-		"Unconstrained_YS_bruteforce",
-		// -- Yossi Shiloach's algorithm
-		//    -> Tested by formulas for classes of trees
-		"Unconstrained_YS_class",
-		// -- Yossi Shiloach's algorithm
-		//    -> Tested in particular trees
-		"Unconstrained_YS_tree",
-		// -- Fan Chung's algorithm
-		//    -> Tested by bruteforce
-		"Unconstrained_FC_bruteforce",
-		// -- Fan Chung's algorithm
-		//    -> Tested by formulas for classes of trees
-		"Unconstrained_FC_class",
-		// -- Fan Chung's algorithm
-		//    -> Tested in particular trees
-		"Unconstrained_FC_tree",
-	});
-
-	// Dmin algorithms for rooted trees
-	const set<string> rooted_algorithms({
-		"Projective"
-	});
-	// Dmin algorithms for free trees
-	const set<string> free_algorithms({
-		"Unconstrained",
-		"Unconstrained_YS_bruteforce",
-		"Unconstrained_YS_class",
-		"Unconstrained_YS_tree",
-		"Unconstrained_FC_bruteforce",
-		"Unconstrained_FC_class",
-		"Unconstrained_FC_tree",
+		"Unconstrained"
 	});
 
 	const string& key = keywords[i];
@@ -323,11 +269,11 @@ err_type call_linarr_Dmin
 		return err_type::wrong_keyword;
 	}
 
-	if (rooted_algorithms.find(key) != rooted_algorithms.end()) {
-		return exe_linarr_Dmin_rooted(key, fin);
+	if (key == "Projective") {
+		return parse_header(exe_linarr_Dmin_projective, fin);
 	}
-	if (free_algorithms.find(key) != free_algorithms.end()) {
-		return exe_linarr_Dmin_free(key, fin);
+	if (key == "Unconstrained") {
+		return parse_header(exe_linarr_Dmin_unconstrained, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -360,28 +306,28 @@ err_type call_generate_trees
 {
 	const string& key = keywords[i];
 	if (key == "alf") {
-		return exe_gen_trees_alf(fin);
+		return parse_header(exe_gen_trees_alf, fin);
 	}
 	else if (key == "alr") {
-		return exe_gen_trees_alr(fin);
+		return parse_header(exe_gen_trees_alr, fin);
 	}
 	else if (key == "auf") {
-		return exe_gen_trees_auf(fin);
+		return parse_header(exe_gen_trees_auf, fin);
 	}
 	else if (key == "aur") {
-		return exe_gen_trees_aur(fin);
+		return parse_header(exe_gen_trees_aur, fin);
 	}
 	else if (key == "rlf") {
-		return exe_gen_trees_rlf(fin);
+		return parse_header(exe_gen_trees_rlf, fin);
 	}
 	else if (key == "rlr") {
-		return exe_gen_trees_rlr(fin);
+		return parse_header(exe_gen_trees_rlr, fin);
 	}
 	else if (key == "ruf") {
-		return exe_gen_trees_ruf(fin);
+		return parse_header(exe_gen_trees_ruf, fin);
 	}
 	else if (key == "rur") {
-		return exe_gen_trees_rur(fin);
+		return parse_header(exe_gen_trees_rur, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -395,10 +341,10 @@ err_type call_generate_arrangements
 {
 	const string& key = keywords[i];
 	if (key == "all_proj") {
-		return exe_gen_arr_all_proj(fin);
+		return parse_header(exe_gen_arr_all_proj, fin);
 	}
 	else if (key == "rand_proj") {
-		return exe_gen_arr_rand_proj(fin);
+		return parse_header(exe_gen_arr_rand_proj, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -414,16 +360,16 @@ err_type call_utils
 {
 	const string& key = keywords[i];
 	if (key == "sorting") {
-		return exe_utils_sorting(fin);
+		return parse_header(exe_utils_sorting, fin);
 	}
 	if (key == "traversal") {
-		return exe_utils_bfs(fin);
+		return parse_header(exe_utils_bfs, fin);
 	}
 	if (key == "centre") {
-		return exe_utils_centre(fin);
+		return parse_header(exe_utils_centre, fin);
 	}
 	if (key == "centroid") {
-		return exe_utils_centroid(fin);
+		return parse_header(exe_utils_centroid, fin);
 	}
 
 	cerr << ERROR << endl;

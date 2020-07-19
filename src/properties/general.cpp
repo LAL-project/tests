@@ -107,36 +107,11 @@ void MHD(const ugraph& g, node r) {
 	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 }
 
-err_type exe_properties_general(ifstream& fin) {
+err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_instructions({
 		"enumerate_Q", "Q_size", "mmt_deg",
 		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
-
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n;
-	fin >> n;
-	vector<string> graph_name(n), graph_format(n);
-	for (size_t i = 0; i < n; ++i) {
-		fin >> graph_name[i] >> graph_format[i];
-	}
-
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
 
 	string ins;
 	string all_instructions = "";
@@ -149,8 +124,8 @@ err_type exe_properties_general(ifstream& fin) {
 	// for each graph.
 
 	ugraph G;
-	for (size_t i = 0; i < n; ++i) {
-		err_type r = io_wrapper::read_graph(graph_name[i], graph_format[i], G);
+	for (size_t i = 0; i < inputs.size(); ++i) {
+		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {
 			return r;
 		}

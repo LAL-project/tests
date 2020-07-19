@@ -556,13 +556,24 @@ err_type test_Unconstrained_tree_algorithm(
 	return err_type::no_error;
 }
 
-err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
+err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		return err_type::test_format_error;
+	}
+
+	string alg;
+	fin >> alg;
+
 	err_type r;
-	if (alg == "Unconstrained") {
+	if (alg == "algo_vs_algo") {
 		r = test_Unconstrained(fin);
 	}
+	// --------------
 	// YOSSI SHILOACH
-	else if (alg == "Unconstrained_YS_bruteforce") {
+	else if (alg == "YS_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -571,7 +582,7 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_YS_class") {
+	else if (alg == "YS_class") {
 		r =
 		test_Unconstrained_class_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -580,7 +591,7 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_YS_tree") {
+	else if (alg == "YS_tree") {
 		r =
 		test_Unconstrained_tree_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -589,8 +600,9 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	// FAN CHUNG
-	else if (alg == "Unconstrained_FC_bruteforce") {
+	// ---------------
+	// FAN R. K. CHUNG
+	else if (alg == "FC_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -599,7 +611,7 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_FC_class") {
+	else if (alg == "FC_class") {
 		r =
 		test_Unconstrained_class_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {
@@ -608,7 +620,7 @@ err_type exe_linarr_Dmin_free(const string& alg, ifstream& fin) {
 		, fin
 		);
 	}
-	else if (alg == "Unconstrained_FC_tree") {
+	else if (alg == "FC_tree") {
 		r =
 		test_Unconstrained_tree_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linearrgmnt> {

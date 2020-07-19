@@ -88,35 +88,7 @@ pair<uint32_t, linearrgmnt> Dmin_Projective_bruteforce(const rtree& t) {
 	return make_pair(Dmin, arrMin);
 }
 
-err_type test_Projective(ifstream& fin) {
-	string field;
-
-	fin >> field;
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n_inputs << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
+err_type test_Projective_GT(ifstream& fin) {
 	// read number of nodes
 	uint32_t n;
 	while (fin >> n) {
@@ -181,10 +153,20 @@ err_type test_Projective(ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_linarr_Dmin_rooted(const string& alg, ifstream& fin) {
+err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		return err_type::test_format_error;
+	}
+
+	string alg;
+	fin >> alg;
+
 	err_type r;
 	if (alg == "Projective") {
-		r = test_Projective(fin);
+		r = test_Projective_GT(fin);
 	}
 	else {
 		cerr << ERROR << endl;

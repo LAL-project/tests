@@ -41,8 +41,9 @@
 #pragma once
 
 // C++ inlcudes
-#include <cstdint>
 #include <filesystem>
+#include <cstdint>
+#include <vector>
 
 #define ERROR \
 	"Error [file " << std::filesystem::path(__FILE__).filename() << ", function '" \
@@ -54,6 +55,9 @@
 	cout << "Test finished without apparent errors." << endl;
 
 namespace exe_tests {
+
+typedef std::vector<std::pair<std::string,std::string>> input_list;
+
 enum class err_type : int8_t {
 	/// The test completed successfully
 	no_error = 0,

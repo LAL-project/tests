@@ -41,6 +41,7 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+#include <set>
 using namespace std;
 
 // lal includes
@@ -58,49 +59,43 @@ using namespace numeric;
 
 namespace exe_tests {
 
-err_type exe_linarr_D(const string& what, ifstream& fin) {
-	string field;
+err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
+	const set<string> allowed_procs(
+	{"D", "MDD"}
+	);
 
-	fin >> field;
-
-	if (field != "INPUT") {
+	if (inputs.size() != 1) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Only one input file si allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	string graph_name;
-	string graph_format;
-	fin >> graph_name >> graph_format;
 
 	ugraph G;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
+	{
+	const string graph_name = inputs[0].first;
+	const string graph_format = inputs[0].second;
+	const err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
 	}
+	}
 
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
+	string proc;
+	fin >> proc;
+	if (allowed_procs.find(proc) == allowed_procs.end()) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Wrong value for procedure type." << endl;
+		cerr << "    Procedure '" << proc << "' was found." << endl;
+		for (const string& p : allowed_procs) {
+		cerr << "    - " << p << endl;
+		}
 		return err_type::test_format_error;
 	}
 
 	// linear arrangement
 	const uint32_t n = G.n_nodes();
-	vector<node> T(n);
+	vector<position> T(n);
 	linearrgmnt pi(n);
 
 	// amount of linear arrangements
@@ -121,14 +116,11 @@ err_type exe_linarr_D(const string& what, ifstream& fin) {
 		}
 		cout << "]: ";
 
-		if (what == "D") {
-			// compute D
-			uint32_t D = linarr::sum_length_edges(G, pi);
-			cout << D << endl;
+		if (proc == "D") {
+			cout << linarr::sum_length_edges(G, pi) << endl;
 		}
-		else if (what == "MDD") {
-			rational MDD = linarr::MDD_rational(G, pi);
-			cout << MDD << endl;
+		else if (proc == "MDD") {
+			cout << linarr::MDD_rational(G, pi) << endl;
 		}
 	}
 

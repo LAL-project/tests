@@ -79,7 +79,7 @@ bool is_linarr_projective(
 	const rtree& rT, const ftree& fT, const linearrgmnt& arr
 )
 {
-	uint32_t C = lal::linarr::n_crossings(fT, arr);
+	const uint32_t C = lal::linarr::n_crossings(fT, arr);
 	if (C != 0) { return false; }
 	return not is_root_covered(rT, arr);
 }

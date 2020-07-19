@@ -82,9 +82,6 @@ err_type call_linarr_C
 err_type call_linarr_klevel
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-err_type call_linarr_D_related
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
 err_type call_linarr_Dmin
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 

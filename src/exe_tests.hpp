@@ -49,6 +49,7 @@
  */
 
 // C++ includes
+#include <functional>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -56,42 +57,55 @@
 // custom includes
 #include "definitions.hpp"
 
+typedef std::vector<std::pair<std::string,std::string>> input_list;
+
 namespace exe_tests {
 
-err_type exe_construction(std::ifstream& fin);
+err_type execute_test_function(
+	const std::function<err_type (input_list, std::ifstream&)> F,
+	const input_list& inputs,
+	std::ifstream& fin
+);
 
-err_type exe_numeric_integer(std::ifstream& fin);
-err_type exe_numeric_rational(std::ifstream& fin);
+err_type parse_header(
+	const std::function<err_type (input_list, std::ifstream&)> F,
+	std::ifstream& fin
+);
 
-err_type exe_properties_general(std::ifstream& fin);
-err_type exe_properties_MHD_All_trees(std::ifstream& fin);
-err_type exe_properties_ExpVar_C(std::ifstream& fin);
-err_type exe_properties_ExpVar_D(std::ifstream& fin);
+err_type exe_construction(const input_list& inputs, std::ifstream& fin);
 
-err_type exe_linarr_approx_Exp_C(std::ifstream& fin);
-err_type exe_linarr_C(std::ifstream& fin);
-err_type exe_linarr_C_list(std::ifstream& fin);
-err_type exe_linarr_D(const std::string& what, std::ifstream& fin);
-err_type exe_linarr_headedness(std::ifstream& fin);
-err_type exe_linarr_syntree_classification(std::ifstream& fin);
-err_type exe_linarr_klevel(const std::string& level, const std::string& what, std::ifstream& fin);
-err_type exe_linarr_Dmin_rooted(const std::string& algorithm, std::ifstream& fin);
-err_type exe_linarr_Dmin_free(const std::string& algorithm, std::ifstream& fin);
+err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin);
+err_type exe_numeric_rational(const input_list& inputs,std::ifstream& fin);
 
-err_type exe_gen_arr_all_proj(std::ifstream& fin);
-err_type exe_gen_arr_rand_proj(std::ifstream& fin);
-err_type exe_gen_trees_alf(std::ifstream& fin);
-err_type exe_gen_trees_alr(std::ifstream& fin);
-err_type exe_gen_trees_auf(std::ifstream& fin);
-err_type exe_gen_trees_aur(std::ifstream& fin);
-err_type exe_gen_trees_rlf(std::ifstream& fin);
-err_type exe_gen_trees_rlr(std::ifstream& fin);
-err_type exe_gen_trees_ruf(std::ifstream& fin);
-err_type exe_gen_trees_rur(std::ifstream& fin);
+err_type exe_properties_general(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_MHD_All_trees(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin);
 
-err_type exe_utils_sorting(std::ifstream& fin);
-err_type exe_utils_bfs(std::ifstream& fin);
-err_type exe_utils_centre(std::ifstream& fin);
-err_type exe_utils_centroid(std::ifstream& fin);
+err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin);
+err_type exe_linarr_C_list(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_headedness(const input_list& inputs,std::ifstream& fin);
+err_type exe_linarr_syntree_classification(const input_list& inputs,std::ifstream& fin);
+err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin);
+
+err_type exe_gen_arr_all_proj(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_arr_rand_proj(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_alr(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin);
+
+err_type exe_utils_sorting(const input_list& inputs, std::ifstream& fin);
+err_type exe_utils_bfs(const input_list& inputs, std::ifstream& fin);
+err_type exe_utils_centre(const input_list& inputs, std::ifstream& fin);
+err_type exe_utils_centroid(const input_list& inputs, std::ifstream& fin);
 
 } // -- namespace exe_tests

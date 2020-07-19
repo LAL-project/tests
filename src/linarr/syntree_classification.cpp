@@ -185,41 +185,22 @@ err_type parse_single_file(const string& file) {
 	return err_type::no_error;
 }
 
-err_type exe_linarr_syntree_classification(ifstream& fin) {
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+err_type exe_linarr_syntree_classification(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 
-	size_t n_inputs;
-	fin >> n_inputs;
-	for (size_t i = 0; i < n_inputs; ++i) {
-		string f;
-		fin >> f;
-		err_type e = parse_single_file(f);
+	string f;
+	while (fin >> f) {
+		const err_type e = parse_single_file(f);
 		if (e != err_type::no_error) {
 			// the complete error message is already
 			// issued inside the function "parse_files"
 			return e;
 		}
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	if (n_inputs > 0) {
-		// process body only if there are no inputs.
 	}
 
 	TEST_GOODBYE

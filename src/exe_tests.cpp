@@ -38,65 +38,56 @@
  *
  ********************************************************************/
 
+#include "exe_tests.hpp"
+
 // C++ includes
 #include <iostream>
-#include <fstream>
-#include <set>
 using namespace std;
-
-// lal includes
-#include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/rtree.hpp>
-#include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/properties/mhd.hpp>
-#include <lal/numeric/rational.hpp>
-#include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace generate;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
-
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
 
 namespace exe_tests {
 
-err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
+err_type execute_test_function(
+	const function<err_type (input_list, ifstream&)> F,
+	const input_list& inputs,
+	std::ifstream& fin
+)
+{
+	return F(inputs, fin);
+}
+
+err_type parse_header(
+	const function<err_type (input_list, ifstream&)> F,
+	ifstream& fin
+)
+{
+	string field;
+	fin >> field;
+
+	if (field != "INPUT") {
 		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		cerr << "    Expected field: INPUT" << endl;
+		cerr << "    Found: " << field << endl;
 		return err_type::test_format_error;
 	}
 
-	uint32_t n;
-	all_ulab_free_trees TreeGen;
-	while (fin >> n) {
-		cout << "----------------------------------------" << endl;
-		cout << "n= " << n << endl;
-
-		TreeGen.init(n);
-		int i = 0;
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			const ftree t = TreeGen.get_tree();
-
-			cout << i << ")" << endl;
-
-			// for each node, make a rooted tree at that node
-			for (node r = 0; r < t.n_nodes(); ++r) {
-				const rtree R(t, r);
-				const rational mhd = properties::MHD_rational(R);
-				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
-			}
-
-			++i;
-		}
+	size_t n_inputs;
+	fin >> n_inputs;
+	input_list inputs(n_inputs);
+	for (size_t i = 0; i < n_inputs; ++i) {
+		string file, format;
+		fin >> file >> format;
+		inputs[i] = make_pair(file, format);
 	}
 
-	return err_type::no_error;
+	fin >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field: BODY" << endl;
+		cerr << "    Found: " << field << endl;
+		return err_type::test_format_error;
+	}
+
+	return F(inputs, fin);
 }
 
 } // -- namespace exe_tests

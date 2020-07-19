@@ -38,11 +38,9 @@
  *
  ********************************************************************/
 
-// C includes
-#include <assert.h>
-
 // C++ includes
 #include <iostream>
+#include <cassert>
 #include <fstream>
 using namespace std;
 
@@ -60,14 +58,9 @@ using namespace numeric;
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
 
-/*
- * ALL UNLABELLED ROOTED TREES
- *
- */
-
 namespace exe_tests {
 
-err_type exe_gen_trees_aur(std::ifstream& fin) {
+err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 
 	/* BUILD TESTING DATA */
 
@@ -111,41 +104,19 @@ err_type exe_gen_trees_aur(std::ifstream& fin) {
 
 	// -------------------------------------------------------------------------
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 
 	// --- do the tests
 
-	uint32_t n;
-	integer gen;
-
 	all_ulab_rooted_trees TreeGen;
 
+	uint32_t n;
+	integer gen;
 	while (fin >> n) {
 		// number of generated trees
 		gen = 0;

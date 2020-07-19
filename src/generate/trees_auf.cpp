@@ -59,11 +59,6 @@ using namespace numeric;
 #include "generate/tree_validity_check.hpp"
 #include "tree_classification.hpp"
 
-/*
- * ALL UNLABELLED FREE TREES
- *
- */
-
 // number of caterpillar trees of a given size
 inline integer num_caterpillar_trees(uint32_t n) {
 	if (n == 1) { return 1; }
@@ -80,7 +75,7 @@ inline integer num_caterpillar_trees(uint32_t n) {
 
 namespace exe_tests {
 
-err_type exe_gen_trees_auf(std::ifstream& fin) {
+err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 	// size of the vector with the number of unlabelled free trees
 	const uint32_t SIZE_UFT = 37;
 
@@ -129,37 +124,14 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 
 	// -------------------------------------------------------------------------
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 
 	// --- do the tests
-
-	uint32_t n;
 
 	// number of caterpillar trees
 	integer n_caterpillar;
@@ -168,6 +140,7 @@ err_type exe_gen_trees_auf(std::ifstream& fin) {
 
 	all_ulab_free_trees TreeGen;
 
+	uint32_t n;
 	while (fin >> n) {
 		n_caterpillar = 0;
 		gen = 0;

@@ -395,37 +395,17 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 	return err_type::test_format_error;
 }
 
-err_type exe_utils_sorting(ifstream& fin) {
+err_type exe_utils_sorting(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_options({
 		"insertion_sort_rand",
 		"bit_sort_rand", "bit_sort_mem_rand",
 		"counting_sort_rand", "counting_sort_nrand"
 	});
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n_inputs << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 

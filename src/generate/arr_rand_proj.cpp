@@ -63,32 +63,11 @@ using namespace iterators;
 
 namespace exe_tests {
 
-err_type exe_gen_arr_rand_proj(ifstream& fin) {
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 

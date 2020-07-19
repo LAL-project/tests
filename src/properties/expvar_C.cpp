@@ -170,40 +170,12 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 	return true;
 }
 
-err_type exe_properties_ExpVar_C(ifstream& fin) {
-	cout.setf(ios::fixed);
-	cout.precision(4);
-
+err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_procs(
 		{"brute_force", "formula-Q",
 		 "formula-no-Q-reuse", "formula-no-Q-no-reuse",
 		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
-
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n;
-	fin >> n;
-	vector<string> graph_name(n), graph_format(n);
-	for (size_t i = 0; i < n; ++i) {
-		fin >> graph_name[i] >> graph_format[i];
-	}
-
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
 
 	string proc;
 	fin >> proc;
@@ -216,11 +188,12 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 	}
 
 	if (proc == "all-trees") {
+		uint32_t n;
 		fin >> n;
 		uint32_t k;
 		for (uint32_t i = 0; i < n; ++i) {
 			fin >> k;
-			bool r = check_ExpVar_C_all_trees(k);
+			const bool r = check_ExpVar_C_all_trees(k);
 
 			if (not r) {
 				return err_type::test_exe_error;
@@ -243,8 +216,8 @@ err_type exe_properties_ExpVar_C(ifstream& fin) {
 	}
 	else {
 		ugraph G;
-		for (size_t i = 0; i < n; ++i) {
-			err_type r = io_wrapper::read_graph(graph_name[i], graph_format[i], G);
+		for (size_t i = 0; i < inputs.size(); ++i) {
+			err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 
 			if (r != err_type::no_error) {
 				return r;

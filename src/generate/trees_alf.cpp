@@ -59,11 +59,6 @@ using namespace numeric;
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
 
-/*
- * ALL LABELLED FREE TREES
- *
- */
-
 // expected second moment of degree over all labelled trees
 inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 	rational p1 = 1;
@@ -75,42 +70,21 @@ inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 
 namespace exe_tests {
 
-err_type exe_gen_trees_alf(std::ifstream& fin) {
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Expected no inputs at all." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 
 	// --- do the tests
 
-	uint32_t n;
 	integer gen;
 
 	all_lab_free_trees TreeGen;
 
+	uint32_t n;
 	while (fin >> n) {
 		const integer nn = integer_from_ui(n);
 

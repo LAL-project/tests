@@ -60,43 +60,22 @@ using namespace numeric;
 
 namespace exe_tests {
 
-err_type exe_linarr_headedness(ifstream& fin) {
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 1) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Only one input file si allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	string graph_name;
-	string graph_format;
-	fin >> graph_name >> graph_format;
 
 	dgraph G;
+	{
+	const string graph_name = inputs[0].first;
+	const string graph_format = inputs[0].second;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
 	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
 	}
 
 	// linear arrangement
@@ -122,7 +101,7 @@ err_type exe_linarr_headedness(ifstream& fin) {
 		}
 		cout << "]: ";
 
-		rational h = linarr::headedness_rational(G, pi);
+		const rational h = linarr::headedness_rational(G, pi);
 		cout << h << endl;
 	}
 

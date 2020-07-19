@@ -38,6 +38,7 @@ SOURCES += \
     construction/construct.cpp \
     construction/construct_assert.cpp \
     construction/construct_utils.cpp \
+	exe_tests.cpp \
     generate/arr_all_proj.cpp \
     generate/arr_rand_proj.cpp \
     generate/tree_validity_check.cpp \

@@ -224,40 +224,15 @@ err_type execute_utils_bfs_test(
 	return err_type::no_error;
 }
 
-err_type exe_utils_bfs(ifstream& fin) {
+err_type exe_utils_bfs(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_options({
 		"sort_insertion", "sort_boolean"
 	});
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
+	if (inputs.size() > 1) {
 		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-
-	size_t n;
-	fin >> n;
-	if (n > 1) {
-		cerr << ERROR << endl;
-		cerr << "    At most one file is allowed in this test." << endl;
-		cerr << "    Instead, " << n << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-
-	string file_name, file_format;
-	if (n == 1) {
-		fin >> file_name >> file_format;
-	}
-
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    At most one input file is allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 
@@ -272,7 +247,9 @@ err_type exe_utils_bfs(ifstream& fin) {
 
 	err_type r = err_type::no_error;
 	cout << "graph_type: " << graph_type << endl;
-	if (n == 1) {
+	if (inputs.size() == 1) {
+		const string file_name = inputs[0].first;
+		const string file_format = inputs[0].second;
 		r = (graph_type == "ugraph" ?
 			execute_utils_bfs_test<ugraph>(file_name, file_format, fin) :
 			execute_utils_bfs_test<dgraph>(file_name, file_format, fin)

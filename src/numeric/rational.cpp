@@ -368,30 +368,11 @@ void test_rational_minutia() {
 	}
 }
 
-err_type exe_numeric_rational(ifstream& fin) {
-	string field;
-	size_t n;
-
-	fin >> field;
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-	fin >> n;
-	if (n != 0) {
+err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
 

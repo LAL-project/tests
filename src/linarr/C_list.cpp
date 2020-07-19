@@ -59,45 +59,26 @@ using namespace linarr;
 
 namespace exe_tests {
 
-err_type exe_linarr_C_list(ifstream& fin) {
-	set<string> allowed_procs({"brute_force", "dyn_prog", "ladder", "stack_based"});
+err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
+	const set<string> allowed_procs(
+	{"brute_force", "dyn_prog", "ladder", "stack_based"}
+	);
 
-	string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		cerr <<ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
+	if (inputs.size() != 1) {
+		cerr << ERROR << endl;
+		cerr << "    Only one input file si allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format_error;
 	}
-
-	size_t n_inputs;
-	fin >> n_inputs;
-	if (n_inputs != 1) {
-		cerr <<ERROR << endl;
-		cerr << "    Expected only one input." << endl;
-		cerr << "    Instead, '" << n_inputs << "' were found." << endl;
-		return err_type::test_format_error;
-	}
-
-	string graph_name;
-	string graph_format;
-	fin >> graph_name >> graph_format;
 
 	ugraph g;
+	{
+	const string graph_name = inputs[0].first;
+	const string graph_format = inputs[0].second;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, g);
 	if (r != err_type::no_error) {
 		return r;
 	}
-
-	// parse body field
-	fin >> field;
-	if (field != "BODY") {
-		cerr <<ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
 	}
 
 	string proc;
@@ -107,6 +88,10 @@ err_type exe_linarr_C_list(ifstream& fin) {
 		cerr <<ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Procedure '" << proc << "' was found." << endl;
+		cerr << "    Valid values:" << endl;
+		for (const string& p : allowed_procs) {
+		cerr << "    - " << p << endl;
+		}
 		return err_type::test_format_error;
 	}
 
