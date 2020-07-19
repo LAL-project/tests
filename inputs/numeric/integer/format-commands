@@ -29,3 +29,6 @@ COMMANDS AVAILABLE
 ** operate_lit VAR0 VAR1 OP VALUE
 	Operates two variables VAR1 and literal value VALUE, where OP : {+, -, *, /, ^}.
 	The result is stored in variable VAR0, which must exist.
+
+** minutia
+	Test small operations that stress some uses of the class

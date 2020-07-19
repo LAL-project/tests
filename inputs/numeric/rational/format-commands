@@ -46,3 +46,6 @@ COMMANDS AVAILABLE
 	Type for variable VAR1 can be either
 		integer
 		rational
+
+** minutia
+	Test small operations that stress some uses of the class
