@@ -145,7 +145,7 @@ function check_res_no_valgrind() {
 	if [ ! -f $base_out_file ]; then
 		
 		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping..."
-		echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Output base file does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping..." >> execution_log
 		
 	else
 		# replace Windows-like endlines with Linux-like endlines
@@ -163,7 +163,7 @@ function check_res_no_valgrind() {
 			mv $temp_test_err $test_err
 			echo "$prog_out" > $test_out
 			
-			echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Errors were produced" >> execution_log
+			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> execution_log
 		else
 			# test whether the error output produced is empty or not
 			BASE_CONTENTS=$(cat $base_out_file)
@@ -173,7 +173,7 @@ function check_res_no_valgrind() {
 				echo -en "\e[1;4;31mDifferent outputs\e[0m "
 				echo "See result in $test_out"
 				echo "$prog_out" > $test_out
-				echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Output of test differs from base output" >> execution_log
+				echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Output of test differs from base output" >> execution_log
 			else
 				# output produced by library is
 				# equal to the output made by hand
@@ -199,7 +199,7 @@ function execute_group() {
 		echo -en "\e[2;4;37m$input_group\e[0m"
 		echo -e " does not exist. Skipping..."
 		
-		echo "$(date +"%Y/%m/%d.%T")        Error: input group $input does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: input $input does not exist. Skipping..." >> execution_log
 		skip=1
 	fi
 	
@@ -210,7 +210,7 @@ function execute_group() {
 		echo -en "\e[2;4;37m$output_group\e[0m"
 		echo -e " does not exist. Skipping..."
 		
-		echo "$(date +"%Y/%m/%d.%T")        Error: output group $output does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: output $output does not exist. Skipping..." >> execution_log
 		skip=1
 	fi
 	
@@ -473,7 +473,10 @@ if [ $exe_group != 0 ]; then
 			i2=$((2*$i + 1))
 			in="${DIRS_TO_PROCESS[$i1]}"
 			out="${DIRS_TO_PROCESS[$i2]}"
+
+			echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> execution_log
 			execute_group $in $out $idx $n_dirs
+			echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> execution_log
 		done
 	fi
 else
