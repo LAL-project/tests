@@ -1,13 +1,13 @@
 TYPE linarr-syntree_classification
-INPUT 10
-graphs/projective-structures/sen-16--0
-graphs/projective-structures/sen-16--1
-graphs/projective-structures/sen-16--2
-graphs/projective-structures/sen-16--3
-graphs/projective-structures/sen-16--4
-graphs/projective-structures/sen-16--5
-graphs/projective-structures/sen-16--6
-graphs/projective-structures/sen-16--7
-graphs/projective-structures/sen-16--8
-graphs/projective-structures/sen-16--9
+INPUT 0
 BODY
+	graphs/projective-structures/sen-16--0
+	graphs/projective-structures/sen-16--1
+	graphs/projective-structures/sen-16--2
+	graphs/projective-structures/sen-16--3
+	graphs/projective-structures/sen-16--4
+	graphs/projective-structures/sen-16--5
+	graphs/projective-structures/sen-16--6
+	graphs/projective-structures/sen-16--7
+	graphs/projective-structures/sen-16--8
+	graphs/projective-structures/sen-16--9

@@ -1,6 +1,7 @@
-TYPE linarr-Dmin-Unconstrained_YS_bruteforce
+TYPE linarr-Dmin
 INPUT 0
 BODY
+	YS_bruteforce
 	1
 	2
 	3

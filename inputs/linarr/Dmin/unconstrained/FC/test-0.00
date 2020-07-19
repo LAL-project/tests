@@ -1,6 +1,7 @@
-TYPE linarr-Dmin-Unconstrained_FC_bruteforce
+TYPE linarr-Dmin
 INPUT 0
 BODY
+	FC_bruteforce
 	1
 	2
 	3

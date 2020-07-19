@@ -1,6 +1,7 @@
-TYPE linarr-Dmin-Unconstrained_YS_tree
+TYPE linarr-Dmin
 INPUT 0
 BODY
+	YS_tree
 	15
 	0 1 0 12
 	1 2 1 7

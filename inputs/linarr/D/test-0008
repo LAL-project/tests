@@ -1,6 +1,7 @@
-TYPE linarr-D-D
+TYPE linarr-D
 INPUT 1 graphs/er/015-0.50 edge-list
 BODY
+	D
 	20
 	6 2 0 8 5 10 14 4 11 13 1 12 9 3 7 
 	8 7 2 5 3 9 10 13 4 11 0 12 1 6 14 

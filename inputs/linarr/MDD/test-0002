@@ -1,6 +1,7 @@
-TYPE linarr-D-MDD
+TYPE linarr-D
 INPUT 1 graphs/complete-bipartite/2-3 edge-list
 BODY
+	MDD
 	20
 	3 0 1 4 2 
 	1 2 0 4 3 

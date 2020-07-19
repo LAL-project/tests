@@ -1,6 +1,7 @@
-TYPE linarr-Dmin-Projective_GT
+TYPE linarr-Dmin
 INPUT 0
 BODY
+	GT
 	7
 	8
 	9

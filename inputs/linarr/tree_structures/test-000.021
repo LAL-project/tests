@@ -1,13 +1,13 @@
 TYPE linarr-syntree_classification
-INPUT 10
-graphs/projective-structures/sen-21--0
-graphs/projective-structures/sen-21--1
-graphs/projective-structures/sen-21--2
-graphs/projective-structures/sen-21--3
-graphs/projective-structures/sen-21--4
-graphs/projective-structures/sen-21--5
-graphs/projective-structures/sen-21--6
-graphs/projective-structures/sen-21--7
-graphs/projective-structures/sen-21--8
-graphs/projective-structures/sen-21--9
+INPUT 0
 BODY
+	graphs/projective-structures/sen-21--0
+	graphs/projective-structures/sen-21--1
+	graphs/projective-structures/sen-21--2
+	graphs/projective-structures/sen-21--3
+	graphs/projective-structures/sen-21--4
+	graphs/projective-structures/sen-21--5
+	graphs/projective-structures/sen-21--6
+	graphs/projective-structures/sen-21--7
+	graphs/projective-structures/sen-21--8
+	graphs/projective-structures/sen-21--9

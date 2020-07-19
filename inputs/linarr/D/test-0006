@@ -1,6 +1,7 @@
-TYPE linarr-D-D
+TYPE linarr-D
 INPUT 1 graphs/linear-tree/010 edge-list
 BODY
+	D
 	20
 	1 7 9 2 4 5 0 3 8 6 
 	7 1 8 9 0 6 2 4 5 3 

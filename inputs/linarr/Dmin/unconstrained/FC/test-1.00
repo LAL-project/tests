@@ -1,6 +1,7 @@
-TYPE linarr-Dmin-Unconstrained_FC_class
+TYPE linarr-Dmin
 INPUT 0
 BODY
+	FC_class
 	linear 1 100
 	star 1 100
 	caterpillar 1 22
