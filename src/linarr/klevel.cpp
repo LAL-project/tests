@@ -129,7 +129,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	}
 
 	// linear arrangement
-	vector<vector<position>> Ts;
+	vector<vector<node>> Ts;
 	vector<linearrgmnt> pis;
 
 	// amount of linear arrangements

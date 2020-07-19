@@ -105,7 +105,7 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<position> > T(n_linarrs, vector<position>(g.n_nodes()));
+	vector<vector<node> > T(n_linarrs, vector<node>(g.n_nodes()));
 	vector<linearrgmnt > pis(n_linarrs,  linearrgmnt(g.n_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
