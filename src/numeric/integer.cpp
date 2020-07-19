@@ -228,6 +228,52 @@ static inline err_type op_integer_lit(
 	return err_type::no_error;
 }
 
+void test_integer_minutia() {
+	{
+	integer i1;
+	integer i2;
+	i1.swap(i2);
+	}
+	{
+	integer i1;
+	integer i2;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1 = 0;
+	integer i2;
+	i1.swap(i2);
+	}
+	{
+	integer i1 = 0;
+	integer i2;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1;
+	integer i2 = 0;
+	i1.swap(i2);
+	}
+	{
+	integer i1;
+	integer i2 = 0;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1 = 0;
+	integer i2 = 0;
+	i1.swap(i2);
+	}
+	{
+	integer i1 = 0;
+	integer i2 = 0;
+	i2.swap(i1);
+	}
+}
+
 err_type exe_numeric_integer(ifstream& fin) {
 	string field;
 	size_t n;
@@ -305,6 +351,9 @@ err_type exe_numeric_integer(ifstream& fin) {
 		else if (command == "operate_lit") {
 			err = op_integer_lit(integer_vars, fin);
 			if (err != err_type::no_error) { return err; }
+		}
+		else if (command == "minutia") {
+			test_integer_minutia();
 		}
 		else {
 			cerr << ERROR << endl;

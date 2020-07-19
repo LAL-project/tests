@@ -56,7 +56,7 @@ using namespace numeric;
 #define map_has(M, v) (M.find(v) != M.end())
 
 #define assert_exists_variable(varname)										\
-	if (not map_has(rational_vars, varname)) {								\
+	if (not map_has(vtypes, varname)) {										\
 		cerr << ERROR << endl;												\
 		cerr << "    Variable '" << varname << "' does not exist." << endl;	\
 		return err_type::test_exe_error;									\
@@ -211,7 +211,24 @@ static inline err_type comp_rational_lit(
 	);
 }
 
-template<typename U, typename V>
+template<typename U>
+static inline rational resolve_op_rational(
+	const U& var1, const string& op, const rational& var2
+)
+{
+	if (op == "+") { return var1 + var2; }
+	if (op == "-") { return var1 - var2; }
+	if (op == "*") { return var1 * var2; }
+	if (op == "/") { return var1 / var2; }
+	return -1;
+}
+
+template<
+	typename U, typename V,
+	typename std::enable_if_t<
+		std::is_same<V, integer>::value || std::is_integral<V>::value, int
+	> = 0
+>
 static inline rational resolve_op_rational(
 	const U& var1, const string& op, const V& var2
 )
@@ -220,6 +237,7 @@ static inline rational resolve_op_rational(
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
 	if (op == "/") { return var1 / var2; }
+	if (op == "^") { return var1 ^ var2; }
 	return -1;
 }
 
@@ -304,6 +322,52 @@ static inline err_type op_rational_lit(
 	return err_type::no_error;
 }
 
+void test_rational_minutia() {
+	{
+	integer i1;
+	integer i2;
+	i1.swap(i2);
+	}
+	{
+	integer i1;
+	integer i2;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1 = 0;
+	integer i2;
+	i1.swap(i2);
+	}
+	{
+	integer i1 = 0;
+	integer i2;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1;
+	integer i2 = 0;
+	i1.swap(i2);
+	}
+	{
+	integer i1;
+	integer i2 = 0;
+	i2.swap(i1);
+	}
+
+	{
+	integer i1 = 0;
+	integer i2 = 0;
+	i1.swap(i2);
+	}
+	{
+	integer i1 = 0;
+	integer i2 = 0;
+	i2.swap(i1);
+	}
+}
+
 err_type exe_numeric_rational(ifstream& fin) {
 	string field;
 	size_t n;
@@ -382,7 +446,12 @@ err_type exe_numeric_rational(ifstream& fin) {
 		else if (command == "print") {
 			fin >> var_name;
 			assert_exists_variable(var_name)
-			cout << var_name << "= " << get_var_value(rational_vars, var_name) << endl;
+			if (vtypes[var_name] == "rational") {
+				cout << var_name << "= " << get_var_value(rational_vars, var_name) << endl;
+			}
+			else {
+				cout << var_name << "= " << get_var_value(integer_vars, var_name) << endl;
+			}
 		}
 		else if (command == "compare") {
 			err = comp_rational(vtypes, integer_vars, rational_vars, fin);
@@ -399,6 +468,9 @@ err_type exe_numeric_rational(ifstream& fin) {
 		else if (command == "operate_lit") {
 			err = op_rational_lit(vtypes, integer_vars, rational_vars, fin);
 			if (err != err_type::no_error) { return err; }
+		}
+		else if (command == "minutia") {
+			test_rational_minutia();
 		}
 		else {
 			cerr << ERROR << endl;
