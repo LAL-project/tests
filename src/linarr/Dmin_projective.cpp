@@ -170,8 +170,11 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	}
 	else {
 		cerr << ERROR << endl;
-		cerr << "    Test not implemented for algorithm 'alg'." << endl;
-		r = err_type::not_implemented;
+		cerr << "    Invalid value for algorithm." << endl;
+		cerr << "    Algorithm value '" << alg << "'." << endl;
+		cerr << "    Valid values:" << endl;
+		cerr << "    - Projective" << endl;
+		return err_type::test_format_error;
 	}
 
 	if (r != err_type::no_error) { return r; }

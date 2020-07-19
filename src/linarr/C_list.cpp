@@ -105,7 +105,7 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > T(n_linarrs, vector<node>(g.n_nodes()));
+	vector<vector<position> > T(n_linarrs, vector<position>(g.n_nodes()));
 	vector<linearrgmnt > pis(n_linarrs,  linearrgmnt(g.n_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
@@ -116,7 +116,7 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 		}
 	}
 
-	vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_C::brute_force);
+	const vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_C::brute_force);
 
 	// compute all C
 	vector<uint32_t> Cs;

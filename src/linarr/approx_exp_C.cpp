@@ -71,12 +71,12 @@ using namespace linarr;
 namespace exe_tests {
 
 template<typename INT>
-inline bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
-	if (s1 == s2) { return true; }
+inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
+	/*if (s1 == s2) { return true; }
 	if (s1 == s2 + d2) { return true; }
 	if (s1 + d1 == s2) { return true; }
-	if (s1 + d1 == s2 + d2) { return true; }
-	return false;
+	if (s1 + d1 == s2 + d2) { return true; }*/
+	return (s1 == s2) or (s1 == s2 + d2) or (s1 + d1 == s2) or (s1 + d1 == s2 + d2);
 }
 
 uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
@@ -84,13 +84,15 @@ uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
 	for (uint32_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
 		for (uint32_t s2 = 1; s2 <= n; ++s2) {
-			if (s2 + d2 > n) { continue; }
-			if (common_endpoints(s1,d1, s2,d2)) { continue; }
+			//if (s2 + d2 > n) { continue; }
+			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
+			const bool cond1 = s2 + d2 > n;
+			const bool cond2 = common_endpoints(s1,d1, s2,d2);
 
 			// no common endpoints
 			const bool cross1 = s1 < s2 and s2 < s1 + d1 and s1 + d1 < s2 + d2;
 			const bool cross2 = s2 < s1 and s1 < s2 + d2 and s2 + d2 < s1 + d1;
-			c += cross1 or cross2;
+			c += (not cond1 and not cond2)*(cross1 or cross2);
 		}
 	}
 	return c;
@@ -101,11 +103,13 @@ uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
 	for (uint32_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
 		for (uint32_t s2 = 1; s2 <= n; ++s2) {
-			if (s2 + d2 > n) { continue; }
-			if (common_endpoints(s1,d1, s2,d2)) { continue; }
+			//if (s2 + d2 > n) { continue; }
+			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
+			const bool cond1 = s2 + d2 > n;
+			const bool cond2 = common_endpoints(s1,d1, s2,d2);
 
 			// no common endpoints
-			++c;
+			c += (not cond1 and not cond2);
 		}
 	}
 	return c;
@@ -181,7 +185,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 
 	// linear arrangement
 	const uint32_t n = G.n_nodes();
-	vector<node> T(n);
+	vector<position> T(n);
 	linearrgmnt pi(n);
 
 	// amount of linear arrangements

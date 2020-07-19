@@ -80,7 +80,7 @@ err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 
 	// linear arrangement
 	const uint32_t n = G.n_nodes();
-	vector<node> T(n);
+	vector<position> T(n);
 	linearrgmnt pi(n);
 
 	// amount of linear arrangements
