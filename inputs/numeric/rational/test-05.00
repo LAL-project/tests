@@ -1,0 +1,53 @@
+TYPE numeric-rational
+INPUT 0
+BODY
+	let k1 rational int 0
+	let two integer int 2
+	let three integer int 3
+	let four integer int 4
+	
+	
+	
+	let k0 rational int 3
+	
+	operate k1 k0 ^ two
+	print k1
+	compare_lit k1 == 9
+	
+	operate k1 k0 ^ three
+	print k1
+	compare_lit k1 == 27
+	
+	operate k1 k0 ^ four
+	print k1
+	compare_lit k1 == 81
+	
+	
+	
+	
+	let k0 rational int 3
+	
+	operate_lit k1 k0 ^ 2
+	print k1
+	compare_lit k1 == 9
+	
+	operate_lit k1 k0 ^ 3
+	print k1
+	compare_lit k1 == 27
+	
+	operate_lit k1 k0 ^ 4
+	print k1
+	compare_lit k1 == 81
+	
+	
+	
+	
+	let k0 rational string 4/3
+	
+	operate k1 k0 ^ two
+	print k1
+	operate k1 k0 ^ three
+	print k1
+	operate k1 k0 ^ four
+	print k1
+	
