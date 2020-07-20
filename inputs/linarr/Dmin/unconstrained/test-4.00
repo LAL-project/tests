@@ -1,4 +1,4 @@
-TYPE linarr-Dmin
+TYPE linarr-Dmin-Unconstrained
 INPUT 0
 BODY
 	algo_vs_algo
@@ -22,4 +22,3 @@ BODY
 	exhaustive YS == FC 18
 	exhaustive YS == FC 19
 	exhaustive YS == FC 20
-	

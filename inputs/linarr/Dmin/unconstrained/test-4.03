@@ -1,0 +1,12 @@
+TYPE linarr-Dmin-Unconstrained
+INPUT 0
+BODY
+	algo_vs_algo
+	random YS == FC 300 10
+	random YS == FC 400 10
+	random YS == FC 500 10
+	random YS == FC 600 10
+	random YS == FC 700 10
+	random YS == FC 800 10
+	random YS == FC 900 10
+	random YS == FC 10 10
