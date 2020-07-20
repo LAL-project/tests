@@ -322,7 +322,7 @@ static inline err_type op_rational_lit(
 	return err_type::no_error;
 }
 
-void test_rational_minutia() {
+err_type test_rational_minutia() {
 	{
 	integer i1;
 	integer i2;
@@ -366,6 +366,30 @@ void test_rational_minutia() {
 	integer i2 = 0;
 	i2.swap(i1);
 	}
+
+	{
+	map<uint32_t, pair<integer, integer>> hash;
+	hash.insert( make_pair(3, make_pair(integer("42"), integer("9999"))) );
+	hash.insert( make_pair(4, make_pair(integer("40"), integer("99899"))) );
+
+#define test_eq(data, good)																\
+	if (data != good) {																	\
+		cerr << ERROR << endl;															\
+		cerr << "    Integer values do not coincide." << endl;							\
+		cerr << "    Expected '" << good << "', retrieved '" << data << "'." << endl;	\
+		return err_type::test_exe_error;												\
+	}
+
+	const auto& p1 = hash[3];
+	test_eq(p1.first, integer("42"))
+	test_eq(p1.second, integer("9999"))
+
+	const auto& p2 = hash[4];
+	test_eq(p2.first, integer("40"))
+	test_eq(p2.second, integer("99899"))
+	}
+
+	return err_type::no_error;
 }
 
 err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
@@ -451,7 +475,8 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 			if (err != err_type::no_error) { return err; }
 		}
 		else if (command == "minutia") {
-			test_rational_minutia();
+			err = test_rational_minutia();
+			if (err != err_type::no_error) { return err; }
 		}
 		else {
 			cerr << ERROR << endl;
