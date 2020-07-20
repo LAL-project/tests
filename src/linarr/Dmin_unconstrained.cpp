@@ -49,6 +49,7 @@ using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/graphs/ftree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
@@ -77,33 +78,6 @@ bool ge(const algo_result& r1, const algo_result& r2) { return r1.first >= r2.fi
 bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.first; }
 
 namespace exe_tests {
-
-err_type consume_beginning(ifstream& F) {
-	string field;
-	F >> field;
-	if (field != "INPUT") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'INPUT'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-	size_t n_inputs;
-	F >> n_inputs;
-	if (n_inputs != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << n_inputs << " were specified." << endl;
-		return err_type::test_format_error;
-	}
-	F >> field;
-	if (field != "BODY") {
-		cerr << ERROR << endl;
-		cerr << "    Expected field 'BODY'." << endl;
-		cerr << "    Instead, '" << field << "' was found." << endl;
-		return err_type::test_format_error;
-	}
-	return err_type::no_error;
-}
 
 pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
 	const uint32_t n = t.n_nodes();
@@ -210,8 +184,6 @@ bool test_correctness_arr_formula(
 // -----------------------------------------------------------------------------
 
 err_type test_Unconstrained(ifstream& fin) {
-	consume_beginning(fin);
-
 	const auto FC =
 	[](const ftree& t) -> algo_result {
 		return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
@@ -267,35 +239,75 @@ err_type test_Unconstrained(ifstream& fin) {
 		uint32_t n;
 		fin >> n;
 
-		cout << "Testing " << algo1 << " " << comp << " " << algo2 << " " << n << endl;
+		cout << "Testing '" << mode << "' for "
+			 << "'" << algo1 << "' " << comp << " '" << algo2 << "'"
+			 << " on size: " << n;
 
-		generate::all_ulab_free_trees TreeGen(n);
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			const ftree tree = TreeGen.get_tree();
+		if (mode == "exhaustive") {
+			cout << endl;
 
-			const auto res1 = F1(tree);
-			const auto res2 = F2(tree);
+			generate::all_ulab_free_trees TreeGen(n);
+			while (TreeGen.has_next()) {
+				TreeGen.next();
+				const ftree tree = TreeGen.get_tree();
 
-			check_correctness_arr(tree, res1);
-			check_correctness_arr(tree, res2);
+				const auto res1 = F1(tree);
+				const auto res2 = F2(tree);
 
-			if (not compare(res1, res2)) {
-				cerr << ERROR << endl;
-				cerr << "    Result of algorithm '" << algo1 << "' is not "
-					 << "'" << comp << "'"
-					 << " with respect to the result of algorithm "
-					 << "'" << algo2 << "'."
-					 << endl;
-				cerr << "    Algorithm: " << algo1 << endl;
-				cerr << "        D= " << res1.first << endl;
-				cerr << "        Arrangement: " << res1.second << endl;
-				cerr << "    Algorithm: " << algo2 << endl;
-				cerr << "        D= " << res2.first << endl;
-				cerr << "        Arrangement: " << res2.second << endl;
-				cerr << " In tree:" << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
+				check_correctness_arr(tree, res1);
+				check_correctness_arr(tree, res2);
+
+				if (not compare(res1, res2)) {
+					cerr << ERROR << endl;
+					cerr << "    Result of algorithm '" << algo1 << "' is not "
+						 << "'" << comp << "'"
+						 << " with respect to the result of algorithm "
+						 << "'" << algo2 << "'."
+						 << endl;
+					cerr << "    Algorithm: " << algo1 << endl;
+					cerr << "        D= " << res1.first << endl;
+					cerr << "        Arrangement: " << res1.second << endl;
+					cerr << "    Algorithm: " << algo2 << endl;
+					cerr << "        D= " << res2.first << endl;
+					cerr << "        Arrangement: " << res2.second << endl;
+					cerr << " In tree:" << endl;
+					cerr << tree << endl;
+					return err_type::test_exe_error;
+				}
+			}
+		}
+		else {
+			uint32_t N;
+			fin >> N;
+			cout << " (N= " << N << ")" << endl;
+
+			generate::rand_ulab_free_trees TreeGen(n);
+			for (uint32_t i = 0; i < N; ++i) {
+				const ftree tree = TreeGen.make_rand_tree();
+
+				const auto res1 = F1(tree);
+				const auto res2 = F2(tree);
+
+				check_correctness_arr(tree, res1);
+				check_correctness_arr(tree, res2);
+
+				if (not compare(res1, res2)) {
+					cerr << ERROR << endl;
+					cerr << "    Result of algorithm '" << algo1 << "' is not "
+						 << "'" << comp << "'"
+						 << " with respect to the result of algorithm "
+						 << "'" << algo2 << "'."
+						 << endl;
+					cerr << "    Algorithm: " << algo1 << endl;
+					cerr << "        D= " << res1.first << endl;
+					cerr << "        Arrangement: " << res1.second << endl;
+					cerr << "    Algorithm: " << algo2 << endl;
+					cerr << "        D= " << res2.first << endl;
+					cerr << "        Arrangement: " << res2.second << endl;
+					cerr << " In tree:" << endl;
+					cerr << tree << endl;
+					return err_type::test_exe_error;
+				}
 			}
 		}
 	}
@@ -307,10 +319,6 @@ err_type test_Unconstrained_bf_algorithm(
 	ifstream& fin
 )
 {
-	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
-		return err;
-	}
-
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
@@ -347,10 +355,6 @@ err_type test_Unconstrained_class_algorithm(
 	ifstream& fin
 )
 {
-	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
-		return err;
-	}
-
 	string tree_class;
 	uint32_t n1, n2;
 
@@ -535,10 +539,6 @@ err_type test_Unconstrained_tree_algorithm(
 	ifstream& fin
 )
 {
-	if (const auto err = consume_beginning(fin); err != err_type::no_error) {
-		return err;
-	}
-
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
