@@ -1,0 +1,7 @@
+TYPE linarr-DMax-Planar
+INPUT 0
+BODY
+	5
+	0 1 0 3 1 2 3 4 10
+	0 1 0 3 0 4 1 2 10
+	0 1 0 2 0 3 0 4 10
