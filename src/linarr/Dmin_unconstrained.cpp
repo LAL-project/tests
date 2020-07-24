@@ -79,28 +79,6 @@ bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.fir
 
 namespace exe_tests {
 
-pair<uint32_t, linearrgmnt> Dmin_Unconstrained_bruteforce(const ftree& t) {
-	const uint32_t n = t.n_nodes();
-	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
-
-	linearrgmnt arr(n);
-	std::iota(arr.begin(), arr.end(), 0);
-
-	linearrgmnt arrMin;
-	uint32_t Dmin = numeric_limits<uint32_t>::max();
-
-	do {
-		const uint32_t D = sum_length_edges(t, arr);
-		if (Dmin > D) {
-			Dmin = D;
-			arrMin = arr;
-		}
-	}
-	while (std::next_permutation(arr.begin(), arr.end()));
-
-	return make_pair(Dmin, arrMin);
-}
-
 bool check_correctness_arr(const ftree& tree, const pair<uint32_t, linearrgmnt>& res) {
 	const linearrgmnt& arr = res.second;
 	/* ensure that the result is an arrangement */
@@ -121,34 +99,6 @@ bool check_correctness_arr(const ftree& tree, const pair<uint32_t, linearrgmnt>&
 		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
 		cerr << "    Value of D returned: " << res.first << endl;
 		cerr << "    Actual value of D:   " << D << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
-		return false;
-	}
-	return true;
-}
-
-bool test_correctness_arr_bf(
-	const ftree& tree, const pair<uint32_t, linearrgmnt>& res_lib
-)
-{
-	if (not check_correctness_arr(tree, res_lib)) {
-		return false;
-	}
-	/* compute Dmin by brute force */
-	const pair<uint32_t, linearrgmnt> res_bf = Dmin_Unconstrained_bruteforce(tree);
-	/* compare results obtained by the library and by brute force */
-	if (res_lib.first != res_bf.first) {
-		cerr << ERROR << endl;
-		cerr << "    Values of unconstrained Dmin do not coincide." << endl;
-		cerr << "    Library:" << endl;
-		cerr << "        Value: " << res_lib.first << endl;
-		cerr << "        Arrangement:     " << res_lib.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << endl;
-		cerr << "    Bruteforce:" << endl;
-		cerr << "        Value: " << res_bf.first << endl;
-		cerr << "        Arrangement:     " << res_bf.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
 		return false;
@@ -319,34 +269,41 @@ err_type test_Unconstrained_bf_algorithm(
 	ifstream& fin
 )
 {
-	// read number of vertices
 	uint32_t n;
-	while (fin >> n) {
-		cout << "Bruteforce " << n << endl;
-		size_t idx = 1;
+	fin >> n;
 
-		// enumerate all trees of 'n' vertices
-		generate::all_ulab_free_trees TreeGen(n);
-		while (TreeGen.has_next()) {
-			cout << "    " << idx << endl;
-			++idx;
+	if (n == 1) {
+		// nothing to do
+		return err_type::no_error;
+	}
 
-			TreeGen.next();
-			const ftree tree = TreeGen.get_tree();
+	vector<edge> edges(n - 1);
+	while (fin >> edges[0].first >> edges[0].second) {
+		// read edges
+		for (uint32_t i = 1; i < n - 1; ++i) {
+			fin >> edges[i].first >> edges[i].second;
+		}
 
-			// compute Dmin using the library's algorithm
-			const auto res_algo = A(tree);
+		ftree T(n);
+		T.add_edges(edges);
+		const auto res_A = A(T);
 
-			const bool correct = test_correctness_arr_bf(tree, res_algo);
-			if (not correct) {
-				cerr << ERROR << endl;
-				cerr << "    When dealing with a tree of " << n << " vertices." << endl;
-				cerr << "    Tree:" << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
+		if (not check_correctness_arr(T, res_A)) {
+			return err_type::test_exe_error;
+		}
+
+		uint32_t base_res_test;
+		fin >> base_res_test;
+
+		if (res_A.first != base_res_test) {
+			cerr << ERROR << endl;
+			cerr << "    Result of algorithm does not match base result." << endl;
+			cerr << "    Base result: " << base_res_test << endl;
+			cerr << "    Algorithm result:" << res_A.first << endl;
+			return err_type::test_exe_error;
 		}
 	}
+
 	return err_type::no_error;
 }
 
