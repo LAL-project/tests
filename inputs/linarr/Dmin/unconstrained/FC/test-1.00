@@ -1,4 +1,4 @@
-TYPE linarr-Dmin
+TYPE linarr-Dmin-Unconstrained
 INPUT 0
 BODY
 	FC_class
