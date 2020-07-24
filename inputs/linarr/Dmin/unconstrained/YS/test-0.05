@@ -1,8 +1,8 @@
 TYPE linarr-Dmin-Unconstrained
 INPUT 0
 BODY
-     YS_bruteforce
-     5
-     0 1 0 3 1 2 3 4 4
-     0 1 0 3 0 4 1 2 5
-     0 1 0 2 0 3 0 4 6
+	YS_bruteforce
+	5
+	0 1 0 3 1 2 3 4 4
+	0 1 0 3 0 4 1 2 5
+	0 1 0 2 0 3 0 4 6
