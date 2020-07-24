@@ -300,6 +300,8 @@ err_type test_Unconstrained_bf_algorithm(
 			cerr << "    Result of algorithm does not match base result." << endl;
 			cerr << "    Base result: " << base_res_test << endl;
 			cerr << "    Algorithm result:" << res_A.first << endl;
+			cerr << "    For tree:" << endl;
+			cerr << T << endl;
 			return err_type::test_exe_error;
 		}
 	}
