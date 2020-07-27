@@ -66,87 +66,77 @@ using namespace generate;
 
 namespace exe_tests {
 
-pair<uint32_t, linearrgmnt> Dmin_Projective_bruteforce(const rtree& t) {
-	const uint32_t n = t.n_nodes();
-	if (n == 1) { return make_pair(0, linearrgmnt(0,0)); }
-
-	linearrgmnt arrMin;
-	uint32_t Dmin = numeric_limits<uint32_t>::max();
-
-	all_proj_arr ArrGen(t);
-	while (ArrGen.has_next()) {
-		ArrGen.next();
-		const linearrgmnt arr = ArrGen.get_arrangement();
-
-		const uint32_t D = sum_length_edges(t, arr);
-		if (Dmin > D) {
-			Dmin = D;
-			arrMin = arr;
-		}
-	}
-
-	return make_pair(Dmin, arrMin);
-}
-
 err_type test_Projective_GT(ifstream& fin) {
 	// read number of nodes
 	uint32_t n;
-	while (fin >> n) {
-		generate::all_ulab_rooted_trees TreeGen(n);
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			rtree tree = TreeGen.get_tree();
-			tree.recalc_size_subtrees();
+	fin >> n;
 
-			// execute library's algorithm
-			const pair<uint32_t, linearrgmnt> res_library
-				= compute_Dmin(tree, algorithms_Dmin::Projective);
-			const linearrgmnt& arr = res_library.second;
+	if (n == 1) {
+		// nothing to do
+		return err_type::no_error;
+	}
 
-			// ensure that the arrangement is a projective permutation
-			const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);
-			if (err != "No error") {
-				cerr << ERROR << endl;
-				cerr << "    The result is not a projective arrangement." << endl;
-				cerr << "    Error: '" << err << "'" << endl;
-				cerr << "    Arrangement:     " << arr << endl;
-				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-				cerr << "    For tree: " << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
+	rtree tree;
+	node r;
+	while (fin >> r) {
+		tree.init(n);
+		tree.set_root(r);
+		vector<edge> edges(n - 1);
+		for (uint32_t i = 0; i < n - 1; ++i) {
+			fin >> edges[i].first >> edges[i].second;
+		}
+		tree.add_edges(edges);
+		tree.set_rtree_type(rtree::rtree_type::arborescence);
+		tree.recalc_size_subtrees();
 
-			// ensure that value of D is correct
-			const uint32_t D = sum_length_edges(tree, res_library.second);
-			if (D != res_library.first) {
-				cerr << ERROR << endl;
-				cerr << "    Value of D returned by method is incorrect." << endl;
-				cerr << "    Arrangement:     " << res_library.second << endl;
-				cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
-				cerr << "    Value of D returned: " << res_library.first << endl;
-				cerr << "    Actual value of D:   " << D << endl;
-				cerr << "    For tree: " << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
+		// execute library's algorithm
+		const pair<uint32_t, linearrgmnt> res_library
+			= compute_Dmin(tree, algorithms_Dmin::Projective);
+		const linearrgmnt& arr = res_library.second;
 
-			// ensure that the value of D is actually minimum
-			const pair<uint32_t, linearrgmnt> res_bf = Dmin_Projective_bruteforce(tree);
-			if (res_library.first != res_bf.first) {
-				cerr << ERROR << endl;
-				cerr << "    Values of projective Dmin do not coincide." << endl;
-				cerr << "    Library:" << endl;
-				cerr << "        Value: " << res_library.first << endl;
-				cerr << "        Arrangement:     " << res_library.second << endl;
-				cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
-				cerr << "    Bruteforce:" << endl;
-				cerr << "        Value: " << res_bf.first << endl;
-				cerr << "        Arrangement:     " << res_bf.second << endl;
-				cerr << "        Inv Arrangement: " << invlinarr(res_bf.second) << endl;
-				cerr << "    For tree: " << endl;
-				cerr << tree << endl;
-				return err_type::test_exe_error;
-			}
+		// ensure that the arrangement is a projective permutation
+		const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);
+		if (err != "No error") {
+			cerr << ERROR << endl;
+			cerr << "    The result is not a projective arrangement." << endl;
+			cerr << "    Error: '" << err << "'" << endl;
+			cerr << "    Arrangement:     " << arr << endl;
+			cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+			cerr << "    For tree: " << endl;
+			cerr << tree << endl;
+			return err_type::test_exe_error;
+		}
+
+		// ensure that value of D matches the evaluation of the arrangement
+		const uint32_t D = sum_length_edges(tree, res_library.second);
+		if (D != res_library.first) {
+			cerr << ERROR << endl;
+			cerr << "    Value of D returned by method does not match the" << endl;
+			cerr << "    evaluation of the arrangement." << endl;
+			cerr << "    Arrangement:     " << res_library.second << endl;
+			cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
+			cerr << "    Value of D returned: " << res_library.first << endl;
+			cerr << "    Actual value of D:   " << D << endl;
+			cerr << "    For tree: " << endl;
+			cerr << tree << endl;
+			return err_type::test_exe_error;
+		}
+
+		// ensure that the value of D is actually minimum
+		uint32_t brute_force_D;
+		fin >> brute_force_D;
+		if (res_library.first != brute_force_D) {
+			cerr << ERROR << endl;
+			cerr << "    Values of projective Dmin do not coincide." << endl;
+			cerr << "    Library:" << endl;
+			cerr << "        Value: " << res_library.first << endl;
+			cerr << "        Arrangement:     " << res_library.second << endl;
+			cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
+			cerr << "    Bruteforce:" << endl;
+			cerr << "        Value: " << brute_force_D << endl;
+			cerr << "    For tree: " << endl;
+			cerr << tree << endl;
+			return err_type::test_exe_error;
 		}
 	}
 
@@ -161,22 +151,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	string alg;
-	fin >> alg;
-
-	err_type r;
-	if (alg == "Projective") {
-		r = test_Projective_GT(fin);
-	}
-	else {
-		cerr << ERROR << endl;
-		cerr << "    Invalid value for algorithm." << endl;
-		cerr << "    Algorithm value '" << alg << "'." << endl;
-		cerr << "    Valid values:" << endl;
-		cerr << "    - Projective" << endl;
-		return err_type::test_format_error;
-	}
-
+	const auto r = test_Projective_GT(fin);
 	if (r != err_type::no_error) { return r; }
 
 	TEST_GOODBYE
