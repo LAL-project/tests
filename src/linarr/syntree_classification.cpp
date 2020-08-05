@@ -45,7 +45,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/tree_structure_class.hpp>
 #include <lal/linarr/tree_structure.hpp>
 #include <lal/utils/graphs/trees/convert_to_rtree.hpp>

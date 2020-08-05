@@ -50,7 +50,7 @@ using namespace std;
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
-#include <lal/graphs/ftree.hpp>
+#include <lal/graphs/free_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/numeric/integer.hpp>

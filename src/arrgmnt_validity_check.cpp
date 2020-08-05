@@ -47,8 +47,8 @@ using namespace std;
 // lal includes
 #include <lal/iterators/E_iterator.hpp>
 #include <lal/linarr/C.hpp>
-#include <lal/graphs/rtree.hpp>
-#include <lal/graphs/ftree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
+#include <lal/graphs/free_tree.hpp>
 #include <lal/utils/std_utils.hpp>
 using namespace lal;
 using namespace graphs;

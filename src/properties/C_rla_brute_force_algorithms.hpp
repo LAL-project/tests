@@ -41,7 +41,7 @@
 #pragma once
 
 #include <lal/numeric.hpp>
-#include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
 
 namespace exe_tests {
 

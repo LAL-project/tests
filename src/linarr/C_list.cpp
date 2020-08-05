@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/linarr/C.hpp>
-#include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;

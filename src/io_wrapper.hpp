@@ -45,8 +45,8 @@
 #include <string>
 
 // lal includes
-#include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/dgraph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
+#include <lal/graphs/directed_graph.hpp>
 
 // custom includes
 #include "definitions.hpp"

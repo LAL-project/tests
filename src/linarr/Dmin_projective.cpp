@@ -49,7 +49,7 @@ using namespace std;
 // lal includes
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
-#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/io/basic_output.hpp>

@@ -47,15 +47,13 @@
 
 // lal includes
 #include <lal/graphs/graph.hpp>
-#include <lal/graphs/dgraph.hpp>
-#include <lal/graphs/ugraph.hpp>
-#include <lal/graphs/ftree.hpp>
-#include <lal/graphs/rtree.hpp>
+#include <lal/graphs/directed_graph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
+#include <lal/graphs/free_tree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
 
 // custom includes
 #include "definitions.hpp"
-
-
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {

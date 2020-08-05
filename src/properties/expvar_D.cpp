@@ -44,7 +44,7 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/ugraph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/properties/D_rla.hpp>
 #include <lal/properties/Q.hpp>
