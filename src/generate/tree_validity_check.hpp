@@ -72,8 +72,8 @@ enum class rtree_check : int8_t {
 	diff_n_verts,
 	diff_n_edges,
 	without_root,
-	invalid_rtree_type,
-	rtree_type_is_none,
+	invalid_rooted_tree_type,
+	rooted_tree_type_is_none,
 
 	correct
 };

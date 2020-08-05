@@ -86,7 +86,7 @@ err_type test_Projective_GT(ifstream& fin) {
 			fin >> edges[i].first >> edges[i].second;
 		}
 		tree.add_edges(edges);
-		tree.set_rtree_type(rtree::rtree_type::arborescence);
+		tree.set_rtree_type(rtree::rooted_tree_type::arborescence);
 		tree.recalc_size_subtrees();
 
 		// execute library's algorithm

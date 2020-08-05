@@ -90,9 +90,9 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 #define RTREE "rtree"
 
 // directed rooted tree types
-#define RTREE_arborescence rtree::rtree_type::arborescence
-#define RTREE_anti_arborescence rtree::rtree_type::anti_arborescence
-#define RTREE_none rtree::rtree_type::none
+#define RTREE_arborescence rtree::rooted_tree_type::arborescence
+#define RTREE_anti_arborescence rtree::rooted_tree_type::anti_arborescence
+#define RTREE_none rtree::rooted_tree_type::none
 
 #define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
 
@@ -128,7 +128,7 @@ static const std::vector<std::string> all_types(
 		return err_type::test_format_error;									\
 	}
 
-#define assert_string_is_rtree_type(assertion, t)							\
+#define assert_string_is_rooted_tree_type(assertion, t)							\
 	if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
@@ -328,12 +328,12 @@ static const std::vector<std::string> all_types(
 	}
 
 
-#define rtree_type_to_string(t)							\
-	[](rtree::rtree_type __t) -> std::string {				\
+#define rooted_tree_type_to_string(t)							\
+	[](rtree::rooted_tree_type __t) -> std::string {				\
 		switch (__t) {										\
-			case rtree::rtree_type::arborescence:			\
+			case rtree::rooted_tree_type::arborescence:			\
 				return "arborescence";						\
-			case rtree::rtree_type::anti_arborescence:	\
+			case rtree::rooted_tree_type::anti_arborescence:	\
 				return "anti_arborescence";					\
 			default:										\
 				return "none";								\
