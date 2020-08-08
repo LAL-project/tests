@@ -2,4 +2,4 @@ TYPE linarr-DMax-Planar
 INPUT 0
 BODY
 	3
-	0 1 0 2 3
+	3 0 0 3

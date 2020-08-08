@@ -2,4 +2,4 @@ TYPE linarr-DMax-Unconstrained
 INPUT 0
 BODY
 	1
-	0
+	1 0

@@ -2,5 +2,5 @@ TYPE properties-expected_D-Projective
 INPUT 0
 BODY
 	3
-	0 0 1 1 2 5/2
-	0 0 1 0 2 8/3
+	0 3 0 1 5/2
+	0 3 0 0 8/3
