@@ -51,8 +51,8 @@ using namespace std;
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/utils/graphs/trees/tree_centroid.hpp>
-#include <lal/utils/graphs/traversal.hpp>
+#include <lal/internal/graphs/trees/tree_centroid.hpp>
+#include <lal/internal/graphs/traversal.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -68,7 +68,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	uint32_t size_cc = 0;
 	vector<node> reachable;
 	{
-	utils::BFS<T> bfs(t);
+	internal::BFS<T> bfs(t);
 	bfs.set_use_rev_edges(t.is_rooted());
 	bfs.set_process_current(
 	[&](const auto&, node s) -> void { reachable.push_back(s); ++size_cc; }
@@ -84,7 +84,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	u1 = u2 = n;
 
 	for (const node u : reachable) {
-		const bool cc = utils::__lal::is_centroidal(t, size_cc, u, vis, sizes);
+		const bool cc = internal::__lal::is_centroidal(t, size_cc, u, vis, sizes);
 
 		if (cc) {
 			if (u1 == n) { u1 = u; }
@@ -127,7 +127,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "find_centroid") {
 			node s;
 			fin >> s;
-			const auto centroid = utils::retrieve_centroid(t, s);
+			const auto centroid = internal::retrieve_centroid(t, s);
 			cout << "centroid: " << centroid.first;
 			if (centroid.second < t.n_nodes()) { cout << " " << centroid.second; }
 			cout << endl;
@@ -135,7 +135,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "centroid_is") {
 			node s;
 			fin >> s;
-			const auto centroid = utils::retrieve_centroid(t, s);
+			const auto centroid = internal::retrieve_centroid(t, s);
 
 			uint32_t centroid_size;
 			fin >> centroid_size;
@@ -211,7 +211,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 
 #define test_correctness(T)										\
 {																\
-	const auto lib_centroid = utils::retrieve_centroid(T, 0);	\
+	const auto lib_centroid = internal::retrieve_centroid(T, 0);	\
 	const auto easy_centroid = straightforward_centroid(T, 0);  \
 	if (lib_centroid != easy_centroid) {						\
 		cerr << ERROR << endl;									\

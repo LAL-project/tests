@@ -49,7 +49,7 @@ using namespace std;
 #include <lal/linarr/C.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/free_tree.hpp>
-#include <lal/utils/std_utils.hpp>
+#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;

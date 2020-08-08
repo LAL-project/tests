@@ -48,7 +48,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/tree_structure_class.hpp>
 #include <lal/linarr/tree_structure.hpp>
-#include <lal/utils/graphs/trees/convert_to_rtree.hpp>
+#include <lal/internal/graphs/trees/convert_to_rtree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -94,7 +94,7 @@ rtree parse_tree_in_line(const string& s) {
 	while (ss >> v) { L.push_back(v); }
 
 	const uint32_t n = static_cast<uint32_t>(L.size() - 1);
-	return lal::utils::linear_sequence_to_tree(L, n);
+	return lal::internal::linear_sequence_to_tree(L, n);
 }
 
 vector<bool> parse_classes(string s) {

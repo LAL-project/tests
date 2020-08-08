@@ -49,9 +49,9 @@
 using namespace std;
 
 // lal includes
-#include <lal/utils/sorting/insertion_sort.hpp>
-#include <lal/utils/sorting/bit_sort.hpp>
-#include <lal/utils/sorting/counting_sort.hpp>
+#include <lal/internal/sorting/insertion_sort.hpp>
+#include <lal/internal/sorting/bit_sort.hpp>
+#include <lal/internal/sorting/counting_sort.hpp>
 using namespace lal;
 
 // custom includes
@@ -222,15 +222,15 @@ err_type check_counting_sort(
 
 	auto sort1 =
 	[&](t1_vec_it begin, t1_vec_it end) -> void {
-		utils::counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
+		internal::counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
 	auto sort2 =
 	[&](t2_vec_it begin, t2_vec_it end) -> void {
-		utils::counting_sort<t2_vec_it, t2>(begin, end, n, key2, incr);
+		internal::counting_sort<t2_vec_it, t2>(begin, end, n, key2, incr);
 	};
 	auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
-		utils::counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
+		internal::counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
 	};
 
 	err_type E = err_type::no_error;
@@ -287,7 +287,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			utils::insertion_sort(begin, end);
+			internal::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			err_type e = check_sorting("insertion", s, n, this_sort, true);
@@ -304,7 +304,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			utils::bit_sort(begin, end);
+			internal::bit_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			err_type e = check_sorting("bit", s, n, this_sort, true);
@@ -321,7 +321,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		// bit array
 		vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			utils::bit_sort_mem(begin, end, &seen[0]);
+			internal::bit_sort_mem(begin, end, &seen[0]);
 		};
 		// execute test
 		for (Ui k = 0; k < R; ++k) {
@@ -383,7 +383,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		auto key1 = [](const uint32_t& t) -> size_t { return t; };
 		auto sort1 =
 		[&](Ui_it begin, Ui_it end) -> void {
-			utils::counting_sort<Ui_it, uint32_t>(begin, end, Max, key1, incr);
+			internal::counting_sort<Ui_it, uint32_t>(begin, end, Max, key1, incr);
 		};
 		return __check_sorting<uint32_t,Ui_it>(
 			"counting_sort", values,values, sort1, incr

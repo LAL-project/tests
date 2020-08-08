@@ -50,7 +50,7 @@ using namespace std;
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
 #include <lal/linarr/C.hpp>
 #include <lal/iterators/E_iterator.hpp>
-#include <lal/utils/std_utils.hpp>
+#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;

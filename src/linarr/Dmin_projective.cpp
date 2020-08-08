@@ -53,7 +53,7 @@ using namespace std;
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/utils/std_utils.hpp>
+#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;

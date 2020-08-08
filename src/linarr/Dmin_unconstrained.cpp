@@ -56,7 +56,7 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/utils/std_utils.hpp>
+#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
