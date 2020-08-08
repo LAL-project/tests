@@ -279,12 +279,8 @@ err_type test_Unconstrained_bf_algorithm(
 
 	vector<uint32_t> node_list(n);
 	while (fin >> node_list[0]) {
-
-		node_list[0] = (node_list[0] == n ? 0 : node_list[0] + 1);
-		// read tree
 		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
-			node_list[i] = (node_list[i] == n ? 0 : node_list[i] + 1);
 		}
 
 		const ftree T = internal::linear_sequence_to_ftree(node_list).first;

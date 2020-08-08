@@ -77,13 +77,10 @@ err_type test_Projective_GT(ifstream& fin) {
 		return err_type::no_error;
 	}
 
-	node root;
 	vector<uint32_t> node_list(n);
-	while (fin >> root) {
-		// read tree
-		for (uint32_t i = 0; i < n; ++i) {
+	while (fin >> node_list[0]) {
+		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
-			node_list[i] = (node_list[i] == n ? 0 : node_list[i] + 1);
 		}
 
 		rtree tree = internal::linear_sequence_to_rtree(node_list);
