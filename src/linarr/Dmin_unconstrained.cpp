@@ -57,11 +57,11 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/internal/std_utils.hpp>
+#include <lal/internal/graphs/trees/convert_to_ftree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
 using namespace numeric;
-using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
@@ -184,7 +184,7 @@ err_type test_Unconstrained(ifstream& fin) {
 
 		const auto F1 = (algo1 == "YS" ? YS : FC);
 		const auto F2 = (algo2 == "YS" ? YS : FC);
-		auto compare = get_comp(comp);
+		const auto compare = get_comp(comp);
 
 		uint32_t n;
 		fin >> n;
@@ -277,15 +277,17 @@ err_type test_Unconstrained_bf_algorithm(
 		return err_type::no_error;
 	}
 
-	vector<edge> edges(n - 1);
-	while (fin >> edges[0].first >> edges[0].second) {
-		// read edges
-		for (uint32_t i = 1; i < n - 1; ++i) {
-			fin >> edges[i].first >> edges[i].second;
+	vector<uint32_t> node_list(n);
+	while (fin >> node_list[0]) {
+
+		node_list[0] = (node_list[0] == n ? 0 : node_list[0] + 1);
+		// read tree
+		for (uint32_t i = 1; i < n; ++i) {
+			fin >> node_list[i];
+			node_list[i] = (node_list[i] == n ? 0 : node_list[i] + 1);
 		}
 
-		ftree T(n);
-		T.add_edges(edges);
+		const ftree T = internal::linear_sequence_to_ftree(node_list).first;
 		const auto res_A = A(T);
 
 		if (not check_correctness_arr(T, res_A)) {

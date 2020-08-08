@@ -89,12 +89,11 @@ tree_structure string_to_sdtt(const string& s) {
 rtree parse_tree_in_line(const string& s) {
 	// read numbers in line
 	stringstream ss(s);
-	vector<uint32_t> L(1, 0);
+	vector<uint32_t> L;
 	uint32_t v;
 	while (ss >> v) { L.push_back(v); }
 
-	const uint32_t n = static_cast<uint32_t>(L.size() - 1);
-	return lal::internal::linear_sequence_to_tree(L, n);
+	return lal::internal::linear_sequence_to_rtree(L);
 }
 
 vector<bool> parse_classes(string s) {

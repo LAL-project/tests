@@ -54,6 +54,7 @@ using namespace std;
 #include <lal/linarr/Dmin.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/internal/std_utils.hpp>
+#include <lal/internal/graphs/trees/convert_to_rtree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -76,17 +77,16 @@ err_type test_Projective_GT(ifstream& fin) {
 		return err_type::no_error;
 	}
 
-	rtree tree;
-	node r;
-	while (fin >> r) {
-		tree.init(n);
-		tree.set_root(r);
-		vector<edge> edges(n - 1);
-		for (uint32_t i = 0; i < n - 1; ++i) {
-			fin >> edges[i].first >> edges[i].second;
+	node root;
+	vector<uint32_t> node_list(n);
+	while (fin >> root) {
+		// read tree
+		for (uint32_t i = 0; i < n; ++i) {
+			fin >> node_list[i];
+			node_list[i] = (node_list[i] == n ? 0 : node_list[i] + 1);
 		}
-		tree.add_edges(edges);
-		tree.set_rtree_type(rtree::rooted_tree_type::arborescence);
+
+		rtree tree = internal::linear_sequence_to_rtree(node_list);
 		tree.recalc_size_subtrees();
 
 		// execute library's algorithm
