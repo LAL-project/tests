@@ -80,7 +80,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 			const rtree rT = TreeGen.make_rand_tree();
 			const ftree fT = rT.to_undirected();
 
-			rand_projective_arrgmnt RandArr(rT, false);
+			rand_projective_arrgmnt RandArr(rT, 100);
 
 			for (uint32_t it = 0; it < nit; ++it) {
 				const linearrgmnt arr = RandArr.make_rand_arrgmnt();
