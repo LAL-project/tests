@@ -136,11 +136,11 @@ bool test_correctness_arr_formula(
 err_type test_Unconstrained(ifstream& fin) {
 	const auto FC =
 	[](const ftree& t) -> algo_result {
-		return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+		return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 	};
 	const auto YS =
 	[](const ftree& t) -> algo_result {
-		return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+		return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 	};
 
 	auto get_comp =
@@ -534,7 +534,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
 		);
@@ -543,7 +543,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_class_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
 		);
@@ -552,7 +552,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_tree_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
 		);
@@ -563,7 +563,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_bf_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
 		);
@@ -572,7 +572,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_class_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
 		);
@@ -581,7 +581,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		test_Unconstrained_tree_algorithm(
 			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
-				return compute_Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
 		);

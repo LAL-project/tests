@@ -84,11 +84,11 @@ err_type test_Projective_GT(ifstream& fin) {
 		}
 
 		rtree tree = internal::linear_sequence_to_rtree(node_list);
-		tree.recalc_size_subtrees();
+		tree.calculate_size_subtrees();
 
 		// execute library's algorithm
 		const pair<uint32_t, linear_arrangement> res_library
-			= compute_Dmin(tree, algorithms_Dmin::Projective);
+			= Dmin(tree, algorithms_Dmin::Projective);
 		const linear_arrangement& arr = res_library.second;
 
 		// ensure that the arrangement is a projective permutation

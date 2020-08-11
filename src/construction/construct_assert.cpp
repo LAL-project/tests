@@ -97,7 +97,7 @@ using namespace iterators;
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
-#define ASSERT_rooted_tree_type_VALID "rtree_type_valid"
+#define ASSERT_rooted_tree_type_valid "rtree_type_valid"
 #define ASSERT_rooted_tree_type_NOT_VALID "rtree_type_not_valid"
 #define ASSERT_RTREE_IS_TYPE "is_rtree_type"
 #define ASSERT_RTREE_IS_NOT_TYPE "is_not_rtree_type"
@@ -585,7 +585,7 @@ err_type process_assert(
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE, g1)
 		assert_correct_graph_type(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE, graph_type(g1), rooted_tree_types)
-		if (mfunction_rtrees(g1, need_recalc_size_subtrees())) {
+		if (mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' have to be recalculated." << endl;
@@ -596,7 +596,7 @@ err_type process_assert(
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE, g1)
 		assert_correct_graph_type(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE, graph_type(g1), rooted_tree_types)
-		if (not mfunction_rtrees(g1, need_recalc_size_subtrees())) {
+		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' do not need to be recalculated." << endl;
@@ -630,7 +630,7 @@ err_type process_assert(
 		assert_exists_variable(ASSERT_RTREE_SIZE_SUBTREE, g1)
 		assert_correct_graph_type(ASSERT_RTREE_SIZE_SUBTREE, graph_type(g1), rooted_tree_types)
 		assert_is_rtree(g1, ASSERT_RTREE_SIZE_SUBTREE)
-		if (mfunction_rtrees(g1, need_recalc_size_subtrees())) {
+		if (mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    Values of subtree's sizes in tree '" << g1 << "' need recalculating." << endl;
@@ -648,24 +648,24 @@ err_type process_assert(
 	}
 
 	// ROOTED DIRECTED TREES
-	else if (assert_what == ASSERT_rooted_tree_type_VALID) {
+	else if (assert_what == ASSERT_rooted_tree_type_valid) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_rooted_tree_type_VALID, g1)
-		assert_correct_graph_type(ASSERT_rooted_tree_type_VALID, graph_type(g1), rooted_tree_types)
-		if (not rtreevars[g1].rtree_type_valid()) {
+		assert_exists_variable(ASSERT_rooted_tree_type_valid, g1)
+		assert_correct_graph_type(ASSERT_rooted_tree_type_valid, graph_type(g1), rooted_tree_types)
+		if (not rtreevars[g1].rooted_tree_type_valid()) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_rooted_tree_type_VALID)
+			message_in_func(ASSERT_rooted_tree_type_valid)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
 			return err_type::test_exe_error;
 		}
 	}
 	else if (assert_what == ASSERT_rooted_tree_type_NOT_VALID) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_rooted_tree_type_VALID, g1)
+		assert_exists_variable(ASSERT_rooted_tree_type_valid, g1)
 		assert_correct_graph_type(ASSERT_rooted_tree_type_NOT_VALID, graph_type(g1), rooted_tree_types)
-		if (rtreevars[g1].rtree_type_valid()) {
+		if (rtreevars[g1].rooted_tree_type_valid()) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_rooted_tree_type_VALID)
+			message_in_func(ASSERT_rooted_tree_type_valid)
 			cerr << "    Tree '" << g1 << "' has a valid rooted_tree_type." << endl;
 			return err_type::test_exe_error;
 		}
@@ -675,13 +675,13 @@ err_type process_assert(
 		assert_exists_variable(ASSERT_RTREE_IS_TYPE, g1)
 		assert_string_is_rooted_tree_type(ASSERT_RTREE_IS_TYPE, g2)
 		assert_correct_graph_type(ASSERT_RTREE_IS_TYPE, graph_type(g1), rooted_tree_types)
-		if (not rtreevars[g1].rtree_type_valid()) {
+		if (not rtreevars[g1].rooted_tree_type_valid()) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
 			return err_type::test_exe_error;
 		}
-		auto type = rtreevars[g1].get_rtree_type();
+		auto type = rtreevars[g1].get_rooted_tree_type();
 		if (g2 == "arborescence") {
 			if (type != RTREE_arborescence) {
 				cerr << ERROR << endl;
@@ -715,13 +715,13 @@ err_type process_assert(
 		assert_exists_variable(ASSERT_RTREE_IS_NOT_TYPE, g1)
 		assert_string_is_rooted_tree_type(ASSERT_RTREE_IS_NOT_TYPE, g2)
 		assert_correct_graph_type(ASSERT_RTREE_IS_NOT_TYPE, graph_type(g1), rooted_tree_types)
-		if (not rtreevars[g1].rtree_type_valid()) {
+		if (not rtreevars[g1].rooted_tree_type_valid()) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
 			return err_type::test_exe_error;
 		}
-		auto type = rtreevars[g1].get_rtree_type();
+		auto type = rtreevars[g1].get_rooted_tree_type();
 		if (g2 == "arborescence") {
 			if (type == RTREE_arborescence) {
 				cerr << ERROR << endl;

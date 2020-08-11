@@ -99,8 +99,8 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	}
 
 	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<linear_arrangement>& pis) {
-		if (level == "1") { return linarr::MDD_1level_rational(Gs, pis); }
-		if (level == "2") { return linarr::MDD_2level_rational(Gs, pis); }
+		if (level == "1") { return linarr::mean_dependency_distance_1level_rational(Gs, pis); }
+		if (level == "2") { return linarr::mean_dependency_distance_2level_rational(Gs, pis); }
 
 		// return invalid value
 		cerr << ERROR << endl;

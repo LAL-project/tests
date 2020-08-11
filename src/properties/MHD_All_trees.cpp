@@ -48,7 +48,7 @@ using namespace std;
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/properties/mhd.hpp>
+#include <lal/properties/mean_hierarchical_distance.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
@@ -88,7 +88,7 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 			// for each node, make a rooted tree at that node
 			for (node r = 0; r < t.n_nodes(); ++r) {
 				const rtree R(t, r);
-				const rational mhd = properties::MHD_rational(R);
+				const rational mhd = properties::mean_hierarchical_distance_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 			}
 

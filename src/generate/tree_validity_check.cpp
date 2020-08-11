@@ -106,10 +106,10 @@ rtree_check test_validity_tree(const uint32_t n, const rtree& T) {
 	if (not T.has_root()) {
 		return rtree_check::without_root;
 	}
-	if (not T.rtree_type_valid()) {
+	if (not T.rooted_tree_type_valid()) {
 		return rtree_check::invalid_rooted_tree_type;
 	}
-	const rtree::rooted_tree_type type = T.get_rtree_type();
+	const rtree::rooted_tree_type type = T.get_rooted_tree_type();
 	if (type == rtree::rooted_tree_type::none) {
 		return rtree_check::rooted_tree_type_is_none;
 	}

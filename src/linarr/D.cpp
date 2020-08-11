@@ -120,7 +120,7 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 			cout << linarr::sum_length_edges(G, pi) << endl;
 		}
 		else if (proc == "MDD") {
-			cout << linarr::MDD_rational(G, pi) << endl;
+			cout << linarr::mean_dependency_distance_rational(G, pi) << endl;
 		}
 	}
 

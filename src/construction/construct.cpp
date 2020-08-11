@@ -408,10 +408,10 @@ err_type exe_construction_test(ifstream& fin) {
 
 			if (graph_type(g1) == RTREE) {
 				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean1)
-				rtreevars[g1].recalc_size_subtrees();
+				rtreevars[g1].calculate_size_subtrees();
 			}
 			else {
-				rtreevars[g1].recalc_size_subtrees();
+				rtreevars[g1].calculate_size_subtrees();
 			}
 		}
 		else if (option == FUNC_RTREE_RETRIEVE_SUBTREE) {
@@ -438,7 +438,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_graph_type(FUNC_RTREE_FIND_TYPE, graph_type(g1), rooted_tree_types)
 			assert_is_rtree(g1, FUNC_RTREE_FIND_TYPE)
 
-			rtreevars[g1].find_rtree_type();
+			rtreevars[g1].find_rooted_tree_type();
 		}
 
 		// ASSERT

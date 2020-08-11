@@ -49,7 +49,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
-#include <lal/properties/mhd.hpp>
+#include <lal/properties/mean_hierarchical_distance.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/internal/graphs/trees/is_tree.hpp>
@@ -103,7 +103,7 @@ void MHD(const ugraph& g, node r) {
 	if (not internal::is_graph_a_tree(g)) { return; }
 	const ftree t(g);
 	const rtree R(t, r);
-	const rational mhd = MHD_rational(R);
+	const rational mhd = mean_hierarchical_distance_rational(R);
 	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 }
 
