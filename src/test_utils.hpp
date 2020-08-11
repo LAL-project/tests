@@ -57,6 +57,6 @@ std::string read_output_string(std::ifstream& fin);
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
-std::vector<lal::node> invlinarr(const lal::linearrgmnt& arr);
+std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr);
 
 } // -- namespace exe_tests

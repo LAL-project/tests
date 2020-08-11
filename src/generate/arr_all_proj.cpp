@@ -95,12 +95,12 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 			const ftree fT = rT.to_undirected();
 
 			uint32_t amount = 0;
-			set<linearrgmnt> list_arrs;
+			set<linear_arrangement> list_arrs;
 
 			all_proj_arr ArrGen(rT);
 			while (ArrGen.has_next()) {
 				ArrGen.next();
-				const linearrgmnt arr = ArrGen.get_arrangement();
+				const linear_arrangement arr = ArrGen.get_arrangement();
 
 				// Do some sanity checks.
 				const string err = is_arrangement_projective(rT, fT, arr);

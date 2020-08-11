@@ -50,14 +50,14 @@ namespace exe_tests {
 
 bool is_linarr_projective(
 	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
-	const lal::linearrgmnt& arr
+	const lal::linear_arrangement& arr
 );
 
-bool is_arrangement(const lal::linearrgmnt& arr);
+bool is_arrangement(const lal::linear_arrangement& arr);
 
 std::string is_arrangement_projective(
 	const lal::graphs::rtree& rT, const lal::graphs::ftree& fT,
-	const lal::linearrgmnt& arr
+	const lal::linear_arrangement& arr
 );
 
 } // -- namespace exe_tests

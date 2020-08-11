@@ -87,9 +87,9 @@ err_type test_Projective_GT(ifstream& fin) {
 		tree.recalc_size_subtrees();
 
 		// execute library's algorithm
-		const pair<uint32_t, linearrgmnt> res_library
+		const pair<uint32_t, linear_arrangement> res_library
 			= compute_Dmin(tree, algorithms_Dmin::Projective);
-		const linearrgmnt& arr = res_library.second;
+		const linear_arrangement& arr = res_library.second;
 
 		// ensure that the arrangement is a projective permutation
 		const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);

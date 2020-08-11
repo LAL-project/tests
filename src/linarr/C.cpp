@@ -98,7 +98,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 	// linear arrangement
 	const uint32_t n = G.n_nodes();
 	vector<node> T(n);
-	linearrgmnt pi(n);
+	linear_arrangement pi(n);
 
 	// amount of linear arrangements
 	size_t n_linarrs;

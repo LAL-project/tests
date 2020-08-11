@@ -89,7 +89,7 @@ string read_output_string(ifstream& fin) {
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
-vector<node> invlinarr(const linearrgmnt& arr) {
+vector<node> invlinarr(const linear_arrangement& arr) {
 	vector<node> ilin(arr.size());
 	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;

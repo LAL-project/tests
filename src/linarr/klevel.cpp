@@ -98,7 +98,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<linearrgmnt>& pis) {
+	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<linear_arrangement>& pis) {
 		if (level == "1") { return linarr::MDD_1level_rational(Gs, pis); }
 		if (level == "2") { return linarr::MDD_2level_rational(Gs, pis); }
 
@@ -130,7 +130,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 
 	// linear arrangement
 	vector<vector<node>> Ts;
-	vector<linearrgmnt> pis;
+	vector<linear_arrangement> pis;
 
 	// amount of linear arrangements
 	size_t n_linarrs;
@@ -147,13 +147,13 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 
 	if (n_linarrs != 0) {
 		Ts = vector<vector<position>>(n_linarrs);
-		pis = vector<linearrgmnt>(n_linarrs);
+		pis = vector<linear_arrangement>(n_linarrs);
 
 		for (size_t i = 0; i < n_linarrs; ++i) {
 			const uint32_t Ni = Gs[i].n_nodes();
 
 			Ts[i] = vector<position>(Ni);
-			pis[i] = linearrgmnt(Ni);
+			pis[i] = linear_arrangement(Ni);
 
 			// read all linear arrangement
 			for (node u = 0; u < Ni; ++u) {

@@ -57,7 +57,7 @@ using namespace iterators;
 
 namespace exe_tests {
 
-bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
+bool is_root_covered(const rtree& rT, const linear_arrangement& pi) {
 	const node R = rT.get_root();
 	bool covered = false;
 
@@ -76,7 +76,7 @@ bool is_root_covered(const rtree& rT, const linearrgmnt& pi) {
 }
 
 bool is_linarr_projective(
-	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+	const rtree& rT, const ftree& fT, const linear_arrangement& arr
 )
 {
 	const uint32_t C = lal::linarr::n_crossings(fT, arr);
@@ -84,7 +84,7 @@ bool is_linarr_projective(
 	return not is_root_covered(rT, arr);
 }
 
-bool is_arrangement(const linearrgmnt& arr) {
+bool is_arrangement(const linear_arrangement& arr) {
 	const uint32_t n = static_cast<uint32_t>(arr.size());
 	bool all_lt_n = true;
 	for (position p : arr) {
@@ -99,7 +99,7 @@ bool is_arrangement(const linearrgmnt& arr) {
 }
 
 string is_arrangement_projective(
-	const rtree& rT, const ftree& fT, const linearrgmnt& arr
+	const rtree& rT, const ftree& fT, const linear_arrangement& arr
 )
 {
 	if (not is_arrangement(arr)) {
