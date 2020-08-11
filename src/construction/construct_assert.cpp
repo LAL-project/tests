@@ -97,10 +97,10 @@ using namespace iterators;
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
-#define ASSERT_rooted_tree_type_VALID "rooted_tree_type_valid"
-#define ASSERT_rooted_tree_type_NOT_VALID "rooted_tree_type_not_valid"
-#define ASSERT_RTREE_IS_TYPE "is_rooted_tree_type"
-#define ASSERT_RTREE_IS_NOT_TYPE "is_not_rooted_tree_type"
+#define ASSERT_rooted_tree_type_VALID "rtree_type_valid"
+#define ASSERT_rooted_tree_type_NOT_VALID "rtree_type_not_valid"
+#define ASSERT_RTREE_IS_TYPE "is_rtree_type"
+#define ASSERT_RTREE_IS_NOT_TYPE "is_not_rtree_type"
 
 namespace exe_tests {
 
