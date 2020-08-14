@@ -9,7 +9,9 @@ groups_list=(\
 	"exp_var_C" \
 	"exp_var_D" \
 	"linarr" \
+	"linarr_E_2Cd" \
 	"linarr_C" \
+	"linarr_C_stack_based" \
 	"Dmin" \
 	"Dmin_Projective" \
 	"Dmin_Unconstrained" \
@@ -121,12 +123,22 @@ linarr_DIRS=(\
 	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
 	)
 
+# approximation of the number of crossings
+linarr_E_2Cd_DIRS=(\
+	"linarr/E_2Cd" "linarr/E_2Cd" \
+	)
+
 # linear arrangements (crossings) tests
 linarr_C_DIRS=(\
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
 	"linarr/C/ladder-list" "linarr/C" \
+	"linarr/C/stack-based" "linarr/C" \
+	"linarr/C/stack-based-list" "linarr/C" \
+	)
+
+linarr_C_stack_based_DIRS=(\
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
 	)
