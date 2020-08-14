@@ -115,7 +115,7 @@ uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
 	return c;
 }
 
-rational E_2Cd_brute_force(ugraph& g, const linear_arrangement& pi) {
+rational E_2Cd_brute_force(graph& g, const linear_arrangement& pi) {
 	rational Ec2(0);
 	const uint32_t n = g.n_nodes();
 
@@ -163,14 +163,16 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	ugraph G;
+	ugraph uG;
+	dgraph dG;
 	{
 	const string graph_name = inputs[0].first;
 	const string graph_format = inputs[0].second;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
-	if (r != err_type::no_error) {
-		return r;
-	}
+	err_type r;
+	r = io_wrapper::read_graph(graph_name, graph_format, uG);
+	if (r != err_type::no_error) { return r; }
+	r = io_wrapper::read_graph(graph_name, graph_format, dG);
+	if (r != err_type::no_error) { return r; }
 	}
 
 	string proc;
@@ -184,7 +186,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint32_t n = G.n_nodes();
+	const uint32_t n = uG.n_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -194,26 +196,56 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (node u = 0; u < G.n_nodes(); ++u) {
+		for (node u = 0; u < uG.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
 		// compute value using library and compare it with brute force method
-		const rational ap_lib = approximate_C_rational(G, pi);
-		const rational ap_bf = E_2Cd_brute_force(G, pi);
-
-		if (ap_lib != ap_bf) {
+		const rational ap_lib_u = approximate_C_rational(uG, pi);
+		const rational ap_lib_d = approximate_C_rational(dG, pi);
+		if (ap_lib_d != ap_lib_u) {
 			cerr << ERROR << endl;
-			cerr << "    The value of E_2[C|d] using the library is not equal to the" << endl;
-			cerr << "    brute force value." << endl;
-			cerr << "    Library's value: " << ap_lib << endl;
-			cerr << "    Brute force's value: " << ap_bf << endl;
+			cerr << "    Library's values for directed and undirected graphs" << endl;
+			cerr << "    do not coincide." << endl;
+			cerr << "        ap_lib_u= " << ap_lib_u << endl;
+			cerr << "        ap_lib_d= " << ap_lib_d << endl;
 			cerr << "    For (inverse) linear arrangement: [" << T[0];
 			for (size_t _i = 1; _i < T.size(); ++_i) {
 				cerr << ", " << T[_i];
 			}
 			cerr << "]" << endl;
+			return err_type::test_exe_error;
+		}
+
+		const rational ap_bf_u = E_2Cd_brute_force(uG, pi);
+		const rational ap_bf_d = E_2Cd_brute_force(dG, pi);
+		if (ap_lib_d != ap_lib_u) {
+			cerr << ERROR << endl;
+			cerr << "    Brute force values for directed and undirected graphs" << endl;
+			cerr << "    do not coincide." << endl;
+			cerr << "        ap_bf_u= " << ap_bf_u << endl;
+			cerr << "        ap_bf_d= " << ap_bf_d << endl;
+			cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (size_t _i = 1; _i < T.size(); ++_i) {
+				cerr << ", " << T[_i];
+			}
+			cerr << "]" << endl;
+			return err_type::test_exe_error;
+		}
+
+		if (ap_lib_u != ap_bf_u) {
+			cerr << ERROR << endl;
+			cerr << "    The value of E_2[C|d] using the library is not equal to the" << endl;
+			cerr << "    brute force value." << endl;
+			cerr << "        Library's value: " << ap_lib_u << endl;
+			cerr << "        Brute force's value: " << ap_bf_u << endl;
+			cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (size_t _i = 1; _i < T.size(); ++_i) {
+				cerr << ", " << T[_i];
+			}
+			cerr << "]" << endl;
+			return err_type::test_exe_error;
 		}
 	}
 

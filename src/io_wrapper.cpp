@@ -52,7 +52,6 @@ using namespace graphs;
 namespace exe_tests {
 namespace io_wrapper {
 
-
 template<class G>
 err_type __read_graph(const string& file, const string& format, G& g) {
 
@@ -79,7 +78,6 @@ err_type read_graph(const string& file, const string& format, ugraph& G) {
 err_type read_graph(const string& file, const string& format, dgraph& G) {
 	return __read_graph(file, format, G);
 }
-
 
 } // -- namespace io_wrapper
 } // -- namespace exe_tests

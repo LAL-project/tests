@@ -71,14 +71,16 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	ugraph g;
+	ugraph uG;
+	dgraph dG;
 	{
 	const string graph_name = inputs[0].first;
 	const string graph_format = inputs[0].second;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, g);
-	if (r != err_type::no_error) {
-		return r;
-	}
+	err_type r;
+	r = io_wrapper::read_graph(graph_name, graph_format, uG);
+	if (r != err_type::no_error) { return r; }
+	r = io_wrapper::read_graph(graph_name, graph_format, dG);
+	if (r != err_type::no_error) { return r; }
 	}
 
 	string proc;
@@ -98,53 +100,33 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
-	const uint32_t n = g.n_nodes();
+	const uint32_t n = uG.n_nodes();
 
 	// amount of linear arrangements
 	uint32_t n_linarrs;
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > T(n_linarrs, vector<node>(g.n_nodes()));
-	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(g.n_nodes()));
+	vector<vector<node> > T(n_linarrs, vector<node>(uG.n_nodes()));
+	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(uG.n_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < g.n_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.n_nodes(); ++u) {
 			fin >> T[i][u];
 			pis[i][ T[i][u] ] = u;
 		}
 	}
 
-	const vector<uint32_t> Cbfs = linarr::n_crossings_list(g, T, algorithms_C::brute_force);
-
-	// compute all C
-	vector<uint32_t> Cs;
-	if (proc == "dyn_prog") {
-		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_C::dynamic_programming);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
-	else if (proc == "ladder") {
-		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_C::ladder);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
-	else if (proc == "stack_based") {
-		begin = timing::now();
-		Cs = n_crossings_list(g, T, algorithms_C::stack_based);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
-
+	const vector<uint32_t> uCbfs = linarr::n_crossings_list(uG, T, algorithms_C::brute_force);
+	const vector<uint32_t> dCbfs = linarr::n_crossings_list(dG, T, algorithms_C::brute_force);
+	bool error = false;
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
-		if (Cbfs[i] != Cs[i]) {
+		if (uCbfs[i] != dCbfs[i]) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        brute force: " << Cbfs[i] << endl;
-			cerr << "        " << proc << ": " << Cs[i] << endl;
+			cerr << "        uCbfs: " << uCbfs[i] << endl;
+			cerr << "        dCbfs: " << dCbfs[i] << endl;
 			cerr << "    For linear arrangement " << i << ":" << endl;
 			cerr << "    [" << T[i][0];
 			for (size_t j = 1; j < n; ++j) {
@@ -152,6 +134,67 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 			}
 			cerr << "]" << endl;
 		}
+		if (error) { return err_type::test_exe_error; }
+	}
+	// uCbfs == dCbfs
+
+	// compute all C
+	vector<uint32_t> uCs, dCs;
+	if (proc == "dyn_prog") {
+		begin = timing::now();
+		uCs = n_crossings_list(uG, T, algorithms_C::dynamic_programming);
+		dCs = n_crossings_list(dG, T, algorithms_C::dynamic_programming);
+		end = timing::now();
+		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	}
+	else if (proc == "ladder") {
+		begin = timing::now();
+		uCs = n_crossings_list(uG, T, algorithms_C::ladder);
+		dCs = n_crossings_list(dG, T, algorithms_C::ladder);
+		end = timing::now();
+		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	}
+	else if (proc == "stack_based") {
+		begin = timing::now();
+		uCs = n_crossings_list(uG, T, algorithms_C::stack_based);
+		dCs = n_crossings_list(dG, T, algorithms_C::stack_based);
+		end = timing::now();
+		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	}
+
+	for (uint32_t i = 0; i < n_linarrs; ++i) {
+		if (dCs[i] != uCs[i]) {
+			error = true;
+			cerr << ERROR << endl;
+			cerr << "    Number of crossings do not coincide" << endl;
+			cerr << "        " << proc << " (u): " << uCs[i] << endl;
+			cerr << "        " << proc << " (d): " << dCs[i] << endl;
+			cerr << "    For linear arrangement " << i << ":" << endl;
+			cerr << "    [" << T[i][0];
+			for (size_t j = 1; j < n; ++j) {
+				cerr << "," << T[i][j];
+			}
+			cerr << "]" << endl;
+		}
+		if (error) { return err_type::test_exe_error; }
+	}
+	// uCs == dCs
+
+	for (uint32_t i = 0; i < n_linarrs; ++i) {
+		if (uCbfs[i] != uCs[i]) {
+			error = true;
+			cerr << ERROR << endl;
+			cerr << "    Number of crossings do not coincide" << endl;
+			cerr << "        brute force: " << uCbfs[i] << endl;
+			cerr << "        " << proc << ": " << uCs[i] << endl;
+			cerr << "    For linear arrangement " << i << ":" << endl;
+			cerr << "    [" << T[i][0];
+			for (size_t j = 1; j < n; ++j) {
+				cerr << "," << T[i][j];
+			}
+			cerr << "]" << endl;
+		}
+		if (error) { return err_type::test_exe_error; }
 	}
 
 	string time_filename;

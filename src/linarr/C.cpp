@@ -72,14 +72,16 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	ugraph G;
+	ugraph uG;
+	dgraph dG;
 	{
 	const string graph_name = inputs[0].first;
 	const string graph_format = inputs[0].second;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
-	if (r != err_type::no_error) {
-		return r;
-	}
+	err_type r;
+	r = io_wrapper::read_graph(graph_name, graph_format, uG);
+	if (r != err_type::no_error) { return r; }
+	r = io_wrapper::read_graph(graph_name, graph_format, dG);
+	if (r != err_type::no_error) { return r; }
 	}
 
 	string proc;
@@ -96,7 +98,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint32_t n = G.n_nodes();
+	const uint32_t n = uG.n_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -106,38 +108,70 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < G.n_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.n_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
-		const uint32_t Cbf = n_crossings(G, pi, algorithms_C::brute_force);
+		const uint32_t uCbf = n_crossings(uG, pi, algorithms_C::brute_force);
+		const uint32_t dCbf = n_crossings(dG, pi, algorithms_C::brute_force);
+		if (uCbf != dCbf) {
+			cerr << ERROR << endl;
+			cerr << "    Number of crossings calculated by bruteforce do not coincide." << endl;
+			cerr << "    Comparing results for directed and undirected graphs." << endl;
+			cerr << "    uCbf= " << uCbf << endl;
+			cerr << "    dCbf= " << dCbf << endl;
+			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+			cerr << "    [" << T[0];
+			for (size_t j = 1; j < n; ++j) {
+				cerr << "," << T[j];
+			}
+			cerr << "]" << endl;
+			return err_type::test_exe_error;
+		}
 
-		uint32_t C = 0;
+		uint32_t uC = 0, dC = 0;
 		if (proc == "dyn_prog") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_C::dynamic_programming);
+			uC = n_crossings(uG, pi, algorithms_C::dynamic_programming);
+			dC = n_crossings(dG, pi, algorithms_C::dynamic_programming);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "ladder") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_C::ladder);
+			uC = n_crossings(uG, pi, algorithms_C::ladder);
+			dC = n_crossings(dG, pi, algorithms_C::ladder);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else if (proc == "stack_based") {
 			begin = timing::now();
-			C = n_crossings(G, pi, algorithms_C::stack_based);
+			uC = n_crossings(uG, pi, algorithms_C::stack_based);
+			dC = n_crossings(dG, pi, algorithms_C::stack_based);
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 
-		if (C != Cbf) {
+		if (uC != dC) {
+			cerr << ERROR << endl;
+			cerr << "    Number of crossings for the directed graph does not" << endl;
+			cerr << "    coincide with the undirected graph." << endl;
+			cerr << "    uC= " << uC << endl;
+			cerr << "    dC= " << dC << endl;
+			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+			cerr << "    [" << T[0];
+			for (size_t j = 1; j < n; ++j) {
+				cerr << "," << T[j];
+			}
+			cerr << "]" << endl;
+			return err_type::test_exe_error;
+		}
+		if (uC != uCbf) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        brute force: " << Cbf << endl;
-			cerr << "        " << proc << ": " << C << endl;
+			cerr << "        brute force: " << uCbf << endl;
+			cerr << "        " << proc << ": " << uC << endl;
 			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
 			cerr << "    [" << T[0];
 			for (size_t j = 1; j < n; ++j) {
