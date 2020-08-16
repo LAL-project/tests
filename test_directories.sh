@@ -14,6 +14,7 @@ groups_list=(\
 	"linarr_C_stack_based" \
 	"Dmin" \
 	"Dmin_Projective" \
+	"Dmin_Planar" \
 	"Dmin_Unconstrained" \
 	"Dmin_Unconstrained_YS" \
 	"Dmin_Unconstrained_FC" \
@@ -55,6 +56,7 @@ all_DIRS=(\
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
 	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	"linarr/Dmin/planar" "linarr/Dmin/planar" \
 	"linarr/Dmin/unconstrained" "linarr/Dmin/unconstrained" \
 	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
 	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/FC" \
@@ -151,6 +153,11 @@ Dmin_DIRS=(\
 # Dmin Projective tests
 Dmin_Projective_DIRS=(\
 	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	)
+
+# Dmin Planar tests
+Dmin_Planar_DIRS=(\
+	"linarr/Dmin/planar" "linarr/Dmin/planar" \
 	)
 
 # Dmin Unconstrained tests -- all
