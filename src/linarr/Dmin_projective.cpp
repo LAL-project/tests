@@ -47,7 +47,6 @@
 using namespace std;
 
 // lal includes
-#include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/D.hpp>
@@ -58,7 +57,6 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
-using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
@@ -92,7 +90,7 @@ err_type test_Projective_GT(ifstream& fin) {
 		const linear_arrangement& arr = res_library.second;
 
 		// ensure that the arrangement is a projective permutation
-		const string err = is_arrangement_projective(tree, tree.to_undirected(), arr);
+		const string err = is_arrangement_projective(tree, arr);
 		if (err != "No error") {
 			cerr << ERROR << endl;
 			cerr << "    The result is not a projective arrangement." << endl;
