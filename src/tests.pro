@@ -53,6 +53,7 @@ SOURCES += \
     linarr/C.cpp \
     linarr/C_list.cpp \
     linarr/D.cpp \
+    linarr/Dmin_planar.cpp \
     linarr/Dmin_projective.cpp \
     linarr/Dmin_unconstrained.cpp \
     linarr/approx_exp_C.cpp \

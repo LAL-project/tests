@@ -257,8 +257,7 @@ err_type call_linarr_Dmin
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const set<string> allowed_keywords({
-		"Projective",
-		"Unconstrained"
+		"Projective", "Planar", "Unconstrained"
 	});
 
 	const string& key = keywords[i];
@@ -271,6 +270,9 @@ err_type call_linarr_Dmin
 
 	if (key == "Projective") {
 		return parse_header(exe_linarr_Dmin_projective, fin);
+	}
+	if (key == "Planar") {
+		return parse_header(exe_linarr_Dmin_planar, fin);
 	}
 	if (key == "Unconstrained") {
 		return parse_header(exe_linarr_Dmin_unconstrained, fin);
