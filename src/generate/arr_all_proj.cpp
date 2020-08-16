@@ -103,7 +103,7 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 				const linear_arrangement arr = ArrGen.get_arrangement();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, fT, arr);
+				const string err = is_arrangement_projective(rT, arr);
 				if (err != "No error") {
 					cerr << ERROR << endl;
 					cerr << "    Generation of arrangement failed with error:" << endl;

@@ -86,7 +86,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 				const linear_arrangement arr = RandArr.make_rand_arrgmnt();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, fT, arr);
+				const string err = is_arrangement_projective(rT, arr);
 				if (err != "No error") {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement failed with error:" << endl;

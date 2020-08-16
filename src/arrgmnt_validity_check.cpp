@@ -57,6 +57,24 @@ using namespace iterators;
 
 namespace exe_tests {
 
+// ----------------------------------------------------------------------------
+
+bool is_arrangement(const linear_arrangement& arr) {
+	const uint32_t n = static_cast<uint32_t>(arr.size());
+	bool all_lt_n = true;
+	for (position p : arr) {
+		all_lt_n = (p >= n ? false : all_lt_n);
+	}
+
+	set<position> setpos;
+	for (size_t i = 0; i < arr.size(); ++i) {
+		setpos.insert(arr[i]);
+	}
+	return setpos.size() == arr.size() and all_lt_n;
+}
+
+// ----------------------------------------------------------------------------
+
 bool is_root_covered(const rtree& rT, const linear_arrangement& pi) {
 	const node R = rT.get_root();
 	bool covered = false;
@@ -75,37 +93,46 @@ bool is_root_covered(const rtree& rT, const linear_arrangement& pi) {
 	return covered;
 }
 
-bool is_linarr_projective(
-	const rtree& rT, const ftree& fT, const linear_arrangement& arr
+// ----------------------------------------------------------------------------
+
+template<class T>
+bool is_linarr_planar(
+	const T& t, const linear_arrangement& arr
 )
 {
-	const uint32_t C = lal::linarr::n_crossings(fT, arr);
-	if (C != 0) { return false; }
-	return not is_root_covered(rT, arr);
+	return lal::linarr::n_crossings(t, arr) == 0;
 }
 
-bool is_arrangement(const linear_arrangement& arr) {
-	const uint32_t n = static_cast<uint32_t>(arr.size());
-	bool all_lt_n = true;
-	for (position p : arr) {
-		all_lt_n = (p >= n ? false : all_lt_n);
-	}
-
-	set<position> setpos;
-	for (size_t i = 0; i < arr.size(); ++i) {
-		setpos.insert(arr[i]);
-	}
-	return setpos.size() == arr.size() and all_lt_n;
+bool is_linarr_projective(
+	const rtree& rT, const linear_arrangement& arr
+)
+{
+	return is_linarr_planar(rT, arr) and not is_root_covered(rT, arr);
 }
 
-string is_arrangement_projective(
-	const rtree& rT, const ftree& fT, const linear_arrangement& arr
+// ----------------------------------------------------------------------------
+
+string is_arrangement_planar(
+	const ftree& fT, const linear_arrangement& arr
 )
 {
 	if (not is_arrangement(arr)) {
 		return "The arrangement is not a permutation of the vertices.";
 	}
-	if (not is_linarr_projective(rT, fT, arr)) {
+	if (not is_linarr_planar(fT, arr)) {
+		return "The arrangement is not planar";
+	}
+	return "No error";
+}
+
+string is_arrangement_projective(
+	const rtree& rT, const linear_arrangement& arr
+)
+{
+	if (not is_arrangement(arr)) {
+		return "The arrangement is not a permutation of the vertices.";
+	}
+	if (not is_linarr_projective(rT, arr)) {
 		return "The arrangement is not projective";
 	}
 	return "No error";
