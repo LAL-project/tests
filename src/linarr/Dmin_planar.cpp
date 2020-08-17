@@ -64,7 +64,14 @@ using namespace linarr;
 
 namespace exe_tests {
 
-err_type test_Planar_HS(ifstream& fin) {
+err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
+	if (inputs.size() != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		return err_type::test_format_error;
+	}
+
 	// read number of nodes
 	uint32_t n;
 	fin >> n;
@@ -132,20 +139,6 @@ err_type test_Planar_HS(ifstream& fin) {
 			return err_type::test_exe_error;
 		}
 	}
-
-	return err_type::no_error;
-}
-
-err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
-	}
-
-	const auto r = test_Planar_HS(fin);
-	if (r != err_type::no_error) { return r; }
 
 	TEST_GOODBYE
 	return err_type::no_error;
