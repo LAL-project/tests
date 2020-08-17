@@ -118,6 +118,7 @@ set(
 		properties/V_rla_C_brute_force_Q.cpp
 
 		utils/centre.cpp
+		utils/centroid.cpp
 		utils/sorting.cpp
 		utils/traversal.cpp
 
