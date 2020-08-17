@@ -117,10 +117,10 @@ set(
 		properties/V_rla_C_brute_force_freqs.cpp
 		properties/V_rla_C_brute_force_Q.cpp
 
-		utils/centre.cpp
-		utils/centroid.cpp
-		utils/sorting.cpp
-		utils/traversal.cpp
+		internal/centre.cpp
+		internal/centroid.cpp
+		internal/sorting.cpp
+		internal/traversal.cpp
 
 		arrgmnt_validity_check.hpp
 		arrgmnt_validity_check.cpp

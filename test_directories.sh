@@ -30,10 +30,10 @@ groups_list=(\
 	"gen_arr_rand_proj" \
 	"gen_arr_all_proj" \
 	"properties" \
-	"utils" \
-	"utils_centre" \
-	"utils_sorting" \
-	"utils_traversal" \
+	"internal" \
+	"internal_centre" \
+	"internal_sorting" \
+	"internal_traversal" \
 	)
 
 # all tests available
@@ -41,9 +41,9 @@ all_DIRS=(\
 	"construction" "construction" \
 	"numeric/integer" "numeric/integer" \
 	"numeric/rational" "numeric/rational" \
-	"utils/sorting" "utils/sorting" \
-	"utils/traversal" "utils/traversal" \
-	"utils/centre" "utils/centre" \
+	"internal/sorting" "internal/sorting" \
+	"internal/traversal" "internal/traversal" \
+	"internal/centre" "internal/centre" \
 	"properties" "properties" \
 	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
 	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
@@ -248,24 +248,24 @@ properties_DIRS=(\
 	"properties/exp-var-D/general-formula" "properties/exp-var-D" \
 	)
 
-# utils tests
-utils_DIRS=(\
-	"utils/sorting" "utils/sorting" \
-	"utils/traversal" "utils/traversal" \
-	"utils/centre" "utils/centre" \
+# internal tests
+internal_DIRS=(\
+	"internal/sorting" "internal/sorting" \
+	"internal/traversal" "internal/traversal" \
+	"internal/centre" "internal/centre" \
 	)
 
 # sorting tests
-utils_sorting_DIRS=(\
-	"utils/sorting" "utils/sorting" \
+internal_sorting_DIRS=(\
+	"internal/sorting" "internal/sorting" \
 	)
 
-# utils_centre tests
-utils_centre_DIRS=(\
-	"utils/centre" "utils/centre" \
+# internal_centre tests
+internal_centre_DIRS=(\
+	"internal/centre" "internal/centre" \
 	)
 
-# utils_traversal tests
-utils_traversal_DIRS=(\
-	"utils/traversal" "utils/traversal" \
+# internal_traversal tests
+internal_traversal_DIRS=(\
+	"internal/traversal" "internal/traversal" \
 	)

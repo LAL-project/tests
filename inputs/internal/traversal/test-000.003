@@ -1,0 +1,13 @@
+TYPE internal-traversal
+INPUT 0
+BODY
+	ugraph
+	init 10
+	
+	add_edge 3 4
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 0 4
+	add_edge 0 1
+	output_graph
+	assert has_undir_cycle

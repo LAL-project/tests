@@ -109,8 +109,8 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	if (key == "generate") {
 		return call_generate(keywords, 1, fin);
 	}
-	if (key == "utils") {
-		return call_utils(keywords, 1, fin);
+	if (key == "internal") {
+		return call_internal(keywords, 1, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -357,21 +357,21 @@ err_type call_generate_arrangements
 
 /* Functions to test the library's utilities */
 
-err_type call_utils
+err_type call_internal
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
 	if (key == "sorting") {
-		return parse_header(exe_utils_sorting, fin);
+		return parse_header(exe_internal_sorting, fin);
 	}
 	if (key == "traversal") {
-		return parse_header(exe_utils_bfs, fin);
+		return parse_header(exe_internal_bfs, fin);
 	}
 	if (key == "centre") {
-		return parse_header(exe_utils_centre, fin);
+		return parse_header(exe_internal_centre, fin);
 	}
 	if (key == "centroid") {
-		return parse_header(exe_utils_centroid, fin);
+		return parse_header(exe_internal_centroid, fin);
 	}
 
 	cerr << ERROR << endl;

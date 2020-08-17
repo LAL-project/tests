@@ -1,6 +1,0 @@
-TYPE utils-traversal
-INPUT 1 graphs/star-tree/010 edge-list
-BODY
-	dgraph
-	assert hasnt_dir_cycle
-	assert hasnt_undir_cycle

@@ -1,0 +1,69 @@
+TYPE internal-centroid
+INPUT 0
+BODY
+	manual ftree
+	
+	init 16
+	add_edges 2
+		0 1
+		0 2
+	
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+
+	add_edges 1
+		0 3
+	
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+
+	add_edges 1
+		3 4
+	
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+	find_centroid 4
+
+	add_edges 1
+		4 5
+
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+	find_centroid 4
+	find_centroid 5
+	
+	add_edges 10
+		5 6
+		5 9
+		6 7
+		6 8
+		9 10
+		10 11
+		10 12
+		11 13
+		12 14
+		12 15
+	
+	find_centroid 0
+	find_centroid 1
+	find_centroid 2
+	find_centroid 3
+	find_centroid 4
+	find_centroid 5
+	find_centroid 6
+	find_centroid 7
+	find_centroid 8
+	find_centroid 9
+	find_centroid 10
+	find_centroid 11
+	find_centroid 12
+	find_centroid 13
+	find_centroid 14
+	find_centroid 15

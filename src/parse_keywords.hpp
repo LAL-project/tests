@@ -96,7 +96,7 @@ err_type call_generate_arrangements
 
 	// Functions to test the library's utilities
 
-err_type call_utils
+err_type call_internal
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 } // -- namespace exe_tests

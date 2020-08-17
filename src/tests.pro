@@ -74,10 +74,10 @@ SOURCES += \
     test_utils.cpp \
     time.cpp \
 	tree_classification.cpp \
-    utils/centre.cpp \
-    utils/centroid.cpp \
-    utils/sorting.cpp \
-    utils/traversal.cpp
+    internal/centre.cpp \
+    internal/centroid.cpp \
+    internal/sorting.cpp \
+    internal/traversal.cpp
 
 HEADERS += \
     arrgmnt_validity_check.hpp \

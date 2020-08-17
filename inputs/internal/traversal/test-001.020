@@ -1,0 +1,13 @@
+TYPE internal-traversal
+INPUT 0
+BODY
+	dgraph
+	init 10
+	
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 3 4
+	output_graph
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle

@@ -1,0 +1,5 @@
+TYPE internal-traversal
+INPUT 1 graphs/linear-tree/050 edge-list
+BODY
+	ugraph
+	assert hasnt_undir_cycle
