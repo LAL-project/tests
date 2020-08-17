@@ -89,6 +89,7 @@ function show_usage() {
 	echo "        internal : execute internal tests "
 	echo "        internal_sorting : execute sorting internal tests "
 	echo "        internal_centre : execute centre internal tests "
+	echo "        internal_centroid : execute centroid internal tests "
 	echo "        internal_traversal : execute traversal internal tests "
 	echo ""	
 	echo "Optional parameters:"

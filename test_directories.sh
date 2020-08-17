@@ -32,6 +32,7 @@ groups_list=(\
 	"properties" \
 	"internal" \
 	"internal_centre" \
+	"internal_centroid" \
 	"internal_sorting" \
 	"internal_traversal" \
 	)
@@ -44,6 +45,7 @@ all_DIRS=(\
 	"internal/sorting" "internal/sorting" \
 	"internal/traversal" "internal/traversal" \
 	"internal/centre" "internal/centre" \
+	"internal/centroid" "internal/centroid" \
 	"properties" "properties" \
 	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
 	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
@@ -253,6 +255,7 @@ internal_DIRS=(\
 	"internal/sorting" "internal/sorting" \
 	"internal/traversal" "internal/traversal" \
 	"internal/centre" "internal/centre" \
+	"internal/centroid" "internal/centroid" \
 	)
 
 # sorting tests
@@ -263,6 +266,11 @@ internal_sorting_DIRS=(\
 # internal_centre tests
 internal_centre_DIRS=(\
 	"internal/centre" "internal/centre" \
+	)
+
+# internal_centre tests
+internal_centroid_DIRS=(\
+	"internal/centroid" "internal/centroid" \
 	)
 
 # internal_traversal tests
