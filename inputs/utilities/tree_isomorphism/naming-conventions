@@ -1,0 +1,15 @@
+NAMING CONVENTIONS
+==================
+
+The format of the names is the following:
+
+	test-x.y.nn.TT
+
+where x is '0'/'1' depending on whether the test
+contains pairs of non-isomorphic/isomorphic trees,
+and 'y' is 'f'/'r' depending on whether we are testing
+free or rooted trees.
+
+The string 'nn' makes up a number of two digits which is the number of vertices of the trees.
+
+The string 'TT' makes up a number of two digits which is the test number.

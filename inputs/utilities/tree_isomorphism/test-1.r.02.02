@@ -1,0 +1,8 @@
+TYPE utilities-tree_isomorphism
+INPUT 0
+BODY
+	rooted
+	
+	2
+	1 0 	1
+	0 1 	0
