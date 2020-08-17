@@ -97,20 +97,23 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 		// no more keywords
 		return parse_header(exe_construction, fin);
 	}
+	if (key == "generate") {
+		return call_generate(keywords, 1, fin);
+	}
+	if (key == "internal") {
+		return call_internal(keywords, 1, fin);
+	}
+	if (key == "linarr") {
+		return call_linarr(keywords, 1, fin);
+	}
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
 	}
 	if (key == "properties") {
 		return call_properties(keywords, 1, fin);
 	}
-	if (key == "linarr") {
-		return call_linarr(keywords, 1, fin);
-	}
-	if (key == "generate") {
-		return call_generate(keywords, 1, fin);
-	}
-	if (key == "internal") {
-		return call_internal(keywords, 1, fin);
+	if (key == "utilities") {
+		return call_utilities(keywords, 1, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -119,47 +122,94 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	return err_type::wrong_keyword;
 }
 
-/* Functions to test the integer and rational classes */
+/* Functions to test the tree generation functions and classes */
 
-err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
-	const string& num_type1 = keywords[i];
-	if (num_type1 != "integer" and num_type1 != "rational") {
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
-		mark_wrong_keyword(keywords, {i}, "    ");
-		return err_type::wrong_keyword;
+err_type call_generate
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "trees") {
+		return call_generate_trees(keywords, i + 1, fin);
 	}
-
-	if (num_type1 == "integer") {
-		return parse_header(exe_numeric_integer, fin);
-	}
-
-	if (num_type1 == "rational") {
-		return parse_header(exe_numeric_rational, fin);
+	else if (key == "arrangements") {
+		return call_generate_arrangements(keywords, i + 1, fin);
 	}
 
 	cerr << ERROR << endl;
-	cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-/* Functions to test the properties functions */
-
-err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
+err_type call_generate_trees
+(const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
-	if (key == "general") {
-		return parse_header(exe_properties_general, fin);
+	if (key == "alf") {
+		return parse_header(exe_gen_trees_alf, fin);
 	}
-	if (key == "MHD_All_Trees") {
-		return parse_header(exe_properties_MHD_All_trees, fin);
+	else if (key == "alr") {
+		return parse_header(exe_gen_trees_alr, fin);
 	}
-	if (key == "exp_var_C") {
-		return parse_header(exe_properties_ExpVar_C, fin);
+	else if (key == "auf") {
+		return parse_header(exe_gen_trees_auf, fin);
 	}
-	if (key == "exp_var_D") {
-		return parse_header(exe_properties_ExpVar_D, fin);
+	else if (key == "aur") {
+		return parse_header(exe_gen_trees_aur, fin);
+	}
+	else if (key == "rlf") {
+		return parse_header(exe_gen_trees_rlf, fin);
+	}
+	else if (key == "rlr") {
+		return parse_header(exe_gen_trees_rlr, fin);
+	}
+	else if (key == "ruf") {
+		return parse_header(exe_gen_trees_ruf, fin);
+	}
+	else if (key == "rur") {
+		return parse_header(exe_gen_trees_rur, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+err_type call_generate_arrangements
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "all_proj") {
+		return parse_header(exe_gen_arr_all_proj, fin);
+	}
+	else if (key == "rand_proj") {
+		return parse_header(exe_gen_arr_rand_proj, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+/* Functions to test the library's utilities */
+
+err_type call_internal
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "sorting") {
+		return parse_header(exe_internal_sorting, fin);
+	}
+	if (key == "traversal") {
+		return parse_header(exe_internal_bfs, fin);
+	}
+	if (key == "centre") {
+		return parse_header(exe_internal_centre, fin);
+	}
+	if (key == "centroid") {
+		return parse_header(exe_internal_centroid, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -284,17 +334,47 @@ err_type call_linarr_Dmin
 	return err_type::not_implemented;
 }
 
-/* Functions to test the tree generation functions and classes */
+/* Functions to test the integer and rational classes */
 
-err_type call_generate
-(const vector<string>& keywords, size_t i, ifstream& fin)
+err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
+	const string& num_type1 = keywords[i];
+	if (num_type1 != "integer" and num_type1 != "rational") {
+		cerr << ERROR << endl;
+		cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
+		mark_wrong_keyword(keywords, {i}, "    ");
+		return err_type::wrong_keyword;
+	}
+
+	if (num_type1 == "integer") {
+		return parse_header(exe_numeric_integer, fin);
+	}
+
+	if (num_type1 == "rational") {
+		return parse_header(exe_numeric_rational, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+/* Functions to test the properties functions */
+
+err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
-	if (key == "trees") {
-		return call_generate_trees(keywords, i + 1, fin);
+	if (key == "general") {
+		return parse_header(exe_properties_general, fin);
 	}
-	else if (key == "arrangements") {
-		return call_generate_arrangements(keywords, i + 1, fin);
+	if (key == "MHD_All_Trees") {
+		return parse_header(exe_properties_MHD_All_trees, fin);
+	}
+	if (key == "exp_var_C") {
+		return parse_header(exe_properties_ExpVar_C, fin);
+	}
+	if (key == "exp_var_D") {
+		return parse_header(exe_properties_ExpVar_D, fin);
 	}
 
 	cerr << ERROR << endl;
@@ -303,75 +383,13 @@ err_type call_generate
 	return err_type::wrong_keyword;
 }
 
-err_type call_generate_trees
-(const vector<string>& keywords, size_t i, ifstream& fin)
+/* Functions to test the properties functions */
+
+err_type call_utilities(const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
-	if (key == "alf") {
-		return parse_header(exe_gen_trees_alf, fin);
-	}
-	else if (key == "alr") {
-		return parse_header(exe_gen_trees_alr, fin);
-	}
-	else if (key == "auf") {
-		return parse_header(exe_gen_trees_auf, fin);
-	}
-	else if (key == "aur") {
-		return parse_header(exe_gen_trees_aur, fin);
-	}
-	else if (key == "rlf") {
-		return parse_header(exe_gen_trees_rlf, fin);
-	}
-	else if (key == "rlr") {
-		return parse_header(exe_gen_trees_rlr, fin);
-	}
-	else if (key == "ruf") {
-		return parse_header(exe_gen_trees_ruf, fin);
-	}
-	else if (key == "rur") {
-		return parse_header(exe_gen_trees_rur, fin);
-	}
-
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
-	mark_wrong_keyword(keywords, {i}, "    ");
-	return err_type::wrong_keyword;
-}
-
-err_type call_generate_arrangements
-(const vector<string>& keywords, size_t i, ifstream& fin)
-{
-	const string& key = keywords[i];
-	if (key == "all_proj") {
-		return parse_header(exe_gen_arr_all_proj, fin);
-	}
-	else if (key == "rand_proj") {
-		return parse_header(exe_gen_arr_rand_proj, fin);
-	}
-
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
-	mark_wrong_keyword(keywords, {i}, "    ");
-	return err_type::wrong_keyword;
-}
-
-/* Functions to test the library's utilities */
-
-err_type call_internal
-(const vector<string>& keywords, size_t i, ifstream& fin)
-{
-	const string& key = keywords[i];
-	if (key == "sorting") {
-		return parse_header(exe_internal_sorting, fin);
-	}
-	if (key == "traversal") {
-		return parse_header(exe_internal_bfs, fin);
-	}
-	if (key == "centre") {
-		return parse_header(exe_internal_centre, fin);
-	}
-	if (key == "centroid") {
-		return parse_header(exe_internal_centroid, fin);
+	if (key == "tree_isomorphism") {
+		return parse_header(exe_utilities_tree_isomorphism, fin);
 	}
 
 	cerr << ERROR << endl;

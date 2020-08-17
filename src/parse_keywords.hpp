@@ -61,17 +61,21 @@ void mark_wrong_keyword(
 // parses the first keyword and calls the appropriate main type function
 err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
 
-	// Functions to test the integer and rational classes
+// Functions to test the generation functions and classes
 
-err_type call_numeric
+err_type call_generate
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+err_type call_generate_trees
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+err_type call_generate_arrangements
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-	// Functions to test the properties functions
+// Functions to test the library's utilities
 
-err_type call_properties
+err_type call_internal
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-	// Functions to test the linear arrangement-related functions
+// Functions to test the linear arrangement-related functions
 
 err_type call_linarr
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
@@ -85,18 +89,19 @@ err_type call_linarr_klevel
 err_type call_linarr_Dmin
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-	// Functions to test the generation functions and classes
+// Functions to test the integer and rational classes
 
-err_type call_generate
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-err_type call_generate_trees
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-err_type call_generate_arrangements
+err_type call_numeric
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-	// Functions to test the library's utilities
+// Functions to test the properties functions
 
-err_type call_internal
+err_type call_properties
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+
+// Functions to test the properties functions
+
+err_type call_utilities
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
 } // -- namespace exe_tests

@@ -77,7 +77,8 @@ SOURCES += \
     internal/centre.cpp \
     internal/centroid.cpp \
     internal/sorting.cpp \
-    internal/traversal.cpp
+    internal/traversal.cpp \
+	utilities/tree_isomorphism.cpp
 
 HEADERS += \
     arrgmnt_validity_check.hpp \

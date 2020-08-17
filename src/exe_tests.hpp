@@ -104,6 +104,8 @@ err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin);
 
+err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream& fin);
+
 err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
