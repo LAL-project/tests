@@ -98,7 +98,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	auto MDD_F = [level](const vector<ugraph>& Gs, const vector<linear_arrangement>& pis) {
+	auto MDD_F = [level](const vector<undirected_graph>& Gs, const vector<linear_arrangement>& pis) {
 		if (level == "1") { return linarr::mean_dependency_distance_1level_rational(Gs, pis); }
 		if (level == "2") { return linarr::mean_dependency_distance_2level_rational(Gs, pis); }
 
@@ -117,7 +117,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	}
 
 	const size_t n_inputs = inputs.size();
-	vector<ugraph> Gs(n_inputs);
+	vector<undirected_graph> Gs(n_inputs);
 	for (size_t i = 0; i < n_inputs; ++i) {
 		const string graph_name = inputs[i].first;
 		const string graph_format = inputs[i].second;

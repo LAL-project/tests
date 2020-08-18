@@ -69,7 +69,7 @@ integer factorial(int64_t f) {
 	return f1*f;
 }
 
-integer amount_projective(const rtree& rT) {
+integer amount_projective(const rooted_tree& rT) {
 	integer k = 1;
 	for (node u = 0; u < rT.n_nodes(); ++u) {
 		k *= factorial(rT.out_degree(u) + 1);
@@ -91,8 +91,8 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 		rand_ulab_rooted_trees TreeGen(n);
 
 		for (uint32_t nt = 0; nt < ntrees; ++nt) {
-			const rtree rT = TreeGen.make_rand_tree();
-			const ftree fT = rT.to_undirected();
+			const rooted_tree rT = TreeGen.make_rand_tree();
+			const free_tree fT = rT.to_undirected();
 
 			uint32_t amount = 0;
 			set<linear_arrangement> list_arrs;

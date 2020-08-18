@@ -57,7 +57,7 @@ namespace exe_tests {
 
 inline void compute_data_gen_graphs_Q
 (
-	const ugraph& g, const vector<edge_pair>& Q,
+	const undirected_graph& g, const vector<edge_pair>& Q,
 	bigint& Qs, bigint& Kg,
 	bigint& n_paths_4, bigint& n_cycles_4, bigint& graphlet,
 	bigint& n_paths_5, bigint& pair_C3_L2,
@@ -128,7 +128,7 @@ inline void compute_data_gen_graphs_Q
 	n_cycles_4 /= 2;
 }
 
-rational variance_C_rational_Q(const ugraph& g, const vector<edge_pair>& Q) {
+rational variance_C_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
 	const bigint m = g.n_edges();
 
 	// ----------------------------

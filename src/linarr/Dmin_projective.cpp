@@ -88,7 +88,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			fin >> node_list[i];
 		}
 
-		rtree tree = internal::linear_sequence_to_rtree(node_list);
+		rooted_tree tree = internal::linear_sequence_to_rtree(node_list);
 		tree.calculate_size_subtrees();
 
 		// execute library's algorithm

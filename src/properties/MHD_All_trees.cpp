@@ -81,13 +81,13 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 		int i = 0;
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			const ftree t = TreeGen.get_tree();
+			const free_tree t = TreeGen.get_tree();
 
 			cout << i << ")" << endl;
 
 			// for each node, make a rooted tree at that node
 			for (node r = 0; r < t.n_nodes(); ++r) {
-				const rtree R(t, r);
+				const rooted_tree R(t, r);
 				const rational mhd = properties::mean_hierarchical_distance_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 			}

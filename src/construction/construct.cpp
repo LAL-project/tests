@@ -87,10 +87,10 @@ using namespace iterators;
 namespace exe_tests {
 
 err_type exe_construction_test(ifstream& fin) {
-	map<string, ugraph> ugraphvars;
-	map<string, dgraph> dgraphvars;
-	map<string, ftree> ftreevars;
-	map<string, rtree> rtreevars;
+	map<string, undirected_graph> ugraphvars;
+	map<string, directed_graph> dgraphvars;
+	map<string, free_tree> ftreevars;
+	map<string, rooted_tree> rtreevars;
 
 	map<string, string> gtypes;
 
@@ -111,16 +111,16 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_graph_type(FUNC_GRAPH_CREATE, type, all_types)
 			gtypes[g1] = type;
 			if (type == UGRAPH) {
-				ugraphvars[g1] = ugraph(n_nodes);
+				ugraphvars[g1] = undirected_graph(n_nodes);
 			}
 			else if (type == DGRAPH) {
-				dgraphvars[g1] = dgraph(n_nodes);
+				dgraphvars[g1] = directed_graph(n_nodes);
 			}
 			else if (type == FTREE) {
-				ftreevars[g1] = ftree(n_nodes);
+				ftreevars[g1] = free_tree(n_nodes);
 			}
 			else if (type == RTREE) {
-				rtreevars[g1] = rtree(n_nodes);
+				rtreevars[g1] = rooted_tree(n_nodes);
 			}
 			else {
 				cerr << ERROR << endl;
@@ -137,11 +137,11 @@ err_type exe_construction_test(ifstream& fin) {
 			gtypes[g1] = type;
 			bool io_res = false;
 			if (type == DGRAPH) {
-				dgraphvars[g1] = dgraph();
+				dgraphvars[g1] = directed_graph();
 				io_res = io::read_edge_list(file, dgraphvars[g1], Boolean1 == "true");
 			}
 			else if (type == UGRAPH) {
-				ugraphvars[g1] = ugraph();
+				ugraphvars[g1] = undirected_graph();
 				io_res = io::read_edge_list(file, ugraphvars[g1], Boolean1 == "true");
 			}
 			else {
@@ -225,17 +225,17 @@ err_type exe_construction_test(ifstream& fin) {
 			//assert_not_exists_variable(FUNC_GRAPH_DISJ_UNION, g1)
 			gtypes[g1] = graph_type(g2);
 			if (graph_type(g2) == UGRAPH) {
-				ugraph uG = ugraphvars[g2];
+				undirected_graph uG = ugraphvars[g2];
 				uG.disjoint_union(ugraphvars[g3]);
 				ugraphvars[g1] = uG;
 			}
 			else if (graph_type(g2) == DGRAPH) {
-				dgraph dG = dgraphvars[g2];
+				directed_graph dG = dgraphvars[g2];
 				dG.disjoint_union(dgraphvars[g3]);
 				dgraphvars[g1] = dG;
 			}
 			else if (graph_type(g2) == FTREE) {
-				ftree fT = ftreevars[g2];
+				free_tree fT = ftreevars[g2];
 				fT.disjoint_union(ftreevars[g3]);
 				ftreevars[g1] = fT;
 			}
@@ -243,7 +243,7 @@ err_type exe_construction_test(ifstream& fin) {
 				fin >> Boolean1;
 				assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1)
 
-				rtree rT = rtreevars[g2];
+				rooted_tree rT = rtreevars[g2];
 				rT.disjoint_union(rtreevars[g3], Boolean1 == "true");
 				rtreevars[g1] = rT;
 			}
@@ -316,7 +316,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_CHECK_Q_IT, g1)
 			vector<edge_pair> iter_pair_edges;
 			if (graph_type(g1) == DGRAPH) {
-				const dgraph& dg1 = dgraphvars[g1];
+				const directed_graph& dg1 = dgraphvars[g1];
 				Q_iterator it(dg1);
 				while (it.has_next()) {
 					it.next();
@@ -325,7 +325,7 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 			}
 			else {
-				const ugraph& ug1 = ugraphvars[g1];
+				const undirected_graph& ug1 = ugraphvars[g1];
 				Q_iterator it(ug1);
 				while (it.has_next()) {
 					it.next();
@@ -388,7 +388,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2)
 			assert_not_exists_variable(FUNC_FTREE_TO_RTREE, g1)
 			assert_correct_graph_type(FUNC_FTREE_TO_RTREE, graph_type(g2), free_tree_types)
-			rtreevars[g1] = rtree(ftreevars[g2], u);
+			rtreevars[g1] = rooted_tree(ftreevars[g2], u);
 			gtypes[g1] = RTREE;
 		}
 

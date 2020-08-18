@@ -60,7 +60,6 @@ using namespace generate;
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
-#include "lal_typedefs.hpp"
 
 template<class T>
 pair<node,node> straightforward_centroid(const T& t, node x) {
@@ -304,8 +303,8 @@ err_type exe_internal_centroid(const input_list& inputs, ifstream& fin) {
 	const err_type err =
 	(mode == "manual" ?
 		(graph_type == "ftree" ?
-		exe_commands_utils_centroid<ftree>(fin) :
-		exe_commands_utils_centroid<rtree>(fin))
+		exe_commands_utils_centroid<free_tree>(fin) :
+		exe_commands_utils_centroid<rooted_tree>(fin))
 		:
 		exe_full_utils_centroid(graph_type, fin)
 	);

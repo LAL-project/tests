@@ -54,7 +54,6 @@
 
 // custom includes
 #include "definitions.hpp"
-#include "lal_typedefs.hpp"
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
@@ -91,9 +90,9 @@ inline bool equal_graphs(const G& g1, const G& g2) {
 #define RTREE "rtree"
 
 // directed rooted tree types
-#define RTREE_arborescence rtree::rooted_tree_type::arborescence
-#define RTREE_anti_arborescence rtree::rooted_tree_type::anti_arborescence
-#define RTREE_none rtree::rooted_tree_type::none
+#define RTREE_arborescence rooted_tree::rooted_tree_type::arborescence
+#define RTREE_anti_arborescence rooted_tree::rooted_tree_type::anti_arborescence
+#define RTREE_none rooted_tree::rooted_tree_type::none
 
 #define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
 
@@ -329,16 +328,16 @@ static const std::vector<std::string> all_types(
 	}
 
 
-#define rooted_tree_type_to_string(t)							\
-	[](rtree::rooted_tree_type __t) -> std::string {				\
-		switch (__t) {										\
-			case rtree::rooted_tree_type::arborescence:			\
-				return "arborescence";						\
-			case rtree::rooted_tree_type::anti_arborescence:	\
-				return "anti_arborescence";					\
-			default:										\
-				return "none";								\
-		}													\
+#define rooted_tree_type_to_string(t)								\
+	[](rooted_tree::rooted_tree_type __t) -> std::string {			\
+		switch (__t) {												\
+			case rooted_tree::rooted_tree_type::arborescence:		\
+				return "arborescence";								\
+			case rooted_tree::rooted_tree_type::anti_arborescence:	\
+				return "anti_arborescence";							\
+			default:												\
+				return "none";										\
+		}															\
 	}(t)
 
 namespace exe_tests {
@@ -349,10 +348,10 @@ std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::graph& g)
 
 err_type process_assert(
 	const std::string& assert_what,
-	std::map<std::string, ugraph>& ugraphvars,
-	std::map<std::string, dgraph>& dgraphvars,
-	std::map<std::string, ftree>& treevars,
-	std::map<std::string, rtree>& rtreevars,
+	std::map<std::string, lal::graphs::undirected_graph>& ugraphvars,
+	std::map<std::string, lal::graphs::directed_graph>& dgraphvars,
+	std::map<std::string, lal::graphs::free_tree>& treevars,
+	std::map<std::string, lal::graphs::rooted_tree>& rtreevars,
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
 );

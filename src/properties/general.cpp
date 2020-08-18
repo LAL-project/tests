@@ -64,7 +64,7 @@ using namespace properties;
 
 namespace exe_tests {
 
-void enum_Q(const ugraph& g) {
+void enum_Q(const undirected_graph& g) {
 	const vector<edge_pair> Q = g.Q();
 
 	cout << "Elements of Q (" << Q.size() << "):" << endl;
@@ -78,7 +78,7 @@ void enum_Q(const ugraph& g) {
 	}
 }
 
-void Q_size(const ugraph& g) {
+void Q_size(const undirected_graph& g) {
 	const integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
@@ -86,12 +86,12 @@ void Q_size(const ugraph& g) {
 	cout << "size of Q: " << dQ << endl;
 }
 
-void mmt_deg(const ugraph& g, uint32_t p) {
+void mmt_deg(const undirected_graph& g, uint32_t p) {
 	const rational kp = mmt_degree_rational(g, p);
 	cout << "<k^" << p << ">= " << kp << endl;
 }
 
-void hubiness_coefficient(const ugraph& g) {
+void hubiness_coefficient(const undirected_graph& g) {
 	if (not internal::is_graph_a_tree(g)) { return; }
 	if (g.n_nodes() > 3) {
 		rational h = hubiness_rational(g);
@@ -99,10 +99,10 @@ void hubiness_coefficient(const ugraph& g) {
 	}
 }
 
-void MHD(const ugraph& g, node r) {
+void MHD(const undirected_graph& g, node r) {
 	if (not internal::is_graph_a_tree(g)) { return; }
-	const ftree t(g);
-	const rtree R(t, r);
+	const free_tree t(g);
+	const rooted_tree R(t, r);
 	const rational mhd = mean_hierarchical_distance_rational(R);
 	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 }
@@ -123,7 +123,7 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	// It is time to execute the instructions
 	// for each graph.
 
-	ugraph G;
+	undirected_graph G;
 	for (size_t i = 0; i < inputs.size(); ++i) {
 		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {

@@ -72,10 +72,10 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 	return err_type::test_format_error;
 }
 
-err_type read_graph(const string& file, const string& format, ugraph& G) {
+err_type read_graph(const string& file, const string& format, lal::graphs::undirected_graph& G) {
 	return __read_graph(file, format, G);
 }
-err_type read_graph(const string& file, const string& format, dgraph& G) {
+err_type read_graph(const string& file, const string& format, lal::graphs::directed_graph& G) {
 	return __read_graph(file, format, G);
 }
 

@@ -64,7 +64,7 @@ string ftree_check_to_string(const ftree_check& fc) {
 	return "";
 }
 
-ftree_check test_validity_tree(const uint32_t n, const ftree& T) {
+ftree_check test_validity_tree(const uint32_t n, const free_tree& T) {
 	if (not T.is_tree()) {
 		return ftree_check::diff_n_verts;
 	}
@@ -93,7 +93,7 @@ string rtree_check_to_string(const rtree_check& fc) {
 	return "";
 }
 
-rtree_check test_validity_tree(const uint32_t n, const rtree& T) {
+rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
 	if (not T.is_tree()) {
 		return rtree_check::diff_n_verts;
 	}
@@ -109,8 +109,8 @@ rtree_check test_validity_tree(const uint32_t n, const rtree& T) {
 	if (not T.rooted_tree_type_valid()) {
 		return rtree_check::invalid_rooted_tree_type;
 	}
-	const rtree::rooted_tree_type type = T.get_rooted_tree_type();
-	if (type == rtree::rooted_tree_type::none) {
+	const rooted_tree::rooted_tree_type type = T.get_rooted_tree_type();
+	if (type == rooted_tree::rooted_tree_type::none) {
 		return rtree_check::rooted_tree_type_is_none;
 	}
 	return rtree_check::correct;

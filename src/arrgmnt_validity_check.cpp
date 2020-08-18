@@ -75,7 +75,7 @@ bool is_arrangement(const linear_arrangement& arr) {
 
 // ----------------------------------------------------------------------------
 
-bool is_root_covered(const rtree& rT, const linear_arrangement& pi) {
+bool is_root_covered(const lal::graphs::rooted_tree& rT, const linear_arrangement& pi) {
 	const node R = rT.get_root();
 	bool covered = false;
 
@@ -104,7 +104,7 @@ bool is_linarr_planar(
 }
 
 bool is_linarr_projective(
-	const rtree& rT, const linear_arrangement& arr
+	const lal::graphs::rooted_tree& rT, const linear_arrangement& arr
 )
 {
 	return is_linarr_planar(rT, arr) and not is_root_covered(rT, arr);
@@ -113,7 +113,7 @@ bool is_linarr_projective(
 // ----------------------------------------------------------------------------
 
 string is_arrangement_planar(
-	const ftree& fT, const linear_arrangement& arr
+	const lal::graphs::free_tree& fT, const linear_arrangement& arr
 )
 {
 	if (not is_arrangement(arr)) {
@@ -126,7 +126,7 @@ string is_arrangement_planar(
 }
 
 string is_arrangement_projective(
-	const rtree& rT, const linear_arrangement& arr
+	const lal::graphs::rooted_tree& rT, const linear_arrangement& arr
 )
 {
 	if (not is_arrangement(arr)) {

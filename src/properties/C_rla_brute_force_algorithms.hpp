@@ -42,9 +42,7 @@
 
 // lal includes
 #include <lal/numeric.hpp>
-
-// custom includes
-#include "lal_typedefs.hpp"
+#include <lal/graphs/undirected_graph.hpp>
 
 namespace exe_tests {
 
@@ -63,7 +61,7 @@ namespace exe_tests {
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
 lal::numeric::rational variance_C_freqs_rational
-(const ugraph& g, uint32_t nthreads = 8);
+(const lal::graphs::undirected_graph& g, uint32_t nthreads = 8);
 
 
 /**
@@ -89,6 +87,6 @@ lal::numeric::rational variance_C_freqs_Q_rational
  * @return Returns the exact value of \f$V_{rla}[C]\f$ as a rational value.
  */
 lal::numeric::rational variance_C_rational_Q
-(const ugraph& g, const std::vector<lal::edge_pair>& Q);
+(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q);
 
 } // -- namespace exe_tests

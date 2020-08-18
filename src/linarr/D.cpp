@@ -71,7 +71,7 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format_error;
 	}
 
-	ugraph G;
+	undirected_graph G;
 	{
 	const string graph_name = inputs[0].first;
 	const string graph_format = inputs[0].second;

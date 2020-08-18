@@ -106,10 +106,10 @@ namespace exe_tests {
 
 err_type process_assert(
 	const string& assert_what,
-	map<string, ugraph>& ugraphvars,
-	map<string, dgraph>& dgraphvars,
-	map<string, ftree>& ftreevars,
-	map<string, rtree>& rtreevars,
+	map<string, undirected_graph>& ugraphvars,
+	map<string, directed_graph>& dgraphvars,
+	map<string, free_tree>& ftreevars,
+	map<string, rooted_tree>& rtreevars,
 	map<string, string>& gtypes,
 	ifstream& fin
 )

@@ -125,7 +125,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			const rtree T = TreeGen.get_tree();
+			const rooted_tree T = TreeGen.get_tree();
 
 			const rtree_check err = test_validity_tree(n, T);
 			if (err != rtree_check::correct) {

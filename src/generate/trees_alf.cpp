@@ -98,7 +98,7 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			const ftree T = TreeGen.get_tree();
+			const free_tree T = TreeGen.get_tree();
 			const ftree_check err = test_validity_tree(n, T);
 			if (err != ftree_check::correct) {
 				cerr << ERROR << endl;

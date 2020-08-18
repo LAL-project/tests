@@ -79,7 +79,7 @@ bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.fir
 
 namespace exe_tests {
 
-bool check_correctness_arr(const ftree& tree, const pair<uint32_t, linear_arrangement>& res) {
+bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not is_arrangement(arr)) {
@@ -107,7 +107,7 @@ bool check_correctness_arr(const ftree& tree, const pair<uint32_t, linear_arrang
 }
 
 bool test_correctness_arr_formula(
-	const ftree& tree, const pair<uint32_t, linear_arrangement>& res_lib,
+	const free_tree& tree, const pair<uint32_t, linear_arrangement>& res_lib,
 	const string& tree_class, const uint32_t val_formula
 )
 {
@@ -135,11 +135,11 @@ bool test_correctness_arr_formula(
 
 err_type test_Unconstrained(ifstream& fin) {
 	const auto FC =
-	[](const ftree& t) -> algo_result {
+	[](const free_tree& t) -> algo_result {
 		return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 	};
 	const auto YS =
-	[](const ftree& t) -> algo_result {
+	[](const free_tree& t) -> algo_result {
 		return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 	};
 
@@ -199,7 +199,7 @@ err_type test_Unconstrained(ifstream& fin) {
 			generate::all_ulab_free_trees TreeGen(n);
 			while (TreeGen.has_next()) {
 				TreeGen.next();
-				const ftree tree = TreeGen.get_tree();
+				const free_tree tree = TreeGen.get_tree();
 
 				const auto res1 = F1(tree);
 				const auto res2 = F2(tree);
@@ -233,7 +233,7 @@ err_type test_Unconstrained(ifstream& fin) {
 
 			generate::rand_ulab_free_trees TreeGen(n);
 			for (uint32_t i = 0; i < N; ++i) {
-				const ftree tree = TreeGen.make_rand_tree();
+				const free_tree tree = TreeGen.make_rand_tree();
 
 				const auto res1 = F1(tree);
 				const auto res2 = F2(tree);
@@ -265,7 +265,7 @@ err_type test_Unconstrained(ifstream& fin) {
 }
 
 err_type test_Unconstrained_bf_algorithm(
-	const function< pair<uint32_t, linear_arrangement> (const ftree&) >& A,
+	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
@@ -283,7 +283,7 @@ err_type test_Unconstrained_bf_algorithm(
 			fin >> node_list[i];
 		}
 
-		const ftree T = internal::linear_sequence_to_ftree(node_list).first;
+		const free_tree T = internal::linear_sequence_to_ftree(node_list).first;
 		const auto res_A = A(T);
 
 		if (not check_correctness_arr(T, res_A)) {
@@ -308,7 +308,7 @@ err_type test_Unconstrained_bf_algorithm(
 }
 
 err_type test_Unconstrained_class_algorithm(
-	const function< pair<uint32_t, linear_arrangement> (const ftree&) >& A,
+	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
@@ -326,7 +326,7 @@ err_type test_Unconstrained_class_algorithm(
 
 			for (uint32_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
-				ftree T(n);
+				free_tree T(n);
 
 				if (n > 1) {
 					for (node u = 0; u < n - 1; ++u) { T.add_edge(u, u+1, false); }
@@ -357,7 +357,7 @@ err_type test_Unconstrained_class_algorithm(
 				generate::all_ulab_free_trees TreeGen(n);
 				while (TreeGen.has_next()) {
 					TreeGen.next();
-					const ftree tree = TreeGen.get_tree();
+					const free_tree tree = TreeGen.get_tree();
 
 					// filter non-caterpillar
 					if (not is_caterpillar(tree)) { continue; }
@@ -405,7 +405,7 @@ err_type test_Unconstrained_class_algorithm(
 				}
 
 				// build k-complete tree of height h
-				ftree T(N);
+				free_tree T(N);
 				{
 				node next_node = 1;
 				queue<node> attach_to;
@@ -463,7 +463,7 @@ err_type test_Unconstrained_class_algorithm(
 			for (uint32_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
 
-				ftree T(n);
+				free_tree T(n);
 				for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
 
 				const uint32_t Dmin_star = (n*n - n%2)/4;
@@ -492,14 +492,14 @@ err_type test_Unconstrained_class_algorithm(
 }
 
 err_type test_Unconstrained_tree_algorithm(
-	const function< pair<uint32_t, linear_arrangement> (const ftree&) >& A,
+	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
 	// read number of vertices
 	uint32_t n;
 	while (fin >> n) {
-		ftree T(n);
+		free_tree T(n);
 		node u,v;
 		for (uint32_t i = 0; i < n - 1; ++i) {
 			fin >> u >> v;
@@ -533,7 +533,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "YS_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
@@ -542,7 +542,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "YS_class") {
 		r =
 		test_Unconstrained_class_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
@@ -551,7 +551,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "YS_tree") {
 		r =
 		test_Unconstrained_tree_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
@@ -562,7 +562,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "FC_bruteforce") {
 		r =
 		test_Unconstrained_bf_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
@@ -571,7 +571,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "FC_class") {
 		r =
 		test_Unconstrained_class_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
@@ -580,7 +580,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (alg == "FC_tree") {
 		r =
 		test_Unconstrained_tree_algorithm(
-			[](const ftree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin

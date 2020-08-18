@@ -68,36 +68,36 @@ using namespace generate;
 
 namespace exe_tests {
 
-void output_ExpVar_C_BF(const ugraph& g) {
+void output_ExpVar_C_BF(const undirected_graph& g) {
 	const rational Vr = variance_C_freqs_Q_rational(g.Q());
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula_Q(const ugraph& g) {
+void output_ExpVar_C_formula_Q(const undirected_graph& g) {
 	const rational Vr = variance_C_rational_Q(g, g.Q());
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula_no_Q(const ugraph& g, bool reuse) {
+void output_ExpVar_C_formula_no_Q(const undirected_graph& g, bool reuse) {
 	const rational Vr = variance_C_rational(g, reuse);
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_trees(const ugraph& g) {
-	const ftree t = g;
+void output_ExpVar_C_trees(const undirected_graph& g) {
+	const free_tree t = g;
 	const rational Vr = variance_C_tree_rational(t);
 	const rational E1r = expectation_C_rational(t);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_forests(const ugraph& g) {
+void output_ExpVar_C_forests(const undirected_graph& g) {
 	const rational Vr = variance_C_forest_rational(g);
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
@@ -108,7 +108,7 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 	all_ulab_free_trees TreeGen;
 	TreeGen.init(n);
 
-	ftree tree;
+	free_tree tree;
 	uint32_t k = 0;
 
 	while (TreeGen.has_next()) {
@@ -139,8 +139,8 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 
 bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_trees) {
 	rand_ulab_free_trees TreeGen(size_trees);
-	ftree rand_tree;
-	ugraph forest;
+	free_tree rand_tree;
+	undirected_graph forest;
 
 	for (uint32_t i = 0; i < r; ++i) {
 		forest.clear();
@@ -215,7 +215,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 		TEST_GOODBYE
 	}
 	else {
-		ugraph G;
+		undirected_graph G;
 		for (size_t i = 0; i < inputs.size(); ++i) {
 			err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 

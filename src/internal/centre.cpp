@@ -60,15 +60,14 @@ using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
-#include "lal_typedefs.hpp"
 #include "test_utils.hpp"
 
 namespace exe_tests {
 
-inline uint32_t test_degree_for_centre(const rtree& t, const node s)
+inline uint32_t test_degree_for_centre(const rooted_tree& t, const node s)
 { return t.out_degree(s) + t.in_degree(s); }
 
-inline uint32_t test_degree_for_centre(const ftree& t, const node s)
+inline uint32_t test_degree_for_centre(const free_tree& t, const node s)
 { return t.degree(s); }
 
 // this is a very simple algorithm to calculate the centre
@@ -352,8 +351,8 @@ err_type exe_internal_centre(const input_list& inputs, ifstream& fin) {
 	const err_type err =
 	(mode == "manual" ?
 		(graph_type == "ftree" ?
-		exe_commands_utils_centre<ftree>(fin) :
-		exe_commands_utils_centre<rtree>(fin))
+		exe_commands_utils_centre<free_tree>(fin) :
+		exe_commands_utils_centre<rooted_tree>(fin))
 		:
 		exe_full_utils_centre(graph_type, fin)
 	);

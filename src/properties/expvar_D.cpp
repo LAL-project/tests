@@ -61,7 +61,7 @@ using namespace properties;
 
 namespace exe_tests {
 
-void output_ExpVar_D_formula(const ugraph& g) {
+void output_ExpVar_D_formula(const undirected_graph& g) {
 	const rational Vr = variance_D_rational(g);
 	const rational E1r = expectation_D_rational(g);
 	const rational E2r = Vr + E1r*E1r;
@@ -85,7 +85,7 @@ err_type exe_properties_ExpVar_D(const input_list& inputs, ifstream& fin) {
 	string graph_type;
 	fin >> graph_type;
 
-	ugraph G;
+	undirected_graph G;
 	for (size_t i = 0; i < inputs.size(); ++i) {
 		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {

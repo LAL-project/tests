@@ -50,6 +50,7 @@
 using namespace std;
 
 // lal includes
+#include <lal/graphs/undirected_graph.hpp>
 using namespace lal;
 using namespace numeric;
 using namespace graphs;
@@ -174,7 +175,7 @@ frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
 // ---------------------
 // Number of crossings C
 
-rational variance_C_freqs_rational(const ugraph& g, uint32_t nthreads) {
+rational variance_C_freqs_rational(const undirected_graph& g, uint32_t nthreads) {
 	// compute set Q(g)
 	return variance_C_freqs_Q_rational(g.Q(), nthreads);
 }

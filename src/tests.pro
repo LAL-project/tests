@@ -85,7 +85,6 @@ HEADERS += \
     construction/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
-    lal_typedefs.hpp \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \

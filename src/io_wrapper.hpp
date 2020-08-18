@@ -50,16 +50,15 @@
 
 // custom includes
 #include "definitions.hpp"
-#include "lal_typedefs.hpp"
 
 namespace exe_tests {
 namespace io_wrapper {
 
 err_type read_graph
-(const std::string& file, const std::string& format, ugraph& G);
+(const std::string& file, const std::string& format, lal::graphs::undirected_graph& G);
 
 err_type read_graph
-(const std::string& file, const std::string& format, dgraph& G);
+(const std::string& file, const std::string& format, lal::graphs::directed_graph& G);
 
 } // -- namespace io_wrapper
 } // -- namespace exe_tests

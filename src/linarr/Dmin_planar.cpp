@@ -87,7 +87,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			fin >> node_list[i];
 		}
 
-		const ftree tree = internal::linear_sequence_to_ftree(node_list).first;
+		const free_tree tree = internal::linear_sequence_to_ftree(node_list).first;
 
 		// execute library's algorithm
 		const pair<uint32_t, linear_arrangement> res_library

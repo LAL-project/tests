@@ -58,7 +58,6 @@ using namespace graphs;
 // custom includes
 #include "io_wrapper.hpp"
 #include "definitions.hpp"
-#include "lal_typedefs.hpp"
 
 namespace exe_tests {
 
@@ -92,7 +91,7 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 	return err_type::no_error;
 }
 
-err_type process_assert(const dgraph& g, ifstream& fin) {
+err_type process_assert(const directed_graph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_dir_cycle") {
@@ -134,7 +133,7 @@ err_type process_assert(const dgraph& g, ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type process_assert(const ugraph& g, ifstream& fin) {
+err_type process_assert(const undirected_graph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_undir_cycle") {
@@ -252,14 +251,14 @@ err_type exe_internal_bfs(const input_list& inputs, ifstream& fin) {
 		const string file_name = inputs[0].first;
 		const string file_format = inputs[0].second;
 		r = (graph_type == "ugraph" ?
-			execute_utils_bfs_test<ugraph>(file_name, file_format, fin) :
-			execute_utils_bfs_test<dgraph>(file_name, file_format, fin)
+			execute_utils_bfs_test<undirected_graph>(file_name, file_format, fin) :
+			execute_utils_bfs_test<directed_graph>(file_name, file_format, fin)
 		);
 	}
 	else {
 		r = (graph_type == "ugraph" ?
-			test_without_graph<ugraph>(fin) :
-			test_without_graph<dgraph>(fin)
+			test_without_graph<undirected_graph>(fin) :
+			test_without_graph<directed_graph>(fin)
 		);
 	}
 
