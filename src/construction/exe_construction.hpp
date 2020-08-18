@@ -54,6 +54,7 @@
 
 // custom includes
 #include "definitions.hpp"
+#include "lal_typedefs.hpp"
 
 template<class G>
 inline bool equal_graphs(const G& g1, const G& g2) {
@@ -348,10 +349,10 @@ std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::graph& g)
 
 err_type process_assert(
 	const std::string& assert_what,
-	std::map<std::string, lal::graphs::ugraph>& ugraphvars,
-	std::map<std::string, lal::graphs::dgraph>& dgraphvars,
-	std::map<std::string, lal::graphs::ftree>& treevars,
-	std::map<std::string, lal::graphs::rtree>& rtreevars,
+	std::map<std::string, ugraph>& ugraphvars,
+	std::map<std::string, dgraph>& dgraphvars,
+	std::map<std::string, ftree>& treevars,
+	std::map<std::string, rtree>& rtreevars,
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
 );

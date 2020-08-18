@@ -60,6 +60,7 @@ using namespace generate;
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
+#include "lal_typedefs.hpp"
 
 template<class T>
 pair<node,node> straightforward_centroid(const T& t, node x) {

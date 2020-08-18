@@ -60,12 +60,15 @@ using namespace generate;
 
 // custom includes
 #include "definitions.hpp"
+#include "lal_typedefs.hpp"
 #include "test_utils.hpp"
 
-inline uint32_t test_degree_for_centre(const graphs::rtree& t, const node s)
+namespace exe_tests {
+
+inline uint32_t test_degree_for_centre(const rtree& t, const node s)
 { return t.out_degree(s) + t.in_degree(s); }
 
-inline uint32_t test_degree_for_centre(const graphs::ftree& t, const node s)
+inline uint32_t test_degree_for_centre(const ftree& t, const node s)
 { return t.degree(s); }
 
 // this is a very simple algorithm to calculate the centre
@@ -150,8 +153,6 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 	const size_t h = longest_path.size()/2;
 	return make_pair(longest_path[h], n);
 }
-
-namespace exe_tests {
 
 template<class G>
 err_type exe_commands_utils_centre(ifstream& fin) {

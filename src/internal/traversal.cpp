@@ -58,6 +58,7 @@ using namespace graphs;
 // custom includes
 #include "io_wrapper.hpp"
 #include "definitions.hpp"
+#include "lal_typedefs.hpp"
 
 namespace exe_tests {
 
@@ -91,7 +92,7 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 	return err_type::no_error;
 }
 
-err_type process_assert(const graphs::dgraph& g, ifstream& fin) {
+err_type process_assert(const dgraph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_dir_cycle") {
@@ -133,7 +134,7 @@ err_type process_assert(const graphs::dgraph& g, ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type process_assert(const graphs::ugraph& g, ifstream& fin) {
+err_type process_assert(const ugraph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_undir_cycle") {

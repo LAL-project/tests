@@ -40,26 +40,14 @@
 
 #pragma once
 
-// C++ includes
-#include <iostream>
-#include <string>
-
 // lal includes
-#include <lal/graphs/undirected_graph.hpp>
-#include <lal/graphs/directed_graph.hpp>
-
-// custom includes
-#include "definitions.hpp"
-#include "lal_typedefs.hpp"
+#include <lal/graphs.hpp>
 
 namespace exe_tests {
-namespace io_wrapper {
 
-err_type read_graph
-(const std::string& file, const std::string& format, ugraph& G);
+typedef lal::graphs::undirected_graph ugraph;
+typedef lal::graphs::directed_graph dgraph;
+typedef lal::graphs::free_tree ftree;
+typedef lal::graphs::rooted_tree rtree;
 
-err_type read_graph
-(const std::string& file, const std::string& format, dgraph& G);
-
-} // -- namespace io_wrapper
 } // -- namespace exe_tests

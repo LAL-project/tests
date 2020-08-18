@@ -46,16 +46,19 @@
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/free_tree.hpp>
 
+// custom includes
+#include "lal_typedefs.hpp"
+
 namespace exe_tests {
 
 bool is_arrangement(const lal::linear_arrangement& arr);
 
 std::string is_arrangement_planar(
-	const lal::graphs::ftree& fT, const lal::linear_arrangement& arr
+	const ftree& fT, const lal::linear_arrangement& arr
 );
 
 std::string is_arrangement_projective(
-	const lal::graphs::rtree& fT, const lal::linear_arrangement& arr
+	const rtree& fT, const lal::linear_arrangement& arr
 );
 
 } // -- namespace exe_tests
