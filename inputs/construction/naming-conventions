@@ -55,6 +55,8 @@ We are currently using the following names:
 	006: construction of ftree using disjoint_union
 	007: construction of rtree using disjoint_union
 	
+	008: conversion of dgraph to ugraph.
+	
 	010: inspection of edges and elements of Q in ugraph
 	011: inspection of edges and elements of Q in dgraph
 	

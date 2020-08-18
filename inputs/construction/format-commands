@@ -211,8 +211,8 @@ COMMANDS AVAILABLE
 DIRECTED GRAPHS (excluding trees)
 ===============
 
-** dgraph_to_ugraph TREE_RESULT TREE
-	Converts the directed graph TREE into an undirected graph TREE_RESULT
+** dgraph_to_ugraph UG DG
+	Converts the directed graph DG into an undirected graph UG
 
 TREES
 =====
