@@ -6,6 +6,8 @@ groups_list=(\
 	"all" \
 	"construction" \
 	"numeric" \
+	"utilities" \
+	"utilities_isomorphism" \
 	"exp_var_C" \
 	"exp_var_D" \
 	"linarr" \
@@ -42,6 +44,7 @@ all_DIRS=(\
 	"construction" "construction" \
 	"numeric/integer" "numeric/integer" \
 	"numeric/rational" "numeric/rational" \
+	"utilities/tree_isomorphism" "utilities/tree_isomorphism" \
 	"internal/sorting" "internal/sorting" \
 	"internal/traversal" "internal/traversal" \
 	"internal/centre" "internal/centre" \
@@ -91,6 +94,15 @@ construction_DIRS=(\
 numeric_DIRS=(\
 	"numeric/integer" "numeric/integer" \
 	"numeric/rational" "numeric/rational" \
+	)
+
+# utilities tests
+utilities_DIRS=(\
+	"utilities/tree_isomorphism" "utilities/tree_isomorphism" \
+	)
+
+utilities_isomorphism_DIRS=(\
+	"utilities/tree_isomorphism" "utilities/tree_isomorphism" \
 	)
 
 # variance C tests
