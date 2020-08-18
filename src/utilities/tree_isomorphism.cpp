@@ -68,6 +68,7 @@ void read_free(ifstream& fin, T& t) {
 	for (auto& e : edges) {
 		fin >> e.first >> e.second;
 	}
+	t.add_edges(edges);
 }
 
 template<class T>
