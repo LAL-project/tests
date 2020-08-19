@@ -117,6 +117,8 @@ set(
 		properties/V_rla_C_brute_force_freqs.cpp
 		properties/V_rla_C_brute_force_Q.cpp
 
+		utilities/tree_isomorphism.cpp
+
 		internal/centre.cpp
 		internal/centroid.cpp
 		internal/sorting.cpp
