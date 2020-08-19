@@ -1,0 +1,32 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ftree g 0
+	assert num_nodes g 0
+	assert num_edges g 0
+	assert is_not_rooted g
+	
+	create_graph ftree g 1
+	assert num_nodes g 1
+	assert num_edges g 0
+	assert is_not_rooted g
+	
+	create_graph ftree g 2
+	assert num_nodes g 2
+	assert num_edges g 0
+	assert is_not_rooted g
+	
+	create_graph ftree g 3
+	assert num_nodes g 3
+	assert num_edges g 0
+	assert is_not_rooted g
+	
+	create_graph ftree g 4
+	assert num_nodes g 4
+	assert num_edges g 0
+	assert is_not_rooted g
+	
+	create_graph ftree g 5
+	assert num_nodes g 5
+	assert num_edges g 0
+	assert is_not_rooted g

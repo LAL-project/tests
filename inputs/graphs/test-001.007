@@ -1,0 +1,71 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph dgraph g 10
+	
+	add_edge g 0 1 false true
+	assert exists_edge g 0 1
+	remove_edge g 0 1 false true
+	assert not_exists_edge g 0 1
+	
+	add_edge g 0 6 false true
+	add_edge g 0 1 false true
+	add_edge g 0 3 false true
+	add_edge g 0 2 false true
+	add_edge g 0 4 false true
+	add_edge g 0 5 false true
+	output_graph g
+	
+	remove_edges g 2
+		0 1
+		0 2
+		false true
+	output_graph g
+	assert not_normalised g
+	
+	
+	create_graph dgraph f 10
+	
+	add_edge f 0 1 false true
+	assert exists_edge f 0 1
+	remove_edge f 0 1 false true
+	assert not_exists_edge f 0 1
+	
+	add_edge f 0 6 false true
+	add_edge f 0 1 false true
+	add_edge f 0 3 false true
+	add_edge f 0 2 false true
+	add_edge f 0 4 false true
+	add_edge f 0 5 false true
+	output_graph f
+	
+	remove_edges f 2
+		0 1
+		0 2
+		true true
+	output_graph f
+	assert normalised f
+	
+	
+	
+	create_graph dgraph h 10
+	
+	add_edge h 0 1 false true
+	assert exists_edge h 0 1
+	remove_edge h 0 1 false true
+	assert not_exists_edge h 0 1
+	
+	add_edge h 0 6 false true
+	add_edge h 0 1 false true
+	add_edge h 0 3 false true
+	add_edge h 0 2 false true
+	add_edge h 0 4 false true
+	add_edge h 0 5 false true
+	output_graph h
+	
+	remove_edges h 2
+		0 6
+		0 3
+		false true
+	output_graph h
+	assert normalised h

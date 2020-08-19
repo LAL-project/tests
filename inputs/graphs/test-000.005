@@ -1,0 +1,63 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ugraph g 10
+	
+	add_edge g 0 1 false true
+	assert exists_edge g 0 1
+	remove_edge g 0 1 false true
+	assert not_exists_edge g 0 1
+	
+	add_edge g 0 3 false true
+	add_edge g 0 2 false true
+	add_edge g 0 1 false true
+	add_edge g 4 1 false true
+	add_edge g 9 1 false true
+	output_graph g
+	
+	assert not_normalised g
+	remove_edge g 0 3 true true
+	output_graph g
+	assert normalised g
+	
+	
+	
+	create_graph ugraph h 10
+	
+	add_edge h 0 1 false true
+	assert exists_edge h 0 1
+	remove_edge h 0 1 false true
+	assert not_exists_edge h 0 1
+	
+	add_edge h 0 3 false true
+	add_edge h 0 2 false true
+	add_edge h 0 1 false true
+	add_edge h 4 1 false true
+	add_edge h 9 1 false true
+	output_graph h
+	
+	assert not_normalised h
+	remove_edge h 0 3 false true
+	output_graph h
+	assert not_normalised h
+	
+	
+	
+	create_graph ugraph f 10
+	
+	add_edge f 0 1 false true
+	assert exists_edge f 0 1
+	remove_edge f 0 1 false true
+	assert not_exists_edge f 0 1
+	
+	add_edge f 0 3 false true
+	add_edge f 0 2 false true
+	add_edge f 9 1 false true
+	add_edge f 0 1 false true
+	add_edge f 4 1 false true
+	output_graph f
+	
+	assert not_normalised f
+	remove_edge f 0 3 true true
+	output_graph f
+	assert normalised f

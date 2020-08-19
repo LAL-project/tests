@@ -1,0 +1,17 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ftree g0 0
+	ftree_to_rtree dg0 g0 0
+	output_graph dg0
+	
+	create_graph ftree g1 1
+	ftree_to_rtree dg1 g1 0
+	output_graph dg1
+	
+	create_graph ftree g2 2
+	assert num_nodes g2 2
+	assert num_edges g2 0
+	add_edge g2 0 1 false true
+	assert num_edges g2 1
+	output_graph g2

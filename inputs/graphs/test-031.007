@@ -1,0 +1,168 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	read_graph dgraph g2 graphs/complete-bipartite/2-2 edge_list true
+	assert normalised g2
+	check_edge_iterator g2
+	check_Q_iterator g2
+	
+	read_graph dgraph g3 graphs/complete-bipartite/2-3 edge_list true
+	assert normalised g3
+	check_edge_iterator g3
+	check_Q_iterator g3
+	
+	read_graph dgraph g4 graphs/complete-bipartite/2-4 edge_list true
+	assert normalised g4
+	check_edge_iterator g4
+	check_Q_iterator g4
+
+	read_graph dgraph g5 graphs/complete-bipartite/2-5 edge_list true
+	assert normalised g5
+	check_edge_iterator g5
+	check_Q_iterator g5
+	
+	read_graph dgraph g6 graphs/complete-bipartite/2-6 edge_list true
+	assert normalised g6
+	check_edge_iterator g6
+	check_Q_iterator g6
+	
+	read_graph dgraph g7 graphs/complete-bipartite/2-7 edge_list true
+	assert normalised g7
+	check_edge_iterator g7
+	check_Q_iterator g7
+	
+	read_graph dgraph g8 graphs/complete-bipartite/2-8 edge_list true
+	assert normalised g8
+	check_edge_iterator g8
+	check_Q_iterator g8
+	
+	read_graph dgraph g9 graphs/complete-bipartite/2-9 edge_list true
+	assert normalised g9
+	check_edge_iterator g9
+	check_Q_iterator g9
+	
+	
+	
+	read_graph dgraph g2 graphs/complete-bipartite/3-2 edge_list true
+	assert normalised g2
+	check_edge_iterator g2
+	check_Q_iterator g2
+	
+	read_graph dgraph g3 graphs/complete-bipartite/3-3 edge_list true
+	assert normalised g3
+	check_edge_iterator g3
+	check_Q_iterator g3
+	
+	read_graph dgraph g4 graphs/complete-bipartite/3-4 edge_list true
+	assert normalised g4
+	check_edge_iterator g4
+	check_Q_iterator g4
+
+	read_graph dgraph g5 graphs/complete-bipartite/3-5 edge_list true
+	assert normalised g5
+	check_edge_iterator g5
+	check_Q_iterator g5
+	
+	read_graph dgraph g6 graphs/complete-bipartite/3-6 edge_list true
+	assert normalised g6
+	check_edge_iterator g6
+	check_Q_iterator g6
+	
+	read_graph dgraph g7 graphs/complete-bipartite/3-7 edge_list true
+	assert normalised g7
+	check_edge_iterator g7
+	check_Q_iterator g7
+	
+	read_graph dgraph g8 graphs/complete-bipartite/3-8 edge_list true
+	assert normalised g8
+	check_edge_iterator g8
+	check_Q_iterator g8
+	
+	read_graph dgraph g9 graphs/complete-bipartite/3-9 edge_list true
+	assert normalised g9
+	check_edge_iterator g9
+	check_Q_iterator g9
+	
+	
+	
+	read_graph dgraph g2 graphs/complete-bipartite/4-2 edge_list true
+	assert normalised g2
+	check_edge_iterator g2
+	check_Q_iterator g2
+	
+	read_graph dgraph g3 graphs/complete-bipartite/4-3 edge_list true
+	assert normalised g3
+	check_edge_iterator g3
+	check_Q_iterator g3
+	
+	read_graph dgraph g4 graphs/complete-bipartite/4-4 edge_list true
+	assert normalised g4
+	check_edge_iterator g4
+	check_Q_iterator g4
+
+	read_graph dgraph g5 graphs/complete-bipartite/4-5 edge_list true
+	assert normalised g5
+	check_edge_iterator g5
+	check_Q_iterator g5
+	
+	read_graph dgraph g6 graphs/complete-bipartite/4-6 edge_list true
+	assert normalised g6
+	check_edge_iterator g6
+	check_Q_iterator g6
+	
+	read_graph dgraph g7 graphs/complete-bipartite/4-7 edge_list true
+	assert normalised g7
+	check_edge_iterator g7
+	check_Q_iterator g7
+	
+	read_graph dgraph g8 graphs/complete-bipartite/4-8 edge_list true
+	assert normalised g8
+	check_edge_iterator g8
+	check_Q_iterator g8
+	
+	read_graph dgraph g9 graphs/complete-bipartite/4-9 edge_list true
+	assert normalised g9
+	check_edge_iterator g9
+	check_Q_iterator g9
+	
+	
+	
+	read_graph dgraph g2 graphs/complete-bipartite/5-2 edge_list true
+	assert normalised g2
+	check_edge_iterator g2
+	check_Q_iterator g2
+	
+	read_graph dgraph g3 graphs/complete-bipartite/5-3 edge_list true
+	assert normalised g3
+	check_edge_iterator g3
+	check_Q_iterator g3
+	
+	read_graph dgraph g4 graphs/complete-bipartite/5-4 edge_list true
+	assert normalised g4
+	check_edge_iterator g4
+	check_Q_iterator g4
+
+	read_graph dgraph g5 graphs/complete-bipartite/5-5 edge_list true
+	assert normalised g5
+	check_edge_iterator g5
+	check_Q_iterator g5
+	
+	read_graph dgraph g6 graphs/complete-bipartite/5-6 edge_list true
+	assert normalised g6
+	check_edge_iterator g6
+	check_Q_iterator g6
+	
+	read_graph dgraph g7 graphs/complete-bipartite/5-7 edge_list true
+	assert normalised g7
+	check_edge_iterator g7
+	check_Q_iterator g7
+	
+	read_graph dgraph g8 graphs/complete-bipartite/5-8 edge_list true
+	assert normalised g8
+	check_edge_iterator g8
+	check_Q_iterator g8
+	
+	read_graph dgraph g9 graphs/complete-bipartite/5-9 edge_list true
+	assert normalised g9
+	check_edge_iterator g9
+	check_Q_iterator g9
