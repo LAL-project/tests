@@ -72,7 +72,7 @@ err_type parse_header(
 	std::ifstream& fin
 );
 
-err_type exe_construction(const input_list& inputs, std::ifstream& fin);
+err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin);
 err_type exe_numeric_rational(const input_list& inputs,std::ifstream& fin);

@@ -70,7 +70,12 @@ err_type call_generate_trees
 err_type call_generate_arrangements
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-// Functions to test the library's utilities
+// Functions to test the different implementations of graphs
+
+err_type call_graphs
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+
+// Functions to test the library's internal algorithms
 
 err_type call_internal
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
@@ -99,7 +104,7 @@ err_type call_numeric
 err_type call_properties
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
-// Functions to test the properties functions
+// Functions to test the library's utilities
 
 err_type call_utilities
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);

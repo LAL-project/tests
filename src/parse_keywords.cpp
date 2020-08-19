@@ -93,12 +93,11 @@ void mark_wrong_keyword
 
 err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	const string& key = keywords[0];
-	if (key == "construction_graph") {
-		// no more keywords
-		return parse_header(exe_construction, fin);
-	}
 	if (key == "generate") {
 		return call_generate(keywords, 1, fin);
+	}
+	if (key == "graphs") {
+		return call_graphs(keywords, 1, fin);
 	}
 	if (key == "internal") {
 		return call_internal(keywords, 1, fin);
@@ -119,6 +118,22 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {0}, "    ");
+	return err_type::wrong_keyword;
+}
+
+/* Functions to test the different implementations of graphs */
+
+err_type call_graphs
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "construction") {
+		return parse_header(exe_graphs_construction, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 

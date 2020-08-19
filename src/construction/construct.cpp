@@ -462,7 +462,7 @@ err_type exe_construction_test(ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_construction(const input_list& inputs, ifstream& fin) {
+err_type exe_graphs_construction(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
