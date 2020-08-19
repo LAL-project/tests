@@ -60,11 +60,11 @@ all_DIRS=(\
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
-	"linarr/Dmin/projective" "linarr/Dmin/projective" \
-	"linarr/Dmin/planar" "linarr/Dmin/planar" \
-	"linarr/Dmin/unconstrained" "linarr/Dmin/unconstrained" \
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
-	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/FC" \
+	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
+	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
+	"linarr/D/Dmin/unconstrained" "linarr/D/Dmin/unconstrained" \
+	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
+	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
@@ -129,6 +129,9 @@ linarr_DIRS=(\
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/MDD" "linarr/MDD" \
 	"linarr/D" "linarr/D" \
+	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
+	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
+	"linarr/D/Dmin/unconstrained" "linarr/D/Dmin/unconstrained" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
@@ -161,12 +164,16 @@ linarr_C_stack_based_DIRS=(\
 
 # Dmin (MLA) tests
 Dmin_DIRS=(\
-	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
+	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
+	"linarr/D/Dmin/unconstrained" "linarr/D/Dmin/unconstrained" \
+	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
+	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	)
 
 # Dmin Projective tests
 Dmin_Projective_DIRS=(\
-	"linarr/Dmin/projective" "linarr/Dmin/projective" \
+	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
 	)
 
 # Dmin Planar tests
