@@ -90,8 +90,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 		const free_tree tree = internal::linear_sequence_to_ftree(node_list).first;
 
 		// execute library's algorithm
-		const pair<uint32_t, linear_arrangement> res_library
-			= Dmin(tree, algorithms_Dmin::Planar);
+		const auto res_library = Dmin(tree, algorithms_Dmin::Planar);
 		const linear_arrangement& arr = res_library.second;
 
 		// ensure that the arrangement is a projective permutation

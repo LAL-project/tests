@@ -92,8 +92,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		tree.calculate_size_subtrees();
 
 		// execute library's algorithm
-		const pair<uint32_t, linear_arrangement> res_library
-			= Dmin(tree, algorithms_Dmin::Projective);
+		const auto res_library = Dmin(tree, algorithms_Dmin::Projective);
 		const linear_arrangement& arr = res_library.second;
 
 		// ensure that the arrangement is a projective permutation
