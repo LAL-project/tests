@@ -60,14 +60,14 @@ linarr_Dmin_Projective_DIRS=(\
 	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
 	)
 linarr_Dmin_Planar_DIRS=(\
-	"linarr/Dmin/planar" "linarr/Dmin/planar" \
+	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
 	)
 linarr_Dmin_Comparison_DIRS=(\
-	"linarr/Dmin/" "linarr/Dmin/" \
+	"linarr/D/Dmin/" "linarr/D/Dmin/" \
 	)
 linarr_Dmin_Unconstrained_YS_DIRS=(\
-	"linarr/Dmin/unconstrained/YS" "linarr/Dmin/unconstrained/YS" \
+	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
 	)
 linarr_Dmin_Unconstrained_FC_DIRS=(\
-	"linarr/Dmin/unconstrained/FC" "linarr/Dmin/unconstrained/FC" \
+	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	)
