@@ -1,7 +1,6 @@
-TYPE linarr-Dmin-Unconstrained
+TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	algo_vs_algo
 	exhaustive YS == FC 1
 	exhaustive YS == FC 2
 	exhaustive YS == FC 3

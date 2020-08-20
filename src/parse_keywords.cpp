@@ -321,18 +321,7 @@ err_type call_linarr_klevel
 err_type call_linarr_Dmin
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
-	const set<string> allowed_keywords({
-		"Projective", "Planar", "Unconstrained"
-	});
-
 	const string& key = keywords[i];
-	if (allowed_keywords.find(key) == allowed_keywords.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i << ": '" << key << "'." << endl;
-		mark_wrong_keyword(keywords, {i}, "    ");
-		return err_type::wrong_keyword;
-	}
-
 	if (key == "Projective") {
 		return parse_header(exe_linarr_Dmin_projective, fin);
 	}
@@ -342,11 +331,14 @@ err_type call_linarr_Dmin
 	if (key == "Unconstrained") {
 		return parse_header(exe_linarr_Dmin_unconstrained, fin);
 	}
+	if (key == "comparison") {
+		return parse_header(exe_linarr_Dmin_comparison, fin);
+	}
 
 	cerr << ERROR << endl;
-	cerr << "    Key '" << key << "' is classified as an algorithm for" << endl;
-	cerr << "    neither free trees nor rooted trees." << endl;
-	return err_type::not_implemented;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
 }
 
 /* Functions to test the integer and rational classes */

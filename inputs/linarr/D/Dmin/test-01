@@ -1,7 +1,6 @@
-TYPE linarr-Dmin-Unconstrained
+TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	algo_vs_algo
 	random YS == FC 30 1000
 	random YS == FC 40 1000
 	random YS == FC 50 1000
