@@ -68,7 +68,7 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Only one input file si allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	undirected_graph G;
@@ -90,7 +90,7 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 		for (const string& p : allowed_procs) {
 		cerr << "    - " << p << endl;
 		}
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	// linear arrangement

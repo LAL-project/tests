@@ -108,7 +108,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	// --- do the tests
@@ -133,7 +133,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 				cerr << "    Tree of index " << gen << " is not correct." << endl;
 				cerr << "    Error: " << rtree_check_to_string(err) << endl;
 				cerr << T << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 
 			// compute 'statistics'
@@ -148,7 +148,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 			cerr << "    Amount of trees should be: " << URT[n] << endl;
 			cerr << "    But generated: " << gen << endl;
 			cerr << "    For a size of " << n << " vertices" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 

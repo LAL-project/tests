@@ -68,7 +68,7 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	uint32_t n;

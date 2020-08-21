@@ -69,7 +69,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	// read number of nodes
@@ -103,7 +103,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		// ensure that value of D matches the evaluation of the arrangement
@@ -118,7 +118,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			cerr << "    Actual value of D:   " << D << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		// ensure that the value of D is actually minimum
@@ -135,7 +135,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			cerr << "        Value: " << brute_force_D << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 

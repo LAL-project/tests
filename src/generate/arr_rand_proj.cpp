@@ -68,7 +68,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	uint32_t n, ntrees, nit;
@@ -95,7 +95,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					cerr << "    For tree:" << endl;
 					cerr << rT << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}

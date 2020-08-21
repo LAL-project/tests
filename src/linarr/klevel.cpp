@@ -85,7 +85,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		for (const string& l : allowed_levels) {
 		cerr << "    - " << l << endl;
 		}
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	if (allowed_procs.find(level) == allowed_procs.end()) {
 		cerr << ERROR << endl;
@@ -95,7 +95,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		for (const string& p : allowed_procs) {
 		cerr << "    - " << p << endl;
 		}
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	auto MDD_F = [level](const vector<undirected_graph>& Gs, const vector<linear_arrangement>& pis) {
@@ -113,7 +113,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Expected at least one input." << endl;
 		cerr << "    Instead, none were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	const size_t n_inputs = inputs.size();
@@ -142,7 +142,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		cerr << "    and it does not equal the amount of graphs given as input." << endl;
 		cerr << "    Amount of graphs given as input: " << Gs.size() << endl;
 		cerr << "    Number of linear arrangements: " << n_linarrs << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	if (n_linarrs != 0) {

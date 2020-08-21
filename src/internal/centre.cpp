@@ -201,7 +201,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 				if (centre.first != u) {
 					cerr << ERROR << endl;
 					cerr << "    Centre does not coincide." << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 			else if (centre_size == 2) {
@@ -210,24 +210,24 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 				if (u > v) {
 					cerr << ERROR << endl;
 					cerr << "    The first vertex must be smaller than the second." << endl;
-					return err_type::test_format_error;
+					return err_type::test_format;
 				}
 				if (u == v) {
 					cerr << ERROR << endl;
 					cerr << "    The two vertices are the same: " << u << " <-> " << v << "." << endl;
-					return err_type::test_format_error;
+					return err_type::test_format;
 				}
 
 				if (centre.first != u and centre.second != v) {
 					cerr << ERROR << endl;
 					cerr << "    Centres do not coincide." << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 			else {
 				cerr << ERROR << endl;
 				cerr << "    Centre size has to be either 1 or 2. Instead, received '" << centre_size << "'." << endl;
-				return err_type::test_format_error;
+				return err_type::test_format;
 			}
 		}
 		else if (option == "output_graph") {
@@ -241,7 +241,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Invalid command '" << option << "'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 	return err_type::no_error;
@@ -254,7 +254,7 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Method of enumeration '" << how << "' is invalid." << endl;
 		cerr << "    It must be either 'exhaustive' or 'random'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 #define test_correctness(T)										\
@@ -328,7 +328,7 @@ err_type exe_internal_centre(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	string mode, graph_type;
@@ -338,14 +338,14 @@ err_type exe_internal_centre(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Expected execution mode 'manual' or 'automatic'." << endl;
 		cerr << "    Found '" << mode << "'" << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	if (graph_type != "ftree" and graph_type != "rtree") {
 		cerr << ERROR << endl;
 		cerr << "    Expected graph type 'ftree' or 'rtree'." << endl;
 		cerr << "    Found '" << graph_type << "'" << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	const err_type err =

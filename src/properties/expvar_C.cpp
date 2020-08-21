@@ -184,7 +184,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Received '" << proc << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	if (proc == "all-trees") {
@@ -196,7 +196,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 			const bool r = check_ExpVar_C_all_trees(k);
 
 			if (not r) {
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		TEST_GOODBYE
@@ -209,7 +209,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 			fin >> n_trees >> size_trees;
 			bool r = check_ExpVar_C_mixed_trees(rep, n_trees, size_trees);
 			if (not r) {
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		TEST_GOODBYE
@@ -244,7 +244,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 			else {
 				cerr << ERROR << endl;
 				cerr << "    Procedure '" << proc << "' not captured." << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 	}

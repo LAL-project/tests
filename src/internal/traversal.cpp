@@ -71,7 +71,7 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 		if (not is) {
 			cerr << ERROR << endl;
 			cerr << "    Vertex " << t << " is not reachable from " << s << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == "is_not_reachable") {
@@ -80,13 +80,13 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 		if (is) {
 			cerr << ERROR << endl;
 			cerr << "    Vertex " << t << " is reachable from " << s << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else {
 		cerr << ERROR << endl;
 		cerr << "    Unknow assertion '" << assert_what << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	return err_type::no_error;
 }
@@ -99,7 +99,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have directed cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == "hasnt_dir_cycle") {
@@ -107,7 +107,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have directed cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == "has_undir_cycle") {
@@ -115,7 +115,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have undirected cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == "hasnt_undir_cycle") {
@@ -123,7 +123,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have undirected cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else {
@@ -141,7 +141,7 @@ err_type process_assert(const undirected_graph& g, ifstream& fin) {
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have undirected cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == "hasnt_undir_cycle") {
@@ -149,7 +149,7 @@ err_type process_assert(const undirected_graph& g, ifstream& fin) {
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have undirected cycles" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else {
@@ -174,7 +174,7 @@ err_type process_instruction(const G& g, const string& command, ifstream& fin) {
 	else {
 		cerr << ERROR << endl;
 		cerr << "    Unrecognised command '" << command << "'" << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	return err_type::no_error;
@@ -233,7 +233,7 @@ err_type exe_internal_bfs(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    At most one input file is allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	string graph_type;
@@ -242,7 +242,7 @@ err_type exe_internal_bfs(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Incorrect type of graph specified." << endl;
 		cerr << "    Recevied: '" << graph_type << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	err_type r = err_type::no_error;

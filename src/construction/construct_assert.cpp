@@ -131,7 +131,7 @@ err_type process_assert(
 			output_graph(g1)
 			cerr << "    Contents of " << g2 << ":" << endl;
 			output_graph(g2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NOT_EQUAL_GRAPHS) {
@@ -147,7 +147,7 @@ err_type process_assert(
 			output_graph(g1)
 			cerr << "    Contents of " << g2 << ":" << endl;
 			output_graph(g2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NEIGHBOURS_ARE) {
@@ -169,7 +169,7 @@ err_type process_assert(
 			cerr << "   ";
 			for (node neigh : node_list) { cerr << " " << neigh; }
 			cerr << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_IS_NORMALISED) {
@@ -181,7 +181,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is not normalised." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NOT_NORMALISED) {
@@ -193,7 +193,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' is normalised." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_EXISTS_EDGE) {
@@ -205,7 +205,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' does not have edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NOT_EXISTS_EDGE) {
@@ -217,7 +217,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' has edge (" << u << ", " << v << ")." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NUM_NODES) {
@@ -230,7 +230,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' has " << mfunction(g1, n_nodes()) << " nodes." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NUM_EDGES) {
@@ -243,7 +243,7 @@ err_type process_assert(
 			cerr << "    Graph '" << g1 << "' has " << mfunction(g1, n_edges()) << " edges." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_EDGES_ARE) {
@@ -272,7 +272,7 @@ err_type process_assert(
 			for (auto e : gv) {
 				cerr << "    " << edge_out(e) << endl;
 			}
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_ELEMENTS_Q_ARE) {
@@ -305,7 +305,7 @@ err_type process_assert(
 			for (auto e : gv) {
 				cerr << "    " << edge_pair_out(e) << endl;
 			}
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_IS_UNDIRECTED) {
@@ -315,13 +315,13 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_IS_UNDIRECTED)
 			cerr << "    Graph '" << g1 << "' is not undirected." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		if (not mfunction(g1, is_undirected())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_IS_UNDIRECTED)
 			cerr << "    Graph '" << g1 << "' does not return undirected." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NOT_UNDIRECTED) {
@@ -331,13 +331,13 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NOT_UNDIRECTED)
 			cerr << "    Graph '" << g1 << "' is undirected." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		if (mfunction(g1, is_undirected())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NOT_UNDIRECTED)
 			cerr << "    Graph '" << g1 << "' returns undirected." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_IS_DIRECTED) {
@@ -347,13 +347,13 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_IS_DIRECTED)
 			cerr << "    Graph '" << g1 << "' is not directed." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		if (not mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_IS_DIRECTED)
 			cerr << "    Graph '" << g1 << "' does not return directed." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_NOT_DIRECTED) {
@@ -363,13 +363,13 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NOT_DIRECTED)
 			cerr << "    Graph '" << g1 << "' is directed." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		if (mfunction(g1, is_directed())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NOT_DIRECTED)
 			cerr << "    Graph '" << g1 << "' returns directed." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_DEGREE) {
@@ -383,7 +383,7 @@ err_type process_assert(
 			cerr << "    The vertex has degree: " << mfunction(g1, degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -408,7 +408,7 @@ err_type process_assert(
 			cerr << "   ";
 			for (node neigh : node_list) { cerr << " " << neigh; }
 			cerr << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_GRAPH_FULL_DEGREE) {
@@ -426,7 +426,7 @@ err_type process_assert(
 			cerr << "    The vertex has full degree: " << fdegree << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_DGRAPH_IN_DEGREE) {
@@ -441,7 +441,7 @@ err_type process_assert(
 			cerr << "    The vertex has in-degree: " << mfunction_dir_graphs(g1, in_degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_DGRAPH_OUT_DEGREE) {
@@ -456,7 +456,7 @@ err_type process_assert(
 			cerr << "    The vertex has out-degree: " << mfunction_dir_graphs(g1, degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -469,7 +469,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_IS_TREE)
 			cerr << "    Tree '" << g1 << "' is 'not a tree'." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_IS_NOT_TREE) {
@@ -480,7 +480,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_IS_TREE)
 			cerr << "    Tree '" << g1 << "' is 'a tree'." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_CAN_ADD_EDGE) {
@@ -495,7 +495,7 @@ err_type process_assert(
 				 << "to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_CANT_ADD_EDGE) {
@@ -510,7 +510,7 @@ err_type process_assert(
 				 << "can be added to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_CAN_ADD_EDGES) {
@@ -532,7 +532,7 @@ err_type process_assert(
 			cerr << "    to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_CANT_ADD_EDGES) {
@@ -554,7 +554,7 @@ err_type process_assert(
 			cerr << "    to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_IS_ROOTED) {
@@ -565,7 +565,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_IS_ROOTED)
 			cerr << "    Graph '" << g1 << "' is not rooted." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_TREE_IS_NOT_ROOTED) {
@@ -576,7 +576,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_IS_NOT_ROOTED)
 			cerr << "    Graph '" << g1 << "' is rooted." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -589,7 +589,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' have to be recalculated." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE) {
@@ -600,7 +600,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' do not need to be recalculated." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_HAS_ROOT) {
@@ -611,7 +611,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_HAS_ROOT)
 			cerr << "    Tree '" << g1 << "' does not have a root." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_NOT_HAS_ROOT) {
@@ -622,7 +622,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NOT_HAS_ROOT)
 			cerr << "    Tree '" << g1 << "' has a root." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_SIZE_SUBTREE) {
@@ -634,7 +634,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    Values of subtree's sizes in tree '" << g1 << "' need recalculating." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		n = mfunction_rtrees(g1, n_nodes_subtree(u));
@@ -643,7 +643,7 @@ err_type process_assert(
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    The size of subtree rooted at '" << u << "' is not '" << v << "." << endl;
 			cerr << "    The size of the subtree is: " << n << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -656,7 +656,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_rooted_tree_type_valid)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_rooted_tree_type_NOT_VALID) {
@@ -667,7 +667,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_rooted_tree_type_valid)
 			cerr << "    Tree '" << g1 << "' has a valid rooted_tree_type." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_IS_TYPE) {
@@ -679,7 +679,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		auto type = rtreevars[g1].get_rooted_tree_type();
 		if (g2 == "arborescence") {
@@ -688,7 +688,7 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is not an arborescence." << endl;
 				cerr << "    Directed rooted tree type: " << rooted_tree_type_to_string(type) << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (g2 == "anti_arborescence") {
@@ -697,7 +697,7 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is not an anti-arborescence." << endl;
 				cerr << "    Directed rooted tree type: " << rooted_tree_type_to_string(type) << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (g2 == "none") {
@@ -706,7 +706,7 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is not 'none'." << endl;
 				cerr << "    Directed rooted tree type: " << rooted_tree_type_to_string(type) << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 	}
@@ -719,7 +719,7 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 			cerr << "    Tree '" << g1 << "' does not have a valid rooted_tree_type." << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		auto type = rtreevars[g1].get_rooted_tree_type();
 		if (g2 == "arborescence") {
@@ -728,7 +728,7 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is an arborescence." << endl;
 				cerr << "    Parameter value: " << g2 << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (g2 == "anti_arborescence") {
@@ -737,7 +737,7 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is an anti-arborescence." << endl;
 				cerr << "    Parameter value: " << g2 << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (g2 == "none") {
@@ -746,14 +746,14 @@ err_type process_assert(
 				message_in_func(ASSERT_RTREE_IS_NOT_TYPE)
 				cerr << "    Directed rooted tree '" << g1 << "' is 'none'." << endl;
 				cerr << "    Parameter value: " << g2 << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 	}
 	else {
 		cerr << ERROR << endl;
 		cerr << "    Invalid assertion '" << assert_what << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	return err_type::no_error;
 }

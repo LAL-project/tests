@@ -151,7 +151,7 @@ err_type test_Unconstrained_bf_algorithm(
 		const auto res_A = A(T);
 
 		if (not check_correctness_arr(T, res_A)) {
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		uint32_t base_res_test;
@@ -164,7 +164,7 @@ err_type test_Unconstrained_bf_algorithm(
 			cerr << "    Algorithm result:" << res_A.first << endl;
 			cerr << "    For tree:" << endl;
 			cerr << T << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -208,7 +208,7 @@ err_type test_Unconstrained_class_algorithm(
 					cerr << "    When dealing with a linear tree of " << n << " vertices." << endl;
 					cerr << "    Tree:" << endl;
 					cerr << T << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}
@@ -244,7 +244,7 @@ err_type test_Unconstrained_class_algorithm(
 						cerr << "    When dealing with a caterpillat tree of " << n << " vertices." << endl;
 						cerr << "    Tree:" << endl;
 						cerr << tree << endl;
-						return err_type::test_exe_error;
+						return err_type::test_execution;
 					}
 				}
 			}
@@ -317,7 +317,7 @@ err_type test_Unconstrained_class_algorithm(
 					cerr << "    When dealing with a complete binary tree of " << n << " vertices." << endl;
 					cerr << "    Tree:" << endl;
 					cerr << T << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}
@@ -342,14 +342,14 @@ err_type test_Unconstrained_class_algorithm(
 					cerr << "    When dealing with a star tree of " << n << " vertices." << endl;
 					cerr << "    Tree:" << endl;
 					cerr << T << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Tree class '" << tree_class << "' not recognised." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 	return err_type::no_error;
@@ -382,7 +382,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	string alg;

@@ -121,7 +121,7 @@ err_type parse_single_file(const string& file) {
 	if (not filesystem::exists(file)) {
 		cerr << ERROR << endl;
 		cerr << "    File '" << file << "' does not exist." << endl;
-		return err_type::io_error;
+		return err_type::io;
 	}
 
 	ifstream F;
@@ -140,7 +140,7 @@ err_type parse_single_file(const string& file) {
 			cerr << "    Input line is not correctly formatted." << endl;
 			cerr << "    In line: " << lineno << "' of file '" << file << "'." << endl;
 			cerr << "    Line '" << lineno << "' does not have the ';'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 
 		// parse line
@@ -177,7 +177,7 @@ err_type parse_single_file(const string& file) {
 						 << endl;
 				}
 			}
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 
@@ -189,7 +189,7 @@ err_type exe_linarr_syntree_classification(const input_list& inputs, ifstream& f
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	string f;

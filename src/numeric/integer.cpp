@@ -98,37 +98,37 @@ static inline err_type resolve_comp_integer(
 	if (op == "==") {
 		if (val1 != val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "!=") {
 		if (val1 == val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">=") {
 		if (val1 < val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">") {
 		if (val1 <= val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<=") {
 		if (val1 > val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<") {
 		if (val1 >= val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else {
@@ -136,7 +136,7 @@ static inline err_type resolve_comp_integer(
 		message_in_func("comparison " + op)
 		cerr << "    Operator is not one of ==, !=, >=, >, <=, <" << endl;
 		cerr << "    Operator is: " << op << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	return err_type::no_error;
 }
@@ -317,7 +317,7 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	map<string, integer> integer_vars;
@@ -378,7 +378,7 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Invalid command '" << command << "'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 

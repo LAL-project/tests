@@ -67,7 +67,7 @@ err_type parse_header(
 		cerr << ERROR << endl;
 		cerr << "    Expected field: INPUT" << endl;
 		cerr << "    Found: " << field << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	size_t n_inputs;
@@ -84,7 +84,7 @@ err_type parse_header(
 		cerr << ERROR << endl;
 		cerr << "    Expected field: BODY" << endl;
 		cerr << "    Found: " << field << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	return F(inputs, fin);

@@ -142,7 +142,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	const set<string> allowed_algos({"Proj", "Plan", "YS", "FC"});
@@ -170,7 +170,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 			cerr << ERROR << endl;
 			cerr << "    Mode '" << mode << "' is invalid." << endl;
 			cerr << "    Must be either 'exhaustive' or 'random'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 
 		string algo1, comp, algo2;
@@ -216,7 +216,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 					cerr << "        Arrangement: " << res2.second << endl;
 					cerr << " In tree:" << endl;
 					cerr << tree << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}
@@ -250,7 +250,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 					cerr << "        Arrangement: " << res2.second << endl;
 					cerr << " In tree:" << endl;
 					cerr << tree << endl;
-					return err_type::test_exe_error;
+					return err_type::test_execution;
 				}
 			}
 		}

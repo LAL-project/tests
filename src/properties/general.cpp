@@ -159,7 +159,7 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 					cout << "        " << s << endl;
 				}
 				cerr << "    Instead, '" << ins << "' was found." << endl;
-				return err_type::test_format_error;
+				return err_type::test_format;
 			}
 		}
 	}

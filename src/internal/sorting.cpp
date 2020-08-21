@@ -186,7 +186,7 @@ err_type __check_sorting
 		cerr << "    ";
 		for (auto k : v2) { cerr << " " << k; }
 		cerr << endl;
-		return err_type::test_exe_error;
+		return err_type::test_execution;
 	}
 	return err_type::no_error;
 }
@@ -277,7 +277,7 @@ err_type check_counting_sort(
 	else {
 		cerr << ERROR << endl;
 		cerr << "    Size of tuple '" << k << "' not captured." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	return E;
 }
@@ -330,7 +330,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 			if (find(seen.begin(), seen.end(), 1) != seen.end()) {
 				cerr << ERROR << endl;
 				cerr << "    Memory array 'seen' contains true values." << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 			if (e != err_type::no_error) { return e; }
 		}
@@ -345,7 +345,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		if (order != "increasing" and order != "decreasing") {
 			cerr << ERROR << endl;
 			cerr << "    Order string '" << order << "' is not valid." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 		const bool incr = order == "increasing";
 
@@ -366,7 +366,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		if (order != "increasing" and order != "decreasing") {
 			cerr << ERROR << endl;
 			cerr << "    Order string '" << order << "' is not valid." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 		const bool incr = order == "increasing";
 
@@ -392,7 +392,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 
 	cerr << ERROR << endl;
 	cerr << "    Option '" << option << "' not valid." << endl;
-	return err_type::test_format_error;
+	return err_type::test_format;
 }
 
 err_type exe_internal_sorting(const input_list& inputs, ifstream& fin) {
@@ -406,7 +406,7 @@ err_type exe_internal_sorting(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	string option;
@@ -422,7 +422,7 @@ err_type exe_internal_sorting(const input_list& inputs, ifstream& fin) {
 			for (const string& s : allowed_options) {
 				cerr << "        " << s << endl;
 			}
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 

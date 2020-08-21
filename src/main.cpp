@@ -63,7 +63,7 @@ err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 		cerr << "    In input test file '" << filename << "'." << endl;
 		cerr << "    First field is not 'TYPE'." << endl;
 		cerr << "    Field found: '" << field << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	fin >> type;
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
 	string type;
 	err_type r = get_type_keyword(input_file, fin, type);
 
-	if (r == err_type::test_format_error) {
+	if (r == err_type::test_format) {
 		cerr << "***********************" << endl;
 		cerr << "Exiting with error type: test_format_error" << endl;
 		return 1;
@@ -144,14 +144,14 @@ int main(int argc, char *argv[]) {
 		cerr << "***********************" << endl;
 		cerr << "Exiting with error type: ";
 		switch (r) {
-		case err_type::io_error: cerr << "io_error"; break;
-		case err_type::test_exe_error: cerr << "test_exe_error"; break;
+		case err_type::io: cerr << "io_error"; break;
+		case err_type::test_execution: cerr << "test_execution"; break;
 		case err_type::invalid_param: cerr << "invalid_param"; break;
 		case err_type::wrong_keyword: cerr << "wrong_keyword"; break;
 		case err_type::not_implemented: cerr << "not_implemented"; break;
-		case err_type::test_format_error: cerr << "test_format_error"; break;
+		case err_type::test_format: cerr << "test_format"; break;
+		case err_type::graph_format: cerr << "graph_format"; break;
 		case err_type::too_many_keywords: cerr << "too_many_keywords"; break;
-		case err_type::graph_format_error: cerr << "graph_format_error"; break;
 		default:
 			;
 		}

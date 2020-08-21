@@ -76,7 +76,7 @@ err_type exe_properties_ExpVar_D(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Received '" << proc << "'." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	// read the graph type so that we can call

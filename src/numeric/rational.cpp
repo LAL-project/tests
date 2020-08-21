@@ -98,37 +98,37 @@ static inline err_type resolve_comp_rational(
 	if (op == "==") {
 		if (val1 != val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "!=") {
 		if (val1 == val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">=") {
 		if (val1 < val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">") {
 		if (val1 <= val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<=") {
 		if (val1 > val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<") {
 		if (val1 >= val2) {
 			comparison_error(op, var1, var2, val1, val2)
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 	else {
@@ -136,7 +136,7 @@ static inline err_type resolve_comp_rational(
 		message_in_func("comparison " + op)
 		cerr << "    Operator is not one of ==, !=, >=, >, <=, <" << endl;
 		cerr << "    Operator is: " << op << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 	return err_type::no_error;
 }
@@ -181,7 +181,7 @@ static inline err_type comp_rational(
 	cerr << "    In operation '" << op_comp << "': combination of variable's types is invalid." << endl;
 	cerr << "    Type of variable '" << var1 << "' is: " << type1 << "." << endl;
 	cerr << "    Type of variable '" << var2 << "' is: " << type2 << "." << endl;
-	return err_type::test_exe_error;
+	return err_type::test_execution;
 }
 
 static inline err_type comp_rational_lit(
@@ -282,7 +282,7 @@ err_type operation(
 		cerr << "    In operation '" << op << "': combination of variable's types is invalid." << endl;
 		cerr << "    Type of variable '" << var1 << "' is: " << type1 << endl;
 		cerr << "    Type of variable '" << var2 << "' is: " << type2 << endl;
-		return err_type::test_exe_error;
+		return err_type::test_execution;
 	}
 
 	rational_vars[var0] = R;
@@ -397,7 +397,7 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	map<string, string> vtypes;
@@ -481,7 +481,7 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Invalid command '" << command << "'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 

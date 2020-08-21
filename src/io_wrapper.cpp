@@ -61,7 +61,7 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 			cerr << ERROR << endl;
 			cerr << "    When attempting to read an edge-list-formatted" << endl;
 			cerr << "    graph from file: '" << file << "'." << endl;
-			return err_type::io_error;
+			return err_type::io;
 		}
 
 		return err_type::no_error;
@@ -69,7 +69,7 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 
 	cerr << ERROR << endl;
 	cerr << "    Unsupported format of file: '" << format << "'." << endl;
-	return err_type::test_format_error;
+	return err_type::test_format;
 }
 
 err_type read_graph(const string& file, const string& format, lal::graphs::undirected_graph& G) {

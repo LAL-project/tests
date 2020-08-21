@@ -65,7 +65,7 @@ err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Only one input file si allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	directed_graph G;

@@ -160,7 +160,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Only one input file si allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	undirected_graph uG;
@@ -182,7 +182,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Procedure '" << proc << "' was found." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	// linear arrangement
@@ -215,7 +215,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 				cerr << ", " << T[_i];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		const rational ap_bf_u = E_2Cd_brute_force(uG, pi);
@@ -231,7 +231,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 				cerr << ", " << T[_i];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		if (ap_lib_u != ap_bf_u) {
@@ -245,7 +245,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 				cerr << ", " << T[_i];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 

@@ -66,12 +66,12 @@ enum class err_type : int8_t {
 	invalid_param,
 
 	/// The input test file was not formatted correctly
-	test_format_error,
+	test_format,
 	/// The format for the input graph is not supported
-	graph_format_error,
+	graph_format,
 
 	/// Some error occurred while performing the test
-	test_exe_error,
+	test_execution,
 
 	/// Unknown keyword: either it is not known or it is incorrect
 	/// given its parent test type.
@@ -80,7 +80,7 @@ enum class err_type : int8_t {
 	too_many_keywords,
 
 	/// an error occurred when reading a file
-	io_error,
+	io,
 
 	/// test not implemented
 	not_implemented

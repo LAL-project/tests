@@ -69,7 +69,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Only one input file si allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	undirected_graph uG;
@@ -91,7 +91,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    Wrong value for procedure type." << endl;
 		cerr << "    Procedure '" << proc << "' was found." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	timing::time_point begin, end;
@@ -127,7 +127,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[j];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 
 		uint32_t uC = 0, dC = 0;
@@ -165,7 +165,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[j];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 		if (uC != uCbf) {
 			cerr << ERROR << endl;
@@ -178,7 +178,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[j];
 			}
 			cerr << "]" << endl;
-			return err_type::test_exe_error;
+			return err_type::test_execution;
 		}
 	}
 

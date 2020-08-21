@@ -126,7 +126,7 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_CREATE)
 				cerr << "    Unhandled type '" << type << "'." << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_READ) {
@@ -148,13 +148,13 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_READ)
 				cerr << "    I/O operation not implemented for " << gtypes[g1] << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 			if (not io_res) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_READ)
 				cerr << "    I/O operation failed when attempting to read file '" << file << "'." << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_OUTPUT) {
@@ -255,7 +255,7 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << "    " << DGRAPH << endl;
 				cerr << "    " << FTREE << endl;
 				cerr << "    " << RTREE << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_CHECK_EDGE_IT) {
@@ -283,7 +283,7 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << "    The amount of edges obtained differs from the amount of edges in the graph." << endl;
 				cerr << "    Number of edges obtained: " << iter_edges.size() << endl;
 				cerr << "    Number of edges in the graph: " << mfunction(g1, n_edges()) << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 			sort(iter_edges.begin(), iter_edges.end());
 			vector<edge> graph_edges = ffunction(g1, enumerate_edges_brute_force);
@@ -308,7 +308,7 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 				cerr << "    Contents:" << endl;
 				output_graph(g1)
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_CHECK_Q_IT) {
@@ -340,7 +340,7 @@ err_type exe_construction_test(ifstream& fin) {
 				cerr << "    The amount of pairs obtained differs from the size of the set Q." << endl;
 				cerr << "    Number of pairs obtained: " << iter_pair_edges.size() << endl;
 				cerr << "    Size of the set Q: " << ffunction(g1, properties::size_Q) << endl;
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 			sort(iter_pair_edges.begin(), iter_pair_edges.end());
 			vector<edge_pair> gpe = ffunction(g1, enumerate_Q_brute_force);
@@ -365,7 +365,7 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 				cerr << "    Contents:" << endl;
 				output_graph(g1)
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 		}
 
@@ -376,7 +376,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_not_exists_variable(FUNC_DGRAPH_TO_UGRAPH, g1)
 			if (graph_type(g2) != DGRAPH) {
 				WRONG_TYPE(FUNC_DGRAPH_TO_UGRAPH, g2, DGRAPH)
-				return err_type::test_exe_error;
+				return err_type::test_execution;
 			}
 			ugraphvars[g1] = dgraphvars[g2].to_undirected();
 			gtypes[g1] = UGRAPH;
@@ -455,7 +455,7 @@ err_type exe_construction_test(ifstream& fin) {
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Invalid option '" << option << "'." << endl;
-			return err_type::test_format_error;
+			return err_type::test_format;
 		}
 	}
 
@@ -467,7 +467,7 @@ err_type exe_graphs_construction(const input_list& inputs, ifstream& fin) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format_error;
+		return err_type::test_format;
 	}
 
 	err_type e = exe_construction_test(fin);
