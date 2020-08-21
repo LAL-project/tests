@@ -1,12 +1,40 @@
 NAMING CONVENTIONS
 ==================
 
-The "handmade" tests have the following format:
+Tests inside free/ and rooted/
+------------------------------
+
+The "manual" tests' names have the following format:
 
 	free/positive/test-nn.TT
 	free/negative/test-nn.TT
 	root/positive/test-nn.TT
 	root/negative/test-nn.TT
 
-The string 'nn' makes up a number of two digits which is the number of vertices of the trees.
+The string 'nn' makes up a number of two digits which is the number of vertices of the trees being tested.
 The string 'TT' makes up a number of two digits which is the test number.
+
+Tests inside in the root directory tree_isomorphism
+---------------------------------------------------
+
+The "automatic" tests' names have the following format:
+
+	test-tem.TT
+
+The string 'tem' encodes the type of tree, expected result, and mode of execution:
+
+	- t: type of tree rooted/free.
+	Values: r/f
+	
+	- e: expected result: negative/positive
+	Values: 0/1
+	
+	- m: mode of execution: exhaustive/random
+	Values: e/r
+
+The string 'TT' makes up a number of two digits which is the test number.
+
+The only combinations allowed are:
+
+	- (f/r) 1e, 1r
+	- (f/r) 0e

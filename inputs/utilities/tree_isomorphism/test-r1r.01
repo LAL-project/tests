@@ -1,0 +1,8 @@
+TYPE utilities-tree_isomorphism
+INPUT 0
+BODY
+	automatic
+	free positive random
+	100 1000 100
+	200 2000 200
+	500 3000 300

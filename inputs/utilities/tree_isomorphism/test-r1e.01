@@ -1,0 +1,8 @@
+TYPE utilities-tree_isomorphism
+INPUT 0
+BODY
+	automatic
+	free positive exhaustive
+	13 1000
+	14 5000
+	15 10000
