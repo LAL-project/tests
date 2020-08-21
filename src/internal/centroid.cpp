@@ -228,7 +228,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 		cerr << endl;											\
 		cerr << "    For tree:" << endl;						\
 		cerr << T << endl;										\
-		return err_type::test_exe_error;						\
+		return err_type::test_execution;						\
 	}															\
 }
 

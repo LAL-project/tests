@@ -59,7 +59,7 @@ using namespace numeric;
 	if (not map_has(integer_vars, varname)) {								\
 		cerr << ERROR << endl;												\
 		cerr << "    Variable '" << varname << "' does not exist." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}
 
 #define var_type(var)	(vtypes.find(var)->second)
@@ -69,14 +69,14 @@ using namespace numeric;
 		cerr << ERROR << endl;											\
 		message_in_func(assertion)										\
 		cerr << "    Invalid variable type '" << vt << "'." << endl;	\
-		return err_type::test_format_error;								\
+		return err_type::test_format;								\
 	}
 #define assert_correct_format(assertion, f)								\
 	if (f != "int" and f != "string") {									\
 		cerr << ERROR << endl;											\
 		message_in_func(assertion)										\
 		cerr << "    Invalid format type '" << f << "'." << endl;		\
-		return err_type::test_format_error;								\
+		return err_type::test_format;								\
 	}
 
 #define comparison_error(op, var1, var2, val_var1, val_var2)	\
@@ -278,7 +278,7 @@ err_type test_integer_minutia() {
 		cerr << ERROR << endl;															\
 		cerr << "    Rational values do not coincide." << endl;							\
 		cerr << "    Expected '" << good << "', retrieved '" << data << "'." << endl;	\
-		return err_type::test_exe_error;												\
+		return err_type::test_execution;												\
 	}
 
 	{

@@ -125,7 +125,7 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
 		cerr << "    Invalid file type '" << ft << "'." << endl;			\
-		return err_type::test_format_error;									\
+		return err_type::test_format;									\
 	}
 
 #define assert_string_is_rooted_tree_type(assertion, t)							\
@@ -133,7 +133,7 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
 		cerr << "    Invalid drtree type '" << t << "'." << endl;			\
-		return err_type::test_format_error;									\
+		return err_type::test_format;									\
 	}
 
 #define assert_correct_boolean(assertion, str)										\
@@ -142,7 +142,7 @@ static const std::vector<std::string> all_types(
 		message_in_func(assertion)													\
 		cerr << "    Invalid Boolean value." << endl;								\
 		cerr << "    Received '" << str << "'. Valid values: true/false." << endl;	\
-		return err_type::test_format_error;											\
+		return err_type::test_format;											\
 	}
 
 #define assert_exists_variable(FUNC, var)									\
@@ -150,7 +150,7 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(FUNC)												\
 		cerr << "    Variable graph '" << var << "' not declared." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}
 
 #define assert_not_exists_variable(FUNC, var)								\
@@ -158,7 +158,7 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(FUNC)												\
 		cerr << "    Variable graph '" << var << "' already declared." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}
 
 #define assert_correct_graph_type(FUNC, type, TYPES)						\
@@ -166,7 +166,7 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(FUNC)												\
 		cerr << "    Graph type '" << type << "' is incorrect." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}
 
 #define assert_equal_types(assertion, var1, var2)														\
@@ -176,7 +176,7 @@ static const std::vector<std::string> all_types(
 		cerr << "    Graphs '" << var1 << "' and '" << var2 << "' are not of the same type." << endl;	\
 		cerr << "    Type of graph " << var1 << ": " << graph_type(var1) << endl;						\
 		cerr << "    Type of graph " << var2 << ": " << graph_type(var2) << endl;						\
-		return err_type::test_exe_error;																\
+		return err_type::test_execution;																\
 	}
 
 /* USEFUL FUNCTIONS */
@@ -312,19 +312,19 @@ static const std::vector<std::string> all_types(
 		cerr << "ERROR" << endl;											\
 		message_in_func(FUNC)												\
 		cerr << "    Tree '" << g1 << "' is not an actual tree." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}																		\
 	if (not mfunction_rtrees(g1, has_root())) {								\
 		cerr << "ERROR" << endl;											\
 		message_in_func(FUNC)												\
 		cerr << "    Tree '" << g1 << "' does not have a root." << endl;	\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}																		\
 	if (not mfunction_rtrees(g1, is_directed())) {							\
 		cerr << "ERROR" << endl;											\
 		message_in_func(FUNC)												\
 		cerr << "    Tree '" << g1 << "' is not directed." << endl;			\
-		return err_type::test_exe_error;									\
+		return err_type::test_execution;									\
 	}
 
 

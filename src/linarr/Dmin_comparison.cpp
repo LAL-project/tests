@@ -119,7 +119,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		for (const string& s : allowed_algos) {								\
 		cerr << "        " << s << endl;									\
 		}																	\
-		return err_type::test_format_error;									\
+		return err_type::test_format;									\
 	}																		\
 }
 
@@ -132,7 +132,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		for (const string& s : allowed_comps) {								\
 		cerr << "        " << s << endl;									\
 		}																	\
-		return err_type::test_format_error;									\
+		return err_type::test_format;									\
 	}																		\
 }
 

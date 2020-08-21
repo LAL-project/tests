@@ -85,4 +85,5 @@ enum class err_type : int8_t {
 	/// test not implemented
 	not_implemented
 };
+
 } // -- namespace exe_tests
