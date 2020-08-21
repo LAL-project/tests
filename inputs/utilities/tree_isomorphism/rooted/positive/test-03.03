@@ -1,6 +1,7 @@
 TYPE utilities-tree_isomorphism
 INPUT 0
 BODY
+	manual
 	rooted
 	
 	3

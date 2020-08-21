@@ -1,7 +1,7 @@
 NAMING CONVENTIONS
 ==================
 
-The format of the names is the following:
+The "handmade" tests have the following format:
 
 	free/positive/test-nn.TT
 	free/negative/test-nn.TT
@@ -9,5 +9,4 @@ The format of the names is the following:
 	root/negative/test-nn.TT
 
 The string 'nn' makes up a number of two digits which is the number of vertices of the trees.
-
 The string 'TT' makes up a number of two digits which is the test number.
