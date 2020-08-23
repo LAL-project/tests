@@ -85,7 +85,7 @@ function show_usage() {
 	echo ""
 	echo "        linarr_Dmin : execute all Minimum Linear Arrangement (mLA) tests"
 	echo "        linarr_Dmin_Comparison: execute mLA tests to compare the algorithms"
-	echo "        linarr_Dmin_Projectve : execute mLA tests for projective arrangements"
+	echo "        linarr_Dmin_Projective : execute mLA tests for projective arrangements"
 	echo "        linarr_Dmin_Planar : execute mLA tests for planar arrangements"
 	echo "        linarr_Dmin_Unconstrained_YS : execute mLA tests for unconstrained arrangements -- algorithms: Yossi Shiloach's"
 	echo "        linarr_Dmin_Unconstrained_FC : execute mLA tests for unconstrained arrangements -- algorithms: Fan Chung's"
