@@ -78,6 +78,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 
 	if (n == 1) {
 		// nothing to do
+		TEST_GOODBYE
 		return err_type::no_error;
 	}
 
