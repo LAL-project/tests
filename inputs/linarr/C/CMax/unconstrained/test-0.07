@@ -1,4 +1,4 @@
-TYPE linarr-CMax
+TYPE linarr-CMax-Unconstrained
 INPUT 0
 BODY
 	7

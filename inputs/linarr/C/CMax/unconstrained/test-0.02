@@ -1,0 +1,5 @@
+TYPE linarr-CMax-Unconstrained
+INPUT 0
+BODY
+	2
+	0 1 0
