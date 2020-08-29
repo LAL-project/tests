@@ -211,6 +211,23 @@ err_type check_sorting(
 
 // -----------------------------------------------------------------------------
 
+template<
+	typename It,
+	typename T = typename std::iterator_traits<It>::value_type
+>
+void here_counting_sort(
+	It begin, It end, const size_t n, const std::function<size_t (const T&)>& key,
+	bool incr
+)
+{
+	if (incr) {
+		internal::counting_sort<It, T,true>(begin, end, n, key);
+	}
+	else {
+		internal::counting_sort<It, T,false>(begin, end, n, key);
+	}
+}
+
 // check sorting of vectors of tuples
 err_type check_counting_sort(
 	const bool incr, Ui k, Ui s, Ui n
@@ -222,15 +239,15 @@ err_type check_counting_sort(
 
 	auto sort1 =
 	[&](t1_vec_it begin, t1_vec_it end) -> void {
-		internal::counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
+		here_counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
 	auto sort2 =
 	[&](t2_vec_it begin, t2_vec_it end) -> void {
-		internal::counting_sort<t2_vec_it, t2>(begin, end, n, key2, incr);
+		here_counting_sort<t2_vec_it, t2>(begin, end, n, key2, incr);
 	};
 	auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
-		internal::counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
+		here_counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
 	};
 
 	err_type E = err_type::no_error;
@@ -383,7 +400,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		auto key1 = [](const uint32_t& t) -> size_t { return t; };
 		auto sort1 =
 		[&](Ui_it begin, Ui_it end) -> void {
-			internal::counting_sort<Ui_it, uint32_t>(begin, end, Max, key1, incr);
+			here_counting_sort<Ui_it, uint32_t>(begin, end, Max, key1, incr);
 		};
 		return __check_sorting<uint32_t,Ui_it>(
 			"counting_sort", values,values, sort1, incr
