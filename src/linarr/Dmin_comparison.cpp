@@ -145,13 +145,11 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_algos({"Proj", "Plan", "YS", "FC"});
-	const auto Proj = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Projective); };
+	const set<string> allowed_algos({"Proj", "YS", "FC"});
 	const auto Plan = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Planar); };
 	const auto FC = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_FC); };
 	const auto YS = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_YS); };
 	map<string, function<algo_result (const free_tree&)> > ALGOS;
-	ALGOS["Proj"] = Proj;
 	ALGOS["Plan"] = Plan;
 	ALGOS["YS"] = YS;
 	ALGOS["FC"] = FC;
