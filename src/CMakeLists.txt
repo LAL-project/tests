@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10.2)
 
+project(LAL_TESTS)
+
 # needed includes to make CMake work
 include(CheckCXXCompilerFlag)
 # installation directories (platform dependent)
@@ -65,43 +67,58 @@ endif()
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
+# includes to lal
+set(LAL_DIR /home/lluis/Documents/projects/linear-arrangement-library)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 	message(STATUS "Link against laldebug (debug compilation of lal)")
-	set(LALLibrary "laldebug")
+	set(LAL_LIB_DIR ${LAL_DIR}/lal-debug)
+	set(LAL_LIB_NAME laldebug)
 else()
 	message(STATUS "Link against lal (release compilation of lal)")
-	set(LALLibrary "lal")
+	set(LAL_LIB_DIR ${LAL_DIR}/lal-release)
+	set(LAL_LIB_NAME lal)
 endif()
+message(STATUS "    LAL_LIB_DIR: ${LAL_LIB_DIR}")
+message(STATUS "    LAL_LIB_NAME: ${LAL_LIB_NAME}")
 
+link_directories(${LAL_LIB_DIR})
+
+# **********************************************************************
 # PROJECT
 
-project(tests)
-set(
-	SOURCES
+add_executable(
+	tests
 		construction/exe_construction.hpp
 		construction/construct.cpp
 		construction/construct_assert.cpp
 		construction/construct_utils.cpp
-
-		generate/tree_validity_check.hpp
+		
 		generate/arr_all_proj.cpp
 		generate/arr_rand_proj.cpp
+		generate/trees_alf.cpp
+		generate/trees_alr.cpp
+		generate/trees_auf.cpp
+		generate/trees_aur.cpp
+		generate/trees_rlf.cpp
+		generate/trees_rlr.cpp
+		generate/trees_ruf.cpp
+		generate/trees_rur.cpp
+		generate/tree_validity_check.hpp
 		generate/tree_validity_check.cpp
-		generate/tree_alf.cpp
-		generate/tree_alr.cpp
-		generate/tree_auf.cpp
-		generate/tree_aur.cpp
-		generate/tree_rlf.cpp
-		generate/tree_rlr.cpp
-		generate/tree_ruf.cpp
-		generate/tree_rur.cpp
+
+		internal/centre.cpp
+		internal/centroid.cpp
+		internal/sorting.cpp
+		internal/traversal.cpp
 
 		linarr/approx_exp_C.cpp
 		linarr/C.cpp
 		linarr/C_list.cpp
 		linarr/D.cpp
-		linarr/D_min_projective.cpp
-		linarr/D_min_unconstrained.cpp
+		linarr/Dmin_comparison.cpp
+		linarr/Dmin_planar.cpp
+		linarr/Dmin_projective.cpp
+		linarr/Dmin_unconstrained.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
 		linarr/syntree_classification.cpp
@@ -119,22 +136,18 @@ set(
 
 		utilities/tree_isomorphism.cpp
 
-		internal/centre.cpp
-		internal/centroid.cpp
-		internal/sorting.cpp
-		internal/traversal.cpp
-
 		arrgmnt_validity_check.hpp
 		arrgmnt_validity_check.cpp
 
 		definitions.hpp
-		definitions.cpp
 
 		exe_tests.hpp
 		exe_tests.cpp
 
 		io_wrapper.hpp
 		io_wrapper.cpp
+
+		main.cpp
 
 		parse_keywords.hpp
 		parse_keywords.cpp
@@ -151,18 +164,20 @@ set(
 
 # **********************************************************************
 # LIBRARIES
-# Check if libraries are installed in the system.
-# If some library does not exist, do not compile
-# the executables that need them
 
-# ***
-# LAL
-find_library(LAL_LIB ${LALLibrary})
-if (LAL_LIB)
-	message(STATUS "Found lal: ${LAL_LIB}")
-else()
-	message(FATAL_ERROR "Error: Linear Arrangement Library (${LAL_LIB}) library not found.")
-endif()
+# ----------------------
+# Add external libraries
+
+# self includes
+target_include_directories(tests PRIVATE .)
+
+# lal includes
+target_include_directories(tests PRIVATE ${LAL_DIR})
+# lal linking
+target_link_libraries(tests ${LAL_LIB_NAME})
+
+# ----------------------
+# Add system libraries
 
 # ***
 # GMP
@@ -202,6 +217,3 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
 	message(STATUS "Adding flags for 'release' mode")
 	add_release_flag(-fstrict-aliasing)
 endif()
-
-# include path (required by the compiler to find the headers)
-target_include_directories(tests PRIVATE ../tests)
