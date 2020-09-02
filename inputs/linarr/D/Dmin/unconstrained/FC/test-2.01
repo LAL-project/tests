@@ -1,0 +1,11 @@
+TYPE linarr-Dmin-Unconstrained
+INPUT 0
+BODY
+	FC_tree
+	15
+	0 1 0 12
+	1 2 1 7
+	2 3 2 4 2 5 2 6
+	7 8 7 9 7 10 7 11
+	12 13
+	13 14
