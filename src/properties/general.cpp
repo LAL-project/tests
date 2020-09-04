@@ -82,7 +82,7 @@ void Q_size(const undirected_graph& g) {
 	const integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
-	const uint32_t dQ = size_Q(g);
+	const uint64_t dQ = size_Q(g);
 	cout << "size of Q: " << dQ << endl;
 }
 
