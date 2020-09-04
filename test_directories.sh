@@ -35,6 +35,7 @@ groups_list=(\
 	"linarr_Dmin_Unconstrained_FC" \
 	"numeric" \
 	"properties" \
+	"properties_basic" \
 	"properties_exp_var_C" \
 	"properties_exp_var_D" \
 	"utilities" \

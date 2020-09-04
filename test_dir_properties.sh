@@ -12,6 +12,11 @@ properties_DIRS=(\
 	)
 
 # variance C tests
+properties_basic_DIRS=(\
+	"properties" "properties" \
+	)
+
+# variance C tests
 properties_exp_var_C_DIRS=(\
 	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
 	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
