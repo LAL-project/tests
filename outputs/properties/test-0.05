@@ -1,4 +1,4 @@
-Elements of Q (7140):
+Elements of Q:
 ((0, 1), (2, 3))
 ((0, 1), (2, 4))
 ((0, 1), (2, 5))
@@ -7139,11 +7139,12 @@ Elements of Q (7140):
 ((13, 14), (15, 16))
 ((13, 15), (14, 16))
 ((13, 16), (14, 15))
+Total number of elements: 7140
 size of Q: 7140
 size of Q: 7140
 <k^2>= 256
 <k^3>= 4096
-Elements of Q (9180):
+Elements of Q:
 ((0, 1), (2, 3))
 ((0, 1), (2, 4))
 ((0, 1), (2, 5))
@@ -16324,6 +16325,7 @@ Elements of Q (9180):
 ((14, 15), (16, 17))
 ((14, 16), (15, 17))
 ((14, 17), (15, 16))
+Total number of elements: 9180
 size of Q: 9180
 size of Q: 9180
 <k^2>= 289

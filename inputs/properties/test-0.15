@@ -1,0 +1,24 @@
+TYPE properties-general
+INPUT 19
+graphs/complete-bipartite/2-2 edge-list
+graphs/complete-bipartite/2-3 edge-list
+graphs/complete-bipartite/2-4 edge-list
+graphs/complete-bipartite/2-5 edge-list
+graphs/complete-bipartite/3-2 edge-list
+graphs/complete-bipartite/3-3 edge-list
+graphs/complete-bipartite/3-4 edge-list
+graphs/complete-bipartite/3-5 edge-list
+graphs/complete-bipartite/3-6 edge-list
+graphs/complete-bipartite/4-2 edge-list
+graphs/complete-bipartite/4-3 edge-list
+graphs/complete-bipartite/4-4 edge-list
+graphs/complete-bipartite/4-5 edge-list
+graphs/complete-bipartite/4-6 edge-list
+graphs/complete-bipartite/5-2 edge-list
+graphs/complete-bipartite/5-3 edge-list
+graphs/complete-bipartite/5-4 edge-list
+graphs/complete-bipartite/5-5 edge-list
+graphs/complete-bipartite/5-6 edge-list
+BODY
+	enumerate_Q_rand_dir
+	Q_size_rand_dir
