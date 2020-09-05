@@ -55,6 +55,7 @@ using namespace std;
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
 #include <lal/io/basic_output.hpp>
+#include <lal/properties/Q.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace iterators;
@@ -76,7 +77,10 @@ using namespace iterators;
 #define FUNC_GRAPH_NORMALISE "normalise"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
 #define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
+#define FUNC_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
+#define FUNC_OUTPUT_Q "output_Q"
+#define FUNC_Q_SIZE "size_Q"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
 #define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
@@ -311,6 +315,20 @@ err_type exe_construction_test(ifstream& fin) {
 				return err_type::test_execution;
 			}
 		}
+		else if (option == FUNC_OUTPUT_EDGES) {
+			fin >> g1;
+			assert_exists_variable(FUNC_OUTPUT_EDGES, g1)
+			E_iterator it = (
+				graph_type(g1) == DGRAPH ?
+					E_iterator(dgraphvars[g1]) :
+					E_iterator(ugraphvars[g1])
+			);
+			while (it.has_next()) {
+				it.next();
+				const edge e = it.get_edge();
+				cout << e.first << " " << e.second << endl;
+			}
+		}
 		else if (option == FUNC_GRAPH_CHECK_Q_IT) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_CHECK_Q_IT, g1)
@@ -367,6 +385,35 @@ err_type exe_construction_test(ifstream& fin) {
 				output_graph(g1)
 				return err_type::test_execution;
 			}
+		}
+		else if (option == FUNC_OUTPUT_Q) {
+			fin >> g1;
+			assert_exists_variable(FUNC_OUTPUT_Q, g1)
+
+			Q_iterator it = (
+				graph_type(g1) == DGRAPH ?
+					Q_iterator(dgraphvars[g1]) :
+					Q_iterator(ugraphvars[g1])
+			);
+			while (it.has_next()) {
+				it.next();
+				const edge_pair e = it.get_pair();
+				cout
+					<< "(" << e.first.first << " " << e.first.second << "), ("
+					<< e.second.first << " " << e.second.second << ")"
+					<< endl;
+			}
+		}
+		else if (option == FUNC_Q_SIZE) {
+			fin >> g1;
+			assert_exists_variable(FUNC_Q_SIZE, g1)
+
+			cout <<
+				(graph_type(g1) == DGRAPH ?
+					properties::size_Q_integer(dgraphvars[g1]) :
+					properties::size_Q_integer(ugraphvars[g1]))
+			<< endl;
+
 		}
 
 		// DGRAPH
