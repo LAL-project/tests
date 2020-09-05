@@ -41,22 +41,28 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+#include <random>
 #include <set>
 using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
+#include <lal/graphs/directed_graph.hpp>
 #include <lal/graphs/rooted_tree.hpp>
+#include <lal/graphs/free_tree.hpp>
+#include <lal/graphs/output.hpp>
+#include <lal/iterators/Q_iterator.hpp>
+#include <lal/numeric/rational.hpp>
+#include <lal/numeric/output.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mean_hierarchical_distance.hpp>
-#include <lal/numeric/rational.hpp>
-#include <lal/io/basic_output.hpp>
 #include <lal/internal/graphs/trees/is_tree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
 using namespace properties;
+using namespace iterators;
 
 // custom includes
 #include "io_wrapper.hpp"
@@ -64,21 +70,63 @@ using namespace properties;
 
 namespace exe_tests {
 
-void enum_Q(const undirected_graph& g) {
-	const vector<edge_pair> Q = g.Q();
+directed_graph make_rand_dgraph(const undirected_graph& g) {
+	// coin flips
+	default_random_engine gen(1234);
+	uniform_int_distribution<int> U(0,1);
 
-	cout << "Elements of Q (" << Q.size() << "):" << endl;
-	for (const edge_pair& ep : Q) {
+	// directed graph
+	directed_graph dg(g.n_nodes());
+	vector<edge> es = g.edges();
+
+	const size_t m = es.size();
+	for (size_t i = 0; i < m; ++i) {
+		edge& e = es[i];
+
+		// add edge in one orientation or the other
+		const int c1 = U(gen);
+		if (c1 == 1) {
+			std::swap(e.first, e.second);
+		}
+
+		// add (or not) the opposite edge
+		const int c2 = U(gen);
+		if (c2 == 1) {
+			edge flip = e;
+			std::swap(flip.first, flip.second);
+			es.push_back(flip);
+		}
+	}
+
+	// construct graph and finish
+	dg.add_edges(es);
+	return dg;
+}
+
+template<class G>
+void enum_Q(const G& g) {
+	size_t total = 0;
+	Q_iterator it(g);
+
+	cout << "Elements of Q:" << endl;
+	while (it.has_next()) {
+		it.next();
+		const edge_pair& ep = it.get_pair();
 		const edge& e1 = ep.first;
 		const edge& e2 = ep.second;
 		cout << "("
 			 << "(" << e1.first << ", " << e1.second << "), "
 			 << "(" << e2.first << ", " << e2.second << ")"
-			 << ")" << endl;
+			 << ")"
+			 << endl;
+
+		++total;
 	}
+	cout << "Total number of elements: " << total << endl;
 }
 
-void Q_size(const undirected_graph& g) {
+template<class G>
+void Q_size(const G& g) {
 	const integer Q = size_Q_integer(g);
 	cout << "size of Q: " << Q << endl;
 
@@ -109,7 +157,9 @@ void MHD(const undirected_graph& g, node r) {
 
 err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_instructions({
-		"enumerate_Q", "Q_size", "mmt_deg",
+		"enumerate_Q", "enumerate_Q_rand_dir",
+		"Q_size", "Q_size_rand_dir",
+		"mmt_deg",
 		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
 
@@ -120,12 +170,11 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	}
 
 	// The input file has been parsed completely.
-	// It is time to execute the instructions
-	// for each graph.
+	// It is time to execute the instructions for each graph.
 
 	undirected_graph G;
 	for (size_t i = 0; i < inputs.size(); ++i) {
-		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
+		const err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {
 			return r;
 		}
@@ -135,8 +184,18 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 			if (ins == "enumerate_Q") {
 				enum_Q(G);
 			}
+			else if (ins == "enumerate_Q_rand_dir") {
+				const directed_graph dG = make_rand_dgraph(G);
+				cout << dG << endl;
+				enum_Q(dG);
+			}
 			else if (ins == "Q_size") {
 				Q_size(G);
+			}
+			else if (ins == "Q_size_rand_dir") {
+				const directed_graph dG = make_rand_dgraph(G);
+				cout << dG << endl;
+				Q_size(dG);
 			}
 			else if (ins == "mmt_deg") {
 				uint32_t p;
@@ -153,7 +212,7 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 			}
 			else {
 				cerr << ERROR << endl;
-				cerr << "    Instruction not recognised." << endl;
+				cerr << "    Invalid instruction." << endl;
 				cerr << "    Allowed instructions:" << endl;
 				for (const string& s : allowed_instructions) {
 					cout << "        " << s << endl;
