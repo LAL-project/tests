@@ -88,10 +88,10 @@ link_directories(${LAL_LIB_DIR})
 
 add_executable(
 	tests
-		construction/exe_construction.hpp
-		construction/construct.cpp
-		construction/construct_assert.cpp
-		construction/construct_utils.cpp
+		graphs/exe_construction.hpp
+		graphs/construct.cpp
+		graphs/construct_assert.cpp
+		graphs/construct_utils.cpp
 		
 		generate/arr_all_proj.cpp
 		generate/arr_rand_proj.cpp

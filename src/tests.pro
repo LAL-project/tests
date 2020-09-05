@@ -35,9 +35,9 @@ LIBS += -fopenmp
 
 SOURCES += \
     arrgmnt_validity_check.cpp \
-    construction/construct.cpp \
-    construction/construct_assert.cpp \
-    construction/construct_utils.cpp \
+	graphs/construct.cpp \
+	graphs/construct_assert.cpp \
+	graphs/construct_utils.cpp \
 	exe_tests.cpp \
     generate/arr_all_proj.cpp \
     generate/arr_rand_proj.cpp \
@@ -83,7 +83,7 @@ SOURCES += \
 
 HEADERS += \
     arrgmnt_validity_check.hpp \
-    construction/exe_construction.hpp \
+	graphs/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
     parse_keywords.hpp \
