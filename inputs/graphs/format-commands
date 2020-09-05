@@ -45,9 +45,15 @@ COMMANDS AVAILABLE
 	Builds the list of edges for a graph and asserts that is the same
 	as that returned by a brute force method.
 
+** output_edges GRAPH
+	Outputs the list of edges of the graph.
+
 ** check_Q_iterator GRAPH
 	Builds the list of pairs of independent edges for a graph and asserts
 	that is the same as that returned by a brute force method method.
+
+** output_Q GRAPH
+	Outputs the list of pairs of independent edges of the graph.
 
 ** normalise GRAPH
 	Normalise a graph
