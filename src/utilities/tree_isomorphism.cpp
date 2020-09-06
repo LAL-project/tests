@@ -39,6 +39,7 @@
  ********************************************************************/
 
 // C++ includes
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <random>
@@ -161,27 +162,23 @@ err_type exe_utils_tree_iso_manual(ifstream& fin) {
 void relabel_edges(vector<edge>& edges, node& r) {
 	const uint32_t n = to_uint32(edges.size() + 1);
 
-	default_random_engine gen;
+	default_random_engine gen(1234);
 	uniform_int_distribution<node> dist(0,n - 1);
 
-	for (uint32_t i = 0; i < n; ++i) {
-		// choose a vertex to relabel
-		const node choice = dist(gen);
-		// choose the new label
-		const node new_lab = dist(gen);
+	vector<node> relab(n);
+	std::iota(relab.begin(), relab.end(), 0);
 
+	for (uint32_t i = 0; i < n; ++i) {
+		std::shuffle(relab.begin(), relab.end(), gen);
+
+		// relabel each vertex accoring to 'relab'
 		for (edge& e : edges) {
 			node& s = e.first;
 			node& t = e.second;
-			if (s == choice) { s = new_lab; }
-			else if (s == new_lab) { s = choice; }
-
-			if (t == choice) { t = new_lab; }
-			else if (t == new_lab) { t = choice; }
+			s = relab[s];
+			t = relab[t];
 		}
-
-		if (r == choice) { r = new_lab; }
-		else if (r == new_lab) { r = choice; }
+		r = relab[r];
 	}
 }
 
