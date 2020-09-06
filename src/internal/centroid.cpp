@@ -52,6 +52,7 @@ using namespace std;
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
 #include <lal/internal/graphs/trees/tree_centroid.hpp>
+#include <lal/internal/graphs/trees/size_subtrees.hpp>
 #include <lal/internal/graphs/traversal.hpp>
 using namespace lal;
 using namespace graphs;
@@ -60,6 +61,41 @@ using namespace generate;
 // custom includes
 #include "definitions.hpp"
 #include "test_utils.hpp"
+
+inline bool is_centroidal(
+	const graphs::rooted_tree& t, uint32_t size_cc, node u, char *vis, uint32_t *sizes
+)
+{
+	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
+	memset(vis, 0, t.n_nodes()*sizeof(char));
+	internal::__lal::get_size_subtrees(t, u, vis, sizes);
+	for (const node v : t.get_neighbours(u)) {
+		if (sizes[v] > size_cc/2) {
+			return false;
+		}
+	}
+	for (const node v : t.get_in_neighbours(u)) {
+		if (sizes[v] > size_cc/2) {
+			return false;
+		}
+	}
+	return true;
+}
+
+inline bool is_centroidal(
+	const graphs::free_tree& t, uint32_t size_cc, node u, char *vis, uint32_t *sizes
+)
+{
+	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
+	memset(vis, 0, t.n_nodes()*sizeof(char));
+	internal::__lal::get_size_subtrees(t, u, vis, sizes);
+	for (const node v : t.get_neighbours(u)) {
+		if (sizes[v] > size_cc/2) {
+			return false;
+		}
+	}
+	return true;
+}
 
 template<class T>
 pair<node,node> straightforward_centroid(const T& t, node x) {
@@ -84,7 +120,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	u1 = u2 = n;
 
 	for (const node u : reachable) {
-		const bool cc = internal::__lal::is_centroidal(t, size_cc, u, vis, sizes);
+		const bool cc = is_centroidal(t, size_cc, u, vis, sizes);
 
 		if (cc) {
 			if (u1 == n) { u1 = u; }
@@ -95,6 +131,19 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	free(vis);
 	free(sizes);
 	return (u1 < u2 ? make_pair(u1,u2) : make_pair(u2,u1));
+}
+
+inline
+bool centroids_are_equal(
+	const tree& t,
+	const pair<node,node>& c1, const pair<node,node>& c2
+)
+{
+	if (c1.first != c2.first) { return false; }
+	if (c1.second < t.n_nodes()) {
+		return c1.second == c2.second;
+	}
+	return true;
 }
 
 namespace exe_tests {
@@ -133,9 +182,9 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 			cout << endl;
 		}
 		else if (option == "centroid_is") {
-			node s;
-			fin >> s;
-			const auto centroid = internal::retrieve_centroid(t, s);
+			node start_at;
+			fin >> start_at;
+			const auto centroid = internal::retrieve_centroid(t, start_at);
 
 			uint32_t centroid_size;
 			fin >> centroid_size;
@@ -147,9 +196,11 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 				if (centroid.first != u) {
 					cerr << ERROR << endl;
 					cerr << "    Centroid does not coincide." << endl;
-					cerr << "    Result: " << centroid.first << endl;
-					cerr << "    Started at: " << s << endl;
-					cerr << "    Received: " << u << endl;
+					cerr << "    Started at: " << start_at << endl;
+					cerr << "    Result (algorithm): " << centroid.first << endl;
+					cerr << "    Received (ground truth): " << u << endl;
+					cerr << "    For tree:" << endl;
+					cerr << t << endl;
 					return err_type::test_execution;
 				}
 			}
@@ -170,9 +221,11 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 				if (centroid.first != u and centroid.second != v) {
 					cerr << ERROR << endl;
 					cerr << "    Centroids do not coincide." << endl;
-					cerr << "    Result: " << centroid.first << " " << centroid.second << endl;
-					cerr << "    Started at: " << s << endl;
-					cerr << "    Received: " << u << " " << v << endl;
+					cerr << "    Started at: " << start_at << endl;
+					cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << endl;
+					cerr << "    Received (ground truth): " << u << " " << v << endl;
+					cerr << "    For tree:" << endl;
+					cerr << t << endl;
 					return err_type::test_execution;
 				}
 			}
@@ -209,27 +262,27 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-#define test_correctness(T)										\
-{																\
+#define test_correctness(T)											\
+{																	\
 	const auto lib_centroid = internal::retrieve_centroid(T, 0);	\
-	const auto easy_centroid = straightforward_centroid(T, 0);  \
-	if (lib_centroid != easy_centroid) {						\
-		cerr << ERROR << endl;									\
-		cerr << "    Centroids differ." << endl;				\
-		cerr << "    Library: " << lib_centroid.first;			\
-		if (lib_centroid.second != n) {							\
-			cerr << " " << lib_centroid.second;					\
-		}														\
-		cerr << endl;											\
-		cerr << "    Straightforward: " << easy_centroid.first;	\
-		if (easy_centroid.second != n) {						\
-			cerr << " " << easy_centroid.second;				\
-		}														\
-		cerr << endl;											\
-		cerr << "    For tree:" << endl;						\
-		cerr << T << endl;										\
-		return err_type::test_execution;						\
-	}															\
+	const auto easy_centroid = straightforward_centroid(T, 0);		\
+	if (not centroids_are_equal(T,lib_centroid, easy_centroid)) {	\
+		cerr << ERROR << endl;										\
+		cerr << "    Centroids differ." << endl;					\
+		cerr << "    Library: " << lib_centroid.first;				\
+		if (lib_centroid.second < n) {								\
+			cerr << " " << lib_centroid.second;						\
+		}															\
+		cerr << endl;												\
+		cerr << "    Straightforward: " << easy_centroid.first;		\
+		if (easy_centroid.second < n) {								\
+			cerr << " " << easy_centroid.second;					\
+		}															\
+		cerr << endl;												\
+		cerr << "    For tree:" << endl;							\
+		cerr << T << endl;											\
+		return err_type::test_execution;							\
+	}																\
 }
 
 #define exe_exhaustive(G, n)			\
