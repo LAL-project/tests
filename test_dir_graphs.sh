@@ -2,10 +2,10 @@
 
 # graph tests
 graphs_DIRS=(\
-	"construction" "construction" \
+	"graphs" "graphs" \
 	)
 
 # construction tests
 graphs_construction_DIRS=(\
-	"construction" "construction" \
+	"graphs" "graphs" \
 	)
