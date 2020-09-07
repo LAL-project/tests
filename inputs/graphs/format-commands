@@ -181,10 +181,10 @@ COMMANDS AVAILABLE
 	ROOTED TREES
 	============
 	
-	-- no_need_recalc_subtree_size TREE
+	-- valid_subtree_sizes TREE
 		asserts that the number of subtrees calculated is valid.
 	
-	-- need_recalc_subtree_size TREE
+	-- invalid_subtree_sizes TREE
 		asserts that the number of subtrees calculated is not valid.
 	
 	-- has_root TREE

@@ -6,7 +6,7 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g
 	
 	create_graph rtree g 1
@@ -14,7 +14,7 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g
 	
 	create_graph rtree g 2
@@ -22,7 +22,7 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_not_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g
 	
 	create_graph rtree g 3
@@ -30,7 +30,7 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_not_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g
 	
 	create_graph rtree g 4
@@ -38,7 +38,7 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_not_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g
 	
 	create_graph rtree g 5
@@ -46,5 +46,5 @@ BODY
 	assert num_edges g 0
 	assert is_rooted g
 	assert is_not_tree g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	assert rtree_type_not_valid g

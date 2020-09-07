@@ -17,9 +17,9 @@ BODY
 	assert rtree_type_valid g
 	assert is_rtree_type g arborescence
 	
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	calculate_size_subtrees g
-	assert no_need_recalc_subtree_size g
+	assert valid_subtree_sizes g
 	
 	assert num_nodes_subtree g 0 5
 	assert num_nodes_subtree g 1 4
@@ -55,9 +55,9 @@ BODY
 	assert rtree_type_valid h
 	assert is_rtree_type h arborescence
 	
-	assert need_recalc_subtree_size h
+	assert invalid_subtree_sizes h
 	calculate_size_subtrees h
-	assert no_need_recalc_subtree_size h
+	assert valid_subtree_sizes h
 	
 	assert num_nodes_subtree h 0 5
 	assert num_nodes_subtree h 1 4
@@ -97,9 +97,9 @@ BODY
 	assert rtree_type_valid f
 	assert is_rtree_type f arborescence
 	
-	assert need_recalc_subtree_size f
+	assert invalid_subtree_sizes f
 	calculate_size_subtrees f
-	assert no_need_recalc_subtree_size f
+	assert valid_subtree_sizes f
 	
 	assert num_nodes_subtree f 0 5
 	assert num_nodes_subtree f 1 1

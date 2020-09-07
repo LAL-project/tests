@@ -85,20 +85,20 @@ BODY
 
 	assert not_has_root g
 	assert rtree_type_not_valid g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	set_root g 0
 	assert rtree_type_not_valid g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	
 	find_rtree_type g
 	calculate_size_subtrees g
 	calculate_size_subtrees g
 	
 	assert rtree_type_valid g
-	assert no_need_recalc_subtree_size g
+	assert valid_subtree_sizes g
 	set_root g 0
 	assert rtree_type_not_valid g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
 	
 	find_rtree_type g
 	calculate_size_subtrees g
@@ -106,4 +106,4 @@ BODY
 	
 	set_root g 1
 	assert rtree_type_not_valid g
-	assert need_recalc_subtree_size g
+	assert invalid_subtree_sizes g
