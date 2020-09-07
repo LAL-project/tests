@@ -92,8 +92,8 @@ using namespace iterators;
 #define ASSERT_TREE_CANT_ADD_EDGES "cant_add_edges"
 #define ASSERT_TREE_IS_ROOTED "is_rooted"
 #define ASSERT_TREE_IS_NOT_ROOTED "is_not_rooted"
-#define ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE "no_need_recalc_subtree_size"
-#define ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE "need_recalc_subtree_size"
+#define ASSERT_RTREE_VALID_SUBSTREE_SIZES "valid_subtree_sizes"
+#define ASSERT_RTREE_INVALID_SUBSTREE_SIZES "invalid_subtree_sizes"
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
@@ -581,25 +581,25 @@ err_type process_assert(
 	}
 
 	// ROOTED TREES
-	else if (assert_what == ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE) {
+	else if (assert_what == ASSERT_RTREE_VALID_SUBSTREE_SIZES) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE, g1)
-		assert_correct_graph_type(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE, graph_type(g1), rooted_tree_types)
-		if (mfunction_rtrees(g1, size_subtrees_valid())) {
+		assert_exists_variable(ASSERT_RTREE_VALID_SUBSTREE_SIZES, g1)
+		assert_correct_graph_type(ASSERT_RTREE_VALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types)
+		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_RTREE_NO_NEED_RECALC_SUBSTREE_SIZE)
-			cerr << "    Sizes of subtrees in tree '" << g1 << "' have to be recalculated." << endl;
+			message_in_func(ASSERT_RTREE_VALID_SUBSTREE_SIZES)
+			cerr << "    Sizes of subtrees in tree '" << g1 << "' are not valid." << endl;
 			return err_type::test_execution;
 		}
 	}
-	else if (assert_what == ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE) {
+	else if (assert_what == ASSERT_RTREE_INVALID_SUBSTREE_SIZES) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE, g1)
-		assert_correct_graph_type(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE, graph_type(g1), rooted_tree_types)
-		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
+		assert_exists_variable(ASSERT_RTREE_INVALID_SUBSTREE_SIZES, g1)
+		assert_correct_graph_type(ASSERT_RTREE_INVALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types)
+		if (mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_RTREE_NEED_RECALC_SUBSTREE_SIZE)
-			cerr << "    Sizes of subtrees in tree '" << g1 << "' do not need to be recalculated." << endl;
+			message_in_func(ASSERT_RTREE_INVALID_SUBSTREE_SIZES)
+			cerr << "    Sizes of subtrees in tree '" << g1 << "' are valid." << endl;
 			return err_type::test_execution;
 		}
 	}
@@ -630,7 +630,7 @@ err_type process_assert(
 		assert_exists_variable(ASSERT_RTREE_SIZE_SUBTREE, g1)
 		assert_correct_graph_type(ASSERT_RTREE_SIZE_SUBTREE, graph_type(g1), rooted_tree_types)
 		assert_is_rtree(g1, ASSERT_RTREE_SIZE_SUBTREE)
-		if (mfunction_rtrees(g1, size_subtrees_valid())) {
+		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    Values of subtree's sizes in tree '" << g1 << "' need recalculating." << endl;
