@@ -1,11 +1,11 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	random FC <= Plan 30 1000
-	random FC <= Plan 40 1000
-	random FC <= Plan 50 1000
-	random FC <= Plan 60 1000
-	random FC <= Plan 70 1000
-	random FC <= Plan 80 1000
-	random FC <= Plan 90 1000
-	random FC <= Plan 100 1000
+	random YS <= Plan 30 1000
+	random YS <= Plan 40 1000
+	random YS <= Plan 50 1000
+	random YS <= Plan 60 1000
+	random YS <= Plan 70 1000
+	random YS <= Plan 80 1000
+	random YS <= Plan 90 1000
+	random YS <= Plan 100 1000

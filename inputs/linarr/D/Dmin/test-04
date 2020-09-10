@@ -1,23 +1,23 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	exhaustive FC <= Plan 1
-	exhaustive FC <= Plan 2
-	exhaustive FC <= Plan 3
-	exhaustive FC <= Plan 4
-	exhaustive FC <= Plan 5
-	exhaustive FC <= Plan 6
-	exhaustive FC <= Plan 7
-	exhaustive FC <= Plan 8
-	exhaustive FC <= Plan 9
-	exhaustive FC <= Plan 10
-	exhaustive FC <= Plan 11
-	exhaustive FC <= Plan 12
-	exhaustive FC <= Plan 13
-	exhaustive FC <= Plan 14
-	exhaustive FC <= Plan 15
-	exhaustive FC <= Plan 16
-	exhaustive FC <= Plan 17
-	exhaustive FC <= Plan 18
-	exhaustive FC <= Plan 19
-	exhaustive FC <= Plan 20
+	exhaustive YS <= Plan 1
+	exhaustive YS <= Plan 2
+	exhaustive YS <= Plan 3
+	exhaustive YS <= Plan 4
+	exhaustive YS <= Plan 5
+	exhaustive YS <= Plan 6
+	exhaustive YS <= Plan 7
+	exhaustive YS <= Plan 8
+	exhaustive YS <= Plan 9
+	exhaustive YS <= Plan 10
+	exhaustive YS <= Plan 11
+	exhaustive YS <= Plan 12
+	exhaustive YS <= Plan 13
+	exhaustive YS <= Plan 14
+	exhaustive YS <= Plan 15
+	exhaustive YS <= Plan 16
+	exhaustive YS <= Plan 17
+	exhaustive YS <= Plan 18
+	exhaustive YS <= Plan 19
+	exhaustive YS <= Plan 20
