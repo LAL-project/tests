@@ -410,6 +410,10 @@ if [ "$EXE_MODE" == "debug" ]; then
 elif [ "$EXE_MODE" == "release" ]; then
 	EXE_DIR="build-release"
 fi
+# make sure the executable is up to date
+cd $EXE_DIR
+make -j4
+cd ..
 EXE_COMM=$EXE_DIR/tests
 
 if [ ! -f $EXE_COMM ]; then
