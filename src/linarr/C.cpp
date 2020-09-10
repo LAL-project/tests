@@ -152,6 +152,11 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 			end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "    Unhandled proc '" << proc << "'." << endl;
+			return err_type::not_implemented;
+		}
 
 		if (uC != dC) {
 			cerr << ERROR << endl;

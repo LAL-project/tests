@@ -64,9 +64,9 @@ typedef tuple<Ui> t1;
 typedef vector<t1> t1_vec;
 typedef t1_vec::iterator t1_vec_it;
 
-typedef tuple<Ui,Ui> t2;
-typedef vector<t2> t2_vec;
-typedef t2_vec::iterator t2_vec_it;
+typedef tuple<Ui,Ui> edge_size;
+typedef vector<edge_size> t2_vec;
+typedef t2_vec::iterator edge_size_t;
 
 typedef tuple<Ui,Ui,Ui> t3;
 typedef vector<t3> t3_vec;
@@ -234,7 +234,7 @@ err_type check_counting_sort(
 )
 {
 	auto key1 = [](const t1& t) -> size_t { return std::get<0>(t); };
-	auto key2 = [](const t2& t) -> size_t { return std::get<0>(t); };
+	auto key2 = [](const edge_size& t) -> size_t { return std::get<0>(t); };
 	auto key3 = [](const t3& t) -> size_t { return std::get<0>(t); };
 
 	auto sort1 =
@@ -242,8 +242,8 @@ err_type check_counting_sort(
 		here_counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
 	auto sort2 =
-	[&](t2_vec_it begin, t2_vec_it end) -> void {
-		here_counting_sort<t2_vec_it, t2>(begin, end, n, key2, incr);
+	[&](edge_size_t begin, edge_size_t end) -> void {
+		here_counting_sort<edge_size_t, edge_size>(begin, end, n, key2, incr);
 	};
 	auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
@@ -274,7 +274,7 @@ err_type check_counting_sort(
 			std::get<1>(R[i]) = r2[i];
 		}
 		// check sorting algorithm
-		E = __check_sorting<t2,t2_vec_it>("counting_sort", R,R, sort2, incr);
+		E = __check_sorting<edge_size,edge_size_t>("counting_sort", R,R, sort2, incr);
 	}
 	else if (k == 3) {
 		// vector of tuples

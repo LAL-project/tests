@@ -40,6 +40,7 @@
 
 // C++ includes
 #include <iostream>
+#include <cstring>
 #include <fstream>
 #include <random>
 #include <set>
