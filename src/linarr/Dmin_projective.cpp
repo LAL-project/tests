@@ -88,9 +88,27 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
 		}
+		// read input array
+		linear_arrangement input_arr(n);
+		for (uint32_t i = 0; i < n; ++i) {
+			fin >> input_arr[i];
+		}
+		// read value of D calculated by brute force
+		uint32_t brute_force_D;
+		fin >> brute_force_D;
 
 		rooted_tree tree = internal::linear_sequence_to_rtree(node_list);
 		tree.calculate_size_subtrees();
+
+		// check correctness of input array
+		if (uint32_t DD = sum_length_edges(tree, input_arr) != brute_force_D) {
+			cerr << ERROR << endl;
+			cerr << "    Input value of D calculated by brute force does not" << endl;
+			cerr << "    agree with the evaluation of the tree." << endl;
+			cerr << "    Input value: " << brute_force_D << endl;
+			cerr << "    Evaluation: " << DD << endl;
+			return err_type::test_format;
+		}
 
 		// execute library's algorithm
 		const auto res_library = Dmin(tree, algorithms_Dmin::Projective);
@@ -125,8 +143,6 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		}
 
 		// ensure that the value of D is actually minimum
-		uint32_t brute_force_D;
-		fin >> brute_force_D;
 		if (res_library.first != brute_force_D) {
 			cerr << ERROR << endl;
 			cerr << "    Values of projective Dmin do not coincide." << endl;

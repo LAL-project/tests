@@ -76,7 +76,7 @@ namespace exe_tests {
 inline
 bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
-	/* ensure that the result is an arrangement */
+	// ensure that the result is an arrangement
 	if (not is_arrangement(arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The result is not an arrangement (permutation)." << endl;
@@ -85,7 +85,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		cerr << tree << endl;
 		return false;
 	}
-	/* ensure that value of D is correct */
+	// ensure that value of D is correct
 	const uint32_t D = sum_length_edges(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
@@ -146,16 +146,35 @@ err_type test_Unconstrained_bf_algorithm(
 		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
 		}
+		// read input array
+		linear_arrangement input_arr(n);
+		for (uint32_t i = 0; i < n; ++i) {
+			fin >> input_arr[i];
+		}
+		// read value of D calculated by brute force
+		uint32_t base_res_test;
+		fin >> base_res_test;
 
+		// construct tree
 		const free_tree T = internal::linear_sequence_to_ftree(node_list).first;
+
+		// check correctness of input array
+		if (uint32_t DD = sum_length_edges(T, input_arr) != base_res_test) {
+			cerr << ERROR << endl;
+			cerr << "    Input value of D calculated by brute force does not" << endl;
+			cerr << "    agree with the evaluation of the tree." << endl;
+			cerr << "    Input value: " << base_res_test << endl;
+			cerr << "    Evaluation: " << DD << endl;
+			return err_type::test_format;
+		}
+
+		// execute library's algorithm
 		const auto res_A = A(T);
 
+		// ensure that the arrangement is a permutation
 		if (not check_correctness_arr(T, res_A)) {
 			return err_type::test_execution;
 		}
-
-		uint32_t base_res_test;
-		fin >> base_res_test;
 
 		if (res_A.first != base_res_test) {
 			cerr << ERROR << endl;
