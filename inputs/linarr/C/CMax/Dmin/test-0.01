@@ -1,0 +1,5 @@
+TYPE linarr-CMax-Constrained_to_Dmin
+INPUT 0
+BODY
+	1
+	 0	0		0
