@@ -80,7 +80,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 	if (not is_arrangement(arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The result is not an arrangement (permutation)." << endl;
-		cerr << "    Arrangement: " << arr << endl;
+		cerr << "        Arrangement: " << arr << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
 		return false;
@@ -90,10 +90,10 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
-		cerr << "    Arrangement:     " << res.second << endl;
-		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
-		cerr << "    Value of D returned: " << res.first << endl;
-		cerr << "    Actual value of D:   " << D << endl;
+		cerr << "        Arrangement:     " << res.second << endl;
+		cerr << "        Inv Arrangement: " << invlinarr(res.second) << endl;
+		cerr << "        Value of D returned: " << res.first << endl;
+		cerr << "        Actual value of D:   " << D << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
 		return false;
@@ -146,25 +146,26 @@ err_type test_Unconstrained_bf_algorithm(
 		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
 		}
-		// read input array
+		// read input arrangement
 		linear_arrangement input_arr(n);
 		for (uint32_t i = 0; i < n; ++i) {
 			fin >> input_arr[i];
 		}
 		// read value of D calculated by brute force
-		uint32_t base_res_test;
-		fin >> base_res_test;
+		uint32_t brute_force_D;
+		fin >> brute_force_D;
 
 		// construct tree
 		const free_tree T = internal::linear_sequence_to_ftree(node_list).first;
 
-		// check correctness of input array
-		if (uint32_t DD = sum_length_edges(T, input_arr) != base_res_test) {
+		// check correctness of input arrangement
+		if (uint32_t DD = sum_length_edges(T, input_arr) != brute_force_D) {
 			cerr << ERROR << endl;
 			cerr << "    Input value of D calculated by brute force does not" << endl;
 			cerr << "    agree with the evaluation of the tree." << endl;
-			cerr << "    Input value: " << base_res_test << endl;
-			cerr << "    Evaluation: " << DD << endl;
+			cerr << "        Input arrangement: " << input_arr << endl;
+			cerr << "        Input value: " << brute_force_D << endl;
+			cerr << "        Evaluation: " << DD << endl;
 			return err_type::test_format;
 		}
 
@@ -176,11 +177,11 @@ err_type test_Unconstrained_bf_algorithm(
 			return err_type::test_execution;
 		}
 
-		if (res_A.first != base_res_test) {
+		if (res_A.first != brute_force_D) {
 			cerr << ERROR << endl;
 			cerr << "    Result of algorithm does not match base result." << endl;
-			cerr << "    Base result: " << base_res_test << endl;
-			cerr << "    Algorithm result:" << res_A.first << endl;
+			cerr << "        Base result: " << brute_force_D << endl;
+			cerr << "        Algorithm result:" << res_A.first << endl;
 			cerr << "    For tree:" << endl;
 			cerr << T << endl;
 			return err_type::test_execution;

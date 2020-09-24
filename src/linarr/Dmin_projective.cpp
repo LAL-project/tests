@@ -88,7 +88,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		for (uint32_t i = 1; i < n; ++i) {
 			fin >> node_list[i];
 		}
-		// read input array
+		// read input arrangement
 		linear_arrangement input_arr(n);
 		for (uint32_t i = 0; i < n; ++i) {
 			fin >> input_arr[i];
@@ -100,13 +100,14 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		rooted_tree tree = internal::linear_sequence_to_rtree(node_list);
 		tree.calculate_size_subtrees();
 
-		// check correctness of input array
+		// check correctness of input arrangement
 		if (uint32_t DD = sum_length_edges(tree, input_arr) != brute_force_D) {
 			cerr << ERROR << endl;
 			cerr << "    Input value of D calculated by brute force does not" << endl;
 			cerr << "    agree with the evaluation of the tree." << endl;
-			cerr << "    Input value: " << brute_force_D << endl;
-			cerr << "    Evaluation: " << DD << endl;
+			cerr << "        Input arrangement: " << input_arr << endl;
+			cerr << "        Input value: " << brute_force_D << endl;
+			cerr << "        Evaluation: " << DD << endl;
 			return err_type::test_format;
 		}
 
@@ -120,8 +121,8 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			cerr << ERROR << endl;
 			cerr << "    The result is not a projective arrangement." << endl;
 			cerr << "    Error: '" << err << "'" << endl;
-			cerr << "    Arrangement:     " << arr << endl;
-			cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+			cerr << "        Arrangement:     " << arr << endl;
+			cerr << "        Inv Arrangement: " << invlinarr(arr) << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
 			return err_type::test_execution;
@@ -133,10 +134,10 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			cerr << ERROR << endl;
 			cerr << "    Value of D returned by method does not match the" << endl;
 			cerr << "    evaluation of the arrangement." << endl;
-			cerr << "    Arrangement:     " << res_library.second << endl;
-			cerr << "    Inv Arrangement: " << invlinarr(res_library.second) << endl;
-			cerr << "    Value of D returned: " << res_library.first << endl;
-			cerr << "    Actual value of D:   " << D << endl;
+			cerr << "        Arrangement:         " << res_library.second << endl;
+			cerr << "        Inv Arrangement:     " << invlinarr(res_library.second) << endl;
+			cerr << "        Value of D returned: " << res_library.first << endl;
+			cerr << "        Actual value of D:   " << D << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
 			return err_type::test_execution;
@@ -152,6 +153,8 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
 			cerr << "    Bruteforce:" << endl;
 			cerr << "        Value: " << brute_force_D << endl;
+			cerr << "        BF Arrangement:     " << input_arr << endl;
+			cerr << "        BF Inv Arrangement: " << invlinarr(input_arr) << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
 			return err_type::test_execution;
