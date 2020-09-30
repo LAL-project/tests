@@ -85,8 +85,7 @@ string rtree_check_to_string(const rtree_check& fc) {
 	case rtree_check::diff_n_verts: return "Input rooted tree has an incorrect number of vertices.";
 	case rtree_check::diff_n_edges: return "Input rooted tree has an incorrect number of edges.";
 	case rtree_check::without_root: return "Input rooted tree does not have a root.";
-	case rtree_check::invalid_rooted_tree_type: return "Input rooted tree does not have a valid rooted tree type.";
-	case rtree_check::rooted_tree_type_is_none: return "Input rooted tree is not an arborescence or an anti-arborescence.";
+	case rtree_check::invalid_edges_orientation: return "Input rooted tree's edges are not oriented correctly.";
 	default:
 		return "Input rooted tree seems to be correct.";
 	}
@@ -106,12 +105,8 @@ rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
 	if (not T.has_root()) {
 		return rtree_check::without_root;
 	}
-	if (not T.rooted_tree_type_valid()) {
-		return rtree_check::invalid_rooted_tree_type;
-	}
-	const rooted_tree::rooted_tree_type type = T.get_rooted_tree_type();
-	if (type == rooted_tree::rooted_tree_type::none) {
-		return rtree_check::rooted_tree_type_is_none;
+	if (not T.is_orientation_valid()) {
+		return rtree_check::invalid_edges_orientation;
 	}
 	return rtree_check::correct;
 }

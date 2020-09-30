@@ -8,14 +8,14 @@ BODY
 		2 3
 		3 4
 		false true
-	assert rtree_type_not_valid g
+	
+	assert rtree_orientation_not_valid g
 	assert not_has_root g
 	set_root g 0
 	assert has_root g
 	assert is_tree g
-	find_rtree_type g
-	assert rtree_type_valid g
-	assert is_rtree_type g arborescence
+	find_edge_orientation g
+	assert rtree_orientation_valid g
 	
 	assert invalid_subtree_sizes g
 	calculate_size_subtrees g
@@ -28,16 +28,14 @@ BODY
 	assert num_nodes_subtree g 4 1
 	
 	set_root g 4
-	assert rtree_type_not_valid g
-	find_rtree_type g
-	assert is_rtree_type g anti_arborescence
+	assert rtree_orientation_not_valid g
+	find_edge_orientation g
+	assert rtree_orientation_not_valid g
 	
-	calculate_size_subtrees g
-	assert num_nodes_subtree g 0 1
-	assert num_nodes_subtree g 1 2
-	assert num_nodes_subtree g 2 3
-	assert num_nodes_subtree g 3 4
-	assert num_nodes_subtree g 4 5
+	/* We can't calculate the size of the subtrees because this is
+	not an actual rooted tree */
+	
+	
 	
 	create_graph rtree h 5
 	add_edges h 4
@@ -46,14 +44,13 @@ BODY
 		2 3
 		0 1
 		false true
-	assert rtree_type_not_valid h
+	assert rtree_orientation_not_valid h
 	assert not_has_root h
 	set_root h 0
 	assert has_root h
 	assert is_tree h
-	find_rtree_type h
-	assert rtree_type_valid h
-	assert is_rtree_type h arborescence
+	find_edge_orientation h
+	assert rtree_orientation_valid h
 	
 	assert invalid_subtree_sizes h
 	calculate_size_subtrees h
@@ -67,17 +64,12 @@ BODY
 	
 	set_root h 4
 	
-	assert rtree_type_not_valid h
-	find_rtree_type h
-	assert is_rtree_type h anti_arborescence
+	assert rtree_orientation_not_valid h
+	find_edge_orientation h
+	assert rtree_orientation_not_valid h
 	
-	calculate_size_subtrees h
-	assert num_nodes_subtree h 0 1
-	assert num_nodes_subtree h 1 2
-	assert num_nodes_subtree h 2 3
-	assert num_nodes_subtree h 3 4
-	assert num_nodes_subtree h 4 5
-	
+	/* We can't calculate the size of the subtrees because this is
+	not an actual rooted tree */
 	
 	
 	
@@ -88,14 +80,13 @@ BODY
 		0 3
 		0 4
 		false true
-	assert rtree_type_not_valid f
+	assert rtree_orientation_not_valid f
 	assert not_has_root f
 	set_root f 0
 	assert has_root f
 	assert is_tree f
-	find_rtree_type f
-	assert rtree_type_valid f
-	assert is_rtree_type f arborescence
+	find_edge_orientation f
+	assert rtree_orientation_valid f
 	
 	assert invalid_subtree_sizes f
 	calculate_size_subtrees f
@@ -109,9 +100,8 @@ BODY
 	
 	set_root f 3
 	
-	assert rtree_type_not_valid f
-	find_rtree_type f
-	assert is_rtree_type f none
+	assert rtree_orientation_not_valid f
+	find_edge_orientation f
 	
 	/* We can't calculate the size of the subtrees because this is
 	not an actual rooted tree */

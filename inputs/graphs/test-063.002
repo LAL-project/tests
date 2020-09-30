@@ -14,14 +14,13 @@ BODY
 		4 9
 		4 10
 		false true
-	assert rtree_type_not_valid f
+	assert rtree_orientation_not_valid f
 	assert not_has_root f
 	set_root f 3
 	assert has_root f
 	assert is_tree f
-	find_rtree_type f
-	assert rtree_type_valid f
-	assert is_rtree_type f arborescence
+	find_edge_orientation f
+	assert rtree_orientation_valid f
 	
 	calculate_size_subtrees f
 	assert num_nodes_subtree f 0 6

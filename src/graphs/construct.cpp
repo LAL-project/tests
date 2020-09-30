@@ -86,7 +86,7 @@ using namespace iterators;
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
-#define FUNC_RTREE_FIND_TYPE "find_rtree_type"
+#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_edge_orientation"
 
 namespace exe_tests {
 
@@ -479,13 +479,13 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 
 		// DRTREE
-		else if (option == FUNC_RTREE_FIND_TYPE) {
+		else if (option == FUNC_RTREE_FIND_EDGE_ORIENTATION) {
 			fin >> g1;
-			assert_exists_variable(FUNC_RTREE_FIND_TYPE, g1)
-			assert_correct_graph_type(FUNC_RTREE_FIND_TYPE, graph_type(g1), rooted_tree_types)
-			assert_is_rtree(g1, FUNC_RTREE_FIND_TYPE)
+			assert_exists_variable(FUNC_RTREE_FIND_EDGE_ORIENTATION, g1)
+			assert_correct_graph_type(FUNC_RTREE_FIND_EDGE_ORIENTATION, graph_type(g1), rooted_tree_types)
+			assert_is_rtree(g1, FUNC_RTREE_FIND_EDGE_ORIENTATION)
 
-			rtreevars[g1].find_rooted_tree_type();
+			rtreevars[g1].find_edge_orientation();
 		}
 
 		// ASSERT

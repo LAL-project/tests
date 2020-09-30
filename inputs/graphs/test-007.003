@@ -31,5 +31,5 @@ BODY
 	
 	assert is_tree T
 	assert has_root T
-	find_rtree_type T
-	assert is_rtree_type T arborescence
+	find_edge_orientation T
+	

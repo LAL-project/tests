@@ -109,22 +109,22 @@ err_type rooted_isomorphism_test(ifstream& fin) {
 		read_rooted(fin, t1);
 		read_rooted(fin, t2);
 
-		const bool has_t1 = t1.find_rooted_tree_type();
-		const bool has_t2 = t2.find_rooted_tree_type();
+		const bool has_t1 = t1.is_orientation_valid();
+		const bool has_t2 = t2.is_orientation_valid();
 
 		// ensure correct format of trees
 		if (not has_t1) {
 			cerr << ERROR << endl;
 			cerr << "    Rooted tree" << endl;
 			cerr << t1 << endl;
-			cerr << "    is neither an arborescence or an anti-arborescence" << endl;
+			cerr << "    is not an arborescence." << endl;
 			return err_type::test_format;
 		}
 		if (not has_t2) {
 			cerr << ERROR << endl;
 			cerr << "    Rooted tree" << endl;
 			cerr << t2 << endl;
-			cerr << "    is neither an arborescence or an anti-arborescence" << endl;
+			cerr << "    is not an arborescence." << endl;
 			return err_type::test_format;
 		}
 
@@ -199,7 +199,7 @@ err_type make_relabelled(vector<edge>& edges_T1, Tree& T2) {
 		T2.init(to_uint32(edges_T1.size() + 1));
 		T2.set_root(r);
 		T2.add_edges(edges_T1);
-		const bool rtt = T2.find_rooted_tree_type();
+		const bool rtt = T2.is_orientation_valid();
 		if (not rtt) {
 			cerr << ERROR << endl;
 			cerr << "    Relabelling of edges failed." << endl;

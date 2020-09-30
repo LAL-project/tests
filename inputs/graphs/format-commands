@@ -196,21 +196,11 @@ COMMANDS AVAILABLE
 	-- num_nodes_subtree TREE NODE SIZE
 		asserts that the subtree of GRAPH rooted at node NODE has size SIZE
 	
-	-- rtree_type_valid TREE
-		asserts that the type of rooted tree is valid.
+	-- rtree_orientation_valid TREE
+		asserts that the orientation of the tree's edges is valid.
 	
-	-- rtree_type_not_valid TREE
-		asserts that the type of rooted tree is not valid.
-	
-	-- is_rtree_type TREE TYPE
-		asserts that rooted tree GRAPH is of type TYPE.
-		Allowed strings for TYPE:
-			"arborescence", "anti_arborescence", "none"
-	
-	-- is_not_rtree_type TREE TYPE
-		asserts that rooted tree GRAPH is NOT of type TYPE.
-		Allowed strings for TYPE:
-			"arborescence", "anti_arborescence", "none"
+	-- rtree_orientation_not_valid TREE
+		asserts that the orientation of the tree's edges is not valid.
 
 +++++++++++++++++++++++++++++++++++++++++
 
@@ -232,8 +222,6 @@ ROOTED TREES
 
 ** set_root TREE NODE
 	Sets the root NODE to TREE.
-	If the graph is a directed rooted tree then it calls the rtree class
-	method 'find_rtree_type()'.
 
 ** retrieve_subtree TREE_RESULT TREE NODE
 	Retrieves the subtree of a rooted tree TREE into tree TREE_RESULT.
@@ -248,6 +236,6 @@ ROOTED TREES
 	The tree must have a root. The Boolean value indicates that whether
 	reversed edges should be used or not.
 
-** find_rtree_type GRAPH
-	Calculates the type of the rooted tree.
+** find_edge_orientation GRAPH
+	Calculates the orientation of the rooted tree's edges.
 	The tree must have a root.
