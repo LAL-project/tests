@@ -1,0 +1,36 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ftree t 5
+	assert num_nodes t 5
+	assert num_edges t 0
+	
+	assert can_add_edge t 0 1
+	add_edge t 0 1 true true
+	output_graph t
+	assert cant_add_edge t 0 1
+	
+	remove_edge t 0 1 true true
+	output_graph t
+	assert can_add_edge t 0 1
+	
+	add_edge t 0 1 false false
+	output_graph t
+	assert cant_add_edge t 0 1
+
+	assert can_add_edges t 3
+		0 2
+		0 3
+		0 4
+	add_edges t 3
+		0 2
+		0 3
+		0 4
+		true true
+	output_graph t
+	assert cant_add_edge t 4 1
+	remove_edge t 0 4 true true
+	output_graph t
+	assert can_add_edge t 4 1
+	add_edge t 4 1 true true
+	output_graph t
