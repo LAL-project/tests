@@ -491,7 +491,7 @@ err_type process_assert(
 		if (not can) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_CAN_ADD_EDGE)
-			cerr << "    Cannot add edge with vertices " << u << ", " << v << " "
+			cerr << "    Cannot add edge with vertices {" << u << "," << v << "} "
 				 << "to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
@@ -506,7 +506,7 @@ err_type process_assert(
 		if (can) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_CANT_ADD_EDGE)
-			cerr << "    Edge with vertices " << u << ", " << v << " "
+			cerr << "    Edge with vertices {" << u << "," << v << "} "
 				 << "can be added to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
 			output_graph(g1)
@@ -527,7 +527,7 @@ err_type process_assert(
 			message_in_func(ASSERT_TREE_CAN_ADD_EDGES)
 			cerr << "    Cannot add edges" << endl;
 			for (auto e : edge_list) {
-			cerr << "        " << e.first << ", " << e.second << endl;
+			cerr << "        {" << e.first << "," << e.second << "}" << endl;
 			}
 			cerr << "    to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
@@ -549,7 +549,7 @@ err_type process_assert(
 			message_in_func(ASSERT_TREE_CANT_ADD_EDGES)
 			cerr << "    Cannot add edges" << endl;
 			for (auto e : edge_list) {
-			cerr << "        " << e.first << ", " << e.second << endl;
+			cerr << "        {" << e.first << "," << e.second << "}" << endl;
 			}
 			cerr << "    to graph '" << g1 << "'" << endl;
 			cout << "    Contents of '" << g1 << "':" << endl;
