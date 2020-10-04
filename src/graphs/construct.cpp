@@ -451,15 +451,9 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_exists_variable(FUNC_RTREE_CALC_SIZE_SUBTREE, g1)
 			assert_correct_graph_type(FUNC_RTREE_CALC_SIZE_SUBTREE, graph_type(g1), rooted_tree_types)
-			assert_is_rtree(g1, FUNC_RTREE_SET_ROOT)
+			assert_is_rtree(g1, FUNC_RTREE_CALC_SIZE_SUBTREE)
 
-			if (graph_type(g1) == RTREE) {
-				assert_correct_boolean(FUNC_RTREE_CALC_SIZE_SUBTREE, Boolean1)
-				rtreevars[g1].calculate_size_subtrees();
-			}
-			else {
-				rtreevars[g1].calculate_size_subtrees();
-			}
+			rtreevars[g1].calculate_size_subtrees();
 		}
 		else if (option == FUNC_RTREE_RETRIEVE_SUBTREE) {
 			fin >> g2 >> g1 >> u;

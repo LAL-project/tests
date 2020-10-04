@@ -236,11 +236,6 @@ ROOTED TREES
 	Calculates the size of each subtree of the rooted tree.
 	The tree must have a root.
 
-** calculate_size_subtrees TREE true/false
-	Calculates the size of each subtree of the rooted tree.
-	The tree must have a root. The Boolean value indicates that whether
-	reversed edges should be used or not.
-
-** find_edge_orientation GRAPH
+** find_edge_orientation TREE
 	Calculates the orientation of the rooted tree's edges.
 	The tree must have a root.
