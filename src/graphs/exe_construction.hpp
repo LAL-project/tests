@@ -125,15 +125,15 @@ static const std::vector<std::string> all_types(
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
 		cerr << "    Invalid file type '" << ft << "'." << endl;			\
-		return err_type::test_format;									\
+		return err_type::test_format;										\
 	}
 
-#define assert_string_is_rooted_tree_type(assertion, t)							\
+#define assert_string_is_rooted_tree_type(assertion, t)						\
 	if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
 		cerr << ERROR << endl;												\
 		message_in_func(assertion)											\
 		cerr << "    Invalid drtree type '" << t << "'." << endl;			\
-		return err_type::test_format;									\
+		return err_type::test_format;										\
 	}
 
 #define assert_correct_boolean(assertion, str)										\
@@ -142,7 +142,7 @@ static const std::vector<std::string> all_types(
 		message_in_func(assertion)													\
 		cerr << "    Invalid Boolean value." << endl;								\
 		cerr << "    Received '" << str << "'. Valid values: true/false." << endl;	\
-		return err_type::test_format;											\
+		return err_type::test_format;												\
 	}
 
 #define assert_exists_variable(FUNC, var)									\
@@ -255,13 +255,13 @@ static const std::vector<std::string> all_types(
 
 #define ffunction_dir_graphs(v, FUNC)										\
 	[&]() {																	\
-		if (graph_type(v) == DGRAPH)		{ return FUNC(dgraphvars[v]); }	\
+		if (graph_type(v) == DGRAPH)	{ return FUNC(dgraphvars[v]); }		\
 		return FUNC(rtreevars[v]);											\
 	}()
 
 #define mfunction_dir_graphs(v, FUNC)										\
 	[&]() {																	\
-		if (graph_type(v) == DGRAPH)		{ return dgraphvars[v].FUNC; }	\
+		if (graph_type(v) == DGRAPH)	{ return dgraphvars[v].FUNC; }		\
 		return rtreevars[v].FUNC;											\
 	}()
 
