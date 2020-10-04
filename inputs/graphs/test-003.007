@@ -29,7 +29,19 @@ BODY
 	assert cant_add_edge t 2 4
 	assert cant_add_edge t 3 4
 	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	
 	remove_edge t 0 1 true true
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 4
+	assert num_nodes_component t 2 4
+	assert num_nodes_component t 3 4
+	assert num_nodes_component t 4 4
 	
 	assert can_add_edge t 0 1
 	assert can_add_edge t 0 2
@@ -38,3 +50,9 @@ BODY
 	
 	add_edge t 0 4 true true
 	output_graph t
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5

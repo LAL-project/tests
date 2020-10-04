@@ -82,4 +82,3 @@ BODY
 	assert cant_add_edge g 2 3
 	assert cant_add_edge g 2 4
 	assert cant_add_edge g 3 4
-	

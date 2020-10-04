@@ -5,16 +5,43 @@ BODY
 	assert num_nodes t 5
 	assert num_edges t 0
 	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 1
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	
 	assert can_add_edge t 0 1
 	add_edge t 0 1 true true
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	
 	output_graph t
 	assert cant_add_edge t 0 1
 	
 	remove_edge t 0 1 true true
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 1
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	
 	output_graph t
 	assert can_add_edge t 0 1
 	
 	add_edge t 0 1 false false
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	
 	output_graph t
 	assert cant_add_edge t 0 1
 
@@ -27,10 +54,30 @@ BODY
 		0 3
 		0 4
 		true true
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	
 	output_graph t
 	assert cant_add_edge t 4 1
 	remove_edge t 0 4 true true
+	
+	assert num_nodes_component t 0 4
+	assert num_nodes_component t 1 4
+	assert num_nodes_component t 2 4
+	assert num_nodes_component t 3 4
+	assert num_nodes_component t 4 1
+	
 	output_graph t
 	assert can_add_edge t 4 1
 	add_edge t 4 1 true true
 	output_graph t
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5

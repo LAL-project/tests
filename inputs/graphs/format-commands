@@ -99,7 +99,7 @@ COMMANDS AVAILABLE
 	
 	-- num_nodes GRAPH N
 		asserts that the number of nodes is N
-		
+	
 	-- num_edges GRAPH N
 		asserts that the number of edges is N
 	
@@ -171,6 +171,11 @@ COMMANDS AVAILABLE
 		
 	-- cant_add_edges TREE N VERTEX_1 VERTEX_2 .. VERTEX_{2N-1} VERTEX_{2N}
 		asserts that the edges in the list cant be added to the graph
+	
+	-- num_nodes_component TREE u N
+		asserts that the size of the connected component to which vertex
+		u belongs to is equal to N (with the special consideration for
+		directed trees).
 	
 	-- is_rooted TREE
 		asserts that the tree is rooted

@@ -5,6 +5,17 @@ BODY
 	assert num_nodes t 10
 	assert num_edges t 0
 	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 1
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
 	add_edges t 8
 		0 1
 		1 2
@@ -16,6 +27,17 @@ BODY
 		7 9
 		true true
 	output_graph t
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 5
+	assert num_nodes_component t 6 5
+	assert num_nodes_component t 7 5
+	assert num_nodes_component t 8 5
+	assert num_nodes_component t 9 5
 	
 	assert can_add_edge t 0 5
 	assert can_add_edge t 0 6
@@ -45,6 +67,17 @@ BODY
 	
 	add_edge t 0 5 true true
 	
+	assert num_nodes_component t 0 10
+	assert num_nodes_component t 1 10
+	assert num_nodes_component t 2 10
+	assert num_nodes_component t 3 10
+	assert num_nodes_component t 4 10
+	assert num_nodes_component t 5 10
+	assert num_nodes_component t 6 10
+	assert num_nodes_component t 7 10
+	assert num_nodes_component t 8 10
+	assert num_nodes_component t 9 10
+	
 	assert cant_add_edge t 0 6
 	assert cant_add_edge t 0 7
 	assert cant_add_edge t 0 8
@@ -72,6 +105,26 @@ BODY
 	
 	remove_edge t 5 6 true true
 	
+	assert num_nodes_component t 0 6
+	assert num_nodes_component t 1 6
+	assert num_nodes_component t 2 6
+	assert num_nodes_component t 3 6
+	assert num_nodes_component t 4 6
+	assert num_nodes_component t 5 6
+	assert num_nodes_component t 6 4
+	assert num_nodes_component t 7 4
+	assert num_nodes_component t 8 4
+	assert num_nodes_component t 9 4
+	
 	assert can_add_edge t 5 6
 	
-	
+	ssert num_nodes_component t 0 10
+	assert num_nodes_component t 1 10
+	assert num_nodes_component t 2 10
+	assert num_nodes_component t 3 10
+	assert num_nodes_component t 4 10
+	assert num_nodes_component t 5 10
+	assert num_nodes_component t 6 10
+	assert num_nodes_component t 7 10
+	assert num_nodes_component t 8 10
+	assert num_nodes_component t 9 10
