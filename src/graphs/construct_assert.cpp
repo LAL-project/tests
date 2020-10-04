@@ -598,7 +598,8 @@ err_type process_assert(
 			cerr << "    The component of vertex '" << u << "'"
 				 << " in '" << g1 << "' does not have "
 				 << n << " vertices." << endl;
-			cerr << "    It actually has: " << mfunction_trees(g1, n_nodes_component(u))
+			cerr << "    It actually has: "
+				 << mfunction_trees(g1, n_nodes_component(u))
 				 << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1)
@@ -707,8 +708,10 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    The size of subtree rooted at '" << u
-				 << "' is not '" << v << "." << endl;
+				 << "' is not '" << v << "'." << endl;
 			cerr << "    The size of the subtree is: " << n << endl;
+			cerr << "    Contents of '" << g1 << "':" << endl;
+			output_graph(g1);
 			return err_type::test_execution;
 		}
 	}
