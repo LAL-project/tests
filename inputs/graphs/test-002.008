@@ -117,6 +117,7 @@ BODY
 	assert num_nodes_component t 9 4
 	
 	assert can_add_edge t 5 6
+	add_edge t 5 6 true true
 	
 	assert num_nodes_component t 0 10
 	assert num_nodes_component t 1 10
