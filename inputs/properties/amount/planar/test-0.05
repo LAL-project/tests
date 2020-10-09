@@ -2,6 +2,6 @@ TYPE properties-amount-Planar
 INPUT 0
 BODY
 	5
-	 0 1 2 1 4	40
-	 0 1 2 1 1	60
-	 0 1 1 1 1	120
+	 0 1 2 1 4    40
+	 0 1 2 1 1    60
+	 0 1 1 1 1    120

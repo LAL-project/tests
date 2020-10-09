@@ -2,4 +2,4 @@ TYPE linarr-Dmin-Projective
 INPUT 0
 BODY
 	1
-	 0	0		0
+	 0	    0   1	  1 * 0
