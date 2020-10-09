@@ -49,11 +49,13 @@ using namespace std;
 #include <lal/linarr/C.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/free_tree.hpp>
-#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
 using namespace iterators;
+
+// common includes
+#include "std_utils.hpp"
 
 namespace exe_tests {
 

@@ -56,7 +56,6 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/std_utils.hpp>
 #include <lal/internal/graphs/trees/convert_to_ftree.hpp>
 using namespace lal;
 using namespace graphs;
@@ -66,8 +65,10 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "arrgmnt_validity_check.hpp"
-#include "test_utils.hpp"
 #include "tree_classification.hpp"
+#include "test_utils.hpp"
+#include "std_utils.hpp"
+#include "linarr/linarr_brute_force_testing.hpp"
 
 typedef pair<uint32_t, linear_arrangement> algo_result;
 
@@ -133,62 +134,24 @@ err_type test_Unconstrained_bf_algorithm(
 	ifstream& fin
 )
 {
-	uint32_t n;
-	fin >> n;
-
-	if (n == 1) {
-		// nothing to do
-		return err_type::no_error;
-	}
-
-	vector<uint32_t> node_list(n);
-	while (fin >> node_list[0]) {
-		for (uint32_t i = 1; i < n; ++i) {
-			fin >> node_list[i];
-		}
-		// read input arrangement
-		linear_arrangement input_arr(n);
-		for (uint32_t i = 0; i < n; ++i) {
-			fin >> input_arr[i];
-		}
-		// read value of D calculated by brute force
-		uint32_t brute_force_D;
-		fin >> brute_force_D;
-
-		// construct tree
-		const free_tree T = internal::linear_sequence_to_ftree(node_list).first;
-
-		// check correctness of input arrangement
-		if (uint32_t DD = sum_length_edges(T, input_arr) != brute_force_D) {
-			cerr << ERROR << endl;
-			cerr << "    Input value of D calculated by brute force does not" << endl;
-			cerr << "    agree with the evaluation of the tree." << endl;
-			cerr << "        Input arrangement: " << input_arr << endl;
-			cerr << "        Input value: " << brute_force_D << endl;
-			cerr << "        Evaluation: " << DD << endl;
-			return err_type::test_format;
-		}
-
-		// execute library's algorithm
-		const auto res_A = A(T);
-
-		// ensure that the arrangement is a permutation
-		if (not check_correctness_arr(T, res_A)) {
-			return err_type::test_execution;
-		}
-
-		if (res_A.first != brute_force_D) {
-			cerr << ERROR << endl;
-			cerr << "    Result of algorithm does not match base result." << endl;
-			cerr << "        Base result: " << brute_force_D << endl;
-			cerr << "        Algorithm result:" << res_A.first << endl;
-			cerr << "    For tree:" << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-	}
-
-	return err_type::no_error;
+	const auto err = linarr_brute_force_testing<free_tree>
+	(
+		[&](const free_tree& t) {
+			return A(t);
+		},
+		[](const free_tree& t, const linear_arrangement& arr) {
+			return sum_length_edges(t, arr);
+		},
+		[](const free_tree& t, const linear_arrangement& arr) {
+			return is_arrangement_planar(t, arr);
+		},
+		[](const vector<node>& v) {
+			return internal::linear_sequence_to_ftree(v).first;
+		},
+		[](free_tree&) { },
+		fin
+	);
+	return err;
 }
 
 err_type test_Unconstrained_class_algorithm(

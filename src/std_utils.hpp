@@ -38,71 +38,36 @@
  *
  ********************************************************************/
 
+#pragma once
+
 // C++ includes
-#include <iostream>
-#include <fstream>
-#include <set>
-using namespace std;
+#include <ostream>
+#include <vector>
 
-// lal includes
-#include <lal/graphs/output.hpp>
-#include <lal/generate/rand_projective_arrangements.hpp>
-#include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/linarr/C.hpp>
-#include <lal/iterators/E_iterator.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-using namespace iterators;
+namespace std {
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
-#include "arrgmnt_validity_check.hpp"
-#include "std_utils.hpp"
-
-namespace exe_tests {
-
-err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+template<typename T>
+ostream& operator<< (ostream& os, const vector<T>& v) {
+	if (v.size() == 0) { return os; }
+	os << v[0];
+	for (size_t i = 1; i < v.size(); ++i) {
+		os << ", " << v[i];
 	}
-
-	uint32_t n, ntrees, nit;
-	while (fin >> n >> ntrees >> nit) {
-		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n);
-
-		for (uint32_t nt = 0; nt < ntrees; ++nt) {
-			const rooted_tree rT = TreeGen.make_rand_tree();
-			const free_tree fT = rT.to_undirected();
-
-			rand_projective_arrgmnt RandArr(rT, 100);
-
-			for (uint32_t it = 0; it < nit; ++it) {
-				const linear_arrangement arr = RandArr.make_rand_arrgmnt();
-
-				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, arr);
-				if (err != "No error") {
-					cerr << ERROR << endl;
-					cerr << "    Generation of random arrangement failed with error:" << endl;
-					cerr << "    '" << err << "'" << endl;
-					cerr << "    Arrangement:     " << arr << endl;
-					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
-					return err_type::test_execution;
-				}
-			}
-		}
-	}
-
-	TEST_GOODBYE
-	return err_type::no_error;
+	return os;
 }
 
-} // -- namespace exe_tests
+template<typename T>
+istream& operator>> (istream& is, const vector<T>& v) {
+	for (size_t i = 0; i < v.size(); ++i) {
+		is >> v[i];
+	}
+	return is;
+}
+
+template<typename T, typename U>
+ostream& operator<< (ostream& os, const pair<T,U>& p) {
+	os << "(" << p.first << "," << p.second << ")";
+	return os;
+}
+
+}

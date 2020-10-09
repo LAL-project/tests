@@ -50,7 +50,6 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/internal/std_utils.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -60,6 +59,7 @@ using namespace generate;
 #include "definitions.hpp"
 #include "test_utils.hpp"
 #include "arrgmnt_validity_check.hpp"
+#include "std_utils.hpp"
 
 namespace exe_tests {
 

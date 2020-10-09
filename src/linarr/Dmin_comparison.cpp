@@ -57,7 +57,6 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/std_utils.hpp>
 #include <lal/internal/graphs/trees/convert_to_ftree.hpp>
 using namespace lal;
 using namespace graphs;
@@ -67,8 +66,9 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "arrgmnt_validity_check.hpp"
-#include "test_utils.hpp"
 #include "tree_classification.hpp"
+#include "std_utils.hpp"
+#include "test_utils.hpp"
 
 typedef pair<uint32_t, linear_arrangement> algo_result;
 

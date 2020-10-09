@@ -39,19 +39,14 @@
  ********************************************************************/
 
 // C++ includes
-#include <algorithm>
 #include <iostream>
-#include <numeric>
 #include <fstream>
-#include <set>
 using namespace std;
 
 // lal includes
 #include <lal/graphs/free_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
-#include <lal/io/basic_output.hpp>
-#include <lal/internal/std_utils.hpp>
 #include <lal/internal/graphs/trees/convert_to_ftree.hpp>
 using namespace lal;
 using namespace graphs;
@@ -60,7 +55,7 @@ using namespace linarr;
 // custom includes
 #include "definitions.hpp"
 #include "arrgmnt_validity_check.hpp"
-#include "test_utils.hpp"
+#include "linarr/linarr_brute_force_testing.hpp"
 
 namespace exe_tests {
 
@@ -72,93 +67,26 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	// read number of nodes
-	uint32_t n;
-	fin >> n;
+	const auto err = linarr_brute_force_testing<free_tree>
+	(
+		[](const free_tree& t) {
+			return Dmin(t, algorithms_Dmin::Planar);
+		},
+		[](const free_tree& t, const linear_arrangement& arr) {
+			return sum_length_edges(t, arr);
+		},
+		[](const free_tree& t, const linear_arrangement& arr) {
+			return is_arrangement_planar(t, arr);
+		},
+		[](const vector<node>& v) {
+			return internal::linear_sequence_to_ftree(v).first;
+		},
+		[](free_tree&) { },
+		fin
+	);
 
-	if (n == 1) {
-		// nothing to do
-		TEST_GOODBYE
-		return err_type::no_error;
-	}
-
-	vector<uint32_t> node_list(n);
-	while (fin >> node_list[0]) {
-		for (uint32_t i = 1; i < n; ++i) {
-			fin >> node_list[i];
-		}
-		// read input array
-		linear_arrangement input_arr(n);
-		for (uint32_t i = 0; i < n; ++i) {
-			fin >> input_arr[i];
-		}
-		// read value of D calculated by brute force
-		uint32_t brute_force_D;
-		fin >> brute_force_D;
-
-		// construct tree
-		const free_tree tree = internal::linear_sequence_to_ftree(node_list).first;
-
-		// check correctness of input array
-		if (uint32_t DD = sum_length_edges(tree, input_arr) != brute_force_D) {
-			cerr << ERROR << endl;
-			cerr << "    Input value of D calculated by brute force does not" << endl;
-			cerr << "    agree with the evaluation of the tree." << endl;
-			cerr << "        BF Arrangement:     " << input_arr << endl;
-			cerr << "        BF Inv Arrangement: " << invlinarr(input_arr) << endl;
-			cerr << "        BF value: " << brute_force_D << endl;
-			cerr << "        Evaluation: " << DD << endl;
-			return err_type::test_format;
-		}
-
-		// execute library's algorithm
-		const auto res_library = Dmin(tree, algorithms_Dmin::Planar);
-		const linear_arrangement& arr = res_library.second;
-
-		// ensure that the arrangement is a planar permutation
-		const string err = is_arrangement_planar(tree, arr);
-		if (err != "No error") {
-			cerr << ERROR << endl;
-			cerr << "    The result is not a planar arrangement." << endl;
-			cerr << "    Error: '" << err << "'" << endl;
-			cerr << "        Arrangement:     " << arr << endl;
-			cerr << "        Inv Arrangement: " << invlinarr(arr) << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			return err_type::test_execution;
-		}
-
-		// ensure that value of D matches the evaluation of the arrangement
-		const uint32_t D = sum_length_edges(tree, res_library.second);
-		if (D != res_library.first) {
-			cerr << ERROR << endl;
-			cerr << "    Value of D returned by method does not match the" << endl;
-			cerr << "    evaluation of the arrangement." << endl;
-			cerr << "        Arrangement:         " << res_library.second << endl;
-			cerr << "        Inv Arrangement:     " << invlinarr(res_library.second) << endl;
-			cerr << "        Value of D returned: " << res_library.first << endl;
-			cerr << "        Actual value of D:   " << D << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			return err_type::test_execution;
-		}
-
-		// ensure that the value of D is actually minimum
-		if (res_library.first != brute_force_D) {
-			cerr << ERROR << endl;
-			cerr << "    Values of projective Dmin do not coincide." << endl;
-			cerr << "    Library:" << endl;
-			cerr << "        Value: " << res_library.first << endl;
-			cerr << "        Arrangement:     " << res_library.second << endl;
-			cerr << "        Inv Arrangement: " << invlinarr(res_library.second) << endl;
-			cerr << "    Bruteforce:" << endl;
-			cerr << "        Value: " << brute_force_D << endl;
-			cerr << "        BF Arrangement:     " << input_arr << endl;
-			cerr << "        BF Inv Arrangement: " << invlinarr(input_arr) << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			return err_type::test_execution;
-		}
+	if (err != err_type::no_error) {
+		return err;
 	}
 
 	TEST_GOODBYE

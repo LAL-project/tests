@@ -86,10 +86,12 @@ HEADERS += \
 	graphs/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
+    linarr/linarr_brute_force_testing.hpp \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \
     properties/C_rla_brute_force_algorithms.hpp \
+    std_utils.hpp \
     test_utils.hpp \
     time.hpp \
 	tree_classification.hpp
