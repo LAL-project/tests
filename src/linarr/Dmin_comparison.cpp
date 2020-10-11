@@ -84,7 +84,7 @@ inline
 bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
 	/* ensure that the result is an arrangement */
-	if (not is_arrangement(arr)) {
+	if (not is_permutation(arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The result is not an arrangement (permutation)." << endl;
 		cerr << "    Arrangement: " << arr << endl;

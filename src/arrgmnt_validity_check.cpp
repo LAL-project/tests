@@ -61,7 +61,7 @@ namespace exe_tests {
 
 // ----------------------------------------------------------------------------
 
-bool is_arrangement(const linear_arrangement& arr) {
+bool is_permutation(const linear_arrangement& arr) {
 	const uint32_t n = static_cast<uint32_t>(arr.size());
 	bool all_lt_n = true;
 	for (position p : arr) {
@@ -77,7 +77,7 @@ bool is_arrangement(const linear_arrangement& arr) {
 
 // ----------------------------------------------------------------------------
 
-bool is_root_covered(const lal::graphs::rooted_tree& rT, const linear_arrangement& pi) {
+bool is_root_covered(const rooted_tree& rT, const linear_arrangement& pi) {
 	const node R = rT.get_root();
 	bool covered = false;
 
@@ -102,11 +102,11 @@ bool is_linarr_planar(
 	const T& t, const linear_arrangement& arr
 )
 {
-	return lal::linarr::n_crossings(t, arr) == 0;
+	return linarr::n_crossings(t, arr) == 0;
 }
 
 bool is_linarr_projective(
-	const lal::graphs::rooted_tree& rT, const linear_arrangement& arr
+	const rooted_tree& rT, const linear_arrangement& arr
 )
 {
 	return is_linarr_planar(rT, arr) and not is_root_covered(rT, arr);
@@ -114,30 +114,38 @@ bool is_linarr_projective(
 
 // ----------------------------------------------------------------------------
 
-string is_arrangement_planar(
-	const lal::graphs::free_tree& fT, const linear_arrangement& arr
-)
+string is_arrangement(const free_tree&, const linear_arrangement& arr) {
+	const bool r = is_permutation(arr);
+	if (r) { return ""; }
+	return "The arrangement is not a permutation of the vertices.";
+}
+
+string is_arrangement(const rooted_tree&, const linear_arrangement& arr) {
+	const bool r = is_permutation(arr);
+	if (r) { return ""; }
+	return "The arrangement is not a permutation of the vertices.";
+}
+
+string is_arrangement_planar(const free_tree& fT, const linear_arrangement& arr)
 {
-	if (not is_arrangement(arr)) {
+	if (not is_permutation(arr)) {
 		return "The arrangement is not a permutation of the vertices.";
 	}
 	if (not is_linarr_planar(fT, arr)) {
 		return "The arrangement is not planar";
 	}
-	return "No error";
+	return "";
 }
 
-string is_arrangement_projective(
-	const lal::graphs::rooted_tree& rT, const linear_arrangement& arr
-)
+string is_arrangement_projective(const rooted_tree& rT, const linear_arrangement& arr)
 {
-	if (not is_arrangement(arr)) {
+	if (not is_permutation(arr)) {
 		return "The arrangement is not a permutation of the vertices.";
 	}
 	if (not is_linarr_projective(rT, arr)) {
 		return "The arrangement is not projective";
 	}
-	return "No error";
+	return "";
 }
 
 } // -- namespace exe_tests

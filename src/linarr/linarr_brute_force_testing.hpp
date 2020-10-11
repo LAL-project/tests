@@ -147,9 +147,9 @@ err_type linarr_brute_force_testing(
 		// ensure that the arrangement is a planar permutation
 		{
 		const string err = arrgmnt_check(tree, library_arr);
-		if (err != "No error") {
+		if (err != "") {
 			cerr << ERROR << endl;
-			cerr << "    The result is not a planar arrangement." << endl;
+			cerr << "    The arrangement produced is not correct." << endl;
 			cerr << "    Error: '" << err << "'" << endl;
 			cerr << "        Arrangement:     " << library_arr << endl;
 			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;

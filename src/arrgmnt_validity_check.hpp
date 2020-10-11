@@ -48,7 +48,15 @@
 
 namespace exe_tests {
 
-bool is_arrangement(const lal::linear_arrangement& arr);
+bool is_permutation(const lal::linear_arrangement& arr);
+
+std::string is_arrangement(
+	const lal::graphs::free_tree& fT, const lal::linear_arrangement& arr
+);
+
+std::string is_arrangement(
+	const lal::graphs::rooted_tree& rT, const lal::linear_arrangement& arr
+);
 
 std::string is_arrangement_planar(
 	const lal::graphs::free_tree& fT, const lal::linear_arrangement& arr
