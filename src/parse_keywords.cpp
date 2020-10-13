@@ -242,6 +242,9 @@ err_type call_memory
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
+	if (key == "graphs") {
+		return parse_header(exe_memory_graphs, fin);
+	}
 	if (key == "numeric") {
 		return parse_header(exe_memory_numeric, fin);
 	}

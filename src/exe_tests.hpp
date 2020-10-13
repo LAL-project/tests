@@ -107,6 +107,7 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs,std::ifstream& fi
 err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin);
 err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin);
 
+err_type exe_memory_graphs(const input_list& inputs,std::ifstream& fin);
 err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin);
 
 err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin);
