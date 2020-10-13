@@ -1,0 +1,315 @@
+++++++++++++++++++++
+function: void exe_tests::test_undirected_graph()
+--------------------
+case starting at line: 112
+g1.n_nodes()= 10
+g1.n_edges()= 0
+116:: Edges of 'g1':{}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+122:: Edges of 'g1':{}
+g2.n_nodes()= 10
+g2.n_edges()= 0
+125:: Edges of 'g2':{}
+--------------------
+case starting at line: 129
+g1.n_nodes()= 6
+g1.n_edges()= 5
+134:: Edges of 'g1':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+140:: Edges of 'g1':{}
+g2.n_nodes()= 6
+g2.n_edges()= 5
+143:: Edges of 'g2':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+--------------------
+case starting at line: 148
+g1.n_nodes()= 10
+g1.n_edges()= 0
+152:: Edges of 'g1':{}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+159:: Edges of 'g1':{}
+g2.n_nodes()= 10
+g2.n_edges()= 0
+162:: Edges of 'g2':{}
+--------------------
+case starting at line: 166
+g1.n_nodes()= 6
+g1.n_edges()= 5
+171:: Edges of 'g1':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+178:: Edges of 'g1':{}
+g2.n_nodes()= 6
+g2.n_edges()= 5
+181:: Edges of 'g2':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+++++++++++++++++++++
+function: void exe_tests::test_directed_graph()
+--------------------
+case starting at line: 190
+g1.n_nodes()= 10
+g1.n_edges()= 0
+194:: Edges of 'g1':{}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+200:: Edges of 'g1':{}
+g2.n_nodes()= 10
+g2.n_edges()= 0
+203:: Edges of 'g2':{}
+--------------------
+case starting at line: 207
+g1.n_nodes()= 6
+g1.n_edges()= 5
+212:: Edges of 'g1':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+218:: Edges of 'g1':{}
+g2.n_nodes()= 6
+g2.n_edges()= 5
+221:: Edges of 'g2':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+--------------------
+case starting at line: 226
+g1.n_nodes()= 10
+g1.n_edges()= 0
+230:: Edges of 'g1':{}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+237:: Edges of 'g1':{}
+g2.n_nodes()= 10
+g2.n_edges()= 0
+240:: Edges of 'g2':{}
+--------------------
+case starting at line: 244
+g1.n_nodes()= 6
+g1.n_edges()= 5
+249:: Edges of 'g1':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+Move constructor: 'g2 <- g1'
+g1.n_nodes()= 0
+g1.n_edges()= 0
+256:: Edges of 'g1':{}
+g2.n_nodes()= 6
+g2.n_edges()= 5
+259:: Edges of 'g2':{ (0,1) (0,2) (1,2) (1,5) (2,4)}
+++++++++++++++++++++
+function: void exe_tests::test_free_trees()
+--------------------
+case starting at line: 268
+270:: t1.n_nodes()= 5
+270:: t1.n_edges()= 0
+270:: Edges of 't1':{}
+270:: t1.n_nodes_component(0)= 1
+270:: t1.n_nodes_component(1)= 1
+270:: t1.n_nodes_component(2)= 1
+270:: t1.n_nodes_component(3)= 1
+270:: t1.n_nodes_component(4)= 1
+Move constructor: 't2 <- t1'
+274:: t1.n_nodes()= 0
+274:: t1.n_edges()= 0
+274:: Edges of 't1':{}
+275:: t2.n_nodes()= 5
+275:: t2.n_edges()= 0
+275:: Edges of 't2':{}
+275:: t2.n_nodes_component(0)= 1
+275:: t2.n_nodes_component(1)= 1
+275:: t2.n_nodes_component(2)= 1
+275:: t2.n_nodes_component(3)= 1
+275:: t2.n_nodes_component(4)= 1
+--------------------
+case starting at line: 279
+282:: t1.n_nodes()= 5
+282:: t1.n_edges()= 4
+282:: Edges of 't1':{ (0,1) (0,2) (0,3) (2,4)}
+282:: t1.n_nodes_component(0)= 5
+282:: t1.n_nodes_component(1)= 5
+282:: t1.n_nodes_component(2)= 5
+282:: t1.n_nodes_component(3)= 5
+282:: t1.n_nodes_component(4)= 5
+Move constructor: 't2 <- t1'
+286:: t1.n_nodes()= 0
+286:: t1.n_edges()= 0
+286:: Edges of 't1':{}
+287:: t2.n_nodes()= 5
+287:: t2.n_edges()= 4
+287:: Edges of 't2':{ (0,1) (0,2) (0,3) (2,4)}
+287:: t2.n_nodes_component(0)= 5
+287:: t2.n_nodes_component(1)= 5
+287:: t2.n_nodes_component(2)= 5
+287:: t2.n_nodes_component(3)= 5
+287:: t2.n_nodes_component(4)= 5
+--------------------
+case starting at line: 292
+294:: t1.n_nodes()= 5
+294:: t1.n_edges()= 0
+294:: Edges of 't1':{}
+294:: t1.n_nodes_component(0)= 1
+294:: t1.n_nodes_component(1)= 1
+294:: t1.n_nodes_component(2)= 1
+294:: t1.n_nodes_component(3)= 1
+294:: t1.n_nodes_component(4)= 1
+Move constructor: 't2 <- t1'
+299:: t1.n_nodes()= 0
+299:: t1.n_edges()= 0
+299:: Edges of 't1':{}
+300:: t2.n_nodes()= 5
+300:: t2.n_edges()= 0
+300:: Edges of 't2':{}
+300:: t2.n_nodes_component(0)= 1
+300:: t2.n_nodes_component(1)= 1
+300:: t2.n_nodes_component(2)= 1
+300:: t2.n_nodes_component(3)= 1
+300:: t2.n_nodes_component(4)= 1
+--------------------
+case starting at line: 304
+307:: t1.n_nodes()= 5
+307:: t1.n_edges()= 4
+307:: Edges of 't1':{ (0,1) (0,2) (0,3) (2,4)}
+307:: t1.n_nodes_component(0)= 5
+307:: t1.n_nodes_component(1)= 5
+307:: t1.n_nodes_component(2)= 5
+307:: t1.n_nodes_component(3)= 5
+307:: t1.n_nodes_component(4)= 5
+Move constructor: 't2 <- t1'
+312:: t1.n_nodes()= 0
+312:: t1.n_edges()= 0
+312:: Edges of 't1':{}
+313:: t2.n_nodes()= 5
+313:: t2.n_edges()= 4
+313:: Edges of 't2':{ (0,1) (0,2) (0,3) (2,4)}
+313:: t2.n_nodes_component(0)= 5
+313:: t2.n_nodes_component(1)= 5
+313:: t2.n_nodes_component(2)= 5
+313:: t2.n_nodes_component(3)= 5
+313:: t2.n_nodes_component(4)= 5
+++++++++++++++++++++
+function: void exe_tests::test_rooted_trees()
+--------------------
+case starting at line: 322
+324:: t1.n_nodes()= 5
+324:: t1.n_edges()= 0
+324:: Edges of 't1':{}
+324:: t1.n_nodes_component(0)= 1
+324:: t1.n_nodes_component(1)= 1
+324:: t1.n_nodes_component(2)= 1
+324:: t1.n_nodes_component(3)= 1
+324:: t1.n_nodes_component(4)= 1
+Move constructor: 't2 <- t1'
+328:: t1.n_nodes()= 0
+328:: t1.n_edges()= 0
+328:: Edges of 't1':{}
+329:: t2.n_nodes()= 5
+329:: t2.n_edges()= 0
+329:: Edges of 't2':{}
+329:: t2.n_nodes_component(0)= 1
+329:: t2.n_nodes_component(1)= 1
+329:: t2.n_nodes_component(2)= 1
+329:: t2.n_nodes_component(3)= 1
+329:: t2.n_nodes_component(4)= 1
+--------------------
+case starting at line: 333
+339:: t1.n_nodes()= 5
+339:: t1.n_edges()= 4
+339:: Edges of 't1':{ (2,4) (3,0) (3,1) (3,2)}
+339:: t1.n_nodes_component(0)= 5
+339:: t1.n_nodes_component(1)= 5
+339:: t1.n_nodes_component(2)= 5
+339:: t1.n_nodes_component(3)= 5
+339:: t1.n_nodes_component(4)= 5
+339:: t1.get_root()= 3
+339:: t1.n_nodes_subtree(0)= 1
+339:: t1.n_nodes_subtree(1)= 1
+339:: t1.n_nodes_subtree(2)= 2
+339:: t1.n_nodes_subtree(3)= 5
+339:: t1.n_nodes_subtree(4)= 1
+Move constructor: 't2 <- t1'
+343:: t1.n_nodes()= 0
+343:: t1.n_edges()= 0
+343:: Edges of 't1':{}
+344:: t2.n_nodes()= 5
+344:: t2.n_edges()= 4
+344:: Edges of 't2':{ (2,4) (3,0) (3,1) (3,2)}
+344:: t2.n_nodes_component(0)= 5
+344:: t2.n_nodes_component(1)= 5
+344:: t2.n_nodes_component(2)= 5
+344:: t2.n_nodes_component(3)= 5
+344:: t2.n_nodes_component(4)= 5
+344:: t2.get_root()= 3
+344:: t2.n_nodes_subtree(0)= 1
+344:: t2.n_nodes_subtree(1)= 1
+344:: t2.n_nodes_subtree(2)= 2
+344:: t2.n_nodes_subtree(3)= 5
+344:: t2.n_nodes_subtree(4)= 1
+--------------------
+case starting at line: 349
+351:: t1.n_nodes()= 5
+351:: t1.n_edges()= 0
+351:: Edges of 't1':{}
+351:: t1.n_nodes_component(0)= 1
+351:: t1.n_nodes_component(1)= 1
+351:: t1.n_nodes_component(2)= 1
+351:: t1.n_nodes_component(3)= 1
+351:: t1.n_nodes_component(4)= 1
+Move constructor: 't2 <- t1'
+356:: t1.n_nodes()= 0
+356:: t1.n_edges()= 0
+356:: Edges of 't1':{}
+357:: t2.n_nodes()= 5
+357:: t2.n_edges()= 0
+357:: Edges of 't2':{}
+357:: t2.n_nodes_component(0)= 1
+357:: t2.n_nodes_component(1)= 1
+357:: t2.n_nodes_component(2)= 1
+357:: t2.n_nodes_component(3)= 1
+357:: t2.n_nodes_component(4)= 1
+--------------------
+case starting at line: 361
+367:: t1.n_nodes()= 5
+367:: t1.n_edges()= 4
+367:: Edges of 't1':{ (2,4) (3,0) (3,1) (3,2)}
+367:: t1.n_nodes_component(0)= 5
+367:: t1.n_nodes_component(1)= 5
+367:: t1.n_nodes_component(2)= 5
+367:: t1.n_nodes_component(3)= 5
+367:: t1.n_nodes_component(4)= 5
+367:: t1.get_root()= 3
+367:: t1.n_nodes_subtree(0)= 1
+367:: t1.n_nodes_subtree(1)= 1
+367:: t1.n_nodes_subtree(2)= 2
+367:: t1.n_nodes_subtree(3)= 5
+367:: t1.n_nodes_subtree(4)= 1
+Move constructor: 't2 <- t1'
+372:: t1.n_nodes()= 0
+372:: t1.n_edges()= 0
+372:: Edges of 't1':{}
+373:: t2.n_nodes()= 5
+373:: t2.n_edges()= 4
+373:: Edges of 't2':{ (2,4) (3,0) (3,1) (3,2)}
+373:: t2.n_nodes_component(0)= 5
+373:: t2.n_nodes_component(1)= 5
+373:: t2.n_nodes_component(2)= 5
+373:: t2.n_nodes_component(3)= 5
+373:: t2.n_nodes_component(4)= 5
+373:: t2.get_root()= 3
+373:: t2.n_nodes_subtree(0)= 1
+373:: t2.n_nodes_subtree(1)= 1
+373:: t2.n_nodes_subtree(2)= 2
+373:: t2.n_nodes_subtree(3)= 5
+373:: t2.n_nodes_subtree(4)= 1
+++++++++++++++++++++
+function: void exe_tests::test_generate()
+--------------------
+case starting at line: 381
+--------------------
+case starting at line: 388
+--------------------
+case starting at line: 395
+--------------------
+case starting at line: 402
+Test finished without apparent errors.
