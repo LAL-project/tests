@@ -33,6 +33,7 @@ groups_list=(\
 	"linarr_Dmin_Planar" \
 	"linarr_Dmin_Unconstrained_YS" \
 	"linarr_Dmin_Unconstrained_FC" \
+	"memory" \
 	"numeric" \
 	"properties" \
 	"properties_basic" \
@@ -92,6 +93,7 @@ source test_dir_generate.sh
 source test_dir_graphs.sh
 source test_dir_internal.sh
 source test_dir_linarr.sh
+source test_dir_memory.sh
 source test_dir_numeric.sh
 source test_dir_properties.sh
 source test_dir_utilities.sh
