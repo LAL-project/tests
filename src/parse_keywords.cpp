@@ -105,6 +105,9 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	if (key == "linarr") {
 		return call_linarr(keywords, 1, fin);
 	}
+	if (key == "memory") {
+		return call_memory(keywords, 1, fin);
+	}
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
 	}
@@ -225,6 +228,22 @@ err_type call_internal
 	}
 	if (key == "centroid") {
 		return parse_header(exe_internal_centroid, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+/* Functions to test memory-related issues */
+
+err_type call_memory
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "numeric") {
+		return parse_header(exe_memory_numeric, fin);
 	}
 
 	cerr << ERROR << endl;

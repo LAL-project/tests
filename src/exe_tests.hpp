@@ -72,15 +72,23 @@ err_type parse_header(
 	std::ifstream& fin
 );
 
+err_type exe_gen_arr_all_proj(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_arr_rand_proj(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_alr(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin);
+
 err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin);
 
-err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin);
-err_type exe_numeric_rational(const input_list& inputs,std::ifstream& fin);
-
-err_type exe_properties_general(const input_list& inputs,std::ifstream& fin);
-err_type exe_properties_MHD_All_trees(const input_list& inputs,std::ifstream& fin);
-err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin);
-err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin);
+err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin);
+err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);
+err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
+err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin);
@@ -94,22 +102,16 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin);
 
-err_type exe_gen_arr_all_proj(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_arr_rand_proj(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_alr(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin);
-err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin);
+err_type exe_properties_general(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_MHD_All_trees(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin);
+err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin);
+
+err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin);
+
+err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin);
+err_type exe_numeric_rational(const input_list& inputs,std::ifstream& fin);
 
 err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream& fin);
-
-err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin);
 
 } // -- namespace exe_tests

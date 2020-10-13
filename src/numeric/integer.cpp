@@ -228,90 +228,6 @@ static inline err_type op_integer_lit(
 	return err_type::no_error;
 }
 
-err_type test_integer_minutia() {
-	{
-	integer i1;
-	integer i2;
-	i1.swap(i2);
-	}
-	{
-	integer i1;
-	integer i2;
-	i2.swap(i1);
-	}
-
-	{
-	integer i1 = 0;
-	integer i2;
-	i1.swap(i2);
-	}
-	{
-	integer i1 = 0;
-	integer i2;
-	i2.swap(i1);
-	}
-
-	{
-	integer i1;
-	integer i2 = 0;
-	i1.swap(i2);
-	}
-	{
-	integer i1;
-	integer i2 = 0;
-	i2.swap(i1);
-	}
-
-	{
-	integer i1 = 0;
-	integer i2 = 0;
-	i1.swap(i2);
-	}
-	{
-	integer i1 = 0;
-	integer i2 = 0;
-	i2.swap(i1);
-	}
-
-#define test_eq(data, good)																\
-	if (data != good) {																	\
-		cerr << ERROR << endl;															\
-		cerr << "    Rational values do not coincide." << endl;							\
-		cerr << "    Expected '" << good << "', retrieved '" << data << "'." << endl;	\
-		return err_type::test_execution;												\
-	}
-
-	{
-	map<uint32_t, pair<rational, rational>> hash;
-	hash.insert( make_pair(3, make_pair(rational("42/13"), rational("9999"))) );
-	hash.insert( make_pair(4, make_pair(rational("40/13"), rational("99899"))) );
-
-	const auto& p1 = hash[3];
-	test_eq(p1.first, rational("42/13"))
-	test_eq(p1.second, rational("9999"))
-
-	const auto& p2 = hash[4];
-	test_eq(p2.first, rational("40/13"))
-	test_eq(p2.second, rational("99899"))
-	}
-
-	{
-	map<uint32_t, pair<rational, rational>> hash;
-	hash.insert( make_pair(3, make_pair(integer("42"), rational("9999"))) );
-	hash.insert( make_pair(4, make_pair(integer("40"), rational("99899"))) );
-
-	const auto& p1 = hash[3];
-	test_eq(p1.first, rational("42"))
-	test_eq(p1.second, rational("9999"))
-
-	const auto& p2 = hash[4];
-	test_eq(p2.first, rational("40"))
-	test_eq(p2.second, rational("99899"))
-	}
-
-	return err_type::no_error;
-}
-
 err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
@@ -369,10 +285,6 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 		}
 		else if (command == "operate_lit") {
 			err = op_integer_lit(integer_vars, fin);
-			if (err != err_type::no_error) { return err; }
-		}
-		else if (command == "minutia") {
-			err = test_integer_minutia();
 			if (err != err_type::no_error) { return err; }
 		}
 		else {

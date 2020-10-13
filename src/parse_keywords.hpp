@@ -80,6 +80,11 @@ err_type call_graphs
 err_type call_internal
 (const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
 
+// Functions to test memory-related issues
+
+err_type call_memory
+(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
+
 // Functions to test the linear arrangement-related functions
 
 err_type call_linarr

@@ -62,6 +62,7 @@ SOURCES += \
     linarr/klevel.cpp \
     linarr/syntree_classification.cpp \
 	main.cpp \
+    memory/numeric.cpp \
     numeric/integer.cpp \
     numeric/rational.cpp \
 	parse_keywords.cpp \
