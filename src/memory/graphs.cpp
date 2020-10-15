@@ -77,10 +77,13 @@ using namespace graphs;
 	cout << "}" << endl;									\
 }
 
-#define output_free_tree_info(n,t)									\
+#define output_graph(n,t)											\
 	cout << MLINE << n << ".n_nodes()= " << t.n_nodes() << endl;	\
 	cout << MLINE << n << ".n_edges()= " << t.n_edges() << endl;	\
 	output_edges(n, t)												\
+
+#define output_free_tree_info(n,t)									\
+	output_graph(n,t)												\
 	for (node u = 0; u < t.n_nodes(); ++u) {						\
 	cout << MLINE													\
 		 << n << ".n_nodes_component(" << u << ")= "				\
@@ -104,163 +107,331 @@ using namespace graphs;
 
 namespace exe_tests {
 
-void test_undirected_graph() {
+void test_move_undirected_graph() {
 	begin_function
 
 	// move constructor
 	{
 	begin_case
 	undirected_graph g1(10);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
 	cout << "Move constructor: 'g2 <- g1'" << endl;
 	undirected_graph g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
 	}
 
 	{
 	begin_case
 	undirected_graph g1(6);
 	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
 	cout << "Move constructor: 'g2 <- g1'" << endl;
 	undirected_graph g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Move constructor: 'v[0] <- g1'" << endl;
+	vector<undirected_graph> v;
+	v.push_back(std::move(g1));
+	output_graph("g1",g1)
+	output_graph("v[0]",v[0])
 	}
 
 	// move operator
 	{
 	begin_case
 	undirected_graph g1(10);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
-	cout << "Move constructor: 'g2 <- g1'" << endl;
+	cout << "Move operator: 'g2 <- g1'" << endl;
 	undirected_graph g2;
 	g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
 	}
 
 	{
 	begin_case
 	undirected_graph g1(6);
 	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
-	cout << "Move constructor: 'g2 <- g1'" << endl;
+	cout << "Move operator: 'g2 <- g1'" << endl;
 	undirected_graph g2;
 	g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Move operator: 'v[0] <- g1'" << endl;
+	vector<undirected_graph> v;
+	v.push_back(undirected_graph());
+	v[0] = std::move(g1);
+	output_graph("g1",g1)
+	output_graph("v[0]",v[0])
 	}
 }
 
-void test_directed_graph() {
+void test_copy_undirected_graph() {
+	begin_function
+
+	// copy constructor
+	{
+	begin_case
+	undirected_graph g1(10);
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	undirected_graph g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	undirected_graph g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'v[0] <- g1'" << endl;
+	vector<undirected_graph> v;
+	v.push_back(g1);
+	output_graph("g1",g1)
+	output_graph("v[0]",v[0])
+	}
+
+	// copy operator
+	{
+	begin_case
+	undirected_graph g1(10);
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	undirected_graph g2;
+	g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	undirected_graph g2;
+	g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	undirected_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'v[0] <- g1'" << endl;
+	vector<undirected_graph> v;
+	v.push_back(undirected_graph());
+	v[0] = g1;
+	output_graph("g1",g1)
+	output_graph("v[0]",v[0])
+	}
+}
+
+void test_move_directed_graph() {
 	begin_function
 
 	// move constructor
 	{
 	begin_case
 	directed_graph g1(10);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
 	cout << "Move constructor: 'g2 <- g1'" << endl;
 	directed_graph g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
 	}
 
 	{
 	begin_case
 	directed_graph g1(6);
 	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
 	cout << "Move constructor: 'g2 <- g1'" << endl;
 	directed_graph g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Move constructor: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(std::move(g1));
+	output_graph("g1",g1)
+	output_graph("v[0]", v[0])
 	}
 
 	// move operator
 	{
 	begin_case
 	directed_graph g1(10);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
-	cout << "Move constructor: 'g2 <- g1'" << endl;
+	cout << "Move operator: 'g2 <- g1'" << endl;
 	directed_graph g2;
 	g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
 	}
 
 	{
 	begin_case
 	directed_graph g1(6);
 	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
+	output_graph("g1",g1)
 
-	cout << "Move constructor: 'g2 <- g1'" << endl;
+	cout << "Move operator: 'g2 <- g1'" << endl;
 	directed_graph g2;
 	g2 = std::move(g1);
-	cout << "g1.n_nodes()= " << g1.n_nodes() << endl;
-	cout << "g1.n_edges()= " << g1.n_edges() << endl;
-	output_edges("g1", g1)
-	cout << "g2.n_nodes()= " << g2.n_nodes() << endl;
-	cout << "g2.n_edges()= " << g2.n_edges() << endl;
-	output_edges("g2", g2)
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Move operator: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(directed_graph());
+	v[0] = std::move(g1);
+	output_graph("g1",g1)
+	output_graph("v[0]", v[0])
 	}
 }
 
-void test_free_trees() {
+void test_copy_directed_graph() {
+	begin_function
+
+	// copy constructor
+	{
+	begin_case
+	directed_graph g1(10);
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	directed_graph g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	directed_graph g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy constructor: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(g1);
+	output_graph("g1",g1)
+	output_graph("v[0]", v[0])
+	}
+
+	// copy operator
+	{
+	begin_case
+	directed_graph g1(10);
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	directed_graph g2;
+	g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	directed_graph g2;
+	g2 = g1;
+	output_graph("g1",g1)
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1)
+
+	cout << "Copy operator: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(directed_graph());
+	v[0] = g1;
+	output_graph("g1",g1)
+	output_graph("v[0]", v[0])
+	}
+}
+
+void test_move_free_trees() {
 	begin_function
 
 	// move constructor
@@ -287,13 +458,26 @@ void test_free_trees() {
 	output_free_tree_info("t2", t2)
 	}
 
+	{
+	begin_case
+	free_tree t1(6);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4), edge(3,5)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Move constructor: 'v[0] <- t1'" << endl;
+	vector<free_tree> v;
+	v.push_back(std::move(t1));
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("v[0]", v[0])
+	}
+
 	// move operator
 	{
 	begin_case
 	free_tree t1(5);
 	output_free_tree_info("t1", t1)
 
-	cout << "Move constructor: 't2 <- t1'" << endl;
+	cout << "Move operator: 't2 <- t1'" << endl;
 	free_tree t2;
 	t2 = std::move(t1);
 	output_free_tree_info("t1", t1)
@@ -306,15 +490,110 @@ void test_free_trees() {
 	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4)});
 	output_free_tree_info("t1", t1)
 
-	cout << "Move constructor: 't2 <- t1'" << endl;
+	cout << "Move operator: 't2 <- t1'" << endl;
 	free_tree t2;
 	t2 = std::move(t1);
 	output_free_tree_info("t1", t1)
 	output_free_tree_info("t2", t2)
 	}
+
+	{
+	begin_case
+	free_tree t1(6);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4), edge(3,5)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Move operator: 'v[0] <- t1'" << endl;
+	vector<free_tree> v;
+	v.push_back(free_tree());
+	v[0] = std::move(t1);
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("v[0]", v[0])
+	}
 }
 
-void test_rooted_trees() {
+void test_copy_free_trees() {
+	begin_function
+
+	// copy constructor
+	{
+	begin_case
+	free_tree t1(5);
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy constructor: 't2 <- t1'" << endl;
+	free_tree t2 = t1;
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	free_tree t1(5);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy constructor: 't2 <- t1'" << endl;
+	free_tree t2 = t1;
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	free_tree t1(6);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4), edge(3,5)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy constructor: 'v[0] <- t1'" << endl;
+	vector<free_tree> v;
+	v.push_back(t1);
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("v[0]", v[0])
+	}
+
+	// copy operator
+	{
+	begin_case
+	free_tree t1(5);
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy operator: 't2 <- t1'" << endl;
+	free_tree t2;
+	t2 = t1;
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	free_tree t1(5);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy operator: 't2 <- t1'" << endl;
+	free_tree t2;
+	t2 = t1;
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	free_tree t1(6);
+	t1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(0,3), edge(2,4), edge(3,5)});
+	output_free_tree_info("t1", t1)
+
+	cout << "Copy operator: 'v[0] <- t1'" << endl;
+	vector<free_tree> v;
+	v.push_back(free_tree());
+	v[0] = t1;
+	output_free_tree_info("t1", t1)
+	output_free_tree_info("v[0]", v[0])
+	}
+}
+
+void test_move_rooted_trees() {
 	begin_function
 
 	// move constructor
@@ -344,6 +623,22 @@ void test_rooted_trees() {
 	output_rooted_tree_info("t2", t2)
 	}
 
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Move constructor: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(std::move(t1));
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
+	}
+
 	// move operator
 	{
 	begin_case
@@ -371,6 +666,116 @@ void test_rooted_trees() {
 	t2 = std::move(t1);
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Move constructor: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(rooted_tree());
+	v[0] = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
+	}
+}
+
+void test_copy_rooted_trees() {
+	begin_function
+
+	// copy constructor
+	{
+	begin_case
+	rooted_tree t1(5);
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy constructor: 't2 <- t1'" << endl;
+	rooted_tree t2 = t1;
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy constructor: 't2 <- t1'" << endl;
+	rooted_tree t2 = t1;
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy constructor: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
+	}
+
+	// copy operator
+	{
+	begin_case
+	rooted_tree t1(5);
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy operator: 't2 <- t1'" << endl;
+	rooted_tree t2;
+	t2 = t1;
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy operator: 't2 <- t1'" << endl;
+	rooted_tree t2;
+	t2 = t1;
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Copy operator: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(rooted_tree());
+	v[0] = t1;
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
 	}
 }
 
@@ -414,10 +819,14 @@ err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
 		return err_type::test_format;
 	}
 
-	test_undirected_graph();
-	test_directed_graph();
-	test_free_trees();
-	test_rooted_trees();
+	test_move_undirected_graph();
+	test_copy_undirected_graph();
+	test_move_directed_graph();
+	test_copy_directed_graph();
+	test_move_free_trees();
+	test_copy_free_trees();
+	test_move_rooted_trees();
+	test_copy_rooted_trees();
 	test_generate();
 
 	TEST_GOODBYE

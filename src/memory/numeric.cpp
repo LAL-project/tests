@@ -58,59 +58,61 @@ using namespace numeric;
 
 namespace exe_tests {
 
-#define check_00(i1, i2)													\
-	if (i1.is_initialized()) {												\
+#define check_0(i)															\
+	if (i.is_initialized()) {												\
 		cerr << ERROR << endl;												\
-		cerr << "    i1 is initialized, but it should not be." << endl;		\
-		return err_type::test_execution;									\
-	}																		\
-	if (i2.is_initialized()) {												\
-		cerr << ERROR << endl;												\
-		cerr << "    i2 is initialized, and it should not be." << endl;		\
+		cerr << "    i is initialized, but it should not be." << endl;		\
 		return err_type::test_execution;									\
 	}
 
-#define check_01(i1, i2, v)													\
-	if (i1.is_initialized()) {												\
+#define check_1(i)															\
+	if (not i.is_initialized()) {											\
 		cerr << ERROR << endl;												\
-		cerr << "    i1 is initialized, but it should not be." << endl;		\
-		return err_type::test_execution;									\
-	}																		\
-	if (not i2.is_initialized()) {											\
-		cerr << ERROR << endl;												\
-		cerr << "    i2 is not initialized, but it should be." << endl;		\
-		return err_type::test_execution;									\
-	}																		\
-	if (i2 != v) {															\
-		cerr << ERROR << endl;												\
-		cerr << "    Value of i2 is not " << v << "." << endl;				\
-		cerr << "    Value is: " << i2 << endl;								\
+		cerr << "    i is not initialized, but it should be." << endl;		\
 		return err_type::test_execution;									\
 	}
 
-#define check_11(i1, i2, v1, v2)											\
-	if (not i1.is_initialized()) {											\
+#define check_1v(i, v)														\
+	check_1(i)																\
+	if (i != v) {															\
 		cerr << ERROR << endl;												\
-		cerr << "    i1 is not initialized, but it should be." << endl;		\
-		return err_type::test_execution;									\
-	}																		\
-	if (not i2.is_initialized()) {											\
-		cerr << ERROR << endl;												\
-		cerr << "    i2 is not initialized, but it should be." << endl;		\
-		return err_type::test_execution;									\
-	}																		\
-	if (i1 != v1) {															\
-		cerr << ERROR << endl;												\
-		cerr << "    Value of i1 is not " << v1 << "." << endl;				\
-		cerr << "    Value is: " << i1 << endl;								\
-		return err_type::test_execution;									\
-	}																		\
-	if (i2 != v2) {															\
-		cerr << ERROR << endl;												\
-		cerr << "    Value of i2 is not " << v2 << "." << endl;				\
-		cerr << "    Value is: " << i2 << endl;								\
+		cerr << "    Value of i is not " << v << "." << endl;				\
+		cerr << "    Value is: " << i << endl;								\
 		return err_type::test_execution;									\
 	}
+
+#define check_00(i1, i2)			\
+	check_0(i1)						\
+	check_0(i2)
+
+#define check_01v(i1, i2, v)		\
+	check_0(i1)						\
+	check_1v(i2, v)
+
+#define check_001(i1, i2, i3, v)	\
+	check_0(i1)						\
+	check_0(i2)						\
+	check_1v(i3, v)
+
+#define check_11vv(i1, i2, v1, v2)	\
+	check_1v(i1, v1)				\
+	check_1v(i2, v2)
+
+#define check_111vvv(i1, i2, i3, v1, v2, v3)	\
+	check_1v(i1, v1)				\
+	check_1v(i2, v2)				\
+	check_1v(i3, v3)
+
+#define check_11_eq(i1, i2)													\
+	check_1(i1)																\
+	check_1(i2)																\
+	if (i1 != i2) {															\
+		cerr << ERROR << endl;												\
+		cerr << "    i1 is different from i2. They should not be." << endl;	\
+		cerr << "    i1=: " << i1 << endl;									\
+		cerr << "    i2=: " << i2 << endl;									\
+		return err_type::test_execution;									\
+	}																		\
 
 #define test_eq(data, good)																\
 	if (data != good) {																	\
@@ -120,7 +122,7 @@ namespace exe_tests {
 		return err_type::test_execution;												\
 	}
 
-err_type test_imem_swap() {
+err_type test_integer_swap() {
 	{
 	integer i1;
 	integer i2;
@@ -138,56 +140,56 @@ err_type test_imem_swap() {
 	integer i1 = 50;
 	integer i2;
 	i1.swap(i2);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	integer i1 = 50;
 	integer i2;
 	i2.swap(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 
 	{
 	integer i1;
 	integer i2 = 50;
 	i1.swap(i2);
-	check_01(i2, i1, 50)
+	check_01v(i2, i1, 50)
 	}
 	{
 	integer i1;
 	integer i2 = 50;
 	i2.swap(i1);
-	check_01(i2, i1, 50)
+	check_01v(i2, i1, 50)
 	}
 
 	{
 	integer i1 = 50;
 	integer i2 = 2;
 	i1.swap(i2);
-	check_11(i1, i2, 2, 50)
+	check_11vv(i1, i2, 2, 50)
 	}
 	{
 	integer i1 = 50;
 	integer i2 = 2;
 	i2.swap(i1);
-	check_11(i1, i2, 2, 50)
+	check_11vv(i1, i2, 2, 50)
 	}
 
 	return err_type::no_error;
 }
 
-err_type test_imem_move() {
+err_type test_integer_move() {
 	// move constructor
 	{
 	integer i1 = 50;
 	integer i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	vector<integer> v;
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 
 	// move operator
@@ -195,14 +197,14 @@ err_type test_imem_move() {
 	integer i1 = 50;
 	integer i2;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 
 	{
 	integer i1 = 50;
 	integer i2 = 200;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 
 	{
@@ -210,7 +212,7 @@ err_type test_imem_move() {
 	v.push_back(integer());
 	integer i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 
 	{
@@ -218,14 +220,14 @@ err_type test_imem_move() {
 	v.push_back(integer(5678));
 	integer i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 
 	{
 	vector<integer> v;
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
 	vector<integer> v;
@@ -239,15 +241,84 @@ err_type test_imem_move() {
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
 	i1 = std::move(v[0]);
-	check_01(v[0], i1, 1234)
+	check_01v(v[0], i1, 1234)
+	}
+
+	return err_type::no_error;
+}
+
+err_type test_integer_copy() {
+	// copy constructor
+	{
+	integer i1 = 50;
+	integer i2 = i1;
+	check_11_eq(i1, i2)
+	}
+	{
+	vector<integer> v;
+	integer i1 = 1234;
+	v.push_back(i1);
+	check_11_eq(i1, v[0])
+	}
+
+	// copy operator
+	{
+	integer i1 = 50;
+	integer i2;
+	i2 = i1;
+	check_11_eq(i1, i2)
+	}
+
+	{
+	integer i1 = 50;
+	integer i2 = 200;
+	i2 = i1;
+	check_11_eq(i1, i2)
+	}
+
+	{
+	vector<integer> v;
+	v.push_back(integer());
+	integer i1 = 1234;
+	v[0] = i1;
+	check_11_eq(i1, v[0])
+	}
+
+	{
+	vector<integer> v;
+	v.push_back(integer(5678));
+	integer i1 = 1234;
+	v[0] = i1;
+	check_11_eq(i1, v[0])
+	}
+
+	{
+	vector<integer> v;
+	integer i1 = 1234;
+	v.push_back(i1);
+	check_11_eq(i1, v[0])
+	}
+	{
+	vector<integer> v;
+	integer i1;
+	v.push_back(i1);
+	check_00(i1, v[0])
+	}
+
+	{
+	vector<integer> v;
+	integer i1 = 1234;
+	v.push_back(i1);
+	check_11_eq(v[0], i1)
 	}
 
 	return err_type::no_error;
 }
 
 err_type test_memory_integer() {
-	return_if(test_imem_swap())
-	return_if(test_imem_move())
+	return_if(test_integer_swap())
+	return_if(test_integer_move())
+	return_if(test_integer_copy())
 
 	{
 	map<uint32_t, pair<integer, integer>> hash;
@@ -265,7 +336,7 @@ err_type test_memory_integer() {
 	return err_type::no_error;
 }
 
-err_type test_rmem_swap() {
+err_type test_rational_swap() {
 	{
 	rational i1;
 	rational i2;
@@ -283,67 +354,73 @@ err_type test_rmem_swap() {
 	rational i1 = 50;
 	rational i2;
 	i1.swap(i2);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	rational i1 = 50;
 	rational i2;
 	i2.swap(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 
 	{
 	rational i1;
 	rational i2 = 50;
 	i1.swap(i2);
-	check_01(i2, i1, 50)
+	check_01v(i2, i1, 50)
 	}
 	{
 	rational i1;
 	rational i2 = 50;
 	i2.swap(i1);
-	check_01(i2, i1, 50)
+	check_01v(i2, i1, 50)
 	}
 
 	{
 	rational i1 = 50;
 	rational i2 = 2;
 	i1.swap(i2);
-	check_11(i1, i2, 2, 50)
+	check_11vv(i1, i2, 2, 50)
 	}
 	{
 	rational i1 = 50;
 	rational i2 = 2;
 	i2.swap(i1);
-	check_11(i1, i2, 2, 50)
+	check_11vv(i1, i2, 2, 50)
 	}
 
 	return err_type::no_error;
 }
 
-err_type test_rmem_move() {
+err_type test_rational_move() {
 	// move constructor
 	{
 	rational i1 = 50;
 	rational i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	integer i1 = 50;
 	rational i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
-	vector<rational> v;
 	rational i1 = 1234;
+	vector<rational> v;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
 	vector<rational> v;
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
+	}
+	{
+	integer i1 = 12;
+	integer i2 = 23;
+	rational r(std::move(i1),std::move(i2));
+	check_001(i1, i2, r, rational("12/23"))
 	}
 
 	// move operator
@@ -351,82 +428,93 @@ err_type test_rmem_move() {
 	rational i1 = 50;
 	rational i2;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	rational i1 = 50;
 	rational i2 = 200;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	integer i1 = 50;
 	rational i2;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 	{
 	integer i1 = 50;
 	rational i2 = 200;
 	i2 = std::move(i1);
-	check_01(i1, i2, 50)
+	check_01v(i1, i2, 50)
 	}
 
 	{
 	vector<rational> v;
 	v.push_back(rational());
+	check_0(v[0])
 	integer i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
 	vector<rational> v;
 	v.push_back(rational());
+	check_0(v[0])
 	rational i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 
+	{
+	vector<rational> v;
+	v.push_back(integer());
+	rational i1 = 1234;
+	v[0] = std::move(i1);
+	check_01v(i1, v[0], 1234)
+	}
 	{
 	vector<rational> v;
 	v.push_back(integer(5678));
+	check_1v(v[0], 5678)
 	rational i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
 	vector<rational> v;
 	v.push_back(rational(5678));
+	check_1v(v[0], 5678)
 	rational i1 = 1234;
 	v[0] = std::move(i1);
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 
 	{
-	vector<rational> v;
 	rational i1 = 1234;
+	vector<rational> v;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
-	vector<rational> v;
 	integer i1 = 1234;
+	vector<rational> v;
 	v.push_back(std::move(i1));
-	check_01(i1, v[0], 1234)
+	check_01v(i1, v[0], 1234)
 	}
 	{
-	vector<rational> v;
 	integer i1;
+	vector<rational> v;
 	v.push_back(std::move(i1));
 	check_00(i1, v[0])
 	}
 
 	{
-	vector<rational> v;
 	rational i1 = 1234;
+	vector<rational> v;
 	v.push_back(std::move(i1));
 	i1 = std::move(v[0]);
-	check_01(v[0], i1, 1234)
+	check_01v(v[0], i1, 1234)
 	}
 	{
 	vector<rational> v;
@@ -439,9 +527,153 @@ err_type test_rmem_move() {
 	return err_type::no_error;
 }
 
+err_type test_rational_copy() {
+	// copy constructor
+	{
+	rational i1 = 50;
+	rational i2 = i1;
+	check_11_eq(i1, i2)
+	}
+	{
+	integer i1 = 50;
+	rational i2 = i1;
+	check_11_eq(i2, i1)
+	}
+	{
+	rational i1 = 1234;
+	vector<rational> v;
+	v.push_back(i1);
+	check_11_eq(i1, v[0])
+	}
+	{
+	vector<rational> v;
+	integer i1 = 1234;
+	v.push_back(i1);
+	check_11_eq(v[0], i1)
+	}
+	{
+	integer i1 = 12;
+	integer i2 = 23;
+	rational r(i1,i2);
+	check_111vvv(i1,i2,r, 12,23, rational("12/23"))
+	}
+
+	// copy operator
+	{
+	rational i1 = 50;
+	rational i2;
+	i2 = i1;
+	check_11_eq(i2, i1)
+	}
+	{
+	rational i1 = 50;
+	rational i2 = 200;
+	i2 = i1;
+	check_11_eq(i2, i1)
+	}
+	{
+	integer i1 = 50;
+	rational i2;
+	i2 = i1;
+	check_11_eq(i2, i1)
+	}
+	{
+	integer i1 = 50;
+	rational i2 = 200;
+	i2 = i1;
+	check_11_eq(i2, i1)
+	}
+
+	{
+	vector<rational> v;
+	v.push_back(rational());
+	check_0(v[0])
+	integer i1 = 1234;
+	v[0] = i1;
+	check_11_eq(v[0], i1)
+	}
+	{
+	vector<rational> v;
+	v.push_back(rational());
+	check_0(v[0])
+	rational i1 = 1234;
+	v[0] = i1;
+	check_11_eq(v[0], i1)
+	}
+
+	{
+	vector<rational> v;
+	v.push_back(integer());
+	check_0(v[0])
+	rational i1 = 1234;
+	v[0] = i1;
+	check_11_eq(i1, v[0])
+	}
+	{
+	vector<rational> v;
+	v.push_back(integer(5678));
+	check_1v(v[0], 5678)
+	rational i1 = 1234;
+	v[0] = i1;
+	check_11_eq(v[0], i1)
+	}
+	{
+	vector<rational> v;
+	v.push_back(rational(5678));
+	check_1v(v[0], 5678)
+	rational i1 = 1234;
+	v[0] = i1;
+	check_11_eq(v[0], i1)
+	}
+	{
+	vector<rational> v;
+	v.push_back(rational(5678));
+	check_1v(v[0], 5678)
+	rational i1 = 1234;
+	i1 = v[0];
+	check_11_eq(v[0], i1)
+	}
+
+	{
+	rational i1 = 1234;
+	vector<rational> v;
+	v.push_back(i1);
+	check_11_eq(v[0], i1)
+	}
+	{
+	integer i1;
+	vector<rational> v;
+	v.push_back(i1);
+	check_00(v[0], i1)
+	}
+	{
+	rational i1;
+	vector<rational> v;
+	v.push_back(i1);
+	check_00(v[0], i1)
+	}
+	{
+	rational i2 = 4567;
+	rational i1 = 1234;
+	vector<rational> v;
+	v.push_back(i1);
+	v.push_back(i2);
+	check_11_eq(v[0], i1)
+	check_11_eq(v[1], i2)
+	}
+	{
+	vector<rational> v;
+	rational i1;
+	v.push_back(i1);
+	check_00(v[0], i1)
+	}
+	return err_type::no_error;
+}
+
 err_type test_memory_rational() {
-	return_if(test_rmem_swap())
-	return_if(test_rmem_move())
+	return_if(test_rational_swap())
+	return_if(test_rational_move())
+	return_if(test_rational_copy())
 
 	{
 	map<uint32_t, pair<rational, rational>> hash;
