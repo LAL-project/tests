@@ -66,7 +66,7 @@ string ftree_check_to_string(const ftree_check& fc) {
 
 ftree_check test_validity_tree(const uint32_t n, const free_tree& T) {
 	if (not T.is_tree()) {
-		return ftree_check::diff_n_verts;
+		return ftree_check::not_a_tree;
 	}
 	if (T.n_nodes() != n) {
 		return ftree_check::diff_n_verts;
@@ -94,7 +94,7 @@ string rtree_check_to_string(const rtree_check& fc) {
 
 rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
 	if (not T.is_tree()) {
-		return rtree_check::diff_n_verts;
+		return rtree_check::not_a_tree;
 	}
 	if (T.n_nodes() != n) {
 		return rtree_check::diff_n_verts;

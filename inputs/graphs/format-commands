@@ -33,6 +33,10 @@ COMMANDS AVAILABLE
 	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
 	check if the result is normalised or not.
 
+** add_all_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
+	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
+	check if the result is normalised or not.
+
 ** remove_edge GRAPH VERTEX1 VERTEX2 true/false true/false
 	Removes an edge from a graph. Normalises (or not) the graph. After the removal,
 	check if the result is normalised or not.

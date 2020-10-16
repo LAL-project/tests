@@ -57,12 +57,12 @@ using namespace graphs;
 
 #define MLINE __LINE__ << ":: "
 
-#define begin_function								\
-	cout << "++++++++++++++++++++" << endl;			\
+#define begin_function										\
+	cout << "+++++++++++++++++++++++++++++++++" << endl;	\
 	cout << "function: " << __PRETTY_FUNCTION__ << endl;
 
-#define begin_case									\
-	cout << "--------------------" << endl;			\
+#define begin_case											\
+	cout << "-----------------------------------" << endl;	\
 	cout << "case starting at line: " << __LINE__ << endl;
 
 #define output_edges(n, g)									\
@@ -550,6 +550,14 @@ void test_copy_free_trees() {
 	v.push_back(t1);
 	output_free_tree_info("t1", t1)
 	output_free_tree_info("v[0]", v[0])
+	}
+
+	{
+	begin_case
+	undirected_graph g(5);
+	g.add_all_edges(vector<edge>{edge(0,1),edge(1,2),edge(2,3),edge(3,4)});
+	free_tree t(g);
+	output_free_tree_info("t", t)
 	}
 
 	// copy operator
