@@ -1,0 +1,101 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+
+	create_graph ftree t05 5
+	assert num_nodes t05 5
+	assert num_edges t05 0
+	
+	add_all_edges t05 4
+		0 1
+		1 2
+		2 3
+		3 4
+		true true
+	output_graph t05
+	
+	assert num_edges t05 4
+
+	assert num_nodes_component t05 0 5
+	assert num_nodes_component t05 1 5
+	assert num_nodes_component t05 2 5
+	assert num_nodes_component t05 3 5
+	assert num_nodes_component t05 4 5
+	
+	
+
+
+	create_graph ftree t10 10
+	assert num_nodes t10 10
+	assert num_edges t10 0
+	
+	add_all_edges t10 9
+		0 1
+		1 2
+		2 3
+		3 4
+		4 5
+		5 6
+		6 7
+		7 8
+		8 9
+		true true
+	output_graph t10
+	
+	assert num_edges t10 9
+
+	assert num_nodes_component t10 0 10
+	assert num_nodes_component t10 1 10
+	assert num_nodes_component t10 2 10
+	assert num_nodes_component t10 3 10
+	assert num_nodes_component t10 4 10
+	assert num_nodes_component t10 5 10
+	assert num_nodes_component t10 6 10
+	assert num_nodes_component t10 7 10
+	assert num_nodes_component t10 8 10
+	assert num_nodes_component t10 9 10
+	
+	
+	
+	
+	
+	
+	create_graph ftree t15 15
+	assert num_nodes t15 15
+	assert num_edges t15 0
+	
+	add_all_edges t15 14
+		0 1
+		1 2
+		2 3
+		3 4
+		4 5
+		5 6
+		6 7
+		7 8
+		8 9
+		9 10
+		10 11
+		11 12
+		12 13
+		13 14
+		true true
+	output_graph t15
+	
+	assert num_edges t15 14
+
+	assert num_nodes_component t15 0 15
+	assert num_nodes_component t15 1 15
+	assert num_nodes_component t15 2 15
+	assert num_nodes_component t15 3 15
+	assert num_nodes_component t15 4 15
+	assert num_nodes_component t15 5 15
+	assert num_nodes_component t15 6 15
+	assert num_nodes_component t15 7 15
+	assert num_nodes_component t15 8 15
+	assert num_nodes_component t15 9 15
+	assert num_nodes_component t15 10 15
+	assert num_nodes_component t15 11 15
+	assert num_nodes_component t15 12 15
+	assert num_nodes_component t15 13 15
+	assert num_nodes_component t15 14 15
