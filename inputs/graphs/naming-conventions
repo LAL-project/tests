@@ -73,7 +73,7 @@ We are currently using the following names:
 	
 	042: convert a ftree to a rtree graph
 	
-	053: type of rtree
+	053: check validity of the orientation of the tree's edges
 	
 	063: sizes of rtree (of the tree and of the subtrees)
 	
