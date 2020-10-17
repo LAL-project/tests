@@ -94,7 +94,6 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
 	// linear arrangement
@@ -131,32 +130,24 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		}
 
 		uint32_t uC = 0, dC = 0;
-		if (proc == "dyn_prog") {
-			begin = timing::now();
-			uC = n_crossings(uG, pi, algorithms_C::dynamic_programming);
-			dC = n_crossings(dG, pi, algorithms_C::dynamic_programming);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else if (proc == "ladder") {
-			begin = timing::now();
-			uC = n_crossings(uG, pi, algorithms_C::ladder);
-			dC = n_crossings(dG, pi, algorithms_C::ladder);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else if (proc == "stack_based") {
-			begin = timing::now();
-			uC = n_crossings(uG, pi, algorithms_C::stack_based);
-			dC = n_crossings(dG, pi, algorithms_C::stack_based);
-			end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
-		}
-		else {
+		const auto choose_algo =
+		[](const string& name) {
+			if (name == "dyn_prog") { return algorithms_C::dynamic_programming; }
+			if (name == "ladder") { return algorithms_C::ladder; }
+			if (name == "stack_based") { return algorithms_C::stack_based; }
+			return algorithms_C::brute_force;
+		}(proc);
+		if (choose_algo == algorithms_C::brute_force) {
 			cerr << ERROR << endl;
 			cerr << "    Unhandled proc '" << proc << "'." << endl;
 			return err_type::not_implemented;
 		}
+
+		const auto begin = timing::now();
+		uC = n_crossings(uG, pi, choose_algo);
+		dC = n_crossings(dG, pi, choose_algo);
+		const auto end = timing::now();
+		total_elapsed += timing::elapsed_milliseconds(begin, end);
 
 		if (uC != dC) {
 			cerr << ERROR << endl;
@@ -174,7 +165,8 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 		}
 		if (uC != uCbf) {
 			cerr << ERROR << endl;
-			cerr << "    Number of crossings do not coincide" << endl;
+			cerr << "    Number of crossings obtained with the algorithm does not" << endl;
+			cerr << "    coincide with the number of crossings obtained by brute force." << endl;
 			cerr << "        brute force: " << uCbf << endl;
 			cerr << "        " << proc << ": " << uC << endl;
 			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
@@ -183,6 +175,10 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[j];
 			}
 			cerr << "]" << endl;
+			cerr << "    Undirected graph:" << endl;
+			cerr << uG << endl;
+			cerr << "    Directed graph:" << endl;
+			cerr << dG << endl;
 			return err_type::test_execution;
 		}
 	}
