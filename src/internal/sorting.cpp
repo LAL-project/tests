@@ -42,7 +42,6 @@
 #include <functional>
 #include <iostream>
 #include <fstream>
-#include <ostream>
 #include <string>
 #include <random>
 #include <set>
@@ -64,9 +63,9 @@ typedef tuple<Ui> t1;
 typedef vector<t1> t1_vec;
 typedef t1_vec::iterator t1_vec_it;
 
-typedef tuple<Ui,Ui> edge_size;
-typedef vector<edge_size> t2_vec;
-typedef t2_vec::iterator edge_size_t;
+typedef tuple<Ui,Ui> t2;
+typedef vector<t2> t2_vec;
+typedef t2_vec::iterator t2_t;
 
 typedef tuple<Ui,Ui,Ui> t3;
 typedef vector<t3> t3_vec;
@@ -162,7 +161,7 @@ template<class T, class It>
 err_type __check_sorting
 (
 	const string& algo, vector<T> v1, vector<T> v2,
-	function<void (It begin, It end)> sort_F,
+	const function<void (It begin, It end)>& sort_F,
 	bool incr
 )
 {
@@ -220,11 +219,12 @@ void here_counting_sort(
 	bool incr
 )
 {
+	const size_t size = std::distance(begin,end);
 	if (incr) {
-		internal::counting_sort<It, T,true>(begin, end, n, key);
+		internal::counting_sort<It, T,true>(begin, end, n, size, key);
 	}
 	else {
-		internal::counting_sort<It, T,false>(begin, end, n, key);
+		internal::counting_sort<It, T,false>(begin, end, n, size, key);
 	}
 }
 
@@ -234,7 +234,7 @@ err_type check_counting_sort(
 )
 {
 	auto key1 = [](const t1& t) -> size_t { return std::get<0>(t); };
-	auto key2 = [](const edge_size& t) -> size_t { return std::get<0>(t); };
+	auto key2 = [](const t2& t) -> size_t { return std::get<0>(t); };
 	auto key3 = [](const t3& t) -> size_t { return std::get<0>(t); };
 
 	auto sort1 =
@@ -242,8 +242,8 @@ err_type check_counting_sort(
 		here_counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
 	auto sort2 =
-	[&](edge_size_t begin, edge_size_t end) -> void {
-		here_counting_sort<edge_size_t, edge_size>(begin, end, n, key2, incr);
+	[&](t2_t begin, t2_t end) -> void {
+		here_counting_sort<t2_t, t2>(begin, end, n, key2, incr);
 	};
 	auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
@@ -274,7 +274,7 @@ err_type check_counting_sort(
 			std::get<1>(R[i]) = r2[i];
 		}
 		// check sorting algorithm
-		E = __check_sorting<edge_size,edge_size_t>("counting_sort", R,R, sort2, incr);
+		E = __check_sorting<t2,t2_t>("counting_sort", R,R, sort2, incr);
 	}
 	else if (k == 3) {
 		// vector of tuples
@@ -307,7 +307,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 			internal::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
-			err_type e = check_sorting("insertion", s, n, this_sort, true);
+			const err_type e = check_sorting("insertion", s, n, this_sort, true);
 			if (e != err_type::no_error) { return e; }
 		}
 		return err_type::no_error;
@@ -321,10 +321,13 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort(begin, end);
+			internal::bit_sort(
+				begin, end,
+				std::distance(begin, end)
+			);
 		};
 		for (Ui k = 0; k < R; ++k) {
-			err_type e = check_sorting("bit", s, n, this_sort, true);
+			const err_type e = check_sorting("bit", s, n, this_sort, true);
 			if (e != err_type::no_error) { return e; }
 		}
 		return err_type::no_error;
@@ -338,11 +341,14 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		// bit array
 		vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort_mem(begin, end, &seen[0]);
+			internal::bit_sort_mem(
+				begin, end,
+				std::distance(begin, end), &seen[0]
+			);
 		};
 		// execute test
 		for (Ui k = 0; k < R; ++k) {
-			err_type e = check_sorting("bit_memory", s, n, bsm, true);
+			const err_type e = check_sorting("bit_memory", s, n, bsm, true);
 			// check for two errors
 			if (find(seen.begin(), seen.end(), 1) != seen.end()) {
 				cerr << ERROR << endl;
