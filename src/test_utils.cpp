@@ -38,16 +38,20 @@
  *
  ********************************************************************/
 
-#include "test_utils.hpp"
-
 // C++ includes
-#include <iostream>
+#include <algorithm>
+#include <fstream>
+#include <random>
 #include <string>
 #include <set>
 using namespace std;
 
 // lal includes
+#include <lal/definitions.hpp>
+#include <lal/graphs/free_tree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
 using namespace lal;
+using namespace graphs;
 
 namespace exe_tests {
 
@@ -93,6 +97,51 @@ vector<node> invlinarr(const linear_arrangement& arr) {
 	vector<node> ilin(arr.size());
 	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;
+}
+
+#define to_uint32(x) static_cast<uint32_t>(x)
+
+void relabel_edges(vector<edge>& edges, node& r) {
+	const uint32_t n = to_uint32(edges.size() + 1);
+
+	std::mt19937 gen(1234);
+
+	vector<node> relab(n);
+	std::iota(relab.begin(), relab.end(), 0);
+
+	for (uint32_t i = 0; i < n; ++i) {
+		std::shuffle(relab.begin(), relab.end(), gen);
+
+		// relabel each vertex accoring to 'relab'
+		for (edge& e : edges) {
+			node& s = e.first;
+			node& t = e.second;
+			s = relab[s];
+			t = relab[t];
+		}
+		r = relab[r];
+	}
+}
+
+void shuffle_tree(std::vector<lal::edge>& edges, rooted_tree& T) {
+	node r = T.get_root();
+	relabel_edges(edges, r);
+
+	T.clear();
+
+	T.init(to_uint32(edges.size() + 1));
+	T.set_root(r);
+	T.add_all_edges(edges);
+	T.set_valid_orientation(true);
+}
+
+void shuffle_tree(std::vector<lal::edge>& edges, free_tree& T) {
+	T.clear();
+	T.init(to_uint32(edges.size() + 1));
+
+	node dummy = 0;
+	relabel_edges(edges, dummy);
+	T.add_all_edges(edges);
 }
 
 } // -- namespace exe_tests

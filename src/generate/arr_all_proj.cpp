@@ -77,6 +77,57 @@ integer amount_projective(const rooted_tree& rT) {
 	return k;
 }
 
+err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) {
+	vector<edge> edges = rT.edges();
+
+	for (uint32_t i = 0; i < nrelabs; ++i) {
+		shuffle_tree(edges, rT);
+
+		uint32_t iterations = 0;
+		set<linear_arrangement> list_arrs;
+
+		all_projective_arrangements ArrGen(rT);
+		while (ArrGen.has_next()) {
+			ArrGen.next();
+			const linear_arrangement arr = ArrGen.get_arrangement();
+
+			// Do some sanity checks.
+			const string err = is_arrangement_projective(rT, arr);
+			if (err != "") {
+				cerr << ERROR << endl;
+				cerr << "    Generation of arrangement failed with error:" << endl;
+				cerr << "    '" << err << "'" << endl;
+				cerr << "    Arrangement:     " << arr << endl;
+				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+				cerr << "    For tree:" << endl;
+				cerr << rT << endl;
+				return err_type::test_execution;
+			}
+
+			++iterations;
+			list_arrs.insert(arr);
+		}
+
+		const integer formula = amount_projective(rT);
+		if (formula != iterations or formula != list_arrs.size()) {
+			cerr << ERROR << endl;
+			cerr << "    Number of projective arrangements generated" << endl;
+			cerr << "    does not agree with the formula." << endl;
+			cerr << "        formula= " << formula << endl;
+			cerr << "        iterations= " << iterations << endl;
+			cerr << "        unique amount= " << list_arrs.size() << endl;
+			cerr << "    List of arrangements:" << endl;
+			for (const auto& v : list_arrs) {
+			cerr << "        " << v << endl;
+			}
+			cerr << "    For tree:" << endl;
+			cerr << rT << endl;
+			return err_type::test_execution;
+		}
+	}
+	return err_type::no_error;
+}
+
 err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
@@ -85,51 +136,17 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n, ntrees;
-	while (fin >> n >> ntrees) {
+	uint32_t n, ntrees, nrelabs;
+	while (fin >> n >> ntrees >> nrelabs) {
 		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n);
+		rand_ulab_rooted_trees TreeGen(n, 1234);
 
 		for (uint32_t nt = 0; nt < ntrees; ++nt) {
-			const rooted_tree rT = TreeGen.make_rand_tree();
-			const free_tree fT = rT.to_undirected();
+			rooted_tree rT = TreeGen.make_rand_tree();
 
-			uint32_t amount = 0;
-			set<linear_arrangement> list_arrs;
-
-			all_proj_arr ArrGen(rT);
-			while (ArrGen.has_next()) {
-				ArrGen.next();
-				const linear_arrangement arr = ArrGen.get_arrangement();
-
-				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, arr);
-				if (err != "No error") {
-					cerr << ERROR << endl;
-					cerr << "    Generation of arrangement failed with error:" << endl;
-					cerr << "    '" << err << "'" << endl;
-					cerr << "    Arrangement:     " << arr << endl;
-					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
-					return err_type::test_execution;
-				}
-
-				++amount;
-				list_arrs.insert(arr);
-			}
-
-			const integer formula = amount_projective(rT);
-			if (formula != amount or formula != list_arrs.size()) {
-				cerr << ERROR << endl;
-				cerr << "    Number of projective arrangements generated" << endl;
-				cerr << "    does not agree with the formula." << endl;
-				cerr << "        formula= " << formula << endl;
-				cerr << "        iterations= " << amount << endl;
-				cerr << "        unique amount= " << list_arrs.size() << endl;
-				cerr << "    For tree:" << endl;
-				cerr << rT << endl;
-				return err_type::test_execution;
+			const err_type e = test_a_tree(rT, nrelabs);
+			if (e != err_type::no_error) {
+				return e;
 			}
 		}
 	}

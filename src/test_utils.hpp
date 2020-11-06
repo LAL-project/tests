@@ -45,6 +45,8 @@
 
 // lal includes
 #include <lal/definitions.hpp>
+#include <lal/graphs/free_tree.hpp>
+#include <lal/graphs/rooted_tree.hpp>
 
 namespace exe_tests {
 
@@ -58,5 +60,8 @@ std::string read_output_string(std::ifstream& fin);
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
 std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr);
+
+void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T);
+void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::free_tree& T);
 
 } // -- namespace exe_tests

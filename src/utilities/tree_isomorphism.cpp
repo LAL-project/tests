@@ -63,10 +63,9 @@ using namespace utilities;
 
 // custom includes
 #include "definitions.hpp"
+#include "test_utils.hpp"
 
 #define to_uint32(x) static_cast<uint32_t>(x)
-#define ARBOR rooted_tree::rooted_tree_type::arborescence
-#define ANTIARBOR rooted_tree::rooted_tree_type::anti_arborescence
 
 namespace exe_tests {
 
@@ -155,61 +154,6 @@ err_type exe_utils_tree_iso_manual(ifstream& fin) {
 
 // -----------------------------------------------------------------------------
 
-#define relabel_node(x, c,nl)		\
-	if (x == c) { x = nl; }			\
-	else if (x == nl) { x = c; }
-
-void relabel_edges(vector<edge>& edges, node& r) {
-	const uint32_t n = to_uint32(edges.size() + 1);
-
-	default_random_engine gen(1234);
-	uniform_int_distribution<node> dist(0,n - 1);
-
-	vector<node> relab(n);
-	std::iota(relab.begin(), relab.end(), 0);
-
-	for (uint32_t i = 0; i < n; ++i) {
-		std::shuffle(relab.begin(), relab.end(), gen);
-
-		// relabel each vertex accoring to 'relab'
-		for (edge& e : edges) {
-			node& s = e.first;
-			node& t = e.second;
-			s = relab[s];
-			t = relab[t];
-		}
-		r = relab[r];
-	}
-}
-
-template<class Tree>
-err_type make_relabelled(vector<edge>& edges_T1, Tree& T2) {
-	if constexpr (std::is_base_of<undirected_graph, Tree>::value) {
-		T2.clear();
-		T2.init(to_uint32(edges_T1.size() + 1));
-		node dummy = 0;
-		relabel_edges(edges_T1, dummy);
-		T2.add_edges(edges_T1);
-	}
-	else if constexpr (std::is_base_of<directed_graph, Tree>::value) {
-		node r = T2.get_root();
-		relabel_edges(edges_T1, r);
-
-		T2.clear();
-		T2.init(to_uint32(edges_T1.size() + 1));
-		T2.set_root(r);
-		T2.add_edges(edges_T1);
-		const bool rtt = T2.is_orientation_valid();
-		if (not rtt) {
-			cerr << ERROR << endl;
-			cerr << "    Relabelling of edges failed." << endl;
-			cerr << "    Rooted tree produced is of an invalid type." << endl;
-			return err_type::test_execution;
-		}
-	}
-	return err_type::no_error;
-}
-
 // ground truth: ISOMORPHIC
 
 template<class Tree, class GEN>
@@ -232,14 +176,7 @@ err_type pos_exh_test(ifstream& fin) {
 
 			for (uint32_t N = 0; N < N_relabs; ++N) {
 				relab_tree.clear();
-				const err_type relab_err = make_relabelled(edges_cur, relab_tree);
-				if (relab_err != err_type::no_error) {
-					cerr << "    For input tree:" << endl;
-					cerr << cur_tree << endl;
-					cerr << "    Output tree:" << endl;
-					cerr << relab_tree << endl;
-					return relab_err;
-				}
+				shuffle_tree(edges_cur, relab_tree);
 
 				const bool r = utilities::are_trees_isomorphic(cur_tree, relab_tree);
 				if (not r) {
@@ -275,14 +212,7 @@ err_type pos_rand_test(ifstream& fin) {
 
 		for (uint32_t l = 0; l < N_relabs; ++l) {
 			relab_tree.clear();
-			const err_type relab_err = make_relabelled(edges_cur, relab_tree);
-			if (relab_err != err_type::no_error) {
-				cerr << "    For input tree:" << endl;
-				cerr << cur_tree << endl;
-				cerr << "    For tree:" << endl;
-				cerr << relab_tree << endl;
-				return relab_err;
-			}
+			shuffle_tree(edges_cur, relab_tree);
 
 			const bool r = utilities::are_trees_isomorphic(cur_tree, relab_tree);
 			if (not r) {
@@ -343,14 +273,7 @@ err_type neg_exh_test(ifstream& fin) {
 			}
 
 			for (uint32_t l = 0; l < N_relabs; ++l) {
-				const err_type relab_err = make_relabelled(edges_tj, relab_tree);
-				if (relab_err != err_type::no_error) {
-					cerr << "    For input tree:" << endl;
-					cerr << tj << endl;
-					cerr << "    Output tree:" << endl;
-					cerr << relab_tree << endl;
-					return relab_err;
-				}
+				shuffle_tree(edges_tj, relab_tree);
 
 				const bool r = utilities::are_trees_isomorphic(ti, relab_tree);
 				if (r) {
