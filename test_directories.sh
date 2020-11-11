@@ -38,6 +38,7 @@ groups_list=(\
 	"properties" \
 	"properties_basic" \
 	"properties_exp_var_C" \
+	"properties_exp_var_C_no_Q" \
 	"properties_exp_var_D" \
 	"utilities" \
 	"utilities_isomorphism" \

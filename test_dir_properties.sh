@@ -11,7 +11,7 @@ properties_DIRS=(\
 	"properties/exp-var-D/general-formula" "properties/exp-var-D" \
 	)
 
-# variance C tests
+# basic properties (size of Q, ...)
 properties_basic_DIRS=(\
 	"properties" "properties" \
 	)
@@ -23,6 +23,12 @@ properties_exp_var_C_DIRS=(\
 	"properties/exp-var-C/formula-Q" "properties/exp-var-C" \
 	"properties/exp-var-C/trees" "properties/exp-var-C" \
 	"properties/exp-var-C/forests" "properties/exp-var-C" \
+	)
+
+# variance C tests
+properties_exp_var_C_no_Q_DIRS=(\
+	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
+	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
 	)
 
 # variance D tests

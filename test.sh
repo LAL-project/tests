@@ -98,6 +98,7 @@ function show_usage() {
 	echo "        properties : execute properties tests"
 	echo "        properties_basic : execute basic properties tests (tests in the root directory of inputs/properties)"
 	echo "        properties_exp_var_C : execute tests for the expectation and variance of C"
+	echo "        properties_exp_var_C_no_Q : execute tests for the expectation and variance of C (w/o Q)"
 	echo "        properties_exp_var_D : execute tests for the expectation and variance of D"
 	echo ""
 	echo "        utilities : execute utilities tests"
