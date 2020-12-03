@@ -168,7 +168,7 @@ err_type process_instruction(const G& g, const string& command, ifstream& fin) {
 
 	}
 	else if (command == "assert") {
-		auto e = process_assert(g, fin);
+		const auto e = process_assert(g, fin);
 		if (e != err_type::no_error) { return e; }
 	}
 	else {
