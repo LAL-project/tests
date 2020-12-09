@@ -84,6 +84,7 @@ void read_rooted(ifstream& fin, T& t) {
 	node r;
 	fin >> r;
 	t.set_root(r);
+	t.find_edge_orientation();
 }
 
 err_type free_isomorphism_test(ifstream& fin) {
