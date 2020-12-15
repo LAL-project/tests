@@ -72,7 +72,7 @@ using namespace iterators;
 #define FUNC_GRAPH_ASSIGN "assign"
 #define FUNC_GRAPH_ADD_EDGE "add_edge"
 #define FUNC_GRAPH_ADD_EDGES "add_edges"
-#define FUNC_GRAPH_ADD_ALL_EDGES "add_all_edges"
+#define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_REMOVE_EDGE "remove_edge"
 #define FUNC_GRAPH_REMOVE_EDGES "remove_edges"
 #define FUNC_GRAPH_NORMALISE "normalise"
@@ -200,15 +200,15 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean2)
 			if_mfunction(g1, add_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
 		}
-		else if (option == FUNC_GRAPH_ADD_ALL_EDGES) {
+		else if (option == FUNC_GRAPH_SET_EDGES) {
 			fin >> g1 >> n_edges;
 			vector<edge> edge_list(n_edges);
 			for (edge& e : edge_list) { fin >> e.first >> e.second; }
 			fin >> Boolean1 >> Boolean2;
-			assert_exists_variable(FUNC_GRAPH_ADD_ALL_EDGES, g1)
-			assert_correct_boolean(FUNC_GRAPH_ADD_ALL_EDGES, Boolean1)
-			assert_correct_boolean(FUNC_GRAPH_ADD_ALL_EDGES, Boolean2)
-			if_mfunction(g1, add_all_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
+			assert_exists_variable(FUNC_GRAPH_SET_EDGES, g1)
+			assert_correct_boolean(FUNC_GRAPH_SET_EDGES, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_SET_EDGES, Boolean2)
+			if_mfunction(g1, set_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGE) {
 			fin >> g1 >> u >> v >> Boolean1 >> Boolean2;

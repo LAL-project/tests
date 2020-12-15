@@ -555,7 +555,7 @@ void test_copy_free_trees() {
 	{
 	begin_case
 	undirected_graph g(5);
-	g.add_all_edges(vector<edge>{edge(0,1),edge(1,2),edge(2,3),edge(3,4)});
+	g.set_edges(vector<edge>{edge(0,1),edge(1,2),edge(2,3),edge(3,4)});
 	free_tree t(g);
 	output_free_tree_info("t", t)
 	}

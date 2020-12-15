@@ -131,7 +131,7 @@ void shuffle_tree(std::vector<lal::edge>& edges, rooted_tree& T) {
 
 	T.init(to_uint32(edges.size() + 1));
 	T.set_root(r);
-	T.add_all_edges(edges);
+	T.set_edges(edges);
 	T.set_valid_orientation(true);
 }
 
@@ -141,7 +141,7 @@ void shuffle_tree(std::vector<lal::edge>& edges, free_tree& T) {
 
 	node dummy = 0;
 	relabel_edges(edges, dummy);
-	T.add_all_edges(edges);
+	T.set_edges(edges);
 }
 
 } // -- namespace exe_tests

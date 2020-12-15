@@ -6,7 +6,7 @@ BODY
 	assert num_nodes t05 5
 	assert num_edges t05 0
 	
-	add_all_edges t05 4
+	set_edges t05 4
 		0 1
 		1 2
 		2 3
@@ -32,7 +32,7 @@ BODY
 	assert num_nodes t10 10
 	assert num_edges t10 0
 	
-	add_all_edges t10 9
+	set_edges t10 9
 		0 1
 		1 2
 		2 3
@@ -70,7 +70,7 @@ BODY
 	assert num_nodes t15 15
 	assert num_edges t15 0
 	
-	add_all_edges t15 14
+	set_edges t15 14
 		0 1
 		1 2
 		2 3
