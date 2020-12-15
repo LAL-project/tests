@@ -103,6 +103,7 @@ function show_usage() {
 	echo ""
 	echo "        utilities : execute utilities tests"
 	echo "        utilities_isomorphism : execute tree isomorphism tests"
+	echo "        utilities_isomorphism_small : execute the smaller tree isomorphism tests"
 	echo ""	
 	echo "Optional parameters:"
 	echo ""

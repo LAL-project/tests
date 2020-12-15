@@ -42,6 +42,8 @@ groups_list=(\
 	"properties_exp_var_D" \
 	"utilities" \
 	"utilities_isomorphism" \
+	"utilities_isomorphism_small" \
+	"utilities_isomorphism_big" \
 	)
 
 # all tests available
