@@ -1,0 +1,11 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree rT 1
+	set_root rT 0
+	find_edge_orientation rT
+	assert rtree_orientation_valid rT
+	
+	rtree_to_ftree rT fT
+	
+	output_graph fT
