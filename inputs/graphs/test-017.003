@@ -1,0 +1,35 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree rT 10
+	set_root rT 6
+	set_edges rT 9
+		6 5
+		6 4
+		5 2
+		5 1
+		4 3
+		2 9
+		1 7
+		3 8
+		3 0
+		true true
+	find_edge_orientation rT
+	assert rtree_orientation_valid rT
+	
+	output_graph rT
+	
+	rtree_to_ftree rT fT
+	
+	output_graph fT
+	
+	assert num_nodes_component fT 0 10
+	assert num_nodes_component fT 1 10
+	assert num_nodes_component fT 2 10
+	assert num_nodes_component fT 3 10
+	assert num_nodes_component fT 4 10
+	assert num_nodes_component fT 5 10
+	assert num_nodes_component fT 6 10
+	assert num_nodes_component fT 7 10
+	assert num_nodes_component fT 8 10
+	assert num_nodes_component fT 9 10

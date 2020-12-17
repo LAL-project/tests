@@ -17,3 +17,11 @@ BODY
 	rtree_to_ftree rT fT
 	
 	output_graph fT
+	
+	assert num_nodes_component fT 0 7
+	assert num_nodes_component fT 1 7
+	assert num_nodes_component fT 2 7
+	assert num_nodes_component fT 3 7
+	assert num_nodes_component fT 4 7
+	assert num_nodes_component fT 5 7
+	assert num_nodes_component fT 6 7
