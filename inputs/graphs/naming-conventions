@@ -55,10 +55,11 @@ We are currently using the following names:
 	006: construction of ftree using disjoint_union
 	007: construction of rtree using disjoint_union
 	
-	008: conversion of dgraph to ugraph.
-	
 	010: inspection of edges and elements of Q in ugraph
 	011: inspection of edges and elements of Q in dgraph
+	
+	015: conversion of dgraph to ugraph.
+	016: convert a ftree to a rtree graph
 	
 	020: check iterators of constructed ugraph
 	021: check iterators of constructed dgraph
@@ -70,8 +71,6 @@ We are currently using the following names:
 		#	032: read ftree from disk
 		#	033: read rtree from disk
 		# are redundant
-	
-	042: convert a ftree to a rtree graph
 	
 	053: check validity of the orientation of the tree's edges
 	
