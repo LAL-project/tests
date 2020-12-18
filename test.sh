@@ -110,6 +110,8 @@ function show_usage() {
 	echo "    --log-file : indicate the name of the log file."
 	echo "        Default: 'execution_log'"
 	echo ""
+	echo "    --no-make : prevent the script from invoking 'make'."
+	echo ""
 	echo "    --all : execute tests automatically. This is equivalent to"
 	echo "        --exe-group=all"
 	echo ""
@@ -320,6 +322,8 @@ release=0
 exe_group=0
 # log file
 log_file="execution_log"
+# compile (or not) the executable
+compile=1
 
 for i in "$@"; do
 	case $i in
@@ -349,6 +353,11 @@ for i in "$@"; do
 		shift
 		;;
 		
+		--no-make)
+		compile=0
+		shift
+		;;
+
 		--valgrind)
 		use_valgrind=1
 		shift
@@ -425,10 +434,14 @@ if [ "$EXE_MODE" == "debug" ]; then
 elif [ "$EXE_MODE" == "release" ]; then
 	EXE_DIR="build-release"
 fi
-# make sure the executable is up to date
-cd $EXE_DIR
-make -j4
-cd ..
+
+if [ $compile -eq 1 ]; then
+	# make sure the executable is up to date
+	cd $EXE_DIR
+	make -j4
+	cd ..
+fi
+
 EXE_COMM=$EXE_DIR/tests
 
 if [ ! -f $EXE_COMM ]; then
