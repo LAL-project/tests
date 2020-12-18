@@ -215,7 +215,7 @@ COMMANDS AVAILABLE
 
 DIRECTED GRAPHS (excluding trees)
 ===============
-cd 
+
 ** dgraph_to_ugraph UG DG
 	Converts the directed graph DG into an undirected graph UG
 
