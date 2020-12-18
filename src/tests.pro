@@ -15,15 +15,31 @@ QMAKE_CXXFLAGS +=										\
     -Wold-style-cast -Wrestrict -Wduplicated-cond		\
     -Wnon-virtual-dtor -Woverloaded-virtual -Wshadow
 
-# lal library
-LAL_DIR = ../../linear-arrangement-library
+isEmpty(ENVIR) {
+    ENVIR = "HOME"
+}
+
+# configure home
+equals(ENVIR, "HOME") {
+    LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library
+}
+
+# configure cluster
+equals(ENVIR, "CLUSTER") {
+    QMAKE_CXX = /home/soft/gcc-9.2.0/bin/g++
+	QMAKE_LINK = /home/soft/gcc-9.2.0/bin/g++
+	QMAKE_CXXFLAGS += -std=c++17
+
+    LAL_DIR = /home/usuaris/lalemany/installations/linear-arrangement-library
+}
+
 CONFIG(debug, debug|release) {
     LIBS += -L$${LAL_DIR}/lal-debug/ -llaldebug
-    PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.a
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.a
 }
 CONFIG(release, debug|release) {
     LIBS += -L$${LAL_DIR}/lal-release/ -llal
-    PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblal.a
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblal.a
 }
 INCLUDEPATH += $${LAL_DIR}/
 DEPENDPATH += $${LAL_DIR}/
