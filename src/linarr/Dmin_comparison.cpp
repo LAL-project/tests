@@ -119,21 +119,21 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		for (const string& s : allowed_algos) {								\
 		cerr << "        " << s << endl;									\
 		}																	\
-		return err_type::test_format;									\
+		return err_type::test_format;										\
 	}																		\
 }
 
-#define correct_comp_str(comp)												\
-{																			\
-	if (allowed_comps.find(comp) == allowed_comps.end()) {					\
-		cerr << ERROR << endl;												\
+#define correct_comp_str(comp)											\
+{																		\
+	if (allowed_comps.find(comp) == allowed_comps.end()) {				\
+		cerr << ERROR << endl;											\
 		cerr << "    Comparison '" << comp << "' is invalid." << endl;	\
-		cerr << "    Must be one of:" << endl;								\
-		for (const string& s : allowed_comps) {								\
-		cerr << "        " << s << endl;									\
-		}																	\
+		cerr << "    Must be one of:" << endl;							\
+		for (const string& s : allowed_comps) {							\
+		cerr << "        " << s << endl;								\
+		}																\
 		return err_type::test_format;									\
-	}																		\
+	}																	\
 }
 
 
@@ -145,10 +145,12 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_algos({"Proj", "YS", "FC"});
+	const set<string> allowed_algos({"Plan", "YS", "FC"});
+
 	const auto Plan = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Planar); };
 	const auto FC = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_FC); };
 	const auto YS = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_YS); };
+
 	map<string, function<algo_result (const free_tree&)> > ALGOS;
 	ALGOS["Plan"] = Plan;
 	ALGOS["YS"] = YS;
