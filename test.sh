@@ -107,6 +107,9 @@ function show_usage() {
 	echo ""	
 	echo "Optional parameters:"
 	echo ""
+	echo "    --log-file : indicate the name of the log file."
+	echo "        Default: 'execution_log'"
+	echo ""
 	echo "    --all : execute tests automatically. This is equivalent to"
 	echo "        --exe-group=all"
 	echo ""
@@ -141,7 +144,7 @@ function check_res_valgrind() {
 		echo "See result in $valg_err"
 		mv $test_err $valg_err
 		
-		echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Valgrind produced errors..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Valgrind produced errors..." >> $log_file
 	else
 		# no errors were detected
 		echo -e "\e[1;1;32mOk\e[0m"
@@ -162,7 +165,7 @@ function check_res_no_valgrind() {
 	if [ ! -f $base_out_file ]; then
 		
 		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping..."
-		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping..." >> $log_file
 		
 	else
 		# replace Windows-like endlines with Linux-like endlines
@@ -180,7 +183,7 @@ function check_res_no_valgrind() {
 			mv $temp_test_err $test_err
 			echo "$prog_out" > $test_out
 			
-			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> execution_log
+			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> $log_file
 		else
 			# test whether the error output produced is empty or not
 			BASE_CONTENTS=$(cat $base_out_file)
@@ -190,7 +193,7 @@ function check_res_no_valgrind() {
 				echo -en "\e[1;4;31mDifferent outputs\e[0m "
 				echo "See result in $test_out"
 				echo "$prog_out" > $test_out
-				echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Output of test differs from base output" >> execution_log
+				echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Output of test differs from base output" >> $log_file
 			else
 				# output produced by library is
 				# equal to the output made by hand
@@ -216,7 +219,7 @@ function execute_group() {
 		echo -en "\e[2;4;37m$input_group\e[0m"
 		echo -e " does not exist. Skipping..."
 		
-		echo "$(date +"%Y/%m/%d.%T")            Warning: input $input does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: input $input does not exist. Skipping..." >> $log_file
 		skip=1
 	fi
 	
@@ -227,7 +230,7 @@ function execute_group() {
 		echo -en "\e[2;4;37m$output_group\e[0m"
 		echo -e " does not exist. Skipping..."
 		
-		echo "$(date +"%Y/%m/%d.%T")            Warning: output $output does not exist. Skipping..." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")            Warning: output $output does not exist. Skipping..." >> $log_file
 		skip=1
 	fi
 	
@@ -315,6 +318,8 @@ debug=0
 release=0
 # execute tests of a certain type
 exe_group=0
+# log file
+log_file="execution_log"
 
 for i in "$@"; do
 	case $i in
@@ -336,6 +341,11 @@ for i in "$@"; do
 		
 		--exe-group=*)
 		exe_group="${i#*=}"
+		shift
+		;;
+		
+		--log-file=*)
+		log_file="${i#*=}"
 		shift
 		;;
 		
@@ -453,7 +463,7 @@ fi
 ########################################################################
 # Execute the tests
 
-echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> execution_log
+echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> $log_file
 
 if [ $exe_group != 0 ]; then
 	
@@ -470,7 +480,7 @@ if [ $exe_group != 0 ]; then
 	if [ $array_has == 0 ]; then
 		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
 		
-		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> execution_log
+		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
 		cont=0
 	fi
 	
@@ -495,15 +505,15 @@ if [ $exe_group != 0 ]; then
 			in="${DIRS_TO_PROCESS[$i1]}"
 			out="${DIRS_TO_PROCESS[$i2]}"
 
-			echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> execution_log
+			echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> $log_file
 			execute_group $in $out $idx $n_dirs
-			echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> execution_log
+			echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> $log_file
 		done
 	fi
 else
 	execute_group $input_dir $output_dir 1 1
 fi
 
-echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> execution_log
+echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> $log_file
 
-echo "A summary of the test has been logged into file 'execution_log'"
+echo "A summary of the test has been logged into file '$log_file'"
