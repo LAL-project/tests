@@ -71,6 +71,8 @@ using namespace iterators;
 #define FUNC_GRAPH_INIT "init_graph"
 #define FUNC_GRAPH_ASSIGN "assign"
 #define FUNC_GRAPH_ADD_EDGE "add_edge"
+#define FUNC_GRAPH_ADD_EDGE_BULK "add_edge_bulk"
+#define FUNC_GRAPH_FINISH_BULK_ADD "finish_bulk_add"
 #define FUNC_GRAPH_ADD_EDGES "add_edges"
 #define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_REMOVE_EDGE "remove_edge"
@@ -190,6 +192,18 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean1)
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean2)
 			if_mfunction(g1, add_edge(u, v, Boolean1 == "true", Boolean2 == "true"))
+		}
+		else if (option == FUNC_GRAPH_ADD_EDGE_BULK) {
+			fin >> g1 >> u >> v;
+			assert_exists_variable(FUNC_GRAPH_ADD_EDGE_BULK, g1)
+			if_mfunction(g1, add_edge_bulk(u, v))
+		}
+		else if (option == FUNC_GRAPH_FINISH_BULK_ADD) {
+			fin >> g1 >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_GRAPH_FINISH_BULK_ADD, g1)
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_ADD, Boolean1)
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_ADD, Boolean2)
+			if_mfunction(g1, finish_bulk_add(Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGES) {
 			fin >> g1 >> n_edges;
