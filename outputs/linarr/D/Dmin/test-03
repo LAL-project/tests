@@ -5,4 +5,5 @@ Testing 'random' for 'YS' == 'FC' on size: 600 (N= 10)
 Testing 'random' for 'YS' == 'FC' on size: 700 (N= 10)
 Testing 'random' for 'YS' == 'FC' on size: 800 (N= 10)
 Testing 'random' for 'YS' == 'FC' on size: 900 (N= 10)
+Testing 'random' for 'YS' == 'FC' on size: 1000 (N= 10)
 Test finished without apparent errors.
