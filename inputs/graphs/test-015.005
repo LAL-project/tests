@@ -1,0 +1,18 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph dgraph dg 5
+	
+	add_edges dg 6
+		0 1
+		2 3
+		1 0
+		3 2
+		1 4
+		3 4
+		false false
+	output_graph dg
+	
+	dgraph_to_ugraph ug dg
+	
+	output_graph ug
