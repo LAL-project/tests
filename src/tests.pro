@@ -4,6 +4,7 @@ CONFIG += c++1z console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17
 QMAKE_CXXFLAGS_DEBUG += -O3 -DDEBUG -D_GLIBCXX_DEBUG
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3 -UDEBUG -DNDEBUG -fstrict-aliasing
@@ -28,7 +29,6 @@ equals(ENVIR, "HOME") {
 equals(ENVIR, "CLUSTER") {
     QMAKE_CXX = /home/soft/gcc-9.2.0/bin/g++
 	QMAKE_LINK = /home/soft/gcc-9.2.0/bin/g++
-	QMAKE_CXXFLAGS += -std=c++17
 
     LAL_DIR = /home/usuaris/lalemany/installations/linear-arrangement-library
 }
