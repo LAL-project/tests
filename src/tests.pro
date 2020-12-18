@@ -23,6 +23,9 @@ isEmpty(ENVIR) {
 # configure home
 equals(ENVIR, "HOME") {
     LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library
+    
+	# extension of the library file
+    EXT=a
 }
 
 # configure cluster
@@ -31,15 +34,18 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_LINK = /home/soft/gcc-9.2.0/bin/g++
 
     LAL_DIR = /home/usuaris/lalemany/installations/linear-arrangement-library
+    
+    # extension of the library file
+    EXT=so
 }
 
 CONFIG(debug, debug|release) {
     LIBS += -L$${LAL_DIR}/lal-debug/ -llaldebug
-	PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.a
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.$$EXT
 }
 CONFIG(release, debug|release) {
     LIBS += -L$${LAL_DIR}/lal-release/ -llal
-	PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblal.a
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblal.$$EXT
 }
 INCLUDEPATH += $${LAL_DIR}/
 DEPENDPATH += $${LAL_DIR}/
