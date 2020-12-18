@@ -3,6 +3,6 @@ INPUT 0
 BODY
 	automatic
 	free positive random
-	50 1000 1000
-	60 2000 2000
-	70 3000 3000
+	50 100 100
+	60 100 100
+	70 100 100

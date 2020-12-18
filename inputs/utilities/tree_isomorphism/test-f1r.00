@@ -4,5 +4,5 @@ BODY
 	automatic
 	free positive random
 	50 1000 1000
-	60 2000 2000
-	70 3000 3000
+	60 1000 1000
+	70 1000 1000
