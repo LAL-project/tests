@@ -71,14 +71,12 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	integer gen;
+	uint64_t gen;
 
 	all_lab_rooted_trees TreeGen;
 
 	uint32_t n;
 	while (fin >> n) {
-		const integer nn = integer_from_ui(n);
-
 		// number of generated trees
 		gen = 0;
 
@@ -104,7 +102,9 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 		// as many trees as n^(n - 1) <- note that we are dealing
 		// with labelled ROOTED trees!
 		// https://oeis.org/A000169/list
+		const integer nn = integer_from_ui(n);
 		const integer total = (n == 1 ? 1 : (nn^(nn - 1)));
+
 		if (gen != total) {
 			cerr << ERROR << endl;
 			cerr << "    Exhaustive generation of labelled rooted trees" << endl;
