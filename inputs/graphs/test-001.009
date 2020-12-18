@@ -1,0 +1,51 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph dgraph g 10
+	
+	add_edge_bulk g 0 1
+	assert exists_edge g 0 1
+	assert not_exists_edge g 1 0
+	assert num_edges g 1
+	
+	add_edge_bulk g 0 2
+	assert exists_edge g 0 2
+	assert not_exists_edge g 2 0
+	assert num_edges g 2
+	
+	add_edge_bulk g 0 4
+	assert exists_edge g 0 4
+	assert not_exists_edge g 4 0
+	assert num_edges g 3
+	
+	normalise g
+	output_graph g
+	
+	finish_bulk_add g true true
+	assert num_edges g 3
+	assert normalised g
+	
+	output_graph g
+	
+	add_edge_bulk g 8 9
+	assert exists_edge g 8 9
+	assert not_exists_edge g 9 8
+	assert num_edges g 4
+	add_edge_bulk g 7 9
+	assert exists_edge g 7 9
+	assert not_exists_edge g 9 7
+	assert num_edges g 5
+	add_edge_bulk g 6 9
+	assert exists_edge g 6 9
+	assert not_exists_edge g 9 6
+	assert num_edges g 6
+	add_edge_bulk g 5 9
+	assert exists_edge g 5 9
+	assert not_exists_edge g 9 5
+	assert num_edges g 7
+	
+	finish_bulk_add g true true
+	assert num_edges g 7
+	assert normalised g
+	
+	output_graph g

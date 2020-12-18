@@ -28,7 +28,13 @@ COMMANDS AVAILABLE
 ** add_edge GRAPH VERTEX1 VERTEX2 true/false true/false
 	Adds an edge to a graph. Normalises (or not) the graph. After the addition,
 	check if the result is normalised or not.
-	
+
+** add_edge_bulk GRAPH VERTEX1 VERTEX2
+	Adds an edge to a graph in bulk mode.
+
+** finish_bulk_add GRAPH true/false true/false
+	Normalises (or not) the graph.
+
 ** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
 	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
 	check if the result is normalised or not.

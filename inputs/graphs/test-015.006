@@ -1,0 +1,21 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph dgraph dg 5
+	
+	add_edge_bulk dg 0 1
+	add_edge_bulk dg 2 3
+	add_edge_bulk dg 1 0
+	add_edge_bulk dg 3 2
+	add_edge_bulk dg 1 4
+	add_edge_bulk dg 3 4
+	
+	finish_bulk_add dg true true
+	
+	output_graph dg
+	
+	dgraph_to_ugraph ug dg
+	
+	output_graph ug
+	
+	assert num_edges ug 4

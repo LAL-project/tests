@@ -28,3 +28,5 @@ BODY
 	dgraph_to_ugraph ug dg
 	
 	output_graph ug
+	
+	assert num_edges ug 9

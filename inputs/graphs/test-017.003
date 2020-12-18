@@ -23,6 +23,7 @@ BODY
 	
 	output_graph fT
 	
+	assert num_edges fT 9
 	assert num_nodes_component fT 0 10
 	assert num_nodes_component fT 1 10
 	assert num_nodes_component fT 2 10

@@ -5,22 +5,23 @@ BODY
 	assert num_nodes t10 10
 	assert num_edges t10 0
 	
-	set_edges t10 9
-		0 1
-		1 2
-		1 3
-		0 4
-		5 6
-		6 7
-		6 8
-		7 9
-		3 5
-		true true
-	output_graph t10
+	add_edge_bulk t10 0 1
+	add_edge_bulk t10 1 2
+	add_edge_bulk t10 1 3
+	add_edge_bulk t10 0 4
+	add_edge_bulk t10 5 6
+	add_edge_bulk t10 6 7
+	add_edge_bulk t10 6 8
+	add_edge_bulk t10 7 9
+	add_edge_bulk t10 3 5
+	
+	finish_bulk_add t10 true true
 	
 	set_root t10 0
 	find_edge_orientation t10
 	assert rtree_orientation_valid t10
+	
+	output_graph t10
 	assert num_edges t10 9
 
 	assert num_nodes_component t10 0 10
@@ -33,42 +34,7 @@ BODY
 	assert num_nodes_component t10 7 10
 	assert num_nodes_component t10 8 10
 	assert num_nodes_component t10 9 10
-
-
-
-	create_graph rtree t12 12
-	assert num_nodes t12 12
-	assert num_edges t12 0
 	
-	set_edges t12 11
-		0 1
-		0 2
-		0 5
-		2 8
-		2 9
-		2 10
-		1 3
-		1 11
-		3 6
-		5 7
-		5 4
-		true true
-	output_graph t12
-	
-	set_root t12 0
-	find_edge_orientation t12
-	assert rtree_orientation_valid t12
-	assert num_edges t12 11
-
-	assert num_nodes_component t12 0 12
-	assert num_nodes_component t12 1 12
-	assert num_nodes_component t12 2 12
-	assert num_nodes_component t12 3 12
-	assert num_nodes_component t12 4 12
-	assert num_nodes_component t12 5 12
-	assert num_nodes_component t12 6 12
-	assert num_nodes_component t12 7 12
-	assert num_nodes_component t12 8 12
-	assert num_nodes_component t12 9 12
-	assert num_nodes_component t12 10 12
-	assert num_nodes_component t12 11 12
+	remove_edge t10 7 9 true true
+	assert num_nodes_component t10 7 9
+	assert num_nodes_component t10 9 1
