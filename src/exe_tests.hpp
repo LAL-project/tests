@@ -84,6 +84,7 @@ err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin);
+err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);

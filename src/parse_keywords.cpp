@@ -134,6 +134,10 @@ err_type call_graphs
 		return parse_header(exe_graphs_construction, fin);
 	}
 
+	if (key == "tree_types") {
+		return parse_header(exe_graphs_tree_type_classification, fin);
+	}
+
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
 	mark_wrong_keyword(keywords, {i}, "    ");

@@ -72,6 +72,7 @@ SOURCES += \
     generate/trees_rlr.cpp \
     generate/trees_ruf.cpp \
     generate/trees_rur.cpp \
+    graphs/tree_type_classification.cpp \
     linarr/C.cpp \
     linarr/C_list.cpp \
     linarr/D.cpp \
