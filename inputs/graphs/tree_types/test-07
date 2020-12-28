@@ -8,7 +8,7 @@ BODY
 	0 1 2 2 1 5 5;caterpillar
 	0 1 2 2 1 5 1;caterpillar
 	0 1 2 2 1 1 1;bistar,caterpillar
-	0 1 2 1 4 1 6;spider,non_caterpillar
+	0 1 2 1 4 1 6;spider
 	0 1 2 1 4 1 1;spider,caterpillar
 	0 1 2 1 1 1 1;bistar,spider,quasistar,caterpillar
 	0 1 1 1 1 1 1;star,spider,caterpillar
