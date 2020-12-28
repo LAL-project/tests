@@ -39,6 +39,7 @@
  ********************************************************************/
 
 // C++ includes
+#include <filesystem>
 #include <algorithm>
 #include <iostream>
 #include <fstream>
@@ -59,6 +60,8 @@ using namespace linarr;
 
 namespace exe_tests {
 
+namespace syntree_class {
+
 string sdtt_to_string(const tree_structure& t) {
 	switch (t) {
 	case tree_structure::projective: return "prj";
@@ -73,7 +76,7 @@ string sdtt_to_string(const tree_structure& t) {
 	return "?";
 }
 
-tree_structure string_to_sdtt(const string& s) {
+tree_structure string_to_syntreetype(const string& s) {
 	if (s == "prj") { return tree_structure::projective; }
 	if (s == "pla") { return tree_structure::planar; }
 	if (s == "1ec") { return tree_structure::EC1; }
@@ -100,7 +103,7 @@ vector<bool> parse_classes(string s) {
 	// classes vector
 	vector<bool> classes(lal::linarr::__tree_structure_size, false);
 	if (s.length() == 0) {
-		const size_t idx = static_cast<size_t>(string_to_sdtt("none"));
+		const size_t idx = static_cast<size_t>(string_to_syntreetype("none"));
 		classes[idx] = true;
 		return classes;
 	}
@@ -110,7 +113,7 @@ vector<bool> parse_classes(string s) {
 	stringstream ss(s);
 	string cls;
 	while (ss >> cls) {
-		const size_t idx = static_cast<size_t>(string_to_sdtt(cls));
+		const size_t idx = static_cast<size_t>(string_to_syntreetype(cls));
 		classes[idx] = true;
 	}
 	return classes;
@@ -160,7 +163,7 @@ err_type parse_single_file(const string& file) {
 			cerr << "    Classes detected by LAL are not a subset of the actual classes." << endl;
 			cerr << "    In line '" << lineno << "' of file '" << file << "'." << endl;
 			cerr << "    Line's content: " << line << endl;
-			cerr << "    Actual classes:" << endl;
+			cerr << "    Ground truth classes:" << endl;
 			for (size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					cout << "        "
@@ -184,6 +187,8 @@ err_type parse_single_file(const string& file) {
 	return err_type::no_error;
 }
 
+} // -- namespace syntree_class
+
 err_type exe_linarr_syntree_classification(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
@@ -194,7 +199,7 @@ err_type exe_linarr_syntree_classification(const input_list& inputs, ifstream& f
 
 	string f;
 	while (fin >> f) {
-		const err_type e = parse_single_file(f);
+		const err_type e = syntree_class::parse_single_file(f);
 		if (e != err_type::no_error) {
 			// the complete error message is already
 			// issued inside the function "parse_files"
