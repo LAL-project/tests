@@ -69,7 +69,7 @@ function show_usage() {
 	echo ""
 	echo "        graphs : execute all graph tests"
 	echo "        graphs_construction : execute graph construction tests"
-	echo "        graphs_tree_type : execute tree classification tests"
+	echo "        graphs_tree_types : execute tree classification tests"
 	echo ""
 	echo "        internal : execute internal tests"
 	echo "        internal_sorting : execute sorting internal tests"

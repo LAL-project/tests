@@ -17,7 +17,7 @@ groups_list=(\
 	"generate_arr_all_proj" \
 	"graphs" \
 	"graphs_construction" \
-	"graphs_tree_type" \
+	"graphs_tree_types" \
 	"internal" \
 	"internal_centre" \
 	"internal_centroid" \
@@ -61,7 +61,7 @@ all_DIRS=(\
 	"generate/arrangements/all_proj" "generate/arrangements/all_proj" \
 	"generate/arrangements/rand_proj" "generate/arrangements/rand_proj" \
 	"graphs/construction" "graphs/construction" \
-	"graphs/tree_type" "graphs/tree_type" \
+	"graphs/tree_types" "graphs/tree_types" \
 	"internal/sorting" "internal/sorting" \
 	"internal/traversal" "internal/traversal" \
 	"internal/centre" "internal/centre" \
