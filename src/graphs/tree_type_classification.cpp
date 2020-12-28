@@ -70,7 +70,6 @@ tree_type string_to_tt(const string& s) {
 	if (s == "bistar") { return tree_type::bistar; }
 	if (s == "caterpillar") { return tree_type::caterpillar; }
 	if (s == "spider") { return tree_type::spider; }
-	if (s == "non_caterpillar") { return tree_type::non_caterpillar; }
 	if (s == "none") { return tree_type::none; }
 	cerr << ERROR << endl;
 	cerr << "    String '" << s << "' could not be converted into a tree type." << endl;

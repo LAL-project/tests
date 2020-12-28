@@ -65,7 +65,6 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "arrgmnt_validity_check.hpp"
-#include "tree_classification.hpp"
 #include "test_utils.hpp"
 #include "std_utils.hpp"
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -204,10 +203,11 @@ err_type test_Unconstrained_class_algorithm(
 				generate::all_ulab_free_trees TreeGen(n);
 				while (TreeGen.has_next()) {
 					TreeGen.next();
-					const free_tree tree = TreeGen.get_tree();
+					free_tree tree = TreeGen.get_tree();
+					tree.calculate_tree_type();
 
 					// filter non-caterpillar
-					if (not is_caterpillar(tree)) { continue; }
+					if (not tree.is_of_type(tree_type::caterpillar)) { continue; }
 
 					// Dmin for caterpillar trees
 					uint32_t Dmin_cat = 0;

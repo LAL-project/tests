@@ -57,7 +57,6 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
-#include "tree_classification.hpp"
 
 // number of caterpillar trees of a given size
 inline integer num_caterpillar_trees(uint32_t n) {
@@ -149,7 +148,9 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			const free_tree T = TreeGen.get_tree();
+			free_tree T = TreeGen.get_tree();
+			T.calculate_tree_type();
+
 			const ftree_check err = test_validity_tree(n, T);
 			if (err != ftree_check::correct) {
 				cerr << ERROR << endl;
@@ -160,7 +161,7 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 			}
 
 			// compute 'statistics'
-			n_caterpillar += is_caterpillar(T);
+			n_caterpillar += T.is_of_type(tree_type::caterpillar);
 			gen += 1;
 		}
 

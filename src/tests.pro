@@ -99,7 +99,6 @@ SOURCES += \
     properties/general.cpp \
     test_utils.cpp \
     time.cpp \
-	tree_classification.cpp \
     internal/centre.cpp \
     internal/centroid.cpp \
     internal/sorting.cpp \
@@ -118,7 +117,6 @@ HEADERS += \
     properties/C_rla_brute_force_algorithms.hpp \
     std_utils.hpp \
     test_utils.hpp \
-    time.hpp \
-	tree_classification.hpp
+    time.hpp
 
 DISTFILES += \
