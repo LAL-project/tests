@@ -49,6 +49,7 @@ using namespace std;
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/tree_type.hpp>
+#include <lal/graphs/output.hpp>
 #include <lal/internal/graphs/trees/convert_to_rtree.hpp>
 #include <lal/internal/graphs/trees/convert_to_ftree.hpp>
 using namespace lal;
@@ -65,10 +66,14 @@ namespace tree_type_class {
 tree_type string_to_tt(const string& s) {
 	if (s == "linear") { return tree_type::linear; }
 	if (s == "star") { return tree_type::star; }
+	if (s == "quasistar") { return tree_type::quasistar; }
 	if (s == "bistar") { return tree_type::bistar; }
 	if (s == "caterpillar") { return tree_type::caterpillar; }
 	if (s == "spider") { return tree_type::spider; }
-	if (s == "non-caterpillar") { return tree_type::noncaterpillar; }
+	if (s == "non_caterpillar") { return tree_type::non_caterpillar; }
+	if (s == "none") { return tree_type::none; }
+	cerr << ERROR << endl;
+	cerr << "    String '" << s << "' could not be converted into a tree type." << endl;
 	return tree_type::none;
 }
 
@@ -84,11 +89,7 @@ vector<uint32_t> parse_treestr(const string& s) {
 vector<bool> parse_classes_tt(string s) {
 	// classes vector
 	vector<bool> classes(lal::graphs::__tree_type_size, false);
-	if (s.length() == 0) {
-		const size_t idx = static_cast<size_t>(string_to_tt("none"));
-		classes[idx] = true;
-		return classes;
-	}
+	bool read_sth = false;
 
 	// parse classes in string
 	std::replace(s.begin(), s.end(), ',', ' ');
@@ -96,6 +97,12 @@ vector<bool> parse_classes_tt(string s) {
 	string cls;
 	while (ss >> cls) {
 		const size_t idx = static_cast<size_t>(string_to_tt(cls));
+		classes[idx] = true;
+		read_sth = true;
+	}
+
+	if (not read_sth) {
+		const size_t idx = static_cast<size_t>(string_to_tt("none"));
 		classes[idx] = true;
 	}
 	return classes;
@@ -112,7 +119,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 	}
 
 	string line;
-	size_t lineno = 1;
+	size_t lineno = 3;
 	getline(fin, line); // skip header
 
 	while (getline(fin, line)) {
@@ -121,7 +128,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 		size_t semicolon = line.find(';');
 		if (semicolon == string::npos) {
 			cerr << ERROR << endl;
-			cerr << "    Input line is not correctly formatted." << endl;
+			cerr << "    Input line is malformed." << endl;
 			cerr << "    In line: " << lineno << "'." << endl;
 			cerr << "    Line '" << lineno << "' does not have the ';'." << endl;
 			return err_type::test_format;
@@ -174,15 +181,18 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 			LAL_types[ static_cast<size_t>(tree_type_class::string_to_tt(s)) ] = true;
 		}
 
-		if (not (LAL_types <= ground_classes)) {
+		if (LAL_types != ground_classes) {
 			cerr << ERROR << endl;
-			cerr << "    In line '" << lineno << "''." << endl;
-			cerr << "    Line's content: " << line << endl;
+			cerr << "    In line '" << lineno << "'." << endl;
+			cerr << "    Line's content: '" << line << "'" << endl;
+			cerr << "    Tree:" << endl;
+			cerr << fT << endl;
 			cerr << "    Ground truth classes:" << endl;
 			for (size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					cout << "        "
 						 << graphs::tree_type_to_string(static_cast<tree_type>(i))
+						 << (not LAL_types[i] ? "  <--- missing" : "")
 						 << endl;
 				}
 			}
