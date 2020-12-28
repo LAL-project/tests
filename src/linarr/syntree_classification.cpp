@@ -152,7 +152,7 @@ err_type parse_single_file(const string& file) {
 		const vector<bool> ground_classes = parse_classes(classlist);
 
 		// classify tree
-		const vector<bool> LAL_classes = lal::linarr::classify_tree_structure(T);
+		const vector<bool> LAL_classes = linarr::classify_tree_structure(T);
 
 		// check result is correct
 		if (not (LAL_classes <= ground_classes)) {
