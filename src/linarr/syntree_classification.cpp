@@ -62,31 +62,27 @@ namespace exe_tests {
 
 namespace syntree_class {
 
-string sdtt_to_string(const syntactic_dependency_structure_type& t) {
+typedef syntactic_dependency_structure_type syndepstr_type;
+
+string sdtt_to_string(const syndepstr_type& t) {
 	switch (t) {
-	case syntactic_dependency_structure_type::projective: return "prj";
-	case syntactic_dependency_structure_type::planar: return "pla";
-	case syntactic_dependency_structure_type::WG1: return "wg1";
-	case syntactic_dependency_structure_type::EC1: return "1ec";
-	case syntactic_dependency_structure_type::MH4: return "mh4";
-	case syntactic_dependency_structure_type::MH5: return "mh5";
-	case syntactic_dependency_structure_type::none: return "?";
+	case syndepstr_type::projective: return "prj";
+	case syndepstr_type::planar: return "pla";
+	case syndepstr_type::WG1: return "wg1";
+	case syndepstr_type::EC1: return "1ec";
+	default: return "none";
 	}
-	// so compiler does not cry
-	return "?";
 }
 
-syntactic_dependency_structure_type string_to_syntreetype(const string& s) {
-	if (s == "prj") { return syntactic_dependency_structure_type::projective; }
-	if (s == "pla") { return syntactic_dependency_structure_type::planar; }
-	if (s == "1ec") { return syntactic_dependency_structure_type::EC1; }
-	if (s == "wg1") { return syntactic_dependency_structure_type::WG1; }
-	if (s == "mh4") { return syntactic_dependency_structure_type::MH4; }
-	if (s == "mh5") { return syntactic_dependency_structure_type::MH5; }
-	cerr << ERROR << endl;
-	cerr << "    String could not be converted to LAL's tree_structure type." << endl;
-	cerr << "    Input string: " << s << endl;
-	return syntactic_dependency_structure_type::none;
+pair<syndepstr_type, bool> string_to_syntreetype(const string& s) {
+	if (s == "prj") { return make_pair(syndepstr_type::projective, true); }
+	if (s == "pla") { return make_pair(syndepstr_type::planar, true); }
+	if (s == "1ec") { return make_pair(syndepstr_type::EC1, true); }
+	if (s == "wg1") { return make_pair(syndepstr_type::WG1, true); }
+	if (s == "mh4") { return make_pair(syndepstr_type::none, false); }
+	if (s == "mh5") { return make_pair(syndepstr_type::none, false); }
+
+	return make_pair(syndepstr_type::none, true);
 }
 
 rooted_tree parse_tree_in_line(const string& s) {
@@ -95,7 +91,6 @@ rooted_tree parse_tree_in_line(const string& s) {
 	vector<uint32_t> L;
 	uint32_t v;
 	while (ss >> v) { L.push_back(v); }
-
 	return lal::internal::linear_sequence_to_rtree(L);
 }
 
@@ -103,7 +98,8 @@ vector<bool> parse_classes(string s) {
 	// classes vector
 	vector<bool> classes(lal::linarr::__tree_structure_size, false);
 	if (s.length() == 0) {
-		const size_t idx = static_cast<size_t>(string_to_syntreetype("none"));
+		const syndepstr_type sdtt = string_to_syntreetype("none").first;
+		const size_t idx = static_cast<size_t>(sdtt);
 		classes[idx] = true;
 		return classes;
 	}
@@ -113,8 +109,11 @@ vector<bool> parse_classes(string s) {
 	stringstream ss(s);
 	string cls;
 	while (ss >> cls) {
-		const size_t idx = static_cast<size_t>(string_to_syntreetype(cls));
-		classes[idx] = true;
+		const auto [sdtt, accept] = string_to_syntreetype(cls);
+		if (accept) {
+			const size_t idx = static_cast<size_t>(sdtt);
+			classes[idx] = true;
+		}
 	}
 	return classes;
 }
@@ -158,7 +157,7 @@ err_type parse_single_file(const string& file) {
 		const vector<bool> LAL_classes = linarr::classify_tree_structure(T);
 
 		// check result is correct
-		if (not (LAL_classes <= ground_classes)) {
+		if (LAL_classes != ground_classes) {
 			cerr << ERROR << endl;
 			cerr << "    Classes detected by LAL are not a subset of the actual classes." << endl;
 			cerr << "    In line '" << lineno << "' of file '" << file << "'." << endl;
@@ -167,7 +166,7 @@ err_type parse_single_file(const string& file) {
 			for (size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					cout << "        "
-						 << sdtt_to_string(static_cast<lal::linarr::syntactic_dependency_structure_type>(i))
+						 << sdtt_to_string(static_cast<syndepstr_type>(i))
 						 << (not LAL_classes[i] ? "  <--- missing" : "")
 						 << endl;
 				}
@@ -176,7 +175,7 @@ err_type parse_single_file(const string& file) {
 			for (size_t i = 0; i < LAL_classes.size(); ++i) {
 				if (LAL_classes[i]) {
 					cout << "        "
-						 << sdtt_to_string(static_cast<lal::linarr::syntactic_dependency_structure_type>(i))
+						 << sdtt_to_string(static_cast<syndepstr_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << endl;
 				}
