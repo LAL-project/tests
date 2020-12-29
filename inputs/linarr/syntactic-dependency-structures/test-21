@@ -1,0 +1,13 @@
+TYPE linarr-syntree_classification
+INPUT 0
+BODY
+	graphs/syntactic-dependency-structures/sen-21--0
+	graphs/syntactic-dependency-structures/sen-21--1
+	graphs/syntactic-dependency-structures/sen-21--2
+	graphs/syntactic-dependency-structures/sen-21--3
+	graphs/syntactic-dependency-structures/sen-21--4
+	graphs/syntactic-dependency-structures/sen-21--5
+	graphs/syntactic-dependency-structures/sen-21--6
+	graphs/syntactic-dependency-structures/sen-21--7
+	graphs/syntactic-dependency-structures/sen-21--8
+	graphs/syntactic-dependency-structures/sen-21--9

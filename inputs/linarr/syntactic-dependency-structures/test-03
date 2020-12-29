@@ -1,4 +1,4 @@
 TYPE linarr-syntree_classification
 INPUT 0
 BODY
-	graphs/projective-structures/sen-03
+	graphs/syntactic-dependency-structures/sen-03
