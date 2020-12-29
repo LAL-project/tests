@@ -12,6 +12,6 @@ graphs_construction_DIRS=(\
 	)
 
 # construction tests
-graphs_tree_type_DIRS=(\
+graphs_tree_types_DIRS=(\
 	"graphs/tree_types" "graphs/tree_types" \
 	)
