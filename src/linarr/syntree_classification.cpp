@@ -47,8 +47,8 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/linarr/tree_structure_class.hpp>
-#include <lal/linarr/tree_structure.hpp>
+#include <lal/linarr/syntactic_dependency_structure_type.hpp>
+#include <lal/linarr/classify_syntactic_dependency_structure.hpp>
 #include <lal/internal/graphs/trees/convert_to_rtree.hpp>
 using namespace lal;
 using namespace graphs;
@@ -62,31 +62,31 @@ namespace exe_tests {
 
 namespace syntree_class {
 
-string sdtt_to_string(const tree_structure& t) {
+string sdtt_to_string(const syntactic_dependency_structure_type& t) {
 	switch (t) {
-	case tree_structure::projective: return "prj";
-	case tree_structure::planar: return "pla";
-	case tree_structure::WG1: return "wg1";
-	case tree_structure::EC1: return "1ec";
-	case tree_structure::MH4: return "mh4";
-	case tree_structure::MH5: return "mh5";
-	case tree_structure::none: return "?";
+	case syntactic_dependency_structure_type::projective: return "prj";
+	case syntactic_dependency_structure_type::planar: return "pla";
+	case syntactic_dependency_structure_type::WG1: return "wg1";
+	case syntactic_dependency_structure_type::EC1: return "1ec";
+	case syntactic_dependency_structure_type::MH4: return "mh4";
+	case syntactic_dependency_structure_type::MH5: return "mh5";
+	case syntactic_dependency_structure_type::none: return "?";
 	}
 	// so compiler does not cry
 	return "?";
 }
 
-tree_structure string_to_syntreetype(const string& s) {
-	if (s == "prj") { return tree_structure::projective; }
-	if (s == "pla") { return tree_structure::planar; }
-	if (s == "1ec") { return tree_structure::EC1; }
-	if (s == "wg1") { return tree_structure::WG1; }
-	if (s == "mh4") { return tree_structure::MH4; }
-	if (s == "mh5") { return tree_structure::MH5; }
+syntactic_dependency_structure_type string_to_syntreetype(const string& s) {
+	if (s == "prj") { return syntactic_dependency_structure_type::projective; }
+	if (s == "pla") { return syntactic_dependency_structure_type::planar; }
+	if (s == "1ec") { return syntactic_dependency_structure_type::EC1; }
+	if (s == "wg1") { return syntactic_dependency_structure_type::WG1; }
+	if (s == "mh4") { return syntactic_dependency_structure_type::MH4; }
+	if (s == "mh5") { return syntactic_dependency_structure_type::MH5; }
 	cerr << ERROR << endl;
 	cerr << "    String could not be converted to LAL's tree_structure type." << endl;
 	cerr << "    Input string: " << s << endl;
-	return tree_structure::none;
+	return syntactic_dependency_structure_type::none;
 }
 
 rooted_tree parse_tree_in_line(const string& s) {
@@ -167,7 +167,8 @@ err_type parse_single_file(const string& file) {
 			for (size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					cout << "        "
-						 << sdtt_to_string(static_cast<lal::linarr::tree_structure>(i))
+						 << sdtt_to_string(static_cast<lal::linarr::syntactic_dependency_structure_type>(i))
+						 << (not LAL_classes[i] ? "  <--- missing" : "")
 						 << endl;
 				}
 			}
@@ -175,7 +176,7 @@ err_type parse_single_file(const string& file) {
 			for (size_t i = 0; i < LAL_classes.size(); ++i) {
 				if (LAL_classes[i]) {
 					cout << "        "
-						 << sdtt_to_string(static_cast<lal::linarr::tree_structure>(i))
+						 << sdtt_to_string(static_cast<lal::linarr::syntactic_dependency_structure_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << endl;
 				}
