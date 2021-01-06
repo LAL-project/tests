@@ -88,11 +88,6 @@ link_directories(${LAL_LIB_DIR})
 
 add_executable(
 	tests
-		graphs/exe_construction.hpp
-		graphs/construct.cpp
-		graphs/construct_assert.cpp
-		graphs/construct_utils.cpp
-		
 		generate/arr_all_proj.cpp
 		generate/arr_rand_proj.cpp
 		generate/trees_alf.cpp
@@ -103,8 +98,14 @@ add_executable(
 		generate/trees_rlr.cpp
 		generate/trees_ruf.cpp
 		generate/trees_rur.cpp
-		generate/tree_validity_check.hpp
 		generate/tree_validity_check.cpp
+		generate/tree_validity_check.hpp
+	
+		graphs/construct.cpp
+		graphs/construct_assert.cpp
+		graphs/construct_utils.cpp
+		graphs/exe_construction.hpp
+		graphs/tre_type_classification.cpp
 
 		internal/centre.cpp
 		internal/centroid.cpp
@@ -121,7 +122,11 @@ add_executable(
 		linarr/Dmin_unconstrained.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
+		linarr/linarr_brute_force_testing.cpp
 		linarr/syntree_classification.cpp
+
+		memory/graphs.cpp
+		memory/numeric.cpp
 
 		numeric/integer.cpp
 		numeric/rational.cpp
@@ -138,28 +143,18 @@ add_executable(
 
 		arrgmnt_validity_check.hpp
 		arrgmnt_validity_check.cpp
-
 		definitions.hpp
-
 		exe_tests.hpp
 		exe_tests.cpp
-
-		io_wrapper.hpp
 		io_wrapper.cpp
-
+		io_wrapper.hpp
 		main.cpp
-
-		parse_keywords.hpp
 		parse_keywords.cpp
-
-		test_utils.hpp
+		parse_keywords.hpp
 		test_utils.cpp
-
-		time.hpp
+		test_utils.hpp
 		time.cpp
-
-		tree_classification.hpp
-		tree_classification.cpp
+		time.hpp
 )
 
 # **********************************************************************
