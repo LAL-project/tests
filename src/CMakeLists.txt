@@ -105,7 +105,7 @@ add_executable(
 		graphs/construct_assert.cpp
 		graphs/construct_utils.cpp
 		graphs/exe_construction.hpp
-		graphs/tre_type_classification.cpp
+		graphs/tree_type_classification.cpp
 
 		internal/centre.cpp
 		internal/centroid.cpp
@@ -122,7 +122,7 @@ add_executable(
 		linarr/Dmin_unconstrained.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
-		linarr/linarr_brute_force_testing.cpp
+		linarr/linarr_brute_force_testing.hpp
 		linarr/syntree_classification.cpp
 
 		memory/graphs.cpp
