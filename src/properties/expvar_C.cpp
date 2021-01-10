@@ -108,15 +108,11 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 	all_ulab_free_trees TreeGen;
 	TreeGen.init(n);
 
-	free_tree tree;
 	uint32_t k = 0;
 
 	while (TreeGen.has_next()) {
 		TreeGen.next();
-		tree = TreeGen.get_tree();
-		if (not tree.is_normalised()) {
-			tree.normalise();
-		}
+		const free_tree tree = TreeGen.get_tree();
 
 		const rational Vr_bf = variance_C_freqs_rational(tree);
 		const rational Vr_gen = variance_C_rational(tree);
@@ -139,13 +135,12 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 
 bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_trees) {
 	rand_ulab_free_trees TreeGen(size_trees);
-	free_tree rand_tree;
 	undirected_graph forest;
 
 	for (uint32_t i = 0; i < r; ++i) {
 		forest.clear();
 		for (uint32_t j = 0; j < n_trees; ++j) {
-			rand_tree = TreeGen.get_tree();
+			const free_tree rand_tree = TreeGen.get_tree();
 			forest.disjoint_union(rand_tree);
 		}
 		if (not forest.is_normalised()) {

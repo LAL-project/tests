@@ -203,8 +203,7 @@ err_type test_Unconstrained_class_algorithm(
 				generate::all_ulab_free_trees TreeGen(n);
 				while (TreeGen.has_next()) {
 					TreeGen.next();
-					free_tree tree = TreeGen.get_tree();
-					tree.calculate_tree_type();
+					const free_tree tree = TreeGen.get_tree();
 
 					// filter non-caterpillar
 					if (not tree.is_of_type(tree_type::caterpillar)) { continue; }

@@ -148,8 +148,7 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 		TreeGen.init(n);
 		while (TreeGen.has_next()) {
 			TreeGen.next();
-			free_tree T = TreeGen.get_tree();
-			T.calculate_tree_type();
+			const free_tree T = TreeGen.get_tree();
 
 			const ftree_check err = test_validity_tree(n, T);
 			if (err != ftree_check::correct) {
