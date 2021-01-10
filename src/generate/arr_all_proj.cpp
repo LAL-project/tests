@@ -142,7 +142,7 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 		rand_ulab_rooted_trees TreeGen(n, 1234);
 
 		for (uint32_t nt = 0; nt < ntrees; ++nt) {
-			rooted_tree rT = TreeGen.make_rand_tree();
+			rooted_tree rT = TreeGen.get_tree();
 
 			const err_type e = test_a_tree(rT, nrelabs);
 			if (e != err_type::no_error) {

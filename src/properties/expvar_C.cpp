@@ -145,7 +145,7 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 	for (uint32_t i = 0; i < r; ++i) {
 		forest.clear();
 		for (uint32_t j = 0; j < n_trees; ++j) {
-			rand_tree = TreeGen.make_rand_tree();
+			rand_tree = TreeGen.get_tree();
 			forest.disjoint_union(rand_tree);
 		}
 		if (not forest.is_normalised()) {

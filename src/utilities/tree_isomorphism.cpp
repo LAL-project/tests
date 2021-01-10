@@ -204,7 +204,7 @@ err_type pos_rand_test(ifstream& fin) {
 	GEN Gen(n);
 
 	for (uint32_t t = 0; t < N_trees; ++t) {
-		const Tree cur_tree = Gen.make_rand_tree();
+		const Tree cur_tree = Gen.get_tree();
 		vector<edge> edges_cur = cur_tree.edges();
 		if constexpr (std::is_base_of<directed_graph, Tree>::value) {
 			relab_tree.init(n);

@@ -302,7 +302,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 	fin >> N;									\
 	G Gen(n);									\
 	for (uint32_t i = 0; i < N; ++i) {			\
-		const auto T = Gen.make_rand_tree();	\
+		const auto T = Gen.get_tree();			\
 		test_correctness(T)						\
 	}											\
 }

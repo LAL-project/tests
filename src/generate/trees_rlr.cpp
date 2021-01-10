@@ -72,7 +72,7 @@ err_type exe_gen_trees_rlr(const input_list& inputs, ifstream& fin) {
 	while (fin >> n) {
 		TreeGen.init(n, 100);
 		for (int i = 0; i < 10000; ++i) {
-			const rooted_tree T = TreeGen.make_rand_tree();
+			const rooted_tree T = TreeGen.get_tree();
 
 			const rtree_check err = test_validity_tree(n, T);
 			if (err != rtree_check::correct) {

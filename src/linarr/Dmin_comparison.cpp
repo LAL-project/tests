@@ -226,7 +226,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 
 			generate::rand_ulab_free_trees TreeGen(n);
 			for (uint32_t i = 0; i < N; ++i) {
-				const free_tree tree = TreeGen.make_rand_tree();
+				const free_tree tree = TreeGen.get_tree();
 
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
