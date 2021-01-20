@@ -49,7 +49,7 @@ using namespace std;
 #include <lal/numeric/output.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
-#include <lal/generate/rand_ulab_rooted_trees.hpp>
+#include <lal/generate/all_ulab_rooted_trees.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -136,12 +136,13 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n, ntrees, nrelabs;
-	while (fin >> n >> ntrees >> nrelabs) {
+	uint32_t n, nrelabs;
+	while (fin >> n >> nrelabs) {
 		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n, 1234);
+		all_ulab_rooted_trees TreeGen(n);
 
-		for (uint32_t nt = 0; nt < ntrees; ++nt) {
+		while (TreeGen.has_next()) {
+			TreeGen.next();
 			rooted_tree rT = TreeGen.get_tree();
 
 			const err_type e = test_a_tree(rT, nrelabs);
