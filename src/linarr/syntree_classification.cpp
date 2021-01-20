@@ -94,17 +94,17 @@ rooted_tree parse_tree_in_line(const string& s) {
 	return lal::internal::linear_sequence_to_rtree(L);
 }
 
-vector<bool> parse_classes(string s) {
+vector<bool> parse_ground_classes(string s) {
 	// classes vector
 	vector<bool> classes(lal::linarr::__tree_structure_size, false);
 	if (s.length() == 0) {
 		const syndepstr_type sdtt = string_to_syntreetype("none").first;
-		const size_t idx = static_cast<size_t>(sdtt);
-		classes[idx] = true;
+		classes[static_cast<size_t>(sdtt)] = true;
 		return classes;
 	}
 
 	// parse classes in string
+	int n_accepted_classes = 0;
 	std::replace(s.begin(), s.end(), ',', ' ');
 	stringstream ss(s);
 	string cls;
@@ -113,7 +113,12 @@ vector<bool> parse_classes(string s) {
 		if (accept) {
 			const size_t idx = static_cast<size_t>(sdtt);
 			classes[idx] = true;
+			++n_accepted_classes;
 		}
+	}
+	if (n_accepted_classes == 0) {
+		const syndepstr_type sdtt = string_to_syntreetype("none").first;
+		classes[static_cast<size_t>(sdtt)] = true;
 	}
 	return classes;
 }
@@ -151,7 +156,7 @@ err_type parse_single_file(const string& file) {
 
 		// parse data in line
 		const rooted_tree T = parse_tree_in_line(treestr);
-		const vector<bool> ground_classes = parse_classes(classlist);
+		const vector<bool> ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
 		const vector<bool> LAL_classes = linarr::classify_tree_structure(T);
