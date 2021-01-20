@@ -1,4 +1,4 @@
 TYPE generate-arrangements-all_proj
 INPUT 0
 BODY
-	4 4 10
+	4 10
