@@ -15,6 +15,7 @@ linarr_DIRS=(\
 	"linarr/C/ladder-list" "linarr/C" \
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
+	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
@@ -70,4 +71,9 @@ linarr_Dmin_Unconstrained_YS_DIRS=(\
 	)
 linarr_Dmin_Unconstrained_FC_DIRS=(\
 	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
+	)
+
+# Classification of syntactic dependency structures
+linarr_syndepstruc_class_DIRS=(\
+	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
 	)

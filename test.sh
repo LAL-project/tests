@@ -90,6 +90,7 @@ function show_usage() {
 	echo "        linarr_Dmin_Planar : execute mLA tests for planar arrangements"
 	echo "        linarr_Dmin_Unconstrained_YS : execute mLA tests for unconstrained arrangements -- algorithms: Yossi Shiloach's"
 	echo "        linarr_Dmin_Unconstrained_FC : execute mLA tests for unconstrained arrangements -- algorithms: Fan Chung's"
+	echo "        linarr_syndepstruc_class : execute tests of classification of syntactic dependencies structures"
 	echo ""
 	echo "        memory : execute tests that try to stress the memory"
 	echo "                 Usage of valgrind and execution of a debug compilation are encouraged"

@@ -35,6 +35,7 @@ groups_list=(\
 	"linarr_Dmin_Planar" \
 	"linarr_Dmin_Unconstrained_YS" \
 	"linarr_Dmin_Unconstrained_FC" \
+	"linarr_syndepstruc_class" \
 	"memory" \
 	"numeric" \
 	"properties" \
@@ -79,6 +80,7 @@ all_DIRS=(\
 	"linarr/C/ladder-list" "linarr/C" \
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
+	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
