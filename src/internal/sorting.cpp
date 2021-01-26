@@ -41,6 +41,7 @@
 // C++ includes
 #include <functional>
 #include <iostream>
+#include <utility>
 #include <fstream>
 #include <string>
 #include <random>
@@ -102,49 +103,63 @@ static inline vector<Ui> random_vector_unique(Ui s, Ui n) {
 static inline vector<Ui> random_vector_multiple(Ui s, Ui n) {
 	// always use the same seed
 	std::mt19937 gen(1234);
-
 	std::uniform_int_distribution<Ui> U(0, n);
 	// random vector
 	vector<Ui> R(s);
-
 	for (size_t i = 0; i < R.size(); ++i) { R[i] = U(gen); }
 	return R;
 }
 
 // -----------------------------------------------------------------------------
 
-namespace std {
-template<class T> ostream& operator <<(ostream& os, const tuple<T>& t) {
-	os << std::get<0>(t);
-	return os;
+template<size_t idx = 0>
+struct struct_output {
+
+template<typename V1, typename ... Params>
+static constexpr void output(const std::tuple<V1, Params...>& t, std::ostream& out) {
+	out << " " << std::get<idx>(t);
+
+	if constexpr (idx < sizeof...(Params)) {
+		struct_output<idx+1>::output(t, out);
+	}
 }
-template<class T> ostream& operator <<(ostream& os, const tuple<T,T>& t) {
-	os << std::get<0>(t) << " "
-	   << std::get<1>(t);
-	return os;
+
+static constexpr void output(const Ui& t, std::ostream& out) {
+	out << " " << t;
 }
-template<class T> ostream& operator <<(ostream& os, const tuple<T,T,T>& t) {
-	os << std::get<0>(t) << " "
-	   << std::get<1>(t) << " "
-	   << std::get<2>(t);
-	return os;
+
+};
+
+template<size_t idx = 0>
+struct struct_assign {
+
+template<typename Tuple, typename V1, typename... Params>
+static void assign(
+	Tuple& t,
+	const V1& v1, const Params&... params
+)
+{
+	std::get<idx>(t) = v1;
+
+	if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
+		struct_assign<idx+1>::assign(t, params...);
+	}
 }
-template<class T> ostream& operator <<(ostream& os, const tuple<T,T,T,T>& t) {
-	os << std::get<0>(t) << " "
-	   << std::get<1>(t) << " "
-	   << std::get<2>(t) << " "
-	   << std::get<3>(t);
-	return os;
+
+template<typename Tuple, typename V1, typename... Params>
+static void assign(
+	Tuple& t,
+	V1&& v1, Params&&... params
+)
+{
+	std::get<idx>(t) = std::move(v1);
+
+	if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
+		struct_assign<idx+1>::assign(t, params...);
+	}
 }
-template<class T> ostream& operator <<(ostream& os, const tuple<T,T,T,T,T>& t) {
-	os << std::get<0>(t) << " "
-	   << std::get<1>(t) << " "
-	   << std::get<2>(t) << " "
-	   << std::get<3>(t) << " "
-	   << std::get<4>(t);
-	return os;
-}
-}
+
+};
 
 // -----------------------------------------------------------------------------
 
@@ -179,11 +194,11 @@ err_type __check_sorting
 		cerr << "    Sorting algorithm '" << algo << "' is not correct." << endl;
 		cerr << "    Vector sorted with std::sort:" << endl;
 		cerr << "    ";
-		for (auto k : v1) { cerr << " " << k; }
+		for (auto k : v1) { struct_output<>::output(k, cerr); }
 		cerr << endl;
 		cerr << "    Vector sorted with '" << algo << "':" << endl;
 		cerr << "    ";
-		for (auto k : v2) { cerr << " " << k; }
+		for (auto k : v2) { struct_output<>::output(k, cerr); }
 		cerr << endl;
 		return err_type::test_execution;
 	}
@@ -233,19 +248,19 @@ err_type check_counting_sort(
 	const bool incr, Ui k, Ui s, Ui n
 )
 {
-	auto key1 = [](const t1& t) -> size_t { return std::get<0>(t); };
-	auto key2 = [](const t2& t) -> size_t { return std::get<0>(t); };
-	auto key3 = [](const t3& t) -> size_t { return std::get<0>(t); };
+	const auto key1 = [](const t1& t) -> size_t { return std::get<0>(t); };
+	const auto key2 = [](const t2& t) -> size_t { return std::get<0>(t); };
+	const auto key3 = [](const t3& t) -> size_t { return std::get<0>(t); };
 
-	auto sort1 =
+	const auto sort1 =
 	[&](t1_vec_it begin, t1_vec_it end) -> void {
 		here_counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
-	auto sort2 =
+	const auto sort2 =
 	[&](t2_t begin, t2_t end) -> void {
 		here_counting_sort<t2_t, t2>(begin, end, n, key2, incr);
 	};
-	auto sort3 =
+	const auto sort3 =
 	[&](t3_vec_it begin, t3_vec_it end) -> void {
 		here_counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
 	};
@@ -258,7 +273,7 @@ err_type check_counting_sort(
 		// fill vector of tuples
 		const vector<Ui> r = random_vector_multiple(s, n);
 		for (Ui i = 0; i < s; ++i) {
-			std::get<0>(R[i]) = r[i];
+			struct_assign<>::assign(R[i], r[i]);
 		}
 		// check sorting algorithm
 		E = __check_sorting<t1,t1_vec_it>("counting_sort", R,R, sort1, incr);
@@ -270,8 +285,7 @@ err_type check_counting_sort(
 		const vector<Ui> r1 = random_vector_multiple(s, n);
 		const vector<Ui> r2 = random_vector_multiple(s, n);
 		for (Ui i = 0; i < s; ++i) {
-			std::get<0>(R[i]) = r1[i];
-			std::get<1>(R[i]) = r2[i];
+			struct_assign<>::assign(R[i], r1[i], r2[i]);
 		}
 		// check sorting algorithm
 		E = __check_sorting<t2,t2_t>("counting_sort", R,R, sort2, incr);
@@ -284,9 +298,7 @@ err_type check_counting_sort(
 		const vector<Ui> r2 = random_vector_multiple(s, n);
 		const vector<Ui> r3 = random_vector_multiple(s, n);
 		for (Ui i = 0; i < s; ++i) {
-			std::get<0>(R[i]) = r1[i];
-			std::get<1>(R[i]) = r2[i];
-			std::get<2>(R[i]) = r3[i];
+			struct_assign<>::assign(R[i], r1[i], r2[i], r3[i]);
 		}
 		// check sorting algorithm
 		E = __check_sorting<t3,t3_vec_it>("counting_sort", R,R, sort3, incr);
