@@ -405,6 +405,11 @@ err_type test_rational_move() {
 	check_01v(i1, i2, 50)
 	}
 	{
+	integer i1 = 50;
+	rational i2(std::move(i1));
+	check_01v(i1, i2, 50)
+	}
+	{
 	rational i1 = 1234;
 	vector<rational> v;
 	v.push_back(std::move(i1));
