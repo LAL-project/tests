@@ -2,13 +2,13 @@ TYPE internal-centroid
 INPUT 0
 BODY
 	manual rtree
-	init 6
+	init 6 set_root 0
 	add_edges 5
 	0 2
-	1 2
+	2 1
 	2 3
-	4 3
-	5 3
+	3 4
+	3 5
 	
 	centroid_is 0 2 2 3
 	centroid_is 1 2 2 3
@@ -17,10 +17,10 @@ BODY
 	centroid_is 4 2 2 3
 	centroid_is 5 2 2 3
 	
-	init 6
+	init 6 set_root 0
 	add_edges 5
 	0 2
-	1 2
+	2 1
 	2 3
 	3 4
 	3 5
@@ -32,12 +32,12 @@ BODY
 	centroid_is 4 2 2 3
 	centroid_is 5 2 2 3
 
-	init 5
+	init 5 set_root 0
 	add_edges 4
 	0 2
-	1 2
-	3 2
-	4 2
+	2 1
+	2 3
+	2 4
 	
 	centroid_is 0 1 2
 	centroid_is 1 1 2
@@ -45,10 +45,10 @@ BODY
 	centroid_is 3 1 2
 	centroid_is 4 1 2
 	
-	init 5
+	init 5 set_root 2
 	add_edges 4
 	2 0
-	2 1
+	0 1
 	2 3
 	2 4
 	

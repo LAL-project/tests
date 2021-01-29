@@ -2,12 +2,11 @@ TYPE internal-centroid
 INPUT 0
 BODY
 	manual rtree
-	init 1
+	init 1 set_root 0
+	
 	centroid_is 0 1 0
 	
-	
-	
-	init 2
+	init 2 set_root 0
 	centroid_is 0 1 0
 	centroid_is 1 1 1
 	
@@ -16,7 +15,7 @@ BODY
 	centroid_is 0 2 0 1
 	centroid_is 1 2 0 1
 	
-	init 2
+	init 2 set_root 1
 	centroid_is 0 1 0
 	centroid_is 1 1 1
 	
@@ -25,9 +24,7 @@ BODY
 	centroid_is 0 2 0 1
 	centroid_is 1 2 0 1
 
-
-
-	init 3
+	init 3 set_root 0
 	centroid_is 0 1 0
 	centroid_is 1 1 1
 	centroid_is 2 1 2
@@ -44,25 +41,40 @@ BODY
 	centroid_is 1 1 1
 	centroid_is 2 1 1
 	
-	
-	
-	init 3
+	init 3 set_root 0
 	centroid_is 0 1 0
 	centroid_is 1 1 1
 	centroid_is 2 1 2
 	
 	add_edges 1
-		0 1
-	centroid_is 0 2 0 1
-	centroid_is 1 2 0 1
-	centroid_is 2 1 2
+		0 2
+	centroid_is 0 2 0 2
+	centroid_is 1 1 1
+	centroid_is 2 2 0 2
 	
 	add_edges 1
 		2 1
-	centroid_is 0 1 1
-	centroid_is 1 1 1
-	centroid_is 2 1 1
+	centroid_is 0 1 2
+	centroid_is 1 1 2
+	centroid_is 2 1 2
 
+	init 3 set_root 1
+	centroid_is 0 1 0
+	centroid_is 1 1 1
+	centroid_is 2 1 2
+	
+	add_edges 1
+		1 0
+	centroid_is 0 2 0 1
+	centroid_is 1 2 0 1
+	centroid_is 2 1 2
+	
+	add_edges 1
+		0 2
+	centroid_is 0 1 0
+	centroid_is 1 1 0
+	centroid_is 2 1 0
+	
 	init 3
 	centroid_is 0 1 0
 	centroid_is 1 1 1
@@ -75,24 +87,7 @@ BODY
 	centroid_is 2 1 2
 	
 	add_edges 1
-		1 2
-	centroid_is 0 1 1
-	centroid_is 1 1 1
-	centroid_is 2 1 1
-	
-	init 3
+		0 2
 	centroid_is 0 1 0
-	centroid_is 1 1 1
-	centroid_is 2 1 2
-	
-	add_edges 1
-		1 0
-	centroid_is 0 2 0 1
-	centroid_is 1 2 0 1
-	centroid_is 2 1 2
-	
-	add_edges 1
-		2 1
-	centroid_is 0 1 1
-	centroid_is 1 1 1
-	centroid_is 2 1 1
+	centroid_is 1 1 0
+	centroid_is 2 1 0
