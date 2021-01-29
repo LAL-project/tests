@@ -82,6 +82,7 @@ SOURCES += \
     linarr/Dmin_projective.cpp \
     linarr/Dmin_unconstrained.cpp \
     linarr/approx_exp_C.cpp \
+    linarr/flux.cpp \
     linarr/headedness.cpp \
     linarr/klevel.cpp \
     linarr/syntree_classification.cpp \

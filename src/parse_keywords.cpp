@@ -278,6 +278,9 @@ err_type call_linarr
 		return call_linarr_Dmin(keywords, i + 1, fin);
 	}
 
+	if (key == "dependency_flux") {
+		return parse_header(exe_linarr_dependency_flux, fin);
+	}
 	if (key == "approx_exp_C") {
 		return parse_header(exe_linarr_approx_Exp_C, fin);
 	}
