@@ -64,12 +64,11 @@ using namespace generate;
 #include "test_utils.hpp"
 
 inline bool is_centroidal(
-	const graphs::rooted_tree& t, uint32_t size_cc, node u, char *vis, uint32_t *sizes
+	const graphs::rooted_tree& t, uint32_t size_cc, node u, uint32_t *sizes
 )
 {
 	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
-	memset(vis, 0, t.n_nodes()*sizeof(char));
-	internal::__lal::get_size_subtrees(t, u, vis, sizes);
+	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
@@ -84,12 +83,11 @@ inline bool is_centroidal(
 }
 
 inline bool is_centroidal(
-	const graphs::free_tree& t, uint32_t size_cc, node u, char *vis, uint32_t *sizes
+	const graphs::free_tree& t, uint32_t size_cc, node u, uint32_t *sizes
 )
 {
 	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
-	memset(vis, 0, t.n_nodes()*sizeof(char));
-	internal::__lal::get_size_subtrees(t, u, vis, sizes);
+	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
@@ -114,22 +112,19 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	}
 
 	// allocate and initialise memory
-	char *vis = static_cast<char *>(malloc(n*sizeof(char)));
 	uint32_t *sizes = static_cast<uint32_t *>(malloc(n*sizeof(uint32_t)));
 
 	node u1, u2;
 	u1 = u2 = n;
 
 	for (const node u : reachable) {
-		const bool cc = is_centroidal(t, size_cc, u, vis, sizes);
-
+		const bool cc = is_centroidal(t, size_cc, u, sizes);
 		if (cc) {
 			if (u1 == n) { u1 = u; }
 			else { u2 = u; }
 		}
 	}
 
-	free(vis);
 	free(sizes);
 	return (u1 < u2 ? make_pair(u1,u2) : make_pair(u2,u1));
 }
@@ -149,9 +144,9 @@ bool centroids_are_equal(
 
 namespace exe_tests {
 
-template<class G>
+template<class TREE_TYPE>
 err_type exe_commands_utils_centroid(ifstream& fin) {
-	G t;
+	TREE_TYPE t;
 	uint32_t n;
 
 	string option;
@@ -159,95 +154,104 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		if (command_is_comment(option)) {
 			process_comment(fin);
 		}
-		else if (option == "output") {
-			cout << read_output_string(fin) << endl;
-		}
-		else if (option == "init") {
-			fin >> n;
-			t.init(n);
-		}
-		else if (option == "add_edges") {
-			fin >> n;
-			vector<edge> es(n);
-			for (uint32_t i = 0; i < n; ++i) {
-				fin >> es[i].first >> es[i].second;
-			}
-			t.add_edges(es);
-		}
-		else if (option == "find_centroid") {
-			node s;
-			fin >> s;
-			const auto centroid = internal::retrieve_centroid(t, s);
-			cout << "centroid: " << centroid.first;
-			if (centroid.second < t.n_nodes()) { cout << " " << centroid.second; }
-			cout << endl;
-		}
-		else if (option == "centroid_is") {
-			node start_at;
-			fin >> start_at;
-			const auto centroid = internal::retrieve_centroid(t, start_at);
-
-			uint32_t centroid_size;
-			fin >> centroid_size;
-
-			if (centroid_size == 1) {
-				node u;
-				fin >> u;
-
-				if (centroid.first != u) {
-					cerr << ERROR << endl;
-					cerr << "    Centroid does not coincide." << endl;
-					cerr << "    Started at: " << start_at << endl;
-					cerr << "    Result (algorithm): " << centroid.first << endl;
-					cerr << "    Received (ground truth): " << u << endl;
-					cerr << "    For tree:" << endl;
-					cerr << t << endl;
-					return err_type::test_execution;
+		else {
+			if (option == "set_root") {
+				if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, TREE_TYPE>) {
+					node r;
+					fin >> r;
+					t.set_root(r);
 				}
 			}
-			else if (centroid_size == 2) {
-				node u, v;
+			else if (option == "output") {
+				cout << read_output_string(fin) << endl;
+			}
+			else if (option == "init") {
+				fin >> n;
+				t.init(n);
+			}
+			else if (option == "add_edges") {
+				fin >> n;
+				vector<edge> es(n);
+				for (uint32_t i = 0; i < n; ++i) {
+					fin >> es[i].first >> es[i].second;
+				}
+				t.add_edges(es);
+			}
+			else if (option == "find_centroid") {
+				node s;
+				fin >> s;
+				const auto centroid = internal::retrieve_centroid(t, s);
+				cout << "centroid: " << centroid.first;
+				if (centroid.second < t.n_nodes()) { cout << " " << centroid.second; }
+				cout << endl;
+			}
+			else if (option == "centroid_is") {
+				node start_at;
+				fin >> start_at;
+				const auto centroid = internal::retrieve_centroid(t, start_at);
+
+				uint32_t centroid_size;
+				fin >> centroid_size;
+
+				if (centroid_size == 1) {
+					node u;
+					fin >> u;
+
+					if (centroid.first != u) {
+						cerr << ERROR << endl;
+						cerr << "    Centroid does not coincide." << endl;
+						cerr << "    Started at: " << start_at << endl;
+						cerr << "    Result (algorithm): " << centroid.first << endl;
+						cerr << "    Received (ground truth): " << u << endl;
+						cerr << "    For tree:" << endl;
+						cerr << t << endl;
+						return err_type::test_execution;
+					}
+				}
+				else if (centroid_size == 2) {
+					node u, v;
+					fin >> u >> v;
+					if (u > v) {
+						cerr << ERROR << endl;
+						cerr << "    The first vertex must be smaller than the second." << endl;
+						return err_type::test_format;
+					}
+					if (u == v) {
+						cerr << ERROR << endl;
+						cerr << "    The two vertices are the same: " << u << " <-> " << v << "." << endl;
+						return err_type::test_format;
+					}
+
+					if (centroid.first != u and centroid.second != v) {
+						cerr << ERROR << endl;
+						cerr << "    Centroids do not coincide." << endl;
+						cerr << "    Started at: " << start_at << endl;
+						cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << endl;
+						cerr << "    Received (ground truth): " << u << " " << v << endl;
+						cerr << "    For tree:" << endl;
+						cerr << t << endl;
+						return err_type::test_execution;
+					}
+				}
+				else {
+					cerr << ERROR << endl;
+					cerr << "    Centroid size has to be either 1 or 2. Instead, received '" << centroid_size << "'." << endl;
+					return err_type::test_format;
+				}
+			}
+			else if (option == "output_graph") {
+				cout << t << endl;
+			}
+			else if (option == "remove_edge") {
+				node u,v;
 				fin >> u >> v;
-				if (u > v) {
-					cerr << ERROR << endl;
-					cerr << "    The first vertex must be smaller than the second." << endl;
-					return err_type::test_format;
-				}
-				if (u == v) {
-					cerr << ERROR << endl;
-					cerr << "    The two vertices are the same: " << u << " <-> " << v << "." << endl;
-					return err_type::test_format;
-				}
-
-				if (centroid.first != u and centroid.second != v) {
-					cerr << ERROR << endl;
-					cerr << "    Centroids do not coincide." << endl;
-					cerr << "    Started at: " << start_at << endl;
-					cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << endl;
-					cerr << "    Received (ground truth): " << u << " " << v << endl;
-					cerr << "    For tree:" << endl;
-					cerr << t << endl;
-					return err_type::test_execution;
-				}
+				t.remove_edge(u,v);
 			}
 			else {
 				cerr << ERROR << endl;
-				cerr << "    Centroid size has to be either 1 or 2. Instead, received '" << centroid_size << "'." << endl;
+				cerr << "    Invalid command '" << option << "'." << endl;
 				return err_type::test_format;
 			}
-		}
-		else if (option == "output_graph") {
-			cout << t << endl;
-		}
-		else if (option == "remove_edge") {
-			node u,v;
-			fin >> u >> v;
-			t.remove_edge(u,v);
-		}
-		else {
-			cerr << ERROR << endl;
-			cerr << "    Invalid command '" << option << "'." << endl;
-			return err_type::test_format;
 		}
 	}
 	return err_type::no_error;
