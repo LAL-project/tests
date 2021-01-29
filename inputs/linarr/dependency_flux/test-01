@@ -1,0 +1,11 @@
+TYPE linarr-dependency_flux
+INPUT 0
+BODY
+	              tree	1	0
+	              size	
+	         left_span	
+	        right_span	
+	      dependencies	
+	            weight	
+	   is_left_bouquet	
+	  is_right_bouquet	
