@@ -91,6 +91,7 @@ using namespace iterators;
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
 #define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_edge_orientation"
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
+#define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
 
 namespace exe_tests {
 
@@ -497,8 +498,6 @@ err_type exe_construction_test(ifstream& fin) {
 				gtypes[g2] = RTREE;
 			}
 		}
-
-		// DRTREE
 		else if (option == FUNC_RTREE_FIND_EDGE_ORIENTATION) {
 			fin >> g1;
 			assert_exists_variable(FUNC_RTREE_FIND_EDGE_ORIENTATION, g1)
@@ -516,6 +515,22 @@ err_type exe_construction_test(ifstream& fin) {
 
 			ftreevars[g2] = rtreevars[g1].to_undirected();
 			gtypes[g2] = FTREE;
+		}
+		else if (option == FUNC_RTREE_OUTPUT_SIZE_SUBTREES) {
+			fin >> g1;
+			assert_exists_variable(FUNC_RTREE_DIR_TO_UNDIR, g1)
+			assert_correct_graph_type(FUNC_RTREE_DIR_TO_UNDIR, graph_type(g1), rooted_tree_types)
+			assert_is_rtree(g1, FUNC_RTREE_DIR_TO_UNDIR)
+			const auto& T = rtreevars[g1];
+			if (not T.size_subtrees_valid()) {
+				cerr << ERROR << endl;
+				cerr << "    Tree '" << g1 << "' does not have valid subtree sizes." << endl;
+				return err_type::test_execution;
+			}
+			cout << "Subtree sizes:" << endl;
+			for (node ww = 0; ww < T.n_nodes(); ++ww) {
+				cout << "    " << ww << ": " << T.n_nodes_subtree(ww) << endl;
+			}
 		}
 
 

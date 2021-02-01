@@ -246,9 +246,8 @@ ROOTED TREES
 	Calculates the size of each subtree of the rooted tree.
 	The tree must have a root.
 
-** find_edge_orientation TREE
-	Calculates the orientation of the rooted tree's edges.
-	The tree must have a root.
+** output_size_subtrees TREE
+	Writes to standard output the size of every subtree.
 
 ** find_edge_orientation TREE
 	Calculates the orientation of the rooted tree's edges.
