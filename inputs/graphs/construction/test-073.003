@@ -24,10 +24,50 @@ BODY
 	find_edge_orientation g1
 	assert rtree_orientation_valid g1
 	
-	retrieve_subtree s1 g1 0
+	retrieve_subtree s0 g1 0
+	normalise s0
+	output_graph s0
+	assert is_tree s0
+	assert has_root s0
+	assert num_nodes s0 10
+	assert num_edges s0 9
+	
+	retrieve_subtree s1 g1 1
 	normalise s1
 	output_graph s1
 	assert is_tree s1
 	assert has_root s1
-	assert num_nodes s1 10
-	assert num_edges s1 9
+	assert num_nodes s1 3
+	assert num_edges s1 2
+	
+	retrieve_subtree s4 g1 4
+	normalise s4
+	output_graph s4
+	assert is_tree s4
+	assert has_root s4
+	assert num_nodes s4 1
+	assert num_edges s4 0
+
+	retrieve_subtree s5 g1 5
+	normalise s5
+	output_graph s5
+	assert is_tree s5
+	assert has_root s5
+	assert num_nodes s5 5
+	assert num_edges s5 4
+
+	retrieve_subtree s9 g1 9
+	normalise s9
+	output_graph s9
+	assert is_tree s9
+	assert has_root s9
+	assert num_nodes s9 1
+	assert num_edges s9 0
+	
+	retrieve_subtree s6 g1 6
+	normalise s6
+	output_graph s6
+	assert is_tree s6
+	assert has_root s6
+	assert num_nodes s6 3
+	assert num_edges s6 2
