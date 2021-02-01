@@ -15,6 +15,7 @@ BODY
 	assert has_root g1
 	assert is_tree g1
 	output_graph g1
+	assert invalid_subtree_sizes g1
 	
 	find_edge_orientation g1
 	assert rtree_orientation_valid g1
@@ -26,6 +27,7 @@ BODY
 	assert has_root s1
 	assert num_nodes s1 1
 	assert num_edges s1 0
+	assert invalid_subtree_sizes s1
 	
 	retrieve_subtree s2 g1 2
 	normalise s2
@@ -34,5 +36,4 @@ BODY
 	assert has_root s2
 	assert num_nodes s2 5
 	assert num_edges s2 4
-
-
+	assert invalid_subtree_sizes s2
