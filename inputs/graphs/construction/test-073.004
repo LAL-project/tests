@@ -1,0 +1,35 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree g0 0
+	assert num_nodes g0 0
+	assert num_edges g0 0
+	assert not_has_root g0
+	set_root g0 0
+	assert has_root g0
+	assert is_tree g0
+	output_graph g0
+	
+	
+	
+	create_graph rtree g1 1
+	assert num_nodes g1 1
+	assert num_edges g1 0
+	assert not_has_root g1
+	set_root g1 0
+	assert has_root g1
+	assert is_tree g1
+	output_graph g1
+	find_edge_orientation g1
+	assert rtree_orientation_valid g1
+	calculate_size_subtrees g1
+	assert valid_subtree_sizes g1
+	
+	retrieve_subtree s1 g1 0
+	assert is_tree s1
+	assert has_root s1
+	assert num_nodes s1 1
+	assert num_edges s1 0
+	output_graph s1
+	assert valid_subtree_sizes s1
+	assert num_nodes_subtree s1 0 1
