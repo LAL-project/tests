@@ -236,10 +236,10 @@ void here_counting_sort(
 {
 	const size_t size = std::distance(begin,end);
 	if (incr) {
-		internal::counting_sort<It, T,true>(begin, end, n, size, key);
+		internal::counting_sort<T,It,true>(begin, end, n, size, key);
 	}
 	else {
-		internal::counting_sort<It, T,false>(begin, end, n, size, key);
+		internal::counting_sort<T,It,false>(begin, end, n, size, key);
 	}
 }
 
@@ -265,8 +265,6 @@ err_type check_counting_sort(
 		here_counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
 	};
 
-	err_type E = err_type::no_error;
-
 	if (k == 1) {
 		// vector of tuples
 		t1_vec R(s);
@@ -276,9 +274,10 @@ err_type check_counting_sort(
 			struct_assign<>::assign(R[i], r[i]);
 		}
 		// check sorting algorithm
-		E = __check_sorting<t1,t1_vec_it>("counting_sort", R,R, sort1, incr);
+		return __check_sorting<t1,t1_vec_it>("counting_sort", R,R, sort1, incr);
 	}
-	else if (k == 2) {
+
+	if (k == 2) {
 		// vector of tuples
 		t2_vec R(s);
 		// fill vector of tuples
@@ -288,9 +287,10 @@ err_type check_counting_sort(
 			struct_assign<>::assign(R[i], r1[i], r2[i]);
 		}
 		// check sorting algorithm
-		E = __check_sorting<t2,t2_t>("counting_sort", R,R, sort2, incr);
+		return __check_sorting<t2,t2_t>("counting_sort", R,R, sort2, incr);
 	}
-	else if (k == 3) {
+
+	if (k == 3) {
 		// vector of tuples
 		t3_vec R(s);
 		// fill vector of tuples
@@ -301,14 +301,12 @@ err_type check_counting_sort(
 			struct_assign<>::assign(R[i], r1[i], r2[i], r3[i]);
 		}
 		// check sorting algorithm
-		E = __check_sorting<t3,t3_vec_it>("counting_sort", R,R, sort3, incr);
+		return __check_sorting<t3,t3_vec_it>("counting_sort", R,R, sort3, incr);
 	}
-	else {
-		cerr << ERROR << endl;
-		cerr << "    Size of tuple '" << k << "' not captured." << endl;
-		return err_type::test_format;
-	}
-	return E;
+
+	cerr << ERROR << endl;
+	cerr << "    Size of tuple '" << k << "' not captured." << endl;
+	return err_type::test_format;
 }
 
 err_type exe_rand_sorting(const string& option, ifstream& fin) {
