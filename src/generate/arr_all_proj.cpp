@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/numeric/integer.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/integer_output.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>

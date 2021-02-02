@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/numeric/integer.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/integer_output.hpp>
 using namespace lal;
 using namespace numeric;
 

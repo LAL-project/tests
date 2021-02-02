@@ -53,7 +53,7 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/numeric/rational.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/rational_output.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mean_hierarchical_distance.hpp>

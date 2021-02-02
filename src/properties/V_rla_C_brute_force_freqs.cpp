@@ -272,14 +272,14 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	integer J(0);
 
 	//J.init_ui(f00);  V += exps[0]*f00;
-	J.init_ui(f24);  V += exps[1]*J;
-	J.init_ui(f13);  V += exps[2]*J;
-	J.init_ui(f12);  V += exps[3]*J;
-	J.init_ui(f04);  V += exps[4]*J;
-	J.init_ui(f03);  V += exps[5]*J;
-	J.init_ui(f021); V += exps[6]*J;
-	J.init_ui(f022); V += exps[7]*J;
-	//J.init_ui(f01);  V += exps[8]*f01;
+	J.set_ui(f24);  V += exps[1]*J;
+	J.set_ui(f13);  V += exps[2]*J;
+	J.set_ui(f12);  V += exps[3]*J;
+	J.set_ui(f04);  V += exps[4]*J;
+	J.set_ui(f03);  V += exps[5]*J;
+	J.set_ui(f021); V += exps[6]*J;
+	J.set_ui(f022); V += exps[7]*J;
+	//J.set_ui(f01);  V += exps[8]*f01;
 	return V;
 }
 

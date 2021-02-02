@@ -48,7 +48,7 @@ using namespace std;
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/integer_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;

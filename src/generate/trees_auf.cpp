@@ -47,8 +47,7 @@ using namespace std;
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
-#include <lal/numeric/rational.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/integer_output.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -187,9 +186,6 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 		}
 	}
 
-	for (size_t i = 0; i < SIZE_UFT; ++i) {
-		UFT[i].clear();
-	}
 	TEST_GOODBYE
 	return err_type::no_error;
 }

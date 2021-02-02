@@ -48,7 +48,7 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
-#include <lal/numeric/output.hpp>
+#include <lal/numeric/integer_output.hpp>
 #include <lal/properties/degrees.hpp>
 using namespace lal;
 using namespace graphs;

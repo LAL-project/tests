@@ -46,7 +46,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/directed_graph.hpp>
-#include <lal/numeric/rational.hpp>
+#include <lal/numeric/rational_output.hpp>
 #include <lal/linarr/headedness.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
