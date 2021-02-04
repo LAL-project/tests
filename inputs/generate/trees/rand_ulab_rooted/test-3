@@ -1,0 +1,6 @@
+TYPE generate-trees-rur
+INPUT 0
+BODY
+	10
+	11
+	12

@@ -1,0 +1,8 @@
+TYPE generate-trees-ruf
+INPUT 0
+BODY
+	6	30
+	7	30
+	8	100
+	9	100
+	10	300

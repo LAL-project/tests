@@ -1,0 +1,6 @@
+TYPE generate-trees-rlr
+INPUT 0
+BODY
+	1
+	2
+	3
