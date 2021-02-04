@@ -72,12 +72,11 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 	}
 
 	uint32_t n;
-	all_ulab_free_trees TreeGen;
 	while (fin >> n) {
 		cout << "----------------------------------------" << endl;
 		cout << "n= " << n << endl;
 
-		TreeGen.init(n);
+		all_ulab_free_trees TreeGen(n);
 		int i = 0;
 		while (TreeGen.has_next()) {
 			TreeGen.next();

@@ -56,6 +56,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
+#include "generate/test_exhasutive_enumeration.hpp"
 
 // number of caterpillar trees of a given size
 inline integer num_caterpillar_trees(uint32_t n) {
@@ -73,15 +74,79 @@ inline integer num_caterpillar_trees(uint32_t n) {
 
 namespace exe_tests {
 
+namespace auf {
+struct extra_params {
+	vector<integer> UFT;
+	uint32_t SIZE_UFT;
+};
+
+err_type test_for_n(
+	uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params
+)
+{
+	const auto& UFT = params.UFT;
+	const auto& SIZE_UFT = params.SIZE_UFT;
+
+	// number of caterpillar trees
+	integer n_caterpillar = 0;
+	// number of generated trees
+	integer gen = 0;
+
+	while (TreeGen.has_next()) {
+		TreeGen.next();
+		const free_tree T = TreeGen.get_tree();
+
+		const ftree_check err = test_validity_tree(n, T);
+		if (err != ftree_check::correct) {
+			cerr << ERROR << endl;
+			cerr << "    Tree of index " << gen << " is not correct." << endl;
+			cerr << "    Error: " << ftree_check_to_string(err) << endl;
+			cerr << T << endl;
+			return err_type::test_execution;
+		}
+
+		// compute 'statistics'
+		n_caterpillar += T.is_of_type(tree_type::caterpillar);
+		gen += 1;
+	}
+
+	// check the number of caterpillar trees is correct
+	const integer n_cat = num_caterpillar_trees(n);
+	if (n_cat != n_caterpillar) {
+		cerr << ERROR << endl;
+		cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;
+		cerr << "    Number of vertices: " << n << endl;
+		cerr << "    Formula:  " << n_cat << endl;
+		cerr << "    Detected: " << n_caterpillar << endl;
+		return err_type::test_execution;
+	}
+
+	// make sure that the amount of trees generate coincides
+	// with the series from the OEIS
+	if (n < SIZE_UFT and gen != UFT[n]) {
+		cerr << ERROR << endl;
+		cerr << "    Exhaustive generation of unlabelled free trees" << endl;
+		cerr << "    Amount of trees should be: " << UFT[n] << endl;
+		cerr << "    But generated: " << gen << endl;
+		cerr << "    For a size of " << n << " vertices" << endl;
+		return err_type::test_execution;
+	}
+	return err_type::no_error;
+}
+} // -- namespace auf
+
 err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
-	// size of the vector with the number of unlabelled free trees
-	const uint32_t SIZE_UFT = 37;
 
 	/* BUILD TESTING DATA */
 
 	// from: http://oeis.org/A000055/list
 	// amount of unlabelled free trees
-	vector<integer> UFT(SIZE_UFT, 0);
+	auf::extra_params params;
+	// size of the vector with the number of unlabelled free trees
+	params.SIZE_UFT = 37;
+
+	auto& UFT = params.UFT;
+	UFT = vector<integer>(params.SIZE_UFT, 0);
 	UFT[0] = 1;
 	UFT[1] = 1;
 	UFT[2] = 1;
@@ -131,59 +196,14 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	// number of caterpillar trees
-	integer n_caterpillar;
-	// number of generated trees
-	integer gen;
-
-	all_ulab_free_trees TreeGen;
-
 	uint32_t n;
 	while (fin >> n) {
-		n_caterpillar = 0;
-		gen = 0;
+		const auto err =
+			exhaustive_enumeration_trees::
+			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
+			(n, auf::test_for_n, params);
 
-		// generate all trees
-		TreeGen.init(n);
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			const free_tree T = TreeGen.get_tree();
-
-			const ftree_check err = test_validity_tree(n, T);
-			if (err != ftree_check::correct) {
-				cerr << ERROR << endl;
-				cerr << "    Tree of index " << gen << " is not correct." << endl;
-				cerr << "    Error: " << ftree_check_to_string(err) << endl;
-				cerr << T << endl;
-				return err_type::test_execution;
-			}
-
-			// compute 'statistics'
-			n_caterpillar += T.is_of_type(tree_type::caterpillar);
-			gen += 1;
-		}
-
-		// check the number of caterpillar trees is correct
-		const integer n_cat = num_caterpillar_trees(n);
-		if (n_cat != n_caterpillar) {
-			cerr << ERROR << endl;
-			cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;
-			cerr << "    Number of vertices: " << n << endl;
-			cerr << "    Formula:  " << n_cat << endl;
-			cerr << "    Detected: " << n_caterpillar << endl;
-			return err_type::test_execution;
-		}
-
-		// make sure that the amount of trees generate coincides
-		// with the series from the OEIS
-		if (n < SIZE_UFT and gen != UFT[n]) {
-			cerr << ERROR << endl;
-			cerr << "    Exhaustive generation of unlabelled free trees" << endl;
-			cerr << "    Amount of trees should be: " << UFT[n] << endl;
-			cerr << "    But generated: " << gen << endl;
-			cerr << "    For a size of " << n << " vertices" << endl;
-			return err_type::test_execution;
-		}
+		if (err != err_type::no_error) { return err; }
 	}
 
 	TEST_GOODBYE

@@ -66,11 +66,9 @@ err_type exe_gen_trees_ruf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	rand_ulab_free_trees TreeGen;
-
 	uint32_t n, N;
 	while (fin >> n >> N) {
-		TreeGen.init(n, 100);
+		rand_ulab_free_trees TreeGen(n, 100);
 		for (uint32_t i = 0; i < N; ++i) {
 			const free_tree T = TreeGen.get_tree();
 

@@ -105,8 +105,7 @@ void output_ExpVar_C_forests(const undirected_graph& g) {
 }
 
 bool check_ExpVar_C_all_trees(uint32_t n) {
-	all_ulab_free_trees TreeGen;
-	TreeGen.init(n);
+	all_ulab_free_trees TreeGen(n);
 
 	uint32_t k = 0;
 

@@ -44,7 +44,6 @@
 #include <fstream>
 #include <random>
 #include <cmath>
-#include <set>
 using namespace std;
 
 // lal includes
@@ -160,11 +159,10 @@ err_type exe_utils_tree_iso_manual(ifstream& fin) {
 template<class Tree, class GEN>
 err_type pos_exh_test(ifstream& fin) {
 	Tree relab_tree;
-	GEN Gen;
 
 	uint32_t n, N_relabs;
 	while (fin >> n >> N_relabs) {
-		Gen.init(n);
+		GEN Gen(n);
 
 		while (Gen.has_next()) {
 			Gen.next();

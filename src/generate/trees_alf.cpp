@@ -58,6 +58,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
+#include "generate/test_exhasutive_enumeration.hpp"
 
 // expected second moment of degree over all labelled trees
 inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
@@ -70,6 +71,61 @@ inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 
 namespace exe_tests {
 
+namespace alf {
+struct extra_params { };
+
+err_type test_for_n(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&) {
+	const integer nn = integer_from_ui(n);
+
+	// expected second moment of degree
+	const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
+	rational mmtdeg2 = 0;
+	// number of generated trees
+	integer gen = 0;
+
+	// generate all trees
+	while (TreeGen.has_next()) {
+		TreeGen.next();
+		const free_tree T = TreeGen.get_tree();
+		const ftree_check err = test_validity_tree(n, T);
+		if (err != ftree_check::correct) {
+			cerr << ERROR << endl;
+			cerr << "    Tree of index " << gen << " is not correct." << endl;
+			cerr << "    Error: " << ftree_check_to_string(err) << endl;
+			cerr << T << endl;
+			return err_type::test_execution;
+		}
+
+		// compute 'statistics'
+		mmtdeg2 += properties::mmt_degree_rational(T, 2);
+		gen += 1;
+	}
+
+	// check that the expected second moment of degree is correct
+	mmtdeg2 /= gen;
+	if (mmtdeg2 != exp_mmtdeg2) {
+		cerr << ERROR << endl;
+		cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
+		cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
+		return err_type::test_execution;
+	}
+
+	// Prüfer's formula: make sure that the generator made
+	// as many trees as n^(n - 2)
+	// also: https://oeis.org/A000272/list
+	const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
+	if (gen != total) {
+		cerr << ERROR << endl;
+		cerr << "    Exhaustive generation of labelled free trees" << endl;
+		cerr << "    Amount of trees should be: " << total << endl;
+		cerr << "    But generated: " << gen << endl;
+		cerr << "    For a size of " << n << " vertices" << endl;
+		return err_type::test_execution;
+	}
+	return err_type::no_error;
+}
+} // -- namespace alf
+
 err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
@@ -80,60 +136,14 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	integer gen;
-
-	all_lab_free_trees TreeGen;
-
 	uint32_t n;
 	while (fin >> n) {
-		const integer nn = integer_from_ui(n);
+		const auto err =
+			exhaustive_enumeration_trees::
+			test_exhaustive_enumeration_of_trees<all_lab_free_trees>
+			(n, alf::test_for_n, alf::extra_params{});
 
-		// expected second moment of degree
-		const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
-		rational mmtdeg2 = 0;
-		// number of generated trees
-		gen = 0;
-
-		// generate all trees
-		TreeGen.init(n);
-		while (TreeGen.has_next()) {
-			TreeGen.next();
-			const free_tree T = TreeGen.get_tree();
-			const ftree_check err = test_validity_tree(n, T);
-			if (err != ftree_check::correct) {
-				cerr << ERROR << endl;
-				cerr << "    Tree of index " << gen << " is not correct." << endl;
-				cerr << "    Error: " << ftree_check_to_string(err) << endl;
-				cerr << T << endl;
-				return err_type::test_execution;
-			}
-
-			// compute 'statistics'
-			mmtdeg2 += properties::mmt_degree_rational(T, 2);
-			gen += 1;
-		}
-
-		// check that the expected second moment of degree is correct
-		mmtdeg2 /= gen;
-		if (mmtdeg2 != exp_mmtdeg2) {
-			cerr << ERROR << endl;
-			cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
-			cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
-			return err_type::test_execution;
-		}
-
-		// Prüfer's formula: make sure that the generator made
-		// as many trees as n^(n - 2)
-		// also: https://oeis.org/A000272/list
-		const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
-		if (gen != total) {
-			cerr << ERROR << endl;
-			cerr << "    Exhaustive generation of labelled free trees" << endl;
-			cerr << "    Amount of trees should be: " << total << endl;
-			cerr << "    But generated: " << gen << endl;
-			cerr << "    For a size of " << n << " vertices" << endl;
-			return err_type::test_execution;
-		}
+		if (err != err_type::no_error) { return err; }
 	}
 
 	TEST_GOODBYE

@@ -109,6 +109,7 @@ SOURCES += \
 
 HEADERS += \
     arrgmnt_validity_check.hpp \
+    generate/test_exhasutive_enumeration.hpp \
 	graphs/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \

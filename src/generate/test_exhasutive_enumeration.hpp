@@ -38,53 +38,30 @@
  *
  ********************************************************************/
 
-// C++ includes
-#include <iostream>
-#include <fstream>
-using namespace std;
+#pragma once
 
-// lal includes
-#include <lal/generate/rand_lab_rooted_trees.hpp>
-#include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-
-// custom includes
 #include "definitions.hpp"
-#include "generate/tree_validity_check.hpp"
 
 namespace exe_tests {
+namespace exhaustive_enumeration_trees {
 
-err_type exe_gen_trees_rlr(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+template<
+	typename Gen,
+	typename Callable,
+	typename extra_params
+>
+err_type test_exhaustive_enumeration_of_trees(
+	uint32_t n, const Callable& f, const extra_params& ep
+)
+{
+	Gen TreeGen(n);
+	for (size_t i = 0; i < 5; ++i) {
+		const auto err = f(n, TreeGen, ep);
+		TreeGen.reset();
+		if (err != err_type::no_error) { return err; }
 	}
-
-	// --- do the tests
-
-	uint32_t n;
-	while (fin >> n) {
-		rand_lab_rooted_trees TreeGen(n, 100);
-		for (int i = 0; i < 10000; ++i) {
-			const rooted_tree T = TreeGen.get_tree();
-
-			const rtree_check err = test_validity_tree(n, T);
-			if (err != rtree_check::correct) {
-				cerr << ERROR << endl;
-				cerr << "    Tree of is not correct." << endl;
-				cerr << "    Error: " << rtree_check_to_string(err) << endl;
-				cerr << T << endl;
-				return err_type::test_execution;
-			}
-		}
-	}
-
-	TEST_GOODBYE
 	return err_type::no_error;
 }
 
+} // -- exhaustive_enumeration_trees
 } // -- namespace exe_tests

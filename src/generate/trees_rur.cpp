@@ -66,11 +66,9 @@ err_type exe_gen_trees_rur(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	rand_ulab_rooted_trees TreeGen;
-
 	uint32_t n;
 	while (fin >> n) {
-		TreeGen.init(n, 100);
+		rand_ulab_rooted_trees TreeGen(n, 100);
 		for (int i = 0; i < 10000; ++i) {
 			const rooted_tree T = TreeGen.get_tree();
 
