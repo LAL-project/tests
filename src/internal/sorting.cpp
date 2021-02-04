@@ -331,10 +331,8 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort(
-				begin, end,
-				std::distance(begin, end)
-			);
+			internal::bit_sort<Ui>
+			(begin, end, std::distance(begin, end));
 		};
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e = check_sorting("bit", s, n, this_sort, true);
@@ -351,10 +349,8 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		// bit array
 		vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort_mem(
-				begin, end,
-				std::distance(begin, end), &seen[0]
-			);
+			internal::bit_sort_mem<Ui>
+			(begin, end, std::distance(begin, end), &seen[0]);
 		};
 		// execute test
 		for (Ui k = 0; k < R; ++k) {
