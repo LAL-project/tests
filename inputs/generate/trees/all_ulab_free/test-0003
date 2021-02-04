@@ -1,6 +1,6 @@
 TYPE generate-trees-auf
 INPUT 0
 BODY
-	1
-	2
-	3
+	10
+	11
+	12
