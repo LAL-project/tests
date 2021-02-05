@@ -129,10 +129,6 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			input_flux.resize(n - 1);
 			S = n - 1;
 		}
-		else if (field == "size") {
-			parse_integral_field(get_size);
-			test_integral_field(get_size, "Sizes");
-		}
 		else if (field == "left_span") {
 			parse_integral_field(get_left_span);
 			test_integral_field(get_left_span, "Left spans");
