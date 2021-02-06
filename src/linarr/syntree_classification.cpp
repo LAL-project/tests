@@ -50,6 +50,7 @@ using namespace std;
 #include <lal/linarr/syntactic_dependency_structure_type.hpp>
 #include <lal/linarr/classify_syntactic_dependency_structure.hpp>
 #include <lal/internal/graphs/trees/convert_to_rtree.hpp>
+#include <lal/internal/make_array_with_value.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -94,9 +95,12 @@ rooted_tree parse_tree_in_line(const string& s) {
 	return lal::internal::linear_sequence_to_rtree(L);
 }
 
-vector<bool> parse_ground_classes(string s) {
+array<bool, __tree_structure_type_size> parse_ground_classes(string s)
+{
 	// classes vector
-	vector<bool> classes(lal::linarr::__tree_structure_size, false);
+	auto classes =
+		lal::internal::make_array_with_value<bool, __tree_structure_type_size, false>();
+
 	if (s.length() == 0) {
 		const syndepstr_type sdtt = string_to_syntreetype("none").first;
 		classes[static_cast<size_t>(sdtt)] = true;
@@ -156,10 +160,10 @@ err_type parse_single_file(const string& file) {
 
 		// parse data in line
 		const rooted_tree T = parse_tree_in_line(treestr);
-		const vector<bool> ground_classes = parse_ground_classes(classlist);
+		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const vector<bool> LAL_classes = linarr::classify_tree_structure(T);
+		const auto LAL_classes = linarr::classify_tree_structure(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {
