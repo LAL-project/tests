@@ -148,6 +148,9 @@ COMMANDS AVAILABLE
 	-- in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
 		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
 	
+	-- out_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	
 	-- full_degree GRAPH NODE d
 		asserts that the in-degree plus out-degree equals d.
 	

@@ -299,7 +299,7 @@ BODY
 	assert out_degree g 7 1
 	assert out_degree g 8 0
 	assert out_degree g 9 1
-	assert neighbours_are g 0 3
+	assert out_neighbours_are g 0 3
 		1 3 7
 	assert in_neighbours_are g 3 2
 		2 0
