@@ -64,12 +64,6 @@ using namespace generate;
 
 namespace exe_tests {
 
-inline uint32_t test_degree_for_centre(const rooted_tree& t, const node s)
-{ return t.out_degree(s) + t.in_degree(s); }
-
-inline uint32_t test_degree_for_centre(const free_tree& t, const node s)
-{ return t.degree(s); }
-
 // this is a very simple algorithm to calculate the centre
 template<class T>
 pair<node, node> straightforward_centre(const T& tree, node u) {
@@ -77,7 +71,7 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 
 	// First simple case:
 	// in case the component of x has only one node (node x)...
-	if (test_degree_for_centre(tree, u) == 0) {
+	if (tree.degree(u) == 0) {
 		return make_pair(u, n);
 	}
 
