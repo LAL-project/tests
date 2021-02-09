@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/output.hpp>
+#include <lal/iterators/E_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/rational_output.hpp>
@@ -101,6 +102,21 @@ directed_graph make_rand_dgraph(const undirected_graph& g) {
 	// construct graph and finish
 	dg.add_edges(es);
 	return dg;
+}
+
+template<class G>
+void enum_E(const G& g) {
+	size_t total = 0;
+	E_iterator it(g);
+
+	cout << "Elements of E:" << endl;
+	while (it.has_next()) {
+		it.next();
+		const auto [u,v] = it.get_edge();
+		cout << "(" << u << "," << v << ")" << endl;
+		++total;
+	}
+	cout << "Total number of elements: " << total << endl;
 }
 
 template<class G>
@@ -157,6 +173,7 @@ void MHD(const undirected_graph& g, node r) {
 
 err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_instructions({
+		"enumerate_E", "enumerate_E_rand_dir",
 		"enumerate_Q", "enumerate_Q_rand_dir",
 		"Q_size", "Q_size_rand_dir",
 		"mmt_deg",
@@ -181,7 +198,15 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 
 		stringstream ss(all_instructions);
 		while (ss >> ins) {
-			if (ins == "enumerate_Q") {
+			if (ins == "enumerate_E") {
+				enum_E(G);
+			}
+			else if (ins == "enumerate_E_rand_dir") {
+				const directed_graph dG = make_rand_dgraph(G);
+				cout << dG << endl;
+				enum_E(dG);
+			}
+			else if (ins == "enumerate_Q") {
 				enum_Q(G);
 			}
 			else if (ins == "enumerate_Q_rand_dir") {
