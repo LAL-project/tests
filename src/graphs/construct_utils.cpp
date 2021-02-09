@@ -44,13 +44,28 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/graph.hpp>
+#include <lal/graphs/directed_graph.hpp>
+#include <lal/graphs/undirected_graph.hpp>
 using namespace lal;
 using namespace graphs;
 
 namespace exe_tests {
 
-vector<edge> enumerate_edges_brute_force(const graph& g) {
+vector<edge> enumerate_edges_brute_force(const directed_graph& g) {
+	const uint32_t n = g.n_nodes();
+	set<edge> E;
+	for (node s = 0; s < n; ++s) {
+	for (auto t : g.get_out_neighbours(s)) {
+		edge st(s,t);
+		if (g.is_undirected()) {
+			if (s > t) { std::swap(st.first, st.second); }
+		}
+		E.insert(st);
+	}}
+	return vector<edge>(E.begin(), E.end());
+}
+
+vector<edge> enumerate_edges_brute_force(const undirected_graph& g) {
 	const uint32_t n = g.n_nodes();
 	set<edge> E;
 	for (node s = 0; s < n; ++s) {
@@ -74,7 +89,7 @@ bool share_vertices(const edge_pair& st_uv) {
 	return s == u or s == v or t == u or t == v;
 }
 
-vector<edge_pair> enumerate_Q_brute_force(const graph& g) {
+vector<edge_pair> enumerate_Q_brute_force(const undirected_graph& g) {
 	const uint32_t n = g.n_nodes();
 	set<edge_pair> Q;
 	for (node s = 0; s < n; ++s) {
@@ -82,6 +97,36 @@ vector<edge_pair> enumerate_Q_brute_force(const graph& g) {
 
 		for (node u = s + 1; u < n; ++u) {
 		for (node v : g.get_neighbours(u)) {
+
+			// s != u and t != u
+			if (s == v or s == u) { continue; }
+			if (t == v or t == u) { continue; }
+
+			// an undirected edge should not be sorted
+			edge st(s,t);
+			edge uv(u,v);
+			if (g.is_undirected()) {
+				if (s > t) { std::swap(st.first, st.second); }
+				if (u > v) { std::swap(uv.first, uv.second); }
+			}
+			// the pair should be sorted
+			if (st > uv) { std::swap(st, uv); }
+
+			// no common endpoints
+			Q.insert( edge_pair(st, uv) );
+		}}
+	}}
+	return vector<edge_pair>(Q.begin(), Q.end());
+}
+
+vector<edge_pair> enumerate_Q_brute_force(const directed_graph& g) {
+	const uint32_t n = g.n_nodes();
+	set<edge_pair> Q;
+	for (node s = 0; s < n; ++s) {
+	for (node t : g.get_out_neighbours(s)) {
+
+		for (node u = s + 1; u < n; ++u) {
+		for (node v : g.get_out_neighbours(u)) {
 
 			// s != u and t != u
 			if (s == v or s == u) { continue; }

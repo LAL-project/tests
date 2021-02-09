@@ -69,7 +69,7 @@ inline bool is_centroidal(
 {
 	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
 	internal::get_size_subtrees(t, u, sizes);
-	for (const node v : t.get_neighbours(u)) {
+	for (const node v : t.get_out_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}

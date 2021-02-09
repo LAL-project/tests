@@ -115,11 +115,12 @@ uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
 	return c;
 }
 
-rational E_2Cd_brute_force(graph& g, const linear_arrangement& pi) {
+template<typename GRAPH>
+rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 	rational Ec2(0);
 	const uint32_t n = g.n_nodes();
 
-	iterators::Q_iterator q(g);
+	iterators::Q_iterator<GRAPH> q(g);
 	while (q.has_next()) {
 		q.next();
 		const edge_pair st_uv = q.get_pair();

@@ -344,16 +344,22 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == FUNC_OUTPUT_EDGES) {
 			fin >> g1;
-			assert_exists_variable(FUNC_OUTPUT_EDGES, g1)
-			E_iterator it = (
-				graph_type(g1) == DGRAPH ?
-					E_iterator(dgraphvars[g1]) :
-					E_iterator(ugraphvars[g1])
-			);
-			while (it.has_next()) {
-				it.next();
-				const edge e = it.get_edge();
-				cout << e.first << " " << e.second << endl;
+			assert_exists_variable(FUNC_OUTPUT_EDGES, g1);
+			if (graph_type(g1) == DGRAPH) {
+				E_iterator<directed_graph> it(dgraphvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					const edge e = it.get_edge();
+					cout << e.first << " " << e.second << endl;
+				}
+			}
+			if (graph_type(g1) == UGRAPH) {
+				E_iterator<undirected_graph> it(ugraphvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					const edge e = it.get_edge();
+					cout << e.first << " " << e.second << endl;
+				}
 			}
 		}
 		else if (option == FUNC_GRAPH_CHECK_Q_IT) {
@@ -415,20 +421,29 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == FUNC_OUTPUT_Q) {
 			fin >> g1;
-			assert_exists_variable(FUNC_OUTPUT_Q, g1)
+			assert_exists_variable(FUNC_OUTPUT_Q, g1);
 
-			Q_iterator it = (
-				graph_type(g1) == DGRAPH ?
-					Q_iterator(dgraphvars[g1]) :
-					Q_iterator(ugraphvars[g1])
-			);
-			while (it.has_next()) {
-				it.next();
-				const edge_pair e = it.get_pair();
-				cout
-					<< "(" << e.first.first << " " << e.first.second << "), ("
-					<< e.second.first << " " << e.second.second << ")"
-					<< endl;
+			if (graph_type(g1) == DGRAPH) {
+				Q_iterator<directed_graph> it(dgraphvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					const edge_pair e = it.get_pair();
+					cout
+						<< "(" << e.first.first << " " << e.first.second << "), ("
+						<< e.second.first << " " << e.second.second << ")"
+						<< endl;
+				}
+			}
+			if (graph_type(g1) == UGRAPH) {
+				Q_iterator<undirected_graph> it(ugraphvars[g1]);
+				while (it.has_next()) {
+					it.next();
+					const edge_pair e = it.get_pair();
+					cout
+						<< "(" << e.first.first << " " << e.first.second << "), ("
+						<< e.second.first << " " << e.second.second << ")"
+						<< endl;
+				}
 			}
 		}
 		else if (option == FUNC_Q_SIZE) {
