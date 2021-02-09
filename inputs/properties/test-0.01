@@ -26,6 +26,7 @@ graphs/linear-tree/024 edge-list
 graphs/linear-tree/025 edge-list
 graphs/linear-tree/026 edge-list
 BODY
+	enumerate_E
 	enumerate_Q
 	Q_size
 	mmt_deg 2

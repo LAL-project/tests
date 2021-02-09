@@ -100,6 +100,7 @@ graphs/quasi-star-tree/098 edge-list
 graphs/quasi-star-tree/099 edge-list
 graphs/quasi-star-tree/100 edge-list
 BODY
+	enumerate_E
 	enumerate_Q
 	Q_size
 	mmt_deg 2

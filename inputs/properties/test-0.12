@@ -98,5 +98,6 @@ graphs/star-tree/098 edge-list
 graphs/star-tree/099 edge-list
 graphs/star-tree/100 edge-list
 BODY
+	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir

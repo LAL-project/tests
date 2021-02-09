@@ -3,6 +3,7 @@ INPUT 2
 graphs/complete/17 edge-list
 graphs/complete/18 edge-list
 BODY
+	enumerate_E
 	enumerate_Q
 	Q_size
 	mmt_deg 2

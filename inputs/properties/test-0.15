@@ -20,5 +20,6 @@ graphs/complete-bipartite/5-4 edge-list
 graphs/complete-bipartite/5-5 edge-list
 graphs/complete-bipartite/5-6 edge-list
 BODY
+	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir

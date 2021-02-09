@@ -20,6 +20,7 @@ graphs/complete-bipartite/5-4 edge-list
 graphs/complete-bipartite/5-5 edge-list
 graphs/complete-bipartite/5-6 edge-list
 BODY
+	enumerate_E
 	enumerate_Q
 	Q_size
 	mmt_deg 2

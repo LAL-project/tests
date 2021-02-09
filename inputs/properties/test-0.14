@@ -10,5 +10,6 @@ graphs/er/029-0.20 edge-list
 graphs/er/029-0.50 edge-list
 graphs/er/030-0.50 edge-list
 BODY
+	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir
