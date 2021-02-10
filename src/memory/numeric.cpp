@@ -77,8 +77,8 @@ namespace exe_tests {
 	check_1(i)																\
 	if (i != v) {															\
 		cerr << ERROR << endl;												\
-		cerr << "    Value of i is not " << v << "." << endl;				\
-		cerr << "    Value is: " << i << endl;								\
+		cerr << "    Value of i is not '" << v << "'." << endl;				\
+		cerr << "    Value is          '" << i << "'." << endl;				\
 		return err_type::test_execution;									\
 	}
 
@@ -204,6 +204,12 @@ err_type test_integer_swap() {
 	return err_type::no_error;
 }
 
+#define iff_value "1000000000000000000000000000000000000000000"
+integer integer_from_function() {
+	integer k = string(iff_value);
+	return k;
+}
+
 err_type test_integer_move() {
 	// move constructor
 	{
@@ -216,6 +222,37 @@ err_type test_integer_move() {
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
 	check_0_1v(i1, v[0], 1234);
+	}
+	{
+	vector<integer> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		integer i1 = 1234;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[i], 1234);
+	}
+	}
+	{
+	integer i1 = integer_from_function();
+	check_1v(i1, string(iff_value));
+	}
+	{
+	vector<integer> v;
+	v.push_back(integer_from_function());
+	check_1v(v[0], string(iff_value));
+	}
+	{
+	vector<integer> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		v.push_back(integer_from_function());
+		check_1v(v[i], string(iff_value));
+	}
+	}
+	{
+	vector<integer> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		v.push_back(string(iff_value));
+		check_1v(v[i], string(iff_value));
+	}
 	}
 
 	// move operator
@@ -442,6 +479,12 @@ err_type test_rational_swap() {
 	return err_type::no_error;
 }
 
+#define rff_value "100000000000000000000000000000/89898988293482848912384898234892839299219919111"
+rational rational_from_function() {
+	rational r = string(iff_value);
+	return r;
+}
+
 err_type test_rational_move() {
 	// move constructor
 	{
@@ -467,15 +510,49 @@ err_type test_rational_move() {
 	}
 	{
 	vector<rational> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		rational r1 = 1234;
+		v.push_back(std::move(r1));
+		check_0_1v(r1, v[i], 1234);
+	}
+	}
+	{
+	vector<rational> v;
 	integer i1 = 1234;
 	v.push_back(std::move(i1));
 	check_0_1v(i1, v[0], 1234);
+	}
+	{
+	vector<rational> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		integer i1 = 1234;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[i], 1234);
+	}
 	}
 	{
 	integer i1 = 12;
 	integer i2 = 23;
 	rational r(std::move(i1),std::move(i2));
 	check_00_1v(i1, i2, r, rational("12/23"));
+	}
+	{
+	rational r1 = integer_from_function();
+	check_1v(r1, string(iff_value));
+	}
+	{
+	vector<rational> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		v.push_back(rational_from_function());
+		check_1v(v[i], string(iff_value));
+	}
+	}
+	{
+	vector<rational> v;
+	for (size_t i = 0; i < 1000; ++i) {
+		v.push_back(string(iff_value));
+		check_1v(v[i], string(iff_value));
+	}
 	}
 
 	// move operator
