@@ -6,33 +6,32 @@ mkdir -p $info
 
 group=generate
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=graphs
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=internal
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=linarr
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=memory
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=numeric
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=properties
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
 
 group=utilities
 echo $group" - "$mode
-sbatch -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
-
+sbatch --job-name=test_"$mode" -p short -o $info/"$group".out -e $info/"$group".err ./test.sh --$mode --exe-group=$group --log-file=$info/"$group"_"$mode"_log
