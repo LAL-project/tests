@@ -8,6 +8,7 @@ CMakeLists.txt.user
 .err.*
 .vgd.*
 .time-*
+jobs.*
 
 build-debug/
 build-release/
