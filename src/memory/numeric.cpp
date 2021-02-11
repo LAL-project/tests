@@ -74,7 +74,7 @@ namespace exe_tests {
 	}
 
 #define check_1v(i, v)														\
-	check_1(i)																\
+	check_1(i);																\
 	if (i != v) {															\
 		cerr << ERROR << endl;												\
 		cerr << "    Value of i is not '" << v << "'." << endl;				\
@@ -83,38 +83,38 @@ namespace exe_tests {
 	}
 
 #define check_00(i1, i2)			\
-	check_0(i1)						\
-	check_0(i2)
+	check_0(i1);					\
+	check_0(i2);
 
 #define check_0_1v(i1, i2, v)		\
-	check_0(i1)						\
-	check_1v(i2, v)
+	check_0(i1);					\
+	check_1v(i2, v);
 
 #define check_1v_0(i1, v, i2)		\
-	check_1v(i1, v)					\
-	check_0(i2)
+	check_1v(i1, v);				\
+	check_0(i2);
 
 #define check_1v_1(i1, v, i2)		\
-	check_1v(i1, v)					\
-	check_1(i2)
+	check_1v(i1, v);				\
+	check_1(i2);
 
 #define check_00_1v(i1, i2, i3, v)	\
-	check_0(i1)						\
-	check_0(i2)						\
-	check_1v(i3, v)
+	check_0(i1);					\
+	check_0(i2);					\
+	check_1v(i3, v);
 
 #define check_1v_1v(i1, v1, i2, v2)	\
-	check_1v(i1, v1)				\
-	check_1v(i2, v2)
+	check_1v(i1, v1);				\
+	check_1v(i2, v2);
 
 #define check_1v_1v_1v(i1, v1, i2, v2, i3, v3)	\
-	check_1v(i1, v1)							\
-	check_1v(i2, v2)							\
-	check_1v(i3, v3)
+	check_1v(i1, v1);							\
+	check_1v(i2, v2);							\
+	check_1v(i3, v3);
 
 #define check_11_eq(i1, i2)													\
-	check_1(i1)																\
-	check_1(i2)																\
+	check_1(i1);															\
+	check_1(i2);															\
 	if (i1 != i2) {															\
 		cerr << ERROR << endl;												\
 		cerr << "    i1 is different from i2. They should not be." << endl;	\
@@ -232,13 +232,16 @@ err_type test_integer_move() {
 	}
 	}
 	{
-	integer i1 = integer_from_function();
-	check_1v(i1, string(iff_value));
+	rational k = string("23/45");
+	integer i = k.to_integer();
+	check_1v(i, 0);
+	k = string("109/45");
+	i = k.to_integer();
+	check_1v(i, 2);
 	}
 	{
-	vector<integer> v;
-	v.push_back(integer_from_function());
-	check_1v(v[0], string(iff_value));
+	integer i1 = integer_from_function();
+	check_1v(i1, string(iff_value));
 	}
 	{
 	vector<integer> v;
@@ -253,6 +256,22 @@ err_type test_integer_move() {
 		v.push_back(string(iff_value));
 		check_1v(v[i], string(iff_value));
 	}
+	}
+	{
+	integer i = 1234;
+	vector<integer> v;
+	v.emplace_back(std::move(i));
+	check_1v(v[0], 1234);
+	}
+	{
+	vector<integer> v;
+	v.emplace_back(integer_from_function());
+	check_1v(v[0], string(iff_value));
+	}
+	{
+	vector<integer> v;
+	v.push_back(integer_from_function());
+	check_1v(v[0], string(iff_value));
 	}
 
 	// move operator
@@ -346,6 +365,18 @@ err_type test_integer_copy() {
 	integer i1 = 1234;
 	v.push_back(i1);
 	check_eq(i1, v[0]);
+	}
+	{
+	integer i = 1234;
+	vector<integer> v;
+	v.emplace_back(i);
+	check_1v(v[0], 1234);
+	}
+	{
+	integer i = 1234;
+	vector<integer> v;
+	v.push_back(i);
+	check_1v(v[0], 1234);
 	}
 
 	// copy operator
