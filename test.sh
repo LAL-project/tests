@@ -136,8 +136,11 @@ function show_usage() {
 
 # Check the result of the tester when valgrind is used.
 function check_res_valgrind() {
-	test_name=$1		# test-000.000 (or whatever that the name is)
+	# input test file
+	test_name=$1
+	# the temporary file where the error output is stored
 	test_err=$2
+	# the file where to store the contents of the error output in case there were any
 	valg_err=$3
 	
 	# When using valgrind, we only need to ensure that errors
@@ -157,19 +160,29 @@ function check_res_valgrind() {
 
 # Check the result of the tester when valgrind is NOT used.
 function check_res_no_valgrind() {
-	test_name=$1		# test-000.000 (or whatever that the name is)
-	test_out=$2			# $TEST_OUT.$ID
-	temp_test_err=$3	# $TEST_ERR
-	test_err=$4			# $TEST_ERR.$ID
-	prog_out=$5			# $PROG_OUT
-	base_out_file=$6	# $output_group/$f
+	# input test file
+	test_name=$1
+	# output base file
+	base_out_file=$2
+
+	# the file where to store the output of the program if said output
+	# differs from the contents of the output base file
+	test_out=$3
+	# a temporary file where the error output is stored
+	temp_test_err=$4
+	# the file where to store the error output of the program if it ever
+	# produced an error output (like error messages and whatnot)
+	test_err=$5			
+
+	# output of the execution of the tester
+	prog_out=$6
 	
 	# check if base output exists. If not, issue an error
 	# message and do not execute
 	if [ ! -f $base_out_file ]; then
 		
-		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping..."
-		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping..." >> $log_file
+		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping comparison..."
+		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping comparison..." >> $log_file
 		
 	else
 		# replace Windows-like endlines with Linux-like endlines
@@ -213,6 +226,7 @@ function execute_group() {
 	output=$2
 	progress_1=$3
 	progress_2=$4
+	storage=$5
 	
 	skip=0
 	
@@ -262,7 +276,7 @@ function execute_group() {
 		display_two $progress_1 $progress_2
 		echo ""
 		
-		# execute all tests
+		# retrieve the names of the test files
 		all_test_files=$(ls $input_group | grep test)
 		n_test_files=$(ls $input_group | grep test | wc -l)
 		nth_test=1
@@ -279,24 +293,27 @@ function execute_group() {
 			echo -en "    \e[1;1;34m$f\e[0m"
 			display_two $nth_test $n_test_files
 			
-			PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $TEST_ERR)
+			# Execute the program NOW
+			PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR)
+
+			# increment the amount of tests executed by 1
 			nth_test=$(($nth_test + 1))
 			
 			# parse result of execution command differently,
 			# depending on whether we are using valgrind or not.
 			if [ $use_valgrind == 1 ]; then
-				check_res_valgrind 		\
-					$input_group/$f 	\
-					$TEST_ERR 			\
-					$VALG_ERR.$ID
+				check_res_valgrind 				\
+					$input_group/$f 			\
+					$storage/$TEST_ERR 			\
+					$storage/$VALG_ERR.$ID
 			else
-				check_res_no_valgrind 	\
-					$input_group/$f		\
-					$TEST_OUT.$ID 		\
-					$TEST_ERR 			\
-					$TEST_ERR.$ID		\
-					"$PROG_OUT"			\
-					$output_group/$f
+				check_res_no_valgrind 			\
+					$input_group/$f				\
+					$output_group/$f			\
+					$storage/$TEST_OUT.$ID 		\
+					$storage/$TEST_ERR 			\
+					$storage/$TEST_ERR.$ID		\
+					"$PROG_OUT"
 			fi
 		done
 		
@@ -313,7 +330,7 @@ function execute_group() {
 usage=0
 # the directory of input tests to be executed
 input_dir=""
-# the directory of output tests to be executed
+# the directory of output files corresponding to the inputs
 output_dir=""
 # use valgrind
 use_valgrind=0
@@ -324,6 +341,9 @@ release=0
 exe_group=0
 # log file
 log_file="execution_log"
+# where to put the error outputs, the outputs that differ from the base
+# output files, and the valgrind outputs (if any)
+storage_dir="."
 # compile (or not) the executable
 compile=1
 
@@ -355,6 +375,11 @@ for i in "$@"; do
 		shift
 		;;
 		
+		--storage-dir=*)
+		storage_dir="${i#*=}"
+		shift
+		;;
+
 		--no-make)
 		compile=0
 		shift
@@ -476,6 +501,14 @@ elif [ "$EXE_MODE" == "release" ]; then
 fi
 
 ########################################################################
+# Display where the files are being written
+
+log_file=$storage_dir/$log_file
+
+echo "    Storage directory: '$storage_dir'"
+echo "    Log file: '$log_file'"
+
+########################################################################
 # Execute the tests
 
 echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> $log_file
@@ -521,12 +554,12 @@ if [ $exe_group != 0 ]; then
 			out="${DIRS_TO_PROCESS[$i2]}"
 
 			echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> $log_file
-			execute_group $in $out $idx $n_dirs
+			execute_group $in $out $idx $n_dirs $storage_dir
 			echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> $log_file
 		done
 	fi
 else
-	execute_group $input_dir $output_dir 1 1
+	execute_group $input_dir $output_dir 1 1 $storage_dir
 fi
 
 echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> $log_file
