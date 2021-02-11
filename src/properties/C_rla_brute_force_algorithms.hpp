@@ -61,7 +61,7 @@ namespace exe_tests {
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
 lal::numeric::rational variance_C_freqs_rational
-(const lal::graphs::undirected_graph& g, uint32_t nthreads = 8);
+(const lal::graphs::undirected_graph& g);
 
 
 /**
@@ -75,7 +75,7 @@ lal::numeric::rational variance_C_freqs_rational
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
 lal::numeric::rational variance_C_freqs_Q_rational
-(const std::vector<lal::edge_pair>& Q, uint32_t nthreads = 8);
+(const std::vector<lal::edge_pair>& Q);
 
 /**
  * @brief Computes the variance of the number of crossings of a graph.

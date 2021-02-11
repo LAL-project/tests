@@ -51,6 +51,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
+#include <lal/internal/data_array.hpp>
 using namespace lal;
 using namespace numeric;
 using namespace graphs;
@@ -175,13 +176,13 @@ frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
 // ---------------------
 // Number of crossings C
 
-rational variance_C_freqs_rational(const undirected_graph& g, uint32_t nthreads) {
+rational variance_C_freqs_rational(const undirected_graph& g) {
 	// compute set Q(g)
-	return variance_C_freqs_Q_rational(g.Q(), nthreads);
+	const auto Q = g.Q();
+	return variance_C_freqs_Q_rational(Q);
 }
 
-rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthreads) {
-	assert(nthreads > 0);
+rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	// frequencies f00 and f01 are not measured
 	// because they have expectation 0
 
@@ -203,74 +204,19 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	uint32_t f04(0),  f12(0), 	f13(0);
 	uint32_t f24(0);
 
-	const size_t frac = Q.size()/nthreads;
-
-	if (Q.size() <= 128*nthreads) {
-		// for a small enough set Q
-		for (const edge_pair& q1 : Q) {
-			for (const edge_pair& q2 : Q) {
-				frequency_type ft = edge_pair_type(q1, q2);
-				classify(ft, f021, f022, f03, f04, f12, f13, f24)
-			}
+	// for a small enough set Q
+	for (const edge_pair& q1 : Q) {
+		for (const edge_pair& q2 : Q) {
+			frequency_type ft = edge_pair_type(q1, q2);
+			classify(ft, f021, f022, f03, f04, f12, f13, f24);
 		}
-	}
-	else {
-		// values of each frequency per thread
-		/*
-		vector<uint32_t> _f021(nthreads, 0), _f022(nthreads, 0), _f03(nthreads, 0);
-		vector<uint32_t> _f04(nthreads, 0), _f12(nthreads, 0), _f13(nthreads, 0);
-		vector<uint32_t> _f24(nthreads, 0);
-		*/
-
-		uint32_t * __restrict__ all_memory = static_cast<uint32_t *>(
-			malloc(7*nthreads*sizeof(uint32_t))
-		);
-		memset(all_memory, 0, 7*nthreads*sizeof(uint32_t));
-		uint32_t * __restrict__ _f021 = &all_memory[0*nthreads];
-		uint32_t * __restrict__ _f022 = &all_memory[1*nthreads];
-		uint32_t * __restrict__ _f03  = &all_memory[2*nthreads];
-		uint32_t * __restrict__ _f04  = &all_memory[3*nthreads];
-		uint32_t * __restrict__ _f12  = &all_memory[4*nthreads];
-		uint32_t * __restrict__ _f13  = &all_memory[5*nthreads];
-		uint32_t * __restrict__ _f24  = &all_memory[6*nthreads];
-
-		#pragma omp parallel num_threads(nthreads)
-		{
-		const size_t tid = static_cast<size_t>(omp_get_thread_num());
-
-		const size_t begin = tid*frac;
-        const size_t end = (tid == nthreads - 1 ? Q.size() : (tid + 1)*frac);
-
-		for (size_t p_q1 = begin; p_q1 < end; ++p_q1) {
-			for (size_t p_q2 = 0; p_q2 < Q.size(); ++p_q2) {
-				const edge_pair& q1 = Q[p_q1];
-				const edge_pair& q2 = Q[p_q2];
-
-				frequency_type ft = edge_pair_type(q1, q2);
-				classify(ft,
-					_f021[tid], _f022[tid], _f03[tid],
-					_f04[tid], _f12[tid], _f13[tid],
-					_f24[tid]
-				)
-			}
-		}
-		}
-
-		// reduce
-		for (uint16_t i = 0; i < nthreads; ++i) {
-			f021 += _f021[i];	f022 += _f022[i];	f03 += _f03[i];
-			f04 += _f04[i];		f12 += _f12[i];		f13 += _f13[i];
-			f24 += _f24[i];
-		}
-
-		free(all_memory);
 	}
 
 	// value of V_rla[C]
 	rational V(0);
 
+	{
 	integer J(0);
-
 	//J.init_ui(f00);  V += exps[0]*f00;
 	J.set_ui(f24);  V += exps[1]*J;
 	J.set_ui(f13);  V += exps[2]*J;
@@ -280,6 +226,8 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q, uint32_t nthrea
 	J.set_ui(f021); V += exps[6]*J;
 	J.set_ui(f022); V += exps[7]*J;
 	//J.set_ui(f01);  V += exps[8]*f01;
+	}
+
 	return V;
 }
 
