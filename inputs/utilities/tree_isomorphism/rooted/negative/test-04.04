@@ -4,6 +4,8 @@ BODY
 	manual
 	rooted
 	
+	NOT_ISOMORPHIC
+	
 	4
 	0 1 1 2 2 3		0
 	0 1 1 2 1 3		0
