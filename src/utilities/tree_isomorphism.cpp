@@ -39,11 +39,9 @@
  ********************************************************************/
 
 // C++ includes
-#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <random>
-#include <cmath>
 using namespace std;
 
 // lal includes
@@ -68,6 +66,22 @@ using namespace utilities;
 
 namespace exe_tests {
 
+std::optional<bool> read_should_be_or_not(ifstream& fin) {
+	string should_what;
+	fin >> should_what;
+	if (should_what == "ISOMORPHIC") {
+		return true;
+	}
+	if (should_what == "NOT_ISOMORPHIC") {
+		return false;
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    String '" << should_what << "' is not a valid identifier of the test." << endl;
+	cerr << "    Should be either: 'ISOMORPHIC' or 'NOT_ISOMORPHIC'." << endl;
+	return {};
+}
+
 template<class T>
 void read_free(ifstream& fin, T& t) {
 	vector<edge> edges(t.n_nodes() - 1);
@@ -87,21 +101,39 @@ void read_rooted(ifstream& fin, T& t) {
 }
 
 err_type free_isomorphism_test(ifstream& fin) {
+	const auto sbi = read_should_be_or_not(fin);
+	if (not sbi.has_value()) { return err_type::test_format; }
+	const bool should_be_isomorphic = *sbi;
+
 	uint32_t n;
 	while (fin >> n) {
 		free_tree t1(n), t2(n);
 		read_free(fin, t1);
 		read_free(fin, t2);
 
-		cout << "Are isomorphic? "
-			 << std::boolalpha
-			 << utilities::are_trees_isomorphic(t1,t2)
-			 << endl;
+		const bool are_iso = utilities::are_trees_isomorphic(t1,t2);
+		cout << "Are isomorphic? " << std::boolalpha << are_iso << endl;
+
+		if (should_be_isomorphic and not are_iso) {
+			cerr << ERROR << endl;
+			cerr << "    The trees should be isomorphic but they are NOT!" << endl;
+			return err_type::test_execution;
+		}
+
+		if (not should_be_isomorphic and are_iso) {
+			cerr << ERROR << endl;
+			cerr << "    The trees should not be isomorphic but they are!" << endl;
+			return err_type::test_execution;
+		}
 	}
 	return err_type::no_error;
 }
 
 err_type rooted_isomorphism_test(ifstream& fin) {
+	const auto sbi = read_should_be_or_not(fin);
+	if (not sbi.has_value()) { return err_type::test_format; }
+	const bool should_be_isomorphic = *sbi;
+
 	uint32_t n;
 	while (fin >> n) {
 		rooted_tree t1(n), t2(n);
@@ -127,10 +159,20 @@ err_type rooted_isomorphism_test(ifstream& fin) {
 			return err_type::test_format;
 		}
 
-		cout << "Are isomorphic? "
-			 << std::boolalpha
-			 << utilities::are_trees_isomorphic(t1,t2)
-			 << endl;
+		const bool are_iso = utilities::are_trees_isomorphic(t1,t2);
+		cout << "Are isomorphic? " << std::boolalpha << are_iso << endl;
+
+		if (should_be_isomorphic and not are_iso) {
+			cerr << ERROR << endl;
+			cerr << "    The trees should be isomorphic but they are NOT!" << endl;
+			return err_type::test_execution;
+		}
+
+		if (not should_be_isomorphic and are_iso) {
+			cerr << ERROR << endl;
+			cerr << "    The trees should not be isomorphic but they are!" << endl;
+			return err_type::test_execution;
+		}
 	}
 	return err_type::no_error;
 }
