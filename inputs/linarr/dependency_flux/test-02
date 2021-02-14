@@ -6,8 +6,6 @@ BODY
 			right_span  1
 		  dependencies	1 0 1
 				weight  1
-	   is_left_bouquet  0
-	  is_right_bouquet  0
 
 
 				  tree  2	2 0
@@ -15,5 +13,3 @@ BODY
 			right_span  1
 		  dependencies	1 0 1
 				weight  1
-	   is_left_bouquet	0
-	  is_right_bouquet	0

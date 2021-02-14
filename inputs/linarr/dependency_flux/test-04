@@ -8,8 +8,6 @@ BODY
 						1 1 2
 						1 2 3
 	            weight	1 1 1
-	   is_left_bouquet	0 0 0
-	  is_right_bouquet	0 0 0
 
 
 	              tree	4	4 4 4 0
@@ -19,8 +17,6 @@ BODY
 						2 0 3 1 3
 						3 0 3 1 3 2 3
 	            weight	1 1 1
-	   is_left_bouquet	0 1 1
-	  is_right_bouquet	0 0 0
 
 
 	              tree	4	3 3 0 3
@@ -30,8 +26,6 @@ BODY
 						2 0 2 1 2
 						1 2 3
 	            weight	1 1 1
-	   is_left_bouquet	0 1 0
-	  is_right_bouquet	0 0 0
 
 
 	              tree	4	2 0 2 2
@@ -41,8 +35,6 @@ BODY
 						2 1 2 1 3
 						1 1 3
 	            weight	1 1 1
-	   is_left_bouquet	0 0 0
-	  is_right_bouquet	0 1 0
 
 
 				  tree	4	4 3 4 0
@@ -52,5 +44,3 @@ BODY
 						2 0 3 1 2
 						2 0 3 2 3
 	            weight	1 2 1
-	   is_left_bouquet	0 0 1
-	  is_right_bouquet	0 0 0
