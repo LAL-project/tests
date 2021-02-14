@@ -169,14 +169,6 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			parse_integral_field(get_weight);
 			test_integral_field(get_weight, "Weights");
 		}
-		else if (field == "is_left_bouquet") {
-			parse_integral_field(is_left_bouquet);
-			test_integral_field(is_left_bouquet, "Left bouquets");
-		}
-		else if (field == "is_right_bouquet") {
-			parse_integral_field(is_right_bouquet);
-			test_integral_field(is_right_bouquet, "Right bouquets");
-		}
 		else {
 			cerr << ERROR << endl;
 			cerr << "    Input field/option not valid." << endl;
