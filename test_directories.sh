@@ -36,6 +36,7 @@ groups_list=(\
 	"linarr_Dmin_Unconstrained_YS" \
 	"linarr_Dmin_Unconstrained_FC" \
 	"linarr_syndepstruc_class" \
+	"linarr_comp_depenendency_flux" \
 	"memory" \
 	"numeric" \
 	"properties" \
@@ -48,60 +49,3 @@ groups_list=(\
 	"utilities_isomorphism_small" \
 	"utilities_isomorphism_big" \
 	)
-
-# all tests available
-all_DIRS=(\
-	"generate/trees/all_lab_free" "generate/trees/all_lab_free" \
-	"generate/trees/all_lab_rooted" "generate/trees/all_lab_rooted" \
-	"generate/trees/all_ulab_free" "generate/trees/all_ulab_free" \
-	"generate/trees/all_ulab_rooted" "generate/trees/all_ulab_rooted" \
-	"generate/trees/rand_lab_free" "generate/trees/rand_lab_free" \
-	"generate/trees/rand_lab_rooted" "generate/trees/rand_lab_rooted" \
-	"generate/trees/rand_ulab_free" "generate/trees/rand_ulab_free" \
-	"generate/trees/rand_ulab_rooted" "generate/trees/rand_ulab_rooted" \
-	"generate/arrangements/all_proj" "generate/arrangements/all_proj" \
-	"generate/arrangements/rand_proj" "generate/arrangements/rand_proj" \
-	"graphs/construction" "graphs/construction" \
-	"graphs/tree_types" "graphs/tree_types" \
-	"internal/sorting" "internal/sorting" \
-	"internal/traversal" "internal/traversal" \
-	"internal/centre" "internal/centre" \
-	"internal/centroid" "internal/centroid" \
-	"linarr/E_2Cd" "linarr/E_2Cd" \
-	"linarr/D" "linarr/D" \
-	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
-	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
-	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
-	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
-	"linarr/D/Dmin/" "linarr/D/Dmin/" \
-	"linarr/C/dyn-prog" "linarr/C" \
-	"linarr/C/dyn-prog-list" "linarr/C" \
-	"linarr/C/ladder" "linarr/C" \
-	"linarr/C/ladder-list" "linarr/C" \
-	"linarr/C/stack-based" "linarr/C" \
-	"linarr/C/stack-based-list" "linarr/C" \
-	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
-	"linarr/headedness" "linarr/headedness" \
-	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
-	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
-	"linarr/MDD" "linarr/MDD" \
-	"numeric/integer" "numeric/integer" \
-	"numeric/rational" "numeric/rational" \
-	"properties" "properties" \
-	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
-	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
-	"properties/exp-var-C/formula-Q" "properties/exp-var-C" \
-	"properties/exp-var-C/trees" "properties/exp-var-C" \
-	"properties/exp-var-C/forests" "properties/exp-var-C" \
-	"properties/exp-var-D/general-formula" "properties/exp-var-D" \
-	"utilities/tree_isomorphism" "utilities/tree_isomorphism" \
-	)
-
-source test_dir_generate.sh
-source test_dir_graphs.sh
-source test_dir_internal.sh
-source test_dir_linarr.sh
-source test_dir_memory.sh
-source test_dir_numeric.sh
-source test_dir_properties.sh
-source test_dir_utilities.sh

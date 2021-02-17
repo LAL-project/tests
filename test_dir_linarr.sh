@@ -16,6 +16,7 @@ linarr_DIRS=(\
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
 	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
+	"linarr/dependency-flux" "linarr/dependency-flux" \
 	"linarr/headedness" "linarr/headedness" \
 	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
 	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
@@ -76,4 +77,9 @@ linarr_Dmin_Unconstrained_FC_DIRS=(\
 # Classification of syntactic dependency structures
 linarr_syndepstruc_class_DIRS=(\
 	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
+	)
+
+# Classification of dependency fluxes
+linarr_comp_dependency_flux_DIRS=(\
+	"linarr/dependency-flux" "linarr/dependency-flux" \
 	)
