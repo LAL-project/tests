@@ -5,6 +5,15 @@
 
 source test_directories.sh
 
+source test_dir_generate.sh
+source test_dir_graphs.sh
+source test_dir_internal.sh
+source test_dir_linarr.sh
+source test_dir_memory.sh
+source test_dir_numeric.sh
+source test_dir_properties.sh
+source test_dir_utilities.sh
+
 ########################################################################
 # Functions
 
@@ -91,6 +100,7 @@ function show_usage() {
 	echo "        linarr_Dmin_Unconstrained_YS : execute mLA tests for unconstrained arrangements -- algorithms: Yossi Shiloach's"
 	echo "        linarr_Dmin_Unconstrained_FC : execute mLA tests for unconstrained arrangements -- algorithms: Fan Chung's"
 	echo "        linarr_syndepstruc_class : execute tests of classification of syntactic dependencies structures"
+	echo "        linarr_comp_dependency_flux : execute tests of dependency flux computation"
 	echo ""
 	echo "        memory : execute tests that try to stress the memory"
 	echo "                 Usage of valgrind and execution of a debug compilation are encouraged"
@@ -323,6 +333,35 @@ function execute_group() {
 	fi
 }
 
+function apply_group() {
+	exe_group=$1		# execution group
+	
+	# if the group is valid, then execute it
+	echo "Executing group '$exe_group'"
+	
+	# variable name
+	dir_name="$exe_group""_DIRS[@]"
+	# actual array
+	DIRS_TO_PROCESS=("${!dir_name}")
+	# size of the array
+	n_dirs=${#DIRS_TO_PROCESS[@]}
+	# number of input directories
+	n_dirs=$(($n_dirs/2))
+	
+	# execute
+	for ((i=0; i<$n_dirs; ++i)); do
+		idx=$(($i + 1))
+		i1=$((2*$i    ))
+		i2=$((2*$i + 1))
+		in="${DIRS_TO_PROCESS[$i1]}"
+		out="${DIRS_TO_PROCESS[$i2]}"
+
+		echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> $log_file
+		execute_group $in $out $idx $n_dirs $storage_dir
+		echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> $log_file
+	done
+}
+
 ########################################################################
 # Code starts here
 
@@ -524,39 +563,20 @@ if [ $exe_group != 0 ]; then
 			;;
 	esac
 	
-	cont=1
-	if [ $array_has == 0 ]; then
+	if [ $array_has == 1 ]; then
+		
+		if [ "$exe_group" == "all" ]; then
+			for g in "generate" "graphs" "internal" "linarr" "memory" "numeric" "properties" "numeric"; do
+				apply_group $g
+			done
+		else
+			apply_group $exe_group
+		fi
+		
+	else
 		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
 		
 		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
-		cont=0
-	fi
-	
-	if [ $cont = 1 ]; then
-		# if the group is valid, then execute it
-		echo "Executing group '$exe_group'"
-		
-		# variable name
-		dir_name="$exe_group""_DIRS[@]"
-		# actual array
-		DIRS_TO_PROCESS=("${!dir_name}")
-		# size of the array
-		n_dirs=${#DIRS_TO_PROCESS[@]}
-		# number of input directories
-		n_dirs=$(($n_dirs/2))
-		
-		# execute
-		for ((i=0; i<$n_dirs; ++i)); do
-			idx=$(($i + 1))
-			i1=$((2*$i    ))
-			i2=$((2*$i + 1))
-			in="${DIRS_TO_PROCESS[$i1]}"
-			out="${DIRS_TO_PROCESS[$i2]}"
-
-			echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> $log_file
-			execute_group $in $out $idx $n_dirs $storage_dir
-			echo "$(date +"%Y/%m/%d.%T")        Finished executing tests in $in." >> $log_file
-		done
 	fi
 else
 	execute_group $input_dir $output_dir 1 1 $storage_dir
