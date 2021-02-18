@@ -82,7 +82,23 @@ SOURCES += \
     linarr/syntree_classification.cpp \
 	main.cpp \
     memory/graphs.cpp \
+    memory/graphs_dgraph_copy.cpp \
+    memory/graphs_dgraph_move.cpp \
+    memory/graphs_ftree_copy.cpp \
+    memory/graphs_ftree_move.cpp \
+    memory/graphs_rtree_copy.cpp \
+    memory/graphs_rtree_move.cpp \
+    memory/graphs_ugraph_copy.cpp \
+    memory/graphs_ugraph_copy_into_ftree.cpp \
+    memory/graphs_ugraph_move.cpp \
+    memory/graphs_ugraph_move_into_ftree.cpp \
     memory/numeric.cpp \
+    memory/numeric_integer_copy.cpp \
+    memory/numeric_integer_move.cpp \
+    memory/numeric_integer_swap.cpp \
+    memory/numeric_rational_copy.cpp \
+    memory/numeric_rational_move.cpp \
+    memory/numeric_rational_swap.cpp \
     numeric/integer.cpp \
     numeric/rational.cpp \
 	parse_keywords.cpp \
@@ -108,6 +124,8 @@ HEADERS += \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
     linarr/linarr_brute_force_testing.hpp \
+    memory/graphs.hpp \
+    memory/numeric.hpp \
     parse_keywords.hpp \
     exe_tests.hpp \
 	io_wrapper.hpp \

@@ -38,114 +38,96 @@
  *
  ********************************************************************/
 
+#include "graphs.hpp"
+
 // C++ includes
-#include <iostream>
-#include <fstream>
-#include <map>
 using namespace std;
 
-// custom includes
-#include "definitions.hpp"
-#include "memory/graphs.hpp"
-
 // lal includes
-#include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/generate/all_ulab_rooted_trees.hpp>
 using namespace lal;
 using namespace graphs;
 
-#define MOVE_UGRAPH
-#define COPY_UGRAPH
-#define MOVE_DGRAPH
-#define COPY_DGRAPH
-#define MOVE_UGRAPH_INTO_FTREE
-#define COPY_UGRAPH_INTO_FTREE
-#define MOVE_FTREE
-#define COPY_FTREE
-#define MOVE_RTREE
-#define COPY_RTREE
-
 namespace exe_tests {
 
-void test_generate() {
-	begin_function
+void test_copy_directed_graph() {
+	begin_function;
 
+	// copy constructor
 	{
 	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	const free_tree f = Gen.get_tree();
-	}
+	directed_graph g1(10);
+	output_graph("g1",g1);
 
-	{
-	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	free_tree f = Gen.get_tree();
-	}
-
-	{
-	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	const rooted_tree f = Gen.get_tree();
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	directed_graph g2 = g1;
+	output_graph("g1",g1);
+	output_graph("g2",g2)
 	}
 
 	{
 	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	rooted_tree f = Gen.get_tree();
-	}
-}
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1);
 
-err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+	cout << "Copy constructor: 'g2 <- g1'" << endl;
+	directed_graph g2 = g1;
+	output_graph("g1",g1);
+	output_graph("g2",g2)
 	}
 
-#if defined MOVE_UGRAPH
-	test_move_undirected_graph();
-#endif
-#if defined COPY_UGRAPH
-	test_copy_undirected_graph();
-#endif
+	{
+	begin_case;
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1);
 
-#if defined MOVE_DGRAPH
-	test_move_directed_graph();
-#endif
-#if defined COPY_DGRAPH
-	test_copy_directed_graph();
-#endif
+	cout << "Copy constructor: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(g1);
+	output_graph("g1",g1);
+	output_graph("v[0]", v[0]);
+	}
 
-#if defined MOVE_UGRAPH_INTO_FTREE
-	test_move_ugraph_into_ftree();
-#endif
-#if defined COPY_UGRAPH_INTO_FTREE
-	test_copy_ugraph_into_ftree();
-#endif
+	// copy operator
+	{
+	begin_case;
+	directed_graph g1(10);
+	output_graph("g1",g1);
 
-#if defined MOVE_FTREE
-	test_move_free_tree();
-#endif
-#if defined COPY_FTREE
-	test_copy_free_tree();
-#endif
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	directed_graph g2;
+	g2 = g1;
+	output_graph("g1",g1);
+	output_graph("g2",g2)
+	}
 
-#if defined MOVE_RTREE
-	test_move_rooted_tree();
-#endif
-#if defined COPY_RTREE
-	test_copy_rooted_tree();
-#endif
+	{
+	begin_case;
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1);
 
-	test_generate();
+	cout << "Copy operator: 'g2 <- g1'" << endl;
+	directed_graph g2;
+	g2 = g1;
+	output_graph("g1",g1);
+	output_graph("g2",g2)
+	}
 
-	TEST_GOODBYE
-	return err_type::no_error;
+	{
+	begin_case;
+	directed_graph g1(6);
+	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	output_graph("g1",g1);
+
+	cout << "Copy operator: 'v[0] <- g1'" << endl;
+	vector<directed_graph> v;
+	v.push_back(directed_graph());
+	v[0] = g1;
+	output_graph("g1",g1);
+	output_graph("v[0]", v[0]);
+	}
 }
 
 } // -- namespace exe_tests

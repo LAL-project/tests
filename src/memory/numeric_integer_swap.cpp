@@ -38,113 +38,80 @@
  *
  ********************************************************************/
 
+#include "memory/numeric.hpp"
+
 // C++ includes
-#include <iostream>
-#include <fstream>
-#include <map>
+#include <vector>
 using namespace std;
 
-// custom includes
-#include "definitions.hpp"
-#include "memory/graphs.hpp"
-
 // lal includes
-#include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/generate/all_ulab_rooted_trees.hpp>
+#include <lal/numeric/integer_output.hpp>
 using namespace lal;
-using namespace graphs;
-
-#define MOVE_UGRAPH
-#define COPY_UGRAPH
-#define MOVE_DGRAPH
-#define COPY_DGRAPH
-#define MOVE_UGRAPH_INTO_FTREE
-#define COPY_UGRAPH_INTO_FTREE
-#define MOVE_FTREE
-#define COPY_FTREE
-#define MOVE_RTREE
-#define COPY_RTREE
+using namespace numeric;
 
 namespace exe_tests {
 
-void test_generate() {
-	begin_function
-
+err_type test_integer_swap() {
 	{
-	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	const free_tree f = Gen.get_tree();
+	integer i1;
+	integer i2;
+	check_1v_1v(i1, 0, i2, 0);
+	i1.swap(i2);
+	check_1v_1v(i1, 0, i2, 0);
 	}
-
 	{
-	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	free_tree f = Gen.get_tree();
-	}
-
-	{
-	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	const rooted_tree f = Gen.get_tree();
+	integer i1;
+	integer i2;
+	check_1v_1v(i1, 0, i2, 0);
+	i2.swap(i1);
+	check_1v_1v(i1, 0, i2, 0);
 	}
 
 	{
-	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	rooted_tree f = Gen.get_tree();
+	integer i1 = 50;
+	integer i2;
+	check_1v_1v(i1, 50, i2, 0);
+	i1.swap(i2);
+	check_1v_1v(i1, 0, i2, 50);
 	}
-}
-
-err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+	{
+	integer i1 = 50;
+	integer i2;
+	check_1v_1v(i1, 50, i2, 0);
+	i2.swap(i1);
+	check_1v_1v(i1, 0, i2, 50);
 	}
 
-#if defined MOVE_UGRAPH
-	test_move_undirected_graph();
-#endif
-#if defined COPY_UGRAPH
-	test_copy_undirected_graph();
-#endif
+	{
+	integer i1;
+	integer i2 = 50;
+	check_1v_1v(i1, 0, i2, 50);
+	i1.swap(i2);
+	check_1v_1v(i1, 50, i2, 0);
+	}
+	{
+	integer i1;
+	integer i2 = 50;
+	check_1v_1v(i1, 0, i2, 50);
+	i2.swap(i1);
+	check_1v_1v(i1, 50, i2, 0);
+	}
 
-#if defined MOVE_DGRAPH
-	test_move_directed_graph();
-#endif
-#if defined COPY_DGRAPH
-	test_copy_directed_graph();
-#endif
+	{
+	integer i1 = 50;
+	integer i2 = 2;
+	check_1v_1v(i1, 50, i2, 2);
+	i1.swap(i2);
+	check_1v_1v(i1, 2, i2, 50);
+	}
+	{
+	integer i1 = 50;
+	integer i2 = 2;
+	check_1v_1v(i1, 50, i2, 2);
+	i2.swap(i1);
+	check_1v_1v(i1, 2, i2, 50);
+	}
 
-#if defined MOVE_UGRAPH_INTO_FTREE
-	test_move_ugraph_into_ftree();
-#endif
-#if defined COPY_UGRAPH_INTO_FTREE
-	test_copy_ugraph_into_ftree();
-#endif
-
-#if defined MOVE_FTREE
-	test_move_free_tree();
-#endif
-#if defined COPY_FTREE
-	test_copy_free_tree();
-#endif
-
-#if defined MOVE_RTREE
-	test_move_rooted_tree();
-#endif
-#if defined COPY_RTREE
-	test_copy_rooted_tree();
-#endif
-
-	test_generate();
-
-	TEST_GOODBYE
 	return err_type::no_error;
 }
 

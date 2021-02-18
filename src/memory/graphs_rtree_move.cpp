@@ -38,114 +38,108 @@
  *
  ********************************************************************/
 
+#include "graphs.hpp"
+
 // C++ includes
-#include <iostream>
-#include <fstream>
-#include <map>
 using namespace std;
 
-// custom includes
-#include "definitions.hpp"
-#include "memory/graphs.hpp"
-
 // lal includes
-#include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/generate/all_ulab_rooted_trees.hpp>
 using namespace lal;
 using namespace graphs;
 
-#define MOVE_UGRAPH
-#define COPY_UGRAPH
-#define MOVE_DGRAPH
-#define COPY_DGRAPH
-#define MOVE_UGRAPH_INTO_FTREE
-#define COPY_UGRAPH_INTO_FTREE
-#define MOVE_FTREE
-#define COPY_FTREE
-#define MOVE_RTREE
-#define COPY_RTREE
-
 namespace exe_tests {
 
-void test_generate() {
-	begin_function
+void test_move_rooted_tree() {
+	begin_function;
 
+	// move constructor
 	{
 	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	const free_tree f = Gen.get_tree();
-	}
+	rooted_tree t1(5);
+	output_rooted_tree_info("t1", t1)
 
-	{
-	begin_case;
-	generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	free_tree f = Gen.get_tree();
-	}
-
-	{
-	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	const rooted_tree f = Gen.get_tree();
+	cout << "Move constructor: 't2 <- t1'" << endl;
+	rooted_tree t2 = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
 	}
 
 	{
 	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	rooted_tree f = Gen.get_tree();
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Move constructor: 't2 <- t1'" << endl;
+	rooted_tree t2 = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
 	}
-}
 
-err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+	{
+	begin_case;
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	cout << "Move constructor: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(std::move(t1));
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
 	}
 
-#if defined MOVE_UGRAPH
-	test_move_undirected_graph();
-#endif
-#if defined COPY_UGRAPH
-	test_copy_undirected_graph();
-#endif
+	// move operator
+	{
+	begin_case;
+	rooted_tree t1(5);
+	output_rooted_tree_info("t1", t1)
 
-#if defined MOVE_DGRAPH
-	test_move_directed_graph();
-#endif
-#if defined COPY_DGRAPH
-	test_copy_directed_graph();
-#endif
+	cout << "Move constructor: 't2 <- t1'" << endl;
+	rooted_tree t2;
+	t2 = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
 
-#if defined MOVE_UGRAPH_INTO_FTREE
-	test_move_ugraph_into_ftree();
-#endif
-#if defined COPY_UGRAPH_INTO_FTREE
-	test_copy_ugraph_into_ftree();
-#endif
+	{
+	begin_case;
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
 
-#if defined MOVE_FTREE
-	test_move_free_tree();
-#endif
-#if defined COPY_FTREE
-	test_copy_free_tree();
-#endif
+	cout << "Move constructor: 't2 <- t1'" << endl;
+	rooted_tree t2;
+	t2 = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
 
-#if defined MOVE_RTREE
-	test_move_rooted_tree();
-#endif
-#if defined COPY_RTREE
-	test_copy_rooted_tree();
-#endif
+	{
+	begin_case;
+	rooted_tree t1(5);
+	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
 
-	test_generate();
-
-	TEST_GOODBYE
-	return err_type::no_error;
+	cout << "Move constructor: 'v[0] <- t1'" << endl;
+	vector<rooted_tree> v;
+	v.push_back(rooted_tree());
+	v[0] = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("v[0]", v[0])
+	}
 }
 
 } // -- namespace exe_tests
