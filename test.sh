@@ -161,7 +161,7 @@ function check_res_valgrind() {
 		echo "See result in $valg_err"
 		mv $test_err $valg_err
 		
-		echo "$(date +"%Y/%m/%d.%T")        Error: when executing test $test_name -- Valgrind produced errors..." >> $log_file
+		echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Valgrind produced errors..." >> $log_file
 	else
 		# no errors were detected
 		echo -e "\e[1;1;32mOk\e[0m"
