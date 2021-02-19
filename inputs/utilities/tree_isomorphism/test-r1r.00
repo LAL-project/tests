@@ -2,7 +2,7 @@ TYPE utilities-tree_isomorphism
 INPUT 0
 BODY
 	automatic
-	free positive random
+	rooted positive random
 	50 100 100
 	60 100 100
 	70 100 100
