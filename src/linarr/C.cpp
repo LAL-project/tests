@@ -97,7 +97,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint32_t n = uG.n_nodes();
+	const uint32_t n = uG.num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -107,7 +107,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < uG.n_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}

@@ -100,19 +100,19 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
-	const uint32_t n = uG.n_nodes();
+	const uint32_t n = uG.num_nodes();
 
 	// amount of linear arrangements
 	uint32_t n_linarrs;
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > T(n_linarrs, vector<node>(uG.n_nodes()));
-	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(uG.n_nodes()));
+	vector<vector<node> > T(n_linarrs, vector<node>(uG.num_nodes()));
+	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(uG.num_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < uG.n_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.num_nodes(); ++u) {
 			fin >> T[i][u];
 			pis[i][ T[i][u] ] = u;
 		}

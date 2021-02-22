@@ -207,13 +207,13 @@ err_type process_assert(
 	else if (assert_what == ASSERT_GRAPH_NUM_NODES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_GRAPH_NUM_NODES, g1);
-		if (mfunction(g1, n_nodes()) != n) {
+		if (mfunction(g1, num_nodes()) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NUM_NODES);
 			cerr << "    Graph '" << g1 << "' does not have "
 				 << n << " nodes." << endl;
 			cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, n_nodes()) << " nodes." << endl;
+				 << mfunction(g1, num_nodes()) << " nodes." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -222,13 +222,13 @@ err_type process_assert(
 	else if (assert_what == ASSERT_GRAPH_NUM_EDGES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_GRAPH_NUM_EDGES, g1);
-		if (mfunction(g1, n_edges()) != n) {
+		if (mfunction(g1, num_edges()) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NUM_EDGES);
 			cerr << "    Graph '" << g1 << "' does not have "
 				 << n << " edges." << endl;
 			cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, n_edges()) << " edges." << endl;
+				 << mfunction(g1, num_edges()) << " edges." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -638,14 +638,14 @@ err_type process_assert(
 	else if (assert_what == ASSERT_TREE_SIZE_CC) {
 		fin >> g1 >> u >> n;
 		assert_exists_variable(ASSERT_TREE_SIZE_CC, g1)
-		if (mfunction_trees(g1, n_nodes_component(u)) != n) {
+		if (mfunction_trees(g1, num_nodes_component(u)) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_SIZE_CC)
 			cerr << "    The component of vertex '" << u << "'"
 				 << " in '" << g1 << "' does not have "
 				 << n << " vertices." << endl;
 			cerr << "    It actually has: "
-				 << mfunction_trees(g1, n_nodes_component(u))
+				 << mfunction_trees(g1, num_nodes_component(u))
 				 << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);

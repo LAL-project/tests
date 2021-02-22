@@ -66,7 +66,7 @@ inline void compute_data_gen_graphs_Q
 )
 {
 	// adjacency matrix
-	vector<vector<bool> > A(g.n_nodes(), vector<bool>(g.n_nodes(), false));
+	vector<vector<bool> > A(g.num_nodes(), vector<bool>(g.num_nodes(), false));
 	E_iterator it(g);
 	while (it.has_next()) {
 		it.next();
@@ -129,7 +129,7 @@ inline void compute_data_gen_graphs_Q
 }
 
 rational variance_C_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
-	const bigint m = g.n_edges();
+	const bigint m = g.num_edges();
 
 	// ----------------------------
 	// compute terms dependent of Q

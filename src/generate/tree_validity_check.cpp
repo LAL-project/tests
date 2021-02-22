@@ -68,10 +68,10 @@ ftree_check test_validity_tree(const uint32_t n, const free_tree& T) {
 	if (not T.is_tree()) {
 		return ftree_check::not_a_tree;
 	}
-	if (T.n_nodes() != n) {
+	if (T.num_nodes() != n) {
 		return ftree_check::diff_n_verts;
 	}
-	if (T.n_edges() != n - 1) {
+	if (T.num_edges() != n - 1) {
 		return ftree_check::diff_n_edges;
 	}
 	return ftree_check::correct;
@@ -96,10 +96,10 @@ rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
 	if (not T.is_tree()) {
 		return rtree_check::not_a_tree;
 	}
-	if (T.n_nodes() != n) {
+	if (T.num_nodes() != n) {
 		return rtree_check::diff_n_verts;
 	}
-	if (T.n_edges() != n - 1) {
+	if (T.num_edges() != n - 1) {
 		return rtree_check::diff_n_edges;
 	}
 	if (not T.has_root()) {

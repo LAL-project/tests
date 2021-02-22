@@ -308,12 +308,12 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 			}
 			// check size
-			if (iter_edges.size() != mfunction(g1, n_edges())) {
+			if (iter_edges.size() != mfunction(g1, num_edges())) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_CHECK_EDGE_IT)
 				cerr << "    The amount of edges obtained differs from the amount of edges in the graph." << endl;
 				cerr << "    Number of edges obtained: " << iter_edges.size() << endl;
-				cerr << "    Number of edges in the graph: " << mfunction(g1, n_edges()) << endl;
+				cerr << "    Number of edges in the graph: " << mfunction(g1, num_edges()) << endl;
 				return err_type::test_execution;
 			}
 			sort(iter_edges.begin(), iter_edges.end());
@@ -543,7 +543,7 @@ err_type exe_construction_test(ifstream& fin) {
 				return err_type::test_execution;
 			}
 			cout << "Subtree sizes:" << endl;
-			for (node ww = 0; ww < T.n_nodes(); ++ww) {
+			for (node ww = 0; ww < T.num_nodes(); ++ww) {
 				cout << "    " << ww << ": " << T.n_nodes_subtree(ww) << endl;
 			}
 		}

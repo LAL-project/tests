@@ -85,7 +85,7 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 			cout << i << ")" << endl;
 
 			// for each node, make a rooted tree at that node
-			for (node r = 0; r < t.n_nodes(); ++r) {
+			for (node r = 0; r < t.num_nodes(); ++r) {
 				const rooted_tree R(t, r);
 				const rational mhd = properties::mean_hierarchical_distance_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;

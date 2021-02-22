@@ -57,7 +57,7 @@
 template<typename G>
 inline bool equal_graphs(const G& g1, const G& g2)
 {
-	if (g1.n_nodes() != g2.n_nodes()) { return false; }
+	if (g1.num_nodes() != g2.num_nodes()) { return false; }
 
 	const auto get_neighs =
 	[](const G& g, lal::node u) {
@@ -69,7 +69,7 @@ inline bool equal_graphs(const G& g1, const G& g2)
 		}
 	};
 
-	const uint32_t n = g1.n_nodes();
+	const uint32_t n = g1.num_nodes();
 	for (lal::node u = 0; u < n; ++u) {
 		const lal::neighbourhood& n1 = get_neighs(g1, u);
 		const lal::neighbourhood& n2 = get_neighs(g2, u);

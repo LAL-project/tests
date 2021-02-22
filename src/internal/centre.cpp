@@ -67,7 +67,7 @@ namespace exe_tests {
 // this is a very simple algorithm to calculate the centre
 template<class T>
 pair<node, node> straightforward_centre(const T& tree, node u) {
-	const auto n = tree.n_nodes();
+	const auto n = tree.num_nodes();
 
 	// First simple case:
 	// in case the component of x has only one node (node x)...
@@ -81,7 +81,7 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 	// ------------------------------------
 	// 1. find vertex 'v' farthest from 'u'
 
-	vector<uint32_t> dists(tree.n_nodes());
+	vector<uint32_t> dists(tree.num_nodes());
 	dists[u] = 0;
 
 	// farthest vertex from 'u' and distance
@@ -109,7 +109,7 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 	// track of the vertices from 'v' to 'w'
 
 	fill(dists.begin(), dists.end(), 0);
-	vector<vector<node>> paths(tree.n_nodes());
+	vector<vector<node>> paths(tree.num_nodes());
 	paths[v] = vector<node>(1, v);
 
 	max_dist = 0;
@@ -177,7 +177,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 			fin >> s;
 			const auto centre = internal::retrieve_centre(t, s);
 			cout << "centre: " << centre.first;
-			if (centre.second < t.n_nodes()) { cout << " " << centre.second; }
+			if (centre.second < t.num_nodes()) { cout << " " << centre.second; }
 			cout << endl;
 		}
 		else if (option == "centre_is") {

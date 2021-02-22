@@ -67,7 +67,7 @@ inline bool is_centroidal(
 	const graphs::rooted_tree& t, uint32_t size_cc, node u, uint32_t *sizes
 )
 {
-	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
+	memset(sizes, 0, t.num_nodes()*sizeof(uint32_t));
 	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_out_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
@@ -86,7 +86,7 @@ inline bool is_centroidal(
 	const graphs::free_tree& t, uint32_t size_cc, node u, uint32_t *sizes
 )
 {
-	memset(sizes, 0, t.n_nodes()*sizeof(uint32_t));
+	memset(sizes, 0, t.num_nodes()*sizeof(uint32_t));
 	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
@@ -98,7 +98,7 @@ inline bool is_centroidal(
 
 template<class T>
 pair<node,node> straightforward_centroid(const T& t, node x) {
-	const uint32_t n = t.n_nodes();
+	const uint32_t n = t.num_nodes();
 
 	uint32_t size_cc = 0;
 	vector<node> reachable;
@@ -136,7 +136,7 @@ bool centroids_are_equal(
 )
 {
 	if (c1.first != c2.first) { return false; }
-	if (c1.second < t.n_nodes()) {
+	if (c1.second < t.num_nodes()) {
 		return c1.second == c2.second;
 	}
 	return true;
@@ -176,7 +176,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 			fin >> s;
 			const auto centroid = internal::retrieve_centroid(t, s);
 			cout << "centroid: " << centroid.first;
-			if (centroid.second < t.n_nodes()) { cout << " " << centroid.second; }
+			if (centroid.second < t.num_nodes()) { cout << " " << centroid.second; }
 			cout << endl;
 		}
 		else if (option == "centroid_is") {

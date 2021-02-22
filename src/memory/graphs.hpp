@@ -73,16 +73,16 @@
 }
 
 #define output_graph(n,t)											\
-	cout << MLINE << n << ".n_nodes()= " << t.n_nodes() << endl;	\
-	cout << MLINE << n << ".n_edges()= " << t.n_edges() << endl;	\
+	cout << MLINE << n << ".num_nodes()= " << t.num_nodes() << endl;	\
+	cout << MLINE << n << ".num_edges()= " << t.num_edges() << endl;	\
 	output_edges(n, t)												\
 
 #define output_free_tree_info(n,t)									\
 	output_graph(n,t)												\
-	for (node u = 0; u < t.n_nodes(); ++u) {						\
+	for (node u = 0; u < t.num_nodes(); ++u) {						\
 	cout << MLINE													\
-		 << n << ".n_nodes_component(" << u << ")= "				\
-		 << t.n_nodes_component(u) << endl;							\
+		 << n << ".num_nodes_component(" << u << ")= "				\
+		 << t.num_nodes_component(u) << endl;							\
 	}
 
 #define output_rooted_tree_info(n,t)							\
@@ -93,7 +93,7 @@
 			 << t.get_root() << endl;							\
 	}															\
 	if (t.size_subtrees_valid()) {								\
-		for (node u = 0; u < t.n_nodes(); ++u) {				\
+		for (node u = 0; u < t.num_nodes(); ++u) {				\
 			cout << MLINE										\
 				 << n << ".n_nodes_subtree(" << u << ")= "		\
 				 << t.n_nodes_subtree(u) << endl;				\

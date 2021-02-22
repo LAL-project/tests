@@ -71,7 +71,7 @@ integer factorial(int64_t f) {
 
 integer amount_projective(const rooted_tree& rT) {
 	integer k = 1;
-	for (node u = 0; u < rT.n_nodes(); ++u) {
+	for (node u = 0; u < rT.num_nodes(); ++u) {
 		k *= factorial(rT.out_degree(u) + 1);
 	}
 	return k;
