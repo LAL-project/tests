@@ -50,7 +50,6 @@ using namespace std;
 // lal includes
 #include <lal/definitions.hpp>
 #include <lal/graphs/output.hpp>
-using namespace lal;
 
 // custom includes
 #include "definitions.hpp"
@@ -60,16 +59,16 @@ using namespace lal;
 namespace exe_tests {
 
 template<class T> using Solver =
-	function< pair<uint32_t, linear_arrangement>(const T&) >;
+	function< pair<uint32_t, lal::linear_arrangement>(const T&) >;
 
 template<class T> using TreeEval =
-	function< uint32_t (const T&, const linear_arrangement&) >;
+	function< uint32_t (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using ArrgmtCheck =
-	function< string (const T&, const linear_arrangement&) >;
+	function< string (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using InputConv =
-	function< T (const vector<node>&) >;
+	function< T (const vector<lal::node>&) >;
 
 template<class T> using TreeInit =
 	function< void (T&) >;
@@ -107,6 +106,11 @@ err_type linarr_brute_force_testing(
 		// construct tree
 		T tree = conv(node_list);
 		tree_initializer(tree);
+		if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, T>) {
+#if defined DEBUG
+			assert(tree.find_edge_orientation());
+#endif
+		}
 
 		// read value of D calculated by brute force
 		uint32_t brute_force_value;
@@ -120,7 +124,7 @@ err_type linarr_brute_force_testing(
 			uint32_t mult; fin >> mult;	// multiplicity
 			char star; fin >> star;		// *
 			// arrangement
-			linear_arrangement input_arr(n);
+			lal::linear_arrangement input_arr(n);
 			for (uint32_t i = 0; i < n; ++i) {
 				fin >> input_arr[i];
 			}
@@ -142,7 +146,7 @@ err_type linarr_brute_force_testing(
 
 		// execute library's algorithm
 		const auto library_res = solver(tree);
-		const linear_arrangement& library_arr = library_res.second;
+		const lal::linear_arrangement& library_arr = library_res.second;
 
 		// ensure that the arrangement is a planar permutation
 		{

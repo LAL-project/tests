@@ -104,20 +104,20 @@ err_type test_rational_move() {
 	}
 	{
 	rational r1 = integer_from_function();
-	check_1v(r1, string(iff_value));
+	check_1v(r1, rational(string(iff_value)));
 	}
 	{
 	vector<rational> v;
 	for (size_t i = 0; i < 1000; ++i) {
 		v.push_back(rational_from_function());
-		check_1v(v[i], string(iff_value));
+		check_1v(v[i], rational(string(iff_value)));
 	}
 	}
 	{
 	vector<rational> v;
 	for (size_t i = 0; i < 1000; ++i) {
 		v.push_back(string(iff_value));
-		check_1v(v[i], string(iff_value));
+		check_1v(v[i], rational(string(iff_value)));
 	}
 	}
 
