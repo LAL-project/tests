@@ -79,7 +79,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			return is_arrangement_projective(t, arr);
 		},
 		[](const vector<node>& v) {
-			return internal::linear_sequence_to_rtree(v);
+			return internal::head_vector_to_rtree(v);
 		},
 		[](rooted_tree& t) {
 			t.calculate_size_subtrees();

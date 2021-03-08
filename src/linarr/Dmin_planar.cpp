@@ -79,7 +79,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			return is_arrangement_planar(t, arr);
 		},
 		[](const vector<node>& v) {
-			return internal::linear_sequence_to_ftree(v).first;
+			return internal::head_vector_to_ftree(v).first;
 		},
 		[](free_tree&) { },
 		fin

@@ -142,7 +142,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 
 		// parse data in line
 		const auto L = tree_type_class::parse_treestr(treestr);
-		const auto P = lal::internal::linear_sequence_to_ftree(L);
+		const auto P = lal::internal::head_vector_to_ftree(L);
 		rooted_tree rT = rooted_tree(P.first, P.second);
 		free_tree fT = P.first;
 

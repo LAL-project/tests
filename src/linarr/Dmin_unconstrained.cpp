@@ -153,7 +153,7 @@ err_type test_bf_algorithm(
 		},
 		// convert what you read from input to a (free) tree
 		[](const vector<node>& v) {
-			return internal::linear_sequence_to_ftree(v).first;
+			return internal::head_vector_to_ftree(v).first;
 		},
 		// function to initialise a (free) tree
 		[](free_tree&) { },

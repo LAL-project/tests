@@ -147,11 +147,11 @@ err_type exe_construction_test(ifstream& fin) {
 			bool io_res = false;
 			if (type == DGRAPH) {
 				dgraphvars[g1] = directed_graph();
-				io_res = io::read_edge_list(file, dgraphvars[g1], Boolean1 == "true");
+				dgraphvars[g1] = *io::read_edge_list<directed_graph>(file, Boolean1 == "true");
 			}
 			else if (type == UGRAPH) {
 				ugraphvars[g1] = undirected_graph();
-				io_res = io::read_edge_list(file, ugraphvars[g1], Boolean1 == "true");
+				ugraphvars[g1] = *io::read_edge_list<undirected_graph>(file, Boolean1 == "true");
 			}
 			else {
 				cerr << ERROR << endl;

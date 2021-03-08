@@ -92,7 +92,7 @@ rooted_tree parse_tree_in_line(const string& s) {
 	vector<uint32_t> L;
 	uint32_t v;
 	while (ss >> v) { L.push_back(v); }
-	return lal::internal::linear_sequence_to_rtree(L);
+	return lal::internal::head_vector_to_rtree(L);
 }
 
 array<bool, __tree_structure_type_size> parse_ground_classes(string s)

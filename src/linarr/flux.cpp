@@ -123,7 +123,7 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			for (auto& v : linear_sequence) { fin >> v; }
 
 			T.clear();
-			T = internal::linear_sequence_to_ftree(linear_sequence).first;
+			T = internal::head_vector_to_ftree(linear_sequence).first;
 
 			algo_flux = linarr::compute_flux(T);
 			input_flux.resize(n - 1);

@@ -56,7 +56,7 @@ template<class G>
 err_type __read_graph(const string& file, const string& format, G& g) {
 
 	if (format == "edge-list") {
-		bool r = io::read_edge_list(file, g, true);
+		auto r = io::read_edge_list<G>(file, true);
 		if (not r) {
 			cerr << ERROR << endl;
 			cerr << "    When attempting to read an edge-list-formatted" << endl;
@@ -64,6 +64,7 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 			return err_type::io;
 		}
 
+		g = *r;
 		return err_type::no_error;
 	}
 
