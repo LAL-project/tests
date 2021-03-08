@@ -1,6 +1,4 @@
 TYPE linarr-Dmin-Unconstrained
-INPUT 0
+INPUT 1 graphs/D/Dmin/unconstrained/02 *
 BODY
 	YS_bruteforce
-	2
-	 0 1	    1   1	  2 * 0 1

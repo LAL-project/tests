@@ -85,6 +85,7 @@ err_type linarr_brute_force_testing(
 	const InputConv<T>& conv,
 	// function that initializes the input tree
 	const TreeInit<T>& tree_initializer,
+	// the input stream
 	ifstream& fin
 )
 {

@@ -40,6 +40,7 @@
 
 // C++ includes
 #include <algorithm>
+#include <filesystem>
 #include <iostream>
 #include <numeric>
 #include <fstream>
@@ -72,6 +73,7 @@ using namespace numeric;
 typedef pair<uint32_t, linear_arrangement> algo_result;
 
 namespace exe_tests {
+namespace dmin_unconstrained {
 
 inline
 bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
@@ -128,32 +130,40 @@ bool test_correctness_arr_formula(
 
 // -----------------------------------------------------------------------------
 
-err_type test_Unconstrained_bf_algorithm(
+err_type test_bf_algorithm(
+	// A is a function that encapsulates an algorithm
+	// -- be it Shiloach's, be it Fan Chung's
 	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
 	const auto err = linarr_brute_force_testing<free_tree>
 	(
+		// calculate result
 		[&](const free_tree& t) {
 			return A(t);
 		},
+		// evaluate input tree with an arrangement
 		[](const free_tree& t, const linear_arrangement& arr) {
 			return sum_length_edges(t, arr);
 		},
+		// check correctness of "arrangement"
 		[](const free_tree& t, const linear_arrangement& arr) {
 			return is_arrangement(t, arr);
 		},
+		// convert what you read from input to a (free) tree
 		[](const vector<node>& v) {
 			return internal::linear_sequence_to_ftree(v).first;
 		},
+		// function to initialise a (free) tree
 		[](free_tree&) { },
+		// where to read from
 		fin
 	);
 	return err;
 }
 
-err_type test_Unconstrained_class_algorithm(
+err_type test_class_algorithm(
 	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
@@ -337,7 +347,7 @@ err_type test_Unconstrained_class_algorithm(
 	return err_type::no_error;
 }
 
-err_type test_Unconstrained_tree_algorithm(
+err_type test_tree_algorithm(
 	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
@@ -359,10 +369,12 @@ err_type test_Unconstrained_tree_algorithm(
 	return err_type::no_error;
 }
 
+} // -- namespace dmin_unconstrained
+
 err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
+	if (inputs.size() > 1) {
 		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    No more than one input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format;
 	}
@@ -374,17 +386,32 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	// --------------
 	// YOSSI SHILOACH
 	if (alg == "YS_bruteforce") {
+		if (inputs.size() != 1) {
+			cerr << ERROR << endl;
+			cerr << "    No input files were given." << endl;
+			return err_type::test_format;
+		}
+
+		if (not filesystem::exists(inputs[0].first)) {
+			cerr << ERROR << endl;
+			cerr << "    Input file '" << inputs[0].first << "' does not exist." << endl;
+			return err_type::io;
+		}
+		ifstream input_file(inputs[0].first);
+
 		r =
-		test_Unconstrained_bf_algorithm(
+		dmin_unconstrained::test_bf_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
-		, fin
+		, input_file
 		);
+
+		input_file.close();
 	}
 	else if (alg == "YS_class") {
 		r =
-		test_Unconstrained_class_algorithm(
+		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
@@ -393,7 +420,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	}
 	else if (alg == "YS_tree") {
 		r =
-		test_Unconstrained_tree_algorithm(
+		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
 			}
@@ -403,17 +430,32 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	// ---------------
 	// FAN R. K. CHUNG
 	else if (alg == "FC_bruteforce") {
+		if (inputs.size() != 1) {
+			cerr << ERROR << endl;
+			cerr << "    No input files were given." << endl;
+			return err_type::test_format;
+		}
+
+		if (not filesystem::exists(inputs[0].first)) {
+			cerr << ERROR << endl;
+			cerr << "    Input file '" << inputs[0].first << "' does not exist." << endl;
+			return err_type::io;
+		}
+		ifstream input_file(inputs[0].first);
+
 		r =
-		test_Unconstrained_bf_algorithm(
+		dmin_unconstrained::test_bf_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
-		, fin
+		, input_file
 		);
+
+		input_file.close();
 	}
 	else if (alg == "FC_class") {
 		r =
-		test_Unconstrained_class_algorithm(
+		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
@@ -422,7 +464,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	}
 	else if (alg == "FC_tree") {
 		r =
-		test_Unconstrained_tree_algorithm(
+		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
 				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
 			}
