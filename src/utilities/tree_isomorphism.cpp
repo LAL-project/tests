@@ -209,7 +209,7 @@ err_type pos_exh_test(ifstream& fin) {
 		while (Gen.has_next()) {
 			Gen.next();
 			const Tree cur_tree = Gen.get_tree();
-			vector<edge> edges_cur = cur_tree.edges();
+			vector<edge> edges_cur = cur_tree.get_edges();
 			if constexpr (std::is_base_of<directed_graph, Tree>::value) {
 				relab_tree.init(n);
 				relab_tree.set_root(cur_tree.get_root());
@@ -245,7 +245,7 @@ err_type pos_rand_test(ifstream& fin) {
 
 	for (uint32_t t = 0; t < N_trees; ++t) {
 		const Tree cur_tree = Gen.get_tree();
-		vector<edge> edges_cur = cur_tree.edges();
+		vector<edge> edges_cur = cur_tree.get_edges();
 		if constexpr (std::is_base_of<directed_graph, Tree>::value) {
 			relab_tree.init(n);
 			relab_tree.set_root(cur_tree.get_root());
@@ -307,7 +307,7 @@ err_type neg_exh_test(ifstream& fin) {
 		for (size_t j = i + 1; j < all_trees.size(); ++j) {
 
 			const Tree& tj = all_trees[j];
-			vector<edge> edges_tj = tj.edges();
+			vector<edge> edges_tj = tj.get_edges();
 			if constexpr (std::is_base_of<directed_graph, Tree>::value) {
 				relab_tree.init(n);
 				relab_tree.set_root(tj.get_root());

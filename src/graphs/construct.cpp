@@ -544,7 +544,7 @@ err_type exe_construction_test(ifstream& fin) {
 			}
 			cout << "Subtree sizes:" << endl;
 			for (node ww = 0; ww < T.num_nodes(); ++ww) {
-				cout << "    " << ww << ": " << T.n_nodes_subtree(ww) << endl;
+				cout << "    " << ww << ": " << T.num_nodes_subtree(ww) << endl;
 			}
 		}
 

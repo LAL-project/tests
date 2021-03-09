@@ -78,7 +78,7 @@ integer amount_projective(const rooted_tree& rT) {
 }
 
 err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) {
-	vector<edge> edges = rT.edges();
+	vector<edge> edges = rT.get_edges();
 
 	for (uint32_t i = 0; i < nrelabs; ++i) {
 		shuffle_tree(edges, rT);

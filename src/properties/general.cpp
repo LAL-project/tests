@@ -78,7 +78,7 @@ directed_graph make_rand_dgraph(const undirected_graph& g) {
 
 	// directed graph
 	directed_graph dg(g.num_nodes());
-	vector<edge> es = g.edges();
+	vector<edge> es = g.get_edges();
 
 	const size_t m = es.size();
 	for (size_t i = 0; i < m; ++i) {

@@ -749,7 +749,7 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 
-		n = mfunction_rtrees(g1, n_nodes_subtree(u));
+		n = mfunction_rtrees(g1, num_nodes_subtree(u));
 		if (n != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
