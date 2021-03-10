@@ -16,11 +16,13 @@ COMMANDS AVAILABLE
 		- ftree
 		- rtree
 
-** read_graph GRAPH_TYPE GRAPH FILE FILE_TYPE true/false
+** read_graph GRAPH_TYPE GRAPH_VAR_NAME FILE FILE_TYPE true/false
 	Reads a directed/undirected (type) graph from file FILE into variable GRAPH.
 	The type file is a string for the format of the graph stored in the file.
 	Allowed strings:
 		- edge_list
+		- head_vector
+	The Boolean value true/false is used to normalise the graph.
 
 ** output_graph GRAPH
 	Outputs a graph to standard output

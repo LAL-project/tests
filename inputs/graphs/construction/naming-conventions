@@ -65,8 +65,8 @@ We are currently using the following names:
 	021: check iterators of constructed dgraph
 		# no need to check other graphs
 	
-	030: read ugraph from disk
-	031: read dgraph from disk
+	030: read a list of edges and convert into undirected graph
+	031: read a list of edges and convert into directed graph
 		# tests
 		#	032: read ftree from disk
 		#	033: read rtree from disk
