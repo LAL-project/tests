@@ -49,7 +49,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/syntactic_dependency_structure_type.hpp>
 #include <lal/linarr/classify_syntactic_dependency_structure.hpp>
-#include <lal/internal/graphs/trees/convert_to_rtree.hpp>
+#include <lal/graphs/conversions.hpp>
 #include <lal/internal/make_array_with_value.hpp>
 using namespace lal;
 using namespace graphs;
@@ -92,7 +92,7 @@ rooted_tree parse_tree_in_line(const string& s) {
 	vector<uint32_t> L;
 	uint32_t v;
 	while (ss >> v) { L.push_back(v); }
-	return lal::internal::head_vector_to_rtree(L);
+	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
 array<bool, __tree_structure_type_size> parse_ground_classes(string s)

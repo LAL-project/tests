@@ -47,7 +47,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
-#include <lal/internal/graphs/trees/convert_to_rtree.hpp>
+#include <lal/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -79,7 +79,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 			return is_arrangement_projective(t, arr);
 		},
 		[](const vector<node>& v) {
-			return internal::head_vector_to_rtree(v);
+			return from_head_vector_to_rooted_tree(v);
 		},
 		[](rooted_tree& t) {
 			t.calculate_size_subtrees();

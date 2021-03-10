@@ -64,6 +64,7 @@ using namespace iterators;
 #include "exe_tests.hpp"
 #include "exe_construction.hpp"
 #include "test_utils.hpp"
+#include "io_wrapper.hpp"
 
 #define FUNC_GRAPH_CREATE "create_graph"
 #define FUNC_GRAPH_READ "read_graph"
@@ -144,22 +145,40 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_file_type(FUNC_GRAPH_READ, file_type)
 			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1)
 			gtypes[g1] = type;
-			bool io_res = false;
+
+			err_type err = err_type::no_error;
 			if (type == DGRAPH) {
 				dgraphvars[g1] = directed_graph();
-				dgraphvars[g1] = *io::read_edge_list<directed_graph>(file, Boolean1 == "true");
+				err = io_wrapper::read_graph(
+					file, file_type, dgraphvars[g1], Boolean1 == "true"
+				);
 			}
 			else if (type == UGRAPH) {
 				ugraphvars[g1] = undirected_graph();
-				ugraphvars[g1] = *io::read_edge_list<undirected_graph>(file, Boolean1 == "true");
+				err = io_wrapper::read_graph(
+					file, file_type, ugraphvars[g1], Boolean1 == "true"
+				);
+			}
+			else if (type == FTREE) {
+				ftreevars[g1] = free_tree();
+				err = io_wrapper::read_graph(
+					file, file_type, ftreevars[g1], Boolean1 == "true"
+				);
+			}
+			else if (type == RTREE) {
+				rtreevars[g1] = rooted_tree();
+				err = io_wrapper::read_graph(
+					file, file_type, rtreevars[g1], Boolean1 == "true"
+				);
 			}
 			else {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_READ)
 				cerr << "    I/O operation not implemented for " << gtypes[g1] << endl;
-				return err_type::test_execution;
+				return err_type::test_format;
 			}
-			if (not io_res) {
+
+			if (err != err_type::no_error) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_READ)
 				cerr << "    I/O operation failed when attempting to read file '" << file << "'." << endl;

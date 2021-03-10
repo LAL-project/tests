@@ -47,7 +47,7 @@ using namespace std;
 // lal includes
 #include <lal/linarr/dependency_flux.hpp>
 #include <lal/linarr/flux.hpp>
-#include <lal/internal/graphs/trees/convert_to_ftree.hpp>
+#include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
@@ -123,7 +123,7 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			for (auto& v : linear_sequence) { fin >> v; }
 
 			T.clear();
-			T = internal::head_vector_to_ftree(linear_sequence).first;
+			T = from_head_vector_to_free_tree(linear_sequence).first;
 
 			algo_flux = linarr::compute_flux(T);
 			input_flux.resize(n - 1);

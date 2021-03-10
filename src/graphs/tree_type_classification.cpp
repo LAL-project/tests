@@ -50,8 +50,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/tree_type.hpp>
 #include <lal/graphs/output.hpp>
-#include <lal/internal/graphs/trees/convert_to_rtree.hpp>
-#include <lal/internal/graphs/trees/convert_to_ftree.hpp>
+#include <lal/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
 
@@ -142,7 +141,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 
 		// parse data in line
 		const auto L = tree_type_class::parse_treestr(treestr);
-		const auto P = lal::internal::head_vector_to_ftree(L);
+		const auto P = lal::graphs::from_head_vector_to_free_tree(L);
 		rooted_tree rT = rooted_tree(P.first, P.second);
 		free_tree fT = P.first;
 

@@ -57,7 +57,7 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/graphs/trees/convert_to_ftree.hpp>
+#include <lal/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -153,7 +153,7 @@ err_type test_bf_algorithm(
 		},
 		// convert what you read from input to a (free) tree
 		[](const vector<node>& v) {
-			return internal::head_vector_to_ftree(v).first;
+			return from_head_vector_to_free_tree(v).first;
 		},
 		// function to initialise a (free) tree
 		[](free_tree&) { },

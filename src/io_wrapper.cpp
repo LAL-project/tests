@@ -45,6 +45,7 @@ using namespace std;
 
 // lal includes
 #include <lal/io/edge_list.hpp>
+#include <lal/io/head_vector.hpp>
 #include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
@@ -53,10 +54,10 @@ namespace exe_tests {
 namespace io_wrapper {
 
 template<class G>
-err_type __read_graph(const string& file, const string& format, G& g) {
+err_type __read_graph(const string& file, const string& format, G& g, bool norm) {
 
-	if (format == "edge-list") {
-		auto r = io::read_edge_list<G>(file, true);
+	if (format == "edge_list") {
+		auto r = io::read_edge_list<G>(file, norm, false);
 		if (not r) {
 			cerr << ERROR << endl;
 			cerr << "    When attempting to read an edge-list-formatted" << endl;
@@ -64,8 +65,32 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 			return err_type::io;
 		}
 
-		g = *r;
+		g = std::move(*r);
 		return err_type::no_error;
+	}
+
+	if (format == "head_vector") {
+		if constexpr (
+			std::is_base_of_v<undirected_graph, G> or
+			std::is_base_of_v<directed_graph, G>
+		)
+		{
+			cerr << ERROR << endl;
+			cerr << "    Type of graph is not allowed when reading a head vector file." << endl;
+			return err_type::test_format;
+		}
+		else {
+			auto r = io::read_head_vector<G>(file, norm, false);
+			if (not r) {
+				cerr << ERROR << endl;
+				cerr << "    When attempting to read an edge-list-formatted" << endl;
+				cerr << "    graph from file: '" << file << "'." << endl;
+				return err_type::io;
+			}
+
+			g = std::move(*r);
+			return err_type::no_error;
+		}
 	}
 
 	cerr << ERROR << endl;
@@ -73,11 +98,27 @@ err_type __read_graph(const string& file, const string& format, G& g) {
 	return err_type::test_format;
 }
 
-err_type read_graph(const string& file, const string& format, lal::graphs::undirected_graph& G) {
-	return __read_graph(file, format, G);
+err_type read_graph
+(const string& file, const string& format, undirected_graph& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
 }
-err_type read_graph(const string& file, const string& format, lal::graphs::directed_graph& G) {
-	return __read_graph(file, format, G);
+err_type read_graph
+(const string& file, const string& format, directed_graph& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
+}
+
+err_type read_graph
+(const string& file, const string& format, free_tree& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
+}
+
+err_type read_graph
+(const string& file, const string& format, rooted_tree& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
 }
 
 } // -- namespace io_wrapper
