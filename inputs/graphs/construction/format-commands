@@ -259,4 +259,4 @@ ROOTED TREES
 	The tree must have a root.
 
 ** rtree_to_ftree IN_TREE OUT_TREE
-	Converts a rooted tree into a free tree.
+	Converts a rooted tree (IN_TREE) into a free tree (OUT_TREE).

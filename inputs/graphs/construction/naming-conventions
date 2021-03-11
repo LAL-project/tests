@@ -65,12 +65,10 @@ We are currently using the following names:
 	021: check iterators of constructed dgraph
 		# no need to check other graphs
 	
-	030: read a list of edges and convert into undirected graph
-	031: read a list of edges and convert into directed graph
-		# tests
-		#	032: read ftree from disk
-		#	033: read rtree from disk
-		# are redundant
+	030: read a list of edges and convert into an undirected graph
+	031: read a list of edges and convert into a directed graph
+	032: read a head vector and convert into a free tree
+	033: read a head vector and convert into a rooted tree
 	
 	053: check validity of the orientation of the tree's edges
 	
