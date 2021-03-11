@@ -99,8 +99,8 @@ using namespace iterators;
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
-#define ASSERT_rtree_orientation_valid "rtree_orientation_valid"
-#define ASSERT_rtree_orientation_NOT_VALID "rtree_orientation_not_valid"
+#define ASSERT_RTREE_ORIENTATION_VALID "rtree_orientation_valid"
+#define ASSERT_RTREE_ORIENTATION_NOT_VALID "rtree_orientation_not_valid"
 #define ASSERT_RTREE_IS_TYPE "is_rtree_type"
 #define ASSERT_RTREE_IS_NOT_TYPE "is_not_rtree_type"
 
@@ -763,30 +763,30 @@ err_type process_assert(
 	}
 
 	// ROOTED DIRECTED TREES
-	else if (assert_what == ASSERT_rtree_orientation_valid) {
+	else if (assert_what == ASSERT_RTREE_ORIENTATION_VALID) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_rtree_orientation_valid, g1)
+		assert_exists_variable(ASSERT_RTREE_ORIENTATION_VALID, g1)
 		assert_correct_graph_type(
-			ASSERT_rtree_orientation_valid, graph_type(g1), rooted_tree_types
+			ASSERT_RTREE_ORIENTATION_VALID, graph_type(g1), rooted_tree_types
 		)
 		if (not rtreevars[g1].is_orientation_valid()) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_rtree_orientation_valid)
+			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
 			cerr << "    Tree '" << g1 << "' does not have a valid edge orientation."
 				 << endl;
 			cerr << rtreevars[g1] << endl;
 			return err_type::test_execution;
 		}
 	}
-	else if (assert_what == ASSERT_rtree_orientation_NOT_VALID) {
+	else if (assert_what == ASSERT_RTREE_ORIENTATION_NOT_VALID) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_rtree_orientation_valid, g1)
+		assert_exists_variable(ASSERT_RTREE_ORIENTATION_VALID, g1)
 		assert_correct_graph_type(
-			ASSERT_rtree_orientation_NOT_VALID, graph_type(g1), rooted_tree_types
+			ASSERT_RTREE_ORIENTATION_NOT_VALID, graph_type(g1), rooted_tree_types
 		)
 		if (rtreevars[g1].is_orientation_valid()) {
 			cerr << ERROR << endl;
-			message_in_func(ASSERT_rtree_orientation_valid)
+			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
 			cerr << "    Tree '" << g1 << "' has a valid edge orientation."
 				 << endl;
 			cerr << rtreevars[g1] << endl;

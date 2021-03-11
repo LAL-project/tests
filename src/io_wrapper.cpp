@@ -71,15 +71,10 @@ err_type __read_graph(const string& file, const string& format, G& g, bool norm)
 
 	if (format == "head_vector") {
 		if constexpr (
-			std::is_base_of_v<undirected_graph, G> or
-			std::is_base_of_v<directed_graph, G>
+			std::is_base_of_v<rooted_tree, G> or
+			std::is_base_of_v<free_tree, G>
 		)
 		{
-			cerr << ERROR << endl;
-			cerr << "    Type of graph is not allowed when reading a head vector file." << endl;
-			return err_type::test_format;
-		}
-		else {
 			auto r = io::read_head_vector<G>(file, norm, false);
 			if (not r) {
 				cerr << ERROR << endl;
@@ -91,10 +86,15 @@ err_type __read_graph(const string& file, const string& format, G& g, bool norm)
 			g = std::move(*r);
 			return err_type::no_error;
 		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "    Type of graph is not allowed when reading a head vector file." << endl;
+			return err_type::test_format;
+		}
 	}
 
 	cerr << ERROR << endl;
-	cerr << "    Unsupported format of file: '" << format << "'." << endl;
+	cerr << "    Unsupported file format: '" << format << "'." << endl;
 	return err_type::test_format;
 }
 

@@ -132,14 +132,6 @@ static const std::vector<std::string> all_types(
 
 /* ASSERTIONS */
 
-#define assert_correct_file_type(assertion, ft)							\
-if (ft != "edge_list") {												\
-	cerr << ERROR << endl;												\
-	message_in_func(assertion)											\
-	cerr << "    Invalid file type '" << ft << "'." << endl;			\
-	return err_type::test_format;										\
-}
-
 #define assert_string_is_rooted_tree_type(assertion, t)					\
 if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
 	cerr << ERROR << endl;												\
