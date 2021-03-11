@@ -1,0 +1,23 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	read_graph ftree g1 graphs/exhaustive-trees/rooted/011-0001.head_vector head_vector true
+	assert normalised g1
+	assert num_nodes g1 11
+	assert num_edges g1 10
+	check_edge_iterator g1
+	check_Q_iterator g1
+
+	read_graph ftree g2 graphs/exhaustive-trees/rooted/011-0100.head_vector head_vector true
+	assert normalised g2
+	assert num_nodes g2 11
+	assert num_edges g2 10
+	check_edge_iterator g2
+	check_Q_iterator g2
+	
+	read_graph ftree g3 graphs/exhaustive-trees/rooted/011-0345.head_vector head_vector true
+	assert normalised g3
+	assert num_nodes g3 11
+	assert num_edges g3 10
+	check_edge_iterator g3
+	check_Q_iterator g3
