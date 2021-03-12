@@ -89,6 +89,7 @@ function show_usage() {
 	echo "        linarr : execute linear arrangement tests"
 	echo "        linarr_E_2Cd : execute linear arrangement (approximation of C) tests"
 	echo "        linarr_C : execute linear arrangement (crossings) tests"
+	echo "        linarr_C_brute_force : execute linear arrangement (crossings) tests (brute force algorithm)"
 	echo "        linarr_C_dyn_prog : execute linear arrangement (crossings) tests (dynamic programming algorithm)"
 	echo "        linarr_C_ladder : execute linear arrangement (crossings) tests (ladder algorithm)"
 	echo "        linarr_C_stack_based : execute linear arrangement (crossings) tests (stack-based algorithm)"

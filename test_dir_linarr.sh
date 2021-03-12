@@ -9,6 +9,8 @@ linarr_DIRS=(\
 	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
 	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	"linarr/D/Dmin/" "linarr/D/Dmin/" \
+	"linarr/C/bruteforce" "linarr/C" \
+	"linarr/C/bruteforce-list" "linarr/C" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
@@ -30,12 +32,18 @@ linarr_E_2Cd_DIRS=(\
 
 # Number of crossings tests
 linarr_C_DIRS=(\
+	"linarr/C/bruteforce" "linarr/C" \
+	"linarr/C/bruteforce-list" "linarr/C" \
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
 	"linarr/C/ladder" "linarr/C" \
 	"linarr/C/ladder-list" "linarr/C" \
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
+	)
+linarr_C_brute_force_DIRS=(\
+	"linarr/C/bruteforce" "linarr/C" \
+	"linarr/C/bruteforce-list" "linarr/C" \
 	)
 linarr_C_dyn_prog_DIRS=(\
 	"linarr/C/dyn-prog" "linarr/C" \

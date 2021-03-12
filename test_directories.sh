@@ -26,6 +26,7 @@ groups_list=(\
 	"linarr" \
 	"linarr_E_2Cd" \
 	"linarr_C" \
+	"linarr_C_brute_force" \
 	"linarr_C_dyn_prog" \
 	"linarr_C_ladder" \
 	"linarr_C_stack_based" \
