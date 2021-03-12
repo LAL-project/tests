@@ -9,6 +9,7 @@ CMakeLists.txt.user
 .vgd.*
 .time-*
 jobs.*
+slurm-*
 
 build-debug/
 build-release/
