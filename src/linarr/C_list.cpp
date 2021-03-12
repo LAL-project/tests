@@ -56,12 +56,13 @@ using namespace linarr;
 #include "io_wrapper.hpp"
 #include "definitions.hpp"
 #include "time.hpp"
+#include "linarr/n_crossings_m2.hpp"
 
 namespace exe_tests {
 
 err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_procs(
-	{"brute_force", "dyn_prog", "ladder", "stack_based"}
+	{"bruteforce", "dyn_prog", "ladder", "stack_based"}
 	);
 
 	if (inputs.size() != 1) {
@@ -107,8 +108,8 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > T(n_linarrs, vector<node>(uG.num_nodes()));
-	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(uG.num_nodes()));
+	vector<vector<node>> T(n_linarrs, vector<node>(uG.num_nodes()));
+	vector<linear_arrangement> pis(n_linarrs, linear_arrangement(uG.num_nodes()));
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
@@ -118,8 +119,8 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 		}
 	}
 
-	const vector<uint32_t> uCbfs = linarr::n_crossings_list(uG, T, algorithms_C::brute_force);
-	const vector<uint32_t> dCbfs = linarr::n_crossings_list(dG, T, algorithms_C::brute_force);
+	const vector<uint32_t> uCbfs = number_of_crossings_brute_force(uG, pis);
+	const vector<uint32_t> dCbfs = number_of_crossings_brute_force(dG, pis);
 	bool error = false;
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
@@ -138,29 +139,20 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	}
 	// uCbfs == dCbfs
 
+	const auto choose_algo =
+	[](const string& name) {
+		if (name == "dyn_prog") { return algorithms_C::dynamic_programming; }
+		if (name == "ladder") { return algorithms_C::ladder; }
+		if (name == "stack_based") { return algorithms_C::stack_based; }
+		return algorithms_C::brute_force;
+	}(proc);
+
 	// compute all C
-	vector<uint32_t> uCs, dCs;
-	if (proc == "dyn_prog") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::dynamic_programming);
-		dCs = n_crossings_list(dG, T, algorithms_C::dynamic_programming);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
-	else if (proc == "ladder") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::ladder);
-		dCs = n_crossings_list(dG, T, algorithms_C::ladder);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
-	else if (proc == "stack_based") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::stack_based);
-		dCs = n_crossings_list(dG, T, algorithms_C::stack_based);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
-	}
+	begin = timing::now();
+	const vector<uint32_t> uCs = number_of_crossings_list(uG, pis, choose_algo);
+	const vector<uint32_t> dCs = number_of_crossings_list(dG, pis, choose_algo);
+	end = timing::now();
+	total_elapsed += timing::elapsed_milliseconds(begin, end);
 
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (dCs[i] != uCs[i]) {

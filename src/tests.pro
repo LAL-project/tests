@@ -124,6 +124,7 @@ HEADERS += \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
     linarr/linarr_brute_force_testing.hpp \
+    linarr/n_crossings_m2.hpp \
     memory/graphs.hpp \
     memory/numeric.hpp \
     parse_keywords.hpp \
