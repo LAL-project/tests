@@ -63,7 +63,7 @@ using namespace linarr;
 
 namespace exe_tests {
 
-err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
+err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bound) {
 	set<string> allowed_procs({
 		"bruteforce", "dyn_prog", "ladder", "stack_based"
 	});
@@ -141,11 +141,22 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 			return algorithms_C::brute_force;
 		}(proc);
 
-		const auto begin = timing::now();
-		uC = number_of_crossings(uG, pi, choose_algo);
-		dC = number_of_crossings(dG, pi, choose_algo);
-		const auto end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
+		uint32_t upper_bound;
+		if (has_upper_bound) {
+			fin >> upper_bound;
+			const auto begin = timing::now();
+			uC = is_number_of_crossings_lesseq_than(uG, pi, upper_bound, choose_algo);
+			dC = is_number_of_crossings_lesseq_than(dG, pi, upper_bound, choose_algo);
+			const auto end = timing::now();
+			total_elapsed += timing::elapsed_milliseconds(begin, end);
+		}
+		else {
+			const auto begin = timing::now();
+			uC = number_of_crossings(uG, pi, choose_algo);
+			dC = number_of_crossings(dG, pi, choose_algo);
+			const auto end = timing::now();
+			total_elapsed += timing::elapsed_milliseconds(begin, end);
+		}
 
 		if (uC != dC) {
 			cerr << ERROR << endl;
@@ -161,23 +172,56 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin) {
 			cerr << "]" << endl;
 			return err_type::test_execution;
 		}
-		if (uC != uCbf) {
-			cerr << ERROR << endl;
-			cerr << "    Number of crossings obtained with the algorithm does not" << endl;
-			cerr << "    coincide with the number of crossings obtained by brute force." << endl;
-			cerr << "        brute force: " << uCbf << endl;
-			cerr << "        " << proc << ": " << uC << endl;
-			cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-			cerr << "    [" << T[0];
-			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << T[j];
+
+		if (has_upper_bound) {
+			if (uCbf > upper_bound) {
+				if (uC != uG.num_edges()*uG.num_edges()) {
+					cerr << ERROR << endl;
+					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Instead, received: " << uC << endl;
+					cerr << "    Actual number of crossings: " << uCbf << endl;
+					cerr << "    Upper bound: " << upper_bound << endl;
+					return err_type::test_execution;
+				}
 			}
-			cerr << "]" << endl;
-			cerr << "    Undirected graph:" << endl;
-			cerr << uG << endl;
-			cerr << "    Directed graph:" << endl;
-			cerr << dG << endl;
-			return err_type::test_execution;
+			else if (uC != uCbf) {
+				cerr << ERROR << endl;
+				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
+				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
+				cerr << "        brute force: " << uCbf << endl;
+				cerr << "        " << proc << ": " << uC << endl;
+				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+				cerr << "    [" << T[0];
+				for (size_t j = 1; j < n; ++j) {
+					cerr << "," << T[j];
+				}
+				cerr << "]" << endl;
+				cerr << "    Undirected graph:" << endl;
+				cerr << uG << endl;
+				cerr << "    Directed graph:" << endl;
+				cerr << dG << endl;
+				return err_type::test_execution;
+			}
+		}
+		else {
+			if (uC != uCbf) {
+				cerr << ERROR << endl;
+				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
+				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
+				cerr << "        brute force: " << uCbf << endl;
+				cerr << "        " << proc << ": " << uC << endl;
+				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+				cerr << "    [" << T[0];
+				for (size_t j = 1; j < n; ++j) {
+					cerr << "," << T[j];
+				}
+				cerr << "]" << endl;
+				cerr << "    Undirected graph:" << endl;
+				cerr << uG << endl;
+				cerr << "    Directed graph:" << endl;
+				cerr << dG << endl;
+				return err_type::test_execution;
+			}
 		}
 	}
 

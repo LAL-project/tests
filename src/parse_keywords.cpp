@@ -38,8 +38,6 @@
  *
  ********************************************************************/
 
-#include "parse_keywords.hpp"
-
 // C++ includes
 #include <iostream>
 #include <set>
@@ -47,8 +45,46 @@ using namespace std;
 
 // custom includes
 #include "exe_tests.hpp"
+#include "parse_keywords.hpp"
 
 namespace exe_tests {
+
+template<typename ... Params>
+err_type parse_header(
+	err_type (*F)(const input_list&, std::ifstream&, Params...),
+
+	ifstream& fin, Params... P
+)
+{
+	string field;
+	fin >> field;
+
+	if (field != "INPUT") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field: INPUT" << endl;
+		cerr << "    Found: " << field << endl;
+		return err_type::test_format;
+	}
+
+	size_t n_inputs;
+	fin >> n_inputs;
+	input_list inputs(n_inputs);
+	for (size_t i = 0; i < n_inputs; ++i) {
+		string file, format;
+		fin >> file >> format;
+		inputs[i] = make_pair(file, format);
+	}
+
+	fin >> field;
+	if (field != "BODY") {
+		cerr << ERROR << endl;
+		cerr << "    Expected field: BODY" << endl;
+		cerr << "    Found: " << field << endl;
+		return err_type::test_format;
+	}
+
+	return F(inputs, fin, P...);
+}
 
 void mark_wrong_keyword
 (const vector<string>& keywords,
@@ -304,12 +340,21 @@ err_type call_linarr_C
 	// If, after this keyword, there are no more of them,
 	// execute the simple test.
 	if (i == keywords.size()) {
-		return parse_header(exe_linarr_C, fin);
+		return parse_header(exe_linarr_C, fin, false);
 	}
 
 	const string& key = keywords[i];
 	if (key == "list") {
-		return parse_header(exe_linarr_C_list, fin);
+		return parse_header<char>(exe_linarr_C_list, fin, 0);
+	}
+	if (key == "upper_bound") {
+		return parse_header(exe_linarr_C, fin, true);
+	}
+	if (key == "list_upper_bound") {
+		return parse_header<char>(exe_linarr_C_list, fin, 1);
+	}
+	if (key == "list_upper_bound_list") {
+		return parse_header<char>(exe_linarr_C_list, fin, 2);
 	}
 
 	cerr << ERROR << endl;

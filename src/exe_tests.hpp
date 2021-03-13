@@ -61,17 +61,6 @@ typedef std::vector<std::pair<std::string,std::string>> input_list;
 
 namespace exe_tests {
 
-err_type execute_test_function(
-	const std::function<err_type (input_list, std::ifstream&)> F,
-	const input_list& inputs,
-	std::ifstream& fin
-);
-
-err_type parse_header(
-	const std::function<err_type (input_list, std::ifstream&)> F,
-	std::ifstream& fin
-);
-
 err_type exe_gen_arr_all_proj(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_arr_rand_proj(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin);
@@ -92,8 +81,13 @@ err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin);
-err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin);
-err_type exe_linarr_C_list(const input_list& inputs, std::ifstream& fin);
+// upper_bound: is there an upper bound after every arrangement?
+err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin, bool has_upper_bound);
+// upper_bound: type of upper_bound
+//	0: no upper bound at all
+//	1: an upper bound at the end of the file
+//	2: an upper bound for every arrangement
+err_type exe_linarr_C_list(const input_list& inputs, std::ifstream& fin, char upper_bound_kind);
 err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_headedness(const input_list& inputs,std::ifstream& fin);
 err_type exe_linarr_syntree_classification(const input_list& inputs,std::ifstream& fin);
