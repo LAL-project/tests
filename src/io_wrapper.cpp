@@ -56,7 +56,7 @@ namespace io_wrapper {
 template<class G>
 err_type __read_graph(const string& file, const string& format, G& g, bool norm) {
 
-	if (format == "edge_list") {
+	if (format == "edge_list" or format == "edge-list") {
 		auto r = io::read_edge_list<G>(file, norm, false);
 		if (not r) {
 			cerr << ERROR << endl;

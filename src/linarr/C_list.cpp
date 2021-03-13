@@ -56,12 +56,13 @@ using namespace linarr;
 #include "io_wrapper.hpp"
 #include "definitions.hpp"
 #include "time.hpp"
+#include "linarr/n_crossings_m2.hpp"
 
 namespace exe_tests {
 
-err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
+err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_bound_type) {
 	const set<string> allowed_procs(
-	{"brute_force", "dyn_prog", "ladder", "stack_based"}
+	{"bruteforce", "dyn_prog", "ladder", "stack_based"}
 	);
 
 	if (inputs.size() != 1) {
@@ -107,8 +108,10 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node> > T(n_linarrs, vector<node>(uG.num_nodes()));
-	vector<linear_arrangement > pis(n_linarrs,  linear_arrangement(uG.num_nodes()));
+	vector<vector<node>> T(n_linarrs, vector<node>(uG.num_nodes()));
+	vector<linear_arrangement> pis(n_linarrs, linear_arrangement(uG.num_nodes()));
+	uint32_t single_upper_bound;
+	vector<uint32_t> list_upper_bounds(n_linarrs, 0);
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
@@ -116,11 +119,17 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 			fin >> T[i][u];
 			pis[i][ T[i][u] ] = u;
 		}
+
+		if (upper_bound_type == 2) {
+			fin >> list_upper_bounds[i];
+		}
+	}
+	if (upper_bound_type == 1) {
+		fin >> single_upper_bound;
 	}
 
-	const vector<uint32_t> uCbfs = linarr::n_crossings_list(uG, T, algorithms_C::brute_force);
-	const vector<uint32_t> dCbfs = linarr::n_crossings_list(dG, T, algorithms_C::brute_force);
-	bool error = false;
+	const vector<uint32_t> uCbfs = number_of_crossings_brute_force(uG, pis);
+	const vector<uint32_t> dCbfs = number_of_crossings_brute_force(dG, pis);
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
 			cerr << ERROR << endl;
@@ -133,38 +142,40 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[i][j];
 			}
 			cerr << "]" << endl;
+			return err_type::test_execution;
 		}
-		if (error) { return err_type::test_execution; }
 	}
 	// uCbfs == dCbfs
 
-	// compute all C
+	const auto choose_algo =
+	[](const string& name) {
+		if (name == "dyn_prog") { return algorithms_C::dynamic_programming; }
+		if (name == "ladder") { return algorithms_C::ladder; }
+		if (name == "stack_based") { return algorithms_C::stack_based; }
+		return algorithms_C::brute_force;
+	}(proc);
+
 	vector<uint32_t> uCs, dCs;
-	if (proc == "dyn_prog") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::dynamic_programming);
-		dCs = n_crossings_list(dG, T, algorithms_C::dynamic_programming);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
+
+	// compute all C
+	begin = timing::now();
+	if (upper_bound_type == 0) {
+		uCs = number_of_crossings(uG, pis, choose_algo);
+		dCs = number_of_crossings(dG, pis, choose_algo);
 	}
-	else if (proc == "ladder") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::ladder);
-		dCs = n_crossings_list(dG, T, algorithms_C::ladder);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	else if (upper_bound_type == 1) {
+		uCs = is_number_of_crossings_lesseq_than(uG, pis, single_upper_bound, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than(dG, pis, single_upper_bound, choose_algo);
 	}
-	else if (proc == "stack_based") {
-		begin = timing::now();
-		uCs = n_crossings_list(uG, T, algorithms_C::stack_based);
-		dCs = n_crossings_list(dG, T, algorithms_C::stack_based);
-		end = timing::now();
-		total_elapsed += timing::elapsed_milliseconds(begin, end);
+	else if (upper_bound_type == 2) {
+		uCs = is_number_of_crossings_lesseq_than(uG, pis, list_upper_bounds, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than(dG, pis, list_upper_bounds, choose_algo);
 	}
+	end = timing::now();
+	total_elapsed += timing::elapsed_milliseconds(begin, end);
 
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (dCs[i] != uCs[i]) {
-			error = true;
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
 			cerr << "        " << proc << " (u): " << uCs[i] << endl;
@@ -175,26 +186,91 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin) {
 				cerr << "," << T[i][j];
 			}
 			cerr << "]" << endl;
+			return err_type::test_execution;
 		}
-		if (error) { return err_type::test_execution; }
 	}
 	// uCs == dCs
 
-	for (uint32_t i = 0; i < n_linarrs; ++i) {
-		if (uCbfs[i] != uCs[i]) {
-			error = true;
-			cerr << ERROR << endl;
-			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        brute force: " << uCbfs[i] << endl;
-			cerr << "        " << proc << ": " << uCs[i] << endl;
-			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << T[i][0];
-			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << T[i][j];
+	if (upper_bound_type == 0) {
+		for (uint32_t i = 0; i < n_linarrs; ++i) {
+			if (uCbfs[i] != uCs[i]) {
+				cerr << ERROR << endl;
+				cerr << "    Number of crossings do not coincide" << endl;
+				cerr << "        brute force: " << uCbfs[i] << endl;
+				cerr << "        " << proc << ": " << uCs[i] << endl;
+				cerr << "    For linear arrangement " << i << ":" << endl;
+				cerr << "    [" << T[i][0];
+				for (size_t j = 1; j < n; ++j) {
+					cerr << "," << T[i][j];
+				}
+				cerr << "]" << endl;
+				return err_type::test_execution;
 			}
-			cerr << "]" << endl;
 		}
-		if (error) { return err_type::test_execution; }
+	}
+	else if (upper_bound_type == 1) {
+		for (uint32_t i = 0; i < n_linarrs; ++i) {
+			if (uCbfs[i] > single_upper_bound) {
+				if (uCs[i] != uG.num_edges()*uG.num_edges()) {
+					cerr << ERROR << endl;
+					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Instead, received: " << uCs[i] << endl;
+					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
+					cerr << "    Upper bound: " << single_upper_bound << endl;
+					return err_type::test_execution;
+				}
+			}
+			else if (uCs[i] != uCbfs[i]) {
+				cerr << ERROR << endl;
+				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
+				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
+				cerr << "        brute force: " << uCbfs[i] << endl;
+				cerr << "        " << proc << ": " << uCs[i] << endl;
+				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+				cerr << "    [" << T[i][0];
+				for (size_t j = 1; j < n; ++j) {
+					cerr << "," << T[i][j];
+				}
+				cerr << "]" << endl;
+				cerr << "    Undirected graph:" << endl;
+				cerr << uG << endl;
+				cerr << "    Directed graph:" << endl;
+				cerr << dG << endl;
+				return err_type::test_execution;
+			}
+		}
+	}
+	else if (upper_bound_type == 2) {
+		for (uint32_t i = 0; i < n_linarrs; ++i) {
+			if (uCbfs[i] > list_upper_bounds[i]) {
+				if (uCs[i] != uG.num_edges()*uG.num_edges()) {
+					cerr << ERROR << endl;
+					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Instead, received: " << uCs[i] << endl;
+					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
+					cerr << "    Upper bound: " << list_upper_bounds[i] << endl;
+					return err_type::test_execution;
+				}
+			}
+			else if (uCs[i] != uCbfs[i]) {
+				cerr << ERROR << endl;
+				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
+				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
+				cerr << "        brute force: " << uCbfs[i] << endl;
+				cerr << "        " << proc << ": " << uCs[i] << endl;
+				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
+				cerr << "    [" << T[i][0];
+				for (size_t j = 1; j < n; ++j) {
+					cerr << "," << T[i][j];
+				}
+				cerr << "]" << endl;
+				cerr << "    Undirected graph:" << endl;
+				cerr << uG << endl;
+				cerr << "    Directed graph:" << endl;
+				cerr << dG << endl;
+				return err_type::test_execution;
+			}
+		}
 	}
 
 	string time_filename;

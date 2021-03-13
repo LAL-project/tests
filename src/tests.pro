@@ -55,7 +55,6 @@ SOURCES += \
 	graphs/construct.cpp \
 	graphs/construct_assert.cpp \
 	graphs/construct_utils.cpp \
-	exe_tests.cpp \
     generate/arr_all_proj.cpp \
     generate/arr_rand_proj.cpp \
     generate/tree_validity_check.cpp \
@@ -124,14 +123,15 @@ HEADERS += \
 	definitions.hpp \
     generate/tree_validity_check.hpp \
     linarr/linarr_brute_force_testing.hpp \
+    linarr/n_crossings_m2.hpp \
     memory/graphs.hpp \
     memory/numeric.hpp \
     parse_keywords.hpp \
-    exe_tests.hpp \
 	io_wrapper.hpp \
     properties/C_rla_brute_force_algorithms.hpp \
     std_utils.hpp \
     test_utils.hpp \
+	exe_tests.hpp \
     time.hpp
 
 DISTFILES += \
