@@ -3,7 +3,7 @@
 ########################################################################
 # Data
 
-source test_directories.sh
+source test_groups.sh
 
 source test_dir_generate.sh
 source test_dir_graphs.sh
@@ -88,6 +88,7 @@ function show_usage() {
 	echo ""
 	echo "        linarr : execute linear arrangement tests"
 	echo "        linarr_E_2Cd : execute linear arrangement (approximation of C) tests"
+	echo "        linarr_D : execute linear arrangement (sum of edge lengths) tests"
 	echo "        linarr_C : execute linear arrangement (crossings) tests"
 	echo "        linarr_C_brute_force : execute linear arrangement (crossings) tests (brute force algorithm)"
 	echo "        linarr_C_dyn_prog : execute linear arrangement (crossings) tests (dynamic programming algorithm)"
@@ -102,6 +103,10 @@ function show_usage() {
 	echo "        linarr_Dmin_Unconstrained_FC : execute mLA tests for unconstrained arrangements -- algorithms: Fan Chung's"
 	echo "        linarr_syndepstruc_class : execute tests of classification of syntactic dependencies structures"
 	echo "        linarr_comp_dependency_flux : execute tests of dependency flux computation"
+	echo ""
+	echo "        linarr_headedness : execute headedness tests"
+	echo "        linarr_k_level : execute tests of k-level metrics"
+	echo "        linarr_MDD : execute tests of mean dependency distance computation"
 	echo ""
 	echo "        memory : execute tests that try to stress the memory"
 	echo "                 Usage of valgrind and execution of a debug compilation are encouraged"

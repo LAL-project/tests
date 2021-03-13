@@ -25,6 +25,7 @@ groups_list=(\
 	"internal_traversal" \
 	"linarr" \
 	"linarr_E_2Cd" \
+	"linarr_D" \
 	"linarr_C" \
 	"linarr_C_brute_force" \
 	"linarr_C_dyn_prog" \
@@ -38,6 +39,9 @@ groups_list=(\
 	"linarr_Dmin_Unconstrained_FC" \
 	"linarr_syndepstruc_class" \
 	"linarr_comp_depenendency_flux" \
+	"linarr_headedness" \
+	"linarr_k_level" \
+	"linarr_MDD" \
 	"memory" \
 	"numeric" \
 	"properties" \

@@ -1,71 +1,51 @@
 #!/bin/bash
 
-# linear arrangements tests
-linarr_DIRS=(\
-	"linarr/E_2Cd" "linarr/E_2Cd" \
-	"linarr/D" "linarr/D" \
-	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
-	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
-	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
-	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
-	"linarr/D/Dmin/" "linarr/D/Dmin/" \
-	"linarr/C/bruteforce" "linarr/C" \
-	"linarr/C/bruteforce-list" "linarr/C" \
-	"linarr/C/dyn-prog" "linarr/C" \
-	"linarr/C/dyn-prog-list" "linarr/C" \
-	"linarr/C/ladder" "linarr/C" \
-	"linarr/C/ladder-list" "linarr/C" \
-	"linarr/C/stack-based" "linarr/C" \
-	"linarr/C/stack-based-list" "linarr/C" \
-	"linarr/syntactic-dependency-structures" "linarr/syntactic-dependency-structures" \
-	"linarr/dependency-flux" "linarr/dependency-flux" \
-	"linarr/headedness" "linarr/headedness" \
-	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
-	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
-	"linarr/MDD" "linarr/MDD" \
-	)
-
 # approximation of the number of crossings
 linarr_E_2Cd_DIRS=(\
 	"linarr/E_2Cd" "linarr/E_2Cd" \
 	)
 
-# Number of crossings tests
-linarr_C_DIRS=(\
-	"linarr/C/bruteforce" "linarr/C" \
-	"linarr/C/bruteforce-list" "linarr/C" \
-	"linarr/C/dyn-prog" "linarr/C" \
-	"linarr/C/dyn-prog-list" "linarr/C" \
-	"linarr/C/ladder" "linarr/C" \
-	"linarr/C/ladder-list" "linarr/C" \
-	"linarr/C/stack-based" "linarr/C" \
-	"linarr/C/stack-based-list" "linarr/C" \
+# sum of edge lengths
+linarr_D_DIRS=(\
+	"linarr/D" "linarr/D" \
 	)
+
+# Number of crossings tests
 linarr_C_brute_force_DIRS=(\
 	"linarr/C/bruteforce" "linarr/C" \
 	"linarr/C/bruteforce-list" "linarr/C" \
+	"linarr/C/bruteforce-upper_bound" "linarr/C" \
+	"linarr/C/bruteforce-list_upper_bound" "linarr/C" \
+	"linarr/C/bruteforce-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_dyn_prog_DIRS=(\
 	"linarr/C/dyn-prog" "linarr/C" \
 	"linarr/C/dyn-prog-list" "linarr/C" \
+	"linarr/C/dyn-prog-upper_bound" "linarr/C" \
+	"linarr/C/dyn-prog-list_upper_bound" "linarr/C" \
+	"linarr/C/dyn-prog-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_ladder_DIRS=(\
 	"linarr/C/ladder" "linarr/C" \
 	"linarr/C/ladder-list" "linarr/C" \
+	"linarr/C/ladder-upper_bound" "linarr/C" \
+	"linarr/C/ladder-list_upper_bound" "linarr/C" \
+	"linarr/C/ladder-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_stack_based_DIRS=(\
 	"linarr/C/stack-based" "linarr/C" \
 	"linarr/C/stack-based-list" "linarr/C" \
+	"linarr/C/stack-based-upper_bound" "linarr/C" \
+	"linarr/C/stack-based-list_upper_bound" "linarr/C" \
+	"linarr/C/stack-based-list_upper_bound_list" "linarr/C" \
+	)
+linarr_C_DIRS=(\
+	"${linarr_C_dyn_prog_DIRS[@]}" \
+	"${linarr_C_ladder_DIRS[@]}" \
+	"${linarr_C_stack_based_DIRS[@]}" \
 	)
 
 # Dmin tests
-linarr_Dmin_DIRS=(\
-	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
-	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
-	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
-	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
-	"linarr/D/Dmin/" "linarr/D/Dmin/" \
-	)
 linarr_Dmin_Projective_DIRS=(\
 	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
 	)
@@ -81,6 +61,13 @@ linarr_Dmin_Unconstrained_YS_DIRS=(\
 linarr_Dmin_Unconstrained_FC_DIRS=(\
 	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	)
+linarr_Dmin_DIRS=(\
+	"${linarr_Dmin_Projective_DIRS[@]}" \
+	"${linarr_Dmin_Planar_DIRS[@]}" \
+	"${linarr_Dmin_Comparison_DIRS[@]}" \
+	"${linarr_Dmin_Unconstrained_YS_DIRS[@]}" \
+	"${linarr_Dmin_Unconstrained_FC_DIRS[@]}" \
+	)
 
 # Classification of syntactic dependency structures
 linarr_syndepstruc_class_DIRS=(\
@@ -90,4 +77,33 @@ linarr_syndepstruc_class_DIRS=(\
 # Classification of dependency fluxes
 linarr_comp_dependency_flux_DIRS=(\
 	"linarr/dependency-flux" "linarr/dependency-flux" \
+	)
+
+# headedness
+linarr_headedness_DIRS=(\
+	"linarr/headedness" "linarr/headedness" \
+	)
+
+# k-level
+linarr_k_level_DIRS=(\
+	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
+	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
+	)
+
+# MDD
+linarr_MDD_DIRS=(\
+	"linarr/MDD" "linarr/MDD" \
+	)
+
+# linear arrangements tests
+linarr_DIRS=(\
+	"${linarr_E_2Cd_DIRS[@]}" \
+	"${linarr_D_DIRS[@]}" \
+	"${linarr_Dmin_DIRS[@]}" \
+	"${linarr_C_DIRS[@]}" \
+	"${linarr_syndepstruc_class_DIRS[@]}" \
+	"${linarr_comp_dependency_flux_DIRS[@]}" \
+	"${linarr_headedness_DIRS[@]}" \
+	"${linarr_k_level_DIRS[@]}" \
+	"${linarr_MDD_DIRS[@]}" \
 	)
