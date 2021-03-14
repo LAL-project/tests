@@ -164,12 +164,12 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 		dCs = number_of_crossings_list(dG, pis, choose_algo);
 	}
 	else if (upper_bound_type == 1) {
-		uCs = is_number_of_crossings_lesseq_than(uG, pis, single_upper_bound, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than(dG, pis, single_upper_bound, choose_algo);
+		uCs = is_number_of_crossings_lesseq_than_list(uG, pis, single_upper_bound, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than_list(dG, pis, single_upper_bound, choose_algo);
 	}
 	else if (upper_bound_type == 2) {
-		uCs = is_number_of_crossings_lesseq_than(uG, pis, list_upper_bounds, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than(dG, pis, list_upper_bounds, choose_algo);
+		uCs = is_number_of_crossings_lesseq_than_list(uG, pis, list_upper_bounds, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than_list(dG, pis, list_upper_bounds, choose_algo);
 	}
 	end = timing::now();
 	total_elapsed += timing::elapsed_milliseconds(begin, end);
