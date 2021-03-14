@@ -4,6 +4,7 @@
 # the value of the parameter --exe-group=*.
 groups_list=(\
 	"all" \
+	\
 	"generate" \
 	"generate_trees_alf" \
 	"generate_trees_alr" \
@@ -15,14 +16,17 @@ groups_list=(\
 	"generate_trees_rur" \
 	"generate_arr_rand_proj" \
 	"generate_arr_all_proj" \
+	\
 	"graphs" \
 	"graphs_construction" \
 	"graphs_tree_types" \
+	\
 	"internal" \
 	"internal_centre" \
 	"internal_centroid" \
 	"internal_sorting" \
 	"internal_traversal" \
+	\
 	"linarr" \
 	"linarr_E_2Cd" \
 	"linarr_D" \
@@ -42,13 +46,20 @@ groups_list=(\
 	"linarr_headedness" \
 	"linarr_k_level" \
 	"linarr_MDD" \
+	\
 	"memory" \
+	\
 	"numeric" \
+	\
 	"properties" \
 	"properties_basic" \
 	"properties_exp_var_C" \
 	"properties_exp_var_C_no_Q" \
+	"properties_exp_var_C_Q" \
+	"properties_exp_var_C_trees" \
+	"properties_exp_var_C_forests" \
 	"properties_exp_var_D" \
+	\
 	"utilities" \
 	"utilities_isomorphism" \
 	"utilities_isomorphism_small" \
