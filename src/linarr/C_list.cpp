@@ -160,8 +160,8 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 	// compute all C
 	begin = timing::now();
 	if (upper_bound_type == 0) {
-		uCs = number_of_crossings(uG, pis, choose_algo);
-		dCs = number_of_crossings(dG, pis, choose_algo);
+		uCs = number_of_crossings_list(uG, pis, choose_algo);
+		dCs = number_of_crossings_list(dG, pis, choose_algo);
 	}
 	else if (upper_bound_type == 1) {
 		uCs = is_number_of_crossings_lesseq_than(uG, pis, single_upper_bound, choose_algo);
