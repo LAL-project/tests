@@ -58,7 +58,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
-#include "generate/test_exhasutive_enumeration.hpp"
+#include "generate/test_exhaustive_enumeration.hpp"
 
 // expected second moment of degree over all labelled trees
 inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {

@@ -56,7 +56,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
-#include "generate/test_exhasutive_enumeration.hpp"
+#include "generate/test_exhaustive_enumeration.hpp"
 
 // number of caterpillar trees of a given size
 inline integer num_caterpillar_trees(uint32_t n) {

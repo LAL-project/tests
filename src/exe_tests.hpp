@@ -80,6 +80,8 @@ err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
 err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin);
 
+err_type exe_io_correctness(const input_list& inputs, std::ifstream& fin);
+
 err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin);
 // upper_bound: is there an upper bound after every arrangement?
 err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin, bool has_upper_bound);

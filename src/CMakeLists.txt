@@ -88,8 +88,11 @@ link_directories(${LAL_LIB_DIR})
 
 add_executable(
 	tests
+		generate/tree_validity_check.hpp
+		generate/test_exhaustive_enumeration.hpp
 		generate/arr_all_proj.cpp
 		generate/arr_rand_proj.cpp
+		generate/tree_validity_check.cpp
 		generate/trees_alf.cpp
 		generate/trees_alr.cpp
 		generate/trees_auf.cpp
@@ -98,20 +101,22 @@ add_executable(
 		generate/trees_rlr.cpp
 		generate/trees_ruf.cpp
 		generate/trees_rur.cpp
-		generate/tree_validity_check.cpp
-		generate/tree_validity_check.hpp
 	
+		graphs/exe_construction.hpp
 		graphs/construct.cpp
 		graphs/construct_assert.cpp
 		graphs/construct_utils.cpp
-		graphs/exe_construction.hpp
 		graphs/tree_type_classification.cpp
 
 		internal/centre.cpp
 		internal/centroid.cpp
 		internal/sorting.cpp
 		internal/traversal.cpp
+		
+		io/correctness.cpp
 
+		linarr/linarr_brute_force_testing.hpp
+		linarr/n_crossings_m2.hpp
 		linarr/approx_exp_C.cpp
 		linarr/C.cpp
 		linarr/C_list.cpp
@@ -122,9 +127,10 @@ add_executable(
 		linarr/Dmin_unconstrained.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
-		linarr/linarr_brute_force_testing.hpp
 		linarr/syntree_classification.cpp
 
+		memory/graphs.hpp
+		memory/numeric.hpp
 		memory/graphs.cpp
 		memory/graphs_dgraph_copy.cpp
 		memory/graphs_dgraph_move.cpp
@@ -158,19 +164,19 @@ add_executable(
 		utilities/tree_isomorphism.cpp
 
 		arrgmnt_validity_check.hpp
-		arrgmnt_validity_check.cpp
 		definitions.hpp
 		exe_tests.hpp
+		io_wrapper.hpp
+		parse_keywords.hpp
+		test_utils.hpp
+		time.hpp
+		arrgmnt_validity_check.cpp
 		exe_tests.cpp
 		io_wrapper.cpp
-		io_wrapper.hpp
 		main.cpp
 		parse_keywords.cpp
-		parse_keywords.hpp
 		test_utils.cpp
-		test_utils.hpp
 		time.cpp
-		time.hpp
 )
 
 # **********************************************************************

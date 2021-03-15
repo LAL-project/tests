@@ -41,68 +41,20 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+#include <set>
 using namespace std;
 
 // lal includes
-#include <lal/generate/all_lab_rooted_trees.hpp>
-#include <lal/graphs/output.hpp>
-#include <lal/numeric/integer.hpp>
-#include <lal/numeric/rational.hpp>
-#include <lal/numeric/integer_output.hpp>
-#include <lal/properties/degrees.hpp>
+#include <lal/io/check_correctness.hpp>
 using namespace lal;
-using namespace graphs;
-using namespace generate;
-using namespace numeric;
 
 // custom includes
+#include "io_wrapper.hpp"
 #include "definitions.hpp"
-#include "generate/tree_validity_check.hpp"
-#include "generate/test_exhaustive_enumeration.hpp"
 
 namespace exe_tests {
 
-namespace alr {
-struct extra_params { };
-
-err_type test_for_n(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
-	uint64_t gen = 0;
-	while (TreeGen.has_next()) {
-		TreeGen.next();
-		const rooted_tree T = TreeGen.get_tree();
-		const rtree_check err = test_validity_tree(n, T);
-		if (err != rtree_check::correct) {
-			cerr << ERROR << endl;
-			cerr << "    Tree of index " << gen << " is not correct." << endl;
-			cerr << "    Error: " << rtree_check_to_string(err) << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-
-		// compute 'statistics'
-		gen += 1;
-	}
-
-	// Prüfer's formula: make sure that the generator made
-	// as many trees as n^(n - 1) <- note that we are dealing
-	// with labelled ROOTED trees!
-	// https://oeis.org/A000169/list
-	const integer nn = integer_from_ui(n);
-	const integer total = (n == 1 ? 1 : (nn^(nn - 1)));
-
-	if (gen != total) {
-		cerr << ERROR << endl;
-		cerr << "    Exhaustive generation of labelled rooted trees" << endl;
-		cerr << "    Amount of trees of " << n << " vertices should be: " << total << endl;
-		cerr << "    But generated: " << gen << endl;
-		cerr << "    For a size of " << n << " vertices" << endl;
-		return err_type::test_execution;
-	}
-	return err_type::no_error;
-}
-} // -- namespace alr
-
-err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
+err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
@@ -110,19 +62,48 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	// --- do the tests
+	const set<string> allowed_file_types{"treebank", "treebank_dataset"};
 
-	uint32_t n;
-	while (fin >> n) {
-		const auto err =
-			exhaustive_enumeration_trees::
-			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
-			(n, alr::test_for_n, alr::extra_params{});
+	string file_type;
+	string file_path;
 
-		if (err != err_type::no_error) { return err; }
+	while (fin >> file_type >> file_path) {
+		if (allowed_file_types.find(file_type) == allowed_file_types.end()) {
+			cerr << ERROR << endl;
+			cerr << "    Wrong file type '" << file_type << "'." << endl;
+			cerr << "    Allowed file types:" << endl;
+			for (const auto& v : allowed_file_types) {
+			cerr << "    - " << v << endl;
+			}
+			return err_type::test_format;
+		}
+
+		if (file_type == "treebank") {
+			const auto errs = io::check_correctness_treebank(file_path);
+			cout << "A total of " << errs.size() << " errors were found for treebank file '"
+				 << file_path << "'." << endl;
+			if (errs.size() > 0) {
+				for (const auto& err : errs) {
+					cout << "    * At line: " << err.get_line_number() << endl;
+					cout << "      What:    " << err.get_error_message() << endl;
+				}
+			}
+		}
+		else {
+			const auto errs = io::check_correctness_treebank_dataset(file_path);
+			cout << "A total of " << errs.size() << " errors were found for treebank dataset '"
+				 << file_path << "'." << endl;
+			if (errs.size() > 0) {
+			for (const auto& err : errs) {
+			cout << "    * Line within main file: " << err.get_line_within_main_file() << endl;
+			cout << "      At treebank file:      " << err.get_treebank_file_name() << endl;
+			cout << "      At treebank file line: " << err.get_treebank_file_line() << endl;
+			cout << "      What:                  " << err.get_error_message() << endl;
+			}
+			}
+		}
 	}
 
-	TEST_GOODBYE
 	return err_type::no_error;
 }
 

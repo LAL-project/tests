@@ -138,6 +138,9 @@ err_type call_main(const vector<string>& keywords, ifstream& fin) {
 	if (key == "internal") {
 		return call_internal(keywords, 1, fin);
 	}
+	if (key == "io") {
+		return call_io(keywords, 1, fin);
+	}
 	if (key == "linarr") {
 		return call_linarr(keywords, 1, fin);
 	}
@@ -268,6 +271,22 @@ err_type call_internal
 	}
 	if (key == "centroid") {
 		return parse_header(exe_internal_centroid, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+/* Functions to test the library's utilities */
+
+err_type call_io
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "correctness") {
+		return parse_header(exe_io_correctness, fin);
 	}
 
 	cerr << ERROR << endl;

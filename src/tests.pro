@@ -67,6 +67,7 @@ SOURCES += \
     generate/trees_ruf.cpp \
     generate/trees_rur.cpp \
     graphs/tree_type_classification.cpp \
+    io/correctness.cpp \
     linarr/C.cpp \
     linarr/C_list.cpp \
     linarr/D.cpp \
@@ -118,7 +119,7 @@ SOURCES += \
 
 HEADERS += \
     arrgmnt_validity_check.hpp \
-    generate/test_exhasutive_enumeration.hpp \
+    generate/test_exhaustive_enumeration.hpp \
 	graphs/exe_construction.hpp \
 	definitions.hpp \
     generate/tree_validity_check.hpp \

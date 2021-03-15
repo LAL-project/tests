@@ -57,7 +57,7 @@ using namespace numeric;
 // custom includes
 #include "definitions.hpp"
 #include "generate/tree_validity_check.hpp"
-#include "generate/test_exhasutive_enumeration.hpp"
+#include "generate/test_exhaustive_enumeration.hpp"
 
 namespace exe_tests {
 
