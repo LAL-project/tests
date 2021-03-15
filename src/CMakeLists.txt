@@ -125,6 +125,7 @@ add_executable(
 		linarr/Dmin_planar.cpp
 		linarr/Dmin_projective.cpp
 		linarr/Dmin_unconstrained.cpp
+		linarr/flux.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
 		linarr/syntree_classification.cpp
@@ -171,7 +172,6 @@ add_executable(
 		test_utils.hpp
 		time.hpp
 		arrgmnt_validity_check.cpp
-		exe_tests.cpp
 		io_wrapper.cpp
 		main.cpp
 		parse_keywords.cpp
