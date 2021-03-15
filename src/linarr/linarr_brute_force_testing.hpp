@@ -134,12 +134,13 @@ err_type linarr_brute_force_testing(
 			// check correctness of input array
 			if (check_value != brute_force_value) {
 				cerr << ERROR << endl;
-				cerr << "    Input value calculated by brute force does not" << endl;
-				cerr << "    agree with the evaluation of the tree." << endl;
-				cerr << "        BF Arrangement:     " << input_arr << endl;
-				cerr << "        BF Inv Arrangement: " << invlinarr(input_arr) << endl;
-				cerr << "        BF value: " << brute_force_value << endl;
-				cerr << "        Evaluation: " << check_value << endl;
+				cerr << "    Input value (calculated by brute force) does not" << endl;
+				cerr << "    agree with the evaluation of the tree at the arrangement" << endl;
+				cerr << "    calculated by brute force." << endl;
+				cerr << "        Brute force arrangement:     " << input_arr << endl;
+				cerr << "        Brute force Inv Arrangement: " << invlinarr(input_arr) << endl;
+				cerr << "        Brute force value:           " << brute_force_value << endl;
+				cerr << "        Evaluation at arrangement:   " << check_value << endl;
 				return err_type::test_format;
 			}
 		}
@@ -154,7 +155,7 @@ err_type linarr_brute_force_testing(
 		const string err = arrgmnt_check(tree, library_arr);
 		if (err != "") {
 			cerr << ERROR << endl;
-			cerr << "    The arrangement produced is not correct." << endl;
+			cerr << "    The arrangement produced by the algorithm is not correct." << endl;
 			cerr << "    Error: '" << err << "'" << endl;
 			cerr << "        Arrangement:     " << library_arr << endl;
 			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;
@@ -169,12 +170,13 @@ err_type linarr_brute_force_testing(
 		const uint32_t check_value = tree_eval(tree, library_arr);
 		if (check_value != library_res.first) {
 			cerr << ERROR << endl;
-			cerr << "    Input value calculated by brute force does not" << endl;
-			cerr << "    agree with the evaluation of the tree." << endl;
-			cerr << "        BF Arrangement:     " << library_arr << endl;
-			cerr << "        BF Inv Arrangement: " << invlinarr(library_arr) << endl;
-			cerr << "        BF value: " << brute_force_value << endl;
-			cerr << "        Evaluation: " << check_value << endl;
+			cerr << "    The value calculated by the library's algorithm does not" << endl;
+			cerr << "    agree with the evaluation of the tree at the arrangement" << endl;
+			cerr << "    that the library's algorithm calculated." << endl;
+			cerr << "        Algorithm's Arrangement:     " << library_arr << endl;
+			cerr << "        Algorithm's Inv Arrangement: " << invlinarr(library_arr) << endl;
+			cerr << "        Algorithm's value:           " << library_res.first << endl;
+			cerr << "        Evaluation at arrangement:   " << check_value << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
 			return err_type::test_execution;
@@ -184,15 +186,15 @@ err_type linarr_brute_force_testing(
 		// ensure that the value of D is actually minimum
 		if (library_res.first != brute_force_value) {
 			cerr << ERROR << endl;
-			cerr << "    The value calculated by the library and the brute force do not agree." << endl;
+			cerr << "    The value calculated by the library and by bruteforce do not agree." << endl;
 			cerr << "    Library:" << endl;
-			cerr << "        Value: " << library_res.first << endl;
+			cerr << "        Value:           " << library_res.first << endl;
 			cerr << "        Arrangement:     " << library_res.second << endl;
 			cerr << "        Inv Arrangement: " << invlinarr(library_res.second) << endl;
-			cerr << "    Bruteforce:" << endl;
-			cerr << "        Value: " << brute_force_value << endl;
-			cerr << "        BF Arrangement:     " << library_arr << endl;
-			cerr << "        BF Inv Arrangement: " << invlinarr(library_arr) << endl;
+			cerr << "    bruteforce:" << endl;
+			cerr << "        Value:           " << brute_force_value << endl;
+			cerr << "        Arrangement:     " << library_arr << endl;
+			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
 			return err_type::test_execution;
