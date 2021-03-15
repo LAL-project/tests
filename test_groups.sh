@@ -27,6 +27,9 @@ groups_list=(\
 	"internal_sorting" \
 	"internal_traversal" \
 	\
+	"io"
+	"io_correctness"
+	\
 	"linarr" \
 	"linarr_E_2Cd" \
 	"linarr_D" \

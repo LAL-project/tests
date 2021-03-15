@@ -8,6 +8,7 @@ source test_groups.sh
 source test_dir_generate.sh
 source test_dir_graphs.sh
 source test_dir_internal.sh
+source test_dir_io.sh
 source test_dir_linarr.sh
 source test_dir_memory.sh
 source test_dir_numeric.sh
@@ -85,6 +86,9 @@ function show_usage() {
 	echo "        internal_centre : execute centre internal tests"
 	echo "        internal_centroid : execute centroid internal tests"
 	echo "        internal_traversal : execute traversal internal tests"
+	echo ""
+	echo "        io : execute io tests"
+	echo "        io_correctness : execute correctness tests of treebanks"
 	echo ""
 	echo "        linarr : execute linear arrangement tests"
 	echo "        linarr_E_2Cd : execute linear arrangement (approximation of C) tests"
@@ -571,20 +575,21 @@ if [ $exe_group != 0 ]; then
 			;;
 	esac
 	
-	if [ $array_has == 1 ]; then
+	if [ $array_has == 0 ]; then
+		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'."
+		echo "    Make sure that the group '$exe_group' is in the variable 'groups_list'"
 		
+		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
+		
+	else
+	
 		if [ "$exe_group" == "all" ]; then
-			for g in "generate" "graphs" "internal" "linarr" "memory" "numeric" "properties" "numeric"; do
+			for g in "generate" "graphs" "internal" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
 				apply_group $g
 			done
 		else
 			apply_group $exe_group
 		fi
-		
-	else
-		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'"
-		
-		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
 	fi
 else
 	execute_group $input_dir $output_dir 1 1 $storage_dir
