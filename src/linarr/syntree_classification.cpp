@@ -80,10 +80,10 @@ pair<syndepstr_type, bool> string_to_syntreetype(const string& s) {
 	if (s == "pla") { return make_pair(syndepstr_type::planar, true); }
 	if (s == "1ec") { return make_pair(syndepstr_type::EC1, true); }
 	if (s == "wg1") { return make_pair(syndepstr_type::WG1, true); }
-	if (s == "mh4") { return make_pair(syndepstr_type::none, false); }
-	if (s == "mh5") { return make_pair(syndepstr_type::none, false); }
+	if (s == "mh4") { return make_pair(syndepstr_type::unknown, false); }
+	if (s == "mh5") { return make_pair(syndepstr_type::unknown, false); }
 
-	return make_pair(syndepstr_type::none, true);
+	return make_pair(syndepstr_type::unknown, true);
 }
 
 rooted_tree parse_tree_in_line(const string& s) {
