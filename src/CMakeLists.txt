@@ -67,21 +67,36 @@ endif()
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
-# includes to lal
-set(LAL_DIR ../../linear-arrangement-library)
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-	message(STATUS "Link against laldebug (debug compilation of lal)")
-	set(LAL_LIB_DIR ${LAL_DIR}/lal-debug)
-	set(LAL_LIB_NAME laldebug)
+# Looking for the Linear Arrangement Library
+if (NOT DEFINED LAL_DEV_DIR)
+	message(STATUS "Also, LAL's development root directory was not given.")
+	message(STATUS "    Note that even if the library is installed in the system, these tests")
+	message(STATUS "    use 'private' headers of the library, which are not distributed.")
+	message(STATUS "    Please, rerun 'cmake' the location of LAL's development root directory:")
+	message(STATUS "        -DLAL_DEV_DIR=/path/to/the/library")
+	message(FATAL_ERROR "Please, read the last few lines and follow the instructions given.")
 else()
-	message(STATUS "Link against lal (release compilation of lal)")
-	set(LAL_LIB_DIR ${LAL_DIR}/lal-release)
-	set(LAL_LIB_NAME lal)
+	message(STATUS "Either LAL was not found in the system, or LAL's development root directory was given.")
+	
+	if (NOT DEFINED LAL_DEV_DIR)
+		message(STATUS "Path to the root directory of the linear arrangement library not given.")
+		message(STATUS "    Use -DLAL_DIR=/path/to/the/library")
+		message(STATUS "Rerun 'cmake' with the appropriate arguments")
+		message(FATAL_ERROR "Please, read the last few lines and follow the instructions given.")
+	else()
+		if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+			message(STATUS "Link against laldebug (debug compilation of lal)")
+			set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-debug)
+			set(LAL_LIB_NAME laldebug)
+		else()
+			message(STATUS "Link against lal (release compilation of lal)")
+			set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-release)
+			set(LAL_LIB_NAME lal)
+		endif()
+		message(STATUS "    LAL_LIB_DIR: ${LAL_LIB_DIR}")
+		message(STATUS "    LAL_LIB_NAME: ${LAL_LIB_NAME}")
+	endif()
 endif()
-message(STATUS "    LAL_LIB_DIR: ${LAL_LIB_DIR}")
-message(STATUS "    LAL_LIB_NAME: ${LAL_LIB_NAME}")
-
-link_directories(${LAL_LIB_DIR})
 
 # **********************************************************************
 # PROJECT
@@ -188,10 +203,11 @@ add_executable(
 # self includes
 target_include_directories(tests PRIVATE .)
 
+# LAL
 # lal includes
-target_include_directories(tests PRIVATE ${LAL_DIR})
+target_include_directories(tests PRIVATE ${LAL_DEV_DIR})
 # lal linking
-target_link_libraries(tests ${LAL_LIB_NAME})
+target_link_libraries(tests ${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 
 # ----------------------
 # Add system libraries
