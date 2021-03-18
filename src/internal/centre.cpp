@@ -51,7 +51,7 @@ using namespace std;
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/internal/graphs/trees/tree_centre.hpp>
+#include <lal/internal/properties/tree_centre.hpp>
 #include <lal/internal/graphs/traversal.hpp>
 using namespace lal;
 using namespace internal;

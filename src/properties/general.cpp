@@ -58,7 +58,7 @@ using namespace std;
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mean_hierarchical_distance.hpp>
-#include <lal/internal/graphs/trees/is_tree.hpp>
+#include <lal/internal/graphs/is_tree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
