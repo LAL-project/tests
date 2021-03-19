@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/graphs/tree_type.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/graphs/conversions.hpp>
+#include <lal/internal/graphs/tree_type_string.hpp>
 using namespace lal;
 using namespace graphs;
 
@@ -189,7 +190,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 			for (size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					cout << "        "
-						 << graphs::tree_type_to_string(static_cast<tree_type>(i))
+						 << internal::tree_type_string(static_cast<tree_type>(i))
 						 << (not LAL_types[i] ? "  <--- missing" : "")
 						 << endl;
 				}
@@ -198,7 +199,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 			for (size_t i = 0; i < LAL_types.size(); ++i) {
 				if (LAL_types[i]) {
 					cout << "        "
-						 << graphs::tree_type_to_string(static_cast<tree_type>(i))
+						 << internal::tree_type_string(static_cast<tree_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << endl;
 				}
