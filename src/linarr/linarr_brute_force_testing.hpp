@@ -98,14 +98,15 @@ err_type linarr_brute_force_testing(
 		return err_type::no_error;
 	}
 
-	vector<uint32_t> node_list(n);
-	while (fin >> node_list[0]) {
+	lal::head_vector tree_as_head_vector(n);
+	while (fin >> tree_as_head_vector[0]) {
+		// read head vector
 		for (uint32_t i = 1; i < n; ++i) {
-			fin >> node_list[i];
+			fin >> tree_as_head_vector[i];
 		}
 
 		// construct tree
-		T tree = conv(node_list);
+		T tree = conv(tree_as_head_vector);
 		tree_initializer(tree);
 		if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, T>) {
 #if defined DEBUG
