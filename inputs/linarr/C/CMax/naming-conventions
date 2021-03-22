@@ -1,7 +1,0 @@
-The folders are named according to the following conventions:
-
-- DMax: contains the value of CMax constrained to DMax, that is, the maximum number of crossings (and the arrangements that yield it) among those arrangements that maximise D.
-
-- Dmin: similarly as before, but among those arrangements that minimise D.
-
-- unconstrained: the maximum number of crossings among every possible arrangement of the vertices (there is no constraint on the arrangements).

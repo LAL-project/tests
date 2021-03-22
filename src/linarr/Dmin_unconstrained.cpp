@@ -372,23 +372,17 @@ err_type test_tree_algorithm(
 } // -- namespace dmin_unconstrained
 
 err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() > 1) {
-		cerr << ERROR << endl;
-		cerr << "    No more than one input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
-	}
-
-	string alg;
-	fin >> alg;
+	string what;
+	fin >> what;
 
 	err_type r;
 	// --------------
 	// YOSSI SHILOACH
-	if (alg == "YS_bruteforce") {
+	if (what == "YS_bruteforce") {
 		if (inputs.size() != 1) {
 			cerr << ERROR << endl;
-			cerr << "    No input files were given." << endl;
+			cerr << "    Exactly one input files are allowed in this test." << endl;
+			cerr << "    Instead, " << inputs.size() << " were given." << endl;
 			return err_type::test_format;
 		}
 
@@ -409,7 +403,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 
 		input_file.close();
 	}
-	else if (alg == "YS_class") {
+	else if (what == "YS_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
@@ -418,7 +412,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		, fin
 		);
 	}
-	else if (alg == "YS_tree") {
+	else if (what == "YS_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
@@ -429,10 +423,11 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	}
 	// ---------------
 	// FAN R. K. CHUNG
-	else if (alg == "FC_bruteforce") {
+	else if (what == "FC_bruteforce") {
 		if (inputs.size() != 1) {
 			cerr << ERROR << endl;
-			cerr << "    No input files were given." << endl;
+			cerr << "    Exactly one input files are allowed in this test." << endl;
+			cerr << "    Instead, " << inputs.size() << " were given." << endl;
 			return err_type::test_format;
 		}
 
@@ -453,7 +448,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 
 		input_file.close();
 	}
-	else if (alg == "FC_class") {
+	else if (what == "FC_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
@@ -462,7 +457,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		, fin
 		);
 	}
-	else if (alg == "FC_tree") {
+	else if (what == "FC_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
@@ -473,7 +468,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	}
 	else {
 		cerr << ERROR << endl;
-		cerr << "    Test not implemented for algorithm '" << alg << "'." << endl;
+		cerr << "    Test not implemented for '" << what << "'." << endl;
 		r = err_type::not_implemented;
 	}
 

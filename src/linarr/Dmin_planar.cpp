@@ -41,6 +41,7 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+#include <set>
 using namespace std;
 
 // lal includes
@@ -60,11 +61,33 @@ using namespace linarr;
 namespace exe_tests {
 
 err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
+	if (inputs.size() != 1) {
 		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Exactly one input files are allowed in this test." << endl;
 		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format;
+	}
+
+	const set<string> allowed_algos({"AEF"});
+
+	string algo;
+	fin >> algo;
+
+	if (allowed_algos.find(algo) == allowed_algos.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Unrecognized algorithm '" << algo << "'." << endl;
+		cerr << "    Allowed algorithms:" << endl;
+		for (const auto& s : allowed_algos) {
+		cerr << "    - " << s << endl;
+		}
+		return err_type::test_format;
+	}
+
+	ifstream input_file(inputs[0].first);
+	if (not input_file.is_open()) {
+		cerr << ERROR << endl;
+		cerr << "    Input file '" << inputs[0].first << "' could not be opened." << endl;
+		return err_type::io;
 	}
 
 	const auto err = linarr_brute_force_testing<free_tree>
@@ -82,7 +105,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			return from_head_vector_to_free_tree(v).first;
 		},
 		[](free_tree&) { },
-		fin
+		input_file
 	);
 
 	if (err != err_type::no_error) {

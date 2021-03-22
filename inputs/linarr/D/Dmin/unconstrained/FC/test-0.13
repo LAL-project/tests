@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-Unconstrained
-INPUT 1 graphs/D/Dmin/unconstrained/13 *
+INPUT 1 inputs/linarr/optimal_linearizations/Dmin/unconstrained/13 *
 BODY
 	FC_bruteforce

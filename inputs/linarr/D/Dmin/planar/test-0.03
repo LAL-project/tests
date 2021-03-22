@@ -1,5 +1,4 @@
 TYPE linarr-Dmin-Planar
-INPUT 0
+INPUT 1 inputs/linarr/optimal_linearizations/Dmin/planar/03 *
 BODY
-	3
-	 0 1 1	    2   1	  2 * 1 0 2
+	AEF

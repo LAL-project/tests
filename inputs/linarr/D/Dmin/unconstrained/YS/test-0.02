@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-Unconstrained
-INPUT 1 graphs/D/Dmin/unconstrained/02 *
+INPUT 1 inputs/linarr/optimal_linearizations/Dmin/unconstrained/02 *
 BODY
 	YS_bruteforce
