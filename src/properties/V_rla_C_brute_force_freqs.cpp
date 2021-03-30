@@ -178,7 +178,7 @@ frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
 
 rational variance_C_freqs_rational(const undirected_graph& g) {
 	// compute set Q(g)
-	const auto Q = g.Q();
+	const auto Q = g.get_Q();
 	return variance_C_freqs_Q_rational(Q);
 }
 

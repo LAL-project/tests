@@ -77,7 +77,7 @@ directed_graph make_rand_dgraph(const undirected_graph& g) {
 	uniform_int_distribution<int> U(0,1);
 
 	// directed graph
-	directed_graph dg(g.num_nodes());
+	directed_graph dg(g.get_num_nodes());
 	vector<edge> es = g.get_edges();
 
 	const size_t m = es.size();
@@ -157,7 +157,7 @@ void mmt_deg(const undirected_graph& g, uint32_t p) {
 
 void hubiness_coefficient(const undirected_graph& g) {
 	if (not internal::is_graph_a_tree(g)) { return; }
-	if (g.num_nodes() > 3) {
+	if (g.get_num_nodes() > 3) {
 		rational h = hubiness_rational(g);
 		cout << "hubiness= " << h << endl;
 	}

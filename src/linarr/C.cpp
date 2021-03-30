@@ -100,7 +100,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint32_t n = uG.num_nodes();
+	const uint32_t n = uG.get_num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -110,7 +110,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < uG.num_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
@@ -175,7 +175,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 
 		if (has_upper_bound) {
 			if (uCbf > upper_bound) {
-				if (uC != uG.num_edges()*uG.num_edges()) {
+				if (uC != uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
 					cerr << "    Expected number of crossings to be m^2." << endl;
 					cerr << "    Instead, received: " << uC << endl;

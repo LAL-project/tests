@@ -118,7 +118,7 @@ uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
 template<typename GRAPH>
 rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 	rational Ec2(0);
-	const uint32_t n = g.num_nodes();
+	const uint32_t n = g.get_num_nodes();
 
 	iterators::Q_iterator<GRAPH> q(g);
 	while (q.has_next()) {
@@ -187,7 +187,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint32_t n = uG.num_nodes();
+	const uint32_t n = uG.get_num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -197,7 +197,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (node u = 0; u < uG.num_nodes(); ++u) {
+		for (node u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}

@@ -84,7 +84,7 @@ std::optional<bool> read_should_be_or_not(ifstream& fin) {
 
 template<class T>
 void read_free(ifstream& fin, T& t) {
-	vector<edge> edges(t.num_nodes() - 1);
+	vector<edge> edges(t.get_num_nodes() - 1);
 	for (auto& e : edges) {
 		fin >> e.first >> e.second;
 	}

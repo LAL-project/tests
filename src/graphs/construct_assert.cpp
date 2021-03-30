@@ -207,13 +207,13 @@ err_type process_assert(
 	else if (assert_what == ASSERT_GRAPH_NUM_NODES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_GRAPH_NUM_NODES, g1);
-		if (mfunction(g1, num_nodes()) != n) {
+		if (mfunction(g1, get_num_nodes()) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NUM_NODES);
 			cerr << "    Graph '" << g1 << "' does not have "
 				 << n << " nodes." << endl;
 			cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, num_nodes()) << " nodes." << endl;
+				 << mfunction(g1, get_num_nodes()) << " nodes." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -222,13 +222,13 @@ err_type process_assert(
 	else if (assert_what == ASSERT_GRAPH_NUM_EDGES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_GRAPH_NUM_EDGES, g1);
-		if (mfunction(g1, num_edges()) != n) {
+		if (mfunction(g1, get_num_edges()) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_NUM_EDGES);
 			cerr << "    Graph '" << g1 << "' does not have "
 				 << n << " edges." << endl;
 			cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, num_edges()) << " edges." << endl;
+				 << mfunction(g1, get_num_edges()) << " edges." << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -365,12 +365,12 @@ err_type process_assert(
 	else if (assert_what == ASSERT_GRAPH_DEGREE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_GRAPH_DEGREE, g1);
-		if (mfunction(g1, degree(u)) != v) {
+		if (mfunction(g1, get_degree(u)) != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_DEGREE);
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have degree " << v << endl;
-			cerr << "    The vertex has degree: " << mfunction(g1, degree(u))
+			cerr << "    The vertex has degree: " << mfunction(g1, get_degree(u))
 				 << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
@@ -479,7 +479,7 @@ err_type process_assert(
 			ASSERT_GRAPH_FULL_DEGREE, graph_type(g1), directed_types
 		)
 		const uint32_t fdegree =
-			mfunction_dir_graphs(g1, degree(u));
+			mfunction_dir_graphs(g1, get_degree(u));
 		if (fdegree != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_GRAPH_FULL_DEGREE)
@@ -497,13 +497,13 @@ err_type process_assert(
 		assert_correct_graph_type(
 			ASSERT_DGRAPH_IN_DEGREE, graph_type(g1), directed_types
 		)
-		if (mfunction_dir_graphs(g1, in_degree(u)) != v) {
+		if (mfunction_dir_graphs(g1, get_in_degree(u)) != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_DGRAPH_IN_DEGREE)
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have in-degree " << v << endl;
 			cerr << "    The vertex has in-degree: "
-				 << mfunction_dir_graphs(g1, in_degree(u)) << endl;
+				 << mfunction_dir_graphs(g1, get_in_degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -515,13 +515,13 @@ err_type process_assert(
 		assert_correct_graph_type(
 			ASSERT_DGRAPH_OUT_DEGREE, graph_type(g1), directed_types
 		)
-		if (mfunction_dir_graphs(g1, out_degree(u)) != v) {
+		if (mfunction_dir_graphs(g1, get_out_degree(u)) != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_DGRAPH_OUT_DEGREE)
 			cerr << "    The vertex '" << u << "' of graph '"
 				 << g1 << "' does not have out-degree " << v << endl;
 			cerr << "    The vertex has out-degree: "
-				 << mfunction_dir_graphs(g1, degree(u)) << endl;
+				 << mfunction_dir_graphs(g1, get_out_degree(u)) << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
 			return err_type::test_execution;
@@ -638,14 +638,14 @@ err_type process_assert(
 	else if (assert_what == ASSERT_TREE_SIZE_CC) {
 		fin >> g1 >> u >> n;
 		assert_exists_variable(ASSERT_TREE_SIZE_CC, g1)
-		if (mfunction_trees(g1, num_nodes_component(u)) != n) {
+		if (mfunction_trees(g1, get_num_nodes_component(u)) != n) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_TREE_SIZE_CC)
 			cerr << "    The component of vertex '" << u << "'"
 				 << " in '" << g1 << "' does not have "
 				 << n << " vertices." << endl;
 			cerr << "    It actually has: "
-				 << mfunction_trees(g1, num_nodes_component(u))
+				 << mfunction_trees(g1, get_num_nodes_component(u))
 				 << endl;
 			cerr << "    Contents of " << g1 << ":" << endl;
 			output_graph(g1);
@@ -686,7 +686,7 @@ err_type process_assert(
 		assert_correct_graph_type(
 			ASSERT_RTREE_VALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types
 		)
-		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
+		if (not mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_VALID_SUBSTREE_SIZES)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' are not valid."
@@ -700,7 +700,7 @@ err_type process_assert(
 		assert_correct_graph_type(
 			ASSERT_RTREE_INVALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types
 		)
-		if (mfunction_rtrees(g1, size_subtrees_valid())) {
+		if (mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_INVALID_SUBSTREE_SIZES)
 			cerr << "    Sizes of subtrees in tree '" << g1 << "' are valid."
@@ -741,7 +741,7 @@ err_type process_assert(
 			ASSERT_RTREE_SIZE_SUBTREE, graph_type(g1), rooted_tree_types
 		)
 		assert_is_rtree(g1, ASSERT_RTREE_SIZE_SUBTREE)
-		if (not mfunction_rtrees(g1, size_subtrees_valid())) {
+		if (not mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)
 			cerr << "    Values of subtree's sizes in tree '"
@@ -749,7 +749,7 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 
-		n = mfunction_rtrees(g1, num_nodes_subtree(u));
+		n = mfunction_rtrees(g1, get_num_nodes_subtree(u));
 		if (n != v) {
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE)

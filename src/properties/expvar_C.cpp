@@ -69,14 +69,14 @@ using namespace generate;
 namespace exe_tests {
 
 void output_ExpVar_C_BF(const undirected_graph& g) {
-	const rational Vr = variance_C_freqs_Q_rational(g.Q());
+	const rational Vr = variance_C_freqs_Q_rational(g.get_Q());
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_Q(const undirected_graph& g) {
-	const rational Vr = variance_C_rational_Q(g, g.Q());
+	const rational Vr = variance_C_rational_Q(g, g.get_Q());
 	const rational E1r = expectation_C_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;

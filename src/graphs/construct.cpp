@@ -341,12 +341,12 @@ err_type exe_construction_test(ifstream& fin) {
 			}
 
 			// check size
-			if (iter_edges.size() != mfunction(g1, num_edges())) {
+			if (iter_edges.size() != mfunction(g1, get_num_edges())) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_CHECK_EDGE_IT);
 				cerr << "    The amount of edges obtained differs from the amount of edges in the graph." << endl;
 				cerr << "    Number of edges obtained: " << iter_edges.size() << endl;
-				cerr << "    Number of edges in the graph: " << mfunction(g1, num_edges()) << endl;
+				cerr << "    Number of edges in the graph: " << mfunction(g1, get_num_edges()) << endl;
 				return err_type::test_execution;
 			}
 			sort(iter_edges.begin(), iter_edges.end());
@@ -585,14 +585,14 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_graph_type(FUNC_RTREE_DIR_TO_UNDIR, graph_type(g1), rooted_tree_types);
 			assert_is_rtree(g1, FUNC_RTREE_DIR_TO_UNDIR);
 			const auto& T = rtreevars[g1];
-			if (not T.size_subtrees_valid()) {
+			if (not T.are_size_subtrees_valid()) {
 				cerr << ERROR << endl;
 				cerr << "    Tree '" << g1 << "' does not have valid subtree sizes." << endl;
 				return err_type::test_execution;
 			}
 			cout << "Subtree sizes:" << endl;
-			for (node ww = 0; ww < T.num_nodes(); ++ww) {
-				cout << "    " << ww << ": " << T.num_nodes_subtree(ww) << endl;
+			for (node ww = 0; ww < T.get_num_nodes(); ++ww) {
+				cout << "    " << ww << ": " << T.get_num_nodes_subtree(ww) << endl;
 			}
 		}
 

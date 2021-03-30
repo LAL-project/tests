@@ -52,7 +52,7 @@ using namespace graphs;
 namespace exe_tests {
 
 vector<edge> enumerate_edges_brute_force(const directed_graph& g) {
-	const uint32_t n = g.num_nodes();
+	const uint32_t n = g.get_num_nodes();
 	set<edge> E;
 	for (node s = 0; s < n; ++s) {
 	for (auto t : g.get_out_neighbours(s)) {
@@ -66,7 +66,7 @@ vector<edge> enumerate_edges_brute_force(const directed_graph& g) {
 }
 
 vector<edge> enumerate_edges_brute_force(const undirected_graph& g) {
-	const uint32_t n = g.num_nodes();
+	const uint32_t n = g.get_num_nodes();
 	set<edge> E;
 	for (node s = 0; s < n; ++s) {
 	for (auto t : g.get_neighbours(s)) {
@@ -90,7 +90,7 @@ bool share_vertices(const edge_pair& st_uv) {
 }
 
 vector<edge_pair> enumerate_Q_brute_force(const undirected_graph& g) {
-	const uint32_t n = g.num_nodes();
+	const uint32_t n = g.get_num_nodes();
 	set<edge_pair> Q;
 	for (node s = 0; s < n; ++s) {
 	for (node t : g.get_neighbours(s)) {
@@ -120,7 +120,7 @@ vector<edge_pair> enumerate_Q_brute_force(const undirected_graph& g) {
 }
 
 vector<edge_pair> enumerate_Q_brute_force(const directed_graph& g) {
-	const uint32_t n = g.num_nodes();
+	const uint32_t n = g.get_num_nodes();
 	set<edge_pair> Q;
 	for (node s = 0; s < n; ++s) {
 	for (node t : g.get_out_neighbours(s)) {

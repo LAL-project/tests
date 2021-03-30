@@ -221,7 +221,7 @@ err_type test_class_algorithm(
 					// Dmin for caterpillar trees
 					uint32_t Dmin_cat = 0;
 					for (node u = 0; u < n; ++u) {
-						const uint32_t du = tree.degree(u);
+						const uint32_t du = tree.get_degree(u);
 						Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
 					}
 					Dmin_cat /= 4;

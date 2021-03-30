@@ -101,21 +101,21 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 	timing::time_point begin, end;
 	double total_elapsed = 0.0;
 
-	const uint32_t n = uG.num_nodes();
+	const uint32_t n = uG.get_num_nodes();
 
 	// amount of linear arrangements
 	uint32_t n_linarrs;
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node>> T(n_linarrs, vector<node>(uG.num_nodes()));
-	vector<linear_arrangement> pis(n_linarrs, linear_arrangement(uG.num_nodes()));
+	vector<vector<node>> T(n_linarrs, vector<node>(uG.get_num_nodes()));
+	vector<linear_arrangement> pis(n_linarrs, linear_arrangement(uG.get_num_nodes()));
 	uint32_t single_upper_bound;
 	vector<uint32_t> list_upper_bounds(n_linarrs, 0);
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < uG.num_nodes(); ++u) {
+		for (uint32_t u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> T[i][u];
 			pis[i][ T[i][u] ] = u;
 		}
@@ -211,7 +211,7 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 	else if (upper_bound_type == 1) {
 		for (uint32_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > single_upper_bound) {
-				if (uCs[i] != uG.num_edges()*uG.num_edges()) {
+				if (uCs[i] != uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
 					cerr << "    Expected number of crossings to be m^2." << endl;
 					cerr << "    Instead, received: " << uCs[i] << endl;
@@ -243,7 +243,7 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 	else if (upper_bound_type == 2) {
 		for (uint32_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > list_upper_bounds[i]) {
-				if (uCs[i] != uG.num_edges()*uG.num_edges()) {
+				if (uCs[i] != uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
 					cerr << "    Expected number of crossings to be m^2." << endl;
 					cerr << "    Instead, received: " << uCs[i] << endl;

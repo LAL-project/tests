@@ -66,7 +66,7 @@ inline void compute_data_gen_graphs_Q
 )
 {
 	// adjacency matrix
-	vector<vector<bool> > A(g.num_nodes(), vector<bool>(g.num_nodes(), false));
+	vector<vector<bool> > A(g.get_num_nodes(), vector<bool>(g.get_num_nodes(), false));
 	E_iterator it(g);
 	while (it.has_next()) {
 		it.next();
@@ -81,10 +81,10 @@ inline void compute_data_gen_graphs_Q
 		const node u = ep.second.first;
 		const node v = ep.second.second;
 
-		const bigint ks = g.degree(s);
-		const bigint kt = g.degree(t);
-		const bigint ku = g.degree(u);
-		const bigint kv = g.degree(v);
+		const bigint ks = g.get_degree(s);
+		const bigint kt = g.get_degree(t);
+		const bigint ku = g.get_degree(u);
+		const bigint kv = g.get_degree(v);
 
 		n_cycles_4 += A[s][v]*A[u][t] + A[s][u]*A[t][v];
 
@@ -129,7 +129,7 @@ inline void compute_data_gen_graphs_Q
 }
 
 rational variance_C_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
-	const bigint m = g.num_edges();
+	const bigint m = g.get_num_edges();
 
 	// ----------------------------
 	// compute terms dependent of Q
