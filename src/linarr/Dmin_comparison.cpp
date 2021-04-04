@@ -79,8 +79,14 @@ bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.fir
 
 namespace exe_tests {
 
+namespace tests_Dmin_comparison {
+
 inline
-bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
+bool check_correctness_arr(
+	const free_tree& tree,
+	const pair<uint32_t, linear_arrangement>& res
+)
+{
 	const linear_arrangement& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not is_permutation(arr)) {
@@ -135,6 +141,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 	}																	\
 }
 
+} // -- namespace tests_Dmin_comparison
 
 err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
@@ -197,8 +204,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				check_correctness_arr(tree, res1);
-				check_correctness_arr(tree, res2);
+				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1);
+				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2);
+
+				if (not correct1 or not correct2) { return err_type::test_execution; }
 
 				if (not COMPS[comp](res1, res2)) {
 					cerr << ERROR << endl;
@@ -231,8 +240,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				check_correctness_arr(tree, res1);
-				check_correctness_arr(tree, res2);
+				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1);
+				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2);
+
+				if (not correct1 or not correct2) { return err_type::test_execution; }
 
 				if (not COMPS[comp](res1, res2)) {
 					cerr << ERROR << endl;
