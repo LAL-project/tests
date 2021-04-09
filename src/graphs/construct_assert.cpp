@@ -98,6 +98,7 @@ using namespace iterators;
 #define ASSERT_RTREE_INVALID_SUBSTREE_SIZES "invalid_subtree_sizes"
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
+#define ASSERT_RTREE_ROOT_IS "root_is"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
 #define ASSERT_RTREE_ORIENTATION_VALID "rtree_orientation_valid"
 #define ASSERT_RTREE_ORIENTATION_NOT_VALID "rtree_orientation_not_valid"
@@ -731,6 +732,21 @@ err_type process_assert(
 			cerr << ERROR << endl;
 			message_in_func(ASSERT_RTREE_NOT_HAS_ROOT)
 			cerr << "    Tree '" << g1 << "' has a root." << endl;
+			return err_type::test_execution;
+		}
+	}
+	else if (assert_what == ASSERT_RTREE_ROOT_IS) {
+		fin >> g1 >> u;
+		assert_exists_variable(ASSERT_RTREE_ROOT_IS, g1)
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS, graph_type(g1), rooted_tree_types
+		)
+		const node R = mfunction_rtrees(g1, get_root());
+		if (R != u) {
+			cerr << ERROR << endl;
+			message_in_func(ASSERT_RTREE_ROOT_IS)
+			cerr << "    The root of tree '" << g1 << "' is not " << u << "." << endl;
+			cerr << "    The root of tree '" << g1 << "' is " << R << "." << endl;
 			return err_type::test_execution;
 		}
 	}
