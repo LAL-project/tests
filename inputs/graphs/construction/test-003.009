@@ -14,8 +14,8 @@ BODY
 		true true
 	output_graph t05
 	
-	set_root t05 0
-	find_edge_orientation t05
+	assert root_is t05 0
+	assert has_root t05
 	assert rtree_orientation_valid t05
 	assert num_edges t05 4
 
@@ -45,8 +45,8 @@ BODY
 		true true
 	output_graph t10
 	
-	set_root t10 0
-	find_edge_orientation t10
+	assert has_root t10
+	assert root_is t10 0
 	assert rtree_orientation_valid t10
 	assert num_edges t10 9
 
@@ -88,8 +88,8 @@ BODY
 		true true
 	output_graph t15
 	
-	set_root t15 0
-	find_edge_orientation t15
+	assert has_root t15
+	assert root_is t15 0
 	assert rtree_orientation_valid t15
 	assert num_edges t15 14
 
