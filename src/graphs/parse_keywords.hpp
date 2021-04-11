@@ -41,44 +41,18 @@
 #pragma once
 
 // C++ includes
-#include <iostream>
+#include <fstream>
+#include <vector>
 #include <string>
 
-// lal includes
-#include <lal/graphs/undirected_graph.hpp>
-#include <lal/graphs/directed_graph.hpp>
-#include <lal/graphs/free_tree.hpp>
-#include <lal/graphs/rooted_tree.hpp>
+// common includes
+#include "common/definitions.hpp"
 
-// custom includes
-#include "definitions.hpp"
+namespace tests {
+namespace graphs {
 
-namespace exe_tests {
-namespace io_wrapper {
+// parses the first keyword and calls the appropriate main type function
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
 
-err_type read_graph(
-	const std::string& file, const std::string& format,
-	lal::graphs::undirected_graph& G,
-	bool normalise = true
-);
-
-err_type read_graph(
-	const std::string& file, const std::string& format,
-	lal::graphs::directed_graph& G,
-	bool normalise = true
-);
-
-err_type read_graph(
-	const std::string& file, const std::string& format,
-	lal::graphs::free_tree& G,
-	bool normalise = true
-);
-
-err_type read_graph(
-	const std::string& file, const std::string& format,
-	lal::graphs::rooted_tree& G,
-	bool normalise = true
-);
-
-} // -- namespace io_wrapper
-} // -- namespace exe_tests
+} // -- namespace graphs
+} // -- namespace tests

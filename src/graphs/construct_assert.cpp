@@ -61,7 +61,7 @@ using namespace lal;
 using namespace graphs;
 using namespace iterators;
 
-// Custom includes
+// common includes
 #include "exe_construction.hpp"
 
 #define ASSERT_GRAPH_EQUAL_GRAPHS "equal_graphs"
@@ -105,7 +105,8 @@ using namespace iterators;
 #define ASSERT_RTREE_IS_TYPE "is_rtree_type"
 #define ASSERT_RTREE_IS_NOT_TYPE "is_not_rtree_type"
 
-namespace exe_tests {
+namespace tests {
+namespace graphs {
 
 err_type process_assert(
 	const string& assert_what,
@@ -817,4 +818,5 @@ err_type process_assert(
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace graphs
+} // -- namespace tests

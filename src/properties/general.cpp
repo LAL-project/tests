@@ -65,11 +65,12 @@ using namespace numeric;
 using namespace properties;
 using namespace iterators;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
 directed_graph make_rand_dgraph(const undirected_graph& g) {
 	// coin flips
@@ -251,4 +252,5 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

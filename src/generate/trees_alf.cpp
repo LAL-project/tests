@@ -55,9 +55,14 @@ using namespace graphs;
 using namespace generate;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
-#include "generate/tree_validity_check.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/std_utils.hpp"
+#include "common/tree_validity_check.hpp"
+
+// generate includes
 #include "generate/test_exhaustive_enumeration.hpp"
 
 // expected second moment of degree over all labelled trees
@@ -69,7 +74,8 @@ inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
 	return p1*p2;
 }
 
-namespace exe_tests {
+namespace tests {
+namespace generate {
 
 namespace alf {
 struct extra_params { };
@@ -139,7 +145,6 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 	uint32_t n;
 	while (fin >> n) {
 		const auto err =
-			exhaustive_enumeration_trees::
 			test_exhaustive_enumeration_of_trees<all_lab_free_trees>
 			(n, alf::test_for_n, alf::extra_params{});
 
@@ -150,4 +155,5 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace generate
+} // -- namespace tests

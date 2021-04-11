@@ -52,15 +52,20 @@ using namespace lal;
 using namespace graphs;
 using namespace linarr;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
+
+// linarr includes
 #include "linarr/n_crossings_m2.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
-err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_bound_type) {
+err_type exe_linarr_C_list
+(const input_list& inputs, ifstream& fin, char upper_bound_type)
+{
 	const set<string> allowed_procs(
 	{"bruteforce", "dyn_prog", "ladder", "stack_based"}
 	);
@@ -284,4 +289,5 @@ err_type exe_linarr_C_list(const input_list& inputs, ifstream& fin, char upper_b
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

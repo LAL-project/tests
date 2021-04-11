@@ -45,78 +45,14 @@
 #include <vector>
 #include <string>
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
 
-namespace exe_tests {
-
-void mark_wrong_keyword(
-	const std::vector<std::string>& keywords,
-	const std::vector<size_t>& k,
-	const std::string& tab = ""
-);
-
-/* FUNCTIONS FOR KEYWORD PARSING */
+namespace tests {
+namespace memory {
 
 // parses the first keyword and calls the appropriate main type function
 err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
 
-// Functions to test the generation functions and classes
-
-err_type call_generate
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-err_type call_generate_trees
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-err_type call_generate_arrangements
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the different implementations of graphs
-
-err_type call_graphs
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the library's internal algorithms
-
-err_type call_internal
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the library's io algorithms
-
-err_type call_io
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test memory-related issues
-
-err_type call_memory
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the linear arrangement-related functions
-
-err_type call_linarr
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-err_type call_linarr_C
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-err_type call_linarr_klevel
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-err_type call_linarr_Dmin
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the integer and rational classes
-
-err_type call_numeric
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the properties functions
-
-err_type call_properties
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-// Functions to test the library's utilities
-
-err_type call_utilities
-(const std::vector<std::string>& keywords, size_t i, std::ifstream& fin);
-
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

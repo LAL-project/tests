@@ -54,12 +54,13 @@ using namespace graphs;
 using namespace numeric;
 using namespace properties;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
 void output_ExpVar_D_formula(const undirected_graph& g) {
 	const rational Vr = variance_D_rational(g);
@@ -99,4 +100,5 @@ err_type exe_properties_ExpVar_D(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

@@ -48,11 +48,12 @@ using namespace std;
 #include <lal/io/check_correctness.hpp>
 using namespace lal;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace io {
 
 err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
@@ -79,7 +80,7 @@ err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 		}
 
 		if (file_type == "treebank") {
-			const auto errs = io::check_correctness_treebank(file_path);
+			const auto errs = lal::io::check_correctness_treebank(file_path);
 			cout << "A total of " << errs.size() << " errors were found for treebank file '"
 				 << file_path << "'." << endl;
 			if (errs.size() > 0) {
@@ -90,7 +91,7 @@ err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 			}
 		}
 		else {
-			const auto errs = io::check_correctness_treebank_dataset(file_path);
+			const auto errs = lal::io::check_correctness_treebank_dataset(file_path);
 			cout << "A total of " << errs.size() << " errors were found for treebank dataset '"
 				 << file_path << "'." << endl;
 			if (errs.size() > 0) {
@@ -107,4 +108,5 @@ err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace io
+} // -- namespace tests

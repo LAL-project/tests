@@ -60,15 +60,16 @@ using namespace numeric;
 using namespace properties;
 using namespace linarr;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
 
 #define to_int32(x) static_cast<int32_t>(x)
 #define to_uint32(x) static_cast<uint32_t>(x)
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 template<typename INT>
 inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
@@ -254,4 +255,5 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace common
+} // -- namespace tests

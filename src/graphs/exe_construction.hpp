@@ -51,8 +51,11 @@
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
+
+namespace tests {
+namespace graphs {
 
 template<typename G>
 inline bool equal_graphs(const G& g1, const G& g2)
@@ -371,8 +374,6 @@ if (not mfunction_rtrees(g1, is_directed())) {							\
 	}															\
 }(t)
 
-namespace exe_tests {
-
 std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::undirected_graph& g);
 std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::directed_graph& g);
 bool share_vertices(const lal::edge_pair& st_uv);
@@ -389,4 +390,5 @@ err_type process_assert(
 	std::ifstream& fin
 );
 
-} // -- namespace exe_tests
+} // -- namespace graphs
+} // -- namespace tests

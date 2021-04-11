@@ -53,12 +53,15 @@ using namespace lal;
 using namespace graphs;
 using namespace linarr;
 
-// custom includes
-#include "definitions.hpp"
-#include "arrgmnt_validity_check.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+
+// linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 1) {
@@ -118,4 +121,5 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

@@ -49,7 +49,8 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+namespace tests {
+namespace graphs {
 
 vector<edge> enumerate_edges_brute_force(const directed_graph& g) {
 	const uint32_t n = g.get_num_nodes();
@@ -149,5 +150,5 @@ vector<edge_pair> enumerate_Q_brute_force(const directed_graph& g) {
 	return vector<edge_pair>(Q.begin(), Q.end());
 }
 
-} // -- namespace exe_tests
-
+} // -- namespace graphs
+} // -- namespace tests

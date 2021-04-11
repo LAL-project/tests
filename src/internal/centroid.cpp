@@ -59,9 +59,9 @@ using namespace lal;
 using namespace graphs;
 using namespace generate;
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
 
 inline bool is_centroidal(
 	const graphs::rooted_tree& t, uint32_t size_cc, node u, uint32_t *sizes
@@ -142,7 +142,8 @@ bool centroids_are_equal(
 	return true;
 }
 
-namespace exe_tests {
+namespace tests {
+namespace internal {
 
 template<class TREE_TYPE>
 err_type exe_commands_utils_centroid(ifstream& fin) {
@@ -174,7 +175,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "find_centroid") {
 			node s;
 			fin >> s;
-			const auto centroid = internal::retrieve_centroid(t, s);
+			const auto centroid = lal::internal::retrieve_centroid(t, s);
 			cout << "centroid: " << centroid.first;
 			if (centroid.second < t.get_num_nodes()) { cout << " " << centroid.second; }
 			cout << endl;
@@ -182,7 +183,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "centroid_is") {
 			node start_at;
 			fin >> start_at;
-			const auto centroid = internal::retrieve_centroid(t, start_at);
+			const auto centroid = lal::internal::retrieve_centroid(t, start_at);
 
 			uint32_t centroid_size;
 			fin >> centroid_size;
@@ -262,7 +263,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 
 #define test_correctness(T)											\
 {																	\
-	const auto lib_centroid = internal::retrieve_centroid(T, 0);	\
+	const auto lib_centroid = lal::internal::retrieve_centroid(T, 0);\
 	const auto easy_centroid = straightforward_centroid(T, 0);		\
 	if (not centroids_are_equal(T,lib_centroid, easy_centroid)) {	\
 		cerr << ERROR << endl;										\
@@ -369,4 +370,5 @@ err_type exe_internal_centroid(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace internal
+} // -- namespace tests

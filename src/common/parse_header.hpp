@@ -41,43 +41,90 @@
 #pragma once
 
 // C++ includes
-#include <string>
+#include <iostream>
+#include <fstream>
 
-// lal includes
-#include <lal/graphs/free_tree.hpp>
-#include <lal/graphs/rooted_tree.hpp>
+// common includes
+#include "common/definitions.hpp"
 
-// custom includes
-#include "definitions.hpp"
+namespace tests {
 
-namespace exe_tests {
+template<typename ... Params>
+err_type parse_header(
+	err_type (*F)(const input_list&, std::ifstream&, Params...),
 
-/* FREE TREES */
+	std::ifstream& fin, Params... P
+)
+{
+	std::string field;
+	fin >> field;
 
-enum class ftree_check : int8_t {
-	not_a_tree,
-	diff_n_verts,
-	diff_n_edges,
+	if (field != "INPUT") {
+		std::cerr << ERROR << std::endl;
+		std::cerr << "    Expected field: INPUT" << std::endl;
+		std::cerr << "    Found: " << field << std::endl;
+		return err_type::test_format;
+	}
 
-	correct
-};
+	size_t n_inputs;
+	fin >> n_inputs;
+	input_list inputs(n_inputs);
+	for (size_t i = 0; i < n_inputs; ++i) {
+		std::string file, format;
+		fin >> file >> format;
+		inputs[i] = make_pair(file, format);
+	}
 
-std::string ftree_check_to_string(const ftree_check& fc);
-ftree_check test_validity_tree(const uint32_t n, const lal::graphs::free_tree& T);
+	fin >> field;
+	if (field != "BODY") {
+		std::cerr << ERROR << std::endl;
+		std::cerr << "    Expected field: BODY" << std::endl;
+		std::cerr << "    Found: " << field << std::endl;
+		return err_type::test_format;
+	}
 
-/* ROOTED TREES */
+	return F(inputs, fin, P...);
+}
 
-enum class rtree_check : int8_t {
-	not_a_tree,
-	diff_n_verts,
-	diff_n_edges,
-	without_root,
-	invalid_edges_orientation,
+void mark_wrong_keyword
+(const std::vector<std::string>& keywords,
+ const std::vector<size_t>& k, const std::string& tab)
+{
+	std::cerr << tab;
+	// sure 'keywords' has at least one keyword
+	for (size_t i = 0; i < keywords.size(); ++i) {
+		if (keywords[i].length() >= 2) {
+			std::cerr << keywords[i] << " ";
+		}
+		else {
+			std::cerr << keywords[i] << "  ";
+		}
+	}
+	std::cerr << std::endl;
 
-	correct
-};
+	// display the /\ where needed
+	size_t it = 0;
+	std::cerr << tab;
+	for (size_t i = 0; i < keywords.size(); ++i) {
+		size_t l = keywords[i].length();
+		if (it < k.size()) {
+			if (k[it] != i) {
+				std::cerr << string(l, ' ') << " ";
+				if (l < 2) { std::cerr << " "; }
+			}
+			else {
+				std::cerr << "/\\";
+				if (l > 2) {
+					std::cerr << string(l - 2, ' ') << " ";
+				}
+				else {
+					std::cerr << "   ";
+				}
+				++it;
+			}
+		}
+	}
+	std::cerr << std::endl;
+}
 
-std::string rtree_check_to_string(const rtree_check& fc);
-rtree_check test_validity_tree(const uint32_t n, const lal::graphs::rooted_tree& T);
-
-} // -- namespace exe_tests
+} // -- namespace tests

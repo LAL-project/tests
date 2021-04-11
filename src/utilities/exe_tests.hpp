@@ -38,24 +38,30 @@
  *
  ********************************************************************/
 
-#include "time.hpp"
+#pragma once
 
-namespace timing {
+/* This file contains the definition of the different functions used for
+ * testing the library.
+ *
+ * This file is not to be included by any of the implemented tests, as adding
+ * a new function to this file will make ALL the corresponding .cpp files to
+ * be recompiled.
+ */
 
-time_point now() {
-	return high_resolution_clock::now();
-}
+// C++ includes
+#include <functional>
+#include <fstream>
+#include <vector>
+#include <string>
 
-double elapsed_seconds(const time_point& begin, const time_point& end) {
-	return duration<double, seconds::period>( end - begin ).count();
-}
+// common includes
+#include "common/definitions.hpp"
 
-double elapsed_milliseconds(const time_point& begin, const time_point& end) {
-	return duration<double, milliseconds::period>( end - begin ).count();
-}
+namespace tests {
+namespace utilities {
 
-double elapsed_microseconds(const time_point& begin, const time_point& end) {
-	return duration<double, microseconds::period>( end - begin ).count();
-}
+err_type exe_utilities_tree_isomorphism
+(const input_list& inputs, std::ifstream& fin);
 
-}
+} // -- namespace utilities
+} // -- namespace tests

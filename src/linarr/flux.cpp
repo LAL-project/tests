@@ -52,8 +52,8 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
 
 #define test_integral_field(FIELD, field_str)									\
 	for (size_t i = 0; i < S; ++i) {											\
@@ -73,7 +73,8 @@ using namespace graphs;
 #define parse_integral_field(FIELD)	\
 	for (auto& v : input_flux) { fin >> v.FIELD(); }
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 namespace test_flux {
 inline ostream& operator<< (ostream& out, const edge& e) {
@@ -105,8 +106,8 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 	string field;
 	free_tree T;
 
-	vector<linarr::dependency_flux> algo_flux;
-	vector<linarr::dependency_flux> input_flux;
+	vector<lal::linarr::dependency_flux> algo_flux;
+	vector<lal::linarr::dependency_flux> input_flux;
 	size_t S = 0;
 	size_t tree_idx = 0;
 
@@ -125,7 +126,7 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			T.clear();
 			T = from_head_vector_to_free_tree(linear_sequence).first;
 
-			algo_flux = linarr::compute_flux(T);
+			algo_flux = lal::linarr::compute_flux(T);
 			input_flux.resize(n - 1);
 			S = n - 1;
 		}
@@ -181,4 +182,5 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

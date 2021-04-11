@@ -38,77 +38,90 @@
  *
  ********************************************************************/
 
-#include "generate/tree_validity_check.hpp"
-
 // C++ includes
 #include <iostream>
 using namespace std;
 
 // lal includes
+#include <lal/io/edge_list.hpp>
+#include <lal/io/head_vector.hpp>
 #include <lal/graphs/output.hpp>
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+// common includes
+#include "common/definitions.hpp"
 
-/* FREE TREES */
+namespace tests {
+namespace io_wrapper {
 
-string ftree_check_to_string(const ftree_check& fc) {
-	switch (fc) {
-	case ftree_check::not_a_tree: return "Input free tree is not a tree.";
-	case ftree_check::diff_n_verts: return "Input free tree has an incorrect number of vertices.";
-	case ftree_check::diff_n_edges: return "Input free tree has an incorrect number of edges.";
-	default:
-		return "Input free tree seems to be correct.";
+template<class G>
+err_type __read_graph(const string& file, const string& format, G& g, bool norm) {
+
+	if (format == "edge_list" or format == "edge-list") {
+		auto r = io::read_edge_list<G>(file, norm, false);
+		if (not r) {
+			cerr << ERROR << endl;
+			cerr << "    When attempting to read an edge-list-formatted" << endl;
+			cerr << "    graph from file: '" << file << "'." << endl;
+			return err_type::io;
+		}
+
+		g = std::move(*r);
+		return err_type::no_error;
 	}
-	return "";
+
+	if (format == "head_vector") {
+		if constexpr (
+			std::is_base_of_v<rooted_tree, G> or
+			std::is_base_of_v<free_tree, G>
+		)
+		{
+			auto r = io::read_head_vector<G>(file, norm, false);
+			if (not r) {
+				cerr << ERROR << endl;
+				cerr << "    When attempting to read an edge-list-formatted" << endl;
+				cerr << "    graph from file: '" << file << "'." << endl;
+				return err_type::io;
+			}
+
+			g = std::move(*r);
+			return err_type::no_error;
+		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "    Type of graph is not allowed when reading a head vector file." << endl;
+			return err_type::test_format;
+		}
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unsupported file format: '" << format << "'." << endl;
+	return err_type::test_format;
 }
 
-ftree_check test_validity_tree(const uint32_t n, const free_tree& T) {
-	if (not T.is_tree()) {
-		return ftree_check::not_a_tree;
-	}
-	if (T.get_num_nodes() != n) {
-		return ftree_check::diff_n_verts;
-	}
-	if (T.get_num_edges() != n - 1) {
-		return ftree_check::diff_n_edges;
-	}
-	return ftree_check::correct;
+err_type read_graph
+(const string& file, const string& format, undirected_graph& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
+}
+err_type read_graph
+(const string& file, const string& format, directed_graph& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
 }
 
-/* ROOTED TREES */
-
-string rtree_check_to_string(const rtree_check& fc) {
-	switch (fc) {
-	case rtree_check::not_a_tree: return "Input rooted tree is not a tree.";
-	case rtree_check::diff_n_verts: return "Input rooted tree has an incorrect number of vertices.";
-	case rtree_check::diff_n_edges: return "Input rooted tree has an incorrect number of edges.";
-	case rtree_check::without_root: return "Input rooted tree does not have a root.";
-	case rtree_check::invalid_edges_orientation: return "Input rooted tree's edges are not oriented correctly.";
-	default:
-		return "Input rooted tree seems to be correct.";
-	}
-	return "";
+err_type read_graph
+(const string& file, const string& format, free_tree& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
 }
 
-rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
-	if (not T.is_tree()) {
-		return rtree_check::not_a_tree;
-	}
-	if (T.get_num_nodes() != n) {
-		return rtree_check::diff_n_verts;
-	}
-	if (T.get_num_edges() != n - 1) {
-		return rtree_check::diff_n_edges;
-	}
-	if (not T.has_root()) {
-		return rtree_check::without_root;
-	}
-	if (not T.is_orientation_valid()) {
-		return rtree_check::invalid_edges_orientation;
-	}
-	return rtree_check::correct;
+err_type read_graph
+(const string& file, const string& format, rooted_tree& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
 }
 
-} // -- namespace exe_tests
+} // -- namespace io_wrapper
+} // -- namespace tests

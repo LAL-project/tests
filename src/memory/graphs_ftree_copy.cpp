@@ -47,7 +47,8 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+namespace tests {
+namespace memory {
 
 void test_copy_free_tree() {
 	begin_function;
@@ -138,4 +139,5 @@ void test_copy_free_tree() {
 	}
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

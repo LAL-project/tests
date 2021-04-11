@@ -47,7 +47,8 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+namespace tests {
+namespace memory {
 
 void test_copy_directed_graph() {
 	begin_function;
@@ -130,4 +131,5 @@ void test_copy_directed_graph() {
 	}
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

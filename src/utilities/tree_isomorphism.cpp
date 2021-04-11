@@ -58,13 +58,14 @@ using namespace graphs;
 using namespace generate;
 using namespace utilities;
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
 
 #define to_uint32(x) static_cast<uint32_t>(x)
 
-namespace exe_tests {
+namespace tests {
+namespace utilities {
 
 std::optional<bool> read_should_be_or_not(ifstream& fin) {
 	string should_what;
@@ -111,7 +112,7 @@ err_type free_isomorphism_test(ifstream& fin) {
 		read_free(fin, t1);
 		read_free(fin, t2);
 
-		const bool are_iso = utilities::are_trees_isomorphic(t1,t2);
+		const bool are_iso = lal::utilities::are_trees_isomorphic(t1,t2);
 		cout << "Are isomorphic? " << std::boolalpha << are_iso << endl;
 
 		if (should_be_isomorphic and not are_iso) {
@@ -159,7 +160,7 @@ err_type rooted_isomorphism_test(ifstream& fin) {
 			return err_type::test_format;
 		}
 
-		const bool are_iso = utilities::are_trees_isomorphic(t1,t2);
+		const bool are_iso = lal::utilities::are_trees_isomorphic(t1,t2);
 		cout << "Are isomorphic? " << std::boolalpha << are_iso << endl;
 
 		if (should_be_isomorphic and not are_iso) {
@@ -219,7 +220,8 @@ err_type pos_exh_test(ifstream& fin) {
 				relab_tree.clear();
 				shuffle_tree(edges_cur, relab_tree);
 
-				const bool r = utilities::are_trees_isomorphic(cur_tree, relab_tree);
+				const bool r =
+					lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
 				if (not r) {
 					cerr << ERROR << endl;
 					cerr << "    Isomorphism test returned false on isomorphic trees." << endl;
@@ -255,7 +257,8 @@ err_type pos_rand_test(ifstream& fin) {
 			relab_tree.clear();
 			shuffle_tree(edges_cur, relab_tree);
 
-			const bool r = utilities::are_trees_isomorphic(cur_tree, relab_tree);
+			const bool r =
+				lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
 			if (not r) {
 				cerr << ERROR << endl;
 				cerr << "    Isomorphism test returned false on isomorphic trees." << endl;
@@ -316,7 +319,8 @@ err_type neg_exh_test(ifstream& fin) {
 			for (uint32_t l = 0; l < N_relabs; ++l) {
 				shuffle_tree(edges_tj, relab_tree);
 
-				const bool r = utilities::are_trees_isomorphic(ti, relab_tree);
+				const bool r =
+					lal::utilities::are_trees_isomorphic(ti, relab_tree);
 				if (r) {
 					cerr << ERROR << endl;
 					cerr << "    Isomorphism test returned true on non-isomorphic trees." << endl;
@@ -419,4 +423,5 @@ err_type exe_utilities_tree_isomorphism(const input_list& inputs, ifstream& fin)
 	return r;
 }
 
-} // -- namespace exe_tests
+} // -- namespace utilities
+} // -- namespace tests

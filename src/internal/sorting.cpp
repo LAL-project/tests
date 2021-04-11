@@ -54,8 +54,8 @@ using namespace std;
 #include <lal/internal/sorting/counting_sort.hpp>
 using namespace lal;
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
 
 typedef uint32_t Ui;
 typedef vector<uint32_t>::iterator Ui_it;
@@ -163,7 +163,8 @@ static void assign(
 
 // -----------------------------------------------------------------------------
 
-namespace exe_tests {
+namespace tests {
+namespace internal {
 
 // Sort two vectors and compare them.
 // - algo: name of the sorting algorithm (for debugging purposes)
@@ -236,10 +237,10 @@ void here_counting_sort(
 {
 	const size_t size = std::distance(begin,end);
 	if (incr) {
-		internal::counting_sort<T,It,true>(begin, end, n, size, key);
+		lal::internal::counting_sort<T,It,true>(begin, end, n, size, key);
 	}
 	else {
-		internal::counting_sort<T,It,false>(begin, end, n, size, key);
+		lal::internal::counting_sort<T,It,false>(begin, end, n, size, key);
 	}
 }
 
@@ -314,7 +315,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			internal::insertion_sort(begin, end);
+			lal::internal::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e = check_sorting("insertion", s, n, this_sort, true);
@@ -331,7 +332,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort<Ui>
+			lal::internal::bit_sort<Ui>
 			(begin, end, std::distance(begin, end));
 		};
 		for (Ui k = 0; k < R; ++k) {
@@ -349,7 +350,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		// bit array
 		vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			internal::bit_sort_mem<Ui>
+			lal::internal::bit_sort_mem<Ui>
 			(begin, end, std::distance(begin, end), &seen[0]);
 		};
 		// execute test
@@ -459,4 +460,5 @@ err_type exe_internal_sorting(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace internal
+} // -- namespace tests

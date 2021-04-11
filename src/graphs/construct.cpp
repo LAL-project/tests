@@ -60,11 +60,10 @@ using namespace lal;
 using namespace graphs;
 using namespace iterators;
 
-// Custom includes
-#include "exe_tests.hpp"
+// common includes
 #include "exe_construction.hpp"
-#include "test_utils.hpp"
-#include "io_wrapper.hpp"
+#include "common/test_utils.hpp"
+#include "common/io_wrapper.hpp"
 
 #define FUNC_GRAPH_CREATE "create_graph"
 #define FUNC_GRAPH_READ "read_graph"
@@ -94,7 +93,8 @@ using namespace iterators;
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
 #define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
 
-namespace exe_tests {
+namespace tests {
+namespace graphs {
 
 err_type exe_construction_test(ifstream& fin) {
 	map<string, undirected_graph> ugraphvars;
@@ -633,4 +633,5 @@ err_type exe_graphs_construction(const input_list& inputs, ifstream& fin) {
 	return e;
 }
 
-} // -- namespace exe_tests
+} // -- namespace graphs
+} // -- namespace tests

@@ -44,7 +44,8 @@
 // lal includes
 #include <lal/definitions.hpp>
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 template<class G>
 inline uint32_t number_of_crossings_brute_force(
@@ -87,4 +88,5 @@ inline std::vector<uint32_t> number_of_crossings_brute_force(
 	return C;
 }
 
-} // -- exe_tests
+} // -- namespace linarr
+} // -- namespace tests

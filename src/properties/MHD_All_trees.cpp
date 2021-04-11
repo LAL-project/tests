@@ -57,11 +57,12 @@ using namespace graphs;
 using namespace numeric;
 using namespace properties;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
 err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
@@ -87,7 +88,8 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 			// for each node, make a rooted tree at that node
 			for (node r = 0; r < t.get_num_nodes(); ++r) {
 				const rooted_tree R(t, r);
-				const rational mhd = properties::mean_hierarchical_distance_rational(R);
+				const rational mhd =
+					lal::properties::mean_hierarchical_distance_rational(R);
 				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
 			}
 
@@ -98,4 +100,5 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

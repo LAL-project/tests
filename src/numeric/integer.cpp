@@ -50,8 +50,8 @@ using namespace std;
 using namespace lal;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
 
 #define map_has(M, v) (M.find(v) != M.end())
 
@@ -87,7 +87,8 @@ using namespace numeric;
 
 #define get_var_value(M, var) M.find(var)->second
 
-namespace exe_tests {
+namespace tests {
+namespace numeric {
 
 template<typename U, typename V>
 static inline err_type resolve_comp_integer(
@@ -298,4 +299,5 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace numeric
+} // -- namespace tests

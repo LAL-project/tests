@@ -41,6 +41,7 @@
 #include "memory/numeric.hpp"
 
 // C++ includes
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -49,7 +50,11 @@ using namespace std;
 using namespace lal;
 using namespace numeric;
 
-namespace exe_tests {
+// common includes
+#include "common/definitions.hpp"
+
+namespace tests {
+namespace memory {
 
 err_type test_integer_copy() {
 	// copy constructor
@@ -131,4 +136,5 @@ err_type test_integer_copy() {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

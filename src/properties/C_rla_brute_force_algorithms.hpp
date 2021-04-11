@@ -44,10 +44,10 @@
 #include <lal/numeric.hpp>
 #include <lal/graphs/undirected_graph.hpp>
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
-
-/**
+/*
  * @brief Computes the variance of the number of crossings of a graph.
  *
  * Compute the variance of the number of crossings \f$V_{rla}[C]\f$ over the space
@@ -64,7 +64,7 @@ lal::numeric::rational variance_C_freqs_rational
 (const lal::graphs::undirected_graph& g);
 
 
-/**
+/*
  * @brief Computes the variance of the number of crossings of a graph.
  *
  * Given the set \f$Q(G)\f$ of a graph \f$G\f$, classifies all elements of
@@ -77,7 +77,7 @@ lal::numeric::rational variance_C_freqs_rational
 lal::numeric::rational variance_C_freqs_Q_rational
 (const std::vector<lal::edge_pair>& Q);
 
-/**
+/*
  * @brief Computes the variance of the number of crossings of a graph.
  *
  * Computes \f$V_{rla}[C]\f$ on the given graph. Applies a more efficient method than
@@ -89,4 +89,5 @@ lal::numeric::rational variance_C_freqs_Q_rational
 lal::numeric::rational variance_C_rational_Q
 (const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q);
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

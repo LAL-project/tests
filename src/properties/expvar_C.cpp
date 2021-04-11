@@ -60,13 +60,16 @@ using namespace numeric;
 using namespace properties;
 using namespace generate;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
-#include "C_rla_brute_force_algorithms.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
 
-namespace exe_tests {
+// properties includes
+#include "properties/C_rla_brute_force_algorithms.hpp"
+
+namespace tests {
+namespace properties {
 
 void output_ExpVar_C_BF(const undirected_graph& g) {
 	const rational Vr = variance_C_freqs_Q_rational(g.get_Q());
@@ -246,4 +249,5 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

@@ -41,25 +41,18 @@
 #pragma once
 
 // C++ includes
-#include <chrono>
-#include <thread>
-using namespace std::chrono;
-using namespace std::this_thread;
+#include <fstream>
+#include <vector>
+#include <string>
 
-namespace timing {
+// common includes
+#include "common/definitions.hpp"
 
-typedef high_resolution_clock::time_point time_point;
+namespace tests {
+namespace properties {
 
-// Returns the current time
-time_point now();
+// parses the first keyword and calls the appropriate main type function
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
 
-// Returns the elapsed time between 'begin' and 'end' in seconds
-double elapsed_seconds(const time_point& begin, const time_point& end);
-
-// Returns the elapsed time between 'begin' and 'end' in microseconds
-double elapsed_milliseconds(const time_point& begin, const time_point& end);
-
-// Returns the elapsed time between 'begin' and 'end' in microseconds
-double elapsed_microseconds(const time_point& begin, const time_point& end);
-
-} // -- namespace timing
+} // -- namespace properties
+} // -- namespace tests

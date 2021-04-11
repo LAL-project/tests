@@ -53,12 +53,13 @@ using namespace lal;
 using namespace graphs;
 using namespace numeric;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 1) {
@@ -101,11 +102,12 @@ err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 		}
 		cout << "]: ";
 
-		const rational h = linarr::headedness_rational(G, pi);
+		const rational h = lal::linarr::headedness_rational(G, pi);
 		cout << h << endl;
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

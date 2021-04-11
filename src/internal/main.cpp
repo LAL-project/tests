@@ -49,10 +49,10 @@
 #include <vector>
 using namespace std;
 
-// custom includes
-#include "definitions.hpp"
-#include "parse_keywords.hpp"
-using namespace exe_tests;
+// common includes
+#include "common/definitions.hpp"
+#include "internal/parse_keywords.hpp"
+using namespace tests;
 
 err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 	string field;
@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
 	vector<string> keywords_type;
 	get_keywords(type, keywords_type);
 
-	r = exe_tests::call_main(keywords_type, fin);
+	r = tests::internal::call_main(keywords_type, fin);
 
 	if (r != err_type::no_error) {
 		cerr << "***********************" << endl;

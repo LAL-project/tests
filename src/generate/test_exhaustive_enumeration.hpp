@@ -40,10 +40,10 @@
 
 #pragma once
 
-#include "definitions.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
-namespace exhaustive_enumeration_trees {
+namespace tests {
+namespace generate {
 
 template<
 	typename Gen,
@@ -63,5 +63,5 @@ err_type test_exhaustive_enumeration_of_trees(
 	return err_type::no_error;
 }
 
-} // -- exhaustive_enumeration_trees
-} // -- namespace exe_tests
+} // -- namespace generate
+} // -- namespace tests

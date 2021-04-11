@@ -99,22 +99,3 @@
 				 << t.get_num_nodes_subtree(u) << endl;			\
 		}														\
 	}
-
-namespace exe_tests {
-
-void test_move_undirected_graph();
-void test_copy_undirected_graph();
-
-void test_move_directed_graph();
-void test_copy_directed_graph();
-
-void test_move_ugraph_into_ftree();
-void test_copy_ugraph_into_ftree();
-
-void test_move_free_tree();
-void test_copy_free_tree();
-
-void test_move_rooted_tree();
-void test_copy_rooted_tree();
-
-} // -- namespace exe_tests

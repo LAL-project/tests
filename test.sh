@@ -1,6 +1,6 @@
 #!/bin/bash
 
-########################################################################
+################################################################################
 # Data
 
 source test_groups.sh
@@ -15,7 +15,7 @@ source test_dir_numeric.sh
 source test_dir_properties.sh
 source test_dir_utilities.sh
 
-########################################################################
+################################################################################
 # Functions
 
 function display_two() {
@@ -316,7 +316,7 @@ function execute_group() {
 			display_two $nth_test $n_test_files
 			
 			# Execute the program NOW
-			PROG_OUT=$($EXE_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR)
+			PROG_OUT=$($EXECUTION_COMMANDAND -i $input_group/$f 2> $storage/$TEST_ERR)
 
 			# increment the amount of tests executed by 1
 			nth_test=$(($nth_test + 1))
@@ -374,7 +374,7 @@ function apply_group() {
 	done
 }
 
-########################################################################
+################################################################################
 # Code starts here
 
 # show usage
@@ -389,7 +389,7 @@ use_valgrind=0
 debug=0
 release=0
 # execute tests of a certain type
-exe_group=0
+exe_group=""
 # log file
 log_file="execution_log"
 # where to put the error outputs, the outputs that differ from the base
@@ -470,28 +470,32 @@ if [ $usage == 1 ]; then
 	exit
 fi
 
-########################################################################
+################################################################################
 # Parameter errors
 
-if [ $exe_group == 0 ] && [ -z $input_dir ]; then
+if [ -z $exe_group ] && [ -z $input_dir ]; then
 	echo -e "\e[1;4;31mError:\e[0m No input directory specified."
 	exit
 fi
-if [ $exe_group == 0 ] && [ -z $output_dir ]; then
+if [ ! -z $exe_group ] && [ ! -z $input_dir ]; then
+	echo -e "\e[1;4;31mError:\e[0m Both input directory and execution group were specified."
+	echo -e "    Specify only one!"
+	exit
+fi
+if [ ! -z $input_dir ] && [ -z $output_dir ] && [ $use_valgrind == 0 ]; then
 	# we only care about output files if valgrind is not used
-	if [ $use_valgrind == 0 ]; then
-		echo -e "\e[1;4;31mError:\e[0m No output directory specified."
-		exit
-	fi
+	echo -e "\e[1;4;31mError:\e[0m No output directory specified."
+	exit
 fi
 
 if [ $release == 1 ] && [ $use_valgrind == 1 ]; then
 	echo -e "\e[1;4;31mError:\e[0m Conflicting options"
 	echo "    --valgrind --release"
+	echo "    You shouldn't be using valgrind on a release compilation!"
 	exit
 fi
 
-########################################################################
+################################################################################
 # Execution mode (debug/release)
 
 # use debug by default
@@ -502,41 +506,142 @@ elif [ $release == 1 ]; then
 	EXE_MODE="release"
 fi
 
-########################################################################
+################################################################################
 # Make sure we can execute something
 
-EXE_COMM=""
-EXE_DIR=""
+EXECUTE_FROM_INPUT=0
+EXECUTE_FROM_GROUP=0
+
+if [ -z $exe_group ]; then
+	EXECUTE_FROM_INPUT=1
+	# ensure that no "inputs/" nor "outputs/" were given in the parameters
+	
+	IFS='/' read -ra in_array <<< "$input_dir"
+	if [ "${in_array[0]}" == "inputs" ]; then
+		echo -e "\e[1;4;31mError:\e[0m Can't write 'inputs/' in input directory."
+		echo "    Just omit it. Like this:"
+		echo "    ./test.sh --input=linarr/C/ladder ..."
+		exit
+	fi
+	
+	IFS='/' read -ra out_array <<< "$output_dir"
+	if [ "${out_array[0]}" == "outputs" ]; then
+		echo -e "\e[1;4;31mError:\e[0m Can't write 'outputs/' in output directory."
+		echo "    Just omit it. Like this:"
+		echo "    ./test.sh ... --output=linarr/C"
+		exit
+	fi
+	
+else
+	EXECUTE_FROM_GROUP=1
+	
+	# test that 'exe_group' value is valid
+	array_has=0
+	case "${groups_list[@]}" in
+		# the '*' are important!
+		*"$exe_group"*)
+			array_has=1
+			;;
+	esac
+
+	if [ $array_has == 0 ]; then
+		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'."
+		echo "    Make sure that the group '$exe_group' is in the variable 'groups_list'"
+		
+		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
+		exit
+	fi
+fi
+
+# partially construct the execution directory
+EXECUTION_DIRECTORY=""
 if [ "$EXE_MODE" == "debug" ]; then
-	EXE_DIR="build-debug"
+	EXECUTION_DIRECTORY="build-debug"
 elif [ "$EXE_MODE" == "release" ]; then
-	EXE_DIR="build-release"
+	EXECUTION_DIRECTORY="build-release"
 fi
 
+# Locate the executable file
+EXECUTION_FILE=""
+
+# make sure the executable is up to date
 if [ $compile -eq 1 ]; then
-	# make sure the executable is up to date
-	cd $EXE_DIR
-	make -j4
-	cd ..
+	wd=$PWD
+	CMAKE_BUILD=0
+	
+	cd $EXECUTION_DIRECTORY
+	if [ -f cmake_install.cmake ]; then
+		CMAKE_BUILD=1
+	fi
+	cd $wd
+	
+	if [ $CMAKE_BUILD == 1 ]; then
+		# choose the execution directory and file for a cmake-based build
+		
+		EXECUTION_DIRECTORY=$EXECUTION_DIRECTORY
+		if [ $EXECUTE_FROM_INPUT == 1 ]; then
+			IFS='/' read -ra keywords <<< "$input_dir"
+			EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+		else
+			if [ "$exe_group" == "all" ]; then
+				EXECUTION_FILE="$EXECUTION_DIRECTORY/tests"
+			else
+				IFS='_' read -ra keywords <<< "$exe_group"
+				EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+			fi
+		fi
+	else
+		# choose the execution directory and file for a qmake-based build
+		
+		if [ $EXECUTE_FROM_INPUT == 1 ]; then
+			IFS='/' read -ra keywords <<< "$input_dir"
+			
+			EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/${keywords[0]}"
+			EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+		else
+			if [ "$exe_group" == "all" ]; then
+				EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/tests"
+				EXECUTION_FILE="$EXECUTION_DIRECTORY/tests"
+			else
+				echo "exe_group: $exe_group"
+				IFS='_' read -ra keywords <<< "$exe_group"
+				echo "KEYWORDS: ${keywords[0]}"
+				EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/${keywords[0]}"
+				EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+			fi
+		fi
+	fi
+	
+	if [ $CMAKE_BUILD == 0 ] && [ $EXECUTE_FROM_INPUT == 0 ] && [ "$exe_group" == "all" ]; then
+		cd $EXECUTION_DIRECTORY
+		cd ..
+		make -j4
+		cd $wd
+	else
+		cd $EXECUTION_DIRECTORY
+		make -j4
+		cd $wd
+	fi
 fi
 
-EXE_COMM=$EXE_DIR/tests
-
-if [ ! -f $EXE_COMM ]; then
-	echo -e "\e[1;4;31mError:\e[0m C++ executable file $EXE_COMM does not exist"
+EXECUTION_COMMAND=""
+if [ -f $EXECUTION_FILE ]; then
+	EXECUTION_COMMAND=./$EXECUTION_FILE
+else
+	echo -e "\e[1;4;31mError:\e[0m No executable found."
+	echo -e "    Looked for: $EXECUTION_FILE"
 	exit
 fi
-EXE_COMM=./$EXE_COMM
 
 # Prepare execution command. If valgrind is
 # requested, make the command appropriately.
 if [ $use_valgrind == 1 ]; then
-	EXE_COMMAND="valgrind -q --leak-check=full $EXE_COMM"
+	EXECUTION_COMMANDAND="valgrind -q --leak-check=full $EXECUTION_COMMAND"
 else
-	EXE_COMMAND="$EXE_COMM"
+	EXECUTION_COMMANDAND="$EXECUTION_COMMAND"
 fi
 
-########################################################################
+################################################################################
 # Display information about what software is being tested.
 
 echo -en "Testing "
@@ -551,7 +656,7 @@ elif [ "$EXE_MODE" == "release" ]; then
 	echo -e "in \e[1;3;36mrelease\e[0m mode."
 fi
 
-########################################################################
+################################################################################
 # Display where the files are being written
 
 log_file=$storage_dir/$log_file
@@ -559,40 +664,22 @@ log_file=$storage_dir/$log_file
 echo "    Storage directory: '$storage_dir'"
 echo "    Log file: '$log_file'"
 
-########################################################################
+################################################################################
 # Execute the tests
 
 echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> $log_file
 
-if [ $exe_group != 0 ]; then
-	
-	# test that 'exe_group' value is valid
-	array_has=0
-	case "${groups_list[@]}" in
-		# the '*' are important!
-		*"$exe_group"*)
-			array_has=1
-			;;
-	esac
-	
-	if [ $array_has == 0 ]; then
-		echo -e "\e[1;4;31mError:\e[0m Invalid execution group '$exe_group'."
-		echo "    Make sure that the group '$exe_group' is in the variable 'groups_list'"
-		
-		echo "$(date +"%Y/%m/%d.%T")        Error: test execution failed. Group '$exe_group' is not valid." >> $log_file
-		
+if [ $EXECUTE_FROM_GROUP == 1 ]; then
+	if [ "$exe_group" == "all" ]; then
+		for g in "generate" "graphs" "internal" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
+			apply_group $g
+		done
 	else
-	
-		if [ "$exe_group" == "all" ]; then
-			for g in "generate" "graphs" "internal" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
-				apply_group $g
-			done
-		else
-			apply_group $exe_group
-		fi
+		apply_group $exe_group
 	fi
-else
+elif [ $EXECUTE_FROM_INPUT == 1 ]; then
 	execute_group $input_dir $output_dir 1 1 $storage_dir
+	
 fi
 
 echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> $log_file

@@ -51,12 +51,13 @@ using namespace std;
 #include <lal/definitions.hpp>
 #include <lal/graphs/output.hpp>
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
-#include "std_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
+#include "common/std_utils.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 template<class T> using Solver =
 	function< pair<uint32_t, lal::linear_arrangement>(const T&) >;
@@ -204,4 +205,5 @@ err_type linarr_brute_force_testing(
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

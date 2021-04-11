@@ -53,9 +53,14 @@ using namespace graphs;
 using namespace generate;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
-#include "generate/tree_validity_check.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/std_utils.hpp"
+#include "common/tree_validity_check.hpp"
+
+// generate includes
 #include "generate/test_exhaustive_enumeration.hpp"
 
 // number of caterpillar trees of a given size
@@ -72,7 +77,8 @@ inline integer num_caterpillar_trees(uint32_t n) {
 	return n1;
 }
 
-namespace exe_tests {
+namespace tests {
+namespace generate {
 
 namespace auf {
 struct extra_params {
@@ -199,7 +205,6 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 	uint32_t n;
 	while (fin >> n) {
 		const auto err =
-			exhaustive_enumeration_trees::
 			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
 			(n, auf::test_for_n, params);
 
@@ -210,4 +215,5 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace generate
+} // -- namespace tests

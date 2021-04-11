@@ -54,11 +54,12 @@ using namespace lal;
 using namespace graphs;
 using namespace numeric;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_procs(
@@ -118,14 +119,15 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 		cout << "]: ";
 
 		if (proc == "D") {
-			cout << linarr::sum_length_edges(G, pi) << endl;
+			cout << lal::linarr::sum_length_edges(G, pi) << endl;
 		}
 		else if (proc == "MDD") {
-			cout << linarr::mean_dependency_distance_rational(G, pi) << endl;
+			cout << lal::linarr::mean_dependency_distance_rational(G, pi) << endl;
 		}
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

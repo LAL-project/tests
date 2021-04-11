@@ -58,11 +58,12 @@ using namespace internal;
 using namespace graphs;
 using namespace generate;
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace internal {
 
 // this is a very simple algorithm to calculate the centre
 template<class T>
@@ -175,7 +176,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "find_centre") {
 			node s;
 			fin >> s;
-			const auto centre = internal::retrieve_centre(t, s);
+			const auto centre = lal::internal::retrieve_centre(t, s);
 			cout << "centre: " << centre.first;
 			if (centre.second < t.get_num_nodes()) { cout << " " << centre.second; }
 			cout << endl;
@@ -183,7 +184,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "centre_is") {
 			node s;
 			fin >> s;
-			const auto centre = internal::retrieve_centre(t, s);
+			const auto centre = lal::internal::retrieve_centre(t, s);
 
 			uint32_t centre_size;
 			fin >> centre_size;
@@ -253,7 +254,7 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 
 #define test_correctness(T)										\
 {																\
-	const auto lib_centre = internal::retrieve_centre(T, 0);		\
+	const auto lib_centre = lal::internal::retrieve_centre(T, 0);\
 	const auto easy_centre = straightforward_centre(T, 0);		\
 	if (lib_centre != easy_centre) {							\
 		cerr << ERROR << endl;									\
@@ -360,4 +361,5 @@ err_type exe_internal_centre(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace internal
+} // -- namespace tests

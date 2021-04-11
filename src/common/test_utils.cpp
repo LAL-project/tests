@@ -53,7 +53,7 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+namespace tests {
 
 bool command_is_comment(const string& s)
 { return (s == "/*") or (s.find("/*") != string::npos); }
@@ -144,4 +144,4 @@ void shuffle_tree(std::vector<lal::edge>& edges, free_tree& T) {
 	T.set_edges(edges);
 }
 
-} // -- namespace exe_tests
+} // -- namespace tests

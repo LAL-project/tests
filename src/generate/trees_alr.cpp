@@ -55,12 +55,18 @@ using namespace graphs;
 using namespace generate;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
-#include "generate/tree_validity_check.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/std_utils.hpp"
+#include "common/tree_validity_check.hpp"
+
+// generate includes
 #include "generate/test_exhaustive_enumeration.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace generate {
 
 namespace alr {
 struct extra_params { };
@@ -115,7 +121,6 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 	uint32_t n;
 	while (fin >> n) {
 		const auto err =
-			exhaustive_enumeration_trees::
 			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
 			(n, alr::test_for_n, alr::extra_params{});
 
@@ -126,4 +131,5 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace generate
+} // -- namespace tests

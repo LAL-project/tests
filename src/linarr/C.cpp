@@ -55,13 +55,16 @@ using namespace lal;
 using namespace graphs;
 using namespace linarr;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
-#include "time.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
+#include "common/time.hpp"
+
+// linarr includes
 #include "linarr/n_crossings_m2.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bound) {
 	set<string> allowed_procs({
@@ -237,4 +240,5 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

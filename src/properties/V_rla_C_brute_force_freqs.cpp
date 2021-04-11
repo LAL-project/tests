@@ -62,7 +62,8 @@ enum class frequency_type : int8_t {
 	f03, f04, f12, f13, f24
 };
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
 /* UTILITIES */
 
@@ -231,4 +232,5 @@ rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	return V;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

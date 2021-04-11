@@ -52,13 +52,17 @@ using namespace std;
 using namespace lal;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
+// common includes
+#include "common/definitions.hpp"
+
+// memory includes
+#include "memory/numeric_functions.hpp"
 #include "memory/numeric.hpp"
 
 #define return_if(e) if (e != err_type::no_error) { return e; }
 
-namespace exe_tests {
+namespace tests {
+namespace memory {
 
 err_type test_memory_integer() {
 	return_if(test_integer_swap())
@@ -80,7 +84,6 @@ err_type test_memory_integer() {
 	}
 	return err_type::no_error;
 }
-
 
 err_type test_memory_rational() {
 	return_if(test_rational_swap())
@@ -116,4 +119,5 @@ err_type exe_memory_numeric(const input_list& inputs, ifstream&) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

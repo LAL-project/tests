@@ -38,30 +38,36 @@
  *
  ********************************************************************/
 
-// C++ includes
-#include <fstream>
-#include <vector>
-#include <string>
+#pragma once
 
 // lal includes
-#include <lal/definitions.hpp>
-#include <lal/graphs/free_tree.hpp>
-#include <lal/graphs/rooted_tree.hpp>
+#include <lal/numeric/integer.hpp>
+#include <lal/numeric/rational.hpp>
 
-namespace exe_tests {
+// common includes
+#include "common/definitions.hpp"
 
-bool command_is_comment(const std::string& s);
+// memory includes
+#include "memory/numeric.hpp"
 
-void process_comment(std::ifstream& fin);
+namespace tests {
+namespace memory {
 
-std::string read_output_string(std::ifstream& fin);
+inline lal::numeric::integer integer_from_function() {
+	return lal::numeric::integer(std::string(iff_value));
+}
 
-/* -------------------------------------------------------------------------- */
-/* ----- Utilities related to the library -- not so much to the tests ------- */
+inline lal::numeric::rational rational_from_function() {
+	return lal::numeric::rational(std::string(iff_value));
+}
 
-std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr);
+err_type test_integer_copy();
+err_type test_integer_swap();
+err_type test_integer_move();
 
-void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T);
-void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::free_tree& T);
+err_type test_rational_copy();
+err_type test_rational_swap();
+err_type test_rational_move();
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

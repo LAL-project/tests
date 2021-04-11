@@ -41,15 +41,24 @@
 #include "memory/numeric.hpp"
 
 // C++ includes
+#include <iostream>
 #include <vector>
 using namespace std;
 
 // lal includes
 #include <lal/numeric/integer_output.hpp>
+#include <lal/numeric/rational.hpp>
 using namespace lal;
 using namespace numeric;
 
-namespace exe_tests {
+// common includes
+#include "common/definitions.hpp"
+
+// memory includes
+#include "memory/numeric_functions.hpp"
+
+namespace tests {
+namespace memory {
 
 err_type test_integer_move() {
 	// move constructor
@@ -194,4 +203,5 @@ err_type test_integer_move() {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

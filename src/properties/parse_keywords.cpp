@@ -39,27 +39,51 @@
  ********************************************************************/
 
 // C++ includes
-#include <vector>
-#include <string>
+#include <iostream>
+using namespace std;
 
-// lal includes
-#include <lal/graphs/rooted_tree.hpp>
-#include <lal/graphs/free_tree.hpp>
+// common includes
+#include "common/parse_keywords.hpp"
+#include "common/parse_header.hpp"
+#include "properties/parse_keywords.hpp"
+#include "properties/exe_tests.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
-bool is_permutation(const lal::linear_arrangement& arr);
+err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "general") {
+		return parse_header(exe_properties_general, fin);
+	}
+	if (key == "MHD_All_Trees") {
+		return parse_header(exe_properties_MHD_All_trees, fin);
+	}
+	if (key == "exp_var_C") {
+		return parse_header(exe_properties_ExpVar_C, fin);
+	}
+	if (key == "exp_var_D") {
+		return parse_header(exe_properties_ExpVar_D, fin);
+	}
 
-std::string is_arrangement
-(const lal::graphs::free_tree& fT, const lal::linear_arrangement& arr);
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
 
-std::string is_arrangement
-(const lal::graphs::rooted_tree& rT, const lal::linear_arrangement& arr);
+err_type call_main(const vector<string>& keywords, ifstream& fin) {
+	const string& key = keywords[0];
+	if (key == "properties") {
+		return call_properties(keywords, 1, fin);
+	}
 
-std::string is_arrangement_planar
-(const lal::graphs::free_tree& fT, const lal::linear_arrangement& arr);
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {0}, "    ");
+	return err_type::wrong_keyword;
+}
 
-std::string is_arrangement_projective
-(const lal::graphs::rooted_tree& fT, const lal::linear_arrangement& arr);
-
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

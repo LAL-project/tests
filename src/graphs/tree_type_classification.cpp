@@ -55,11 +55,12 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace graphs {
 
 namespace tree_type_class {
 
@@ -212,4 +213,5 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream&
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace graphs
+} // -- namespace tests

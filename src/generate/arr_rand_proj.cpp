@@ -55,13 +55,14 @@ using namespace graphs;
 using namespace generate;
 using namespace iterators;
 
-// custom includes
-#include "definitions.hpp"
-#include "test_utils.hpp"
-#include "arrgmnt_validity_check.hpp"
-#include "std_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/test_utils.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/std_utils.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace generate {
 
 err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
@@ -105,4 +106,5 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace generate
+} // -- namespace tests

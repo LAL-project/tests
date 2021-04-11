@@ -58,11 +58,12 @@ using namespace graphs;
 using namespace numeric;
 using namespace linarr;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_levels(
@@ -99,8 +100,8 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	}
 
 	auto MDD_F = [level](const vector<undirected_graph>& Gs, const vector<linear_arrangement>& pis) {
-		if (level == "1") { return linarr::mean_dependency_distance_1level_rational(Gs, pis); }
-		if (level == "2") { return linarr::mean_dependency_distance_2level_rational(Gs, pis); }
+		if (level == "1") { return lal::linarr::mean_dependency_distance_1level_rational(Gs, pis); }
+		if (level == "2") { return lal::linarr::mean_dependency_distance_2level_rational(Gs, pis); }
 
 		// return invalid value
 		cerr << ERROR << endl;
@@ -171,4 +172,5 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

@@ -53,7 +53,8 @@ using namespace graphs;
 
 typedef uint32_t bigint;
 
-namespace exe_tests {
+namespace tests {
+namespace properties {
 
 inline void compute_data_gen_graphs_Q
 (
@@ -191,4 +192,5 @@ rational variance_C_rational_Q(const undirected_graph& g, const vector<edge_pair
 	return V;
 }
 
-} // -- namespace exe_tests
+} // -- namespace properties
+} // -- namespace tests

@@ -47,7 +47,8 @@ using namespace std;
 using namespace lal;
 using namespace graphs;
 
-namespace exe_tests {
+namespace tests {
+namespace memory {
 
 void test_move_rooted_tree() {
 	begin_function;
@@ -142,4 +143,5 @@ void test_move_rooted_tree() {
 	}
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

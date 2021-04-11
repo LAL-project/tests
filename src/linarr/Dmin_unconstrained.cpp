@@ -63,16 +63,20 @@ using namespace graphs;
 using namespace linarr;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
-#include "arrgmnt_validity_check.hpp"
-#include "test_utils.hpp"
-#include "std_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/test_utils.hpp"
+#include "common/std_utils.hpp"
+
+// linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
 
 typedef pair<uint32_t, linear_arrangement> algo_result;
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
+
 namespace dmin_unconstrained {
 
 inline
@@ -478,4 +482,5 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

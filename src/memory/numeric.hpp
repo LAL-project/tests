@@ -40,17 +40,6 @@
 
 #pragma once
 
-// C++ includes
-#include <iostream>
-#include <string>
-
-// lal includes
-#include <lal/numeric/integer.hpp>
-#include <lal/numeric/rational.hpp>
-
-// custom includes
-#include "definitions.hpp"
-
 #define check_0(i)													\
 if (i.is_initialized()) {											\
 	cerr << ERROR << endl;											\
@@ -135,22 +124,3 @@ if (data != good) {																	\
 #define iff_value "1000000000000000000000000000000000000000000"
 #define rff_value "100000000000000000000000000000/89898988293482848912384898234892839299219919111"
 
-namespace exe_tests {
-
-inline lal::numeric::integer integer_from_function() {
-	return lal::numeric::integer(std::string(iff_value));
-}
-
-inline lal::numeric::rational rational_from_function() {
-	return lal::numeric::rational(std::string(iff_value));
-}
-
-err_type test_integer_copy();
-err_type test_integer_swap();
-err_type test_integer_move();
-
-err_type test_rational_copy();
-err_type test_rational_swap();
-err_type test_rational_move();
-
-} // -- namespace exe_tests

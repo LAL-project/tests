@@ -40,50 +40,26 @@
 
 #pragma once
 
-// C++ inlcudes
-#include <filesystem>
-#include <cstdint>
-#include <vector>
+// C++ includes
+#include <chrono>
+#include <thread>
 
-#define ERROR \
-	"Error [file " << std::filesystem::path(__FILE__).filename() << ", function '" \
-	<< __func__ << "', line " << __LINE__ << "]:"
+namespace tests {
+namespace timing {
 
-#define INVALID_KEYWORD "¡@/#/?234!"
+typedef std::chrono::high_resolution_clock::time_point time_point;
 
-#define TEST_GOODBYE \
-	cout << "Test finished without apparent errors." << endl;
+// Returns the current time
+time_point now();
 
-namespace exe_tests {
+// Returns the elapsed time between 'begin' and 'end' in seconds
+double elapsed_seconds(const time_point& begin, const time_point& end);
 
-typedef std::vector<std::pair<std::string,std::string>> input_list;
+// Returns the elapsed time between 'begin' and 'end' in microseconds
+double elapsed_milliseconds(const time_point& begin, const time_point& end);
 
-enum class err_type : int8_t {
-	/// The test completed successfully
-	no_error = 0,
+// Returns the elapsed time between 'begin' and 'end' in microseconds
+double elapsed_microseconds(const time_point& begin, const time_point& end);
 
-	/// wrong parameter value
-	invalid_param,
-
-	/// The input test file was not formatted correctly
-	test_format,
-	/// The format for the input graph is not supported
-	graph_format,
-
-	/// Some error occurred while performing the test
-	test_execution,
-
-	/// Unknown keyword: either it is not known or it is incorrect
-	/// given its parent test type.
-	wrong_keyword,
-	/// too many keywords
-	too_many_keywords,
-
-	/// an error occurred when reading a file
-	io,
-
-	/// test not implemented
-	not_implemented
-};
-
-} // -- namespace exe_tests
+} // -- namespace timing
+} // -- namespace tests

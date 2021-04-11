@@ -55,11 +55,12 @@ using namespace lal;
 using namespace graphs;
 using namespace linarr;
 
-// custom includes
-#include "io_wrapper.hpp"
-#include "definitions.hpp"
+// common includes
+#include "common/io_wrapper.hpp"
+#include "common/definitions.hpp"
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 namespace syntree_class {
 
@@ -163,7 +164,7 @@ err_type parse_single_file(const string& file) {
 		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const auto LAL_classes = linarr::classify_tree_structure(T);
+		const auto LAL_classes = lal::linarr::classify_tree_structure(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {
@@ -220,4 +221,5 @@ err_type exe_linarr_syntree_classification(const input_list& inputs, ifstream& f
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

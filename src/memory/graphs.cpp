@@ -44,15 +44,18 @@
 #include <map>
 using namespace std;
 
-// custom includes
-#include "definitions.hpp"
-#include "memory/graphs.hpp"
-
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 using namespace lal;
 using namespace graphs;
+
+// common includes
+#include "common/definitions.hpp"
+
+// memory includes
+#include "memory/graphs.hpp"
+#include "memory/graph_functions.hpp"
 
 #define MOVE_UGRAPH
 #define COPY_UGRAPH
@@ -65,7 +68,8 @@ using namespace graphs;
 #define MOVE_RTREE
 #define COPY_RTREE
 
-namespace exe_tests {
+namespace tests {
+namespace memory {
 
 void test_generate() {
 	begin_function
@@ -148,4 +152,5 @@ err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace memory
+} // -- namespace tests

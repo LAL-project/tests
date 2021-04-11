@@ -63,11 +63,11 @@ using namespace graphs;
 using namespace linarr;
 using namespace numeric;
 
-// custom includes
-#include "definitions.hpp"
-#include "arrgmnt_validity_check.hpp"
-#include "std_utils.hpp"
-#include "test_utils.hpp"
+// common includes
+#include "common/definitions.hpp"
+#include "common/arrgmnt_validity_check.hpp"
+#include "common/std_utils.hpp"
+#include "common/test_utils.hpp"
 
 typedef pair<uint32_t, linear_arrangement> algo_result;
 
@@ -77,7 +77,8 @@ bool eq(const algo_result& r1, const algo_result& r2) { return r1.first == r2.fi
 bool ge(const algo_result& r1, const algo_result& r2) { return r1.first >= r2.first; }
 bool gt(const algo_result& r1, const algo_result& r2) { return r1.first > r2.first; }
 
-namespace exe_tests {
+namespace tests {
+namespace linarr {
 
 namespace tests_Dmin_comparison {
 
@@ -270,4 +271,5 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-} // -- namespace exe_tests
+} // -- namespace linarr
+} // -- namespace tests

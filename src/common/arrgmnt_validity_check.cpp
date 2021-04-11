@@ -38,7 +38,7 @@
  *
  ********************************************************************/
 
-#include "arrgmnt_validity_check.hpp"
+#include "common/arrgmnt_validity_check.hpp"
 
 // C++ includes
 #include <set>
@@ -57,7 +57,7 @@ using namespace iterators;
 // common includes
 #include "std_utils.hpp"
 
-namespace exe_tests {
+namespace tests {
 
 // ----------------------------------------------------------------------------
 
@@ -148,4 +148,4 @@ string is_arrangement_projective(const rooted_tree& rT, const linear_arrangement
 	return "";
 }
 
-} // -- namespace exe_tests
+} // -- namespace tests
