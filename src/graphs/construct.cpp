@@ -77,6 +77,7 @@ using namespace iterators;
 #define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_REMOVE_EDGE "remove_edge"
 #define FUNC_GRAPH_REMOVE_EDGES "remove_edges"
+#define FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO "remove_edges_incident_to"
 #define FUNC_GRAPH_NORMALISE "normalise"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
 #define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
@@ -260,6 +261,14 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean2);
 			if_mfunction(g1, remove_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
+		}
+		else if (option == FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO) {
+			fin >> g1 >> u;
+			fin >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, g1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, Boolean2);
+			if_mfunction(g1, remove_edges_incident_to(u, Boolean1 == "true", Boolean2 == "true"))
 		}
 		else if (option == FUNC_GRAPH_NORMALISE) {
 			fin >> g1;

@@ -53,6 +53,10 @@ COMMANDS AVAILABLE
 	Removes N edges from a graph. Normalises (or not) the graph. After the removal,
 	check if the result is normalised or not.
 
+** remove_edges_incident_to GRAPH N true/false true/false
+	Removes the edges from a graph that are incident to a given vertex. Normalises
+	(or not) the graph. After the removal, check if the result is normalised or not.
+
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
 	as that returned by a brute force method.
