@@ -1,0 +1,120 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ugraph g1 10
+	assert num_edges g1 0
+	set_edges g1 5
+		0 3
+		0 1
+		0 2
+		4 0
+		5 0
+		true true
+	output_graph g1
+	assert normalised g1
+	remove_edges_incident_to g1 0 true true
+	assert normalised g1
+	assert num_edges g1 0
+	output_graph g1
+	
+	
+	
+	create_graph ugraph g2 10
+	assert num_edges g2 0
+	set_edges g2 5
+		0 3
+		0 1
+		0 2
+		4 0
+		5 0
+		false true
+	output_graph g2
+	assert not_normalised g2
+	remove_edges_incident_to g2 0 false true
+	assert normalised g2
+	assert num_edges g2 0
+	output_graph g2
+	
+	
+	
+	create_graph ugraph g3 10
+	assert num_edges g3 0
+	set_edges g3 8
+		1 2
+		2 3
+		3 4
+		0 3
+		0 1
+		0 2
+		4 0
+		5 0
+		true true
+	output_graph g3
+	assert normalised g3
+	remove_edges_incident_to g3 0 true true
+	assert normalised g3
+	assert num_edges g3 3
+	output_graph g3
+	
+	
+	
+	create_graph ugraph g4 10
+	assert num_edges g4 0
+	set_edges g4 8
+		1 2
+		2 3
+		3 4
+		0 3
+		0 1
+		0 2
+		4 0
+		5 0
+		false true
+	output_graph g4
+	assert not_normalised g4
+	remove_edges_incident_to g4 0 false true
+	assert normalised g4
+	assert num_edges g4 3
+	output_graph g4
+	
+	
+	
+	create_graph ugraph g5 10
+	assert num_edges g5 0
+	set_edges g5 8
+		2 3
+		0 2
+		1 2
+		3 4
+		0 3
+		0 1
+		4 0
+		5 0
+		false true
+	output_graph g5
+	assert not_normalised g5
+	remove_edges_incident_to g5 0 false true
+	assert not_normalised g5
+	assert num_edges g5 3
+	output_graph g5
+	
+	
+	
+	create_graph ugraph g6 10
+	assert num_edges g6 0
+	set_edges g6 8
+		1 2
+		2 3
+		0 2
+		3 4
+		0 3
+		0 1
+		4 0
+		5 0
+		false true
+	output_graph g6
+	assert not_normalised g6
+	remove_edges_incident_to g6 0 false true
+	assert normalised g6
+	assert num_edges g6 3
+	output_graph g6

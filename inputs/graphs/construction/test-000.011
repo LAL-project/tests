@@ -1,0 +1,26 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ugraph g1 10
+	assert num_edges g1 0
+	set_edges g1 5
+		0 3
+		0 1
+		0 2
+		4 0
+		5 0
+		true true
+	output_graph g1
+	assert normalised g1
+	remove_edges_incident_to g1 0 true true
+	assert normalised g1
+	assert num_edges g1 0
+	output_graph g1
+	
+	add_edges g1 3
+		0 1
+		0 2
+		0 3
+		true true
+	output_graph g1
+	assert num_edges g1 3
