@@ -45,7 +45,7 @@ groups_list=(\
 	"linarr_Dmin_Unconstrained_YS" \
 	"linarr_Dmin_Unconstrained_FC" \
 	"linarr_syndepstruc_class" \
-	"linarr_comp_depenendency_flux" \
+	"linarr_comp_dependency_flux" \
 	"linarr_headedness" \
 	"linarr_k_level" \
 	"linarr_MDD" \
