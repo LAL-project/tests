@@ -154,7 +154,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 
 	const set<string> allowed_algos({"Plan", "YS", "FC"});
 
-	const auto Plan = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Planar); };
+	const auto Plan = [](const free_tree& t) -> algo_result { return Dmin_Planar(t); };
 	const auto FC = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_FC); };
 	const auto YS = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_YS); };
 

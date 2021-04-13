@@ -75,7 +75,7 @@ pair<uint32_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
 		rooted_tree rt(t, u);
 		rt.calculate_size_subtrees();
 
-		const auto Dmin_proj = lal::linarr::Dmin(rt, lal::linarr::algorithms_Dmin::Projective);
+		const auto Dmin_proj = lal::linarr::Dmin_Projective(rt);
 		if (Dmin_planar > Dmin_proj.first) {
 			Dmin_planar = Dmin_proj.first;
 			arr = Dmin_proj.second;
@@ -120,8 +120,7 @@ bool check_correctness_arr(
 }
 
 err_type check_tree(const free_tree& T) {
-	const auto Dmin_planar_library =
-		lal::linarr::Dmin(T, lal::linarr::algorithms_Dmin::Planar);
+	const auto Dmin_planar_library = lal::linarr::Dmin_Planar(T);
 
 	const auto Dmin_planar_quadratic =
 		tests_Dmin_planar::Dmin_planar_quadratic(T);
@@ -187,7 +186,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 		err = linarr_brute_force_testing<free_tree>
 		(
 			[](const free_tree& t) {
-				return Dmin(t, algorithms_Dmin::Planar);
+				return Dmin_Planar(t);
 			},
 			[](const free_tree& t, const linear_arrangement& arr) {
 				return sum_length_edges(t, arr);
