@@ -85,6 +85,7 @@ err_type exe_linarr_C_list
 	err_type r;
 	r = io_wrapper::read_graph(graph_name, graph_format, uG);
 	if (r != err_type::no_error) { return r; }
+
 	r = io_wrapper::read_graph(graph_name, graph_format, dG);
 	if (r != err_type::no_error) { return r; }
 	}
@@ -113,16 +114,16 @@ err_type exe_linarr_C_list
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node>> T(n_linarrs, vector<node>(uG.get_num_nodes()));
-	vector<linear_arrangement> pis(n_linarrs, linear_arrangement(uG.get_num_nodes()));
+	vector<vector<node>> inv_arrs(n_linarrs, vector<node>(uG.get_num_nodes()));
+	vector<linear_arrangement> arrangements(n_linarrs, linear_arrangement(uG.get_num_nodes()));
 	uint32_t single_upper_bound;
 	vector<uint32_t> list_upper_bounds(n_linarrs, 0);
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint32_t u = 0; u < uG.get_num_nodes(); ++u) {
-			fin >> T[i][u];
-			pis[i][ T[i][u] ] = u;
+			fin >> inv_arrs[i][u];
+			arrangements[i][ inv_arrs[i][u] ] = u;
 		}
 
 		if (upper_bound_type == 2) {
@@ -133,8 +134,8 @@ err_type exe_linarr_C_list
 		fin >> single_upper_bound;
 	}
 
-	const vector<uint32_t> uCbfs = number_of_crossings_brute_force(uG, pis);
-	const vector<uint32_t> dCbfs = number_of_crossings_brute_force(dG, pis);
+	const vector<uint32_t> uCbfs = number_of_crossings_brute_force(uG, arrangements);
+	const vector<uint32_t> dCbfs = number_of_crossings_brute_force(dG, arrangements);
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
 			cerr << ERROR << endl;
@@ -142,9 +143,9 @@ err_type exe_linarr_C_list
 			cerr << "        uCbfs: " << uCbfs[i] << endl;
 			cerr << "        dCbfs: " << dCbfs[i] << endl;
 			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << T[i][0];
+			cerr << "    [" << inv_arrs[i][0];
 			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << T[i][j];
+				cerr << "," << inv_arrs[i][j];
 			}
 			cerr << "]" << endl;
 			return err_type::test_execution;
@@ -165,16 +166,16 @@ err_type exe_linarr_C_list
 	// compute all C
 	begin = timing::now();
 	if (upper_bound_type == 0) {
-		uCs = number_of_crossings_list(uG, pis, choose_algo);
-		dCs = number_of_crossings_list(dG, pis, choose_algo);
+		uCs = number_of_crossings_list(uG, arrangements, choose_algo);
+		dCs = number_of_crossings_list(dG, arrangements, choose_algo);
 	}
 	else if (upper_bound_type == 1) {
-		uCs = is_number_of_crossings_lesseq_than_list(uG, pis, single_upper_bound, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than_list(dG, pis, single_upper_bound, choose_algo);
+		uCs = is_number_of_crossings_lesseq_than_list(uG, arrangements, single_upper_bound, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than_list(dG, arrangements, single_upper_bound, choose_algo);
 	}
 	else if (upper_bound_type == 2) {
-		uCs = is_number_of_crossings_lesseq_than_list(uG, pis, list_upper_bounds, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than_list(dG, pis, list_upper_bounds, choose_algo);
+		uCs = is_number_of_crossings_lesseq_than_list(uG, arrangements, list_upper_bounds, choose_algo);
+		dCs = is_number_of_crossings_lesseq_than_list(dG, arrangements, list_upper_bounds, choose_algo);
 	}
 	end = timing::now();
 	total_elapsed += timing::elapsed_milliseconds(begin, end);
@@ -183,12 +184,12 @@ err_type exe_linarr_C_list
 		if (dCs[i] != uCs[i]) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        " << proc << " (u): " << uCs[i] << endl;
-			cerr << "        " << proc << " (d): " << dCs[i] << endl;
+			cerr << "        " << proc << " (undirected): " << uCs[i] << endl;
+			cerr << "        " << proc << " (directed): " << dCs[i] << endl;
 			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << T[i][0];
+			cerr << "    [" << inv_arrs[i][0];
 			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << T[i][j];
+				cerr << "," << inv_arrs[i][j];
 			}
 			cerr << "]" << endl;
 			return err_type::test_execution;
@@ -204,9 +205,9 @@ err_type exe_linarr_C_list
 				cerr << "        brute force: " << uCbfs[i] << endl;
 				cerr << "        " << proc << ": " << uCs[i] << endl;
 				cerr << "    For linear arrangement " << i << ":" << endl;
-				cerr << "    [" << T[i][0];
+				cerr << "    [" << inv_arrs[i][0];
 				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << T[i][j];
+					cerr << "," << inv_arrs[i][j];
 				}
 				cerr << "]" << endl;
 				return err_type::test_execution;
@@ -232,9 +233,9 @@ err_type exe_linarr_C_list
 				cerr << "        brute force: " << uCbfs[i] << endl;
 				cerr << "        " << proc << ": " << uCs[i] << endl;
 				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-				cerr << "    [" << T[i][0];
+				cerr << "    [" << inv_arrs[i][0];
 				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << T[i][j];
+					cerr << "," << inv_arrs[i][j];
 				}
 				cerr << "]" << endl;
 				cerr << "    Undirected graph:" << endl;
@@ -264,9 +265,9 @@ err_type exe_linarr_C_list
 				cerr << "        brute force: " << uCbfs[i] << endl;
 				cerr << "        " << proc << ": " << uCs[i] << endl;
 				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-				cerr << "    [" << T[i][0];
+				cerr << "    [" << inv_arrs[i][0];
 				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << T[i][j];
+					cerr << "," << inv_arrs[i][j];
 				}
 				cerr << "]" << endl;
 				cerr << "    Undirected graph:" << endl;
