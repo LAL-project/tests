@@ -237,10 +237,12 @@ void here_counting_sort(
 {
 	const size_t size = std::distance(begin,end);
 	if (incr) {
-		lal::internal::counting_sort<T,It,true>(begin, end, n, size, key);
+		lal::internal::counting_sort<T,It,lal::internal::countingsort::increasing_t>
+		(begin, end, n, size, key);
 	}
 	else {
-		lal::internal::counting_sort<T,It,false>(begin, end, n, size, key);
+		lal::internal::counting_sort<T,It,lal::internal::countingsort::decreasing_t>
+		(begin, end, n, size, key);
 	}
 }
 
