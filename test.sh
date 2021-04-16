@@ -669,6 +669,9 @@ echo "    Log file: '$log_file'"
 
 echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> $log_file
 
+echo "$(date +"%Y/%m/%d.%T")" >> $log_file
+echo "$(date +"%Y/%m/%d.%T")" >> $log_file
+echo "$(date +"%Y/%m/%d.%T")" >> $log_file
 if [ $EXECUTE_FROM_GROUP == 1 ]; then
 	if [ "$exe_group" == "all" ]; then
 		for g in "generate" "graphs" "internal" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
@@ -679,7 +682,6 @@ if [ $EXECUTE_FROM_GROUP == 1 ]; then
 	fi
 elif [ $EXECUTE_FROM_INPUT == 1 ]; then
 	execute_group $input_dir $output_dir 1 1 $storage_dir
-	
 fi
 
 echo "$(date +"%Y/%m/%d.%T")    Finished test execution of group '$exe_group'." >> $log_file
