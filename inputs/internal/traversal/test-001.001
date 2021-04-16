@@ -9,7 +9,7 @@ BODY
 	add_edge 2 3
 	add_edge 3 4
 	add_edge 4 0
-	output_graph
+	
 	
 	assert has_dir_cycle
 	assert has_undir_cycle
@@ -21,7 +21,6 @@ BODY
 	add_edge 2 3
 	add_edge 3 4
 	add_edge 0 4
-	output_graph
-	
+		
 	assert hasnt_dir_cycle
 	assert has_undir_cycle

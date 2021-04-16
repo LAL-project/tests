@@ -5,7 +5,7 @@ BODY
 	init 3
 	add_edge 0 1
 	add_edge 1 2
-	output_graph
+	
 	
 	assert hasnt_dir_cycle
 	assert hasnt_undir_cycle
@@ -13,7 +13,7 @@ BODY
 	init 3
 	add_edge 2 1
 	add_edge 1 0
-	output_graph
+	
 	
 	assert hasnt_dir_cycle
 	assert hasnt_undir_cycle

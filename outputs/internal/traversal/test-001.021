@@ -1,18 +1,2 @@
 graph_type: dgraph
-out:
-0: 1
-1: 2
-2:
-in:
-0:
-1: 0
-2: 1
-out:
-0:
-1: 0
-2: 1
-in:
-0: 1
-1: 2
-2:
 Test finished without apparent errors.
