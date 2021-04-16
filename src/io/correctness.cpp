@@ -91,7 +91,7 @@ err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
 			}
 		}
 		else {
-			const auto errs = lal::io::check_correctness_treebank_dataset(file_path);
+			const auto errs = lal::io::check_correctness_treebank_collection(file_path);
 			cout << "A total of " << errs.size() << " errors were found for treebank dataset '"
 				 << file_path << "'." << endl;
 			if (errs.size() > 0) {
