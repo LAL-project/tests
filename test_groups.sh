@@ -6,65 +6,86 @@ groups_list=(\
 	"all" \
 	\
 	"generate" \
-	"generate_trees_alf" \
-	"generate_trees_alr" \
-	"generate_trees_auf" \
-	"generate_trees_aur" \
-	"generate_trees_rlf" \
-	"generate_trees_rlr" \
-	"generate_trees_ruf" \
-	"generate_trees_rur" \
-	"generate_arr_rand_proj" \
-	"generate_arr_all_proj" \
+		"generate_trees_alf" \
+		"generate_trees_alr" \
+		"generate_trees_auf" \
+		"generate_trees_aur" \
+		"generate_trees_rlf" \
+		"generate_trees_rlr" \
+		"generate_trees_ruf" \
+		"generate_trees_rur" \
+		"generate_arr_rand_proj" \
+		"generate_arr_all_proj" \
 	\
 	"graphs" \
-	"graphs_construction" \
-	"graphs_tree_types" \
+		"graphs_construction" \
+		"graphs_tree_types" \
 	\
 	"internal" \
-	"internal_centre" \
-	"internal_centroid" \
-	"internal_sorting" \
-	"internal_traversal" \
+		"internal_centre" \
+		"internal_centroid" \
+		"internal_sorting" \
+		"internal_traversal" \
 	\
 	"io"
 	"io_correctness"
 	\
 	"linarr" \
-	"linarr_E_2Cd" \
-	"linarr_D" \
-	"linarr_C" \
-	"linarr_C_brute_force" \
-	"linarr_C_dyn_prog" \
-	"linarr_C_ladder" \
-	"linarr_C_stack_based" \
-	"linarr_Dmin" \
-	"linarr_Dmin_Comparison" \
-	"linarr_Dmin_Projective" \
-	"linarr_Dmin_Planar" \
-	"linarr_Dmin_Unconstrained_YS" \
-	"linarr_Dmin_Unconstrained_FC" \
-	"linarr_syndepstruc_class" \
-	"linarr_comp_dependency_flux" \
-	"linarr_headedness" \
-	"linarr_k_level" \
-	"linarr_MDD" \
+		"linarr_E_2Cd" \
+		"linarr_D" \
+		"linarr_C" \
+			"linarr_C_brute_force" \
+				"linarr_C_brute_force_C" \
+				"linarr_C_brute_force_C_list" \
+				"linarr_C_brute_force_C_upper_bound" \
+				"linarr_C_brute_force_C_list_upper_bound" \
+				"linarr_C_brute_force_C_list_upper_bound_list" \
+			"linarr_C_dyn_prog" \
+				"linarr_C_dyn_prog_C" \
+				"linarr_C_dyn_prog_C_list" \
+				"linarr_C_dyn_prog_C_upper_bound" \
+				"linarr_C_dyn_prog_C_list_upper_bound" \
+				"linarr_C_dyn_prog_C_list_upper_bound_list" \
+			"linarr_C_ladder" \
+				"linarr_C_ladder_C" \
+				"linarr_C_ladder_C_list" \
+				"linarr_C_ladder_C_upper_bound" \
+				"linarr_C_ladder_C_list_upper_bound" \
+				"linarr_C_ladder_C_list_upper_bound_list" \
+			"linarr_C_stack_based" \
+				"linarr_C_stack_based_C" \
+				"linarr_C_stack_based_C_list" \
+				"linarr_C_stack_based_C_upper_bound" \
+				"linarr_C_stack_based_C_list_upper_bound" \
+				"linarr_C_stack_based_C_list_upper_bound_list" \
+		"linarr_Dmin" \
+			"linarr_Dmin_Comparison" \
+			"linarr_Dmin_Projective" \
+			"linarr_Dmin_Planar" \
+			"linarr_Dmin_Unconstrained" \
+				"linarr_Dmin_Unconstrained_YS" \
+				"linarr_Dmin_Unconstrained_FC" \
+		"linarr_syndepstruc_class" \
+		"linarr_comp_dependency_flux" \
+		"linarr_headedness" \
+		"linarr_k_level" \
+		"linarr_MDD" \
 	\
 	"memory" \
 	\
 	"numeric" \
 	\
 	"properties" \
-	"properties_basic" \
-	"properties_exp_var_C" \
-	"properties_exp_var_C_no_Q" \
-	"properties_exp_var_C_Q" \
-	"properties_exp_var_C_trees" \
-	"properties_exp_var_C_forests" \
-	"properties_exp_var_D" \
+		"properties_basic" \
+		"properties_exp_var_C" \
+			"properties_exp_var_C_no_Q" \
+			"properties_exp_var_C_Q" \
+			"properties_exp_var_C_trees" \
+			"properties_exp_var_C_forests" \
+		"properties_exp_var_D" \
 	\
 	"utilities" \
-	"utilities_isomorphism" \
-	"utilities_isomorphism_small" \
-	"utilities_isomorphism_big" \
+		"utilities_isomorphism" \
+		"utilities_isomorphism_small" \
+		"utilities_isomorphism_big" \
 	)

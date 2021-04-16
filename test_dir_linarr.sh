@@ -11,34 +11,98 @@ linarr_D_DIRS=(\
 	)
 
 # Number of crossings tests
+linarr_C_brute_force_C_DIRS=(\
+	"linarr/C/brute_force" "linarr/C" \
+	)
+linarr_C_brute_force_C_list_DIRS=(\
+	"linarr/C/brute_force-list" "linarr/C" \
+	)
+linarr_C_brute_force_C_upper_bound_DIRS=(\
+	"linarr/C/brute_force-upper_bound" "linarr/C" \
+	)
+linarr_C_brute_force_C_list_upper_bound_DIRS=(\
+	"linarr/C/brute_force-list_upper_bound" "linarr/C" \
+	)
+linarr_C_brute_force_C_list_upper_bound_list_DIRS=(\
+	"linarr/C/brute_force-list_upper_bound_list" "linarr/C" \
+	)
 linarr_C_brute_force_DIRS=(\
-	"linarr/C/bruteforce" "linarr/C" \
-	"linarr/C/bruteforce-list" "linarr/C" \
-	"linarr/C/bruteforce-upper_bound" "linarr/C" \
-	"linarr/C/bruteforce-list_upper_bound" "linarr/C" \
-	"linarr/C/bruteforce-list_upper_bound_list" "linarr/C" \
+	"${linarr_C_brute_force_C_DIRS[@]}" \
+	"${linarr_C_brute_force_C_list_DIRS[@]}" \
+	"${linarr_C_brute_force_C_upper_bound_DIRS[@]}" \
+	"${linarr_C_brute_force_C_list_upper_bound_DIRS[@]}" \
+	"${linarr_C_brute_force_C_list_upper_bound_list_DIRS[@]}" \
+	)
+
+linarr_C_dyn_prog_C_DIRS=(\
+	"linarr/C/dyn_prog" "linarr/C" \
+	)
+linarr_C_dyn_prog_C_list_DIRS=(\
+	"linarr/C/dyn_prog-list" "linarr/C" \
+	)
+linarr_C_dyn_prog_C_upper_bound_DIRS=(\
+	"linarr/C/dyn_prog-upper_bound" "linarr/C" \
+	)
+linarr_C_dyn_prog_C_list_upper_bound_DIRS=(\
+	"linarr/C/dyn_prog-list_upper_bound" "linarr/C" \
+	)
+linarr_C_dyn_prog_C_list_upper_bound_list_DIRS=(\
+	"linarr/C/dyn_prog-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_dyn_prog_DIRS=(\
-	"linarr/C/dyn-prog" "linarr/C" \
-	"linarr/C/dyn-prog-list" "linarr/C" \
-	"linarr/C/dyn-prog-upper_bound" "linarr/C" \
-	"linarr/C/dyn-prog-list_upper_bound" "linarr/C" \
-	"linarr/C/dyn-prog-list_upper_bound_list" "linarr/C" \
+	"${linarr_C_dyn_prog_C_DIRS[@]}" \
+	"${linarr_C_dyn_prog_C_list_DIRS[@]}" \
+	"${linarr_C_dyn_prog_C_upper_bound_DIRS[@]}" \
+	"${linarr_C_dyn_prog_C_list_upper_bound_DIRS[@]}" \
+	"${linarr_C_dyn_prog_C_list_upper_bound_list_DIRS[@]}" \
 	)
-linarr_C_ladder_DIRS=(\
+
+linarr_C_ladder_C_DIRS=(\
 	"linarr/C/ladder" "linarr/C" \
+	)
+linarr_C_ladder_C_list_DIRS=(\
 	"linarr/C/ladder-list" "linarr/C" \
+	)
+linarr_C_ladder_C_upper_bound_DIRS=(\
 	"linarr/C/ladder-upper_bound" "linarr/C" \
+	)
+linarr_C_ladder_C_list_upper_bound_DIRS=(\
 	"linarr/C/ladder-list_upper_bound" "linarr/C" \
+	)
+linarr_C_ladder_C_list_upper_bound_list_DIRS=(\
 	"linarr/C/ladder-list_upper_bound_list" "linarr/C" \
 	)
-linarr_C_stack_based_DIRS=(\
-	"linarr/C/stack-based" "linarr/C" \
-	"linarr/C/stack-based-list" "linarr/C" \
-	"linarr/C/stack-based-upper_bound" "linarr/C" \
-	"linarr/C/stack-based-list_upper_bound" "linarr/C" \
-	"linarr/C/stack-based-list_upper_bound_list" "linarr/C" \
+linarr_C_ladder_DIRS=(\
+	"${linarr_C_ladder_C_DIRS[@]}" \
+	"${linarr_C_ladder_C_list_DIRS[@]}" \
+	"${linarr_C_ladder_C_upper_bound_DIRS[@]}" \
+	"${linarr_C_ladder_C_list_upper_bound_DIRS[@]}" \
+	"${linarr_C_ladder_C_list_upper_bound_list_DIRS[@]}" \
 	)
+
+linarr_C_stack_based_C_DIRS=(\
+	"linarr/C/stack_based" "linarr/C" \
+	)
+linarr_C_stack_based_C_list_DIRS=(\
+	"linarr/C/stack_based-list" "linarr/C" \
+	)
+linarr_C_stack_based_C_upper_bound_DIRS=(\
+	"linarr/C/stack_based-upper_bound" "linarr/C" \
+	)
+linarr_C_stack_based_C_list_upper_bound_DIRS=(\
+	"linarr/C/stack_based-list_upper_bound" "linarr/C" \
+	)
+linarr_C_stack_based_C_list_upper_bound_list_DIRS=(\
+	"linarr/C/stack_based-list_upper_bound_list" "linarr/C" \
+	)
+linarr_C_stack_based_DIRS=(\
+	"${linarr_C_stack_based_C_DIRS[@]}" \
+	"${linarr_C_stack_based_C_list_DIRS[@]}" \
+	"${linarr_C_stack_based_C_upper_bound_DIRS[@]}" \
+	"${linarr_C_stack_based_C_list_upper_bound_DIRS[@]}" \
+	"${linarr_C_stack_based_C_list_upper_bound_list_DIRS[@]}" \
+	)
+
 linarr_C_DIRS=(\
 	"${linarr_C_dyn_prog_DIRS[@]}" \
 	"${linarr_C_ladder_DIRS[@]}" \
@@ -61,12 +125,15 @@ linarr_Dmin_Unconstrained_YS_DIRS=(\
 linarr_Dmin_Unconstrained_FC_DIRS=(\
 	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
 	)
+linarr_Dmin_Unconstrained_DIRS=(\
+	"${linarr_Dmin_Unconstrained_YS_DIRS[@]}" \
+	"${linarr_Dmin_Unconstrained_FC_DIRS[@]}" \
+	)
 linarr_Dmin_DIRS=(\
 	"${linarr_Dmin_Projective_DIRS[@]}" \
 	"${linarr_Dmin_Planar_DIRS[@]}" \
 	"${linarr_Dmin_Comparison_DIRS[@]}" \
-	"${linarr_Dmin_Unconstrained_YS_DIRS[@]}" \
-	"${linarr_Dmin_Unconstrained_FC_DIRS[@]}" \
+	"${linarr_Dmin_Unconstrained_DIRS[@]}" \
 	)
 
 # Classification of syntactic dependency structures
