@@ -220,7 +220,8 @@ err_type test_class_algorithm(
 					const free_tree tree = TreeGen.get_tree();
 
 					// filter non-caterpillar
-					if (not tree.is_of_type(tree_type::caterpillar)) { continue; }
+					if (not tree.is_of_tree_type(tree_type::caterpillar))
+					{ continue; }
 
 					// Dmin for caterpillar trees
 					uint32_t Dmin_cat = 0;

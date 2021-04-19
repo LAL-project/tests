@@ -112,7 +112,7 @@ err_type test_for_n(
 		}
 
 		// compute 'statistics'
-		n_caterpillar += T.is_of_type(tree_type::caterpillar);
+		n_caterpillar += T.is_of_tree_type(tree_type::caterpillar);
 		gen += 1;
 	}
 

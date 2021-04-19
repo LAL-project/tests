@@ -50,7 +50,7 @@ using namespace std;
 #include <lal/linarr/syntactic_dependency_structure_type.hpp>
 #include <lal/linarr/classify_syntactic_dependency_structure.hpp>
 #include <lal/graphs/conversions.hpp>
-#include <lal/internal/make_array_with_value.hpp>
+#include <lal/internal/make_array.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -164,7 +164,7 @@ err_type parse_single_file(const string& file) {
 		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const auto LAL_classes = lal::linarr::classify_tree_structure(T);
+		const auto LAL_classes = lal::linarr::classify_syntactic_dependency_structure(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {
