@@ -36,7 +36,7 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXXFLAGS += -std=c++17
 
     LAL_DIR = /home/usuaris/lalemany/linear-arrangement-library
-	THIS_DIR = /home/usuaris/lalemany/research-linear-arrangements/src
+	THIS_DIR = /home/usuaris/lalemany/LAL-tests/src
 }
 
 CONFIG(debug, debug|release) {
