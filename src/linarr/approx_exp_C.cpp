@@ -204,8 +204,8 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 		}
 
 		// compute value using library and compare it with brute force method
-		const rational ap_lib_u = approximate_C_rational(uG, pi);
-		const rational ap_lib_d = approximate_C_rational(dG, pi);
+		const rational ap_lib_u = predicted_num_crossings_rational(uG, pi);
+		const rational ap_lib_d = predicted_num_crossings_rational(dG, pi);
 		if (ap_lib_d != ap_lib_u) {
 			cerr << ERROR << endl;
 			cerr << "    Library's values for directed and undirected graphs" << endl;

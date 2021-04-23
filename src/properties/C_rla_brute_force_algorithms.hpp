@@ -86,7 +86,7 @@ lal::numeric::rational variance_C_freqs_Q_rational
  * @param Q Set of pairs of independent edges \f$Q(G)\f$.
  * @return Returns the exact value of \f$V_{rla}[C]\f$ as a rational value.
  */
-lal::numeric::rational variance_C_rational_Q
+lal::numeric::rational var_num_crossings_rational_Q
 (const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q);
 
 } // -- namespace properties

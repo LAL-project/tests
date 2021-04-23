@@ -102,7 +102,7 @@ bool is_linarr_planar(
 	const T& t, const linear_arrangement& arr
 )
 {
-	return linarr::number_of_crossings(t, arr) == 0;
+	return linarr::num_crossings(t, arr) == 0;
 }
 
 bool is_linarr_projective(

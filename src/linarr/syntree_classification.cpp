@@ -47,7 +47,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/linarr/syntactic_dependency_structure_type.hpp>
+#include <lal/linarr/syntactic_dependency_structure.hpp>
 #include <lal/linarr/classify_syntactic_dependency_structure.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/internal/make_array.hpp>
@@ -64,7 +64,7 @@ namespace linarr {
 
 namespace syntree_class {
 
-typedef syntactic_dependency_structure_type syndepstr_type;
+typedef syntactic_dependency_structure syndepstr_type;
 
 string sdtt_to_string(const syndepstr_type& t) {
 	switch (t) {
@@ -96,11 +96,11 @@ rooted_tree parse_tree_in_line(const string& s) {
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
-array<bool, __tree_structure_type_size> parse_ground_classes(string s)
+array<bool, __syntactic_dependency_structure_size> parse_ground_classes(string s)
 {
 	// classes vector
 	auto classes =
-		lal::internal::make_array_with_value<bool, __tree_structure_type_size, false>();
+		lal::internal::make_array_with_value<bool, __syntactic_dependency_structure_size, false>();
 
 	if (s.length() == 0) {
 		const syndepstr_type sdtt = string_to_syntreetype("none").first;
@@ -164,7 +164,7 @@ err_type parse_single_file(const string& file) {
 		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const auto LAL_classes = lal::linarr::classify_syntactic_dependency_structure(T);
+		const auto LAL_classes = lal::linarr::syntactic_dependency_structure_class(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {

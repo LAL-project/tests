@@ -118,8 +118,8 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 			pi[ T[u] ] = u;
 		}
 
-		const uint32_t uCbf = number_of_crossings_brute_force(uG, pi);
-		const uint32_t dCbf = number_of_crossings_brute_force(dG, pi);
+		const uint32_t uCbf = num_crossings_brute_force(uG, pi);
+		const uint32_t dCbf = num_crossings_brute_force(dG, pi);
 		if (uCbf != dCbf) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings calculated by bruteforce do not coincide." << endl;
@@ -148,15 +148,15 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 		if (has_upper_bound) {
 			fin >> upper_bound;
 			const auto begin = timing::now();
-			uC = is_number_of_crossings_lesseq_than(uG, pi, upper_bound, choose_algo);
-			dC = is_number_of_crossings_lesseq_than(dG, pi, upper_bound, choose_algo);
+			uC = is_num_crossings_lesseq_than(uG, pi, upper_bound, choose_algo);
+			dC = is_num_crossings_lesseq_than(dG, pi, upper_bound, choose_algo);
 			const auto end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else {
 			const auto begin = timing::now();
-			uC = number_of_crossings(uG, pi, choose_algo);
-			dC = number_of_crossings(dG, pi, choose_algo);
+			uC = num_crossings(uG, pi, choose_algo);
+			dC = num_crossings(dG, pi, choose_algo);
 			const auto end = timing::now();
 			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}

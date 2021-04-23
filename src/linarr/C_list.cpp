@@ -134,8 +134,8 @@ err_type exe_linarr_C_list
 		fin >> single_upper_bound;
 	}
 
-	const vector<uint32_t> uCbfs = number_of_crossings_brute_force(uG, arrangements);
-	const vector<uint32_t> dCbfs = number_of_crossings_brute_force(dG, arrangements);
+	const vector<uint32_t> uCbfs = num_crossings_brute_force(uG, arrangements);
+	const vector<uint32_t> dCbfs = num_crossings_brute_force(dG, arrangements);
 	for (uint32_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
 			cerr << ERROR << endl;
@@ -166,16 +166,16 @@ err_type exe_linarr_C_list
 	// compute all C
 	begin = timing::now();
 	if (upper_bound_type == 0) {
-		uCs = number_of_crossings_list(uG, arrangements, choose_algo);
-		dCs = number_of_crossings_list(dG, arrangements, choose_algo);
+		uCs = num_crossings_list(uG, arrangements, choose_algo);
+		dCs = num_crossings_list(dG, arrangements, choose_algo);
 	}
 	else if (upper_bound_type == 1) {
-		uCs = is_number_of_crossings_lesseq_than_list(uG, arrangements, single_upper_bound, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than_list(dG, arrangements, single_upper_bound, choose_algo);
+		uCs = is_num_crossings_lesseq_than_list(uG, arrangements, single_upper_bound, choose_algo);
+		dCs = is_num_crossings_lesseq_than_list(dG, arrangements, single_upper_bound, choose_algo);
 	}
 	else if (upper_bound_type == 2) {
-		uCs = is_number_of_crossings_lesseq_than_list(uG, arrangements, list_upper_bounds, choose_algo);
-		dCs = is_number_of_crossings_lesseq_than_list(dG, arrangements, list_upper_bounds, choose_algo);
+		uCs = is_num_crossings_lesseq_than_list(uG, arrangements, list_upper_bounds, choose_algo);
+		dCs = is_num_crossings_lesseq_than_list(dG, arrangements, list_upper_bounds, choose_algo);
 	}
 	end = timing::now();
 	total_elapsed += timing::elapsed_milliseconds(begin, end);

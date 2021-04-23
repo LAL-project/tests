@@ -73,36 +73,36 @@ namespace properties {
 
 void output_ExpVar_C_BF(const undirected_graph& g) {
 	const rational Vr = variance_C_freqs_Q_rational(g.get_Q());
-	const rational E1r = expectation_C_rational(g);
+	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_Q(const undirected_graph& g) {
-	const rational Vr = variance_C_rational_Q(g, g.get_Q());
-	const rational E1r = expectation_C_rational(g);
+	const rational Vr = var_num_crossings_rational_Q(g, g.get_Q());
+	const rational E1r = exp_num_crossings(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_no_Q(const undirected_graph& g, bool reuse) {
-	const rational Vr = variance_C_rational(g, reuse);
-	const rational E1r = expectation_C_rational(g);
+	const rational Vr = var_num_crossings_rational(g, reuse);
+	const rational E1r = exp_num_crossings(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_trees(const undirected_graph& g) {
 	const free_tree t = g;
-	const rational Vr = variance_C_tree_rational(t);
-	const rational E1r = expectation_C_rational(t);
+	const rational Vr = var_num_crossings_tree_rational(t);
+	const rational E1r = exp_num_crossings(t);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_forests(const undirected_graph& g) {
-	const rational Vr = variance_C_forest_rational(g);
-	const rational E1r = expectation_C_rational(g);
+	const rational Vr = var_num_crossings_forest_rational(g);
+	const rational E1r = exp_num_crossings(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
@@ -117,8 +117,8 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 		const free_tree tree = TreeGen.get_tree();
 
 		const rational Vr_bf = variance_C_freqs_rational(tree);
-		const rational Vr_gen = variance_C_rational(tree);
-		const rational Vr_trees = variance_C_tree_rational(tree);
+		const rational Vr_gen = var_num_crossings_rational(tree);
+		const rational Vr_trees = var_num_crossings_tree_rational(tree);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_trees) {
 			cerr << "Error in tree " << k << " of size " << n << endl;
@@ -150,8 +150,8 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 		}
 
 		const rational Vr_bf = variance_C_freqs_rational(forest);
-		const rational Vr_gen = variance_C_rational(forest);
-		const rational Vr_forests = variance_C_forest_rational(forest);
+		const rational Vr_gen = var_num_crossings_rational(forest);
+		const rational Vr_forests = var_num_crossings_forest_rational(forest);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_forests) {
 			cerr << "Error in forest with " << n_trees

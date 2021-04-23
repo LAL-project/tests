@@ -92,7 +92,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		return false;
 	}
 	// ensure that value of D is correct
-	const uint32_t D = sum_length_edges(tree, arr);
+	const uint32_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
@@ -149,7 +149,7 @@ err_type test_bf_algorithm(
 		},
 		// evaluate input tree with an arrangement
 		[](const free_tree& t, const linear_arrangement& arr) {
-			return sum_length_edges(t, arr);
+			return sum_edge_lengths(t, arr);
 		},
 		// check correctness of "arrangement"
 		[](const free_tree& t, const linear_arrangement& arr) {
@@ -401,7 +401,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, input_file
 		);
@@ -412,7 +412,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
 		);
@@ -421,7 +421,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_YS);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
 		);
@@ -446,7 +446,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, input_file
 		);
@@ -457,7 +457,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_class_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
 		);
@@ -466,7 +466,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 		r =
 		dmin_unconstrained::test_tree_algorithm(
 			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
-				return Dmin(t, algorithms_Dmin::Unconstrained_FC);
+				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
 		);

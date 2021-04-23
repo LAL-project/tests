@@ -144,10 +144,10 @@ void enum_Q(const G& g) {
 
 template<class G>
 void Q_size(const G& g) {
-	const integer Q = size_Q_integer(g);
+	const integer Q = num_pairs_independent_edges_integer(g);
 	cout << "size of Q: " << Q << endl;
 
-	const uint64_t dQ = size_Q(g);
+	const uint64_t dQ = num_pairs_independent_edges(g);
 	cout << "size of Q: " << dQ << endl;
 }
 

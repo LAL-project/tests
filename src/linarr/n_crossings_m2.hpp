@@ -48,7 +48,7 @@ namespace tests {
 namespace linarr {
 
 template<class G>
-inline uint32_t number_of_crossings_brute_force(
+inline uint32_t num_crossings_brute_force(
 	const G& g,
 	const lal::linear_arrangement& pi
 )
@@ -76,14 +76,14 @@ inline uint32_t number_of_crossings_brute_force(
 }
 
 template<class G>
-inline std::vector<uint32_t> number_of_crossings_brute_force(
+inline std::vector<uint32_t> num_crossings_brute_force(
 	const G& g,
 	const std::vector<lal::linear_arrangement>& pis
 )
 {
 	std::vector<uint32_t> C(pis.size());
 	for (size_t i = 0; i < pis.size(); ++i) {
-		C[i] = number_of_crossings_brute_force(g, pis[i]);
+		C[i] = num_crossings_brute_force(g, pis[i]);
 	}
 	return C;
 }

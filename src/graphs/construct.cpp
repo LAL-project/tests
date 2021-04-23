@@ -84,7 +84,7 @@ using namespace iterators;
 #define FUNC_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_OUTPUT_Q "output_Q"
-#define FUNC_Q_SIZE "size_Q"
+#define FUNC_Q_SIZE "num_pairs_independent_edges"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
 #define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
@@ -442,12 +442,12 @@ err_type exe_construction_test(ifstream& fin) {
 			}
 
 			// check size
-			if (iter_pair_edges.size() != ffunction(g1, properties::size_Q)) {
+			if (iter_pair_edges.size() != ffunction(g1, properties::num_pairs_independent_edges)) {
 				cerr << ERROR << endl;
 				message_in_func(FUNC_GRAPH_CHECK_Q_IT);
 				cerr << "    The amount of pairs obtained differs from the size of the set Q." << endl;
 				cerr << "    Number of pairs obtained: " << iter_pair_edges.size() << endl;
-				cerr << "    Size of the set Q: " << ffunction(g1, properties::size_Q) << endl;
+				cerr << "    Size of the set Q: " << ffunction(g1, properties::num_pairs_independent_edges) << endl;
 				return err_type::test_execution;
 			}
 			sort(iter_pair_edges.begin(), iter_pair_edges.end());
@@ -509,8 +509,8 @@ err_type exe_construction_test(ifstream& fin) {
 
 			cout <<
 				(graph_type(g1) == DGRAPH ?
-					properties::size_Q_integer(dgraphvars[g1]) :
-					properties::size_Q_integer(ugraphvars[g1]))
+					properties::num_pairs_independent_edges_integer(dgraphvars[g1]) :
+					properties::num_pairs_independent_edges_integer(ugraphvars[g1]))
 			<< endl;
 
 		}

@@ -47,7 +47,7 @@ using namespace std;
 // lal includes
 #include <lal/graphs/directed_graph.hpp>
 #include <lal/numeric/rational_output.hpp>
-#include <lal/linarr/headedness.hpp>
+#include <lal/linarr/head_initial.hpp>
 #include <lal/io/basic_output.hpp>
 using namespace lal;
 using namespace graphs;
@@ -102,7 +102,7 @@ err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 		}
 		cout << "]: ";
 
-		const rational h = lal::linarr::headedness_rational(G, pi);
+		const rational h = lal::linarr::head_initial_rational(G, pi);
 		cout << h << endl;
 	}
 

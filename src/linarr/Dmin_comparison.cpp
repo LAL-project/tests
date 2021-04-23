@@ -99,7 +99,7 @@ bool check_correctness_arr(
 		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint32_t D = sum_length_edges(tree, arr);
+	const uint32_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
@@ -154,9 +154,9 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 
 	const set<string> allowed_algos({"Plan", "YS", "FC"});
 
-	const auto Plan = [](const free_tree& t) -> algo_result { return Dmin_Planar(t); };
-	const auto FC = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_FC); };
-	const auto YS = [](const free_tree& t) -> algo_result { return Dmin(t, algorithms_Dmin::Unconstrained_YS); };
+	const auto Plan = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths_planar(t); };
+	const auto FC = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC); };
+	const auto YS = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS); };
 
 	map<string, function<algo_result (const free_tree&)> > ALGOS;
 	ALGOS["Plan"] = Plan;

@@ -96,10 +96,10 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	const auto err = linarr_brute_force_testing<rooted_tree>
 	(
 		[](const rooted_tree& t) {
-			return Dmin_Projective(t);
+			return min_sum_edge_lengths_projective(t);
 		},
 		[](const rooted_tree& t, const linear_arrangement& arr) {
-			return sum_length_edges(t, arr);
+			return sum_edge_lengths(t, arr);
 		},
 		[](const rooted_tree& t, const linear_arrangement& arr) {
 			return is_arrangement_projective(t, arr);

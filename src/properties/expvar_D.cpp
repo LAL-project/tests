@@ -63,8 +63,8 @@ namespace tests {
 namespace properties {
 
 void output_ExpVar_D_formula(const undirected_graph& g) {
-	const rational Vr = variance_D_rational(g);
-	const rational E1r = expectation_D_rational(g);
+	const rational Vr = var_sum_edge_lengths_rational(g);
+	const rational E1r = exp_sum_edge_lengths_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
 }
