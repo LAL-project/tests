@@ -103,7 +103,7 @@ err_type test_for_n(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&
 		}
 
 		// compute 'statistics'
-		mmtdeg2 += properties::mmt_degree_rational(T, 2);
+		mmtdeg2 += properties::moment_degree_rational(T, 2);
 		gen += 1;
 	}
 

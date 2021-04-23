@@ -152,7 +152,7 @@ void Q_size(const G& g) {
 }
 
 void mmt_deg(const undirected_graph& g, uint32_t p) {
-	const rational kp = mmt_degree_rational(g, p);
+	const rational kp = moment_degree_rational(g, p);
 	cout << "<k^" << p << ">= " << kp << endl;
 }
 
