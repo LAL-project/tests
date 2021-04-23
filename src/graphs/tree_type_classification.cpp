@@ -51,7 +51,7 @@ using namespace std;
 #include <lal/graphs/tree_type.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/graphs/conversions.hpp>
-#include <lal/internal/graphs/tree_type_string.hpp>
+#include <lal/internal/graphs/tree_type.hpp>
 using namespace lal;
 using namespace graphs;
 
