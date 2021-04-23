@@ -36,7 +36,7 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXXFLAGS += -std=c++17
 
     LAL_DIR = /home/usuaris/lalemany/linear-arrangement-library
-	THIS_DIR = /home/usuaris/lalemany/research-linear-arrangements/src
+	THIS_DIR = /home/usuaris/lalemany/LAL-tests/src
 }
 
 CONFIG(debug, debug|release) {
@@ -61,8 +61,8 @@ LIBS += -fopenmp
 SOURCES += \
     arr_all_proj.cpp \
     arr_rand_proj.cpp \
-        main.cpp \
-		parse_keywords.cpp \
+    main.cpp \
+	parse_keywords.cpp \
     trees_alf.cpp \
     trees_alr.cpp \
     trees_auf.cpp \

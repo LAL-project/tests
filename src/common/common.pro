@@ -33,7 +33,7 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXXFLAGS += -std=c++17
 
     LAL_DIR = /home/usuaris/lalemany/linear-arrangement-library
-	THIS_DIR = /home/usuaris/lalemany/LAL-tests/tests
+	THIS_DIR = /home/usuaris/lalemany/LAL-tests/src
 }
 
 INCLUDEPATH += $$LAL_DIR
