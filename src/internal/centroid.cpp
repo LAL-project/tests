@@ -130,7 +130,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 }
 
 inline
-bool centroids_are_equal(
+bool are_centroids_equal(
 	const tree& t,
 	const pair<node,node>& c1, const pair<node,node>& c2
 )
@@ -265,7 +265,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 {																	\
 	const auto lib_centroid = lal::internal::retrieve_centroid(T, 0);\
 	const auto easy_centroid = straightforward_centroid(T, 0);		\
-	if (not centroids_are_equal(T,lib_centroid, easy_centroid)) {	\
+	if (not are_centroids_equal(T,lib_centroid, easy_centroid)) {	\
 		cerr << ERROR << endl;										\
 		cerr << "    Centroids differ." << endl;					\
 		cerr << "    Library: " << lib_centroid.first;				\

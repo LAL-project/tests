@@ -80,14 +80,14 @@ void output_ExpVar_C_BF(const undirected_graph& g) {
 
 void output_ExpVar_C_formula_Q(const undirected_graph& g) {
 	const rational Vr = var_num_crossings_rational_Q(g, g.get_Q());
-	const rational E1r = exp_num_crossings(g);
+	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_formula_no_Q(const undirected_graph& g, bool reuse) {
 	const rational Vr = var_num_crossings_rational(g, reuse);
-	const rational E1r = exp_num_crossings(g);
+	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
@@ -95,14 +95,14 @@ void output_ExpVar_C_formula_no_Q(const undirected_graph& g, bool reuse) {
 void output_ExpVar_C_trees(const undirected_graph& g) {
 	const free_tree t = g;
 	const rational Vr = var_num_crossings_tree_rational(t);
-	const rational E1r = exp_num_crossings(t);
+	const rational E1r = exp_num_crossings_rational(t);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
 void output_ExpVar_C_forests(const undirected_graph& g) {
 	const rational Vr = var_num_crossings_forest_rational(g);
-	const rational E1r = exp_num_crossings(g);
+	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
@@ -214,8 +214,8 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 	else {
 		undirected_graph G;
 		for (size_t i = 0; i < inputs.size(); ++i) {
-			err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
-
+			G.clear();
+			const err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 			if (r != err_type::no_error) {
 				return r;
 			}

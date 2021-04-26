@@ -65,6 +65,20 @@ using namespace generate;
 namespace tests {
 namespace internal {
 
+inline bool are_centres_equal(
+	const uint32_t n,
+	const pair<node,node>& c1, const pair<node,node>& c2
+)
+noexcept
+{
+	if (c1.first != c2.first) { return false; }
+	if (c1.second < n and c2.second >= n) { return false; }
+	if (c1.second >= n and c2.second < n) { return false; }
+	if (c1.second >= n and c2.second >= n) { return true; }
+	if (c1.second != c2.second) { return false; }
+	return true;
+}
+
 // this is a very simple algorithm to calculate the centre
 template<class T>
 pair<node, node> straightforward_centre(const T& tree, node u) {
@@ -256,16 +270,16 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 {																\
 	const auto lib_centre = lal::internal::retrieve_centre(T, 0);\
 	const auto easy_centre = straightforward_centre(T, 0);		\
-	if (lib_centre != easy_centre) {							\
+	if (not are_centres_equal(T.get_num_nodes(), lib_centre, easy_centre)) { \
 		cerr << ERROR << endl;									\
 		cerr << "    Centres differ." << endl;					\
 		cerr << "    Library: " << lib_centre.first;			\
-		if (lib_centre.second != n) {							\
+		if (lib_centre.second < n) {							\
 			cerr << " " << lib_centre.second;					\
 		}														\
 		cerr << endl;											\
 		cerr << "    Straightforward: " << easy_centre.first;	\
-		if (easy_centre.second != n) {							\
+		if (easy_centre.second < n) {							\
 			cerr << " " << easy_centre.second;					\
 		}														\
 		cerr << endl;											\
@@ -285,15 +299,15 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 	}									\
 }
 
-#define exe_random(G, n)						\
-{												\
-	uint32_t N;									\
-	fin >> N;									\
-	G Gen(n);									\
-	for (uint32_t i = 0; i < N; ++i) {			\
-		const auto T = Gen.get_tree();			\
-		test_correctness(T)						\
-	}											\
+#define exe_random(G, n)				\
+{										\
+	uint32_t N;							\
+	fin >> N;							\
+	G Gen(n);							\
+	for (uint32_t i = 0; i < N; ++i) {	\
+		const auto T = Gen.get_tree();	\
+		test_correctness(T)				\
+	}									\
 }
 
 	uint32_t n;

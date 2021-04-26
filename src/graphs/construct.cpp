@@ -84,7 +84,7 @@ using namespace iterators;
 #define FUNC_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_OUTPUT_Q "output_Q"
-#define FUNC_Q_SIZE "num_pairs_independent_edges"
+#define FUNC_Q_SIZE "size_Q"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
 #define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
