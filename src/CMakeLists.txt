@@ -202,7 +202,7 @@ add_executable(
 		linarr/n_crossings_m2.hpp
 		linarr/parse_keywords.hpp
 		
-		linarr/approx_exp_C.cpp
+		linarr/predicted_C.cpp
 		linarr/C.cpp
 		linarr/C_list.cpp
 		linarr/D.cpp

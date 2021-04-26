@@ -66,12 +66,12 @@ SOURCES += \
     Dmin_planar.cpp \
     Dmin_projective.cpp \
     Dmin_unconstrained.cpp \
-    approx_exp_C.cpp \
     flux.cpp \
     headedness.cpp \
     klevel.cpp \
         main.cpp \
 		parse_keywords.cpp \
+    predicted_C.cpp \
     syntree_classification.cpp
 
 HEADERS += \
