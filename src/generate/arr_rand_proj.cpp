@@ -84,7 +84,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 			rand_projective_arrangements RandArr(rT, 100);
 
 			for (uint32_t it = 0; it < nit; ++it) {
-				const linear_arrangement arr = RandArr.make_rand_arrgmnt();
+				const linear_arrangement arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
 				const string err = is_arrangement_projective(rT, arr);
