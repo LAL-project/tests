@@ -35,19 +35,19 @@ linarr_C_brute_force_DIRS=(\
 	)
 
 linarr_C_dyn_prog_C_DIRS=(\
-	"linarr/C/dyn_prog" "linarr/C" \
+	"linarr/C/dyn-prog" "linarr/C" \
 	)
 linarr_C_dyn_prog_C_list_DIRS=(\
-	"linarr/C/dyn_prog-list" "linarr/C" \
+	"linarr/C/dyn-prog-list" "linarr/C" \
 	)
 linarr_C_dyn_prog_C_upper_bound_DIRS=(\
-	"linarr/C/dyn_prog-upper_bound" "linarr/C" \
+	"linarr/C/dyn-prog-upper_bound" "linarr/C" \
 	)
 linarr_C_dyn_prog_C_list_upper_bound_DIRS=(\
-	"linarr/C/dyn_prog-list_upper_bound" "linarr/C" \
+	"linarr/C/dyn-prog-list_upper_bound" "linarr/C" \
 	)
 linarr_C_dyn_prog_C_list_upper_bound_list_DIRS=(\
-	"linarr/C/dyn_prog-list_upper_bound_list" "linarr/C" \
+	"linarr/C/dyn-prog-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_dyn_prog_DIRS=(\
 	"${linarr_C_dyn_prog_C_DIRS[@]}" \
@@ -81,19 +81,19 @@ linarr_C_ladder_DIRS=(\
 	)
 
 linarr_C_stack_based_C_DIRS=(\
-	"linarr/C/stack_based" "linarr/C" \
+	"linarr/C/stack-based" "linarr/C" \
 	)
 linarr_C_stack_based_C_list_DIRS=(\
-	"linarr/C/stack_based-list" "linarr/C" \
+	"linarr/C/stack-based-list" "linarr/C" \
 	)
 linarr_C_stack_based_C_upper_bound_DIRS=(\
-	"linarr/C/stack_based-upper_bound" "linarr/C" \
+	"linarr/C/stack-based-upper_bound" "linarr/C" \
 	)
 linarr_C_stack_based_C_list_upper_bound_DIRS=(\
-	"linarr/C/stack_based-list_upper_bound" "linarr/C" \
+	"linarr/C/stack-based-list_upper_bound" "linarr/C" \
 	)
 linarr_C_stack_based_C_list_upper_bound_list_DIRS=(\
-	"linarr/C/stack_based-list_upper_bound_list" "linarr/C" \
+	"linarr/C/stack-based-list_upper_bound_list" "linarr/C" \
 	)
 linarr_C_stack_based_DIRS=(\
 	"${linarr_C_stack_based_C_DIRS[@]}" \
