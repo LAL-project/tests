@@ -63,6 +63,49 @@ using namespace linarr;
 namespace tests {
 namespace linarr {
 
+namespace dmin_projective {
+
+template<class T>
+err_type examine_dmin_projective
+(
+	const string& filename,
+	const TreeInit<T>& tree_initializer
+)
+noexcept
+{
+	ifstream input_file(filename);
+	if (not input_file.is_open()) {
+		cerr << ERROR << endl;
+		cerr << "    Input file '" << filename << "' could not be opened." << endl;
+		return err_type::io;
+	}
+
+	const auto err = linarr_brute_force_testing<rooted_tree>
+	(
+		[](const rooted_tree& t) {
+			return min_sum_edge_lengths_projective(t);
+		},
+		[](const rooted_tree& t, const linear_arrangement& arr) {
+			return sum_edge_lengths(t, arr);
+		},
+		[](const rooted_tree& t, const linear_arrangement& arr) {
+			return is_arrangement_projective(t, arr);
+		},
+		[](const head_vector& v) {
+			return from_head_vector_to_rooted_tree(v);
+		},
+		tree_initializer,
+		input_file
+	);
+	if (err != err_type::no_error) {
+		return err;
+	}
+
+	return err;
+}
+
+} // -- namespace dmin_projective
+
 err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 1) {
 		cerr << ERROR << endl;
@@ -86,36 +129,24 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	ifstream input_file(inputs[0].first);
-	if (not input_file.is_open()) {
-		cerr << ERROR << endl;
-		cerr << "    Input file '" << inputs[0].first << "' could not be opened." << endl;
-		return err_type::io;
-	}
-
-	const auto err = linarr_brute_force_testing<rooted_tree>
+	const auto err1 =
+	dmin_projective::examine_dmin_projective<rooted_tree>
 	(
-		[](const rooted_tree& t) {
-			return min_sum_edge_lengths_projective(t);
-		},
-		[](const rooted_tree& t, const linear_arrangement& arr) {
-			return sum_edge_lengths(t, arr);
-		},
-		[](const rooted_tree& t, const linear_arrangement& arr) {
-			return is_arrangement_projective(t, arr);
-		},
-		[](const vector<node>& v) {
-			return from_head_vector_to_rooted_tree(v);
-		},
+		inputs[0].first,
 		[](rooted_tree& t) {
 			t.calculate_size_subtrees();
-		},
-		input_file
+		}
 	);
+	if (err1 != err_type::no_error) { return err1; }
 
-	if (err != err_type::no_error) {
-		return err;
-	}
+	// do not calculate size subtrees so as to be able to test it
+	const auto err2 =
+	dmin_projective::examine_dmin_projective<rooted_tree>
+	(
+		inputs[0].first,
+		[](rooted_tree&) { }
+	);
+	if (err2 != err_type::no_error) { return err2; }
 
 	TEST_GOODBYE
 	return err_type::no_error;
