@@ -1,0 +1,81 @@
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_move_constructor()
+-----------------------------------
+case starting at line: 70
+72:: Empty
+74:: Empty
+75:: Empty
+-----------------------------------
+case starting at line: 79
+81::  100 100 100 100 100
+83:: Empty
+84::  100 100 100 100 100
+-----------------------------------
+case starting at line: 88
+90::  1 1 1 1 1 1 1 1 1 1
+92:: Empty
+93::  1 1 1 1 1 1 1 1 1 1
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_move_assignment()
+-----------------------------------
+case starting at line: 102
+104:: Empty
+106:: Empty
+107:: Empty
+110:: Empty
+111:: Empty
+-----------------------------------
+case starting at line: 115
+117::  100 100 100 100 100
+119:: Empty
+120::  100 100 100 100 100
+123::  100 100 100 100 100
+124:: Empty
+-----------------------------------
+case starting at line: 128
+130::  1 1 1 1 1 1 1 1 1 1
+132:: Empty
+133::  1 1 1 1 1 1 1 1 1 1
+136::  1 1 1 1 1 1 1 1 1 1
+137:: Empty
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_copy_constructor()
+-----------------------------------
+case starting at line: 147
+149:: Empty
+151:: Empty
+152:: Empty
+-----------------------------------
+case starting at line: 156
+158::  100 100 100 100 100
+160::  100 100 100 100 100
+161::  100 100 100 100 100
+-----------------------------------
+case starting at line: 165
+167::  1 1 1 1 1 1 1 1 1 1
+169::  1 1 1 1 1 1 1 1 1 1
+170::  1 1 1 1 1 1 1 1 1 1
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_copy_assignment()
+-----------------------------------
+case starting at line: 179
+181:: Empty
+183:: Empty
+184:: Empty
+187:: Empty
+188:: Empty
+-----------------------------------
+case starting at line: 192
+194::  100 100 100 100 100
+196::  100 100 100 100 100
+197::  100 100 100 100 100
+200::  100 100 100 100 100
+201::  100 100 100 100 100
+-----------------------------------
+case starting at line: 205
+207::  1 1 1 1 1 1 1 1 1 1
+209::  1 1 1 1 1 1 1 1 1 1
+210::  1 1 1 1 1 1 1 1 1 1
+213::  1 1 1 1 1 1 1 1 1 1
+214::  1 1 1 1 1 1 1 1 1 1
+Test finished without apparent errors.
