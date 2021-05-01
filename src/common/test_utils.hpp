@@ -50,18 +50,39 @@
 
 namespace tests {
 
-bool command_is_comment(const std::string& s);
+bool command_is_comment(const std::string& s) noexcept;
 
-void process_comment(std::ifstream& fin);
+void process_comment(std::ifstream& fin) noexcept;
 
-std::string read_output_string(std::ifstream& fin);
+std::string read_output_string(std::ifstream& fin) noexcept;
 
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
-std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr);
+std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr) noexcept;
 
-void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T);
-void shuffle_tree(std::vector<lal::edge>& edges, lal::graphs::free_tree& T);
+void shuffle_graph_edges(
+	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G,
+	bool normalise = false, bool check = false
+)
+noexcept;
+
+void relabel_graph_vertices(
+	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G,
+	bool normalise = false, bool check = false
+)
+noexcept;
+
+void relabel_tree_vertices(
+	std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T,
+	bool normalise = false, bool check = false
+)
+noexcept;
+
+void relabel_tree_vertices(
+	std::vector<lal::edge>& edges, lal::graphs::free_tree& T,
+	bool normalise = false, bool check = false
+)
+noexcept;
 
 } // -- namespace tests

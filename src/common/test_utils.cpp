@@ -40,6 +40,7 @@
 
 // C++ includes
 #include <algorithm>
+#include <iostream>
 #include <fstream>
 #include <random>
 #include <string>
@@ -55,10 +56,10 @@ using namespace graphs;
 
 namespace tests {
 
-bool command_is_comment(const string& s)
+bool command_is_comment(const string& s) noexcept
 { return (s == "/*") or (s.find("/*") != string::npos); }
 
-void process_comment(ifstream& fin) {
+void process_comment(ifstream& fin) noexcept {
 	string comment;
 	do {
 		fin >> comment;
@@ -66,7 +67,7 @@ void process_comment(ifstream& fin) {
 	while (comment.find("*/") == string::npos);
 }
 
-string read_output_string(ifstream& fin) {
+string read_output_string(ifstream& fin) noexcept {
 
 	string total_message = "";
 	string msg;
@@ -93,7 +94,7 @@ string read_output_string(ifstream& fin) {
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
-vector<node> invlinarr(const linear_arrangement& arr) {
+vector<node> invlinarr(const linear_arrangement& arr) noexcept {
 	vector<node> ilin(arr.size());
 	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;
@@ -101,21 +102,18 @@ vector<node> invlinarr(const linear_arrangement& arr) {
 
 #define to_uint32(x) static_cast<uint32_t>(x)
 
-void relabel_edges(vector<edge>& edges, node& r) {
-	const uint32_t n = to_uint32(edges.size() + 1);
-
+void relabel_edges(const uint32_t n, vector<edge>& edges, node& r) noexcept {
 	std::mt19937 gen(1234);
 
 	vector<node> relab(n);
 	std::iota(relab.begin(), relab.end(), 0);
 
+	// relabel 'n' times
 	for (uint32_t i = 0; i < n; ++i) {
 		std::shuffle(relab.begin(), relab.end(), gen);
 
-		// relabel each vertex accoring to 'relab'
-		for (edge& e : edges) {
-			node& s = e.first;
-			node& t = e.second;
+		// relabel each vertex according to 'relab'
+		for (auto& [s,t] : edges) {
 			s = relab[s];
 			t = relab[t];
 		}
@@ -123,25 +121,63 @@ void relabel_edges(vector<edge>& edges, node& r) {
 	}
 }
 
-void shuffle_tree(std::vector<lal::edge>& edges, rooted_tree& T) {
+void shuffle_graph_edges(
+	vector<edge>& edges, undirected_graph& G, bool normalise, bool check
+)
+noexcept
+{
+	const uint32_t n = G.get_num_nodes();
+	std::mt19937 gen(1234);
+
+	// shuffle 'n' times
+	for (uint32_t i = 0; i < n; ++i) {
+		std::shuffle(edges.begin(), edges.end(), gen);
+	}
+
+	G.clear();
+	G.init(n);
+	G.set_edges(edges, normalise, check);
+}
+
+void relabel_graph_vertices(
+	vector<edge>& edges, undirected_graph& G, bool normalise, bool check
+)
+noexcept
+{
+	const uint32_t n = G.get_num_nodes();
+	node dummy = 0;
+	relabel_edges(G.get_num_nodes(), edges, dummy);
+
+	G.clear();
+	G.init(n);
+	G.set_edges(edges, normalise, check);
+}
+
+void relabel_tree_vertices(
+	vector<edge>& edges, rooted_tree& T, bool normalise, bool check
+)
+noexcept
+{
 	node r = T.get_root();
-	relabel_edges(edges, r);
+	relabel_edges(T.get_num_nodes(), edges, r);
 
 	T.clear();
-
 	T.init(to_uint32(edges.size() + 1));
-	T.set_root(r);
-	T.set_edges(edges);
+	T.set_edges(edges, normalise, check);
 	T.set_valid_orientation(true);
 }
 
-void shuffle_tree(std::vector<lal::edge>& edges, free_tree& T) {
+void relabel_tree_vertices(
+	vector<edge>& edges, free_tree& T, bool normalise, bool check
+)
+noexcept
+{
+	node dummy = 0;
+	relabel_edges(T.get_num_nodes(), edges, dummy);
+
 	T.clear();
 	T.init(to_uint32(edges.size() + 1));
-
-	node dummy = 0;
-	relabel_edges(edges, dummy);
-	T.set_edges(edges);
+	T.set_edges(edges, normalise, check);
 }
 
 } // -- namespace tests

@@ -218,10 +218,11 @@ err_type pos_exh_test(ifstream& fin) {
 
 			for (uint32_t N = 0; N < N_relabs; ++N) {
 				relab_tree.clear();
-				shuffle_tree(edges_cur, relab_tree);
+				shuffle_tree(edges_cur, relab_tree, true, true);
 
 				const bool r =
 					lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
+
 				if (not r) {
 					cerr << ERROR << endl;
 					cerr << "    Isomorphism test returned false on isomorphic trees." << endl;
@@ -255,7 +256,7 @@ err_type pos_rand_test(ifstream& fin) {
 
 		for (uint32_t l = 0; l < N_relabs; ++l) {
 			relab_tree.clear();
-			shuffle_tree(edges_cur, relab_tree);
+			shuffle_tree(edges_cur, relab_tree, true, true);
 
 			const bool r =
 				lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
@@ -317,7 +318,7 @@ err_type neg_exh_test(ifstream& fin) {
 			}
 
 			for (uint32_t l = 0; l < N_relabs; ++l) {
-				shuffle_tree(edges_tj, relab_tree);
+				shuffle_tree(edges_tj, relab_tree, true, true);
 
 				const bool r =
 					lal::utilities::are_trees_isomorphic(ti, relab_tree);
