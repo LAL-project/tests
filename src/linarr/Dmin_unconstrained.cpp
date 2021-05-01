@@ -66,7 +66,6 @@ using namespace numeric;
 // common includes
 #include "common/definitions.hpp"
 #include "common/arrgmnt_validity_check.hpp"
-#include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
 
 // linarr includes
@@ -189,7 +188,9 @@ err_type test_class_algorithm(
 				free_tree T(n);
 
 				if (n > 1) {
-					for (node u = 0; u < n - 1; ++u) { T.add_edge(u, u+1, false); }
+					vector<edge> es;
+					for (node u = 0; u < n - 1; ++u) { es.push_back({u,u+1}); }
+					T.set_edges(es);
 				}
 
 				// Dmin for linear tree is
