@@ -77,6 +77,15 @@ void test_move_constructor() {
 
 	{
 	begin_case;
+	data_array<int> A(0, 333);
+	output_array(A);
+	data_array<int> B(std::move(A));
+	output_array(A);
+	output_array(B);
+	}
+
+	{
+	begin_case;
 	data_array<int> A(5, 100);
 	output_array(A);
 	data_array<int> B(std::move(A));
@@ -101,6 +110,19 @@ void test_move_assignment() {
 	{
 	begin_case;
 	data_array<int> A(0);
+	output_array(A);
+	TO = std::move(A);
+	output_array(A);
+	output_array(TO);
+
+	A = std::move(TO);
+	output_array(A);
+	output_array(TO);
+	}
+
+	{
+	begin_case;
+	data_array<int> A(0, 333);
 	output_array(A);
 	TO = std::move(A);
 	output_array(A);
@@ -154,6 +176,15 @@ void test_copy_constructor() {
 
 	{
 	begin_case;
+	data_array<int> A(0, 333);
+	output_array(A);
+	data_array<int> B(A);
+	output_array(A);
+	output_array(B);
+	}
+
+	{
+	begin_case;
 	data_array<int> A(5, 100);
 	output_array(A);
 	data_array<int> B(A);
@@ -178,6 +209,19 @@ void test_copy_assignment() {
 	{
 	begin_case;
 	data_array<int> A(0);
+	output_array(A);
+	TO = A;
+	output_array(A);
+	output_array(TO);
+
+	A = TO;
+	output_array(A);
+	output_array(TO);
+	}
+
+	{
+	begin_case;
+	data_array<int> A(0, 333);
 	output_array(A);
 	TO = A;
 	output_array(A);
