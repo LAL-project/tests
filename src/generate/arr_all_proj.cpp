@@ -64,13 +64,13 @@ using namespace generate;
 namespace tests {
 namespace generate {
 
-integer factorial(int64_t f) {
+inline integer factorial(int64_t f) noexcept {
 	if (f == 0) { return 1; }
 	const integer f1 = factorial(f - 1);
 	return f1*f;
 }
 
-integer amount_projective(const rooted_tree& rT) {
+inline integer amount_projective(const rooted_tree& rT) noexcept {
 	integer k = 1;
 	for (node u = 0; u < rT.get_num_nodes(); ++u) {
 		k *= factorial(rT.get_out_degree(u) + 1);
@@ -78,11 +78,11 @@ integer amount_projective(const rooted_tree& rT) {
 	return k;
 }
 
-err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) {
+inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 	vector<edge> edges = rT.get_edges();
 
-	for (uint32_t i = 0; i < nrelabs; ++i) {
-		shuffle_tree(edges, rT);
+	for (uint32_t i = 0; i < 2*nrelabs; ++i) {
+		shuffle_tree(edges, rT, (i < nrelabs ? false : true), false);
 
 		uint32_t iterations = 0;
 		set<linear_arrangement> list_arrs;

@@ -63,6 +63,7 @@ using namespace generate;
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/test_utils.hpp"
 #include "common/time.hpp"
 
 // properties includes
@@ -71,28 +72,53 @@ using namespace generate;
 namespace tests {
 namespace properties {
 
-void output_ExpVar_C_BF(const undirected_graph& g) {
-	const rational Vr = variance_C_freqs_Q_rational(g.get_Q());
+void output_ExpVar_C_BF(const undirected_graph& g) noexcept {
+	const rational Vr = nonLAL_variance_C_freqs_Q_rational(g.get_Q());
 	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula_Q(const undirected_graph& g) {
-	const rational Vr = var_num_crossings_rational_Q(g, g.get_Q());
+void output_ExpVar_C_formula_Q(const undirected_graph& g) noexcept {
+	const rational Vr = nonLAL_var_num_crossings_rational_Q(g, g.get_Q());
 	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_formula_no_Q(const undirected_graph& g, bool reuse) {
+err_type output_ExpVar_C_formula_no_Q(undirected_graph& g, bool reuse) noexcept {
+	g.normalise();
 	const rational Vr = var_num_crossings_rational(g, reuse);
+
+	{
+	vector<edge> edges = g.get_edges();
+	const size_t max_iters = 50;
+	size_t iters = 0;
+	while (g.is_normalised() and iters < max_iters) {
+		shuffle_graph_edges(edges, g, false, true);
+		++iters;
+	}
+
+	const rational Vr_nonnormalised = var_num_crossings_rational(g, reuse);
+	if (Vr_nonnormalised != Vr) {
+		cerr << ERROR << endl;
+		cerr << "    Variance obtained with a normalised graph differs from" << endl;
+		cerr << "    the variance obtained with a non-normalised graph." << endl;
+		cerr << "    Normalised variance:     " << Vr << endl;
+		cerr << "    Non-normalised variance: " << Vr_nonnormalised << endl;
+		// mess the output so that the tester does not skip any error
+		cout << "-1" << endl;
+		return err_type::test_execution;
+	}
+	}
+
 	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+	return err_type::no_error;
 }
 
-void output_ExpVar_C_trees(const undirected_graph& g) {
+void output_ExpVar_C_trees(const undirected_graph& g) noexcept {
 	const free_tree t = g;
 	const rational Vr = var_num_crossings_tree_rational(t);
 	const rational E1r = exp_num_crossings_rational(t);
@@ -100,14 +126,14 @@ void output_ExpVar_C_trees(const undirected_graph& g) {
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-void output_ExpVar_C_forests(const undirected_graph& g) {
+void output_ExpVar_C_forests(const undirected_graph& g) noexcept {
 	const rational Vr = var_num_crossings_forest_rational(g);
 	const rational E1r = exp_num_crossings_rational(g);
 	const rational E2r = Vr + E1r*E1r;
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-bool check_ExpVar_C_all_trees(uint32_t n) {
+bool check_ExpVar_C_all_trees(uint32_t n) noexcept {
 	all_ulab_free_trees TreeGen(n);
 
 	uint32_t k = 0;
@@ -116,7 +142,7 @@ bool check_ExpVar_C_all_trees(uint32_t n) {
 		TreeGen.next();
 		const free_tree tree = TreeGen.get_tree();
 
-		const rational Vr_bf = variance_C_freqs_rational(tree);
+		const rational Vr_bf = nonLAL_variance_C_freqs_rational(tree);
 		const rational Vr_gen = var_num_crossings_rational(tree);
 		const rational Vr_trees = var_num_crossings_tree_rational(tree);
 
@@ -149,7 +175,7 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 			forest.normalise();
 		}
 
-		const rational Vr_bf = variance_C_freqs_rational(forest);
+		const rational Vr_bf = nonLAL_variance_C_freqs_rational(forest);
 		const rational Vr_gen = var_num_crossings_rational(forest);
 		const rational Vr_forests = var_num_crossings_forest_rational(forest);
 
@@ -170,7 +196,7 @@ bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_tree
 err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 	const set<string> allowed_procs(
 		{"brute_force", "formula-Q",
-		 "formula-no-Q-reuse", "formula-no-Q-no-reuse",
+		 "formula-no_Q-reuse", "formula-no_Q-no-reuse",
 		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
 
@@ -215,10 +241,9 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 		undirected_graph G;
 		for (size_t i = 0; i < inputs.size(); ++i) {
 			G.clear();
-			const err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
-			if (r != err_type::no_error) {
-				return r;
-			}
+			const err_type r =
+			io_wrapper::read_graph(inputs[i].first, inputs[i].second, G, false);
+			if (r != err_type::no_error) { return r; }
 
 			if (proc == "brute_force") {
 				output_ExpVar_C_BF(G);
@@ -226,11 +251,13 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 			else if (proc == "formula-Q") {
 				output_ExpVar_C_formula_Q(G);
 			}
-			else if (proc == "formula-no-Q-reuse") {
-				output_ExpVar_C_formula_no_Q(G, true);
+			else if (proc == "formula-no_Q-reuse") {
+				const auto err = output_ExpVar_C_formula_no_Q(G, true);
+				if (err != err_type::no_error) { return err; }
 			}
-			else if (proc == "formula-no-Q-no-reuse") {
-				output_ExpVar_C_formula_no_Q(G, false);
+			else if (proc == "formula-no_Q-no-reuse") {
+				const auto err = output_ExpVar_C_formula_no_Q(G, false);
+				if (err != err_type::no_error) { return err; }
 			}
 			else if (proc == "trees") {
 				output_ExpVar_C_trees(G);
