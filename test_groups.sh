@@ -72,6 +72,9 @@ groups_list=(\
 		"linarr_MDD" \
 	\
 	"memory" \
+		"memory_graphs" \
+		"memory_numeric" \
+		"memory_internal" \
 	\
 	"numeric" \
 	\
