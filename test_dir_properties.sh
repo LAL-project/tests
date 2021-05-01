@@ -7,8 +7,8 @@ properties_basic_DIRS=(\
 
 # variance C tests -- without Q
 properties_exp_var_C_no_Q_DIRS=(\
-	"properties/exp-var-C/formula-no-Q-reuse" "properties/exp-var-C" \
-	"properties/exp-var-C/formula-no-Q-no-reuse" "properties/exp-var-C" \
+	"properties/exp-var-C/formula-no_Q-reuse" "properties/exp-var-C" \
+	"properties/exp-var-C/formula-no_Q-no-reuse" "properties/exp-var-C" \
 	)
 
 # variance C tests -- with Q
