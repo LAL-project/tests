@@ -62,6 +62,7 @@ namespace memory {
 
 err_type exe_memory_graphs(const input_list& inputs,std::ifstream& fin);
 err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin);
+err_type exe_memory_internal_data_array(const input_list& inputs,std::ifstream& fin);
 
 } // -- namespace memory
 } // -- namespace tests

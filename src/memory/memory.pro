@@ -70,6 +70,7 @@ SOURCES += \
     graphs_ugraph_copy_into_ftree.cpp \
     graphs_ugraph_move.cpp \
     graphs_ugraph_move_into_ftree.cpp \
+    internal_data_array.cpp \
         main.cpp \
     numeric.cpp \
     numeric_integer_copy.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     exe_tests.hpp \
     graph_functions.hpp \
     graphs.hpp \
+    internal_data_array_functions.hpp \
     numeric.hpp \
     numeric_functions.hpp \
     parse_keywords.hpp

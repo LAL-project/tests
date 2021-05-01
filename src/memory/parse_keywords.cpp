@@ -51,6 +51,20 @@ using namespace std;
 namespace tests {
 namespace memory {
 
+err_type call_memory_internal
+(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "data_array") {
+		return parse_header(exe_memory_internal_data_array, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
 err_type call_memory
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
@@ -60,6 +74,9 @@ err_type call_memory
 	}
 	if (key == "numeric") {
 		return parse_header(exe_memory_numeric, fin);
+	}
+	if (key == "internal") {
+		return call_memory_internal(keywords, i+1, fin);
 	}
 
 	cerr << ERROR << endl;

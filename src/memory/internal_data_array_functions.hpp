@@ -40,34 +40,24 @@
 
 #pragma once
 
-// lal includes
-#include <lal/numeric/integer.hpp>
-#include <lal/numeric/rational.hpp>
+#define MLINE __LINE__ << ":: "
 
-// common includes
-#include "common/definitions.hpp"
+#define begin_function										\
+	cout << "+++++++++++++++++++++++++++++++++" << endl;	\
+	cout << "function: " << __PRETTY_FUNCTION__ << endl;
 
-// memory includes
-#include "memory/numeric.hpp"
+#define begin_case											\
+	cout << "-----------------------------------" << endl;	\
+	cout << "case starting at line: " << __LINE__ << endl;
 
-namespace tests {
-namespace memory {
-
-inline lal::numeric::integer integer_from_function() noexcept {
-	return lal::numeric::integer(std::string(iff_value));
-}
-
-inline lal::numeric::rational rational_from_function() noexcept {
-	return lal::numeric::rational(std::string(iff_value));
-}
-
-err_type test_integer_copy();
-err_type test_integer_swap();
-err_type test_integer_move();
-
-err_type test_rational_copy();
-err_type test_rational_swap();
-err_type test_rational_move();
-
-} // -- namespace memory
-} // -- namespace tests
+#define output_array(A)							\
+	if (A.size() == 0) {						\
+		cout << MLINE << "Empty" << endl;		\
+	}											\
+	else {										\
+		cout << MLINE;							\
+		for (size_t i = 0; i < A.size(); ++i) {	\
+			cout << " " << A[i];				\
+		}										\
+		cout << endl;							\
+	}
