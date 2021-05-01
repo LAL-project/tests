@@ -177,13 +177,13 @@ frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
 // ---------------------
 // Number of crossings C
 
-rational variance_C_freqs_rational(const undirected_graph& g) {
+rational nonLAL_variance_C_freqs_rational(const undirected_graph& g) {
 	// compute set Q(g)
 	const auto Q = g.get_Q();
-	return variance_C_freqs_Q_rational(Q);
+	return nonLAL_variance_C_freqs_Q_rational(Q);
 }
 
-rational variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
+rational nonLAL_variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	// frequencies f00 and f01 are not measured
 	// because they have expectation 0
 

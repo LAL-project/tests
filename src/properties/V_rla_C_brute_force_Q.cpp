@@ -129,7 +129,7 @@ inline void compute_data_gen_graphs_Q
 	n_cycles_4 /= 2;
 }
 
-rational var_num_crossings_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
+rational nonLAL_var_num_crossings_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
 	const bigint m = g.get_num_edges();
 
 	// ----------------------------
