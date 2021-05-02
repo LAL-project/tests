@@ -321,31 +321,23 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_CHECK_EDGE_IT, g1);
 			vector<edge> iter_edges;
 			if (graph_type(g1) == DGRAPH) {
-				E_iterator it(dgraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_edges.push_back(it.get_edge());
+				for (E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
+					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == UGRAPH) {
-				E_iterator it(ugraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_edges.push_back(it.get_edge());
+				for (E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
+					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == FTREE) {
-				E_iterator it(ftreevars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_edges.push_back(it.get_edge());
+				for (E_iterator e_it(ftreevars[g1]); not e_it.end(); e_it.next()) {
+					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == RTREE) {
-				E_iterator it(rtreevars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_edges.push_back(it.get_edge());
+				for (E_iterator e_it(rtreevars[g1]); not e_it.end(); e_it.next()) {
+					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 
@@ -388,18 +380,14 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_exists_variable(FUNC_OUTPUT_EDGES, g1);
 			if (graph_type(g1) == DGRAPH) {
-				E_iterator<directed_graph> it(dgraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					const edge e = it.get_edge();
+				for (E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
+					const edge e = e_it.get_edge();
 					cout << e.first << " " << e.second << endl;
 				}
 			}
 			if (graph_type(g1) == UGRAPH) {
-				E_iterator<undirected_graph> it(ugraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					const edge e = it.get_edge();
+				for (E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
+					const edge e = e_it.get_edge();
 					cout << e.first << " " << e.second << endl;
 				}
 			}
@@ -409,34 +397,26 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_CHECK_Q_IT, g1);
 			vector<edge_pair> iter_pair_edges;
 			if (graph_type(g1) == DGRAPH) {
-				Q_iterator it(dgraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_pair_edges.push_back(it.get_pair());
-					assert(not share_vertices(it.get_pair()));
+				for (Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
+					iter_pair_edges.push_back(q_it.get_edge_pair());
+					assert(not share_vertices(it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == UGRAPH) {
-				Q_iterator it(ugraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_pair_edges.push_back(it.get_pair());
+				for (Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
+					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(it.get_pair()));
 				}
 			}
 			else if (graph_type(g1) == FTREE) {
-				Q_iterator it(ftreevars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_pair_edges.push_back(it.get_pair());
+				for (Q_iterator q_it(ftreevars[g1]); not q_it.end(); q_it.next()) {
+					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(it.get_pair()));
 				}
 			}
 			else if (graph_type(g1) == RTREE) {
-				Q_iterator it(rtreevars[g1]);
-				while (it.has_next()) {
-					it.next();
-					iter_pair_edges.push_back(it.get_pair());
+				for (Q_iterator q_it(rtreevars[g1]); not q_it.end(); q_it.next()) {
+					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(it.get_pair()));
 				}
 			}
@@ -481,10 +461,8 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_OUTPUT_Q, g1);
 
 			if (graph_type(g1) == DGRAPH) {
-				Q_iterator<directed_graph> it(dgraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					const edge_pair e = it.get_pair();
+				for (Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
+					const edge_pair e = q_it.get_edge_pair();
 					cout
 						<< "(" << e.first.first << " " << e.first.second << "), ("
 						<< e.second.first << " " << e.second.second << ")"
@@ -492,10 +470,8 @@ err_type exe_construction_test(ifstream& fin) {
 				}
 			}
 			if (graph_type(g1) == UGRAPH) {
-				Q_iterator<undirected_graph> it(ugraphvars[g1]);
-				while (it.has_next()) {
-					it.next();
-					const edge_pair e = it.get_pair();
+				for (Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
+					const edge_pair e = q_it.get_edge_pair();
 					cout
 						<< "(" << e.first.first << " " << e.first.second << "), ("
 						<< e.second.first << " " << e.second.second << ")"

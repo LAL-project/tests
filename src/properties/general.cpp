@@ -108,12 +108,11 @@ directed_graph make_rand_dgraph(const undirected_graph& g) {
 template<class G>
 void enum_E(const G& g) {
 	size_t total = 0;
-	E_iterator it(g);
 
 	cout << "Elements of E:" << endl;
-	while (it.has_next()) {
-		it.next();
-		const auto [u,v] = it.get_edge();
+
+	for (E_iterator e_it(g); not e_it.end(); e_it.next()) {
+		const auto [u,v] = e_it.get_edge();
 		cout << "(" << u << "," << v << ")" << endl;
 		++total;
 	}
@@ -123,12 +122,11 @@ void enum_E(const G& g) {
 template<class G>
 void enum_Q(const G& g) {
 	size_t total = 0;
-	Q_iterator it(g);
 
 	cout << "Elements of Q:" << endl;
-	while (it.has_next()) {
-		it.next();
-		const edge_pair& ep = it.get_pair();
+
+	for (Q_iterator q_it(g); not q_it.end(); q_it.next()) {
+		const edge_pair& ep = q_it.get_edge_pair();
 		const edge& e1 = ep.first;
 		const edge& e2 = ep.second;
 		cout << "("

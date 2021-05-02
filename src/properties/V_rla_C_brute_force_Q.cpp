@@ -68,10 +68,8 @@ inline void compute_data_gen_graphs_Q
 {
 	// adjacency matrix
 	vector<vector<bool> > A(g.get_num_nodes(), vector<bool>(g.get_num_nodes(), false));
-	E_iterator it(g);
-	while (it.has_next()) {
-		it.next();
-		const edge e = it.get_edge();
+	for (E_iterator e_it(g); not e_it.end(); e_it.next()) {
+		const edge e = e_it.get_edge();
 		A[e.first][e.second] = true;
 		A[e.second][e.first] = true;
 	}

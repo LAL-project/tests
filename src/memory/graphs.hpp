@@ -60,16 +60,14 @@
 	cout << "-----------------------------------" << endl;	\
 	cout << "case starting at line: " << __LINE__ << endl;
 
-#define output_edges(n, g)									\
-{															\
-	iterators::E_iterator it(g);							\
-	cout << MLINE << "Edges of '" << n << "':{";			\
-	while (it.has_next()) {									\
-		it.next();											\
-		const edge e = it.get_edge();						\
-		cout << " (" << e.first << "," << e.second << ")";	\
-	}														\
-	cout << "}" << endl;									\
+#define output_edges(n, g)											\
+{																	\
+	cout << MLINE << "Edges of '" << n << "':{";					\
+	for (iterators::E_iterator it(g); not it.end(); it.next()) {	\
+		const edge e = it.get_edge();								\
+		cout << " (" << e.first << "," << e.second << ")";			\
+	}																\
+	cout << "}" << endl;											\
 }
 
 #define output_graph(n,t)													\

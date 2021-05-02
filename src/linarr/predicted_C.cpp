@@ -121,10 +121,8 @@ rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 	rational Ec2(0);
 	const uint32_t n = g.get_num_nodes();
 
-	iterators::Q_iterator<GRAPH> q(g);
-	while (q.has_next()) {
-		q.next();
-		const edge_pair st_uv = q.get_pair();
+	for (iterators::Q_iterator<GRAPH> q_it(g); not q_it.end(); q_it.next()) {
+		const edge_pair st_uv = q_it.get_edge_pair();
 		const edge st = st_uv.first;
 		const edge uv = st_uv.second;
 		const node s = st.first;

@@ -82,14 +82,15 @@ bool is_root_covered(const rooted_tree& rT, const linear_arrangement& pi) {
 	bool covered = false;
 
 	E_iterator e_it(rT);
-	while (e_it.has_next() and not covered) {
-		e_it.next();
+	while (not e_it.end() and not covered) {
 		const edge e = e_it.get_edge();
 		const node s = e.first;
 		const node t = e.second;
 		covered =
 			((pi[s] < pi[R]) and (pi[R] < pi[t])) or
 			((pi[t] < pi[R]) and (pi[R] < pi[s]));
+
+		e_it.next();
 	}
 
 	return covered;
