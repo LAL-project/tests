@@ -289,14 +289,12 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 	}															\
 }
 
-#define exe_exhaustive(G, n)			\
-{										\
-	G Gen(n);							\
-	while (Gen.has_next()) {			\
-		Gen.next();						\
-		const auto T = Gen.get_tree();	\
-		test_correctness(T)				\
-	}									\
+#define exe_exhaustive(G, n)					\
+{												\
+	for (G Gen(n); not Gen.end(); Gen.next()) {	\
+		const auto T = Gen.get_tree();			\
+		test_correctness(T)						\
+	}											\
 }
 
 #define exe_random(G, n)				\

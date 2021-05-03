@@ -134,13 +134,12 @@ void output_ExpVar_C_forests(const undirected_graph& g) noexcept {
 }
 
 bool check_ExpVar_C_all_trees(uint32_t n) noexcept {
-	all_ulab_free_trees TreeGen(n);
-
 	uint32_t k = 0;
 
-	while (TreeGen.has_next()) {
-		TreeGen.next();
+	all_ulab_free_trees TreeGen(n);
+	while (not TreeGen.end()) {
 		const free_tree tree = TreeGen.get_tree();
+		TreeGen.next();
 
 		const rational Vr_bf = nonLAL_variance_C_freqs_rational(tree);
 		const rational Vr_gen = var_num_crossings_rational(tree);

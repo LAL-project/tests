@@ -399,25 +399,25 @@ err_type exe_construction_test(ifstream& fin) {
 			if (graph_type(g1) == DGRAPH) {
 				for (Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
-					assert(not share_vertices(it.get_edge_pair()));
+					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == UGRAPH) {
 				for (Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
-					assert(not share_vertices(it.get_pair()));
+					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == FTREE) {
 				for (Q_iterator q_it(ftreevars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
-					assert(not share_vertices(it.get_pair()));
+					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == RTREE) {
 				for (Q_iterator q_it(rtreevars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
-					assert(not share_vertices(it.get_pair()));
+					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 

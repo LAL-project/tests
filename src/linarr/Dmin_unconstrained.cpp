@@ -216,9 +216,9 @@ err_type test_class_algorithm(
 				cout << "    " << n << endl;
 
 				generate::all_ulab_free_trees TreeGen(n);
-				while (TreeGen.has_next()) {
-					TreeGen.next();
+				while (not TreeGen.end()) {
 					const free_tree tree = TreeGen.get_tree();
+					TreeGen.next();
 
 					// filter non-caterpillar
 					if (not tree.is_of_tree_type(tree_type::caterpillar))

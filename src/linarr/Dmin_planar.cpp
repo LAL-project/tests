@@ -225,9 +225,9 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 		while (fin >> n) {
 			if (mode == "exhaustive") {
 				generate::all_ulab_free_trees Gen(n);
-				while (Gen.has_next()) {
-					Gen.next();
+				while (not Gen.end()) {
 					const auto T = Gen.get_tree();
+					Gen.next();
 					err = tests_Dmin_planar::check_tree(T);
 					if (err != err_type::no_error) {
 						return err;

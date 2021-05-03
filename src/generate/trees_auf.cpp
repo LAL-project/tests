@@ -86,7 +86,7 @@ struct extra_params {
 	uint32_t SIZE_UFT;
 };
 
-err_type test_for_n(
+err_type test_for_n_while(
 	uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params
 )
 {
@@ -98,8 +98,61 @@ err_type test_for_n(
 	// number of generated trees
 	integer gen = 0;
 
-	while (TreeGen.has_next()) {
+	while (not TreeGen.end()) {
+		const free_tree T = TreeGen.get_tree();
 		TreeGen.next();
+
+		const ftree_check err = test_validity_tree(n, T);
+		if (err != ftree_check::correct) {
+			cerr << ERROR << endl;
+			cerr << "    Tree of index " << gen << " is not correct." << endl;
+			cerr << "    Error: " << ftree_check_to_string(err) << endl;
+			cerr << T << endl;
+			return err_type::test_execution;
+		}
+
+		// compute 'statistics'
+		n_caterpillar += T.is_of_tree_type(tree_type::caterpillar);
+		gen += 1;
+	}
+
+	// check the number of caterpillar trees is correct
+	const integer n_cat = num_caterpillar_trees(n);
+	if (n_cat != n_caterpillar) {
+		cerr << ERROR << endl;
+		cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;
+		cerr << "    Number of vertices: " << n << endl;
+		cerr << "    Formula:  " << n_cat << endl;
+		cerr << "    Detected: " << n_caterpillar << endl;
+		return err_type::test_execution;
+	}
+
+	// make sure that the amount of trees generate coincides
+	// with the series from the OEIS
+	if (n < SIZE_UFT and gen != UFT[n]) {
+		cerr << ERROR << endl;
+		cerr << "    Exhaustive generation of unlabelled free trees" << endl;
+		cerr << "    Amount of trees should be: " << UFT[n] << endl;
+		cerr << "    But generated: " << gen << endl;
+		cerr << "    For a size of " << n << " vertices" << endl;
+		return err_type::test_execution;
+	}
+	return err_type::no_error;
+}
+
+err_type test_for_n_for(
+	uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params
+)
+{
+	const auto& UFT = params.UFT;
+	const auto& SIZE_UFT = params.SIZE_UFT;
+
+	// number of caterpillar trees
+	integer n_caterpillar = 0;
+	// number of generated trees
+	integer gen = 0;
+
+	for (; not TreeGen.end(); TreeGen.next()) {
 		const free_tree T = TreeGen.get_tree();
 
 		const ftree_check err = test_validity_tree(n, T);
@@ -139,6 +192,7 @@ err_type test_for_n(
 	}
 	return err_type::no_error;
 }
+
 } // -- namespace auf
 
 err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
@@ -204,11 +258,15 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 
 	uint32_t n;
 	while (fin >> n) {
-		const auto err =
+		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
-			(n, auf::test_for_n, params);
+			(n, auf::test_for_n_while, params);
+		if (err1 != err_type::no_error) { return err1; }
 
-		if (err != err_type::no_error) { return err; }
+		const auto err2 =
+			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
+			(n, auf::test_for_n_for, params);
+		if (err2 != err_type::no_error) { return err2; }
 	}
 
 	TEST_GOODBYE

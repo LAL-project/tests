@@ -83,9 +83,9 @@ err_type test_for_n(
 	// number of generated trees
 	integer gen = 0;
 
-	while (TreeGen.has_next()) {
-		TreeGen.next();
+	while (not TreeGen.end()) {
 		const rooted_tree T = TreeGen.get_tree();
+		TreeGen.next();
 
 		const rtree_check err = test_validity_tree(n, T);
 		if (err != rtree_check::correct) {

@@ -71,11 +71,12 @@ namespace generate {
 namespace alr {
 struct extra_params { };
 
-err_type test_for_n(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
+err_type test_for_n_while(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
 	uint64_t gen = 0;
-	while (TreeGen.has_next()) {
-		TreeGen.next();
+	while (not TreeGen.end()) {
 		const rooted_tree T = TreeGen.get_tree();
+		TreeGen.next();
+
 		const rtree_check err = test_validity_tree(n, T);
 		if (err != rtree_check::correct) {
 			cerr << ERROR << endl;
@@ -106,6 +107,43 @@ err_type test_for_n(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_param
 	}
 	return err_type::no_error;
 }
+
+err_type test_for_n_for(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
+	uint64_t gen = 0;
+	for (; not TreeGen.end(); TreeGen.next()) {
+		const rooted_tree T = TreeGen.get_tree();
+
+		const rtree_check err = test_validity_tree(n, T);
+		if (err != rtree_check::correct) {
+			cerr << ERROR << endl;
+			cerr << "    Tree of index " << gen << " is not correct." << endl;
+			cerr << "    Error: " << rtree_check_to_string(err) << endl;
+			cerr << T << endl;
+			return err_type::test_execution;
+		}
+
+		// compute 'statistics'
+		gen += 1;
+	}
+
+	// Prüfer's formula: make sure that the generator made
+	// as many trees as n^(n - 1) <- note that we are dealing
+	// with labelled ROOTED trees!
+	// https://oeis.org/A000169/list
+	const integer nn = integer_from_ui(n);
+	const integer total = (n == 1 ? 1 : (nn^(nn - 1)));
+
+	if (gen != total) {
+		cerr << ERROR << endl;
+		cerr << "    Exhaustive generation of labelled rooted trees" << endl;
+		cerr << "    Amount of trees of " << n << " vertices should be: " << total << endl;
+		cerr << "    But generated: " << gen << endl;
+		cerr << "    For a size of " << n << " vertices" << endl;
+		return err_type::test_execution;
+	}
+	return err_type::no_error;
+}
+
 } // -- namespace alr
 
 err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
@@ -122,7 +160,7 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 	while (fin >> n) {
 		const auto err =
 			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
-			(n, alr::test_for_n, alr::extra_params{});
+			(n, alr::test_for_n_while, alr::extra_params{});
 
 		if (err != err_type::no_error) { return err; }
 	}

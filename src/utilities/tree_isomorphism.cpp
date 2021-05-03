@@ -206,10 +206,10 @@ err_type pos_exh_test(ifstream& fin) {
 	uint32_t n, N_relabs;
 	while (fin >> n >> N_relabs) {
 		GEN Gen(n);
-
-		while (Gen.has_next()) {
-			Gen.next();
+		while (not Gen.end()) {
 			const Tree cur_tree = Gen.get_tree();
+			Gen.next();
+
 			vector<edge> edges_cur = cur_tree.get_edges();
 			if constexpr (std::is_base_of<directed_graph, Tree>::value) {
 				relab_tree.init(n);
@@ -300,9 +300,9 @@ err_type neg_exh_test(ifstream& fin) {
 
 	vector<Tree> all_trees;
 	GEN Gen(n);
-	while (Gen.has_next()) {
-		Gen.next();
+	while (not Gen.end()) {
 		all_trees.push_back(Gen.get_tree());
+		Gen.next();
 	}
 
 	Tree relab_tree;

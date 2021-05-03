@@ -86,10 +86,49 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 
 		uint32_t iterations = 0;
 		set<linear_arrangement> list_arrs;
+		const integer formula = amount_projective(rT);
 
 		all_projective_arrangements ArrGen(rT);
-		while (ArrGen.has_next()) {
+		while (not ArrGen.end()) {
+			const linear_arrangement arr = ArrGen.get_arrangement();
 			ArrGen.next();
+
+			// Do some sanity checks.
+			const string err = is_arrangement_projective(rT, arr);
+			if (err != "") {
+				cerr << ERROR << endl;
+				cerr << "    Generation of arrangement failed with error:" << endl;
+				cerr << "    '" << err << "'" << endl;
+				cerr << "    Arrangement:     " << arr << endl;
+				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+				cerr << "    For tree:" << endl;
+				cerr << rT << endl;
+				return err_type::test_execution;
+			}
+
+			++iterations;
+			list_arrs.insert(arr);
+		}
+		if (formula != iterations or formula != list_arrs.size()) {
+			cerr << ERROR << endl;
+			cerr << "    Number of projective arrangements generated" << endl;
+			cerr << "    does not agree with the formula." << endl;
+			cerr << "        formula= " << formula << endl;
+			cerr << "        iterations= " << iterations << endl;
+			cerr << "        unique amount= " << list_arrs.size() << endl;
+			cerr << "    List of arrangements:" << endl;
+			for (const auto& v : list_arrs) {
+			cerr << "        " << v << endl;
+			}
+			cerr << "    For tree:" << endl;
+			cerr << rT << endl;
+			return err_type::test_execution;
+		}
+
+		iterations = 0;
+		ArrGen.reset();
+		list_arrs.clear();
+		for (; not ArrGen.end(); ArrGen.next()) {
 			const linear_arrangement arr = ArrGen.get_arrangement();
 
 			// Do some sanity checks.
@@ -109,7 +148,6 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 			list_arrs.insert(arr);
 		}
 
-		const integer formula = amount_projective(rT);
 		if (formula != iterations or formula != list_arrs.size()) {
 			cerr << ERROR << endl;
 			cerr << "    Number of projective arrangements generated" << endl;
@@ -142,9 +180,9 @@ err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
 		// do 'ntrees' trees of 'n' vertices
 		all_ulab_rooted_trees TreeGen(n);
 
-		while (TreeGen.has_next()) {
-			TreeGen.next();
+		while (not TreeGen.end()) {
 			rooted_tree rT = TreeGen.get_tree();
+			TreeGen.next();
 
 			const err_type e = test_a_tree(rT, nrelabs);
 			if (e != err_type::no_error) {

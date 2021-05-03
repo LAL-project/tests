@@ -77,11 +77,11 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 		cout << "----------------------------------------" << endl;
 		cout << "n= " << n << endl;
 
-		all_ulab_free_trees TreeGen(n);
 		int i = 0;
-		while (TreeGen.has_next()) {
-			TreeGen.next();
+		all_ulab_free_trees TreeGen(n);
+		while (not TreeGen.end()) {
 			const free_tree t = TreeGen.get_tree();
+			TreeGen.next();
 
 			cout << i << ")" << endl;
 
