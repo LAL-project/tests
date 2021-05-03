@@ -55,7 +55,7 @@ err_type test_exhaustive_enumeration_of_trees(
 )
 {
 	Gen TreeGen(n);
-	for (size_t i = 0; i < 5; ++i) {
+	for (size_t i = 0; i < 2; ++i) {
 		const auto err = f(n, TreeGen, ep);
 		if (err != err_type::no_error) { return err; }
 		TreeGen.reset();
