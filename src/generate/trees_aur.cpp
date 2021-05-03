@@ -49,6 +49,7 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
+#include <lal/utilities/tree_isomorphism.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -82,8 +83,11 @@ err_type test_for_n_while
 	// number of generated trees
 	integer gen = 0;
 
+	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	size_t it = 0;
+
 	while (not TreeGen.end()) {
-		const rooted_tree T = TreeGen.get_tree();
+		rooted_tree T = TreeGen.get_tree();
 		TreeGen.next();
 
 		const rtree_check err = test_validity_tree(n, T);
@@ -97,6 +101,23 @@ err_type test_for_n_while
 
 		// compute 'statistics'
 		gen += 1;
+
+		// ensure uniqueness
+		for (size_t j = 0; j < it; ++j) {
+			if (utilities::are_trees_isomorphic(all_rooted_trees[j], T)) {
+				cerr << ERROR << endl;
+				cerr << "    Found two isomorphic trees!." << endl;
+				cerr << "    After generating the " << it << " tree." << endl;
+				cerr << "    The isomorphic tree is at j= " << j << endl;
+				cerr << "    Just generated:" << endl;
+				cerr << T << endl;
+				cerr << "   The tree at position j= " << j << ":" << endl;
+				cerr << all_rooted_trees[j] << endl;
+				return err_type::test_execution;
+			}
+		}
+		all_rooted_trees[it] = std::move(T);
+		++it;
 	}
 
 	// make sure that the amount of trees generate coincides
