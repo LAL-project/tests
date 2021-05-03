@@ -86,9 +86,8 @@ struct extra_params {
 	uint32_t SIZE_UFT;
 };
 
-err_type test_for_n_while(
-	uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params
-)
+err_type test_for_n_while
+(uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 	const auto& SIZE_UFT = params.SIZE_UFT;
@@ -140,9 +139,8 @@ err_type test_for_n_while(
 	return err_type::no_error;
 }
 
-err_type test_for_n_for(
-	uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params
-)
+err_type test_for_n_for
+(uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 	const auto& SIZE_UFT = params.SIZE_UFT;

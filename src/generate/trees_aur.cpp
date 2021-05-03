@@ -73,9 +73,8 @@ struct extra_params {
 	uint32_t SIZE_URT;
 };
 
-err_type test_for_n(
-	uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params
-)
+err_type test_for_n_while
+(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 	const auto& SIZE_URT = params.SIZE_URT;
@@ -113,6 +112,46 @@ err_type test_for_n(
 
 	return err_type::no_error;
 }
+
+err_type test_for_n_for
+(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+{
+	const auto& URT = params.URT;
+	const auto& SIZE_URT = params.SIZE_URT;
+
+	// number of generated trees
+	integer gen = 0;
+
+	for (; not TreeGen.end(); TreeGen.next()) {
+		const rooted_tree T = TreeGen.get_tree();
+
+		const rtree_check err = test_validity_tree(n, T);
+		if (err != rtree_check::correct) {
+			cerr << ERROR << endl;
+			cerr << "    Tree of index " << gen << " is not correct." << endl;
+			cerr << "    Error: " << rtree_check_to_string(err) << endl;
+			cerr << T << endl;
+			return err_type::test_execution;
+		}
+
+		// compute 'statistics'
+		gen += 1;
+	}
+
+	// make sure that the amount of trees generate coincides
+	// with the series from the OEIS
+	if (n < SIZE_URT and gen != URT[n]) {
+		cerr << ERROR << endl;
+		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;
+		cerr << "    Amount of trees should be: " << URT[n] << endl;
+		cerr << "    But generated: " << gen << endl;
+		cerr << "    For a size of " << n << " vertices" << endl;
+		return err_type::test_execution;
+	}
+
+	return err_type::no_error;
+}
+
 } // -- namespace aur
 
 err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
@@ -172,11 +211,15 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 
 	uint32_t n;
 	while (fin >> n) {
-		const auto err =
+		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
-			(n, aur::test_for_n, params);
+			(n, aur::test_for_n_while, params);
+		if (err1 != err_type::no_error) { return err1; }
 
-		if (err != err_type::no_error) { return err; }
+		const auto err2 =
+			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
+			(n, aur::test_for_n_for, params);
+		if (err2 != err_type::no_error) { return err2; }
 	}
 
 	TEST_GOODBYE

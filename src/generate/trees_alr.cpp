@@ -71,7 +71,9 @@ namespace generate {
 namespace alr {
 struct extra_params { };
 
-err_type test_for_n_while(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
+err_type test_for_n_while
+(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
+{
 	uint64_t gen = 0;
 	while (not TreeGen.end()) {
 		const rooted_tree T = TreeGen.get_tree();
@@ -108,7 +110,9 @@ err_type test_for_n_while(uint32_t n, all_lab_rooted_trees& TreeGen, const extra
 	return err_type::no_error;
 }
 
-err_type test_for_n_for(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&) {
+err_type test_for_n_for
+(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
+{
 	uint64_t gen = 0;
 	for (; not TreeGen.end(); TreeGen.next()) {
 		const rooted_tree T = TreeGen.get_tree();
@@ -158,11 +162,15 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 
 	uint32_t n;
 	while (fin >> n) {
-		const auto err =
+		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
 			(n, alr::test_for_n_while, alr::extra_params{});
+		if (err1 != err_type::no_error) { return err1; }
 
-		if (err != err_type::no_error) { return err; }
+		const auto err2 =
+			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
+			(n, alr::test_for_n_for, alr::extra_params{});
+		if (err2 != err_type::no_error) { return err2; }
 	}
 
 	TEST_GOODBYE

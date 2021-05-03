@@ -80,7 +80,9 @@ namespace generate {
 namespace alf {
 struct extra_params { };
 
-err_type test_for_n_while(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&) {
+err_type test_for_n_while
+(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+{
 	const integer nn = integer_from_ui(n);
 
 	// expected second moment of degree
@@ -132,7 +134,9 @@ err_type test_for_n_while(uint32_t n, all_lab_free_trees& TreeGen, const extra_p
 	return err_type::no_error;
 }
 
-err_type test_for_n_for(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&) {
+err_type test_for_n_for
+(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+{
 	const integer nn = integer_from_ui(n);
 
 	// expected second moment of degree
