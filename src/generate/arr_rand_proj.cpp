@@ -79,7 +79,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 
 		for (uint32_t nt = 0; nt < ntrees; ++nt) {
 			const rooted_tree rT = TreeGen.get_tree();
-			const free_tree fT = rT.to_undirected();
+			const free_tree fT = rT.to_free_tree();
 
 			rand_projective_arrangements RandArr(rT, 100);
 

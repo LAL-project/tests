@@ -561,7 +561,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_correct_graph_type(FUNC_RTREE_DIR_TO_UNDIR, graph_type(g1), rooted_tree_types);
 			assert_is_rtree(g1, FUNC_RTREE_DIR_TO_UNDIR);
 
-			ftreevars[g2] = rtreevars[g1].to_undirected();
+			ftreevars[g2] = rtreevars[g1].to_free_tree();
 			gtypes[g2] = FTREE;
 		}
 		else if (option == FUNC_RTREE_OUTPUT_SIZE_SUBTREES) {
