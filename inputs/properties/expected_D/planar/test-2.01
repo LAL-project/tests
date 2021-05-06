@@ -1,0 +1,13 @@
+TYPE properties-expected_D-Planar-quadratic
+INPUT 0
+BODY
+	random
+	100 1000
+	200 1000
+	300 1000
+	400 1000
+	500 1000
+	600 1000
+	700 1000
+	800 1000
+	900 1000

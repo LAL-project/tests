@@ -1,4 +1,4 @@
-TYPE properties-expected_D-Planar
+TYPE properties-expected_D-Planar-brute_force
 INPUT 0
 BODY
 	1
