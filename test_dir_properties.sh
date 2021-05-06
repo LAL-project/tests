@@ -34,9 +34,24 @@ properties_exp_var_C_DIRS=(\
 	"${properties_exp_var_C_forests_DIRS[@]}" \
 	)
 
-# variance D tests
-properties_exp_var_D_DIRS=(\
+# moments of D tests
+
+properties_exp_D_projective_DIRS=(\
+	"properties/expected_D/projective" "properties/expected_D/projective"
+	)
+
+properties_exp_D_planar_DIRS=(\
+	"properties/expected_D/planar" "properties/expected_D/planar"
+	)
+
+properties_exp_var_D_unconstrained_DIRS=(\
 	"properties/exp-var-D/" "properties/exp-var-D/" \
+	)
+
+properties_exp_var_D_DIRS=(\
+	"${properties_exp_D_projective_DIRS[@]}" \
+	"${properties_exp_D_planar_DIRS[@]}" \
+	"${properties_exp_var_D_unconstrained_DIRS[@]}" \
 	)
 
 # properties

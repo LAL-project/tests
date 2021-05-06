@@ -86,6 +86,9 @@ groups_list=(\
 			"properties_exp_var_C_trees" \
 			"properties_exp_var_C_forests" \
 		"properties_exp_var_D" \
+			"properties_exp_D_projective" \
+			"properties_exp_D_planar" \
+			"properties_exp_var_D_unconstrained" \
 	\
 	"utilities" \
 		"utilities_isomorphism" \
