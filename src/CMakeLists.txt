@@ -266,6 +266,8 @@ add_executable(
 		properties/exe_tests.hpp
 		properties/parse_keywords.hpp
 		
+		properties/expexted_D_planar.cpp
+		properties/expexted_D_projective.cpp
 		properties/expvar_C.cpp
 		properties/expvar_D.cpp
 		properties/general.cpp

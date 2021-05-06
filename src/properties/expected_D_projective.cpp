@@ -45,7 +45,6 @@
 using namespace std;
 
 // lal includes
-#include <lal/graphs/undirected_graph.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/conversions.hpp>
@@ -65,44 +64,58 @@ using namespace properties;
 namespace tests {
 namespace properties {
 
-namespace ExpVar_D {
-
-void output_ExpVar_D_formula(const undirected_graph& g) {
-	const rational Vr = var_sum_edge_lengths_rational(g);
-	const rational E1r = exp_sum_edge_lengths_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
-}
-
-} // -- namespace ExpVar_D
-
-err_type exe_properties_ExpVar_D(const input_list& inputs, ifstream& fin) {
-	string proc;
-	fin >> proc;
-
-	if (proc != "formula") {
+err_type exe_properties_expected_D_projective(const input_list& inputs, ifstream& fin)
+{
+	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Received '" << proc << "'." << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
 		return err_type::test_format;
 	}
 
-	// read the graph type so that we can call
-	// the appropriate function for this graph
-	// type's variance.
-	string graph_type;
-	fin >> graph_type;
+	uint32_t n;
+	fin >> n;
 
-	undirected_graph G;
-	for (size_t i = 0; i < inputs.size(); ++i) {
-		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
-		if (r != err_type::no_error) {
-			return r;
+	head_vector hv(n);
+	while (fin >> hv[0]) {
+		for (uint32_t i = 1; i < n; ++i) { fin >> hv[i]; }
+
+		rooted_tree T = from_head_vector_to_rooted_tree(hv);
+
+		// calculate the same value with tree subsizes
+		const rational value_no_sizes =
+			lal::properties::exp_sum_edge_lengths_projective_rational(T);
+
+		// calculate the same value with tree subsizes
+		T.calculate_size_subtrees();
+		const rational value_sizes =
+			lal::properties::exp_sum_edge_lengths_projective_rational(T);
+
+		if (value_no_sizes != value_sizes) {
+			cerr << ERROR << endl;
+			cerr << "    Value computed with tree subsizes in tree" << endl;
+			cerr << "    differs from the value computed without tree" << endl;
+			cerr << "    subsizes in the tree." << endl;
+			cerr << "    With tree subsizes in tree: " << value_sizes << endl;
+			cerr << "    Without tree subsizes in tree: " << value_no_sizes << endl;
+			return err_type::test_execution;
 		}
-		if (proc == "formula") {
-			ExpVar_D::output_ExpVar_D_formula(G);
+
+		string ground_truth_str;
+		fin >> ground_truth_str;
+
+		const rational ground_truth(ground_truth_str);
+		if (value_no_sizes != ground_truth) {
+			cerr << ERROR << endl;
+			cerr << "    Value calculated with algorithm does not coincide with" << endl;
+			cerr << "    ground truth value." << endl;
+			cerr << "    Algorithm: " << value_no_sizes << endl;
+			cerr << "    Ground truth: " << ground_truth << endl;
+			return err_type::test_execution;
 		}
 	}
+
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

@@ -51,6 +51,38 @@ using namespace std;
 namespace tests {
 namespace properties {
 
+err_type call_expected_D_planar(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "brute_force") {
+		return parse_header(exe_properties_expected_D_planar_brute_force, fin);
+	}
+	if (key == "quadratic") {
+		return parse_header(exe_properties_expected_D_planar_quadratic, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
+err_type call_expected_D(const vector<string>& keywords, size_t i, ifstream& fin)
+{
+	const string& key = keywords[i];
+	if (key == "Projective") {
+		return parse_header(exe_properties_expected_D_projective, fin);
+	}
+	if (key == "Planar") {
+		return call_expected_D_planar(keywords, i+1, fin);
+	}
+
+	cerr << ERROR << endl;
+	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
 err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
@@ -65,6 +97,9 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 	}
 	if (key == "exp_var_D") {
 		return parse_header(exe_properties_ExpVar_D, fin);
+	}
+	if (key == "expected_D") {
+		return call_expected_D(keywords, i+1, fin);
 	}
 
 	cerr << ERROR << endl;
