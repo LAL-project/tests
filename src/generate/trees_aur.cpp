@@ -74,6 +74,46 @@ struct extra_params {
 	uint32_t SIZE_URT;
 };
 
+#define process																\
+	const rtree_check err = test_validity_tree(n, T);						\
+	if (err != rtree_check::correct) {										\
+		cerr << ERROR << endl;												\
+		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
+		cerr << "    Error: " << rtree_check_to_string(err) << endl;		\
+		cerr << T << endl;													\
+		return err_type::test_execution;									\
+	}																		\
+	/* compute 'statistics' */												\
+	gen += 1;																\
+	/* ensure uniqueness */													\
+	for (size_t j = 0; j < it; ++j) {										\
+		if (utilities::are_trees_isomorphic(all_rooted_trees[j], T)) {		\
+			cerr << ERROR << endl;											\
+			cerr << "    Found two isomorphic trees!." << endl;				\
+			cerr << "    After generating the " << it << " tree." << endl;	\
+			cerr << "    The isomorphic tree is at j= " << j << endl;		\
+			cerr << "    Just generated:" << endl;							\
+			cerr << T << endl;												\
+			cerr << "   The tree at position j= " << j << ":" << endl;		\
+			cerr << all_rooted_trees[j] << endl;							\
+			return err_type::test_execution;								\
+		}																	\
+	}																		\
+	all_rooted_trees[it] = std::move(T);									\
+	++it;
+
+#define check																	\
+	/* make sure that the amount of trees generate coincides					\
+	   with the series from the OEIS */											\
+	if (n < SIZE_URT and gen != URT[n]) {										\
+		cerr << ERROR << endl;													\
+		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;	\
+		cerr << "    Amount of trees should be: " << URT[n] << endl;			\
+		cerr << "    But generated: " << gen << endl;							\
+		cerr << "    For a size of " << n << " vertices" << endl;				\
+		return err_type::test_execution;										\
+	}
+
 err_type test_for_n_while
 (uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
@@ -89,48 +129,9 @@ err_type test_for_n_while
 	while (not TreeGen.end()) {
 		rooted_tree T = TreeGen.get_tree();
 		TreeGen.next();
-
-		const rtree_check err = test_validity_tree(n, T);
-		if (err != rtree_check::correct) {
-			cerr << ERROR << endl;
-			cerr << "    Tree of index " << gen << " is not correct." << endl;
-			cerr << "    Error: " << rtree_check_to_string(err) << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-
-		// compute 'statistics'
-		gen += 1;
-
-		// ensure uniqueness
-		for (size_t j = 0; j < it; ++j) {
-			if (utilities::are_trees_isomorphic(all_rooted_trees[j], T)) {
-				cerr << ERROR << endl;
-				cerr << "    Found two isomorphic trees!." << endl;
-				cerr << "    After generating the " << it << " tree." << endl;
-				cerr << "    The isomorphic tree is at j= " << j << endl;
-				cerr << "    Just generated:" << endl;
-				cerr << T << endl;
-				cerr << "   The tree at position j= " << j << ":" << endl;
-				cerr << all_rooted_trees[j] << endl;
-				return err_type::test_execution;
-			}
-		}
-		all_rooted_trees[it] = std::move(T);
-		++it;
+		process;
 	}
-
-	// make sure that the amount of trees generate coincides
-	// with the series from the OEIS
-	if (n < SIZE_URT and gen != URT[n]) {
-		cerr << ERROR << endl;
-		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;
-		cerr << "    Amount of trees should be: " << URT[n] << endl;
-		cerr << "    But generated: " << gen << endl;
-		cerr << "    For a size of " << n << " vertices" << endl;
-		return err_type::test_execution;
-	}
-
+	check;
 	return err_type::no_error;
 }
 
@@ -143,33 +144,34 @@ err_type test_for_n_for
 	// number of generated trees
 	integer gen = 0;
 
+	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	size_t it = 0;
+
 	for (; not TreeGen.end(); TreeGen.next()) {
-		const rooted_tree T = TreeGen.get_tree();
-
-		const rtree_check err = test_validity_tree(n, T);
-		if (err != rtree_check::correct) {
-			cerr << ERROR << endl;
-			cerr << "    Tree of index " << gen << " is not correct." << endl;
-			cerr << "    Error: " << rtree_check_to_string(err) << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-
-		// compute 'statistics'
-		gen += 1;
+		rooted_tree T = TreeGen.get_tree();
+		process;
 	}
+	check;
+	return err_type::no_error;
+}
 
-	// make sure that the amount of trees generate coincides
-	// with the series from the OEIS
-	if (n < SIZE_URT and gen != URT[n]) {
-		cerr << ERROR << endl;
-		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;
-		cerr << "    Amount of trees should be: " << URT[n] << endl;
-		cerr << "    But generated: " << gen << endl;
-		cerr << "    For a size of " << n << " vertices" << endl;
-		return err_type::test_execution;
+err_type test_for_n_yield
+(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+{
+	const auto& URT = params.URT;
+	const auto& SIZE_URT = params.SIZE_URT;
+
+	// number of generated trees
+	integer gen = 0;
+
+	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	size_t it = 0;
+
+	while (not TreeGen.end()) {
+		rooted_tree T = TreeGen.yield_tree();
+		process;
 	}
-
+	check;
 	return err_type::no_error;
 }
 
@@ -241,6 +243,11 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
 			(n, aur::test_for_n_for, params);
 		if (err2 != err_type::no_error) { return err2; }
+
+		const auto err3 =
+			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
+			(n, aur::test_for_n_yield, params);
+		if (err3 != err_type::no_error) { return err3; }
 	}
 
 	TEST_GOODBYE

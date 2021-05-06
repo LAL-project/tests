@@ -99,6 +99,23 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 					return err_type::test_execution;
 				}
 			}
+
+			for (uint32_t it = 0; it < nit; ++it) {
+				const linear_arrangement arr = RandArr.yield_arrangement();
+
+				// Do some sanity checks.
+				const string err = is_arrangement_projective(rT, arr);
+				if (err != "") {
+					cerr << ERROR << endl;
+					cerr << "    Generation of random arrangement failed with error:" << endl;
+					cerr << "    '" << err << "'" << endl;
+					cerr << "    Arrangement:     " << arr << endl;
+					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
+					cerr << "    For tree:" << endl;
+					cerr << rT << endl;
+					return err_type::test_execution;
+				}
+			}
 		}
 	}
 

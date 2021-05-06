@@ -80,6 +80,41 @@ namespace generate {
 namespace alf {
 struct extra_params { };
 
+#define process																\
+	const ftree_check err = test_validity_tree(n, T);						\
+	if (err != ftree_check::correct) {										\
+		cerr << ERROR << endl;												\
+		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
+		cerr << "    Error: " << ftree_check_to_string(err) << endl;		\
+		cerr << T << endl;													\
+		return err_type::test_execution;									\
+	}																		\
+	/* compute 'statistics' */												\
+	mmtdeg2 += properties::moment_degree_rational(T, 2);					\
+	gen += 1;
+
+#define check																	\
+	/* check that the expected second moment of degree is correct */			\
+	mmtdeg2 /= gen;																\
+	if (mmtdeg2 != exp_mmtdeg2) {												\
+		cerr << ERROR << endl;													\
+		cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;		\
+		cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;	\
+		return err_type::test_execution;										\
+	}																			\
+	/* Prüfer's formula: make sure that the generator made						\
+	   as many trees as n^(n - 2)												\
+	  also: https://oeis.org/A000272/list */									\
+	const integer total = (n == 1 ? 1 : (nn^(nn - 2)));							\
+	if (gen != total) {															\
+		cerr << ERROR << endl;													\
+		cerr << "    Exhaustive generation of labelled free trees" << endl;		\
+		cerr << "    Amount of trees should be: " << total << endl;				\
+		cerr << "    But generated: " << gen << endl;							\
+		cerr << "    For a size of " << n << " vertices" << endl;				\
+		return err_type::test_execution;										\
+	}
+
 err_type test_for_n_while
 (uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
 {
@@ -95,42 +130,9 @@ err_type test_for_n_while
 	while (not TreeGen.end()) {
 		const free_tree T = TreeGen.get_tree();
 		TreeGen.next();
-
-		const ftree_check err = test_validity_tree(n, T);
-		if (err != ftree_check::correct) {
-			cerr << ERROR << endl;
-			cerr << "    Tree of index " << gen << " is not correct." << endl;
-			cerr << "    Error: " << ftree_check_to_string(err) << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-
-		// compute 'statistics'
-		mmtdeg2 += properties::moment_degree_rational(T, 2);
-		gen += 1;
+		process;
 	}
-
-	// check that the expected second moment of degree is correct
-	mmtdeg2 /= gen;
-	if (mmtdeg2 != exp_mmtdeg2) {
-		cerr << ERROR << endl;
-		cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
-		cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
-		return err_type::test_execution;
-	}
-
-	// Prüfer's formula: make sure that the generator made
-	// as many trees as n^(n - 2)
-	// also: https://oeis.org/A000272/list
-	const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
-	if (gen != total) {
-		cerr << ERROR << endl;
-		cerr << "    Exhaustive generation of labelled free trees" << endl;
-		cerr << "    Amount of trees should be: " << total << endl;
-		cerr << "    But generated: " << gen << endl;
-		cerr << "    For a size of " << n << " vertices" << endl;
-		return err_type::test_execution;
-	}
+	check;
 	return err_type::no_error;
 }
 
@@ -148,42 +150,29 @@ err_type test_for_n_for
 	// generate all trees
 	for (; not TreeGen.end(); TreeGen.next()) {
 		const free_tree T = TreeGen.get_tree();
-
-		const ftree_check err = test_validity_tree(n, T);
-		if (err != ftree_check::correct) {
-			cerr << ERROR << endl;
-			cerr << "    Tree of index " << gen << " is not correct." << endl;
-			cerr << "    Error: " << ftree_check_to_string(err) << endl;
-			cerr << T << endl;
-			return err_type::test_execution;
-		}
-
-		// compute 'statistics'
-		mmtdeg2 += properties::moment_degree_rational(T, 2);
-		gen += 1;
+		process;
 	}
+	check;
+	return err_type::no_error;
+}
 
-	// check that the expected second moment of degree is correct
-	mmtdeg2 /= gen;
-	if (mmtdeg2 != exp_mmtdeg2) {
-		cerr << ERROR << endl;
-		cerr << "    Calculated 2nd moment of degree: " << mmtdeg2 << endl;
-		cerr << "    Does not agree with the formula: " << exp_mmtdeg2 << endl;
-		return err_type::test_execution;
-	}
+err_type test_for_n_yield
+(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+{
+	const integer nn = integer_from_ui(n);
 
-	// Prüfer's formula: make sure that the generator made
-	// as many trees as n^(n - 2)
-	// also: https://oeis.org/A000272/list
-	const integer total = (n == 1 ? 1 : (nn^(nn - 2)));
-	if (gen != total) {
-		cerr << ERROR << endl;
-		cerr << "    Exhaustive generation of labelled free trees" << endl;
-		cerr << "    Amount of trees should be: " << total << endl;
-		cerr << "    But generated: " << gen << endl;
-		cerr << "    For a size of " << n << " vertices" << endl;
-		return err_type::test_execution;
+	// expected second moment of degree
+	const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
+	rational mmtdeg2 = 0;
+	// number of generated trees
+	integer gen = 0;
+
+	// generate all trees
+	while (not TreeGen.end()) {
+		const free_tree T = TreeGen.yield_tree();
+		process;
 	}
+	check;
 	return err_type::no_error;
 }
 
@@ -210,6 +199,11 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 			test_exhaustive_enumeration_of_trees<all_lab_free_trees>
 			(n, alf::test_for_n_for, alf::extra_params{});
 		if (err2 != err_type::no_error) { return err2; }
+
+		const auto err3 =
+			test_exhaustive_enumeration_of_trees<all_lab_free_trees>
+			(n, alf::test_for_n_yield, alf::extra_params{});
+		if (err3 != err_type::no_error) { return err3; }
 	}
 
 	TEST_GOODBYE

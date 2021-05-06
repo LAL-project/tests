@@ -88,80 +88,81 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 		set<linear_arrangement> list_arrs;
 		const integer formula = amount_projective(rT);
 
+#define check_arrangement													\
+	const string err = is_arrangement_projective(rT, arr);					\
+	if (err != "") {														\
+		cerr << ERROR << endl;												\
+		cerr << "    Generation of arrangement failed with error:" << endl;	\
+		cerr << "    '" << err << "'" << endl;								\
+		cerr << "    Arrangement:     " << arr << endl;						\
+		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
+		cerr << "    For tree:" << endl;									\
+		cerr << rT << endl;													\
+		return err_type::test_execution;									\
+	}																		\
+	++iterations;															\
+	list_arrs.insert(arr);
+
+#define final_check															\
+	if (formula != iterations or formula != list_arrs.size()) {				\
+		cerr << ERROR << endl;												\
+		cerr << "    Number of projective arrangements generated" << endl;	\
+		cerr << "    does not agree with the formula." << endl;				\
+		cerr << "        formula= " << formula << endl;						\
+		cerr << "        iterations= " << iterations << endl;				\
+		cerr << "        unique amount= " << list_arrs.size() << endl;		\
+		cerr << "    List of arrangements:" << endl;						\
+		for (const auto& v : list_arrs) {									\
+		cerr << "        " << v << endl;									\
+		}																	\
+		cerr << "    For tree:" << endl;									\
+		cerr << rT << endl;													\
+		return err_type::test_execution;									\
+	}
+
 		all_projective_arrangements ArrGen(rT);
+
+		// USAGE 1
+		iterations = 0;
+		ArrGen.reset();
+		list_arrs.clear();
+		{
 		while (not ArrGen.end()) {
 			const linear_arrangement arr = ArrGen.get_arrangement();
 			ArrGen.next();
 
 			// Do some sanity checks.
-			const string err = is_arrangement_projective(rT, arr);
-			if (err != "") {
-				cerr << ERROR << endl;
-				cerr << "    Generation of arrangement failed with error:" << endl;
-				cerr << "    '" << err << "'" << endl;
-				cerr << "    Arrangement:     " << arr << endl;
-				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-				cerr << "    For tree:" << endl;
-				cerr << rT << endl;
-				return err_type::test_execution;
-			}
-
-			++iterations;
-			list_arrs.insert(arr);
+			check_arrangement;
 		}
-		if (formula != iterations or formula != list_arrs.size()) {
-			cerr << ERROR << endl;
-			cerr << "    Number of projective arrangements generated" << endl;
-			cerr << "    does not agree with the formula." << endl;
-			cerr << "        formula= " << formula << endl;
-			cerr << "        iterations= " << iterations << endl;
-			cerr << "        unique amount= " << list_arrs.size() << endl;
-			cerr << "    List of arrangements:" << endl;
-			for (const auto& v : list_arrs) {
-			cerr << "        " << v << endl;
-			}
-			cerr << "    For tree:" << endl;
-			cerr << rT << endl;
-			return err_type::test_execution;
+		final_check;
 		}
 
+		// USAGE 2
 		iterations = 0;
 		ArrGen.reset();
 		list_arrs.clear();
+		{
 		for (; not ArrGen.end(); ArrGen.next()) {
 			const linear_arrangement arr = ArrGen.get_arrangement();
 
 			// Do some sanity checks.
-			const string err = is_arrangement_projective(rT, arr);
-			if (err != "") {
-				cerr << ERROR << endl;
-				cerr << "    Generation of arrangement failed with error:" << endl;
-				cerr << "    '" << err << "'" << endl;
-				cerr << "    Arrangement:     " << arr << endl;
-				cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-				cerr << "    For tree:" << endl;
-				cerr << rT << endl;
-				return err_type::test_execution;
-			}
-
-			++iterations;
-			list_arrs.insert(arr);
+			check_arrangement;
+		}
+		final_check;
 		}
 
-		if (formula != iterations or formula != list_arrs.size()) {
-			cerr << ERROR << endl;
-			cerr << "    Number of projective arrangements generated" << endl;
-			cerr << "    does not agree with the formula." << endl;
-			cerr << "        formula= " << formula << endl;
-			cerr << "        iterations= " << iterations << endl;
-			cerr << "        unique amount= " << list_arrs.size() << endl;
-			cerr << "    List of arrangements:" << endl;
-			for (const auto& v : list_arrs) {
-			cerr << "        " << v << endl;
-			}
-			cerr << "    For tree:" << endl;
-			cerr << rT << endl;
-			return err_type::test_execution;
+		// USAGE 3
+		iterations = 0;
+		ArrGen.reset();
+		list_arrs.clear();
+		{
+		while (not ArrGen.end()) {
+			const linear_arrangement arr = ArrGen.yield_arrangement();
+
+			// Do some sanity checks.
+			check_arrangement;
+		}
+		final_check;
 		}
 	}
 	return err_type::no_error;
