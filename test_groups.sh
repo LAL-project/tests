@@ -6,18 +6,22 @@ groups_list=(\
 	"all" \
 	\
 	"generate" \
-		"generate_trees_alf" \
-		"generate_trees_alr" \
-		"generate_trees_auf" \
-		"generate_trees_aur" \
-		"generate_trees_rlf" \
-		"generate_trees_rlr" \
-		"generate_trees_ruf" \
-		"generate_trees_rur" \
-		"generate_arrangements_all_projective" \
-		"generate_arrangements_all_planar" \
-		"generate_arrangements_rand_projective" \
-		"generate_arrangements_rand_planar" \
+		"generate_trees_all" \
+			"generate_trees_alf" \
+			"generate_trees_alr" \
+			"generate_trees_auf" \
+			"generate_trees_aur" \
+		"generate_trees_rand" \
+			"generate_trees_rlf" \
+			"generate_trees_rlr" \
+			"generate_trees_ruf" \
+			"generate_trees_rur" \
+		"generate_arrangements_all" \
+			"generate_arrangements_all_projective" \
+			"generate_arrangements_all_planar" \
+		"generate_arrangements_rand" \
+			"generate_arrangements_rand_projective" \
+			"generate_arrangements_rand_planar" \
 	\
 	"graphs" \
 		"graphs_construction" \

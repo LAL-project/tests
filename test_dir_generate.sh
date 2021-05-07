@@ -40,6 +40,24 @@ generate_trees_rur_DIRS=(\
 	"generate/trees/rand_ulab_rooted" "generate/trees/rand_ulab_rooted" \
 	)
 
+# generate tests for trees
+generate_trees_all_DIRS=(\
+	"${generate_trees_alf_DIRS[@]}" \
+	"${generate_trees_alr_DIRS[@]}" \
+	"${generate_trees_auf_DIRS[@]}" \
+	"${generate_trees_aur_DIRS[@]}" \
+	)
+generate_trees_rand_DIRS=(\
+	"${generate_trees_rlf_DIRS[@]}" \
+	"${generate_trees_rlr_DIRS[@]}" \
+	"${generate_trees_ruf_DIRS[@]}" \
+	"${generate_trees_rur_DIRS[@]}" \
+	)
+generate_trees_DIRS=(\
+	"${generate_trees_all_DIRS[@]}" \
+	"${generate_trees_rand_DIRS[@]}" \
+	)
+
 # generate (all projective arrangements) tests
 generate_arrangements_all_projective_DIRS=(\
 	"generate/arrangements/all_projective" "generate/arrangements/all_projective" \
@@ -60,19 +78,22 @@ generate_arrangements_rand_planar_DIRS=(\
 	"generate/arrangements/rand_planar" "generate/arrangements/rand_planar" \
 	)
 
+# generate tests for arrangements
+generate_arrangements_all_DIRS=(\
+	"${generate_arrangements_all_projective_DIRS[@]}" \
+	"${generate_arrangements_all_planar_DIRS[@]}" \
+	)
+generate_arrangements_rand_DIRS=(\
+	"${generate_arrangements_rand_projective_DIRS[@]}" \
+	"${generate_arrangements_rand_planar_DIRS[@]}" \
+	)
+generate_arrangements_DIRS=(\
+	"${generate_arrangements_all_DIRS[@]}" \
+	"${generate_arrangements_rand_DIRS[@]}" \
+	)
 
 # generate tests
 generate_DIRS=(\
-	"${generate_trees_alf_DIRS[@]}" \
-	"${generate_trees_alr_DIRS[@]}" \
-	"${generate_trees_auf_DIRS[@]}" \
-	"${generate_trees_aur_DIRS[@]}" \
-	"${generate_trees_rlf_DIRS[@]}" \
-	"${generate_trees_rlr_DIRS[@]}" \
-	"${generate_trees_ruf_DIRS[@]}" \
-	"${generate_trees_rur_DIRS[@]}" \
-	"${generate_arrangements_all_projective_DIRS[@]}" \
-	"${generate_arrangements_all_planar_DIRS[@]}" \
-	"${generate_arrangements_rand_projective_DIRS[@]}" \
-	"${generate_arrangements_rand_planar_DIRS[@]}" \
+	"${generate_trees_DIRS[@]}" \
+	"${generate_arrangements_DIRS[@]}" \
 	)
