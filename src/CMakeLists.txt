@@ -120,7 +120,9 @@ add_library(
 		common/arrgmnt_validity_check.hpp
 		common/definitions.hpp
 		common/io_wrapper.hpp
+		common/parse_header.hpp
 		common/parse_keywords.hpp
+		common/std_utils.hpp
 		common/test_utils.hpp
 		common/time.hpp
 		common/tree_validity_check.hpp
@@ -144,10 +146,10 @@ add_executable(
 		generate/parse_keywords.hpp
 		generate/test_exhaustive_enumeration.hpp
 		
-		generate/arr_all_projective.cpp
-		generate/arr_rand_projective.cpp
 		generate/arr_all_planar.cpp
+		generate/arr_all_projective.cpp
 		generate/arr_rand_planar.cpp
+		generate/arr_rand_projective.cpp
 		generate/main.cpp
 		generate/parse_keywords.cpp
 		generate/trees_alf.cpp
@@ -204,7 +206,6 @@ add_executable(
 		linarr/n_crossings_m2.hpp
 		linarr/parse_keywords.hpp
 		
-		linarr/predicted_C.cpp
 		linarr/C.cpp
 		linarr/C_list.cpp
 		linarr/D.cpp
@@ -217,6 +218,7 @@ add_executable(
 		linarr/klevel.cpp
 		linarr/main.cpp
 		linarr/parse_keywords.cpp
+		linarr/predicted_C.cpp
 		linarr/syntree_classification.cpp
 )
 
@@ -225,6 +227,7 @@ add_executable(
 		memory/exe_tests.hpp
 		memory/graph_functions.hpp
 		memory/graphs.hpp
+		memory/internal_data_array_functions.hpp
 		memory/numeric.hpp
 		memory/numeric_functions.hpp
 		memory/parse_keywords.hpp
@@ -240,6 +243,7 @@ add_executable(
 		memory/graphs_ugraph_copy_into_ftree.cpp
 		memory/graphs_ugraph_move.cpp
 		memory/graphs_ugraph_move_into_ftree.cpp
+		memory/internal_data_array.cpp
 		memory/main.cpp
 		memory/numeric.cpp
 		memory/numeric_integer_copy.cpp

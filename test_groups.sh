@@ -14,10 +14,10 @@ groups_list=(\
 		"generate_trees_rlr" \
 		"generate_trees_ruf" \
 		"generate_trees_rur" \
-		"generate_arrangements_projective_rand" \
-		"generate_arrangements_projective_all" \
-		"generate_arrangements_planar_rand" \
-		"generate_arrangements_planar_all" \
+		"generate_arrangements_all_projective" \
+		"generate_arrangements_all_planar" \
+		"generate_arrangements_rand_projective" \
+		"generate_arrangements_rand_planar" \
 	\
 	"graphs" \
 		"graphs_construction" \
