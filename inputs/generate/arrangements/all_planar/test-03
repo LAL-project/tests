@@ -1,0 +1,4 @@
+TYPE generate-arrangements-all_planar
+INPUT 0
+BODY
+	3 10

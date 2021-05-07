@@ -55,11 +55,17 @@ err_type call_generate_arrangements
 (const vector<string>& keywords, size_t i, ifstream& fin)
 {
 	const string& key = keywords[i];
-	if (key == "all_proj") {
-		return parse_header(exe_gen_arr_all_proj, fin);
+	if (key == "all_projective") {
+		return parse_header(exe_gen_arr_all_projective, fin);
 	}
-	else if (key == "rand_proj") {
-		return parse_header(exe_gen_arr_rand_proj, fin);
+	else if (key == "rand_projective") {
+		return parse_header(exe_gen_arr_rand_projective, fin);
+	}
+	else if (key == "all_planar") {
+		return parse_header(exe_gen_arr_all_planar, fin);
+	}
+	else if (key == "rand_planar") {
+		return parse_header(exe_gen_arr_rand_planar, fin);
 	}
 
 	cerr << ERROR << endl;

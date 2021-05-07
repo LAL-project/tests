@@ -168,7 +168,7 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_gen_arr_all_proj(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_arr_all_projective(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;

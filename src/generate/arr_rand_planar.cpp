@@ -46,8 +46,8 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/output.hpp>
-#include <lal/generate/rand_projective_arrangements.hpp>
-#include <lal/generate/rand_ulab_rooted_trees.hpp>
+#include <lal/generate/rand_planar_arrangements.hpp>
+#include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/linarr/C.hpp>
 #include <lal/iterators/E_iterator.hpp>
 using namespace lal;
@@ -64,7 +64,7 @@ using namespace iterators;
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_arr_rand_planar(const input_list& inputs, ifstream& fin) {
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
@@ -75,19 +75,18 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 	uint32_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n);
+		rand_ulab_free_trees TreeGen(n);
 
 		for (uint32_t nt = 0; nt < ntrees; ++nt) {
-			const rooted_tree rT = TreeGen.get_tree();
-			const free_tree fT = rT.to_free_tree();
+			const free_tree T = TreeGen.get_tree();
 
-			rand_projective_arrangements RandArr(rT, 100);
+			rand_planar_arrangements RandArr(T, 100);
 
 			for (uint32_t it = 0; it < nit; ++it) {
 				const linear_arrangement arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, arr);
+				const string err = is_arrangement_planar(T, arr);
 				if (err != "") {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement failed with error:" << endl;
@@ -95,7 +94,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 					cerr << "    Arrangement:     " << arr << endl;
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
+					cerr << T << endl;
 					return err_type::test_execution;
 				}
 			}
@@ -104,7 +103,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 				const linear_arrangement arr = RandArr.yield_arrangement();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_projective(rT, arr);
+				const string err = is_arrangement_planar(T, arr);
 				if (err != "") {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement failed with error:" << endl;
@@ -112,7 +111,7 @@ err_type exe_gen_arr_rand_proj(const input_list& inputs, ifstream& fin) {
 					cerr << "    Arrangement:     " << arr << endl;
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
+					cerr << T << endl;
 					return err_type::test_execution;
 				}
 			}

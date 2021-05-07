@@ -59,8 +59,10 @@ LIBS += -lgmp
 LIBS += -fopenmp
 
 SOURCES += \
-    arr_all_proj.cpp \
-    arr_rand_proj.cpp \
+    arr_all_planar.cpp \
+    arr_all_projective.cpp \
+    arr_rand_planar.cpp \
+    arr_rand_projective.cpp \
     main.cpp \
 	parse_keywords.cpp \
     trees_alf.cpp \
