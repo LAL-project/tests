@@ -21,14 +21,7 @@ if [ ! -z $2 ]; then
 	fi
 fi
 
-queue="short"
-if [ "$mode" == "debug" ]; then
-	if [ $use_valgrind -eq 1 ]; then
-		queue="long"
-	else
-		queue="medium"
-	fi
-fi
+queue="long"
 
 mkdir -p $info
 
