@@ -40,12 +40,12 @@ groups_list=(\
 		"linarr_E_2Cd" \
 		"linarr_D" \
 		"linarr_C" \
-			"linarr_C_brute_force" \
-				"linarr_C_brute_force_C" \
-				"linarr_C_brute_force_C_list" \
-				"linarr_C_brute_force_C_upper_bound" \
-				"linarr_C_brute_force_C_list_upper_bound" \
-				"linarr_C_brute_force_C_list_upper_bound_list" \
+			"linarr_C_bruteforce" \
+				"linarr_C_bruteforce_C" \
+				"linarr_C_bruteforce_C_list" \
+				"linarr_C_bruteforce_C_upper_bound" \
+				"linarr_C_bruteforce_C_list_upper_bound" \
+				"linarr_C_bruteforce_C_list_upper_bound_list" \
 			"linarr_C_dyn_prog" \
 				"linarr_C_dyn_prog_C" \
 				"linarr_C_dyn_prog_C_list" \

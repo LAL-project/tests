@@ -217,9 +217,9 @@ err_type exe_linarr_C_list
 	else if (upper_bound_type == 1) {
 		for (uint32_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > single_upper_bound) {
-				if (uCs[i] != uG.get_num_edges()*uG.get_num_edges()) {
+				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
-					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Expected number of crossings to be >m^2." << endl;
 					cerr << "    Instead, received: " << uCs[i] << endl;
 					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
 					cerr << "    Upper bound: " << single_upper_bound << endl;
@@ -249,9 +249,9 @@ err_type exe_linarr_C_list
 	else if (upper_bound_type == 2) {
 		for (uint32_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > list_upper_bounds[i]) {
-				if (uCs[i] != uG.get_num_edges()*uG.get_num_edges()) {
+				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
-					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Expected number of crossings to be >m^2." << endl;
 					cerr << "    Instead, received: " << uCs[i] << endl;
 					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
 					cerr << "    Upper bound: " << list_upper_bounds[i] << endl;

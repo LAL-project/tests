@@ -11,27 +11,27 @@ linarr_D_DIRS=(\
 	)
 
 # Number of crossings tests
-linarr_C_brute_force_C_DIRS=(\
-	"linarr/C/brute_force" "linarr/C" \
+linarr_C_bruteforce_C_DIRS=(\
+	"linarr/C/bruteforce" "linarr/C" \
 	)
-linarr_C_brute_force_C_list_DIRS=(\
-	"linarr/C/brute_force-list" "linarr/C" \
+linarr_C_bruteforce_C_list_DIRS=(\
+	"linarr/C/bruteforce-list" "linarr/C" \
 	)
-linarr_C_brute_force_C_upper_bound_DIRS=(\
-	"linarr/C/brute_force-upper_bound" "linarr/C" \
+linarr_C_bruteforce_C_upper_bound_DIRS=(\
+	"linarr/C/bruteforce-upper_bound" "linarr/C" \
 	)
-linarr_C_brute_force_C_list_upper_bound_DIRS=(\
-	"linarr/C/brute_force-list_upper_bound" "linarr/C" \
+linarr_C_bruteforce_C_list_upper_bound_DIRS=(\
+	"linarr/C/bruteforce-list_upper_bound" "linarr/C" \
 	)
-linarr_C_brute_force_C_list_upper_bound_list_DIRS=(\
-	"linarr/C/brute_force-list_upper_bound_list" "linarr/C" \
+linarr_C_bruteforce_C_list_upper_bound_list_DIRS=(\
+	"linarr/C/bruteforce-list_upper_bound_list" "linarr/C" \
 	)
-linarr_C_brute_force_DIRS=(\
-	"${linarr_C_brute_force_C_DIRS[@]}" \
-	"${linarr_C_brute_force_C_list_DIRS[@]}" \
-	"${linarr_C_brute_force_C_upper_bound_DIRS[@]}" \
-	"${linarr_C_brute_force_C_list_upper_bound_DIRS[@]}" \
-	"${linarr_C_brute_force_C_list_upper_bound_list_DIRS[@]}" \
+linarr_C_bruteforce_DIRS=(\
+	"${linarr_C_bruteforce_C_DIRS[@]}" \
+	"${linarr_C_bruteforce_C_list_DIRS[@]}" \
+	"${linarr_C_bruteforce_C_upper_bound_DIRS[@]}" \
+	"${linarr_C_bruteforce_C_list_upper_bound_DIRS[@]}" \
+	"${linarr_C_bruteforce_C_list_upper_bound_list_DIRS[@]}" \
 	)
 
 linarr_C_dyn_prog_C_DIRS=(\

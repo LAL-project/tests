@@ -178,9 +178,9 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 
 		if (has_upper_bound) {
 			if (uCbf > upper_bound) {
-				if (uC != uG.get_num_edges()*uG.get_num_edges()) {
+				if (uC <= uG.get_num_edges()*uG.get_num_edges()) {
 					cerr << ERROR << endl;
-					cerr << "    Expected number of crossings to be m^2." << endl;
+					cerr << "    Expected number of crossings to be >m^2." << endl;
 					cerr << "    Instead, received: " << uC << endl;
 					cerr << "    Actual number of crossings: " << uCbf << endl;
 					cerr << "    Upper bound: " << upper_bound << endl;
