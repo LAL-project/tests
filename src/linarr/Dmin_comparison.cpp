@@ -57,7 +57,7 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/graphs/convert_to_ftree.hpp>
+#include <lal/internal/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;

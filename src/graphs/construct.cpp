@@ -50,6 +50,7 @@
 using namespace std;
 
 // lal includes
+#include <lal/graphs/conversions.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/iterators/E_iterator.hpp>
 #include <lal/iterators/Q_iterator.hpp>
@@ -86,6 +87,9 @@ using namespace iterators;
 #define FUNC_OUTPUT_Q "output_Q"
 #define FUNC_Q_SIZE "size_Q"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
+#define FUNC_TREE_OUTPUT_HEAD_VECTOR "output_head_vector"
+#define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
+#define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
 #define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
@@ -504,7 +508,47 @@ err_type exe_construction_test(ifstream& fin) {
 			gtypes[g1] = UGRAPH;
 		}
 
+		else if (option == FUNC_TREE_OUTPUT_HEAD_VECTOR) {
+			fin >> g1;
+			assert_exists_variable(FUNC_DGRAPH_TO_UGRAPH, g1);
+			assert_correct_graph_type(FUNC_TREE_OUTPUT_HEAD_VECTOR, graph_type(g1), tree_types);
+
+			if (graph_type(g1) == FTREE) {
+				fin >> u;
+				const auto hv = ftreevars[g1].get_head_vector(u);
+				for (const auto& p : hv) { cout << p << " "; }
+				cout << endl;
+			}
+			else if (graph_type(g1) == RTREE) {
+				const auto hv = rtreevars[g1].get_head_vector();
+				for (const auto& p : hv) { cout << p << " "; }
+				cout << endl;
+			}
+		}
+
 		// UTREE
+		else if (option == FUNC_FROM_HEAD_VECTOR_TO_FTREE) {
+			fin >> g1;
+			assert_not_exists_variable(FUNC_FROM_HEAD_VECTOR_TO_FTREE, g1);
+
+			uint32_t n;
+			fin >> n;
+			head_vector hv(n);
+			for (node& q : hv) { fin >> q; }
+
+			fin >> Boolean1 >> Boolean2;
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean2);
+
+			const auto t_root =
+				lal::graphs::from_head_vector_to_free_tree
+				(hv, Boolean1 == "true", Boolean2 == "true");
+
+			cout << "Root: " << t_root.second << endl;
+			ftreevars[g1] = std::move(t_root.first);
+			gtypes[g1] = FTREE;
+		}
+
 		else if (option == FUNC_FTREE_TO_RTREE) {
 			fin >> g1 >> g2 >> u;
 			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2);
@@ -515,6 +559,25 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 
 		// RTREE
+		else if (option == FUNC_FROM_HEAD_VECTOR_TO_RTREE) {
+			fin >> g1;
+			assert_not_exists_variable(FUNC_FROM_HEAD_VECTOR_TO_RTREE, g1);
+
+			uint32_t n;
+			fin >> n;
+			head_vector hv(n);
+			for (node& q : hv) { fin >> q; }
+
+			fin >> Boolean1 >> Boolean2;
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_READ, Boolean2);
+
+			rtreevars[g1] =
+				lal::graphs::from_head_vector_to_rooted_tree
+				(hv, Boolean1 == "true", Boolean2 == "true");
+
+			gtypes[g1] = RTREE;
+		}
 		else if (option == FUNC_RTREE_SET_ROOT) {
 			fin >> g1 >> u;
 			assert_exists_variable(FUNC_RTREE_SET_ROOT, g1);
@@ -580,7 +643,6 @@ err_type exe_construction_test(ifstream& fin) {
 				cout << "    " << ww << ": " << T.get_num_nodes_subtree(ww) << endl;
 			}
 		}
-
 
 		// ASSERT
 		else if (option == "assert") {
