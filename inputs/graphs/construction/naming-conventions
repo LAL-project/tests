@@ -56,10 +56,12 @@ We are currently using the following names:
 	
 	010: inspection of E and Q in ugraph
 	011: inspection of E and Q in dgraph
+	012: inspection of the head vector of free trees and of rooted trees
 	
 	015: conversion of dgraph to ugraph.
 	016: convert a ftree to a rtree
 	017: convert a rtree to a ftree
+	018: convert a head vector into a free and rooted tree
 	
 	020: check iterators of constructed ugraph
 	021: check iterators of constructed dgraph

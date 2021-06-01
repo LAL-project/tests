@@ -1,0 +1,15 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	from_head_vector_to_free_tree t1 5 0 1 2 3 4 true true
+	output_graph t1
+	
+	from_head_vector_to_free_tree t2 5 2 0 2 3 4 true true
+	output_graph t2
+	
+	from_head_vector_to_free_tree t3 5 2 3 0 3 4 true true
+	output_graph t3
+
+	from_head_vector_to_free_tree t4 10 3 3 0 5 3 7 5 10 10 7 true true
+	output_graph t4
+	
