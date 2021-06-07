@@ -60,6 +60,8 @@
 namespace tests {
 namespace generate {
 
+err_type exe_gen_arr_all(const input_list& inputs, std::ifstream& fin);
+err_type exe_gen_arr_rand(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_arr_all_projective(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fin);
 err_type exe_gen_arr_all_planar(const input_list& inputs, std::ifstream& fin);

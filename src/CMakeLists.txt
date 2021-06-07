@@ -146,8 +146,10 @@ add_executable(
 		generate/parse_keywords.hpp
 		generate/test_exhaustive_enumeration.hpp
 		
+		generate/arr_all.cpp
 		generate/arr_all_planar.cpp
 		generate/arr_all_projective.cpp
+		generate/arr_rand.cpp
 		generate/arr_rand_planar.cpp
 		generate/arr_rand_projective.cpp
 		generate/main.cpp

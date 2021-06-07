@@ -1,0 +1,4 @@
+TYPE generate-arrangements-all
+INPUT 0
+BODY
+	5 10

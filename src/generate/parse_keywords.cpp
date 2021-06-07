@@ -67,6 +67,12 @@ err_type call_generate_arrangements
 	else if (key == "rand_planar") {
 		return parse_header(exe_gen_arr_rand_planar, fin);
 	}
+	else if (key == "all") {
+		return parse_header(exe_gen_arr_all, fin);
+	}
+	else if (key == "rand") {
+		return parse_header(exe_gen_arr_rand, fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
