@@ -81,13 +81,6 @@ inline integer amount_projective(const rooted_tree& rT) noexcept {
 inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 	vector<edge> edges = rT.get_edges();
 
-	for (uint32_t i = 0; i < 2*nrelabs; ++i) {
-		relabel_tree_vertices(edges, rT, (i < nrelabs ? false : true), false);
-
-		uint32_t iterations = 0;
-		set<linear_arrangement> list_arrs;
-		const integer formula = amount_projective(rT);
-
 #define check_arrangement													\
 	const string err = is_arrangement_projective(rT, arr);					\
 	if (err != "") {														\
@@ -119,6 +112,13 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 		cerr << rT << endl;													\
 		return err_type::test_execution;									\
 	}
+
+	for (uint32_t i = 0; i < 2*nrelabs; ++i) {
+		relabel_tree_vertices(edges, rT, (i < nrelabs ? false : true), false);
+
+		uint32_t iterations = 0;
+		set<linear_arrangement> list_arrs;
+		const integer formula = amount_projective(rT);
 
 		all_projective_arrangements ArrGen(rT);
 

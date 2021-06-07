@@ -47,6 +47,7 @@ using namespace std;
 // lal includes
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
+#include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_planar_arrangements.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
@@ -60,6 +61,42 @@ using namespace generate;
 #include "common/test_utils.hpp"
 #include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
+
+#define check_and_process_arrangement(c)												\
+	const string err = is_arrangement_planar(T, arr);						\
+	if (err != "") {														\
+		cerr << ERROR << endl;												\
+		cerr << "    In check: " << c << endl;								\
+		cerr << "    Generation of arrangement failed with error:" << endl;	\
+		cerr << "    '" << err << "'" << endl;								\
+		cerr << "    Arrangement:     " << arr << endl;						\
+		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
+		cerr << "    For tree:" << endl;									\
+		cerr << T << endl;													\
+		cerr << T.get_head_vector() << endl;								\
+		return err_type::test_execution;									\
+	}																		\
+	++iterations;															\
+	list_arrs.insert(arr);
+
+#define final_check(c)														\
+	if (formula != iterations or formula != list_arrs.size()) {				\
+		cerr << ERROR << endl;												\
+		cerr << "    In check: " << c << endl;								\
+		cerr << "    Number of projective arrangements generated" << endl;	\
+		cerr << "    does not agree with the formula." << endl;				\
+		cerr << "        formula= " << formula << endl;						\
+		cerr << "        iterations= " << iterations << endl;				\
+		cerr << "        unique amount= " << list_arrs.size() << endl;		\
+		cerr << "    List of arrangements:" << endl;						\
+		for (const auto& v : list_arrs) {									\
+		cerr << "        " << v << endl;									\
+		}																	\
+		cerr << "    For tree:" << endl;									\
+		cerr << T << endl;													\
+		cerr << T.get_head_vector() << endl;								\
+		return err_type::test_execution;									\
+	}
 
 namespace tests {
 namespace generate {
@@ -75,7 +112,7 @@ inline integer amount_planar(const free_tree& T) noexcept {
 	for (node u = 0; u < T.get_num_nodes(); ++u) {
 		k *= factorial(T.get_degree(u));
 	}
-	return k*T.get_num_nodes();
+	return T.get_num_nodes()*k;
 }
 
 inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
@@ -87,38 +124,6 @@ inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
 		uint32_t iterations = 0;
 		set<linear_arrangement> list_arrs;
 		const integer formula = amount_planar(T);
-
-#define check_arrangement													\
-	const string err = is_arrangement_planar(T, arr);						\
-	if (err != "") {														\
-		cerr << ERROR << endl;												\
-		cerr << "    Generation of arrangement failed with error:" << endl;	\
-		cerr << "    '" << err << "'" << endl;								\
-		cerr << "    Arrangement:     " << arr << endl;						\
-		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
-		cerr << "    For tree:" << endl;									\
-		cerr << T << endl;													\
-		return err_type::test_execution;									\
-	}																		\
-	++iterations;															\
-	list_arrs.insert(arr);
-
-#define final_check															\
-	if (formula != iterations or formula != list_arrs.size()) {				\
-		cerr << ERROR << endl;												\
-		cerr << "    Number of projective arrangements generated" << endl;	\
-		cerr << "    does not agree with the formula." << endl;				\
-		cerr << "        formula= " << formula << endl;						\
-		cerr << "        iterations= " << iterations << endl;				\
-		cerr << "        unique amount= " << list_arrs.size() << endl;		\
-		cerr << "    List of arrangements:" << endl;						\
-		for (const auto& v : list_arrs) {									\
-		cerr << "        " << v << endl;									\
-		}																	\
-		cerr << "    For tree:" << endl;									\
-		cerr << T << endl;													\
-		return err_type::test_execution;									\
-	}
 
 		all_planar_arrangements ArrGen(T);
 
@@ -132,9 +137,9 @@ inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
 			ArrGen.next();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 1");
 		}
-		final_check;
+		final_check("Usage 1");
 		}
 
 		// USAGE 2
@@ -146,9 +151,9 @@ inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
 			const linear_arrangement arr = ArrGen.get_arrangement();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 2");
 		}
-		final_check;
+		final_check("Usage 2");
 		}
 
 		// USAGE 3
@@ -160,15 +165,17 @@ inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
 			const linear_arrangement arr = ArrGen.yield_arrangement();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 3");
 		}
-		final_check;
+		final_check("Usage 3");
 		}
 	}
 	return err_type::no_error;
 }
 
 err_type exe_gen_arr_all_planar(const input_list& inputs, ifstream& fin) {
+	const set<string> allowed_modes({"automatic", "manual"});
+
 	if (inputs.size() != 0) {
 		cerr << ERROR << endl;
 		cerr << "    No input files are allowed in this test." << endl;
@@ -176,19 +183,60 @@ err_type exe_gen_arr_all_planar(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n, nrelabs;
-	while (fin >> n >> nrelabs) {
-		// do 'ntrees' trees of 'n' vertices
-		all_ulab_free_trees TreeGen(n);
+	string mode;
+	fin >> mode;
 
-		while (not TreeGen.end()) {
-			free_tree rT = TreeGen.get_tree();
-			TreeGen.next();
+	if (allowed_modes.find(mode) == allowed_modes.end()) {
+		cerr << ERROR << endl;
+		cerr << "    Invalid mode '" << mode << "'." << endl;
+		cerr << "    Expected one of:" << endl;
+		for (const auto& s : allowed_modes) {
+		cerr << "    - " << s << endl;
+		}
+		return err_type::test_format;
+	}
 
-			const err_type e = test_a_tree(rT, nrelabs);
-			if (e != err_type::no_error) {
-				return e;
+	if (mode == "automatic") {
+		uint32_t n, nrelabs;
+		while (fin >> n >> nrelabs) {
+			// do all trees of 'n' vertices
+			all_ulab_free_trees TreeGen(n);
+
+			while (not TreeGen.end()) {
+				free_tree fT = TreeGen.get_tree();
+				TreeGen.next();
+
+				const err_type e = test_a_tree(fT, nrelabs);
+				if (e != err_type::no_error) {
+					return e;
+				}
 			}
+		}
+	}
+	else if (mode == "manual") {
+		string line;
+		getline(fin, line);
+
+
+		while (getline(fin, line)) {
+			cout << "---------------" << endl;
+			head_vector hv;
+			stringstream ss(line);
+			uint32_t k;
+			while (ss >> k) { hv.push_back(k); }
+
+			const free_tree T = from_head_vector_to_free_tree(hv).first;
+			const auto formula = amount_planar(T);
+
+			set<linear_arrangement> list_arrs;
+			size_t iterations = 0;
+			for (all_planar_arrangements ArrGen(T); not ArrGen.end(); ArrGen.next()) {
+				const auto arr = ArrGen.get_arrangement();
+				cout << iterations << ") " << arr << endl;
+
+				check_and_process_arrangement("Exhaustive enumeration (displayed)");
+			}
+			final_check("Exhaustive enumeration (displayed)");
 		}
 	}
 
