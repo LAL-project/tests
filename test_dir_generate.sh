@@ -58,6 +58,16 @@ generate_trees_DIRS=(\
 	"${generate_trees_rand_DIRS[@]}" \
 	)
 
+# generate (all unconstrained arrangements) tests
+generate_arrangements_all_unc_DIRS=(\
+	"generate/arrangements/all" "generate/arrangements/all" \
+	)
+
+# generate (rand unconstrained arrangements) tests
+generate_arrangements_rand_unc_DIRS=(\
+	"generate/arrangements/rand" "generate/arrangements/rand" \
+	)
+
 # generate (all projective arrangements) tests
 generate_arrangements_all_projective_DIRS=(\
 	"generate/arrangements/all_projective" "generate/arrangements/all_projective" \
@@ -80,10 +90,12 @@ generate_arrangements_rand_planar_DIRS=(\
 
 # generate tests for arrangements
 generate_arrangements_all_DIRS=(\
+	"${generate_arrangements_all_unc[@]}" \
 	"${generate_arrangements_all_projective_DIRS[@]}" \
 	"${generate_arrangements_all_planar_DIRS[@]}" \
 	)
 generate_arrangements_rand_DIRS=(\
+	"${generate_arrangements_rand_unc[@]}" \
 	"${generate_arrangements_rand_projective_DIRS[@]}" \
 	"${generate_arrangements_rand_planar_DIRS[@]}" \
 	)
