@@ -184,7 +184,7 @@ integer resolve_integer_operation(const U& var1, const string& op, const V& var2
 	if (op == "/") { return var1 / var2; }
 	// NOTE: var2, when it is an int64_t, its
 	// signedness changes into uint64_t.
-	if (op == "^") { return var1^var2; }
+	if (op == "^") { return var1.pow(var2); }
 	return -1;
 }
 
@@ -294,6 +294,85 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 			return err_type::test_format;
 		}
 	}
+
+	TEST_GOODBYE
+	return err_type::no_error;
+}
+
+err_type exe_numeric_integer_manual(const input_list& inputs, ifstream&) {
+	if (inputs.size() != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		return err_type::test_format;
+	}
+
+	int i = 0;
+
+#define check_result(WHAT, EXPR, RES)										\
+	i += 1;																	\
+	if (EXPR != RES) {														\
+		cerr << ERROR << endl;												\
+		cerr << "    At expression " << i << ")" << endl;					\
+		cerr << "    Input expression computes a result different" << endl;	\
+		cerr << "    from the ground truth." << endl;						\
+		cerr << "    Result of '" << WHAT << "'= " << EXPR << endl;			\
+		cerr << "    Expected: " << RES << endl;							\
+		return err_type::test_execution;									\
+	}
+
+	integer k(3);
+	check_result("k + 3", k + 3, 6);
+	check_result("3 + k", 3 + k, 6);
+	check_result("k - 3", k - 3, 0);
+	check_result("k - (-3)", k - (-3), 6);
+	check_result("3 - k", 3 - k, 0);
+	check_result("3 - (-k)", 3 - (-k), 6);
+	check_result("k*3", k*3, 9);
+	check_result("k*(-3)", k*(-3), -9);
+	check_result("(-k)*3", (-k)*3, -9);
+	check_result("(-k)*(-3)", (-k)*(-3), 9);
+	check_result("3*k", 3*k, 9);
+	check_result("(-3)*k", (-3)*k, -9);
+	check_result("3*(-k)", 3*(-k), -9);
+	check_result("(-3)*(-k)", (-3)*(-k), 9);
+	check_result("k/3", k/3, 1);
+	check_result("k/(-3)", k/(-3), -1);
+	check_result("(-k)/3", (-k)/3, -1);
+	check_result("(-k)/(-3)", (-k)/(-3), 1);
+	check_result("3/k", 3/k, 1);
+	check_result("(-3)/k", (-3)/k, -1);
+	check_result("3/(-k)", 3/(-k), -1);
+	check_result("(-3)/(-k)", (-3)/(-k), 1);
+
+	check_result("18/k", 18/k, 6);
+	check_result("18/integer(1234)", 18/integer(1234), 0);
+
+	k = 6;
+	check_result("k + 3", k + 3, 9);
+	check_result("3 + k", 3 + k, 9);
+	check_result("k - 3", k - 3, 3);
+	check_result("k - (-3)", k - (-3), 9);
+	check_result("3 - k", 3 - k, -3);
+	check_result("3 - (-k)", 3 - (-k), 9);
+	check_result("k*3", k*3, 18);
+	check_result("k*(-3)", k*(-3), -18);
+	check_result("(-k)*3", (-k)*3, -18);
+	check_result("(-k)*(-3)", (-k)*(-3), 18);
+	check_result("3*k", 3*k, 18);
+	check_result("(-3)*k", (-3)*k, -18);
+	check_result("3*(-k)", 3*(-k), -18);
+	check_result("(-3)*(-k)", (-3)*(-k), 18);
+	check_result("k/3", k/3, 2);
+	check_result("k/(-3)", k/(-3), -2);
+	check_result("(-k)/3", (-k)/3, -2);
+	check_result("(-k)/(-3)", (-k)/(-3), 2);
+	check_result("3/k", 3/k, 0);
+	check_result("(-3)/k", (-3)/k, 0);
+	check_result("3/(-k)", 3/(-k), 0);
+	check_result("(-3)/(-k)", (-3)/(-k), 0);
+
+	check_result("18/k", 18/k, 3);
 
 	TEST_GOODBYE
 	return err_type::no_error;

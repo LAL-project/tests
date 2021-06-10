@@ -71,9 +71,9 @@ inline integer num_caterpillar_trees(uint32_t n) noexcept {
 	if (n == 3) { return 1; }
 	if (n == 4) { return 2; }
 	integer n1 = 2;
-	n1 ^= n - 4;
+	n1.powt(n - 4);
 	integer n2 = 2;
-	n2 ^= ((n - 4)/2);
+	n2.powt((n - 4)/2);
 	n1 += n2;
 	return n1;
 }

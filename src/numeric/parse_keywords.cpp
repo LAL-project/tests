@@ -53,19 +53,19 @@ namespace numeric {
 
 err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 	const string& num_type1 = keywords[i];
-	if (num_type1 != "integer" and num_type1 != "rational") {
-		cerr << ERROR << endl;
-		cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
-		mark_wrong_keyword(keywords, {i}, "    ");
-		return err_type::wrong_keyword;
-	}
 
 	if (num_type1 == "integer") {
 		return parse_header(exe_numeric_integer, fin);
 	}
+	if (num_type1 == "integer_manual") {
+		return parse_header(exe_numeric_integer_manual, fin);
+	}
 
 	if (num_type1 == "rational") {
 		return parse_header(exe_numeric_rational, fin);
+	}
+	if (num_type1 == "rational_manual") {
+		return parse_header(exe_numeric_rational_manual, fin);
 	}
 
 	cerr << ERROR << endl;

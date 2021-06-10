@@ -89,7 +89,7 @@ struct extra_params { };
 	   with labelled ROOTED trees!															\
 	   https://oeis.org/A000169/list */														\
 	const integer nn = integer_from_ui(n);													\
-	const integer total = (n == 1 ? 1 : (nn^(nn - 1)));										\
+	const integer total = (n == 1 ? 1 : (nn.pow(nn - 1)));									\
 	if (gen != total) {																		\
 		cerr << ERROR << endl;																\
 		cerr << "    Exhaustive generation of labelled rooted trees" << endl;				\

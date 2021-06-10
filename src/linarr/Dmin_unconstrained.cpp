@@ -261,7 +261,7 @@ err_type test_class_algorithm(
 				uint32_t N;
 				{
 				integer _N = 2;
-				_N ^= h;
+				_N.powt(h);
 				_N -= 1;
 				N = static_cast<uint32_t>(_N.to_uint());
 				}
@@ -296,7 +296,7 @@ err_type test_class_algorithm(
 				rational F = h;
 				F /= 3; // k/3
 				F += rational(5,18); // k/3 + 5/18
-				F *= integer(2)^h; // 2^k(k/3 + 5/18)
+				F *= integer(2).pow(h); // 2^k(k/3 + 5/18)
 
 				F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
 				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2

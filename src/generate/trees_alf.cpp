@@ -105,7 +105,7 @@ struct extra_params { };
 	/* Prüfer's formula: make sure that the generator made						\
 	   as many trees as n^(n - 2)												\
 	  also: https://oeis.org/A000272/list */									\
-	const integer total = (n == 1 ? 1 : (nn^(nn - 2)));							\
+	const integer total = (n == 1 ? 1 : (nn.pow(nn - 2)));						\
 	if (gen != total) {															\
 		cerr << ERROR << endl;													\
 		cerr << "    Exhaustive generation of labelled free trees" << endl;		\

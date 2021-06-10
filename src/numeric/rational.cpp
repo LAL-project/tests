@@ -239,7 +239,7 @@ static inline rational resolve_op_rational(
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
 	if (op == "/") { return var1 / var2; }
-	if (op == "^") { return var1 ^ var2; }
+	if (op == "^") { return var1.pow(var2); }
 	return -1;
 }
 
@@ -486,6 +486,119 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 			return err_type::test_format;
 		}
 	}
+
+	TEST_GOODBYE
+	return err_type::no_error;
+}
+
+err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
+	if (inputs.size() != 0) {
+		cerr << ERROR << endl;
+		cerr << "    No input files are allowed in this test." << endl;
+		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		return err_type::test_format;
+	}
+
+	int i = 0;
+
+#define check_result(WHAT, EXPR, RES)										\
+	i += 1;																	\
+	if (EXPR != RES) {														\
+		cerr << ERROR << endl;												\
+		cerr << "    At expression " << i << ")" << endl;					\
+		cerr << "    Input expression computes a result different" << endl;	\
+		cerr << "    from the ground truth." << endl;						\
+		cerr << "    Result of '" << WHAT << "'= " << EXPR << endl;			\
+		cerr << "    Expected: " << RES << endl;							\
+		return err_type::test_execution;									\
+	}
+
+	{
+	rational k(3);
+	k.invert();
+	if (k != rational(1,3)) {
+		cerr << ERROR << endl;
+		cerr << "    Inversion of rational failed." << endl;
+		return err_type::test_execution;
+	}
+	}
+
+	rational k(3);
+	check_result("k + 3", k + 3, 6);
+	check_result("3 + k", 3 + k, 6);
+	check_result("k - 3", k - 3, 0);
+	check_result("k - (-3)", k - (-3), 6);
+	check_result("3 - k", 3 - k, 0);
+	check_result("3 - (-k)", 3 - (-k), 6);
+	check_result("k*3", k*3, 9);
+	check_result("k*(-3)", k*(-3), -9);
+	check_result("(-k)*3", (-k)*3, -9);
+	check_result("(-k)*(-3)", (-k)*(-3), 9);
+	check_result("3*k", 3*k, 9);
+	check_result("(-3)*k", (-3)*k, -9);
+	check_result("3*(-k)", 3*(-k), -9);
+	check_result("(-3)*(-k)", (-3)*(-k), 9);
+	check_result("k/3", k/3, 1);
+	check_result("k/(-3)", k/(-3), -1);
+	check_result("(-k)/3", (-k)/3, -1);
+	check_result("(-k)/(-3)", (-k)/(-3), 1);
+	check_result("3/k", 3/k, 1);
+	check_result("(-3)/k", (-3)/k, -1);
+	check_result("3/(-k)", 3/(-k), -1);
+	check_result("(-3)/(-k)", (-3)/(-k), 1);
+
+	check_result("18/k", 18/k, 6);
+	check_result("18/integer(1234)", 18/integer(1234), 0);
+
+	k = 6;
+	check_result("k + 3", k + 3, 9);
+	check_result("3 + k", 3 + k, 9);
+	check_result("k - 3", k - 3, 3);
+	check_result("k - (-3)", k - (-3), 9);
+	check_result("3 - k", 3 - k, -3);
+	check_result("3 - (-k)", 3 - (-k), 9);
+	check_result("k*3", k*3, 18);
+	check_result("k*(-3)", k*(-3), -18);
+	check_result("(-k)*3", (-k)*3, -18);
+	check_result("(-k)*(-3)", (-k)*(-3), 18);
+	check_result("3*k", 3*k, 18);
+	check_result("(-3)*k", (-3)*k, -18);
+	check_result("3*(-k)", 3*(-k), -18);
+	check_result("(-3)*(-k)", (-3)*(-k), 18);
+	check_result("k/3", k/3, 2);
+	check_result("k/(-3)", k/(-3), -2);
+	check_result("(-k)/3", (-k)/3, -2);
+	check_result("(-k)/(-3)", (-k)/(-3), 2);
+	check_result("3/k", 3/k, rational(1,2));
+	check_result("(-3)/k", (-3)/k, rational(-1,2));
+	check_result("3/(-k)", 3/(-k), rational(-1,2));
+	check_result("(-3)/(-k)", (-3)/(-k), rational(1,2));
+
+	k = rational(3,4);
+	check_result("k + 3", k + 3, rational(15,4));
+	check_result("3 + k", 3 + k, rational(15,4));
+	check_result("k - 3", k - 3, rational(-9,4));
+	check_result("k - (-3)", k - (-3), rational(15,4));
+	check_result("3 - k", 3 - k, rational(9,4));
+	check_result("3 - (-k)", 3 - (-k), rational(15,4));
+	check_result("k*3", k*3, rational(9,4));
+	check_result("k*(-3)", k*(-3), rational(-9,4));
+	check_result("(-k)*3", (-k)*3, rational(-9,4));
+	check_result("(-k)*(-3)", (-k)*(-3), rational(9,4));
+	check_result("3*k", 3*k, rational(9,4));
+	check_result("(-3)*k", (-3)*k, rational(-9,4));
+	check_result("3*(-k)", 3*(-k), rational(-9,4));
+	check_result("(-3)*(-k)", (-3)*(-k), rational(9,4));
+	check_result("k/3", k/3, rational(1,4));
+	check_result("k/(-3)", k/(-3), rational(-1,4));
+	check_result("(-k)/3", (-k)/3, rational(-1,4));
+	check_result("(-k)/(-3)", (-k)/(-3), rational(1,4));
+	check_result("3/k", 3/k, rational(4));
+	check_result("(-3)/k", (-3)/k, rational(-4));
+	check_result("3/(-k)", 3/(-k), rational(-4));
+	check_result("(-3)/(-k)", (-3)/(-k), rational(4));
+
+	check_result("18/k", 18/k, rational(24));
 
 	TEST_GOODBYE
 	return err_type::no_error;
