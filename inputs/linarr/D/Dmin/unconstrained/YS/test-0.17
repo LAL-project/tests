@@ -1,0 +1,4 @@
+TYPE linarr-Dmin-Unconstrained
+INPUT 1 inputs/linarr/optimal_linearizations/Dmin/unconstrained/17_noncaterpillar *
+BODY
+	YS_bruteforce
