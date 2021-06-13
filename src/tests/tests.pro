@@ -25,8 +25,8 @@ isEmpty(ENVIR) {
 
 # configure home
 equals(ENVIR, "HOME") {
-    LAL_DIR = /home/lluis/Documents/projects/linear-arrangement-library
-	THIS_DIR = /home/lluis/Documents/projects/LAL-tests/src/
+    LAL_DIR = /home/lluis/Documents/projects/LAL-DISTRIBUTION/21.07/linear-arrangement-library
+	THIS_DIR = /home/lluis/Documents/projects/LAL-DISTRIBUTION/21.07/LAL-tests/src/
 }
 
 # configure cluster
@@ -35,8 +35,8 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_LINK = /home/soft/gcc-9.2.0/bin/g++
 	QMAKE_CXXFLAGS += -std=c++17
 
-    LAL_DIR = /home/usuaris/lalemany/linear-arrangement-library
-	THIS_DIR = /home/usuaris/lalemany/LAL-tests/src
+	LAL_DIR = /home/usuaris/lalemany/LAL-DISTRIBUTION/21.07/linear-arrangement-library
+	THIS_DIR = /home/usuaris/lalemany/LAL-DISTRIBUTION/21.07/LAL-tests/src
 }
 
 CONFIG(debug, debug|release) {
