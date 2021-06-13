@@ -49,6 +49,7 @@ using namespace std;
 #include <lal/generate/rand_planar_arrangements.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/linarr/C.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 #include <lal/iterators/E_iterator.hpp>
 using namespace lal;
 using namespace graphs;
@@ -58,7 +59,6 @@ using namespace iterators;
 // common includes
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
 
 namespace tests {
@@ -86,15 +86,14 @@ err_type exe_gen_arr_rand_planar(const input_list& inputs, ifstream& fin) {
 				const linear_arrangement arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_planar(T, arr);
-				if (err != "") {
+				if (not lal::linarr::is_planar(T, arr)) {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement failed with error:" << endl;
-					cerr << "    '" << err << "'" << endl;
 					cerr << "    Arrangement:     " << arr << endl;
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					cerr << "    For tree:" << endl;
 					cerr << T << endl;
+					cerr << T.get_head_vector() << endl;
 					return err_type::test_execution;
 				}
 			}
@@ -103,15 +102,13 @@ err_type exe_gen_arr_rand_planar(const input_list& inputs, ifstream& fin) {
 				const linear_arrangement arr = RandArr.yield_arrangement();
 
 				// Do some sanity checks.
-				const string err = is_arrangement_planar(T, arr);
-				if (err != "") {
+				if (not lal::linarr::is_planar(T, arr)) {
 					cerr << ERROR << endl;
 					cerr << "    Generation of random arrangement failed with error:" << endl;
-					cerr << "    '" << err << "'" << endl;
 					cerr << "    Arrangement:     " << arr << endl;
 					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
 					cerr << "    For tree:" << endl;
-					cerr << T << endl;
+					cerr << T.get_head_vector() << endl;
 					return err_type::test_execution;
 				}
 			}

@@ -40,7 +40,6 @@ INCLUDEPATH += $$LAL_DIR
 INCLUDEPATH += $$THIS_DIR
 
 SOURCES += \
-    arrgmnt_validity_check.cpp \
     io_wrapper.cpp \
     parse_keywords.cpp \
     test_utils.cpp \
@@ -48,7 +47,6 @@ SOURCES += \
     tree_validity_check.cpp
 
 HEADERS += \
-    arrgmnt_validity_check.hpp \
     definitions.hpp \
     io_wrapper.hpp \
     parse_header.hpp \

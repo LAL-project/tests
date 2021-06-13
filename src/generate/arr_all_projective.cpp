@@ -50,6 +50,7 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -58,7 +59,6 @@ using namespace generate;
 // common includes
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
 
 namespace tests {
@@ -82,11 +82,9 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 	vector<edge> edges = rT.get_edges();
 
 #define check_arrangement													\
-	const string err = is_arrangement_projective(rT, arr);					\
-	if (err != "") {														\
+	if (not lal::linarr::is_projective(rT, arr)) {							\
 		cerr << ERROR << endl;												\
 		cerr << "    Generation of arrangement failed with error:" << endl;	\
-		cerr << "    '" << err << "'" << endl;								\
 		cerr << "    Arrangement:     " << arr << endl;						\
 		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
 		cerr << "    For tree:" << endl;									\

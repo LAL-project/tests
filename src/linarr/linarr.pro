@@ -66,6 +66,7 @@ SOURCES += \
     Dmin_planar.cpp \
     Dmin_projective.cpp \
     Dmin_unconstrained.cpp \
+    arrangement_validity.cpp \
     flux.cpp \
     headedness.cpp \
     klevel.cpp \

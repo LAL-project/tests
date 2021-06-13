@@ -1,0 +1,72 @@
+TYPE linarr-arrangement_validity
+INPUT 0
+BODY
+	undirected_graph
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 3 4 -1
+		permutation
+		arrangement
+		planar
+		end
+	
+	undirected_graph
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 4 4 -1
+		not_permutation
+		not_arrangement
+		end
+	
+	undirected_graph
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 3 4 5 -1
+		permutation
+		not_arrangement
+		end
+	
+	undirected_graph
+		0 1 0 2 0 3 0 4 1 5 -1
+		0 1 2 3 4 5 -1
+		permutation
+		arrangement
+		not_planar
+		end
+	
+	undirected_graph
+		0 1 1 2 2 3 3 4 -1 
+		0 1 2 3 4 -1
+		permutation
+		arrangement
+		planar
+		end
+	
+	undirected_graph
+		0 1 1 2 2 3 3 4 -1 
+		0 2 1 3 4 -1
+		permutation
+		arrangement
+		not_planar
+		end
+	
+	undirected_graph
+		0 1 2 3 4 5 -1 
+		0 1 2 3 4 5 -1
+		permutation
+		arrangement
+		planar
+		end
+	
+	undirected_graph
+		0 1 2 3 4 5 -1 
+		0 2 3 1 4 5 -1
+		permutation
+		arrangement
+		planar
+		end
+	
+	undirected_graph
+		0 1 2 3 4 5 -1 
+		0 2 1 3 4 5 -1
+		permutation
+		arrangement
+		not_planar
+		end

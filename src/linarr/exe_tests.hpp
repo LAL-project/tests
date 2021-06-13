@@ -77,6 +77,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin
 err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_arrangement_validity(const input_list& inputs, std::ifstream& fin);
 
 } // -- namespace linarr
 } // -- namespace tests

@@ -51,6 +51,7 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_planar_arrangements.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -59,16 +60,12 @@ using namespace generate;
 // common includes
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
 
-#define check_and_process_arrangement(c)												\
-	const string err = is_arrangement_planar(T, arr);						\
-	if (err != "") {														\
+#define check_and_process_arrangement(c)									\
+	if (not linarr::is_planar(T, arr)) {									\
 		cerr << ERROR << endl;												\
 		cerr << "    In check: " << c << endl;								\
-		cerr << "    Generation of arrangement failed with error:" << endl;	\
-		cerr << "    '" << err << "'" << endl;								\
 		cerr << "    Arrangement:     " << arr << endl;						\
 		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
 		cerr << "    For tree:" << endl;									\

@@ -163,6 +163,9 @@ err_type call_linarr
 	if (key == "syntree_classification") {
 		return parse_header(exe_linarr_syntree_classification, fin);
 	}
+	if (key == "arrangement_validity") {
+		return parse_header(exe_linarr_arrangement_validity, fin);
+	}
 
 	cerr << ERROR << endl;
 	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;

@@ -58,7 +58,6 @@ using namespace numeric;
 // common includes
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
 #include "common/tree_validity_check.hpp"
 

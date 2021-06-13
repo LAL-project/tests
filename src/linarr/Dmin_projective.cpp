@@ -48,6 +48,7 @@ using namespace std;
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
@@ -55,7 +56,6 @@ using namespace linarr;
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -89,7 +89,7 @@ noexcept
 			return sum_edge_lengths(t, arr);
 		},
 		[](const rooted_tree& t, const linear_arrangement& arr) {
-			return is_arrangement_projective(t, arr);
+			return lal::linarr::is_projective(t, arr);
 		},
 		[](const head_vector& v) {
 			return from_head_vector_to_rooted_tree(v);

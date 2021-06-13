@@ -117,7 +117,6 @@ find_package(OpenMP REQUIRED)
 
 add_library(
 	common STATIC
-		common/arrgmnt_validity_check.hpp
 		common/definitions.hpp
 		common/io_wrapper.hpp
 		common/parse_header.hpp
@@ -127,7 +126,6 @@ add_library(
 		common/time.hpp
 		common/tree_validity_check.hpp
 		
-		common/arrgmnt_validity_check.cpp
 		common/io_wrapper.cpp
 		common/parse_keywords.cpp
 		common/test_utils.cpp

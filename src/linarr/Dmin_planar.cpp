@@ -51,13 +51,13 @@ using namespace std;
 #include <lal/graphs/conversions.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -91,13 +91,11 @@ bool check_correctness_arr(
 )
 {
 	const linear_arrangement& arr = res.second;
-	const auto msg = is_arrangement_planar(tree, arr);
 	/* ensure planarity of arrangement */
-	if (msg != "") {
+	if (not lal::linarr::is_planar(tree, arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The arrangement produced by the library is not an actual" << endl;
 		cerr << "    arrangement or is not planar." << endl;
-		cerr << "    Error message: '" << msg << "'." << endl;
 		cerr << "    Arrangement: " << arr << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
@@ -192,7 +190,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 				return sum_edge_lengths(t, arr);
 			},
 			[](const free_tree& t, const linear_arrangement& arr) {
-				return is_arrangement_planar(t, arr);
+				return lal::linarr::is_planar(t, arr);
 			},
 			[](const vector<node>& v) {
 				return from_head_vector_to_free_tree(v).first;

@@ -54,6 +54,7 @@ using namespace std;
 #include <lal/graphs/free_tree.hpp>
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
@@ -65,7 +66,6 @@ using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/arrgmnt_validity_check.hpp"
 #include "common/std_utils.hpp"
 
 // linarr includes
@@ -82,7 +82,7 @@ inline
 bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
 	// ensure that the result is an arrangement
-	if (not is_permutation(arr)) {
+	if (not lal::linarr::is_permutation(arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The result is not an arrangement (permutation)." << endl;
 		cerr << "        Arrangement: " << arr << endl;

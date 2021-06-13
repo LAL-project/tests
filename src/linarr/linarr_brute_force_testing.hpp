@@ -66,7 +66,7 @@ template<class T> using TreeEval =
 	function< uint32_t (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using ArrgmtCheck =
-	function< string (const T&, const lal::linear_arrangement&) >;
+	function< bool (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using InputConv =
 	function< T (const vector<lal::node>&) >;
@@ -154,15 +154,14 @@ err_type linarr_brute_force_testing(
 
 		// ensure that the arrangement is a planar permutation
 		{
-		const string err = arrgmnt_check(tree, library_arr);
-		if (err != "") {
+		if (not arrgmnt_check(tree, library_arr)) {
 			cerr << ERROR << endl;
 			cerr << "    The arrangement produced by the algorithm is not correct." << endl;
-			cerr << "    Error: '" << err << "'" << endl;
 			cerr << "        Arrangement:     " << library_arr << endl;
 			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;
 			cerr << "    For tree: " << endl;
 			cerr << tree << endl;
+			cerr << tree.get_head_vector() << endl;
 			return err_type::test_execution;
 		}
 		}

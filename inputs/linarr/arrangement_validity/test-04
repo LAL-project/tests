@@ -1,0 +1,61 @@
+TYPE linarr-arrangement_validity
+INPUT 0
+BODY
+	rooted_tree
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 3 4 -1
+		permutation
+		arrangement
+		planar
+		projective
+		end
+	
+	rooted_tree
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 4 4 -1
+		not_permutation
+		not_arrangement
+		end
+	
+	rooted_tree
+		0 1 0 2 0 3 0 4 -1 
+		0 1 2 3 4 5 -1
+		permutation
+		not_arrangement
+		end
+	
+	rooted_tree
+		0 1 0 2 0 3 0 4 1 5 -1
+		0 1 2 3 4 5 -1
+		permutation
+		arrangement
+		not_planar
+		not_projective
+		end
+	
+	rooted_tree
+		2 0 2 1 2 4 4 3 4 6 6 5 6 9 9 7 9 8 -1
+		0 1 2 3 4 5 6 7 8 9 -1
+		permutation
+		arrangement
+		planar
+		projective
+		end
+	
+	rooted_tree
+		2 0 2 1 2 4 4 3 4 6 6 5 6 9 9 7 9 8 -1
+		1 2 3 4 5 6 7 8 9 0 -1
+		permutation
+		arrangement
+		planar
+		projective
+		end
+	
+	rooted_tree
+		2 0 2 1 2 4 4 3 4 6 6 5 6 9 9 7 9 8 -1
+		7 8 9 0 1 2 3 4 5 6 -1
+		permutation
+		arrangement
+		planar
+		not_projective
+		end

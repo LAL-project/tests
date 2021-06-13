@@ -69,14 +69,14 @@ using namespace numeric;
 		cerr << ERROR << endl;											\
 		message_in_func(assertion)										\
 		cerr << "    Invalid variable type '" << vt << "'." << endl;	\
-		return err_type::test_format;								\
+		return err_type::test_format;									\
 	}
 #define assert_correct_format(assertion, f)								\
 	if (f != "int" and f != "string") {									\
 		cerr << ERROR << endl;											\
 		message_in_func(assertion)										\
 		cerr << "    Invalid format type '" << f << "'." << endl;		\
-		return err_type::test_format;								\
+		return err_type::test_format;									\
 	}
 
 #define comparison_error(op, var1, var2, val_var1, val_var2)	\
