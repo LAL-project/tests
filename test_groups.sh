@@ -78,6 +78,7 @@ groups_list=(\
 		"linarr_headedness" \
 		"linarr_k_level" \
 		"linarr_MDD" \
+		"linarr_arrangement_validity" \
 	\
 	"memory" \
 		"memory_graphs" \
