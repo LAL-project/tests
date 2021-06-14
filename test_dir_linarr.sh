@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# projectivity and planarity tests
+linarr_arrangement_validity_DIRS=(\
+	"linarr/arrangement_validity" "linarr/arrangement_validity" \
+	)
+
 # approximation of the number of crossings
 linarr_E_2Cd_DIRS=(\
 	"linarr/E_2Cd" "linarr/E_2Cd" \
@@ -164,6 +169,7 @@ linarr_MDD_DIRS=(\
 
 # linear arrangements tests
 linarr_DIRS=(\
+	"${linarr_arrangement_validity_DIRS[@]}" \
 	"${linarr_E_2Cd_DIRS[@]}" \
 	"${linarr_D_DIRS[@]}" \
 	"${linarr_Dmin_DIRS[@]}" \
