@@ -103,7 +103,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 	double total_elapsed = 0.0;
 
 	// linear arrangement
-	const uint32_t n = uG.get_num_nodes();
+	const uint64_t n = uG.get_num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
@@ -113,13 +113,13 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 
 	for (size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint32_t u = 0; u < uG.get_num_nodes(); ++u) {
+		for (uint64_t u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
-		const uint32_t uCbf = num_crossings_brute_force(uG, pi);
-		const uint32_t dCbf = num_crossings_brute_force(dG, pi);
+		const uint64_t uCbf = num_crossings_brute_force(uG, pi);
+		const uint64_t dCbf = num_crossings_brute_force(dG, pi);
 		if (uCbf != dCbf) {
 			cerr << ERROR << endl;
 			cerr << "    Number of crossings calculated by bruteforce do not coincide." << endl;
@@ -135,7 +135,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 			return err_type::test_execution;
 		}
 
-		uint32_t uC = 0, dC = 0;
+		uint64_t uC = 0, dC = 0;
 		const auto choose_algo =
 		[](const string& name) {
 			if (name == "dyn_prog") { return algorithms_C::dynamic_programming; }
@@ -144,7 +144,7 @@ err_type exe_linarr_C(const input_list& inputs, ifstream& fin, bool has_upper_bo
 			return algorithms_C::brute_force;
 		}(proc);
 
-		uint32_t upper_bound;
+		uint64_t upper_bound;
 		if (has_upper_bound) {
 			fin >> upper_bound;
 			const auto begin = timing::now();

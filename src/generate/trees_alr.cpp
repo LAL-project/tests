@@ -87,7 +87,7 @@ struct extra_params { };
 	   as many trees as n^(n - 1) <- note that we are dealing								\
 	   with labelled ROOTED trees!															\
 	   https://oeis.org/A000169/list */														\
-	const integer nn = integer_from_ui(n);													\
+	const integer nn = integer(n);															\
 	const integer total = (n == 1 ? 1 : (nn.pow(nn - 1)));									\
 	if (gen != total) {																		\
 		cerr << ERROR << endl;																\
@@ -99,7 +99,7 @@ struct extra_params { };
 	}
 
 err_type test_for_n_while
-(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
 {
 	uint64_t gen = 0;
 	while (not TreeGen.end()) {
@@ -112,7 +112,7 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
 {
 	uint64_t gen = 0;
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -124,7 +124,7 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint32_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_rooted_trees& TreeGen, const extra_params&)
 {
 	uint64_t gen = 0;
 	while (not TreeGen.end()) {
@@ -147,7 +147,7 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>

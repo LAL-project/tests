@@ -63,7 +63,7 @@ enum class ftree_check : int8_t {
 };
 
 std::string ftree_check_to_string(const ftree_check& fc);
-ftree_check test_validity_tree(const uint32_t n, const lal::graphs::free_tree& T);
+ftree_check test_validity_tree(const uint64_t n, const lal::graphs::free_tree& T);
 
 /* ROOTED TREES */
 
@@ -78,6 +78,6 @@ enum class rtree_check : int8_t {
 };
 
 std::string rtree_check_to_string(const rtree_check& fc);
-rtree_check test_validity_tree(const uint32_t n, const lal::graphs::rooted_tree& T);
+rtree_check test_validity_tree(const uint64_t n, const lal::graphs::rooted_tree& T);
 
 } // -- namespace tests

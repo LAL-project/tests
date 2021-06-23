@@ -69,10 +69,10 @@ err_type exe_gen_trees_ruf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n, N;
+	uint64_t n, N;
 	while (fin >> n >> N) {
 		rand_ulab_free_trees TreeGen(n, 100);
-		for (uint32_t i = 0; i < N; ++i) {
+		for (uint64_t i = 0; i < N; ++i) {
 			const free_tree T = TreeGen.get_tree();
 
 			const ftree_check err = test_validity_tree(n, T);

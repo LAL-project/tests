@@ -57,8 +57,8 @@ using namespace lal;
 // common includes
 #include "common/definitions.hpp"
 
-typedef uint32_t Ui;
-typedef vector<uint32_t>::iterator Ui_it;
+typedef uint64_t Ui;
+typedef vector<uint64_t>::iterator Ui_it;
 
 typedef tuple<Ui> t1;
 typedef vector<t1> t1_vec;
@@ -402,22 +402,22 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		}
 		const bool incr = order == "increasing";
 
-		uint32_t n;
+		uint64_t n;
 		fin >> n;
 
-		uint32_t Max = 0;
-		vector<uint32_t> values(n);
+		uint64_t Max = 0;
+		vector<uint64_t> values(n);
 		for (auto& v : values) {
 			fin >> v;
 			Max = std::max(Max, v);
 		}
 
-		auto key1 = [](const uint32_t& t) -> size_t { return t; };
+		auto key1 = [](const uint64_t& t) -> size_t { return t; };
 		auto sort1 =
 		[&](Ui_it begin, Ui_it end) -> void {
-			here_counting_sort<Ui_it, uint32_t>(begin, end, Max, key1, incr);
+			here_counting_sort<Ui_it, uint64_t>(begin, end, Max, key1, incr);
 		};
-		return __check_sorting<uint32_t,Ui_it>(
+		return __check_sorting<uint64_t,Ui_it>(
 			"counting_sort", values,values, sort1, incr
 		);
 	}

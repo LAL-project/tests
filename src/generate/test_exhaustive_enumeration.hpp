@@ -51,7 +51,7 @@ template<
 	typename extra_params
 >
 err_type test_exhaustive_enumeration_of_trees(
-	uint32_t n, const Callable& f, const extra_params& ep
+	uint64_t n, const Callable& f, const extra_params& ep
 )
 {
 	Gen TreeGen(n);

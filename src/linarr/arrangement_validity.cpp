@@ -65,7 +65,7 @@ template<class G>
 err_type test_arrangement(ifstream& fin) {
 	G g;
 	{
-	uint32_t num_nodes = 0;
+	uint64_t num_nodes = 0;
 	vector<edge> edges;
 	int u;
 	while (fin >> u and u != -1) {

@@ -72,7 +72,7 @@ inline bool equal_graphs(const G& g1, const G& g2)
 		}
 	};
 
-	const uint32_t n = g1.get_num_nodes();
+	const uint64_t n = g1.get_num_nodes();
 	for (lal::node u = 0; u < n; ++u) {
 		const lal::neighbourhood& n1 = get_neighs(g1, u);
 		const lal::neighbourhood& n2 = get_neighs(g2, u);

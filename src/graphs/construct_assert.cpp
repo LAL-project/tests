@@ -119,7 +119,7 @@ err_type process_assert(
 )
 {
 	string g1, g2;
-	uint32_t n;
+	uint64_t n;
 	node u,v;
 
 	if (assert_what == ASSERT_GRAPH_EQUAL_GRAPHS) {
@@ -480,7 +480,7 @@ err_type process_assert(
 		assert_correct_graph_type(
 			ASSERT_GRAPH_FULL_DEGREE, graph_type(g1), directed_types
 		)
-		const uint32_t fdegree =
+		const uint64_t fdegree =
 			mfunction_dir_graphs(g1, get_degree(u));
 		if (fdegree != v) {
 			cerr << ERROR << endl;

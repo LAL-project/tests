@@ -75,12 +75,12 @@ err_type exe_properties_expected_D_planar_brute_force
 		return err_type::test_format;
 	}
 
-	uint32_t n;
+	uint64_t n;
 	fin >> n;
 
 	head_vector hv(n);
 	while (fin >> hv[0]) {
-		for (uint32_t i = 1; i < n; ++i) { fin >> hv[i]; }
+		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
 
 		const free_tree T = from_head_vector_to_free_tree(hv).first;
 
@@ -108,7 +108,7 @@ err_type exe_properties_expected_D_planar_brute_force
 }
 
 rational quadratic_E_pr_D(const free_tree& t) {
-	const uint32_t n = t.get_num_nodes();
+	const uint64_t n = t.get_num_nodes();
 	const rational correction_factor((n - 1)*(n - 2), 6*n);
 	rational S = 0;
 	for (node u = 0; u < n; ++u) {
@@ -132,7 +132,7 @@ err_type exe_properties_expected_D_planar_quadratic
 	string option;
 	fin >> option;
 
-	uint32_t n;
+	uint64_t n;
 	if (option == "exhaustive") {
 		while (fin >> n) {
 			size_t idx = 0;
@@ -162,10 +162,10 @@ err_type exe_properties_expected_D_planar_quadratic
 		}
 	}
 	else {
-		uint32_t nrand;
+		uint64_t nrand;
 		while (fin >> n >> nrand) {
 			generate::rand_ulab_free_trees gen(n, 1234);
-			for (uint32_t i = 0; i < nrand; ++i) {
+			for (uint64_t i = 0; i < nrand; ++i) {
 				const auto t = gen.yield_tree();
 
 				// linear time algorithm

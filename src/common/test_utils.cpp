@@ -96,20 +96,20 @@ string read_output_string(ifstream& fin) noexcept {
 
 vector<node> invlinarr(const linear_arrangement& arr) noexcept {
 	vector<node> ilin(arr.size());
-	for (uint32_t p : arr) { ilin[ arr[p] ] = p; }
+	for (uint64_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;
 }
 
-#define to_uint32(x) static_cast<uint32_t>(x)
+#define to_uint64(x) static_cast<uint64_t>(x)
 
-void relabel_edges(const uint32_t n, vector<edge>& edges, node& r) noexcept {
+void relabel_edges(const uint64_t n, vector<edge>& edges, node& r) noexcept {
 	std::mt19937 gen(1234);
 
 	vector<node> relab(n);
 	std::iota(relab.begin(), relab.end(), 0);
 
 	// relabel 'n' times
-	for (uint32_t i = 0; i < n; ++i) {
+	for (uint64_t i = 0; i < n; ++i) {
 		std::shuffle(relab.begin(), relab.end(), gen);
 
 		// relabel each vertex according to 'relab'
@@ -126,11 +126,11 @@ void shuffle_graph_edges(
 )
 noexcept
 {
-	const uint32_t n = G.get_num_nodes();
+	const uint64_t n = G.get_num_nodes();
 	std::mt19937 gen(1234);
 
 	// shuffle 'n' times
-	for (uint32_t i = 0; i < n; ++i) {
+	for (uint64_t i = 0; i < n; ++i) {
 		std::shuffle(edges.begin(), edges.end(), gen);
 	}
 
@@ -144,7 +144,7 @@ void relabel_graph_vertices(
 )
 noexcept
 {
-	const uint32_t n = G.get_num_nodes();
+	const uint64_t n = G.get_num_nodes();
 	node dummy = 0;
 	relabel_edges(G.get_num_nodes(), edges, dummy);
 
@@ -162,7 +162,7 @@ noexcept
 	relabel_edges(T.get_num_nodes(), edges, r);
 
 	T.clear();
-	T.init(to_uint32(edges.size() + 1));
+	T.init(to_uint64(edges.size() + 1));
 	T.set_edges(edges, normalise, check);
 	T.set_valid_orientation(true);
 }
@@ -176,7 +176,7 @@ noexcept
 	relabel_edges(T.get_num_nodes(), edges, dummy);
 
 	T.clear();
-	T.init(to_uint32(edges.size() + 1));
+	T.init(to_uint64(edges.size() + 1));
 	T.set_edges(edges, normalise, check);
 }
 

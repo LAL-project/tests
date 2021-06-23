@@ -51,7 +51,7 @@ using namespace iterators;
 using namespace numeric;
 using namespace graphs;
 
-typedef uint32_t bigint;
+typedef uint64_t bigint;
 
 namespace tests {
 namespace properties {
@@ -123,7 +123,7 @@ inline void compute_data_gen_graphs_Q
 		}
 	}
 
-	Qs = static_cast<uint32_t>(Q.size());
+	Qs = static_cast<uint64_t>(Q.size());
 	n_cycles_4 /= 2;
 }
 
@@ -176,17 +176,17 @@ rational nonLAL_var_num_crossings_rational_Q(const undirected_graph& g, const ve
 
 	// V[C]
 	rational V(0);
-	J.set_ui((m + 2)*Qs);			V += rational(2,45)*J;
-	J.set_ui((2*m + 7)*n_paths_4);	V -= rational(1,180)*J;
-	J.set_ui(n_paths_5);			V -= rational(1,180)*J;
-	J.set_ui(Kg);					V += rational(1,90)*J;
-	J.set_ui(n_cycles_4);			V -= rational(3,45)*J;
-	J.set_ui(Lambda_1);				V -= rational(1,60)*J;
-	J.set_ui(Lambda_2);				V += rational(1,180)*J;
-	J.set_ui(Phi_2);				V += rational(1,180)*J;
-	J.set_ui(Phi_1);				V -= rational(1,90)*J;
-	J.set_ui(graphlet);				V += rational(1,30)*J;
-	J.set_ui(pair_C3_L2);			V += rational(1,90)*J;
+	J.set_number((m + 2)*Qs);			V += rational(2,45)*J;
+	J.set_number((2*m + 7)*n_paths_4);	V -= rational(1,180)*J;
+	J.set_number(n_paths_5);			V -= rational(1,180)*J;
+	J.set_number(Kg);					V += rational(1,90)*J;
+	J.set_number(n_cycles_4);			V -= rational(3,45)*J;
+	J.set_number(Lambda_1);				V -= rational(1,60)*J;
+	J.set_number(Lambda_2);				V += rational(1,180)*J;
+	J.set_number(Phi_2);				V += rational(1,180)*J;
+	J.set_number(Phi_1);				V -= rational(1,90)*J;
+	J.set_number(graphlet);				V += rational(1,30)*J;
+	J.set_number(pair_C3_L2);			V += rational(1,90)*J;
 	return V;
 }
 

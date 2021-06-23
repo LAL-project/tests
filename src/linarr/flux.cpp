@@ -114,13 +114,13 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 	while (fin >> field) {
 		if (field == "tree") {
 			++tree_idx;
-			uint32_t n;
+			uint64_t n;
 			fin >> n;
 #if defined DEBUG
 			assert(n > 0);
 #endif
 
-			vector<uint32_t> linear_sequence(n);
+			vector<uint64_t> linear_sequence(n);
 			for (auto& v : linear_sequence) { fin >> v; }
 
 			T.clear();
@@ -140,11 +140,11 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 		}
 		else if (field == "dependencies") {
 			for (auto& v : input_flux) {
-				uint32_t k;
+				uint64_t k;
 				fin >> k;
 				v.get_dependencies().resize(k);
 				auto& deps = v.get_dependencies();
-				for (uint32_t i = 0; i < k; ++i) {
+				for (uint64_t i = 0; i < k; ++i) {
 					fin >> deps[i].first >> deps[i].second;
 				}
 			}

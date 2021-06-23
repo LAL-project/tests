@@ -65,8 +65,8 @@ using namespace linarr;
 #include "common/definitions.hpp"
 #include "common/time.hpp"
 
-#define to_int32(x) static_cast<int32_t>(x)
-#define to_uint32(x) static_cast<uint32_t>(x)
+#define to_int64(x) static_cast<int64_t>(x)
+#define to_uint64(x) static_cast<uint64_t>(x)
 
 namespace tests {
 namespace linarr {
@@ -80,11 +80,11 @@ inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
 	return (s1 == s2) or (s1 == s2 + d2) or (s1 + d1 == s2) or (s1 + d1 == s2 + d2);
 }
 
-uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
-	uint32_t c = 0;
-	for (uint32_t s1 = 1; s1 <= n; ++s1) {
+uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
+	uint64_t c = 0;
+	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-		for (uint32_t s2 = 1; s2 <= n; ++s2) {
+		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			//if (s2 + d2 > n) { continue; }
 			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
 			const bool cond1 = s2 + d2 > n;
@@ -99,11 +99,11 @@ uint32_t alpha(uint32_t n, uint32_t d1, uint32_t d2) {
 	return c;
 }
 
-uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
-	uint32_t c = 0;
-	for (uint32_t s1 = 1; s1 <= n; ++s1) {
+uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
+	uint64_t c = 0;
+	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
-		for (uint32_t s2 = 1; s2 <= n; ++s2) {
+		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			//if (s2 + d2 > n) { continue; }
 			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
 			const bool cond1 = s2 + d2 > n;
@@ -119,7 +119,7 @@ uint32_t beta(uint32_t n, uint32_t d1, uint32_t d2) {
 template<typename GRAPH>
 rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 	rational Ec2(0);
-	const uint32_t n = g.get_num_nodes();
+	const uint64_t n = g.get_num_nodes();
 
 	for (iterators::Q_iterator<GRAPH> q_it(g); not q_it.end(); q_it.next()) {
 		const edge_pair st_uv = q_it.get_edge_pair();
@@ -130,11 +130,11 @@ rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 		const node u = uv.first;
 		const node v = uv.second;
 
-		uint32_t al;
-		uint32_t be;
+		uint64_t al;
+		uint64_t be;
 
-		const uint32_t len_st = to_uint32(std::abs(to_int32(pi[s]) - to_int32(pi[t])));
-		const uint32_t len_uv = to_uint32(std::abs(to_int32(pi[u]) - to_int32(pi[v])));
+		const uint64_t len_st = to_uint64(std::abs(to_int64(pi[s]) - to_int64(pi[t])));
+		const uint64_t len_uv = to_uint64(std::abs(to_int64(pi[u]) - to_int64(pi[v])));
 		assert(len_st <= n);
 		assert(len_uv <= n);
 
@@ -147,7 +147,7 @@ rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 			be = beta(n, len_uv, len_st);
 		}
 
-		Ec2 += rational(to_int32(al), be);
+		Ec2 += rational(to_int64(al), be);
 	}
 
 	return Ec2;
@@ -186,12 +186,12 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint32_t n = uG.get_num_nodes();
+	const uint64_t n = uG.get_num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 
 	// amount of linear arrangements
-	uint32_t n_linarrs;
+	uint64_t n_linarrs;
 	fin >> n_linarrs;
 
 	for (size_t i = 0; i < n_linarrs; ++i) {

@@ -79,11 +79,11 @@ tree_type string_to_tt(const string& s) {
 	return tree_type::unknown;
 }
 
-vector<uint32_t> parse_treestr(const string& s) {
+vector<uint64_t> parse_treestr(const string& s) {
 	// read numbers in line
 	stringstream ss(s);
-	vector<uint32_t> L;
-	uint32_t v;
+	vector<uint64_t> L;
+	uint64_t v;
 	while (ss >> v) { L.push_back(v); }
 	return L;
 }

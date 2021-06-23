@@ -192,7 +192,7 @@ err_type test_without_graph(ifstream& fin) {
 			g.add_edge(u,v);
 		}
 		else if (command == "init") {
-			uint32_t n;
+			uint64_t n;
 			fin >> n;
 			g.init(n);
 		}

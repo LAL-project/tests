@@ -201,9 +201,9 @@ rational nonLAL_variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	};
 
 	// values of the frequencies
-	uint32_t f021(0), f022(0),	f03(0);
-	uint32_t f04(0),  f12(0), 	f13(0);
-	uint32_t f24(0);
+	uint64_t f021(0), f022(0),	f03(0);
+	uint64_t f04(0),  f12(0), 	f13(0);
+	uint64_t f24(0);
 
 	// for a small enough set Q
 	for (const edge_pair& q1 : Q) {
@@ -219,14 +219,14 @@ rational nonLAL_variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	{
 	integer J(0);
 	//J.init_ui(f00);  V += exps[0]*f00;
-	J.set_ui(f24);  V += exps[1]*J;
-	J.set_ui(f13);  V += exps[2]*J;
-	J.set_ui(f12);  V += exps[3]*J;
-	J.set_ui(f04);  V += exps[4]*J;
-	J.set_ui(f03);  V += exps[5]*J;
-	J.set_ui(f021); V += exps[6]*J;
-	J.set_ui(f022); V += exps[7]*J;
-	//J.set_ui(f01);  V += exps[8]*f01;
+	J.set_number(f24);  V += exps[1]*J;
+	J.set_number(f13);  V += exps[2]*J;
+	J.set_number(f12);  V += exps[3]*J;
+	J.set_number(f04);  V += exps[4]*J;
+	J.set_number(f03);  V += exps[5]*J;
+	J.set_number(f021); V += exps[6]*J;
+	J.set_number(f022); V += exps[7]*J;
+	//J.set_number(f01);  V += exps[8]*f01;
 	}
 
 	return V;

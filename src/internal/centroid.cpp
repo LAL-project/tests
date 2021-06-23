@@ -64,10 +64,10 @@ using namespace generate;
 #include "common/test_utils.hpp"
 
 inline bool is_centroidal(
-	const graphs::rooted_tree& t, uint32_t size_cc, node u, uint32_t *sizes
+	const graphs::rooted_tree& t, uint64_t size_cc, node u, uint64_t *sizes
 )
 {
-	memset(sizes, 0, t.get_num_nodes()*sizeof(uint32_t));
+	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_out_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
@@ -83,10 +83,10 @@ inline bool is_centroidal(
 }
 
 inline bool is_centroidal(
-	const graphs::free_tree& t, uint32_t size_cc, node u, uint32_t *sizes
+	const graphs::free_tree& t, uint64_t size_cc, node u, uint64_t *sizes
 )
 {
-	memset(sizes, 0, t.get_num_nodes()*sizeof(uint32_t));
+	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	internal::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
@@ -98,9 +98,9 @@ inline bool is_centroidal(
 
 template<class T>
 pair<node,node> straightforward_centroid(const T& t, node x) {
-	const uint32_t n = t.get_num_nodes();
+	const uint64_t n = t.get_num_nodes();
 
-	uint32_t size_cc = 0;
+	uint64_t size_cc = 0;
 	vector<node> reachable;
 	{
 	internal::BFS<T> bfs(t);
@@ -112,7 +112,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	}
 
 	// allocate and initialise memory
-	uint32_t *sizes = static_cast<uint32_t *>(malloc(n*sizeof(uint32_t)));
+	uint64_t *sizes = static_cast<uint64_t *>(malloc(n*sizeof(uint64_t)));
 
 	node u1, u2;
 	u1 = u2 = n;
@@ -148,7 +148,7 @@ namespace internal {
 template<class TREE_TYPE>
 err_type exe_commands_utils_centroid(ifstream& fin) {
 	TREE_TYPE t;
-	uint32_t n;
+	uint64_t n;
 
 	string option;
 	while (fin >> option) {
@@ -167,7 +167,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "add_edges") {
 			fin >> n;
 			vector<edge> es(n);
-			for (uint32_t i = 0; i < n; ++i) {
+			for (uint64_t i = 0; i < n; ++i) {
 				fin >> es[i].first >> es[i].second;
 			}
 			t.add_edges(es);
@@ -185,7 +185,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 			fin >> start_at;
 			const auto centroid = lal::internal::retrieve_centroid(t, start_at);
 
-			uint32_t centroid_size;
+			uint64_t centroid_size;
 			fin >> centroid_size;
 
 			if (centroid_size == 1) {
@@ -294,16 +294,16 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 
 #define exe_random(G, n)						\
 {												\
-	uint32_t N;									\
+	uint64_t N;									\
 	fin >> N;									\
 	G Gen(n);									\
-	for (uint32_t i = 0; i < N; ++i) {			\
+	for (uint64_t i = 0; i < N; ++i) {			\
 		const auto T = Gen.get_tree();			\
 		test_correctness(T)						\
 	}											\
 }
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		if (graph_type == "ftree") {
 			if (how == "exhaustive") {

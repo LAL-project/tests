@@ -48,13 +48,13 @@ namespace tests {
 namespace linarr {
 
 template<class G>
-inline uint32_t num_crossings_brute_force(
+inline uint64_t num_crossings_brute_force(
 	const G& g,
 	const lal::linear_arrangement& pi
 )
 {
 	const std::vector<lal::edge> edges = g.get_edges();
-	uint32_t C = 0;
+	uint64_t C = 0;
 
 #define sorted_by_pos(A,B) \
 	(pi[A] < pi[B] ? std::make_pair(pi[A],pi[B]) : std::make_pair(pi[B],pi[A]))
@@ -76,12 +76,12 @@ inline uint32_t num_crossings_brute_force(
 }
 
 template<class G>
-inline std::vector<uint32_t> num_crossings_brute_force(
+inline std::vector<uint64_t> num_crossings_brute_force(
 	const G& g,
 	const std::vector<lal::linear_arrangement>& pis
 )
 {
-	std::vector<uint32_t> C(pis.size());
+	std::vector<uint64_t> C(pis.size());
 	for (size_t i = 0; i < pis.size(); ++i) {
 		C[i] = num_crossings_brute_force(g, pis[i]);
 	}

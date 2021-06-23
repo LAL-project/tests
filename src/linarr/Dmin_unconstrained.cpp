@@ -71,7 +71,7 @@ using namespace numeric;
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
 
-typedef pair<uint32_t, linear_arrangement> algo_result;
+typedef pair<uint64_t, linear_arrangement> algo_result;
 
 namespace tests {
 namespace linarr {
@@ -79,7 +79,7 @@ namespace linarr {
 namespace dmin_unconstrained {
 
 inline
-bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
+bool check_correctness_arr(const free_tree& tree, const pair<uint64_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
 	// ensure that the result is an arrangement
 	if (not lal::linarr::is_permutation(arr)) {
@@ -91,7 +91,7 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 		return false;
 	}
 	// ensure that value of D is correct
-	const uint32_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
@@ -107,8 +107,8 @@ bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_ar
 }
 
 bool test_correctness_arr_formula(
-	const free_tree& tree, const pair<uint32_t, linear_arrangement>& res_lib,
-	const string& tree_class, const uint32_t val_formula
+	const free_tree& tree, const pair<uint64_t, linear_arrangement>& res_lib,
+	const string& tree_class, const uint64_t val_formula
 )
 {
 	if (not check_correctness_arr(tree, res_lib)) {
@@ -136,7 +136,7 @@ bool test_correctness_arr_formula(
 err_type test_bf_algorithm(
 	// A is a function that encapsulates an algorithm
 	// -- be it Shiloach's, be it Fan Chung's
-	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
+	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
@@ -167,12 +167,12 @@ err_type test_bf_algorithm(
 }
 
 err_type test_class_algorithm(
-	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
+	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
 	string tree_class;
-	uint32_t n1, n2;
+	uint64_t n1, n2;
 
 	// read class of tree to test
 	// read size of the tree
@@ -183,7 +183,7 @@ err_type test_class_algorithm(
 		if (tree_class == "linear") {
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			for (uint32_t n = n1; n <= n2; ++n) {
+			for (uint64_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
 				free_tree T(n);
 
@@ -194,7 +194,7 @@ err_type test_class_algorithm(
 				}
 
 				// Dmin for linear tree is
-				const uint32_t Dmin_lintree = n - 1;
+				const uint64_t Dmin_lintree = n - 1;
 				// Dmin from the algorithm is
 				const auto algo_res = A(T);
 
@@ -212,7 +212,7 @@ err_type test_class_algorithm(
 		else if (tree_class == "caterpillar") {
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			for (uint32_t n = n1; n <= n2; ++n) {
+			for (uint64_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
 
 				generate::all_ulab_free_trees TreeGen(n);
@@ -225,9 +225,9 @@ err_type test_class_algorithm(
 					{ continue; }
 
 					// Dmin for caterpillar trees
-					uint32_t Dmin_cat = 0;
+					uint64_t Dmin_cat = 0;
 					for (node u = 0; u < n; ++u) {
-						const uint32_t du = tree.get_degree(u);
+						const uint64_t du = tree.get_degree(u);
 						Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
 					}
 					Dmin_cat /= 4;
@@ -250,20 +250,20 @@ err_type test_class_algorithm(
 		else if (tree_class == "binary-complete") {
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			for (uint32_t n = n1; n <= n2; ++n) {
+			for (uint64_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
 
 				// We should interpret 'n' as the *heigh*.
 				// The height of a single vertex is h=1
-				const uint32_t h = n;
+				const uint64_t h = n;
 
 				// total amount of vertices
-				uint32_t N;
+				uint64_t N;
 				{
 				integer _N = 2;
 				_N.powt(h);
 				_N -= 1;
-				N = static_cast<uint32_t>(_N.to_uint());
+				N = static_cast<uint64_t>(_N.to_uint());
 				}
 
 				// build k-complete tree of height h
@@ -280,7 +280,7 @@ err_type test_class_algorithm(
 					const node s = attach_to.front();
 					attach_to.pop();
 
-					for (uint32_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
+					for (uint64_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
 						const node t = next_node;
 						attach_to.push(t);
 
@@ -291,7 +291,7 @@ err_type test_class_algorithm(
 				T.add_edges(edges, false);
 				}
 
-				uint32_t Dmin_bin_complete = 0;
+				uint64_t Dmin_bin_complete = 0;
 				{
 				rational F = h;
 				F /= 3; // k/3
@@ -300,7 +300,7 @@ err_type test_class_algorithm(
 
 				F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
 				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
-				Dmin_bin_complete = static_cast<uint32_t>(F.to_integer().to_uint());
+				Dmin_bin_complete = static_cast<uint64_t>(F.to_integer().to_uint());
 
 				assert(F == Dmin_bin_complete);
 				}
@@ -322,13 +322,13 @@ err_type test_class_algorithm(
 		else if (tree_class == "star") {
 			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
 
-			for (uint32_t n = n1; n <= n2; ++n) {
+			for (uint64_t n = n1; n <= n2; ++n) {
 				cout << "    " << n << endl;
 
 				free_tree T(n);
 				for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
 
-				const uint32_t Dmin_star = (n*n - n%2)/4;
+				const uint64_t Dmin_star = (n*n - n%2)/4;
 
 				// compute Dmin using the library's algorithm
 				const auto res_algo = A(T);
@@ -354,16 +354,16 @@ err_type test_class_algorithm(
 }
 
 err_type test_tree_algorithm(
-	const function< pair<uint32_t, linear_arrangement> (const free_tree&) >& A,
+	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
 	ifstream& fin
 )
 {
 	// read number of vertices
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		free_tree T(n);
 		node u,v;
-		for (uint32_t i = 0; i < n - 1; ++i) {
+		for (uint64_t i = 0; i < n - 1; ++i) {
 			fin >> u >> v;
 			T.add_edge(u,v);
 		}
@@ -401,7 +401,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, input_file
@@ -412,7 +412,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "YS_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
@@ -421,7 +421,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "YS_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_YS);
 			}
 		, fin
@@ -446,7 +446,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, input_file
@@ -457,7 +457,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "FC_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin
@@ -466,7 +466,7 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "FC_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const free_tree& t) -> pair<uint32_t, linear_arrangement> {
+			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
 				return min_sum_edge_lengths(t, algorithms_Dmin::Unconstrained_FC);
 			}
 		, fin

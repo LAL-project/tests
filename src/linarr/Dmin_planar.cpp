@@ -67,8 +67,8 @@ namespace linarr {
 
 namespace tests_Dmin_planar {
 
-pair<uint32_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
-	uint32_t Dmin_planar = numeric_limits<uint32_t>::max();
+pair<uint64_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
+	uint64_t Dmin_planar = numeric_limits<uint64_t>::max();
 	linear_arrangement arr;
 
 	for (node u = 0; u < t.get_num_nodes(); ++u) {
@@ -87,7 +87,7 @@ pair<uint32_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
 inline
 bool check_correctness_arr(
 	const free_tree& tree,
-	const pair<uint32_t, linear_arrangement>& res
+	const pair<uint64_t, linear_arrangement>& res
 )
 {
 	const linear_arrangement& arr = res.second;
@@ -102,7 +102,7 @@ bool check_correctness_arr(
 		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint32_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
@@ -219,7 +219,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			return err_type::test_format;
 		}
 
-		uint32_t n;
+		uint64_t n;
 		while (fin >> n) {
 			if (mode == "exhaustive") {
 				generate::all_ulab_free_trees Gen(n);

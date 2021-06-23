@@ -65,7 +65,7 @@ string ftree_check_to_string(const ftree_check& fc) {
 	return "";
 }
 
-ftree_check test_validity_tree(const uint32_t n, const free_tree& T) {
+ftree_check test_validity_tree(const uint64_t n, const free_tree& T) {
 	if (not T.is_tree()) {
 		return ftree_check::not_a_tree;
 	}
@@ -93,7 +93,7 @@ string rtree_check_to_string(const rtree_check& fc) {
 	return "";
 }
 
-rtree_check test_validity_tree(const uint32_t n, const rooted_tree& T) {
+rtree_check test_validity_tree(const uint64_t n, const rooted_tree& T) {
 	if (not T.is_tree()) {
 		return rtree_check::not_a_tree;
 	}

@@ -72,7 +72,7 @@ err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		cout << "----------------------------------------" << endl;
 		cout << "n= " << n << endl;

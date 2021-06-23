@@ -65,7 +65,7 @@ using namespace numeric;
 #include "generate/test_exhaustive_enumeration.hpp"
 
 // expected second moment of degree over all labelled trees
-inline rational exp_mmt_deg_2_lab_trees(uint32_t n) {
+inline rational exp_mmt_deg_2_lab_trees(uint64_t n) {
 	rational p1 = 1;
 	p1 -= rational(1,n);
 	rational p2 = 5;
@@ -115,9 +115,9 @@ struct extra_params { };
 	}
 
 err_type test_for_n_while
-(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_free_trees& TreeGen, const extra_params&)
 {
-	const integer nn = integer_from_ui(n);
+	const integer nn = integer(n);
 
 	// expected second moment of degree
 	const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
@@ -136,9 +136,9 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_free_trees& TreeGen, const extra_params&)
 {
-	const integer nn = integer_from_ui(n);
+	const integer nn = integer(n);
 
 	// expected second moment of degree
 	const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
@@ -156,9 +156,9 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint32_t n, all_lab_free_trees& TreeGen, const extra_params&)
+(uint64_t n, all_lab_free_trees& TreeGen, const extra_params&)
 {
-	const integer nn = integer_from_ui(n);
+	const integer nn = integer(n);
 
 	// expected second moment of degree
 	const rational exp_mmtdeg2 = exp_mmt_deg_2_lab_trees(n);
@@ -187,7 +187,7 @@ err_type exe_gen_trees_alf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_lab_free_trees>

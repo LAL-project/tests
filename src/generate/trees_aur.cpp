@@ -70,7 +70,7 @@ namespace generate {
 namespace aur {
 struct extra_params {
 	vector<integer> URT;
-	uint32_t SIZE_URT;
+	uint64_t SIZE_URT;
 };
 
 #define process																\
@@ -114,7 +114,7 @@ struct extra_params {
 	}
 
 err_type test_for_n_while
-(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 	const auto& SIZE_URT = params.SIZE_URT;
@@ -135,7 +135,7 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 	const auto& SIZE_URT = params.SIZE_URT;
@@ -155,7 +155,7 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint32_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 	const auto& SIZE_URT = params.SIZE_URT;
@@ -231,7 +231,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>

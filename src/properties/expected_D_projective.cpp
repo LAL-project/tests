@@ -73,12 +73,12 @@ err_type exe_properties_expected_D_projective(const input_list& inputs, ifstream
 		return err_type::test_format;
 	}
 
-	uint32_t n;
+	uint64_t n;
 	fin >> n;
 
 	head_vector hv(n);
 	while (fin >> hv[0]) {
-		for (uint32_t i = 1; i < n; ++i) { fin >> hv[i]; }
+		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
 
 		rooted_tree T = from_head_vector_to_rooted_tree(hv);
 

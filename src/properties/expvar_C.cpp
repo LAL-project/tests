@@ -133,8 +133,8 @@ void output_ExpVar_C_forests(const undirected_graph& g) noexcept {
 	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
 }
 
-bool check_ExpVar_C_all_trees(uint32_t n) noexcept {
-	uint32_t k = 0;
+bool check_ExpVar_C_all_trees(uint64_t n) noexcept {
+	uint64_t k = 0;
 
 	all_ulab_free_trees TreeGen(n);
 	while (not TreeGen.end()) {
@@ -160,13 +160,13 @@ bool check_ExpVar_C_all_trees(uint32_t n) noexcept {
 	return true;
 }
 
-bool check_ExpVar_C_mixed_trees(uint32_t r, uint32_t n_trees, uint32_t size_trees) {
+bool check_ExpVar_C_mixed_trees(uint64_t r, uint64_t n_trees, uint64_t size_trees) {
 	rand_ulab_free_trees TreeGen(size_trees);
 	undirected_graph forest;
 
-	for (uint32_t i = 0; i < r; ++i) {
+	for (uint64_t i = 0; i < r; ++i) {
 		forest.clear();
-		for (uint32_t j = 0; j < n_trees; ++j) {
+		for (uint64_t j = 0; j < n_trees; ++j) {
 			const free_tree rand_tree = TreeGen.get_tree();
 			forest.disjoint_union(rand_tree);
 		}
@@ -210,10 +210,10 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 	}
 
 	if (proc == "all-trees") {
-		uint32_t n;
+		uint64_t n;
 		fin >> n;
-		uint32_t k;
-		for (uint32_t i = 0; i < n; ++i) {
+		uint64_t k;
+		for (uint64_t i = 0; i < n; ++i) {
 			fin >> k;
 			const bool r = check_ExpVar_C_all_trees(k);
 
@@ -224,10 +224,10 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 		TEST_GOODBYE
 	}
 	else if (proc == "mixed-trees") {
-		uint32_t rep, n_pairs, n_trees, size_trees;
+		uint64_t rep, n_pairs, n_trees, size_trees;
 		fin >> rep >> n_pairs;
 
-		for (uint32_t i = 0; i < n_pairs; ++i) {
+		for (uint64_t i = 0; i < n_pairs; ++i) {
 			fin >> n_trees >> size_trees;
 			bool r = check_ExpVar_C_mixed_trees(rep, n_trees, size_trees);
 			if (not r) {

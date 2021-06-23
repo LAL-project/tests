@@ -69,7 +69,7 @@ err_type exe_gen_trees_rur(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		rand_ulab_rooted_trees TreeGen(n, 100);
 		for (int i = 0; i < 10000; ++i) {

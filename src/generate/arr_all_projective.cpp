@@ -78,7 +78,7 @@ inline integer amount_projective(const rooted_tree& rT) noexcept {
 	return k;
 }
 
-inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
+inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 	vector<edge> edges = rT.get_edges();
 
 #define check_arrangement													\
@@ -111,10 +111,10 @@ inline err_type test_a_tree(rooted_tree& rT, uint32_t nrelabs) noexcept {
 		return err_type::test_execution;									\
 	}
 
-	for (uint32_t i = 0; i < 2*nrelabs; ++i) {
+	for (uint64_t i = 0; i < 2*nrelabs; ++i) {
 		relabel_tree_vertices(edges, rT, (i < nrelabs ? false : true), false);
 
-		uint32_t iterations = 0;
+		uint64_t iterations = 0;
 		set<linear_arrangement> list_arrs;
 		const integer formula = amount_projective(rT);
 
@@ -174,7 +174,7 @@ err_type exe_gen_arr_all_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n, nrelabs;
+	uint64_t n, nrelabs;
 	while (fin >> n >> nrelabs) {
 		// do 'ntrees' trees of 'n' vertices
 		all_ulab_rooted_trees TreeGen(n);

@@ -65,18 +65,18 @@ using namespace numeric;
 
 #define var_type(var)	(vtypes.find(var)->second)
 #define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
-#define assert_correct_var_type(assertion, vt)							\
-	if (vt != "integer" and vt != "rational") {							\
-		cerr << ERROR << endl;											\
-		message_in_func(assertion)										\
-		cerr << "    Invalid variable type '" << vt << "'." << endl;	\
+#define assert_correct_var_type(assertion, vt)						\
+	if (vt != "integer" and vt != "rational") {						\
+		cerr << ERROR << endl;										\
+		message_in_func(assertion)									\
+		cerr << "    Invalid variable type '" << vt << "'." << endl;\
 		return err_type::test_format;								\
 	}
-#define assert_correct_format(assertion, f)								\
-	if (f != "int" and f != "string") {									\
-		cerr << ERROR << endl;											\
-		message_in_func(assertion)										\
-		cerr << "    Invalid format type '" << f << "'." << endl;		\
+#define assert_correct_format(assertion, f)							\
+	if (f != "int" and f != "string") {								\
+		cerr << ERROR << endl;										\
+		message_in_func(assertion)									\
+		cerr << "    Invalid format type '" << f << "'." << endl;	\
 		return err_type::test_format;								\
 	}
 
@@ -370,7 +370,7 @@ err_type test_rational_minutia() {
 	}
 
 	{
-	map<uint32_t, pair<integer, integer>> hash;
+	map<uint64_t, pair<integer, integer>> hash;
 	hash.insert( make_pair(3, make_pair(integer("42"), integer("9999"))) );
 	hash.insert( make_pair(4, make_pair(integer("40"), integer("99899"))) );
 

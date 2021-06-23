@@ -66,7 +66,7 @@ namespace tests {
 namespace internal {
 
 inline bool are_centres_equal(
-	const uint32_t n,
+	const uint64_t n,
 	const pair<node,node>& c1, const pair<node,node>& c2
 )
 noexcept
@@ -96,11 +96,11 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 	// ------------------------------------
 	// 1. find vertex 'v' farthest from 'u'
 
-	vector<uint32_t> dists(tree.get_num_nodes());
+	vector<uint64_t> dists(tree.get_num_nodes());
 	dists[u] = 0;
 
 	// farthest vertex from 'u' and distance
-	uint32_t max_dist = 0;
+	uint64_t max_dist = 0;
 	node v;
 
 	bfs.set_process_neighbour(
@@ -165,7 +165,7 @@ pair<node, node> straightforward_centre(const T& tree, node u) {
 template<class G>
 err_type exe_commands_utils_centre(ifstream& fin) {
 	G t;
-	uint32_t n;
+	uint64_t n;
 
 	string option;
 	while (fin >> option) {
@@ -182,7 +182,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "add_edges") {
 			fin >> n;
 			vector<edge> es(n);
-			for (uint32_t i = 0; i < n; ++i) {
+			for (uint64_t i = 0; i < n; ++i) {
 				fin >> es[i].first >> es[i].second;
 			}
 			t.add_edges(es);
@@ -200,7 +200,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 			fin >> s;
 			const auto centre = lal::internal::retrieve_centre(t, s);
 
-			uint32_t centre_size;
+			uint64_t centre_size;
 			fin >> centre_size;
 
 			if (centre_size == 1) {
@@ -299,16 +299,16 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 
 #define exe_random(G, n)				\
 {										\
-	uint32_t N;							\
+	uint64_t N;							\
 	fin >> N;							\
 	G Gen(n);							\
-	for (uint32_t i = 0; i < N; ++i) {	\
+	for (uint64_t i = 0; i < N; ++i) {	\
 		const auto T = Gen.get_tree();	\
 		test_correctness(T)				\
 	}									\
 }
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		if (graph_type == "ftree") {
 			if (how == "exhaustive") {

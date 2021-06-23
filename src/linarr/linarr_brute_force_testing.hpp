@@ -60,10 +60,10 @@ namespace tests {
 namespace linarr {
 
 template<class T> using Solver =
-	function< pair<uint32_t, lal::linear_arrangement>(const T&) >;
+	function< pair<uint64_t, lal::linear_arrangement>(const T&) >;
 
 template<class T> using TreeEval =
-	function< uint32_t (const T&, const lal::linear_arrangement&) >;
+	function< uint64_t (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using ArrgmtCheck =
 	function< bool (const T&, const lal::linear_arrangement&) >;
@@ -91,7 +91,7 @@ err_type linarr_brute_force_testing(
 )
 {
 	// read number of nodes
-	uint32_t n;
+	uint64_t n;
 	fin >> n;
 
 	if (n == 1) {
@@ -102,7 +102,7 @@ err_type linarr_brute_force_testing(
 	lal::head_vector tree_as_head_vector(n);
 	while (fin >> tree_as_head_vector[0]) {
 		// read head vector
-		for (uint32_t i = 1; i < n; ++i) {
+		for (uint64_t i = 1; i < n; ++i) {
 			fin >> tree_as_head_vector[i];
 		}
 
@@ -116,23 +116,23 @@ err_type linarr_brute_force_testing(
 		}
 
 		// read value of D calculated by brute force
-		uint32_t brute_force_value;
+		uint64_t brute_force_value;
 		fin >> brute_force_value;
 
 		// read input arrays and test their correctness
 		{
-		uint32_t n_classes;
+		uint64_t n_classes;
 		fin >> n_classes;
-		for (uint32_t c = 0; c < n_classes; ++c) {
-			uint32_t mult; fin >> mult;	// multiplicity
+		for (uint64_t c = 0; c < n_classes; ++c) {
+			uint64_t mult; fin >> mult;	// multiplicity
 			char star; fin >> star;		// *
 			// arrangement
 			lal::linear_arrangement input_arr(n);
-			for (uint32_t i = 0; i < n; ++i) {
+			for (uint64_t i = 0; i < n; ++i) {
 				fin >> input_arr[i];
 			}
 
-			const uint32_t check_value = tree_eval(tree, input_arr);
+			const uint64_t check_value = tree_eval(tree, input_arr);
 			// check correctness of input array
 			if (check_value != brute_force_value) {
 				cerr << ERROR << endl;
@@ -168,7 +168,7 @@ err_type linarr_brute_force_testing(
 
 		// ensure that value of D matches the evaluation of the arrangement
 		{
-		const uint32_t check_value = tree_eval(tree, library_arr);
+		const uint64_t check_value = tree_eval(tree, library_arr);
 		if (check_value != library_res.first) {
 			cerr << ERROR << endl;
 			cerr << "    The value calculated by the library's algorithm does not" << endl;

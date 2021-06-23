@@ -111,7 +111,7 @@ err_type exe_construction_test(ifstream& fin) {
 
 	string option, assert_what;
 	string type, g1, g2, g3, file, file_type, Boolean1, Boolean2;
-	uint32_t n_nodes, n_edges;
+	uint64_t n_nodes, n_edges;
 	node u, v;
 
 	while (fin >> option) {
@@ -531,7 +531,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_not_exists_variable(FUNC_FROM_HEAD_VECTOR_TO_FTREE, g1);
 
-			uint32_t n;
+			uint64_t n;
 			fin >> n;
 			head_vector hv(n);
 			for (node& q : hv) { fin >> q; }
@@ -563,7 +563,7 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_not_exists_variable(FUNC_FROM_HEAD_VECTOR_TO_RTREE, g1);
 
-			uint32_t n;
+			uint64_t n;
 			fin >> n;
 			head_vector hv(n);
 			for (node& q : hv) { fin >> q; }

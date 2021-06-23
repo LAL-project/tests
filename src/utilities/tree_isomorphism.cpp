@@ -62,7 +62,7 @@ using namespace utilities;
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 
-#define to_uint32(x) static_cast<uint32_t>(x)
+#define to_uint64(x) static_cast<uint64_t>(x)
 
 namespace tests {
 namespace utilities {
@@ -106,7 +106,7 @@ err_type free_isomorphism_test(ifstream& fin) {
 	if (not sbi.has_value()) { return err_type::test_format; }
 	const bool should_be_isomorphic = *sbi;
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		free_tree t1(n), t2(n);
 		read_free(fin, t1);
@@ -135,7 +135,7 @@ err_type rooted_isomorphism_test(ifstream& fin) {
 	if (not sbi.has_value()) { return err_type::test_format; }
 	const bool should_be_isomorphic = *sbi;
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		rooted_tree t1(n), t2(n);
 		read_rooted(fin, t1);
@@ -203,7 +203,7 @@ template<class Tree, class GEN>
 err_type pos_exh_test(ifstream& fin) {
 	Tree relab_tree;
 
-	uint32_t n, N_relabs;
+	uint64_t n, N_relabs;
 	while (fin >> n >> N_relabs) {
 		GEN Gen(n);
 		while (not Gen.end()) {
@@ -216,7 +216,7 @@ err_type pos_exh_test(ifstream& fin) {
 				relab_tree.set_root(cur_tree.get_root());
 			}
 
-			for (uint32_t N = 0; N < N_relabs; ++N) {
+			for (uint64_t N = 0; N < N_relabs; ++N) {
 				relab_tree.clear();
 				relabel_tree_vertices(edges_cur, relab_tree, true, true);
 
@@ -240,13 +240,13 @@ err_type pos_exh_test(ifstream& fin) {
 
 template<class Tree, class GEN>
 err_type pos_rand_test(ifstream& fin) {
-	uint32_t n, N_trees, N_relabs;
+	uint64_t n, N_trees, N_relabs;
 	fin >> n >> N_trees >> N_relabs;
 
 	Tree relab_tree;
 	GEN Gen(n);
 
-	for (uint32_t t = 0; t < N_trees; ++t) {
+	for (uint64_t t = 0; t < N_trees; ++t) {
 		const Tree cur_tree = Gen.get_tree();
 		vector<edge> edges_cur = cur_tree.get_edges();
 		if constexpr (std::is_base_of<directed_graph, Tree>::value) {
@@ -254,7 +254,7 @@ err_type pos_rand_test(ifstream& fin) {
 			relab_tree.set_root(cur_tree.get_root());
 		}
 
-		for (uint32_t l = 0; l < N_relabs; ++l) {
+		for (uint64_t l = 0; l < N_relabs; ++l) {
 			relab_tree.clear();
 			relabel_tree_vertices(edges_cur, relab_tree, true, true);
 
@@ -278,7 +278,7 @@ err_type pos_rand_test(ifstream& fin) {
 
 template<class Tree, class GEN>
 err_type neg_exh_test(ifstream& fin) {
-	uint32_t n, N_relabs;
+	uint64_t n, N_relabs;
 	fin >> n >> N_relabs;
 
 	if constexpr (std::is_base_of<undirected_graph, Tree>::value) {
@@ -317,7 +317,7 @@ err_type neg_exh_test(ifstream& fin) {
 				relab_tree.set_root(tj.get_root());
 			}
 
-			for (uint32_t l = 0; l < N_relabs; ++l) {
+			for (uint64_t l = 0; l < N_relabs; ++l) {
 				relabel_tree_vertices(edges_tj, relab_tree, true, true);
 
 				const bool r =

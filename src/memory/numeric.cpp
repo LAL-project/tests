@@ -70,7 +70,7 @@ err_type test_memory_integer() {
 	return_if(test_integer_copy())
 
 	{
-	map<uint32_t, pair<integer, integer>> hash;
+	map<uint64_t, pair<integer, integer>> hash;
 	hash.insert( make_pair(3, make_pair(integer("42"), integer("9999"))) );
 	hash.insert( make_pair(4, make_pair(integer("40"), integer("99899"))) );
 
@@ -91,7 +91,7 @@ err_type test_memory_rational() {
 	return_if(test_rational_copy())
 
 	{
-	map<uint32_t, pair<rational, rational>> hash;
+	map<uint64_t, pair<rational, rational>> hash;
 	hash.insert( make_pair(3, make_pair(rational("42/13"), rational("9999"))) );
 	hash.insert( make_pair(4, make_pair(rational("40/13"), rational("99899"))) );
 

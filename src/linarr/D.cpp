@@ -96,7 +96,7 @@ err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
 	}
 
 	// linear arrangement
-	const uint32_t n = G.get_num_nodes();
+	const uint64_t n = G.get_num_nodes();
 	vector<node> T(n);
 	linear_arrangement pi(n);
 

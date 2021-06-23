@@ -149,7 +149,7 @@ void Q_size(const G& g) {
 	cout << "size of Q: " << dQ << endl;
 }
 
-void mmt_deg(const undirected_graph& g, uint32_t p) {
+void mmt_deg(const undirected_graph& g, uint64_t p) {
 	const rational kp = moment_degree_rational(g, p);
 	cout << "<k^" << p << ">= " << kp << endl;
 }
@@ -222,7 +222,7 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 				Q_size(dG);
 			}
 			else if (ins == "mmt_deg") {
-				uint32_t p;
+				uint64_t p;
 				ss >> p;
 				mmt_deg(G, p);
 			}

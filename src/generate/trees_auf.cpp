@@ -64,7 +64,7 @@ using namespace numeric;
 #include "generate/test_exhaustive_enumeration.hpp"
 
 // number of caterpillar trees of a given size
-inline integer num_caterpillar_trees(uint32_t n) noexcept {
+inline integer num_caterpillar_trees(uint64_t n) noexcept {
 	if (n == 1) { return 1; }
 	if (n == 2) { return 1; }
 	if (n == 3) { return 1; }
@@ -83,7 +83,7 @@ namespace generate {
 namespace auf {
 struct extra_params {
 	vector<integer> UFT;
-	uint32_t SIZE_UFT;
+	uint64_t SIZE_UFT;
 };
 
 #define process																\
@@ -137,7 +137,7 @@ struct extra_params {
 	}
 
 err_type test_for_n_while
-(uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 	const auto& SIZE_UFT = params.SIZE_UFT;
@@ -162,7 +162,7 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 	const auto& SIZE_UFT = params.SIZE_UFT;
@@ -186,7 +186,7 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint32_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 	const auto& SIZE_UFT = params.SIZE_UFT;
@@ -272,7 +272,7 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint32_t n;
+	uint64_t n;
 	while (fin >> n) {
 		const auto err1 =
 			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>

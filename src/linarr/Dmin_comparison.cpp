@@ -69,7 +69,7 @@ using namespace numeric;
 #include "common/std_utils.hpp"
 #include "common/test_utils.hpp"
 
-typedef pair<uint32_t, linear_arrangement> algo_result;
+typedef pair<uint64_t, linear_arrangement> algo_result;
 
 bool lt(const algo_result& r1, const algo_result& r2) { return r1.first < r2.first; }
 bool le(const algo_result& r1, const algo_result& r2) { return r1.first <= r2.first; }
@@ -85,7 +85,7 @@ namespace tests_Dmin_comparison {
 inline
 bool check_correctness_arr(
 	const free_tree& tree,
-	const pair<uint32_t, linear_arrangement>& res
+	const pair<uint64_t, linear_arrangement>& res
 )
 {
 	const linear_arrangement& arr = res.second;
@@ -99,7 +99,7 @@ bool check_correctness_arr(
 		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint32_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
 		cerr << "    Value of D returned by method is incorrect." << endl;
@@ -187,7 +187,7 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		correct_comp_str(comp);
 		correct_algo_str(algo2);
 
-		uint32_t n;
+		uint64_t n;
 		fin >> n;
 
 		cout << "Testing '" << mode << "' for "
@@ -230,12 +230,12 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 			}
 		}
 		else {
-			uint32_t N;
+			uint64_t N;
 			fin >> N;
 			cout << " (N= " << N << ")" << endl;
 
 			generate::rand_ulab_free_trees TreeGen(n);
-			for (uint32_t i = 0; i < N; ++i) {
+			for (uint64_t i = 0; i < N; ++i) {
 				const free_tree tree = TreeGen.get_tree();
 
 				const auto res1 = ALGOS[algo1](tree);

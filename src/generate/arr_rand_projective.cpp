@@ -72,18 +72,18 @@ err_type exe_gen_arr_rand_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	uint32_t n, ntrees, nit;
+	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices
 		rand_ulab_rooted_trees TreeGen(n);
 
-		for (uint32_t nt = 0; nt < ntrees; ++nt) {
+		for (uint64_t nt = 0; nt < ntrees; ++nt) {
 			const rooted_tree rT = TreeGen.get_tree();
 			const free_tree fT = rT.to_free_tree();
 
 			rand_projective_arrangements RandArr(rT, 100);
 
-			for (uint32_t it = 0; it < nit; ++it) {
+			for (uint64_t it = 0; it < nit; ++it) {
 				const linear_arrangement arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
@@ -98,7 +98,7 @@ err_type exe_gen_arr_rand_projective(const input_list& inputs, ifstream& fin) {
 				}
 			}
 
-			for (uint32_t it = 0; it < nit; ++it) {
+			for (uint64_t it = 0; it < nit; ++it) {
 				const linear_arrangement arr = RandArr.yield_arrangement();
 
 				// Do some sanity checks.

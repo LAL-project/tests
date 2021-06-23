@@ -112,13 +112,13 @@ inline integer amount_planar(const free_tree& T) noexcept {
 	return T.get_num_nodes()*k;
 }
 
-inline err_type test_a_tree(free_tree& T, uint32_t nrelabs) noexcept {
+inline err_type test_a_tree(free_tree& T, uint64_t nrelabs) noexcept {
 	vector<edge> edges = T.get_edges();
 
-	for (uint32_t i = 0; i < 2*nrelabs; ++i) {
+	for (uint64_t i = 0; i < 2*nrelabs; ++i) {
 		relabel_tree_vertices(edges, T, (i < nrelabs ? false : true), false);
 
-		uint32_t iterations = 0;
+		uint64_t iterations = 0;
 		set<linear_arrangement> list_arrs;
 		const integer formula = amount_planar(T);
 
@@ -194,7 +194,7 @@ err_type exe_gen_arr_all_planar(const input_list& inputs, ifstream& fin) {
 	}
 
 	if (mode == "automatic") {
-		uint32_t n, nrelabs;
+		uint64_t n, nrelabs;
 		while (fin >> n >> nrelabs) {
 			// do all trees of 'n' vertices
 			all_ulab_free_trees TreeGen(n);
@@ -218,7 +218,7 @@ err_type exe_gen_arr_all_planar(const input_list& inputs, ifstream& fin) {
 			cout << "---------------" << endl;
 			head_vector hv;
 			stringstream ss(line);
-			uint32_t k;
+			uint64_t k;
 			while (ss >> k) { hv.push_back(k); }
 
 			const free_tree T = from_head_vector_to_free_tree(hv).first;

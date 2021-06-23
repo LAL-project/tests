@@ -151,7 +151,7 @@ err_type exe_linarr_klevel(const input_list& inputs, ifstream& fin) {
 		pis = vector<linear_arrangement>(n_linarrs);
 
 		for (size_t i = 0; i < n_linarrs; ++i) {
-			const uint32_t Ni = Gs[i].get_num_nodes();
+			const uint64_t Ni = Gs[i].get_num_nodes();
 
 			Ts[i] = vector<position>(Ni);
 			pis[i] = linear_arrangement(Ni);

@@ -90,8 +90,8 @@ pair<syndepstr_type, bool> string_to_syntreetype(const string& s) {
 rooted_tree parse_tree_in_line(const string& s) {
 	// read numbers in line
 	stringstream ss(s);
-	vector<uint32_t> L;
-	uint32_t v;
+	vector<uint64_t> L;
+	uint64_t v;
 	while (ss >> v) { L.push_back(v); }
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
