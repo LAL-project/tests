@@ -69,7 +69,11 @@ groups_list=(\
 		"linarr_Dmin" \
 			"linarr_Dmin_Comparison" \
 			"linarr_Dmin_Projective" \
+				"linarr_Dmin_Projective_AEF" \
+				"linarr_Dmin_Projective_HS" \
 			"linarr_Dmin_Planar" \
+				"linarr_Dmin_Planar_AEF" \
+				"linarr_Dmin_Planar_HS" \
 			"linarr_Dmin_Unconstrained" \
 				"linarr_Dmin_Unconstrained_YS" \
 				"linarr_Dmin_Unconstrained_FC" \

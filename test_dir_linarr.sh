@@ -115,20 +115,34 @@ linarr_C_DIRS=(\
 	)
 
 # Dmin tests
+linarr_Dmin_Projective_AEF_DIRS=(\
+	"linarr/D/Dmin/projective/AEF" "linarr/D/Dmin/projective/" \
+	)
+linarr_Dmin_Projective_HS_DIRS=(\
+	"linarr/D/Dmin/projective/HS" "linarr/D/Dmin/projective/" \
+	)
 linarr_Dmin_Projective_DIRS=(\
-	"linarr/D/Dmin/projective" "linarr/D/Dmin/projective" \
+	"${linarr_Dmin_Projective_AEF_DIRS[@]}" \
+	"${linarr_Dmin_Projective_HS_DIRS[@]}" \
+	)
+linarr_Dmin_Planar_AEF_DIRS=(\
+	"linarr/D/Dmin/planar/AEF" "linarr/D/Dmin/planar" \
+	)
+linarr_Dmin_Planar_HS_DIRS=(\
+	"linarr/D/Dmin/planar/HS" "linarr/D/Dmin/planar" \
 	)
 linarr_Dmin_Planar_DIRS=(\
-	"linarr/D/Dmin/planar" "linarr/D/Dmin/planar" \
+	"${linarr_Dmin_Planar_AEF_DIRS[@]}" \
+	"${linarr_Dmin_Planar_HS_DIRS[@]}" \
 	)
 linarr_Dmin_Comparison_DIRS=(\
 	"linarr/D/Dmin/" "linarr/D/Dmin/" \
 	)
 linarr_Dmin_Unconstrained_YS_DIRS=(\
-	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/YS" \
+	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/" \
 	)
 linarr_Dmin_Unconstrained_FC_DIRS=(\
-	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/FC" \
+	"linarr/D/Dmin/unconstrained/FC" "linarr/D/Dmin/unconstrained/" \
 	)
 linarr_Dmin_Unconstrained_DIRS=(\
 	"${linarr_Dmin_Unconstrained_YS_DIRS[@]}" \
