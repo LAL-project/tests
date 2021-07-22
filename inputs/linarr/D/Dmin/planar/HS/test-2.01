@@ -1,0 +1,14 @@
+TYPE linarr-Dmin-Planar
+INPUT 0
+BODY
+	quadratic
+	random
+	HS
+	
+	30 10000
+	40 10000
+	50 10000
+	60 10000
+	70 10000
+	80 10000
+	90 10000

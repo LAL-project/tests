@@ -1,0 +1,7 @@
+TYPE linarr-Dmin-Planar
+INPUT 0
+BODY
+	quadratic
+	exhaustive
+	AEF
+	17

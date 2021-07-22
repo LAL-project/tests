@@ -1,6 +1,0 @@
-TYPE linarr-Dmin-Planar
-INPUT 0
-BODY
-	quadratic
-	exhaustive
-	20
