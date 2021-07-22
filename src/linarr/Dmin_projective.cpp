@@ -69,7 +69,8 @@ template<class T>
 err_type examine_dmin_projective
 (
 	const string& filename,
-	const TreeInit<T>& tree_initializer
+	const TreeInit<T>& tree_initializer,
+	const lal::linarr::algorithms_Dmin_projective& algo
 )
 noexcept
 {
@@ -82,8 +83,8 @@ noexcept
 
 	const auto err = linarr_brute_force_testing<rooted_tree>
 	(
-		[](const rooted_tree& t) {
-			return min_sum_edge_lengths_projective(t);
+		[=](const rooted_tree& t) {
+			return min_sum_edge_lengths_projective(t, algo);
 		},
 		[](const rooted_tree& t, const linear_arrangement& arr) {
 			return sum_edge_lengths(t, arr);
@@ -114,7 +115,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_algos({"AEF"});
+	const set<string> allowed_algos({"AEF", "HS"});
 
 	string algo;
 	fin >> algo;
@@ -129,13 +130,20 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 		return err_type::test_format;
 	}
 
+	const auto algo_id = (
+		algo == "AEF" ?
+		lal::linarr::algorithms_Dmin_projective::AlemanyEstebanFerrer :
+		lal::linarr::algorithms_Dmin_projective::HochbergStallmann
+	);
+
 	const auto err1 =
 	dmin_projective::examine_dmin_projective<rooted_tree>
 	(
 		inputs[0].first,
 		[](rooted_tree& t) {
 			t.calculate_size_subtrees();
-		}
+		},
+		algo_id
 	);
 	if (err1 != err_type::no_error) { return err1; }
 
@@ -144,7 +152,8 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	dmin_projective::examine_dmin_projective<rooted_tree>
 	(
 		inputs[0].first,
-		[](rooted_tree&) { }
+		[](rooted_tree&) { },
+		algo_id
 	);
 	if (err2 != err_type::no_error) { return err2; }
 

@@ -117,8 +117,8 @@ bool check_correctness_arr(
 	return true;
 }
 
-err_type check_tree(const free_tree& T) {
-	const auto Dmin_planar_library = lal::linarr::min_sum_edge_lengths_planar(T);
+err_type check_tree(const free_tree& T, const algorithms_Dmin_planar& algo) {
+	const auto Dmin_planar_library = lal::linarr::min_sum_edge_lengths_planar(T, algo);
 
 	const auto Dmin_planar_quadratic =
 		tests_Dmin_planar::Dmin_planar_quadratic(T);
@@ -149,7 +149,7 @@ err_type check_tree(const free_tree& T) {
 } // -- namespace tests_Dmin_planar
 
 err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
-	const set<string> allowed_algos({"AEF", "quadratic"});
+	const set<string> allowed_algos({"AEF", "HS", "quadratic"});
 	const set<string> allowed_quadratic_modes({"exhaustive", "random"});
 
 	string algo;
@@ -166,7 +166,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 
 	err_type err = err_type::no_error;
 
-	if (algo == "AEF") {
+	if (algo == "AEF" or algo == "HS") {
 		if (inputs.size() != 1) {
 			cerr << ERROR << endl;
 			cerr << "    Exactly one input files are allowed in this test." << endl;
@@ -181,10 +181,23 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			return err_type::io;
 		}
 
+		algorithms_Dmin_planar algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		if (algo == "AEF") {
+			algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		}
+		else if (algo == "HS") {
+			algo_choice = algorithms_Dmin_planar::HochbergStallmann;
+		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "Algorithm '" << algo << "' not recognised." << endl;
+			return err_type::test_format;
+		}
+
 		err = linarr_brute_force_testing<free_tree>
 		(
-			[](const free_tree& t) {
-				return min_sum_edge_lengths_planar(t);
+			[=](const free_tree& t) {
+				return min_sum_edge_lengths_planar(t, algo_choice);
 			},
 			[](const free_tree& t, const linear_arrangement& arr) {
 				return sum_edge_lengths(t, arr);
@@ -219,6 +232,30 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 			return err_type::test_format;
 		}
 
+		fin >> algo;
+		if (allowed_algos.find(algo) == allowed_algos.end()) {
+			cerr << ERROR << endl;
+			cerr << "    Unrecognized algorithm '" << algo << "'." << endl;
+			cerr << "    Allowed algorithms:" << endl;
+			for (const auto& s : allowed_algos) {
+			cerr << "    - " << s << endl;
+			}
+			return err_type::test_format;
+		}
+
+		algorithms_Dmin_planar algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		if (algo == "AEF") {
+			algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		}
+		else if (algo == "HS") {
+			algo_choice = algorithms_Dmin_planar::HochbergStallmann;
+		}
+		else {
+			cerr << ERROR << endl;
+			cerr << "Algorithm '" << algo << "' not recognised." << endl;
+			return err_type::test_format;
+		}
+
 		uint64_t n;
 		while (fin >> n) {
 			if (mode == "exhaustive") {
@@ -226,7 +263,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 				while (not Gen.end()) {
 					const auto T = Gen.get_tree();
 					Gen.next();
-					err = tests_Dmin_planar::check_tree(T);
+					err = tests_Dmin_planar::check_tree(T, algo_choice);
 					if (err != err_type::no_error) {
 						return err;
 					}
@@ -239,7 +276,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 				generate::rand_ulab_free_trees Gen(n, 1234);
 				for (size_t i = 0; i < n_rand_trees; ++i) {
 					const auto T = Gen.get_tree();
-					err = tests_Dmin_planar::check_tree(T);
+					err = tests_Dmin_planar::check_tree(T, algo_choice);
 					if (err != err_type::no_error) {
 						return err;
 					}
