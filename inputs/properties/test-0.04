@@ -103,4 +103,8 @@ BODY
 	Q_size
 	mmt_deg 2
 	mmt_deg 3
+	mmt_in_deg 2
+	mmt_in_deg 3
+	mmt_out_deg 2
+	mmt_out_deg 3
 	hubiness_coefficient
