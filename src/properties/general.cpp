@@ -149,10 +149,107 @@ void Q_size(const G& g) {
 	cout << "size of Q: " << dQ << endl;
 }
 
+//
+
 void mmt_deg(const undirected_graph& g, uint64_t p) {
-	const rational kp = moment_degree_rational(g, p);
-	cout << "<k^" << p << ">= " << kp << endl;
+	cout << "(udir) <k^" << p << ">= "
+		 << moment_degree_rational(g, p)
+		 << endl;
 }
+
+void mmt_deg(const directed_graph& g, uint64_t p) {
+	cout << "( dir) <k^" << p << ">= "
+		 << moment_degree_rational(g, p)
+		 << endl;
+}
+
+//
+
+err_type mmt_in_deg(const undirected_graph& uG, const directed_graph& dG, uint64_t p) {
+	cout << "(graph) <k_out^" << p << ">= "
+		 << moment_in_degree_rational(dG, p)
+		 << endl;
+
+	const bool is_tree_dG = internal::is_graph_a_tree(dG);
+	const bool is_tree_uG = internal::is_graph_a_tree(uG);
+
+	if (is_tree_dG != is_tree_uG) {
+		cerr << ERROR << endl;
+		cerr << "    Error in deciding whether a graph is a tree or not." << endl;
+		cerr << "    It has been determined that an undirected graph uG" << endl;
+		cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however" << endl;
+		cerr << "    it has been determined that its oriented version dG" << endl;
+		cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence" << endl;
+		cerr << "    a contradiction." << endl;
+		cerr << "    Is undirected a tree? " << is_tree_uG << endl;
+		cerr << "    Is   directed a tree? " << is_tree_dG << endl;
+		cerr << "    Undirected graph:" << endl;
+		cerr << uG << endl;
+		cerr << "    Directed graph:" << endl;
+		cerr << dG << endl;
+		return err_type::test_execution;
+	}
+
+	if (is_tree_dG) {
+		const auto n = uG.get_num_nodes();
+		for (node r = 0; r < n; ++r) {
+			const rooted_tree T(uG, r);
+			const auto kin = moment_in_degree_rational(T, p);
+
+			cout << "(rtree at " << r << ") <k_in^" << p << ">= " << kin << endl;
+			if (kin != lal::numeric::rational(n-1, n)) {
+				cerr << ERROR << endl;
+				cerr << "    Moment of in-degree is not equal to the expected value." << endl;
+				cerr << "    Expected: " << lal::numeric::rational(n-1, n) << endl;
+				cerr << "    Received: " << kin << endl;
+				return err_type::test_execution;
+			}
+
+		}
+	}
+	return err_type::no_error;
+}
+
+//
+
+err_type mmt_out_deg(const undirected_graph& uG, const directed_graph& dG, uint64_t p) {
+	cout << "(graph) <k_out^" << p << ">= "
+		 << moment_out_degree_rational(dG, p)
+		 << endl;
+
+	const bool is_tree_dG = internal::is_graph_a_tree(dG);
+	const bool is_tree_uG = internal::is_graph_a_tree(uG);
+
+	if (is_tree_dG != is_tree_uG) {
+		cerr << ERROR << endl;
+		cerr << "    Error in deciding whether a graph is a tree or not." << endl;
+		cerr << "    It has been determined that an undirected graph uG" << endl;
+		cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however" << endl;
+		cerr << "    it has been determined that its oriented version dG" << endl;
+		cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence" << endl;
+		cerr << "    a contradiction." << endl;
+		cerr << "    Is undirected a tree? " << is_tree_uG << endl;
+		cerr << "    Is   directed a tree? " << is_tree_dG << endl;
+		cerr << "    Undirected graph:" << endl;
+		cerr << uG << endl;
+		cerr << "    Directed graph:" << endl;
+		cerr << dG << endl;
+		return err_type::test_execution;
+	}
+
+	if (is_tree_dG) {
+		for (node r = 0; r < uG.get_num_nodes(); ++r) {
+			const rooted_tree T(uG, r);
+
+			cout << "(rtree at " << r << ") <k_out^" << p << ">= "
+				 << moment_out_degree_rational(T, p)
+				 << endl;
+		}
+	}
+	return err_type::no_error;
+}
+
+//
 
 void hubiness_coefficient(const undirected_graph& g) {
 	if (not internal::is_graph_a_tree(g)) { return; }
@@ -175,7 +272,7 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 		"enumerate_E", "enumerate_E_rand_dir",
 		"enumerate_Q", "enumerate_Q_rand_dir",
 		"Q_size", "Q_size_rand_dir",
-		"mmt_deg",
+		"mmt_deg", "mmt_in_deg", "mmt_out_deg",
 		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
 
@@ -188,51 +285,70 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	// The input file has been parsed completely.
 	// It is time to execute the instructions for each graph.
 
-	undirected_graph G;
+	undirected_graph uG;
+	directed_graph dG;
 	for (size_t i = 0; i < inputs.size(); ++i) {
-		const err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
-		if (r != err_type::no_error) {
-			return r;
-		}
+
+		err_type r;
+
+		r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, uG);
+		if (r != err_type::no_error) { return r; }
+
+		r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, dG);
+		if (r != err_type::no_error) { return r; }
+
+		// this graph may have edges of the form
+		// (u,v)  ..  (v,u)
+		const directed_graph rdG = make_rand_dgraph(uG);
 
 		stringstream ss(all_instructions);
 		while (ss >> ins) {
 			if (ins == "enumerate_E") {
-				enum_E(G);
+				enum_E(uG);
 			}
 			else if (ins == "enumerate_E_rand_dir") {
-				const directed_graph dG = make_rand_dgraph(G);
-				cout << dG << endl;
-				enum_E(dG);
+				cout << rdG << endl;
+				enum_E(rdG);
 			}
 			else if (ins == "enumerate_Q") {
-				enum_Q(G);
+				enum_Q(uG);
 			}
 			else if (ins == "enumerate_Q_rand_dir") {
-				const directed_graph dG = make_rand_dgraph(G);
-				cout << dG << endl;
-				enum_Q(dG);
+				cout << rdG << endl;
+				enum_Q(rdG);
 			}
 			else if (ins == "Q_size") {
-				Q_size(G);
+				Q_size(uG);
 			}
 			else if (ins == "Q_size_rand_dir") {
-				const directed_graph dG = make_rand_dgraph(G);
-				cout << dG << endl;
-				Q_size(dG);
+				cout << rdG << endl;
+				Q_size(rdG);
 			}
 			else if (ins == "mmt_deg") {
 				uint64_t p;
 				ss >> p;
-				mmt_deg(G, p);
+				mmt_deg(uG, p);
+				mmt_deg(rdG, p);
+			}
+			else if (ins == "mmt_in_deg") {
+				uint64_t p;
+				ss >> p;
+				r = mmt_in_deg(uG, dG, p);
+				if (r != err_type::no_error) { return r; }
+			}
+			else if (ins == "mmt_out_deg") {
+				uint64_t p;
+				ss >> p;
+				r = mmt_out_deg(uG, dG, p);
+				if (r != err_type::no_error) { return r; }
 			}
 			else if (ins == "hubiness_coefficient") {
-				hubiness_coefficient(G);
+				hubiness_coefficient(uG);
 			}
 			else if (ins == "Mean_Hierarchical_Distance") {
 				node root;
 				ss >> root;
-				MHD(G, root);
+				MHD(uG, root);
 			}
 			else {
 				cerr << ERROR << endl;
