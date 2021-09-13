@@ -1,4 +1,4 @@
-import lal
+import laldebug as lal
 
 """
 class asdf:
@@ -143,3 +143,24 @@ print("67. -4/i=", -4/i)
 
 
 print("68. 5^(2/5)=", 5**lal.numeric.rational(2,5))
+
+print("---------------------")
+i = lal.numeric.integer(3)
+i *= 3
+print("69. i*=3 ->", i)
+i += 3
+print("70. i+=3 ->", i)
+i -= 3
+print("71. i-=3 ->", i)
+i /= 3
+print("72. i/=3 ->", i)
+
+i = lal.numeric.rational(10,3)
+i *= 3
+print("69. i*=3 ->", i)
+i += 3
+print("70. i+=3 ->", i)
+i -= 3
+print("71. i-=3 ->", i)
+i /= 3
+print("72. i/=3 ->", i)
