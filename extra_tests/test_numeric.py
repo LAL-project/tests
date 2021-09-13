@@ -146,6 +146,7 @@ print("68. 5^(2/5)=", 5**lal.numeric.rational(2,5))
 
 print("---------------------")
 i = lal.numeric.integer(3)
+print("i=", i)
 i *= 3
 print("69. i*=3 ->", i)
 i += 3
@@ -156,6 +157,7 @@ i /= 3
 print("72. i/=3 ->", i)
 
 i = lal.numeric.rational(10,3)
+print("i=", i)
 i *= 3
 print("69. i*=3 ->", i)
 i += 3
