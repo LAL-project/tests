@@ -7280,8 +7280,10 @@ Elements of Q:
 Total number of elements: 7140
 size of Q: 7140
 size of Q: 7140
-<k^2>= 256
-<k^3>= 4096
+(udir) <k^2>= 256
+( dir) <k^2>= 10844/17
+(udir) <k^3>= 4096
+( dir) <k^3>= 276350/17
 Elements of E:
 (0,1)
 (0,2)
@@ -16621,5 +16623,7 @@ Elements of Q:
 Total number of elements: 9180
 size of Q: 9180
 size of Q: 9180
-<k^2>= 289
-<k^3>= 4913
+(udir) <k^2>= 289
+( dir) <k^2>= 6226/9
+(udir) <k^3>= 4913
+( dir) <k^3>= 165215/9

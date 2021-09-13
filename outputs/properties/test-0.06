@@ -10,8 +10,10 @@ Elements of Q:
 Total number of elements: 2
 size of Q: 2
 size of Q: 2
-<k^2>= 16/9
-<k^3>= 38/9
+(udir) <k^2>= 16/9
+( dir) <k^2>= 38/9
+(udir) <k^3>= 38/9
+( dir) <k^3>= 50/3
 Elements of E:
 (0,4)
 (2,6)
@@ -47,8 +49,10 @@ Elements of Q:
 Total number of elements: 21
 size of Q: 21
 size of Q: 21
-<k^2>= 5/2
-<k^3>= 16/3
+(udir) <k^2>= 5/2
+( dir) <k^2>= 13/2
+(udir) <k^3>= 16/3
+( dir) <k^3>= 65/3
 Elements of E:
 (0,6)
 (0,8)
@@ -100,8 +104,10 @@ Elements of Q:
 Total number of elements: 35
 size of Q: 35
 size of Q: 35
-<k^2>= 20/7
-<k^3>= 43/7
+(udir) <k^2>= 20/7
+( dir) <k^2>= 47/7
+(udir) <k^3>= 43/7
+( dir) <k^3>= 159/7
 Elements of E:
 (1,6)
 (2,12)
@@ -204,8 +210,10 @@ Elements of Q:
 Total number of elements: 81
 size of Q: 81
 size of Q: 81
-<k^2>= 78/19
-<k^3>= 234/19
+(udir) <k^2>= 78/19
+( dir) <k^2>= 156/19
+(udir) <k^3>= 234/19
+( dir) <k^3>= 660/19
 Elements of E:
 (0,4)
 (0,7)
@@ -2186,8 +2194,10 @@ Elements of Q:
 Total number of elements: 1907
 size of Q: 1907
 size of Q: 1907
-<k^2>= 53/2
-<k^3>= 1142/7
+(udir) <k^2>= 53/2
+( dir) <k^2>= 125/2
+(udir) <k^3>= 1142/7
+( dir) <k^3>= 4191/7
 Elements of E:
 (0,9)
 (0,12)
@@ -19205,8 +19215,10 @@ Elements of Q:
 Total number of elements: 16813
 size of Q: 16813
 size of Q: 16813
-<k^2>= 1444/7
-<k^3>= 21642/7
+(udir) <k^2>= 1444/7
+( dir) <k^2>= 6665/14
+(udir) <k^3>= 21642/7
+( dir) <k^3>= 76596/7
 Elements of E:
 (0,5)
 (0,7)
@@ -22273,8 +22285,10 @@ Elements of Q:
 Total number of elements: 2977
 size of Q: 2977
 size of Q: 2977
-<k^2>= 1018/29
-<k^3>= 230
+(udir) <k^2>= 1018/29
+( dir) <k^2>= 2466/29
+(udir) <k^3>= 230
+( dir) <k^3>= 25272/29
 Elements of E:
 (0,5)
 (0,7)
@@ -40061,8 +40075,10 @@ Elements of Q:
 Total number of elements: 17578
 size of Q: 17578
 size of Q: 17578
-<k^2>= 5850/29
-<k^3>= 87494/29
+(udir) <k^2>= 5850/29
+( dir) <k^2>= 13462/29
+(udir) <k^3>= 87494/29
+( dir) <k^3>= 310348/29
 Elements of E:
 (0,1)
 (0,2)
@@ -62048,5 +62064,7 @@ Elements of Q:
 Total number of elements: 21755
 size of Q: 21755
 size of Q: 21755
-<k^2>= 689/3
-<k^3>= 10927/3
+(udir) <k^2>= 689/3
+( dir) <k^2>= 8048/15
+(udir) <k^3>= 10927/3
+( dir) <k^3>= 198817/15

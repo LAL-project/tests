@@ -5,8 +5,10 @@ Elements of Q:
 Total number of elements: 0
 size of Q: 0
 size of Q: 0
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 1
+(udir) <k^3>= 1
+( dir) <k^3>= 1
 Elements of E:
 (0,1)
 (2,3)
@@ -16,8 +18,10 @@ Elements of Q:
 Total number of elements: 1
 size of Q: 1
 size of Q: 1
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -30,8 +34,10 @@ Elements of Q:
 Total number of elements: 3
 size of Q: 3
 size of Q: 3
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 2
+(udir) <k^3>= 1
+( dir) <k^3>= 10/3
 Elements of E:
 (0,1)
 (2,3)
@@ -48,8 +54,10 @@ Elements of Q:
 Total number of elements: 6
 size of Q: 6
 size of Q: 6
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -71,8 +79,10 @@ Elements of Q:
 Total number of elements: 10
 size of Q: 10
 size of Q: 10
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 11/5
+(udir) <k^3>= 1
+( dir) <k^3>= 19/5
 Elements of E:
 (0,1)
 (2,3)
@@ -100,8 +110,10 @@ Elements of Q:
 Total number of elements: 15
 size of Q: 15
 size of Q: 15
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -136,8 +148,10 @@ Elements of Q:
 Total number of elements: 21
 size of Q: 21
 size of Q: 21
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 19/7
+(udir) <k^3>= 1
+( dir) <k^3>= 5
 Elements of E:
 (0,1)
 (2,3)
@@ -180,8 +194,10 @@ Elements of Q:
 Total number of elements: 28
 size of Q: 28
 size of Q: 28
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 23/8
+(udir) <k^3>= 1
+( dir) <k^3>= 43/8
 Elements of E:
 (0,1)
 (2,3)
@@ -233,8 +249,10 @@ Elements of Q:
 Total number of elements: 36
 size of Q: 36
 size of Q: 36
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 8/3
+(udir) <k^3>= 1
+( dir) <k^3>= 44/9
 Elements of E:
 (0,1)
 (2,3)
@@ -296,8 +314,10 @@ Elements of Q:
 Total number of elements: 45
 size of Q: 45
 size of Q: 45
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -370,8 +390,10 @@ Elements of Q:
 Total number of elements: 55
 size of Q: 55
 size of Q: 55
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 26/11
+(udir) <k^3>= 1
+( dir) <k^3>= 46/11
 Elements of E:
 (0,1)
 (2,3)
@@ -456,8 +478,10 @@ Elements of Q:
 Total number of elements: 66
 size of Q: 66
 size of Q: 66
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 9/4
+(udir) <k^3>= 1
+( dir) <k^3>= 47/12
 Elements of E:
 (0,1)
 (2,3)
@@ -555,8 +579,10 @@ Elements of Q:
 Total number of elements: 78
 size of Q: 78
 size of Q: 78
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 28/13
+(udir) <k^3>= 1
+( dir) <k^3>= 48/13
 Elements of E:
 (0,1)
 (2,3)
@@ -668,8 +694,10 @@ Elements of Q:
 Total number of elements: 91
 size of Q: 91
 size of Q: 91
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 16/7
+(udir) <k^3>= 1
+( dir) <k^3>= 4
 Elements of E:
 (0,1)
 (2,3)
@@ -796,8 +824,10 @@ Elements of Q:
 Total number of elements: 105
 size of Q: 105
 size of Q: 105
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 11/5
+(udir) <k^3>= 1
+( dir) <k^3>= 19/5
 Elements of E:
 (0,1)
 (2,3)
@@ -940,8 +970,10 @@ Elements of Q:
 Total number of elements: 120
 size of Q: 120
 size of Q: 120
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 37/16
+(udir) <k^3>= 1
+( dir) <k^3>= 65/16
 Elements of E:
 (0,1)
 (2,3)
@@ -1101,8 +1133,10 @@ Elements of Q:
 Total number of elements: 136
 size of Q: 136
 size of Q: 136
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 41/17
+(udir) <k^3>= 1
+( dir) <k^3>= 73/17
 Elements of E:
 (0,1)
 (2,3)
@@ -1280,8 +1314,10 @@ Elements of Q:
 Total number of elements: 153
 size of Q: 153
 size of Q: 153
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 7/3
+(udir) <k^3>= 1
+( dir) <k^3>= 37/9
 Elements of E:
 (0,1)
 (2,3)
@@ -1478,8 +1514,10 @@ Elements of Q:
 Total number of elements: 171
 size of Q: 171
 size of Q: 171
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 43/19
+(udir) <k^3>= 1
+( dir) <k^3>= 75/19
 Elements of E:
 (0,1)
 (2,3)
@@ -1696,8 +1734,10 @@ Elements of Q:
 Total number of elements: 190
 size of Q: 190
 size of Q: 190
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 47/20
+(udir) <k^3>= 1
+( dir) <k^3>= 83/20
 Elements of E:
 (0,1)
 (2,3)
@@ -1935,8 +1975,10 @@ Elements of Q:
 Total number of elements: 210
 size of Q: 210
 size of Q: 210
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 16/7
+(udir) <k^3>= 1
+( dir) <k^3>= 4
 Elements of E:
 (0,1)
 (2,3)
@@ -2196,8 +2238,10 @@ Elements of Q:
 Total number of elements: 231
 size of Q: 231
 size of Q: 231
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 26/11
+(udir) <k^3>= 1
+( dir) <k^3>= 46/11
 Elements of E:
 (0,1)
 (2,3)
@@ -2480,8 +2524,10 @@ Elements of Q:
 Total number of elements: 253
 size of Q: 253
 size of Q: 253
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 56/23
+(udir) <k^3>= 1
+( dir) <k^3>= 100/23
 Elements of E:
 (0,1)
 (2,3)
@@ -2788,8 +2834,10 @@ Elements of Q:
 Total number of elements: 276
 size of Q: 276
 size of Q: 276
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -3121,8 +3169,10 @@ Elements of Q:
 Total number of elements: 300
 size of Q: 300
 size of Q: 300
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 64/25
+(udir) <k^3>= 1
+( dir) <k^3>= 116/25
 Elements of E:
 (0,1)
 (2,3)
@@ -3480,8 +3530,10 @@ Elements of Q:
 Total number of elements: 325
 size of Q: 325
 size of Q: 325
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 34/13
+(udir) <k^3>= 1
+( dir) <k^3>= 62/13
 Elements of E:
 (0,1)
 (2,3)
@@ -3866,8 +3918,10 @@ Elements of Q:
 Total number of elements: 351
 size of Q: 351
 size of Q: 351
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 23/9
+(udir) <k^3>= 1
+( dir) <k^3>= 125/27
 Elements of E:
 (0,1)
 (2,3)
@@ -4280,8 +4334,10 @@ Elements of Q:
 Total number of elements: 378
 size of Q: 378
 size of Q: 378
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 5/2
+(udir) <k^3>= 1
+( dir) <k^3>= 9/2
 Elements of E:
 (0,1)
 (2,3)
@@ -4723,8 +4779,10 @@ Elements of Q:
 Total number of elements: 406
 size of Q: 406
 size of Q: 406
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 74/29
+(udir) <k^3>= 1
+( dir) <k^3>= 134/29
 Elements of E:
 (0,1)
 (2,3)
@@ -5196,8 +5254,10 @@ Elements of Q:
 Total number of elements: 435
 size of Q: 435
 size of Q: 435
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 13/5
+(udir) <k^3>= 1
+( dir) <k^3>= 71/15
 Elements of E:
 (0,1)
 (2,3)
@@ -5700,8 +5760,10 @@ Elements of Q:
 Total number of elements: 465
 size of Q: 465
 size of Q: 465
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 82/31
+(udir) <k^3>= 1
+( dir) <k^3>= 150/31
 Elements of E:
 (0,1)
 (2,3)
@@ -6236,8 +6298,10 @@ Elements of Q:
 Total number of elements: 496
 size of Q: 496
 size of Q: 496
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 43/16
+(udir) <k^3>= 1
+( dir) <k^3>= 79/16
 Elements of E:
 (0,1)
 (2,3)
@@ -6805,8 +6869,10 @@ Elements of Q:
 Total number of elements: 528
 size of Q: 528
 size of Q: 528
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 30/11
+(udir) <k^3>= 1
+( dir) <k^3>= 166/33
 Elements of E:
 (0,1)
 (2,3)
@@ -7408,8 +7474,10 @@ Elements of Q:
 Total number of elements: 561
 size of Q: 561
 size of Q: 561
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 47/17
+(udir) <k^3>= 1
+( dir) <k^3>= 87/17
 Elements of E:
 (0,1)
 (2,3)
@@ -8046,8 +8114,10 @@ Elements of Q:
 Total number of elements: 595
 size of Q: 595
 size of Q: 595
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 19/7
+(udir) <k^3>= 1
+( dir) <k^3>= 5
 Elements of E:
 (0,1)
 (2,3)
@@ -8720,8 +8790,10 @@ Elements of Q:
 Total number of elements: 630
 size of Q: 630
 size of Q: 630
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 8/3
+(udir) <k^3>= 1
+( dir) <k^3>= 44/9
 Elements of E:
 (0,1)
 (2,3)
@@ -9431,8 +9503,10 @@ Elements of Q:
 Total number of elements: 666
 size of Q: 666
 size of Q: 666
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 100/37
+(udir) <k^3>= 1
+( dir) <k^3>= 184/37
 Elements of E:
 (0,1)
 (2,3)
@@ -10180,8 +10254,10 @@ Elements of Q:
 Total number of elements: 703
 size of Q: 703
 size of Q: 703
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 101/38
+(udir) <k^3>= 1
+( dir) <k^3>= 185/38
 Elements of E:
 (0,1)
 (2,3)
@@ -10968,8 +11044,10 @@ Elements of Q:
 Total number of elements: 741
 size of Q: 741
 size of Q: 741
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 35/13
+(udir) <k^3>= 1
+( dir) <k^3>= 193/39
 Elements of E:
 (0,1)
 (2,3)
@@ -11796,8 +11874,10 @@ Elements of Q:
 Total number of elements: 780
 size of Q: 780
 size of Q: 780
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 53/20
+(udir) <k^3>= 1
+( dir) <k^3>= 97/20
 Elements of E:
 (0,1)
 (2,3)
@@ -12665,8 +12745,10 @@ Elements of Q:
 Total number of elements: 820
 size of Q: 820
 size of Q: 820
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 110/41
+(udir) <k^3>= 1
+( dir) <k^3>= 202/41
 Elements of E:
 (0,1)
 (2,3)
@@ -13576,8 +13658,10 @@ Elements of Q:
 Total number of elements: 861
 size of Q: 861
 size of Q: 861
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 19/7
+(udir) <k^3>= 1
+( dir) <k^3>= 5
 Elements of E:
 (0,1)
 (2,3)
@@ -14530,8 +14614,10 @@ Elements of Q:
 Total number of elements: 903
 size of Q: 903
 size of Q: 903
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 118/43
+(udir) <k^3>= 1
+( dir) <k^3>= 218/43
 Elements of E:
 (0,1)
 (2,3)
@@ -15528,8 +15614,10 @@ Elements of Q:
 Total number of elements: 946
 size of Q: 946
 size of Q: 946
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 119/44
+(udir) <k^3>= 1
+( dir) <k^3>= 219/44
 Elements of E:
 (0,1)
 (2,3)
@@ -16571,8 +16659,10 @@ Elements of Q:
 Total number of elements: 990
 size of Q: 990
 size of Q: 990
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 8/3
+(udir) <k^3>= 1
+( dir) <k^3>= 44/9
 Elements of E:
 (0,1)
 (2,3)
@@ -17660,8 +17750,10 @@ Elements of Q:
 Total number of elements: 1035
 size of Q: 1035
 size of Q: 1035
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 121/46
+(udir) <k^3>= 1
+( dir) <k^3>= 221/46
 Elements of E:
 (0,1)
 (2,3)
@@ -18796,8 +18888,10 @@ Elements of Q:
 Total number of elements: 1081
 size of Q: 1081
 size of Q: 1081
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 122/47
+(udir) <k^3>= 1
+( dir) <k^3>= 222/47
 Elements of E:
 (0,1)
 (2,3)
@@ -19980,8 +20074,10 @@ Elements of Q:
 Total number of elements: 1128
 size of Q: 1128
 size of Q: 1128
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 21/8
+(udir) <k^3>= 1
+( dir) <k^3>= 115/24
 Elements of E:
 (0,1)
 (2,3)
@@ -21213,8 +21309,10 @@ Elements of Q:
 Total number of elements: 1176
 size of Q: 1176
 size of Q: 1176
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 127/49
+(udir) <k^3>= 1
+( dir) <k^3>= 33/7
 Elements of E:
 (0,1)
 (2,3)
@@ -22496,5 +22594,7 @@ Elements of Q:
 Total number of elements: 1225
 size of Q: 1225
 size of Q: 1225
-<k^2>= 1
-<k^3>= 1
+(udir) <k^2>= 1
+( dir) <k^2>= 131/50
+(udir) <k^3>= 1
+( dir) <k^3>= 239/50
