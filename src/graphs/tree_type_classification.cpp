@@ -65,15 +65,15 @@ namespace graphs {
 namespace tree_type_class {
 
 tree_type string_to_tt(const string& s) {
+	if (s == "empty") { return tree_type::empty; }
+	if (s == "singleton") { return tree_type::singleton; }
 	if (s == "linear") { return tree_type::linear; }
 	if (s == "star") { return tree_type::star; }
 	if (s == "quasistar") { return tree_type::quasistar; }
 	if (s == "bistar") { return tree_type::bistar; }
 	if (s == "caterpillar") { return tree_type::caterpillar; }
 	if (s == "spider") { return tree_type::spider; }
-	if (s == "unknown_tree_type") { return tree_type::unknown; }
 	if (s == "unknown") { return tree_type::unknown; }
-	if (s == "none") { return tree_type::unknown; }
 	cerr << ERROR << endl;
 	cerr << "    String '" << s << "' could not be converted into a tree type." << endl;
 	return tree_type::unknown;
@@ -104,7 +104,7 @@ vector<bool> parse_classes_tt(string s) {
 	}
 
 	if (not read_sth) {
-		const size_t idx = static_cast<size_t>(string_to_tt("none"));
+		const size_t idx = static_cast<size_t>(string_to_tt("unknown"));
 		classes[idx] = true;
 	}
 	return classes;

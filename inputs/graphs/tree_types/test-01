@@ -1,4 +1,4 @@
 TYPE graphs-tree_types
 INPUT 0
 BODY
-	0;linear,star,caterpillar
+	0;singleton
