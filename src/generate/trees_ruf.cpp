@@ -52,9 +52,7 @@ using namespace generate;
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
-#include "common/std_utils.hpp"
-#include "common/tree_validity_check.hpp"
+#include "test_random_tree_generation.hpp"
 
 namespace tests {
 namespace generate {
@@ -69,21 +67,16 @@ err_type exe_gen_trees_ruf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint64_t n, N;
-	while (fin >> n >> N) {
-		rand_ulab_free_trees TreeGen(n, 100);
-		for (uint64_t i = 0; i < N; ++i) {
-			const free_tree T = TreeGen.get_tree();
+	uint64_t n1, n2;
+	int num_trees;
+	while (fin >> n1 >> n2 >> num_trees) {
+		test_random_generation_of_trees
+		<true, 100, lal::generate::rand_ulab_free_trees>
+		(n1, n2, num_trees, cerr);
 
-			const ftree_check err = test_validity_tree(n, T);
-			if (err != ftree_check::correct) {
-				cerr << ERROR << endl;
-				cerr << "    Tree is not correct." << endl;
-				cerr << "    Error: " << ftree_check_to_string(err) << endl;
-				cerr << T << endl;
-				return err_type::test_execution;
-			}
-		}
+		test_random_generation_of_trees
+		<false, 100, lal::generate::rand_ulab_free_trees>
+		(n1, n2, num_trees, cerr);
 	}
 
 	TEST_GOODBYE

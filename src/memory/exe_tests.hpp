@@ -49,7 +49,6 @@
  */
 
 // C++ includes
-#include <functional>
 #include <fstream>
 #include <vector>
 #include <string>

@@ -41,24 +41,47 @@
 #pragma once
 
 #include "common/definitions.hpp"
+#include "common/tree_validity_check.hpp"
 
 namespace tests {
 namespace generate {
 
 template<
+	bool use_constructor,
+	int seed,
 	typename Gen,
-	typename Callable,
-	typename extra_params
+	class errstream
 >
-err_type test_exhaustive_enumeration_of_trees(
-	uint64_t n, const Callable& f, const extra_params& ep
-)
+inline
+err_type test_random_generation_of_trees
+(uint64_t n1, uint64_t n2, int num_trees, errstream& errs)
+noexcept
 {
-	Gen TreeGen(n);
-	for (size_t i = 0; i < 2; ++i) {
-		const auto err = f(n, TreeGen, ep);
-		if (err != err_type::no_error) { return err; }
-		TreeGen.reset();
+
+	Gen TreeGen;
+
+	for (auto n = n1; n <= n2; ++n) {
+		if constexpr (use_constructor) {
+			TreeGen = Gen(n);
+		}
+		else {
+			TreeGen.init(n);
+		}
+
+		for (int i = 0; i < num_trees; ++i) {
+			const typename Gen::tree_type_t T = TreeGen.get_tree();
+
+			const auto err = test_validity_tree(n, T);
+			if (err != decltype(err)::correct) {
+				errs << ERROR << '\n';
+				errs << "    Tree is not correct." << '\n';
+				errs << "    Error: " << tree_check_to_string(err) << '\n';
+				errs << T << '\n';
+				return err_type::test_execution;
+			}
+		}
+
+		TreeGen.clear();
 	}
 	return err_type::no_error;
 }

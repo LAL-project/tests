@@ -59,10 +59,10 @@ using namespace numeric;
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
-#include "common/tree_validity_check.hpp"
 
 // generate includes
-#include "generate/test_exhaustive_enumeration.hpp"
+#include "generate/test_exhaustive_tree_enumeration.hpp"
+#include "common/tree_validity_check.hpp"
 
 namespace tests {
 namespace generate {
@@ -75,7 +75,7 @@ struct extra_params { };
 	if (err != rtree_check::correct) {										\
 		cerr << ERROR << endl;												\
 		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
-		cerr << "    Error: " << rtree_check_to_string(err) << endl;		\
+		cerr << "    Error: " << tree_check_to_string(err) << endl;			\
 		cerr << T << endl;													\
 		return err_type::test_execution;									\
 	}																		\
@@ -135,6 +135,31 @@ err_type test_for_n_yield
 	return err_type::no_error;
 }
 
+template<bool init>
+err_type call_test_exhaustive(uint64_t n1, uint64_t n2) noexcept {
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_lab_rooted_trees>
+		(n1, n2, test_for_n_while, extra_params{});
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_lab_rooted_trees>
+		(n1, n2, test_for_n_for, extra_params{});
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_lab_rooted_trees>
+		(n1, n2, test_for_n_yield, extra_params{});
+	if (err != err_type::no_error) { return err; }
+	}
+	return err_type::no_error;
+}
+
 } // -- namespace alr
 
 err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
@@ -147,22 +172,17 @@ err_type exe_gen_trees_alr(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint64_t n;
-	while (fin >> n) {
-		const auto err1 =
-			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
-			(n, alr::test_for_n_while, alr::extra_params{});
-		if (err1 != err_type::no_error) { return err1; }
+	uint64_t n1, n2;
+	while (fin >> n1 >> n2) {
+		{
+		const auto err = alr::call_test_exhaustive<true>(n1, n2);
+		if (err != err_type::no_error) { return err; }
+		}
 
-		const auto err2 =
-			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
-			(n, alr::test_for_n_for, alr::extra_params{});
-		if (err2 != err_type::no_error) { return err2; }
-
-		const auto err3 =
-			test_exhaustive_enumeration_of_trees<all_lab_rooted_trees>
-			(n, alr::test_for_n_yield, alr::extra_params{});
-		if (err3 != err_type::no_error) { return err3; }
+		{
+		const auto err = alr::call_test_exhaustive<false>(n1, n2);
+		if (err != err_type::no_error) { return err; }
+		}
 	}
 
 	TEST_GOODBYE

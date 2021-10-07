@@ -38,48 +38,43 @@
  *
  ********************************************************************/
 
-// C++ includes
-#include <iostream>
-#include <fstream>
-using namespace std;
+#pragma once
 
-// lal includes
-#include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-
-// common includes
 #include "common/definitions.hpp"
-#include "test_random_tree_generation.hpp"
 
 namespace tests {
 namespace generate {
 
-err_type exe_gen_trees_rur(const input_list& inputs, ifstream& fin) {
-	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
-		return err_type::test_format;
+template<
+	bool use_constructor,
+	typename Gen,
+	typename Callable,
+	typename extra_params
+>
+inline
+err_type test_exhaustive_enumeration_of_trees
+(uint64_t n1, uint64_t n2, const Callable& f, const extra_params& ep)
+noexcept
+{
+
+	Gen TreeGen;
+
+	for (auto n = n1; n <= n2; ++n) {
+		if constexpr (use_constructor) {
+			TreeGen = Gen(n);
+		}
+		else {
+			TreeGen.init(n);
+		}
+
+		for (size_t i = 0; i < 2; ++i) {
+			const auto err = f(n, TreeGen, ep);
+			if (err != err_type::no_error) { return err; }
+			TreeGen.reset();
+		}
+
+		TreeGen.clear();
 	}
-
-	// --- do the tests
-
-	uint64_t n1, n2;
-	int num_trees;
-	while (fin >> n1 >> n2 >> num_trees) {
-		test_random_generation_of_trees
-		<true, 100, lal::generate::rand_ulab_rooted_trees>
-		(n1, n2, num_trees, cerr);
-
-		test_random_generation_of_trees
-		<false, 100, lal::generate::rand_ulab_rooted_trees>
-		(n1, n2, num_trees, cerr);
-	}
-
-	TEST_GOODBYE
 	return err_type::no_error;
 }
 

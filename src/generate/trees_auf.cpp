@@ -58,10 +58,10 @@ using namespace numeric;
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
-#include "common/tree_validity_check.hpp"
 
 // generate includes
-#include "generate/test_exhaustive_enumeration.hpp"
+#include "generate/test_exhaustive_tree_enumeration.hpp"
+#include "common/tree_validity_check.hpp"
 
 // number of caterpillar trees of a given size
 inline integer num_caterpillar_trees(uint64_t n) noexcept {
@@ -83,7 +83,6 @@ namespace generate {
 namespace auf {
 struct extra_params {
 	vector<integer> UFT;
-	uint64_t SIZE_UFT;
 };
 
 #define process																\
@@ -91,7 +90,7 @@ struct extra_params {
 	if (err != ftree_check::correct) {										\
 		cerr << ERROR << endl;												\
 		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
-		cerr << "    Error: " << ftree_check_to_string(err) << endl;		\
+		cerr << "    Error: " << tree_check_to_string(err) << endl;			\
 		cerr << T << endl;													\
 		return err_type::test_execution;									\
 	}																		\
@@ -127,7 +126,7 @@ struct extra_params {
 		return err_type::test_execution;																\
 	}																									\
 	/* make sure that the amount of trees generate coincides with the series from the OEIS */			\
-	if (n < SIZE_UFT and gen != UFT[n]) {																\
+	if (n < UFT.size() and gen != UFT[n]) {																\
 		cerr << ERROR << endl;																			\
 		cerr << "    Exhaustive generation of unlabelled free trees" << endl;							\
 		cerr << "    Amount of trees should be: " << UFT[n] << endl;									\
@@ -140,7 +139,6 @@ err_type test_for_n_while
 (uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
-	const auto& SIZE_UFT = params.SIZE_UFT;
 
 	// number of caterpillar trees
 	integer n_caterpillar = 0;
@@ -165,7 +163,6 @@ err_type test_for_n_for
 (uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
-	const auto& SIZE_UFT = params.SIZE_UFT;
 
 	// number of caterpillar trees
 	integer n_caterpillar = 0;
@@ -189,7 +186,6 @@ err_type test_for_n_yield
 (uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
-	const auto& SIZE_UFT = params.SIZE_UFT;
 
 	// number of caterpillar trees
 	integer n_caterpillar = 0;
@@ -209,6 +205,32 @@ err_type test_for_n_yield
 	return err_type::no_error;
 }
 
+template<bool init>
+err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) noexcept {
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		(n1, n2, test_for_n_while, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		(n1, n2, test_for_n_for, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		(n1, n2, test_for_n_yield, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+	return err_type::no_error;
+}
+
+
 } // -- namespace auf
 
 err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
@@ -219,47 +241,47 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 	// amount of unlabelled free trees
 	auf::extra_params params;
 	// size of the vector with the number of unlabelled free trees
-	params.SIZE_UFT = 37;
 
-	auto& UFT = params.UFT;
-	UFT = vector<integer>(params.SIZE_UFT, 0);
-	UFT[0] = 1;
-	UFT[1] = 1;
-	UFT[2] = 1;
-	UFT[3] = 1;
-	UFT[4] = 2;
-	UFT[5] = 3;
-	UFT[6] = 6;
-	UFT[7] = 11;
-	UFT[8] = 23;
-	UFT[9] = 47;
-	UFT[10] = 106;
-	UFT[11] = 235;
-	UFT[12] = 551;
-	UFT[13] = 1301;
-	UFT[14] = 3159;
-	UFT[15] = 7741;
-	UFT[16] = 19320;
-	UFT[17] = 48629;
-	UFT[18] = 123867;
-	UFT[19] = 317955;
-	UFT[20] = 823065;
-	UFT[21] = 2144505;
-	UFT[22] = 5623756;
-	UFT[23] = 14828074;
-	UFT[24] = 39299897;
-	UFT[25] = integer("104636890");
-	UFT[26] = integer("279793450");
-	UFT[27] = integer("751065460");
-	UFT[28] = integer("2023443032");
-	UFT[29] = integer("5469566585");
-	UFT[30] = integer("14830871802");
-	UFT[31] = integer("40330829030");
-	UFT[32] = integer("109972410221");
-	UFT[33] = integer("300628862480");
-	UFT[34] = integer("823779631721");
-	UFT[35] = integer("2262366343746");
-	UFT[36] = integer("6226306037178");
+	params.UFT =
+	vector<integer>{
+		1,
+		1,
+		1,
+		1,
+		2,
+		3,
+		6,
+		11,
+		23,
+		47,
+		106,
+		235,
+		551,
+		1301,
+		3159,
+		7741,
+		19320,
+		48629,
+		123867,
+		317955,
+		823065,
+		2144505,
+		5623756,
+		14828074,
+		39299897,
+		integer("104636890"),
+		integer("279793450"),
+		integer("751065460"),
+		integer("2023443032"),
+		integer("5469566585"),
+		integer("14830871802"),
+		integer("40330829030"),
+		integer("109972410221"),
+		integer("300628862480"),
+		integer("823779631721"),
+		integer("2262366343746"),
+		integer("6226306037178")
+	};
 
 	// -------------------------------------------------------------------------
 
@@ -272,22 +294,17 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint64_t n;
-	while (fin >> n) {
-		const auto err1 =
-			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
-			(n, auf::test_for_n_while, params);
-		if (err1 != err_type::no_error) { return err1; }
+	uint64_t n1, n2;
+	while (fin >> n1 >> n2) {
+		{
+		const auto err = auf::call_test_exhaustive<true>(n1, n2, params);
+		if (err != err_type::no_error) { return err; }
+		}
 
-		const auto err2 =
-			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
-			(n, auf::test_for_n_for, params);
-		if (err2 != err_type::no_error) { return err2; }
-
-		const auto err3 =
-			test_exhaustive_enumeration_of_trees<all_ulab_free_trees>
-			(n, auf::test_for_n_yield, params);
-		if (err3 != err_type::no_error) { return err3; }
+		{
+		const auto err = auf::call_test_exhaustive<false>(n1, n2, params);
+		if (err != err_type::no_error) { return err; }
+		}
 	}
 
 	TEST_GOODBYE

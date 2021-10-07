@@ -43,8 +43,7 @@ SOURCES += \
     io_wrapper.cpp \
     parse_keywords.cpp \
     test_utils.cpp \
-    time.cpp \
-    tree_validity_check.cpp
+	time.cpp
 
 HEADERS += \
     definitions.hpp \
@@ -54,4 +53,4 @@ HEADERS += \
     std_utils.hpp \
     test_utils.hpp \
     time.hpp \
-    tree_validity_check.hpp
+	tree_validity_check.hpp

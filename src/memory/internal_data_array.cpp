@@ -260,6 +260,44 @@ void test_copy_assignment() {
 }
 #endif
 
+template<bool clear>
+void test_resize_fill() {
+	begin_function;
+
+	data_array<int> d;
+
+	begin_case;
+	d.resize(1, 1);
+	output_array(d);
+
+	if constexpr (clear) { d.clear(); }
+
+	begin_case;
+	d.resize(2, 2);
+	output_array(d);
+
+	if constexpr (clear) { d.clear(); }
+
+	begin_case;
+	d.resize(10, 10);
+	output_array(d);
+
+	if constexpr (clear) { d.clear(); }
+
+	begin_case;
+	d.resize(10, 10);
+	output_array(d);
+
+	if constexpr (clear) { d.clear(); }
+
+	begin_case;
+	d.resize(20);
+	d.fill(20);
+	output_array(d);
+
+	if constexpr (clear) { d.clear(); }
+}
+
 }
 
 err_type exe_memory_internal_data_array(const input_list& inputs, ifstream&) {
@@ -279,6 +317,9 @@ err_type exe_memory_internal_data_array(const input_list& inputs, ifstream&) {
 	lal_data_array::test_copy_constructor();
 	lal_data_array::test_copy_assignment();
 #endif
+
+	lal_data_array::test_resize_fill<false>();
+	lal_data_array::test_resize_fill<true>();
 
 	TEST_GOODBYE
 	return err_type::no_error;

@@ -79,4 +79,5 @@ SOURCES += \
 HEADERS += \
     exe_tests.hpp \
     parse_keywords.hpp \
-    test_exhaustive_enumeration.hpp
+    test_exhaustive_tree_enumeration.hpp \
+    test_random_tree_generation.hpp

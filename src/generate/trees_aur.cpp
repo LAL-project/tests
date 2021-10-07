@@ -59,10 +59,10 @@ using namespace numeric;
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
-#include "common/tree_validity_check.hpp"
 
 // generate includes
-#include "generate/test_exhaustive_enumeration.hpp"
+#include "generate/test_exhaustive_tree_enumeration.hpp"
+#include "common/tree_validity_check.hpp"
 
 namespace tests {
 namespace generate {
@@ -70,7 +70,6 @@ namespace generate {
 namespace aur {
 struct extra_params {
 	vector<integer> URT;
-	uint64_t SIZE_URT;
 };
 
 #define process																\
@@ -78,7 +77,7 @@ struct extra_params {
 	if (err != rtree_check::correct) {										\
 		cerr << ERROR << endl;												\
 		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
-		cerr << "    Error: " << rtree_check_to_string(err) << endl;		\
+		cerr << "    Error: " << tree_check_to_string(err) << endl;			\
 		cerr << T << endl;													\
 		return err_type::test_execution;									\
 	}																		\
@@ -104,7 +103,7 @@ struct extra_params {
 #define check																	\
 	/* make sure that the amount of trees generate coincides					\
 	   with the series from the OEIS */											\
-	if (n < SIZE_URT and gen != URT[n]) {										\
+	if (n < URT.size() and gen != URT[n]) {										\
 		cerr << ERROR << endl;													\
 		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;	\
 		cerr << "    Amount of trees should be: " << URT[n] << endl;			\
@@ -117,7 +116,6 @@ err_type test_for_n_while
 (uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
-	const auto& SIZE_URT = params.SIZE_URT;
 
 	// number of generated trees
 	integer gen = 0;
@@ -138,7 +136,6 @@ err_type test_for_n_for
 (uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
-	const auto& SIZE_URT = params.SIZE_URT;
 
 	// number of generated trees
 	integer gen = 0;
@@ -158,7 +155,6 @@ err_type test_for_n_yield
 (uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
-	const auto& SIZE_URT = params.SIZE_URT;
 
 	// number of generated trees
 	integer gen = 0;
@@ -174,6 +170,33 @@ err_type test_for_n_yield
 	return err_type::no_error;
 }
 
+template<bool init>
+err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep)
+noexcept
+{
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		(n1, n2, test_for_n_while, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		(n1, n2, test_for_n_for, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+
+	{
+	const auto err =
+		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		(n1, n2, test_for_n_yield, ep);
+	if (err != err_type::no_error) { return err; }
+	}
+	return err_type::no_error;
+}
+
 } // -- namespace aur
 
 err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
@@ -183,42 +206,41 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 	// from: http://oeis.org/A000055/list
 	// amount of unlabelled free trees
 	aur::extra_params params;
-	// size of the vector with the number of unlabelled free trees
-	params.SIZE_URT = 37;
 
-	auto& URT = params.URT;
-	URT = vector<integer>(params.SIZE_URT, 0);
-	URT[0] = 0;
-	URT[1] = 1;
-	URT[2] = 1;
-	URT[3] = 2;
-	URT[4] = 4;
-	URT[5] = 9;
-	URT[6] = 20;
-	URT[7] = 48;
-	URT[8] = 115;
-	URT[9] = 286;
-	URT[10] = 719;
-	URT[11] = 1842;
-	URT[12] = 4766;
-	URT[13] = 12486;
-	URT[14] = 32973;
-	URT[15] = 87811;
-	URT[16] = 235381;
-	URT[17] = 634847;
-	URT[18] = 1721159;
-	URT[19] = 4688676;
-	URT[20] = 12826228;
-	URT[21] = 35221832;
-	URT[22] = 97055181;
-	URT[23] = 268282855;
-	URT[24] = 743724984;
-	URT[25] = integer("2067174645");
-	URT[26] = integer("5759636510");
-	URT[27] = integer("16083734329");
-	URT[28] = integer("45007066269");
-	URT[29] = integer("126186554308");
-	URT[30] = integer("354426847597");
+	params.URT =
+	vector<integer>{
+		0,
+		1,
+		1,
+		2,
+		4,
+		9,
+		20,
+		48,
+		115,
+		286,
+		719,
+		1842,
+		4766,
+		12486,
+		32973,
+		87811,
+		235381,
+		634847,
+		1721159,
+		4688676,
+		12826228,
+		35221832,
+		97055181,
+		268282855,
+		743724984,
+		integer("2067174645"),
+		integer("5759636510"),
+		integer("16083734329"),
+		integer("45007066269"),
+		integer("126186554308"),
+		integer("354426847597")
+	};
 
 	// -------------------------------------------------------------------------
 
@@ -231,22 +253,17 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 
 	// --- do the tests
 
-	uint64_t n;
-	while (fin >> n) {
-		const auto err1 =
-			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
-			(n, aur::test_for_n_while, params);
-		if (err1 != err_type::no_error) { return err1; }
+	uint64_t n1, n2;
+	while (fin >> n1 >> n2) {
+		{
+		const auto err = aur::call_test_exhaustive<true>(n1, n2, params);
+		if (err != err_type::no_error) { return err; }
+		}
 
-		const auto err2 =
-			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
-			(n, aur::test_for_n_for, params);
-		if (err2 != err_type::no_error) { return err2; }
-
-		const auto err3 =
-			test_exhaustive_enumeration_of_trees<all_ulab_rooted_trees>
-			(n, aur::test_for_n_yield, params);
-		if (err3 != err_type::no_error) { return err3; }
+		{
+		const auto err = aur::call_test_exhaustive<false>(n1, n2, params);
+		if (err != err_type::no_error) { return err; }
+		}
 	}
 
 	TEST_GOODBYE
