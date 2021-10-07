@@ -1,6 +1,4 @@
 TYPE generate-trees-alr
 INPUT 0
 BODY
-	4
-	5
-	6
+	4 6

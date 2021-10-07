@@ -1,6 +1,4 @@
 TYPE generate-trees-rlf
 INPUT 0
 BODY
-	4
-	5
-	6
+	21 29	1000

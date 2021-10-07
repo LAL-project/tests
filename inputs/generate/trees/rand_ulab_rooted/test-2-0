@@ -1,5 +1,4 @@
 TYPE generate-trees-rur
 INPUT 0
 BODY
-	19
-	20
+	100 109 1000

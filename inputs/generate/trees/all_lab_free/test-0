@@ -1,6 +1,4 @@
 TYPE generate-trees-alf
 INPUT 0
 BODY
-	1
-	2
-	3
+	1 3

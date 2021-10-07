@@ -1,6 +1,4 @@
 TYPE generate-trees-rlr
 INPUT 0
 BODY
-	16
-	17
-	18
+	40 49	1000
