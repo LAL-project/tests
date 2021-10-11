@@ -98,18 +98,18 @@ using namespace generate;
 namespace tests {
 namespace generate {
 
-inline integer factorial(int64_t f) noexcept {
+inline integer factorial(uint64_t f) noexcept {
 	if (f == 0) { return 1; }
 	const integer f1 = factorial(f - 1);
 	return f1*f;
 }
 
 inline integer amount_planar(const free_tree& T) noexcept {
-	integer k = 1;
+	integer k = T.get_num_nodes();
 	for (node u = 0; u < T.get_num_nodes(); ++u) {
 		k *= factorial(T.get_degree(u));
 	}
-	return T.get_num_nodes()*k;
+	return k;
 }
 
 inline err_type test_a_tree(free_tree& T, uint64_t nrelabs) noexcept {
