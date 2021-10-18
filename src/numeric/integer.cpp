@@ -107,6 +107,10 @@ static inline err_type resolve_comp_integer(
 			comparison_error(op, var1, var2, val1, val2)
 			return err_type::test_execution;
 		}
+		if (val2 == val1) {
+			comparison_error(op, var1, var2, val1, val2)
+			return err_type::test_execution;
+		}
 	}
 	else if (op == ">=") {
 		if (val1 < val2) {

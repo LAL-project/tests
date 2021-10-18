@@ -39,6 +39,7 @@
  ********************************************************************/
 
 // C++ includes
+#include <optional>
 #include <iostream>
 #include <fstream>
 #include <random>
