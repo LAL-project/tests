@@ -42,7 +42,6 @@
 #include <functional>
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
@@ -52,10 +51,6 @@ using namespace std;
 #include <lal/numeric/rational_output.hpp>
 #include <lal/properties/D_rla.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -67,34 +62,34 @@ namespace properties {
 
 namespace ExpVar_D {
 
-void output_ExpVar_D_formula(const undirected_graph& g) {
-	const rational Vr = var_sum_edge_lengths_rational(g);
-	const rational E1r = exp_sum_edge_lengths_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << "\t" << endl;
+void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) {
+	const lal::numeric::rational Vr = lal::properties::var_sum_edge_lengths_rational(g);
+	const lal::numeric::rational E1r = lal::properties::exp_sum_edge_lengths_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << "\t\n";
 }
 
 } // -- namespace ExpVar_D
 
-err_type exe_properties_ExpVar_D(const input_list& inputs, ifstream& fin) {
-	string proc;
+err_type exe_properties_ExpVar_D(const input_list& inputs, std::ifstream& fin) {
+	std::string proc;
 	fin >> proc;
 
 	if (proc != "formula") {
-		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Received '" << proc << "'." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Wrong value for procedure type.\n";
+		std::cerr << "    Received '" << proc << "'.\n";
 		return err_type::test_format;
 	}
 
 	// read the graph type so that we can call
 	// the appropriate function for this graph
 	// type's variance.
-	string graph_type;
+	std::string graph_type;
 	fin >> graph_type;
 
-	undirected_graph G;
-	for (size_t i = 0; i < inputs.size(); ++i) {
+	lal::graphs::undirected_graph G;
+	for (std::size_t i = 0; i < inputs.size(); ++i) {
 		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {
 			return r;

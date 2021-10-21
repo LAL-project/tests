@@ -47,42 +47,40 @@
 #include <fstream>
 #include <string>
 #include <vector>
-using namespace std;
 
 // common includes
 #include "common/definitions.hpp"
 #include "utilities/parse_keywords.hpp"
-using namespace tests;
 
-err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
-	string field;
+tests::err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type) {
+	std::string field;
 	fin >> field;
 
 	if (field != "TYPE") {
-		cerr << ERROR << endl;
-		cerr << "    In input test file '" << filename << "'." << endl;
-		cerr << "    First field is not 'TYPE'." << endl;
-		cerr << "    Field found: '" << field << "'." << endl;
-		return err_type::test_format;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    In input test file '" << filename << "'.\n";
+		std::cerr << "    First field is not 'TYPE'.\n";
+		std::cerr << "    Field found: '" << field << "'.\n";
+		return tests::err_type::test_format;
 	}
 
 	fin >> type;
-	return err_type::no_error;
+	return tests::err_type::no_error;
 }
 
-void get_keywords(const string& type, vector<string>& keywords) {
+void get_keywords(const std::string& type, std::vector<std::string>& keywords) {
 	bool finish = false;
 
-	size_t dash_pos = 0;
+	std::size_t dash_pos = 0;
 	do {
-		size_t new_dash_pos = type.find("-", dash_pos);
-		if (new_dash_pos != string::npos) {
-			string keyword = type.substr(dash_pos, new_dash_pos - dash_pos);
+		std::size_t new_dash_pos = type.find("-", dash_pos);
+		if (new_dash_pos != std::string::npos) {
+			std::string keyword = type.substr(dash_pos, new_dash_pos - dash_pos);
 			keywords.push_back(keyword);
 			dash_pos = new_dash_pos + 1;
 		}
 		else {
-			string keyword = type.substr(dash_pos, type.length() - dash_pos);
+			std::string keyword = type.substr(dash_pos, type.length() - dash_pos);
 			keywords.push_back(keyword);
 			finish = true;
 		}
@@ -93,70 +91,70 @@ void get_keywords(const string& type, vector<string>& keywords) {
 int main(int argc, char *argv[]) {
 	// error checking
 	if (argc == 1) {
-		cerr << ERROR << endl;
-		cerr << "    No arguments given. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No arguments given. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 	if (argc > 3) {
-		cerr << ERROR << endl;
-		cerr << "    Too many arguments given. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Too many arguments given. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 	if (strcmp(argv[1], "-i") != 0 and strcmp(argv[1], "--input") != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Unrecognised parameter '" << string(argv[1]) << "'. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unrecognised parameter '" << std::string(argv[1]) << "'. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 
-	string input_file(argv[2]);
-	if (not filesystem::exists(input_file)) {
-		cerr << ERROR << endl;
-		cerr << "    Input test '" << input_file << "' does not exist." << endl;
+	std::string input_file(argv[2]);
+	if (not std::filesystem::exists(input_file)) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Input test '" << input_file << "' does not exist.\n";
 		return 1;
 	}
 
-	ifstream fin;
+	std::ifstream fin;
 	fin.open(input_file.c_str());
-	string type;
-	err_type r = get_type_keyword(input_file, fin, type);
+	std::string type;
+	tests::err_type r = get_type_keyword(input_file, fin, type);
 
-	if (r == err_type::test_format) {
-		cerr << "***********************" << endl;
-		cerr << "Exiting with error type: test_format_error" << endl;
+	if (r == tests::err_type::test_format) {
+		std::cerr << "***********************\n";
+		std::cerr << "Exiting with error type: test_format_error\n";
 		return 1;
 	}
 
-	vector<string> keywords_type;
+	std::vector<std::string> keywords_type;
 	get_keywords(type, keywords_type);
 
 	r = tests::utilities::call_main(keywords_type, fin);
 
-	if (r != err_type::no_error) {
-		cerr << "***********************" << endl;
-		cerr << "Exiting with error type: ";
+	if (r != tests::err_type::no_error) {
+		std::cerr << "***********************\n";
+		std::cerr << "Exiting with error type: ";
 		switch (r) {
-		case err_type::io: cerr << "io_error"; break;
-		case err_type::test_execution: cerr << "test_execution"; break;
-		case err_type::invalid_param: cerr << "invalid_param"; break;
-		case err_type::wrong_keyword: cerr << "wrong_keyword"; break;
-		case err_type::not_implemented: cerr << "not_implemented"; break;
-		case err_type::test_format: cerr << "test_format"; break;
-		case err_type::graph_format: cerr << "graph_format"; break;
-		case err_type::too_many_keywords: cerr << "too_many_keywords"; break;
+		case tests::err_type::io: std::cerr << "io_error"; break;
+		case tests::err_type::test_execution: std::cerr << "test_execution"; break;
+		case tests::err_type::invalid_param: std::cerr << "invalid_param"; break;
+		case tests::err_type::wrong_keyword: std::cerr << "wrong_keyword"; break;
+		case tests::err_type::not_implemented: std::cerr << "not_implemented"; break;
+		case tests::err_type::test_format: std::cerr << "test_format"; break;
+		case tests::err_type::graph_format: std::cerr << "graph_format"; break;
+		case tests::err_type::too_many_keywords: std::cerr << "too_many_keywords"; break;
 		default:
 			;
 		}
 
-		cerr << endl;
+		std::cerr << '\n';
 		return 1;
 	}
 

@@ -67,15 +67,15 @@ noexcept
 			TreeGen.init(n);
 		}
 
-		for (size_t i = 0; i < 2; ++i) {
+		for (std::size_t i = 0; i < 2; ++i) {
 			const auto err = f(n, TreeGen, ep);
-			if (err != err_type::no_error) { return err; }
+			if (err != tests::err_type::no_error) { return err; }
 			TreeGen.reset();
 		}
 
 		TreeGen.clear();
 	}
-	return err_type::no_error;
+	return tests::err_type::no_error;
 }
 
 } // -- namespace generate

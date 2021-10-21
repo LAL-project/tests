@@ -43,7 +43,6 @@
 #include <fstream>
 #include <random>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
@@ -59,11 +58,6 @@ using namespace std;
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mean_hierarchical_distance.hpp>
 #include <lal/detail/graphs/is_tree.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
-using namespace iterators;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -72,29 +66,29 @@ using namespace iterators;
 namespace tests {
 namespace properties {
 
-directed_graph make_rand_dgraph(const undirected_graph& g) {
+lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph& g) {
 	// coin flips
-	default_random_engine gen(1234);
-	uniform_int_distribution<int> U(0,1);
+	std::default_random_engine gen(1234);
+	std::uniform_int_distribution<int> U(0,1);
 
 	// directed graph
-	directed_graph dg(g.get_num_nodes());
-	vector<edge> es = g.get_edges();
+	lal::graphs::directed_graph dg(g.get_num_nodes());
+	std::vector<lal::edge> es = g.get_edges();
 
-	const size_t m = es.size();
-	for (size_t i = 0; i < m; ++i) {
-		edge& e = es[i];
+	const std::size_t m = es.size();
+	for (std::size_t i = 0; i < m; ++i) {
+		lal::edge& e = es[i];
 
-		// add edge in one orientation or the other
+		// add lal::edge in one orientation or the other
 		const int c1 = U(gen);
 		if (c1 == 1) {
 			std::swap(e.first, e.second);
 		}
 
-		// add (or not) the opposite edge
+		// add (or not) the opposite lal::edge
 		const int c2 = U(gen);
 		if (c2 == 1) {
-			edge flip = e;
+			lal::edge flip = e;
 			std::swap(flip.first, flip.second);
 			es.push_back(flip);
 		}
@@ -107,101 +101,101 @@ directed_graph make_rand_dgraph(const undirected_graph& g) {
 
 template<class G>
 void enum_E(const G& g) {
-	size_t total = 0;
+	std::size_t total = 0;
 
-	cout << "Elements of E:" << endl;
+	std::cout << "Elements of E:\n";
 
-	for (E_iterator e_it(g); not e_it.end(); e_it.next()) {
+	for (lal::iterators::E_iterator e_it(g); not e_it.end(); e_it.next()) {
 		const auto [u,v] = e_it.get_edge();
-		cout << "(" << u << "," << v << ")" << endl;
+		std::cout << "(" << u << "," << v << ")\n";
 		++total;
 	}
-	cout << "Total number of elements: " << total << endl;
+	std::cout << "Total number of elements: " << total << '\n';
 }
 
 template<class G>
 void enum_Q(const G& g) {
-	size_t total = 0;
+	std::size_t total = 0;
 
-	cout << "Elements of Q:" << endl;
+	std::cout << "Elements of Q:\n";
 
-	for (Q_iterator q_it(g); not q_it.end(); q_it.next()) {
-		const edge_pair& ep = q_it.get_edge_pair();
-		const edge& e1 = ep.first;
-		const edge& e2 = ep.second;
-		cout << "("
+	for (lal::iterators::Q_iterator q_it(g); not q_it.end(); q_it.next()) {
+		const lal::edge_pair& ep = q_it.get_edge_pair();
+		const lal::edge& e1 = ep.first;
+		const lal::edge& e2 = ep.second;
+		std::cout << "("
 			 << "(" << e1.first << ", " << e1.second << "), "
 			 << "(" << e2.first << ", " << e2.second << ")"
 			 << ")"
-			 << endl;
+			 << '\n';
 
 		++total;
 	}
-	cout << "Total number of elements: " << total << endl;
+	std::cout << "Total number of elements: " << total << '\n';
 }
 
 template<class G>
 void Q_size(const G& g) {
-	const integer Q = num_pairs_independent_edges_integer(g);
-	cout << "size of Q: " << Q << endl;
+	const lal::numeric::integer Q = lal::properties::num_pairs_independent_edges_integer(g);
+	std::cout << "size of Q: " << Q << '\n';
 
-	const uint64_t dQ = num_pairs_independent_edges(g);
-	cout << "size of Q: " << dQ << endl;
+	const uint64_t dQ = lal::properties::num_pairs_independent_edges(g);
+	std::cout << "size of Q: " << dQ << '\n';
 }
 
 //
 
-void mmt_deg(const undirected_graph& g, uint64_t p) {
-	cout << "(udir) <k^" << p << ">= "
-		 << moment_degree_rational(g, p)
-		 << endl;
+void mmt_deg(const lal::graphs::undirected_graph& g, uint64_t p) {
+	std::cout << "(udir) <k^" << p << ">= "
+		 << lal::properties::moment_degree_rational(g, p)
+		 << '\n';
 }
 
-void mmt_deg(const directed_graph& g, uint64_t p) {
-	cout << "( dir) <k^" << p << ">= "
-		 << moment_degree_rational(g, p)
-		 << endl;
+void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) {
+	std::cout << "( dir) <k^" << p << ">= "
+		 << lal::properties::moment_degree_rational(g, p)
+		 << '\n';
 }
 
 //
 
-err_type mmt_in_deg(const undirected_graph& uG, const directed_graph& dG, uint64_t p) {
-	cout << "(graph) <k_out^" << p << ">= "
-		 << moment_in_degree_rational(dG, p)
-		 << endl;
+err_type mmt_in_deg(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p) {
+	std::cout << "(graph) <k_out^" << p << ">= "
+		 << lal::properties::moment_in_degree_rational(dG, p)
+		 << '\n';
 
-	const bool is_tree_dG = detail::is_graph_a_tree(dG);
-	const bool is_tree_uG = detail::is_graph_a_tree(uG);
+	const bool is_tree_dG = lal::detail::is_graph_a_tree(dG);
+	const bool is_tree_uG = lal::detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
-		cerr << ERROR << endl;
-		cerr << "    Error in deciding whether a graph is a tree or not." << endl;
-		cerr << "    It has been determined that an undirected graph uG" << endl;
-		cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however" << endl;
-		cerr << "    it has been determined that its oriented version dG" << endl;
-		cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence" << endl;
-		cerr << "    a contradiction." << endl;
-		cerr << "    Is undirected a tree? " << is_tree_uG << endl;
-		cerr << "    Is   directed a tree? " << is_tree_dG << endl;
-		cerr << "    Undirected graph:" << endl;
-		cerr << uG << endl;
-		cerr << "    Directed graph:" << endl;
-		cerr << dG << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Error in deciding whether a graph is a tree or not.\n";
+		std::cerr << "    It has been determined that an undirected graph uG\n";
+		std::cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however\n";
+		std::cerr << "    it has been determined that its oriented version dG\n";
+		std::cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence\n";
+		std::cerr << "    a contradiction.\n";
+		std::cerr << "    Is undirected a tree? " << is_tree_uG << '\n';
+		std::cerr << "    Is   directed a tree? " << is_tree_dG << '\n';
+		std::cerr << "    Undirected graph:\n";
+		std::cerr << uG << '\n';
+		std::cerr << "    Directed graph:\n";
+		std::cerr << dG << '\n';
 		return err_type::test_execution;
 	}
 
 	if (is_tree_dG) {
 		const auto n = uG.get_num_nodes();
-		for (node r = 0; r < n; ++r) {
-			const rooted_tree T(uG, r);
-			const auto kin = moment_in_degree_rational(T, p);
+		for (lal::node r = 0; r < n; ++r) {
+			const lal::graphs::rooted_tree T(uG, r);
+			const auto kin = lal::properties::moment_in_degree_rational(T, p);
 
-			cout << "(rtree at " << r << ") <k_in^" << p << ">= " << kin << endl;
+			std::cout << "(rtree at " << r << ") <k_in^" << p << ">= " << kin << '\n';
 			if (kin != lal::numeric::rational(n-1, n)) {
-				cerr << ERROR << endl;
-				cerr << "    Moment of in-degree is not equal to the expected value." << endl;
-				cerr << "    Expected: " << lal::numeric::rational(n-1, n) << endl;
-				cerr << "    Received: " << kin << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Moment of in-degree is not equal to the expected value.\n";
+				std::cerr << "    Expected: " << lal::numeric::rational(n-1, n) << '\n';
+				std::cerr << "    Received: " << kin << '\n';
 				return err_type::test_execution;
 			}
 
@@ -212,38 +206,38 @@ err_type mmt_in_deg(const undirected_graph& uG, const directed_graph& dG, uint64
 
 //
 
-err_type mmt_out_deg(const undirected_graph& uG, const directed_graph& dG, uint64_t p) {
-	cout << "(graph) <k_out^" << p << ">= "
-		 << moment_out_degree_rational(dG, p)
-		 << endl;
+err_type mmt_out_deg(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p) {
+	std::cout << "(graph) <k_out^" << p << ">= "
+		 << lal::properties::moment_out_degree_rational(dG, p)
+		 << '\n';
 
-	const bool is_tree_dG = detail::is_graph_a_tree(dG);
-	const bool is_tree_uG = detail::is_graph_a_tree(uG);
+	const bool is_tree_dG = lal::detail::is_graph_a_tree(dG);
+	const bool is_tree_uG = lal::detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
-		cerr << ERROR << endl;
-		cerr << "    Error in deciding whether a graph is a tree or not." << endl;
-		cerr << "    It has been determined that an undirected graph uG" << endl;
-		cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however" << endl;
-		cerr << "    it has been determined that its oriented version dG" << endl;
-		cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence" << endl;
-		cerr << "    a contradiction." << endl;
-		cerr << "    Is undirected a tree? " << is_tree_uG << endl;
-		cerr << "    Is   directed a tree? " << is_tree_dG << endl;
-		cerr << "    Undirected graph:" << endl;
-		cerr << uG << endl;
-		cerr << "    Directed graph:" << endl;
-		cerr << dG << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Error in deciding whether a graph is a tree or not.\n";
+		std::cerr << "    It has been determined that an undirected graph uG\n";
+		std::cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however\n";
+		std::cerr << "    it has been determined that its oriented version dG\n";
+		std::cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence\n";
+		std::cerr << "    a contradiction.\n";
+		std::cerr << "    Is undirected a tree? " << is_tree_uG << '\n';
+		std::cerr << "    Is   directed a tree? " << is_tree_dG << '\n';
+		std::cerr << "    Undirected graph:\n";
+		std::cerr << uG << '\n';
+		std::cerr << "    Directed graph:\n";
+		std::cerr << dG << '\n';
 		return err_type::test_execution;
 	}
 
 	if (is_tree_dG) {
-		for (node r = 0; r < uG.get_num_nodes(); ++r) {
-			const rooted_tree T(uG, r);
+		for (lal::node r = 0; r < uG.get_num_nodes(); ++r) {
+			const lal::graphs::rooted_tree T(uG, r);
 
-			cout << "(rtree at " << r << ") <k_out^" << p << ">= "
-				 << moment_out_degree_rational(T, p)
-				 << endl;
+			std::cout << "(rtree at " << r << ") <k_out^" << p << ">= "
+				 << lal::properties::moment_out_degree_rational(T, p)
+				 << '\n';
 		}
 	}
 	return err_type::no_error;
@@ -251,24 +245,24 @@ err_type mmt_out_deg(const undirected_graph& uG, const directed_graph& dG, uint6
 
 //
 
-void hubiness_coefficient(const undirected_graph& g) {
-	if (not detail::is_graph_a_tree(g)) { return; }
+void hubiness_coefficient(const lal::graphs::undirected_graph& g) {
+	if (not lal::detail::is_graph_a_tree(g)) { return; }
 	if (g.get_num_nodes() > 3) {
-		rational h = hubiness_rational(g);
-		cout << "hubiness= " << h << endl;
+		lal::numeric::rational h = lal::properties::hubiness_rational(g);
+		std::cout << "hubiness= " << h << '\n';
 	}
 }
 
-void MHD(const undirected_graph& g, node r) {
-	if (not detail::is_graph_a_tree(g)) { return; }
-	const free_tree t(g);
-	const rooted_tree R(t, r);
-	const rational mhd = mean_hierarchical_distance_rational(R);
-	cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
+void MHD(const lal::graphs::undirected_graph& g, lal::node r) {
+	if (not lal::detail::is_graph_a_tree(g)) { return; }
+	const lal::graphs::free_tree t(g);
+	const lal::graphs::rooted_tree R(t, r);
+	const lal::numeric::rational mhd = lal::properties::mean_hierarchical_distance_rational(R);
+	std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
 }
 
-err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
-	const set<string> allowed_instructions({
+err_type exe_properties_general(const input_list& inputs, std::ifstream& fin) {
+	const std::set<std::string> allowed_instructions({
 		"enumerate_E", "enumerate_E_rand_dir",
 		"enumerate_Q", "enumerate_Q_rand_dir",
 		"Q_size", "Q_size_rand_dir",
@@ -276,8 +270,8 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
 
-	string ins;
-	string all_instructions = "";
+	std::string ins;
+	std::string all_instructions = "";
 	while (fin >> ins) {
 		all_instructions += ins + " ";
 	}
@@ -285,9 +279,9 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 	// The input file has been parsed completely.
 	// It is time to execute the instructions for each graph.
 
-	undirected_graph uG;
-	directed_graph dG;
-	for (size_t i = 0; i < inputs.size(); ++i) {
+	lal::graphs::undirected_graph uG;
+	lal::graphs::directed_graph dG;
+	for (std::size_t i = 0; i < inputs.size(); ++i) {
 
 		err_type r;
 
@@ -299,29 +293,29 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 
 		// this graph may have edges of the form
 		// (u,v)  ..  (v,u)
-		const directed_graph rdG = make_rand_dgraph(uG);
+		const lal::graphs::directed_graph rdG = make_rand_dgraph(uG);
 
-		stringstream ss(all_instructions);
+		std::stringstream ss(all_instructions);
 		while (ss >> ins) {
 			if (ins == "enumerate_E") {
 				enum_E(uG);
 			}
 			else if (ins == "enumerate_E_rand_dir") {
-				cout << rdG << endl;
+				std::cout << rdG << '\n';
 				enum_E(rdG);
 			}
 			else if (ins == "enumerate_Q") {
 				enum_Q(uG);
 			}
 			else if (ins == "enumerate_Q_rand_dir") {
-				cout << rdG << endl;
+				std::cout << rdG << '\n';
 				enum_Q(rdG);
 			}
 			else if (ins == "Q_size") {
 				Q_size(uG);
 			}
 			else if (ins == "Q_size_rand_dir") {
-				cout << rdG << endl;
+				std::cout << rdG << '\n';
 				Q_size(rdG);
 			}
 			else if (ins == "mmt_deg") {
@@ -346,18 +340,18 @@ err_type exe_properties_general(const input_list& inputs, ifstream& fin) {
 				hubiness_coefficient(uG);
 			}
 			else if (ins == "Mean_Hierarchical_Distance") {
-				node root;
+				lal::node root;
 				ss >> root;
 				MHD(uG, root);
 			}
 			else {
-				cerr << ERROR << endl;
-				cerr << "    Invalid instruction." << endl;
-				cerr << "    Allowed instructions:" << endl;
-				for (const string& s : allowed_instructions) {
-					cout << "        " << s << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Invalid instruction.\n";
+				std::cerr << "    Allowed instructions:\n";
+				for (const std::string& s : allowed_instructions) {
+					std::cout << "        " << s << '\n';
 				}
-				cerr << "    Instead, '" << ins << "' was found." << endl;
+				std::cerr << "    Instead, '" << ins << "' was found.\n";
 				return err_type::test_format;
 			}
 		}

@@ -42,14 +42,11 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-using namespace std;
 
 // lal includes
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/numeric/output.hpp>
-using namespace lal;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -58,33 +55,33 @@ using namespace numeric;
 
 #define assert_exists_variable(varname)										\
 	if (not map_has(vtypes, varname)) {										\
-		cerr << ERROR << endl;												\
-		cerr << "    Variable '" << varname << "' does not exist." << endl;	\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    Variable '" << varname << "' does not exist.\n";	\
 		return err_type::test_execution;									\
 	}
 
 #define var_type(var)	(vtypes.find(var)->second)
-#define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
+#define message_in_func(f) std::cerr << "    -- In '" << f << "' --\n";
 #define assert_correct_var_type(assertion, vt)						\
 	if (vt != "integer" and vt != "rational") {						\
-		cerr << ERROR << endl;										\
+		std::cerr << ERROR << '\n';										\
 		message_in_func(assertion)									\
-		cerr << "    Invalid variable type '" << vt << "'." << endl;\
+		std::cerr << "    Invalid variable type '" << vt << "'.\n";\
 		return err_type::test_format;								\
 	}
 #define assert_correct_format(assertion, f)							\
-	if (f != "int" and f != "string") {								\
-		cerr << ERROR << endl;										\
+	if (f != "int" and f != "std::string") {								\
+		std::cerr << ERROR << '\n';										\
 		message_in_func(assertion)									\
-		cerr << "    Invalid format type '" << f << "'." << endl;	\
+		std::cerr << "    Invalid format type '" << f << "'.\n";	\
 		return err_type::test_format;								\
 	}
 
 #define comparison_error(op, var1, var2, val_var1, val_var2)	\
-	cerr << ERROR << endl;										\
-	cerr << "    Assertion '" << op << "' failed for" << endl;	\
-	cerr << "        '" << var1 << "' = " << val_var1 << endl;	\
-	cerr << "        '" << var2 << "' = " << val_var2 << endl;
+	std::cerr << ERROR << '\n';										\
+	std::cerr << "    Assertion '" << op << "' failed for\n";	\
+	std::cerr << "        '" << var1 << "' = " << val_var1 << '\n';	\
+	std::cerr << "        '" << var2 << "' = " << val_var2 << '\n';
 
 #define get_var_value(M, var) M.find(var)->second
 
@@ -93,8 +90,8 @@ namespace numeric {
 
 template<typename U, typename V>
 static inline err_type resolve_comp_rational(
-	const string& var1, const string& var2,
-	const U& val1, const string& op, const V& val2
+	const std::string& var1, const std::string& var2,
+	const U& val1, const std::string& op, const V& val2
 )
 {
 	if (op == "==") {
@@ -138,38 +135,38 @@ static inline err_type resolve_comp_rational(
 		}
 	}
 	else {
-		cerr << ERROR << endl;
+		std::cerr << ERROR << '\n';
 		message_in_func("comparison " + op)
-		cerr << "    Operator is not one of ==, !=, >=, >, <=, <" << endl;
-		cerr << "    Operator is: " << op << endl;
+		std::cerr << "    Operator is not one of ==, !=, >=, >, <=, <\n";
+		std::cerr << "    Operator is: " << op << '\n';
 		return err_type::test_format;
 	}
 	return err_type::no_error;
 }
 
 static inline err_type comp_rational(
-	const map<string, string>& vtypes,
-	const map<string, integer>& integer_vars,
-	const map<string, rational>& rational_vars,
-	ifstream& fin
+	const std::map<std::string, std::string>& vtypes,
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	const std::map<std::string, lal::numeric::rational>& rational_vars,
+	std::ifstream& fin
 )
 {
-	string op_comp;
-	string var1, var2;
+	std::string op_comp;
+	std::string var1, var2;
 	fin >> var1 >> op_comp >> var2;
 
 	assert_exists_variable(var1)
 	assert_exists_variable(var2)
 
-	integer ival1;
-	rational rval1;
-	const string& type1 = var_type(var1);
+	lal::numeric::integer ival1;
+	lal::numeric::rational rval1;
+	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") { ival1 = get_var_value(integer_vars, var1); }
 	else { rval1 = get_var_value(rational_vars, var1); }
 
-	integer ival2;
-	rational rval2;
-	const string& type2 = var_type(var2);
+	lal::numeric::integer ival2;
+	lal::numeric::rational rval2;
+	const std::string& type2 = var_type(var2);
 	if (type2 == "integer") { ival2 = get_var_value(integer_vars, var2); }
 	else { rval2 = get_var_value(rational_vars, var2); }
 
@@ -183,30 +180,30 @@ static inline err_type comp_rational(
 		return resolve_comp_rational(var1, var2, rval1, op_comp, rval2);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    In operation '" << op_comp << "': combination of variable's types is invalid." << endl;
-	cerr << "    Type of variable '" << var1 << "' is: " << type1 << "." << endl;
-	cerr << "    Type of variable '" << var2 << "' is: " << type2 << "." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    In operation '" << op_comp << "': combination of variable's types is invalid.\n";
+	std::cerr << "    Type of variable '" << var1 << "' is: " << type1 << ".\n";
+	std::cerr << "    Type of variable '" << var2 << "' is: " << type2 << ".\n";
 	return err_type::test_execution;
 }
 
 static inline err_type comp_rational_lit(
-	const map<string, string>& vtypes,
-	const map<string, integer>& integer_vars,
-	const map<string, rational>& rational_vars,
-	ifstream& fin
+	const std::map<std::string, std::string>& vtypes,
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	const std::map<std::string, lal::numeric::rational>& rational_vars,
+	std::ifstream& fin
 )
 {
-	string op_comp;
-	string var1;
+	std::string op_comp;
+	std::string var1;
 	int64_t val2;
 	fin >> var1 >> op_comp >> val2;
 
 	assert_exists_variable(var1)
 
-	integer ival1;
-	rational rval1;
-	const string& type1 = var_type(var1);
+	lal::numeric::integer ival1;
+	lal::numeric::rational rval1;
+	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") { ival1 = get_var_value(integer_vars, var1); }
 	else { rval1 = get_var_value(rational_vars, var1); }
 
@@ -218,8 +215,8 @@ static inline err_type comp_rational_lit(
 }
 
 template<typename U>
-static inline rational resolve_op_rational(
-	const U& var1, const string& op, const rational& var2
+static inline lal::numeric::rational resolve_op_rational(
+	const U& var1, const std::string& op, const lal::numeric::rational& var2
 )
 {
 	if (op == "+") { return var1 + var2; }
@@ -232,11 +229,11 @@ static inline rational resolve_op_rational(
 template<
 	typename U, typename V,
 	typename std::enable_if_t<
-		std::is_same<V, integer>::value || std::is_integral<V>::value, int
+		std::is_same<V, lal::numeric::integer>::value || std::is_integral<V>::value, int
 	> = 0
 >
-static inline rational resolve_op_rational(
-	const U& var1, const string& op, const V& var2
+static inline lal::numeric::rational resolve_op_rational(
+	const U& var1, const std::string& op, const V& var2
 )
 {
 	if (op == "+") { return var1 + var2; }
@@ -248,32 +245,32 @@ static inline rational resolve_op_rational(
 }
 
 err_type operation(
-	const map<string, string>& vtypes,
-	const map<string, integer>& integer_vars,
-	map<string, rational>& rational_vars,
-	ifstream& fin
+	const std::map<std::string, std::string>& vtypes,
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::map<std::string, lal::numeric::rational>& rational_vars,
+	std::ifstream& fin
 )
 {
-	string op;
-	string var0, var1, var2;
+	std::string op;
+	std::string var0, var1, var2;
 	fin >> var0 >> var1 >> op >> var2;
 
 	assert_exists_variable(var0)
 	assert_exists_variable(var1)
 	assert_exists_variable(var2)
 
-	integer ival1, ival2;
-	rational rval1, rval2;
+	lal::numeric::integer ival1, ival2;
+	lal::numeric::rational rval1, rval2;
 
-	const string& type1 = var_type(var1);
+	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") { ival1 = get_var_value(integer_vars, var1); }
 	else { rval1 = get_var_value(rational_vars, var1); }
 
-	const string& type2 = var_type(var2);
+	const std::string& type2 = var_type(var2);
 	if (type2 == "integer") { ival2 = get_var_value(integer_vars, var2); }
 	else { rval2 = get_var_value(rational_vars, var2); }
 
-	rational R;
+	lal::numeric::rational R;
 	if (type1 == "integer" and type2 == "integer") {
 		R = resolve_op_rational(ival1, op, ival2);
 	}
@@ -284,10 +281,10 @@ err_type operation(
 		R = resolve_op_rational(rval1, op, rval2);
 	}
 	else if (type1 == "integer" and type2 == "rational") {
-		cerr << ERROR << endl;
-		cerr << "    In operation '" << op << "': combination of variable's types is invalid." << endl;
-		cerr << "    Type of variable '" << var1 << "' is: " << type1 << endl;
-		cerr << "    Type of variable '" << var2 << "' is: " << type2 << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    In operation '" << op << "': combination of variable's types is invalid.\n";
+		std::cerr << "    Type of variable '" << var1 << "' is: " << type1 << '\n';
+		std::cerr << "    Type of variable '" << var2 << "' is: " << type2 << '\n';
 		return err_type::test_execution;
 	}
 
@@ -296,28 +293,28 @@ err_type operation(
 }
 
 static inline err_type op_rational_lit(
-	const map<string, string>& vtypes,
-	const map<string, integer>& integer_vars,
-	map<string, rational>& rational_vars,
-	ifstream& fin
+	const std::map<std::string, std::string>& vtypes,
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::map<std::string, lal::numeric::rational>& rational_vars,
+	std::ifstream& fin
 )
 {
-	string op;
-	string var0, var1;
+	std::string op;
+	std::string var0, var1;
 	int64_t val2;
 	fin >> var0 >> var1 >> op >> val2;
 
 	assert_exists_variable(var0)
 	assert_exists_variable(var1)
 
-	integer ival1;
-	rational rval1;
+	lal::numeric::integer ival1;
+	lal::numeric::rational rval1;
 
-	const string& type1 = var_type(var1);
+	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") { ival1 = get_var_value(integer_vars, var1); }
 	else { rval1 = get_var_value(rational_vars, var1); }
 
-	rational R;
+	lal::numeric::rational R;
 	if (type1 == "integer") {
 		R = resolve_op_rational(ival1, op, val2);
 	}
@@ -330,89 +327,89 @@ static inline err_type op_rational_lit(
 
 err_type test_rational_minutia() {
 	{
-	integer i1;
-	integer i2;
+	lal::numeric::integer i1;
+	lal::numeric::integer i2;
 	i1.swap(i2);
 	}
 	{
-	integer i1;
-	integer i2;
+	lal::numeric::integer i1;
+	lal::numeric::integer i2;
 	i2.swap(i1);
 	}
 
 	{
-	integer i1 = 0;
-	integer i2;
+	lal::numeric::integer i1 = 0;
+	lal::numeric::integer i2;
 	i1.swap(i2);
 	}
 	{
-	integer i1 = 0;
-	integer i2;
+	lal::numeric::integer i1 = 0;
+	lal::numeric::integer i2;
 	i2.swap(i1);
 	}
 
 	{
-	integer i1;
-	integer i2 = 0;
+	lal::numeric::integer i1;
+	lal::numeric::integer i2 = 0;
 	i1.swap(i2);
 	}
 	{
-	integer i1;
-	integer i2 = 0;
+	lal::numeric::integer i1;
+	lal::numeric::integer i2 = 0;
 	i2.swap(i1);
 	}
 
 	{
-	integer i1 = 0;
-	integer i2 = 0;
+	lal::numeric::integer i1 = 0;
+	lal::numeric::integer i2 = 0;
 	i1.swap(i2);
 	}
 	{
-	integer i1 = 0;
-	integer i2 = 0;
+	lal::numeric::integer i1 = 0;
+	lal::numeric::integer i2 = 0;
 	i2.swap(i1);
 	}
 
 	{
-	map<uint64_t, pair<integer, integer>> hash;
-	hash.insert( make_pair(3, make_pair(integer("42"), integer("9999"))) );
-	hash.insert( make_pair(4, make_pair(integer("40"), integer("99899"))) );
+	std::map<uint64_t, std::pair<lal::numeric::integer, lal::numeric::integer>> hash;
+	hash.insert( {3, {{"42"}, {"9999"}}} );
+	hash.insert( {4, {{"40"}, {"99899"}}} );
 
 #define test_eq(data, good)																\
 	if (data != good) {																	\
-		cerr << ERROR << endl;															\
-		cerr << "    Integer values do not coincide." << endl;							\
-		cerr << "    Expected '" << good << "', retrieved '" << data << "'." << endl;	\
+		std::cerr << ERROR << '\n';														\
+		std::cerr << "    Integer values do not coincide.\n";							\
+		std::cerr << "    Expected '" << good << "', retrieved '" << data << "'.\n";	\
 		return err_type::test_execution;												\
 	}
 
 	const auto& p1 = hash[3];
-	test_eq(p1.first, integer("42"))
-	test_eq(p1.second, integer("9999"))
+	test_eq(p1.first, lal::numeric::integer("42"))
+	test_eq(p1.second, lal::numeric::integer("9999"))
 
 	const auto& p2 = hash[4];
-	test_eq(p2.first, integer("40"))
-	test_eq(p2.second, integer("99899"))
+	test_eq(p2.first, lal::numeric::integer("40"))
+	test_eq(p2.second, lal::numeric::integer("99899"))
 	}
 
 	return err_type::no_error;
 }
 
-err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
+err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	map<string, string> vtypes;
-	map<string, integer> integer_vars;
-	map<string, rational> rational_vars;
+	std::map<std::string, std::string> vtypes;
+	std::map<std::string, lal::numeric::integer> integer_vars;
+	std::map<std::string, lal::numeric::rational> rational_vars;
 
-	string command;
-	string var_name, var_type;
-	string format;
+	std::string command;
+	std::string var_name, var_type;
+	std::string format;
 	err_type err;
 
 	while (fin >> command) {
@@ -428,10 +425,10 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 					fin >> val;
 					integer_vars[var_name] = val;
 				}
-				else if (format == "string") {
-					string val;
+				else if (format == "std::string") {
+					std::string val;
 					fin >> val;
-					integer_vars[var_name] = integer(val);
+					integer_vars[var_name] = lal::numeric::integer(val);
 				}
 			}
 			else {
@@ -440,28 +437,28 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 					fin >> val;
 					rational_vars[var_name] = val;
 				}
-				else if (format == "string") {
-					string val;
+				else if (format == "std::string") {
+					std::string val;
 					fin >> val;
-					rational_vars[var_name] = rational(val);
+					rational_vars[var_name] = lal::numeric::rational(val);
 				}
 			}
 		}
 		else if (command == "assign") {
 			fin >> var_name;
 			assert_exists_variable(var_name)
-			string value;
+			std::string value;
 			fin >> value;
-			rational_vars[var_name] = rational(value);
+			rational_vars[var_name] = lal::numeric::rational(value);
 		}
 		else if (command == "print") {
 			fin >> var_name;
 			assert_exists_variable(var_name)
 			if (vtypes[var_name] == "rational") {
-				cout << var_name << "= " << get_var_value(rational_vars, var_name) << endl;
+				std::cout << var_name << "= " << get_var_value(rational_vars, var_name) << '\n';
 			}
 			else {
-				cout << var_name << "= " << get_var_value(integer_vars, var_name) << endl;
+				std::cout << var_name << "= " << get_var_value(integer_vars, var_name) << '\n';
 			}
 		}
 		else if (command == "compare") {
@@ -485,8 +482,8 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 			if (err != err_type::no_error) { return err; }
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Invalid command '" << command << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Invalid command '" << command << "'.\n";
 			return err_type::test_format;
 		}
 	}
@@ -497,9 +494,9 @@ err_type exe_numeric_rational(const input_list& inputs, ifstream& fin) {
 
 err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
@@ -508,26 +505,26 @@ err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
 #define check_result(WHAT, EXPR, RES)										\
 	i += 1;																	\
 	if (EXPR != RES) {														\
-		cerr << ERROR << endl;												\
-		cerr << "    At expression " << i << ")" << endl;					\
-		cerr << "    Input expression computes a result different" << endl;	\
-		cerr << "    from the ground truth." << endl;						\
-		cerr << "    Result of '" << WHAT << "'= " << EXPR << endl;			\
-		cerr << "    Expected: " << RES << endl;							\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    At expression " << i << ")\n";					\
+		std::cerr << "    Input expression computes a result different\n";	\
+		std::cerr << "    from the ground truth.\n";						\
+		std::cerr << "    Result of '" << WHAT << "'= " << EXPR << '\n';			\
+		std::cerr << "    Expected: " << RES << '\n';							\
 		return err_type::test_execution;									\
 	}
 
 	{
-	rational k(3);
+	lal::numeric::rational k(3);
 	k.invert();
-	if (k != rational(1,3)) {
-		cerr << ERROR << endl;
-		cerr << "    Inversion of rational failed." << endl;
+	if (k != lal::numeric::rational(1,3)) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Inversion of lal::numeric::rationalfailed.\n";
 		return err_type::test_execution;
 	}
 	}
 
-	rational k(3);
+	lal::numeric::rational k(3);
 	check_result("k + 3", k + 3, 6);
 	check_result("3 + k", 3 + k, 6);
 	check_result("k - 3", k - 3, 0);
@@ -552,7 +549,7 @@ err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
 	check_result("(-3)/(-k)", (-3)/(-k), 1);
 
 	check_result("18/k", 18/k, 6);
-	check_result("18/integer(1234)", 18/integer(1234), 0);
+	check_result("18/integer(1234)", 18/lal::numeric::integer(1234), 0);
 
 	k = 6;
 	check_result("k + 3", k + 3, 9);
@@ -573,36 +570,36 @@ err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
 	check_result("k/(-3)", k/(-3), -2);
 	check_result("(-k)/3", (-k)/3, -2);
 	check_result("(-k)/(-3)", (-k)/(-3), 2);
-	check_result("3/k", 3/k, rational(1,2));
-	check_result("(-3)/k", (-3)/k, rational(-1,2));
-	check_result("3/(-k)", 3/(-k), rational(-1,2));
-	check_result("(-3)/(-k)", (-3)/(-k), rational(1,2));
+	check_result("3/k", 3/k, lal::numeric::rational(1,2));
+	check_result("(-3)/k", (-3)/k, lal::numeric::rational(-1,2));
+	check_result("3/(-k)", 3/(-k), lal::numeric::rational(-1,2));
+	check_result("(-3)/(-k)", (-3)/(-k), lal::numeric::rational(1,2));
 
-	k = rational(3,4);
-	check_result("k + 3", k + 3, rational(15,4));
-	check_result("3 + k", 3 + k, rational(15,4));
-	check_result("k - 3", k - 3, rational(-9,4));
-	check_result("k - (-3)", k - (-3), rational(15,4));
-	check_result("3 - k", 3 - k, rational(9,4));
-	check_result("3 - (-k)", 3 - (-k), rational(15,4));
-	check_result("k*3", k*3, rational(9,4));
-	check_result("k*(-3)", k*(-3), rational(-9,4));
-	check_result("(-k)*3", (-k)*3, rational(-9,4));
-	check_result("(-k)*(-3)", (-k)*(-3), rational(9,4));
-	check_result("3*k", 3*k, rational(9,4));
-	check_result("(-3)*k", (-3)*k, rational(-9,4));
-	check_result("3*(-k)", 3*(-k), rational(-9,4));
-	check_result("(-3)*(-k)", (-3)*(-k), rational(9,4));
-	check_result("k/3", k/3, rational(1,4));
-	check_result("k/(-3)", k/(-3), rational(-1,4));
-	check_result("(-k)/3", (-k)/3, rational(-1,4));
-	check_result("(-k)/(-3)", (-k)/(-3), rational(1,4));
-	check_result("3/k", 3/k, rational(4));
-	check_result("(-3)/k", (-3)/k, rational(-4));
-	check_result("3/(-k)", 3/(-k), rational(-4));
-	check_result("(-3)/(-k)", (-3)/(-k), rational(4));
+	k = lal::numeric::rational(3,4);
+	check_result("k + 3", k + 3, lal::numeric::rational(15,4));
+	check_result("3 + k", 3 + k, lal::numeric::rational(15,4));
+	check_result("k - 3", k - 3, lal::numeric::rational(-9,4));
+	check_result("k - (-3)", k - (-3), lal::numeric::rational(15,4));
+	check_result("3 - k", 3 - k, lal::numeric::rational(9,4));
+	check_result("3 - (-k)", 3 - (-k), lal::numeric::rational(15,4));
+	check_result("k*3", k*3, lal::numeric::rational(9,4));
+	check_result("k*(-3)", k*(-3), lal::numeric::rational(-9,4));
+	check_result("(-k)*3", (-k)*3, lal::numeric::rational(-9,4));
+	check_result("(-k)*(-3)", (-k)*(-3), lal::numeric::rational(9,4));
+	check_result("3*k", 3*k, lal::numeric::rational(9,4));
+	check_result("(-3)*k", (-3)*k, lal::numeric::rational(-9,4));
+	check_result("3*(-k)", 3*(-k), lal::numeric::rational(-9,4));
+	check_result("(-3)*(-k)", (-3)*(-k), lal::numeric::rational(9,4));
+	check_result("k/3", k/3, lal::numeric::rational(1,4));
+	check_result("k/(-3)", k/(-3), lal::numeric::rational(-1,4));
+	check_result("(-k)/3", (-k)/3, lal::numeric::rational(-1,4));
+	check_result("(-k)/(-3)", (-k)/(-3), lal::numeric::rational(1,4));
+	check_result("3/k", 3/k, lal::numeric::rational(4));
+	check_result("(-3)/k", (-3)/k, lal::numeric::rational(-4));
+	check_result("3/(-k)", 3/(-k), lal::numeric::rational(-4));
+	check_result("(-3)/(-k)", (-3)/(-k), lal::numeric::rational(4));
 
-	check_result("18/k", 18/k, rational(24));
+	check_result("18/k", 18/k, lal::numeric::rational(24));
 
 	TEST_GOODBYE
 	return err_type::no_error;

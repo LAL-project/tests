@@ -45,7 +45,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-using namespace std;
 
 // lal includes
 #include <lal/definitions.hpp>
@@ -60,19 +59,19 @@ namespace tests {
 namespace linarr {
 
 template<class T> using Solver =
-	function< pair<uint64_t, lal::linear_arrangement>(const T&) >;
+	std::function< std::pair<uint64_t, lal::linear_arrangement>(const T&) >;
 
 template<class T> using TreeEval =
-	function< uint64_t (const T&, const lal::linear_arrangement&) >;
+	std::function< uint64_t (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using ArrgmtCheck =
-	function< bool (const T&, const lal::linear_arrangement&) >;
+	std::function< bool (const T&, const lal::linear_arrangement&) >;
 
 template<class T> using InputConv =
-	function< T (const vector<lal::node>&) >;
+	std::function< T (const std::vector<lal::node>&) >;
 
 template<class T> using TreeInit =
-	function< void (T&) >;
+	std::function< void (T&) >;
 
 template<class T>
 err_type linarr_brute_force_testing(
@@ -87,7 +86,7 @@ err_type linarr_brute_force_testing(
 	// function that initializes the input tree
 	const TreeInit<T>& tree_initializer,
 	// the input stream
-	ifstream& fin
+	std::ifstream& fin
 )
 {
 	// read number of nodes
@@ -96,7 +95,7 @@ err_type linarr_brute_force_testing(
 
 	if (n == 1) {
 		// nothing to do
-		return err_type::no_error;
+		return tests::err_type::no_error;
 	}
 
 	lal::head_vector tree_as_head_vector(n);
@@ -135,15 +134,15 @@ err_type linarr_brute_force_testing(
 			const uint64_t check_value = tree_eval(tree, input_arr);
 			// check correctness of input array
 			if (check_value != brute_force_value) {
-				cerr << ERROR << endl;
-				cerr << "    Input value (calculated by brute force) does not" << endl;
-				cerr << "    agree with the evaluation of the tree at the arrangement" << endl;
-				cerr << "    calculated by brute force." << endl;
-				cerr << "        Brute force arrangement:     " << input_arr << endl;
-				cerr << "        Brute force Inv Arrangement: " << invlinarr(input_arr) << endl;
-				cerr << "        Brute force value:           " << brute_force_value << endl;
-				cerr << "        Evaluation at arrangement:   " << check_value << endl;
-				return err_type::test_format;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Input value (calculated by brute force) does not\n";
+				std::cerr << "    agree with the evaluation of the tree at the arrangement\n";
+				std::cerr << "    calculated by brute force.\n";
+				std::cerr << "        Brute force arrangement:     " << input_arr << '\n';
+				std::cerr << "        Brute force Inv Arrangement: " << invlinarr(input_arr) << '\n';
+				std::cerr << "        Brute force value:           " << brute_force_value << '\n';
+				std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
+				return tests::err_type::test_format;
 			}
 		}
 		}
@@ -155,14 +154,14 @@ err_type linarr_brute_force_testing(
 		// ensure that the arrangement is a planar permutation
 		{
 		if (not arrgmnt_check(tree, library_arr)) {
-			cerr << ERROR << endl;
-			cerr << "    The arrangement produced by the algorithm is not correct." << endl;
-			cerr << "        Arrangement:     " << library_arr << endl;
-			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			cerr << tree.get_head_vector() << endl;
-			return err_type::test_execution;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    The arrangement produced by the algorithm is not correct.\n";
+			std::cerr << "        Arrangement:     " << library_arr << '\n';
+			std::cerr << "        Inv Arrangement: " << invlinarr(library_arr) << '\n';
+			std::cerr << "    For tree: \n";
+			std::cerr << tree << '\n';
+			std::cerr << tree.get_head_vector() << '\n';
+			return tests::err_type::test_execution;
 		}
 		}
 
@@ -170,38 +169,38 @@ err_type linarr_brute_force_testing(
 		{
 		const uint64_t check_value = tree_eval(tree, library_arr);
 		if (check_value != library_res.first) {
-			cerr << ERROR << endl;
-			cerr << "    The value calculated by the library's algorithm does not" << endl;
-			cerr << "    agree with the evaluation of the tree at the arrangement" << endl;
-			cerr << "    that the library's algorithm calculated." << endl;
-			cerr << "        Algorithm's Arrangement:     " << library_arr << endl;
-			cerr << "        Algorithm's Inv Arrangement: " << invlinarr(library_arr) << endl;
-			cerr << "        Algorithm's value:           " << library_res.first << endl;
-			cerr << "        Evaluation at arrangement:   " << check_value << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			return err_type::test_execution;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    The value calculated by the library's algorithm does not\n";
+			std::cerr << "    agree with the evaluation of the tree at the arrangement\n";
+			std::cerr << "    that the library's algorithm calculated.\n";
+			std::cerr << "        Algorithm's Arrangement:     " << library_arr << '\n';
+			std::cerr << "        Algorithm's Inv Arrangement: " << invlinarr(library_arr) << '\n';
+			std::cerr << "        Algorithm's value:           " << library_res.first << '\n';
+			std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
+			std::cerr << "    For tree: \n";
+			std::cerr << tree << '\n';
+			return tests::err_type::test_execution;
 		}
 		}
 
 		// ensure that the value of D is actually minimum
 		if (library_res.first != brute_force_value) {
-			cerr << ERROR << endl;
-			cerr << "    The value calculated by the library and by bruteforce do not agree." << endl;
-			cerr << "    Library:" << endl;
-			cerr << "        Value:           " << library_res.first << endl;
-			cerr << "        Arrangement:     " << library_res.second << endl;
-			cerr << "        Inv Arrangement: " << invlinarr(library_res.second) << endl;
-			cerr << "    bruteforce:" << endl;
-			cerr << "        Value:           " << brute_force_value << endl;
-			cerr << "        Arrangement:     " << library_arr << endl;
-			cerr << "        Inv Arrangement: " << invlinarr(library_arr) << endl;
-			cerr << "    For tree: " << endl;
-			cerr << tree << endl;
-			return err_type::test_execution;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    The value calculated by the library and by bruteforce do not agree.\n";
+			std::cerr << "    Library:\n";
+			std::cerr << "        Value:           " << library_res.first << '\n';
+			std::cerr << "        Arrangement:     " << library_res.second << '\n';
+			std::cerr << "        Inv Arrangement: " << invlinarr(library_res.second) << '\n';
+			std::cerr << "    bruteforce:\n";
+			std::cerr << "        Value:           " << brute_force_value << '\n';
+			std::cerr << "        Arrangement:     " << library_arr << '\n';
+			std::cerr << "        Inv Arrangement: " << invlinarr(library_arr) << '\n';
+			std::cerr << "    For tree: \n";
+			std::cerr << tree << '\n';
+			return tests::err_type::test_execution;
 		}
 	}
-	return err_type::no_error;
+	return tests::err_type::no_error;
 }
 
 } // -- namespace linarr

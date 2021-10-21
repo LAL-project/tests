@@ -42,7 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-using namespace std;
 
 // lal includes
 #include <lal/detail/data_array.hpp>
@@ -300,11 +299,11 @@ void test_resize_fill() {
 
 }
 
-err_type exe_memory_internal_data_array(const input_list& inputs, ifstream&) {
+err_type exe_memory_internal_data_array(const input_list& inputs, std::ifstream&) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 

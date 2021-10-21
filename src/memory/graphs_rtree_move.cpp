@@ -41,11 +41,8 @@
 #include "graphs.hpp"
 
 // C++ includes
-using namespace std;
 
 // lal includes
-using namespace lal;
-using namespace graphs;
 
 namespace tests {
 namespace memory {
@@ -56,41 +53,41 @@ void test_move_rooted_tree() {
 	// move constructor
 	{
 	begin_case;
-	rooted_tree t1(5);
+	lal::graphs::rooted_tree t1(5);
 	output_rooted_tree_info("t1", t1)
 
-	cout << "Move constructor: 't2 <- t1'" << endl;
-	rooted_tree t2 = std::move(t1);
-	output_rooted_tree_info("t1", t1)
-	output_rooted_tree_info("t2", t2)
-	}
-
-	{
-	begin_case;
-	rooted_tree t1(5);
-	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
-	t1.set_root(3);
-	t1.set_valid_orientation(true);
-	t1.calculate_size_subtrees();
-	output_rooted_tree_info("t1", t1)
-
-	cout << "Move constructor: 't2 <- t1'" << endl;
-	rooted_tree t2 = std::move(t1);
+	std::cout << "Move constructor: 't2 <- t1'\n";
+	lal::graphs::rooted_tree t2 = std::move(t1);
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("t2", t2)
 	}
 
 	{
 	begin_case;
-	rooted_tree t1(5);
-	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	lal::graphs::rooted_tree t1(5);
+	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
 	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
-	cout << "Move constructor: 'v[0] <- t1'" << endl;
-	vector<rooted_tree> v;
+	std::cout << "Move constructor: 't2 <- t1'\n";
+	lal::graphs::rooted_tree t2 = std::move(t1);
+	output_rooted_tree_info("t1", t1)
+	output_rooted_tree_info("t2", t2)
+	}
+
+	{
+	begin_case;
+	lal::graphs::rooted_tree t1(5);
+	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
+	t1.set_root(3);
+	t1.set_valid_orientation(true);
+	t1.calculate_size_subtrees();
+	output_rooted_tree_info("t1", t1)
+
+	std::cout << "Move constructor: 'v[0] <- t1'\n";
+	std::vector<lal::graphs::rooted_tree> v;
 	v.push_back(std::move(t1));
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("v[0]", v[0])
@@ -99,11 +96,11 @@ void test_move_rooted_tree() {
 	// move operator
 	{
 	begin_case;
-	rooted_tree t1(5);
+	lal::graphs::rooted_tree t1(5);
 	output_rooted_tree_info("t1", t1)
 
-	cout << "Move constructor: 't2 <- t1'" << endl;
-	rooted_tree t2;
+	std::cout << "Move constructor: 't2 <- t1'\n";
+	lal::graphs::rooted_tree t2;
 	t2 = std::move(t1);
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("t2", t2)
@@ -111,15 +108,15 @@ void test_move_rooted_tree() {
 
 	{
 	begin_case;
-	rooted_tree t1(5);
-	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	lal::graphs::rooted_tree t1(5);
+	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
 	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
-	cout << "Move constructor: 't2 <- t1'" << endl;
-	rooted_tree t2;
+	std::cout << "Move constructor: 't2 <- t1'\n";
+	lal::graphs::rooted_tree t2;
 	t2 = std::move(t1);
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("t2", t2)
@@ -127,16 +124,16 @@ void test_move_rooted_tree() {
 
 	{
 	begin_case;
-	rooted_tree t1(5);
-	t1.add_edges(vector<edge>{edge(3,1), edge(3,2), edge(3,0), edge(2,4)});
+	lal::graphs::rooted_tree t1(5);
+	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
 	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
-	cout << "Move constructor: 'v[0] <- t1'" << endl;
-	vector<rooted_tree> v;
-	v.push_back(rooted_tree());
+	std::cout << "Move constructor: 'v[0] <- t1'\n";
+	std::vector<lal::graphs::rooted_tree> v;
+	v.push_back(lal::graphs::rooted_tree());
 	v[0] = std::move(t1);
 	output_rooted_tree_info("t1", t1)
 	output_rooted_tree_info("v[0]", v[0])

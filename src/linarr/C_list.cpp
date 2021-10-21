@@ -42,15 +42,11 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/linarr/C.hpp>
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace linarr;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -64,24 +60,24 @@ namespace tests {
 namespace linarr {
 
 err_type exe_linarr_C_list
-(const input_list& inputs, ifstream& fin, char upper_bound_type)
+(const input_list& inputs, std::ifstream& fin, char upper_bound_type)
 {
-	const set<string> allowed_procs(
+	const std::set<std::string> allowed_procs(
 	{"bruteforce", "dyn_prog", "ladder", "stack_based"}
 	);
 
 	if (inputs.size() != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Only one input file si allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Only one input file si allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	undirected_graph uG;
-	directed_graph dG;
+	lal::graphs::undirected_graph uG;
+	lal::graphs::directed_graph dG;
 	{
-	const string graph_name = inputs[0].first;
-	const string graph_format = inputs[0].second;
+	const std::string graph_name = inputs[0].first;
+	const std::string graph_format = inputs[0].second;
 	err_type r;
 	r = io_wrapper::read_graph(graph_name, graph_format, uG);
 	if (r != err_type::no_error) { return r; }
@@ -90,16 +86,16 @@ err_type exe_linarr_C_list
 	if (r != err_type::no_error) { return r; }
 	}
 
-	string proc;
+	std::string proc;
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr <<ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Procedure '" << proc << "' was found." << endl;
-		cerr << "    Valid values:" << endl;
-		for (const string& p : allowed_procs) {
-		cerr << "    - " << p << endl;
+		std::cerr <<ERROR << '\n';
+		std::cerr << "    Wrong value for procedure type.\n";
+		std::cerr << "    Procedure '" << proc << "' was found.\n";
+		std::cerr << "    Valid values:\n";
+		for (const std::string& p : allowed_procs) {
+		std::cerr << "    - " << p << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -114,12 +110,12 @@ err_type exe_linarr_C_list
 	fin >> n_linarrs;
 
 	// linear arrangements
-	vector<vector<node>> inv_arrs(n_linarrs, vector<node>(uG.get_num_nodes()));
-	vector<linear_arrangement> arrangements(n_linarrs, linear_arrangement(uG.get_num_nodes()));
+	std::vector<std::vector<lal::node>> inv_arrs(n_linarrs, std::vector<lal::node>(uG.get_num_nodes()));
+	std::vector<lal::linear_arrangement> arrangements(n_linarrs, lal::linear_arrangement(uG.get_num_nodes()));
 	uint64_t single_upper_bound;
-	vector<uint64_t> list_upper_bounds(n_linarrs, 0);
+	std::vector<uint64_t> list_upper_bounds(n_linarrs, 0);
 
-	for (size_t i = 0; i < n_linarrs; ++i) {
+	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
 		for (uint64_t u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> inv_arrs[i][u];
@@ -134,34 +130,34 @@ err_type exe_linarr_C_list
 		fin >> single_upper_bound;
 	}
 
-	const vector<uint64_t> uCbfs = num_crossings_brute_force(uG, arrangements);
-	const vector<uint64_t> dCbfs = num_crossings_brute_force(dG, arrangements);
+	const std::vector<uint64_t> uCbfs = num_crossings_brute_force(uG, arrangements);
+	const std::vector<uint64_t> dCbfs = num_crossings_brute_force(dG, arrangements);
 	for (uint64_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
-			cerr << ERROR << endl;
-			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        uCbfs: " << uCbfs[i] << endl;
-			cerr << "        dCbfs: " << dCbfs[i] << endl;
-			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << inv_arrs[i][0];
-			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << inv_arrs[i][j];
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Number of crossings do not coincide\n";
+			std::cerr << "        uCbfs: " << uCbfs[i] << '\n';
+			std::cerr << "        dCbfs: " << dCbfs[i] << '\n';
+			std::cerr << "    For linear arrangement " << i << ":\n";
+			std::cerr << "    [" << inv_arrs[i][0];
+			for (std::size_t j = 1; j < n; ++j) {
+				std::cerr << "," << inv_arrs[i][j];
 			}
-			cerr << "]" << endl;
+			std::cerr << "]\n";
 			return err_type::test_execution;
 		}
 	}
 	// uCbfs == dCbfs
 
 	const auto choose_algo =
-	[](const string& name) {
-		if (name == "dyn_prog") { return algorithms_C::dynamic_programming; }
-		if (name == "ladder") { return algorithms_C::ladder; }
-		if (name == "stack_based") { return algorithms_C::stack_based; }
-		return algorithms_C::brute_force;
+	[](const std::string& name) {
+		if (name == "dyn_prog") { return lal::linarr::algorithms_C::dynamic_programming; }
+		if (name == "ladder") { return lal::linarr::algorithms_C::ladder; }
+		if (name == "stack_based") { return lal::linarr::algorithms_C::stack_based; }
+		return lal::linarr::algorithms_C::brute_force;
 	}(proc);
 
-	vector<uint64_t> uCs, dCs;
+	std::vector<uint64_t> uCs, dCs;
 
 	// compute all C
 	begin = timing::now();
@@ -182,16 +178,16 @@ err_type exe_linarr_C_list
 
 	for (uint64_t i = 0; i < n_linarrs; ++i) {
 		if (dCs[i] != uCs[i]) {
-			cerr << ERROR << endl;
-			cerr << "    Number of crossings do not coincide" << endl;
-			cerr << "        " << proc << " (undirected): " << uCs[i] << endl;
-			cerr << "        " << proc << " (directed): " << dCs[i] << endl;
-			cerr << "    For linear arrangement " << i << ":" << endl;
-			cerr << "    [" << inv_arrs[i][0];
-			for (size_t j = 1; j < n; ++j) {
-				cerr << "," << inv_arrs[i][j];
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Number of crossings do not coincide\n";
+			std::cerr << "        " << proc << " (undirected): " << uCs[i] << '\n';
+			std::cerr << "        " << proc << " (directed): " << dCs[i] << '\n';
+			std::cerr << "    For linear arrangement " << i << ":\n";
+			std::cerr << "    [" << inv_arrs[i][0];
+			for (std::size_t j = 1; j < n; ++j) {
+				std::cerr << "," << inv_arrs[i][j];
 			}
-			cerr << "]" << endl;
+			std::cerr << "]\n";
 			return err_type::test_execution;
 		}
 	}
@@ -200,16 +196,16 @@ err_type exe_linarr_C_list
 	if (upper_bound_type == 0) {
 		for (uint64_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] != uCs[i]) {
-				cerr << ERROR << endl;
-				cerr << "    Number of crossings do not coincide" << endl;
-				cerr << "        brute force: " << uCbfs[i] << endl;
-				cerr << "        " << proc << ": " << uCs[i] << endl;
-				cerr << "    For linear arrangement " << i << ":" << endl;
-				cerr << "    [" << inv_arrs[i][0];
-				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << inv_arrs[i][j];
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Number of crossings do not coincide\n";
+				std::cerr << "        brute force: " << uCbfs[i] << '\n';
+				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
+				std::cerr << "    For linear arrangement " << i << ":\n";
+				std::cerr << "    [" << inv_arrs[i][0];
+				for (std::size_t j = 1; j < n; ++j) {
+					std::cerr << "," << inv_arrs[i][j];
 				}
-				cerr << "]" << endl;
+				std::cerr << "]\n";
 				return err_type::test_execution;
 			}
 		}
@@ -218,30 +214,30 @@ err_type exe_linarr_C_list
 		for (uint64_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > single_upper_bound) {
 				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
-					cerr << ERROR << endl;
-					cerr << "    Expected number of crossings to be >m^2." << endl;
-					cerr << "    Instead, received: " << uCs[i] << endl;
-					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
-					cerr << "    Upper bound: " << single_upper_bound << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Expected number of crossings to be >m^2.\n";
+					std::cerr << "    Instead, received: " << uCs[i] << '\n';
+					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
+					std::cerr << "    Upper bound: " << single_upper_bound << '\n';
 					return err_type::test_execution;
 				}
 			}
 			else if (uCs[i] != uCbfs[i]) {
-				cerr << ERROR << endl;
-				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
-				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
-				cerr << "        brute force: " << uCbfs[i] << endl;
-				cerr << "        " << proc << ": " << uCs[i] << endl;
-				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-				cerr << "    [" << inv_arrs[i][0];
-				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << inv_arrs[i][j];
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "        brute force: " << uCbfs[i] << '\n';
+				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
+				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
+				std::cerr << "    [" << inv_arrs[i][0];
+				for (std::size_t j = 1; j < n; ++j) {
+					std::cerr << "," << inv_arrs[i][j];
 				}
-				cerr << "]" << endl;
-				cerr << "    Undirected graph:" << endl;
-				cerr << uG << endl;
-				cerr << "    Directed graph:" << endl;
-				cerr << dG << endl;
+				std::cerr << "]\n";
+				std::cerr << "    Undirected graph:\n";
+				std::cerr << uG << '\n';
+				std::cerr << "    Directed graph:\n";
+				std::cerr << dG << '\n';
 				return err_type::test_execution;
 			}
 		}
@@ -250,40 +246,40 @@ err_type exe_linarr_C_list
 		for (uint64_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > list_upper_bounds[i]) {
 				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
-					cerr << ERROR << endl;
-					cerr << "    Expected number of crossings to be >m^2." << endl;
-					cerr << "    Instead, received: " << uCs[i] << endl;
-					cerr << "    Actual number of crossings: " << uCbfs[i] << endl;
-					cerr << "    Upper bound: " << list_upper_bounds[i] << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Expected number of crossings to be >m^2.\n";
+					std::cerr << "    Instead, received: " << uCs[i] << '\n';
+					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
+					std::cerr << "    Upper bound: " << list_upper_bounds[i] << '\n';
 					return err_type::test_execution;
 				}
 			}
 			else if (uCs[i] != uCbfs[i]) {
-				cerr << ERROR << endl;
-				cerr << "    Number of crossings obtained with the algorithm does not" << endl;
-				cerr << "    coincide with the number of crossings obtained by brute force." << endl;
-				cerr << "        brute force: " << uCbfs[i] << endl;
-				cerr << "        " << proc << ": " << uCs[i] << endl;
-				cerr << "    For inverse linear arrangement function " << i << ":" << endl;
-				cerr << "    [" << inv_arrs[i][0];
-				for (size_t j = 1; j < n; ++j) {
-					cerr << "," << inv_arrs[i][j];
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "        brute force: " << uCbfs[i] << '\n';
+				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
+				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
+				std::cerr << "    [" << inv_arrs[i][0];
+				for (std::size_t j = 1; j < n; ++j) {
+					std::cerr << "," << inv_arrs[i][j];
 				}
-				cerr << "]" << endl;
-				cerr << "    Undirected graph:" << endl;
-				cerr << uG << endl;
-				cerr << "    Directed graph:" << endl;
-				cerr << dG << endl;
+				std::cerr << "]\n";
+				std::cerr << "    Undirected graph:\n";
+				std::cerr << uG << '\n';
+				std::cerr << "    Directed graph:\n";
+				std::cerr << dG << '\n';
 				return err_type::test_execution;
 			}
 		}
 	}
 
-	string time_filename;
+	std::string time_filename;
 	if (fin >> time_filename) {
-		ofstream fout;
+		std::ofstream fout;
 		fout.open(time_filename.c_str());
-		fout << "Total time: " << total_elapsed << " ms" << endl;
+		fout << "Total time: " << total_elapsed << " ms\n";
 	}
 
 	TEST_GOODBYE

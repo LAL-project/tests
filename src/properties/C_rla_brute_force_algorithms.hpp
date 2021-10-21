@@ -63,7 +63,6 @@ namespace properties {
 lal::numeric::rational nonLAL_variance_C_freqs_rational
 (const lal::graphs::undirected_graph& g);
 
-
 /*
  * @brief Computes the variance of the number of crossings of a graph.
  *

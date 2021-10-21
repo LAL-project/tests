@@ -43,7 +43,6 @@
 #include <fstream>
 #include <cmath>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
@@ -54,11 +53,6 @@ using namespace std;
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
-using namespace generate;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -72,86 +66,86 @@ using namespace generate;
 namespace tests {
 namespace properties {
 
-void output_ExpVar_C_BF(const undirected_graph& g) noexcept {
-	const rational Vr = nonLAL_variance_C_freqs_Q_rational(g.get_Q());
-	const rational E1r = exp_num_crossings_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+void output_ExpVar_C_BF(const lal::graphs::undirected_graph& g) noexcept {
+	const lal::numeric::rational Vr = nonLAL_variance_C_freqs_Q_rational(g.get_Q());
+	const lal::numeric::rational E1r = lal::properties::exp_num_crossings_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << '\n';
 }
 
-void output_ExpVar_C_formula_Q(const undirected_graph& g) noexcept {
-	const rational Vr = nonLAL_var_num_crossings_rational_Q(g, g.get_Q());
-	const rational E1r = exp_num_crossings_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+void output_ExpVar_C_formula_Q(const lal::graphs::undirected_graph& g) noexcept {
+	const lal::numeric::rational Vr = nonLAL_var_num_crossings_rational_Q(g, g.get_Q());
+	const lal::numeric::rational E1r = lal::properties::exp_num_crossings_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << '\n';
 }
 
-err_type output_ExpVar_C_formula_no_Q(undirected_graph& g, bool reuse) noexcept {
+err_type output_ExpVar_C_formula_no_Q(lal::graphs::undirected_graph& g, bool reuse) noexcept {
 	g.normalise();
-	const rational Vr = var_num_crossings_rational(g, reuse);
+	const lal::numeric::rational Vr = lal::properties::var_num_crossings_rational(g, reuse);
 
 	{
-	vector<edge> edges = g.get_edges();
-	const size_t max_iters = 50;
-	size_t iters = 0;
+	std::vector<lal::edge> edges = g.get_edges();
+	const std::size_t max_iters = 50;
+	std::size_t iters = 0;
 	while (g.is_normalised() and iters < max_iters) {
 		shuffle_graph_edges(edges, g, false, true);
 		++iters;
 	}
 
-	const rational Vr_nonnormalised = var_num_crossings_rational(g, reuse);
+	const lal::numeric::rational Vr_nonnormalised = lal::properties::var_num_crossings_rational(g, reuse);
 	if (Vr_nonnormalised != Vr) {
-		cerr << ERROR << endl;
-		cerr << "    Variance obtained with a normalised graph differs from" << endl;
-		cerr << "    the variance obtained with a non-normalised graph." << endl;
-		cerr << "    Normalised variance:     " << Vr << endl;
-		cerr << "    Non-normalised variance: " << Vr_nonnormalised << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Variance obtained with a normalised graph differs from\n";
+		std::cerr << "    the variance obtained with a non-normalised graph.\n";
+		std::cerr << "    Normalised variance:     " << Vr << '\n';
+		std::cerr << "    Non-normalised variance: " << Vr_nonnormalised << '\n';
 		// mess the output so that the tester does not skip any error
-		cout << "-1" << endl;
+		std::cout << "-1\n";
 		return err_type::test_execution;
 	}
 	}
 
-	const rational E1r = exp_num_crossings_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+	const lal::numeric::rational E1r = lal::properties::exp_num_crossings_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << '\n';
 	return err_type::no_error;
 }
 
-void output_ExpVar_C_trees(const undirected_graph& g) noexcept {
-	const free_tree t = g;
-	const rational Vr = var_num_crossings_tree_rational(t);
-	const rational E1r = exp_num_crossings_rational(t);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+void output_ExpVar_C_trees(const lal::graphs::undirected_graph& g) noexcept {
+	const lal::graphs::free_tree t = g;
+	const lal::numeric::rational Vr = lal::properties::var_num_crossings_tree_rational(t);
+	const lal::numeric::rational E1r = lal::properties::exp_num_crossings_rational(t);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << '\n';
 }
 
-void output_ExpVar_C_forests(const undirected_graph& g) noexcept {
-	const rational Vr = var_num_crossings_forest_rational(g);
-	const rational E1r = exp_num_crossings_rational(g);
-	const rational E2r = Vr + E1r*E1r;
-	cout << E1r << "\t" << E2r << "\t" << Vr << endl;
+void output_ExpVar_C_forests(const lal::graphs::undirected_graph& g) noexcept {
+	const lal::numeric::rational Vr = lal::properties::var_num_crossings_forest_rational(g);
+	const lal::numeric::rational E1r = lal::properties::exp_num_crossings_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r*E1r;
+	std::cout << E1r << "\t" << E2r << "\t" << Vr << '\n';
 }
 
 bool check_ExpVar_C_all_trees(uint64_t n) noexcept {
 	uint64_t k = 0;
 
-	all_ulab_free_trees TreeGen(n);
+	lal::generate::all_ulab_free_trees TreeGen(n);
 	while (not TreeGen.end()) {
-		const free_tree tree = TreeGen.get_tree();
+		const lal::graphs::free_tree tree = TreeGen.get_tree();
 		TreeGen.next();
 
-		const rational Vr_bf = nonLAL_variance_C_freqs_rational(tree);
-		const rational Vr_gen = var_num_crossings_rational(tree);
-		const rational Vr_trees = var_num_crossings_tree_rational(tree);
+		const lal::numeric::rational Vr_bf = nonLAL_variance_C_freqs_rational(tree);
+		const lal::numeric::rational Vr_gen = lal::properties::var_num_crossings_rational(tree);
+		const lal::numeric::rational Vr_trees = lal::properties::var_num_crossings_tree_rational(tree);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_trees) {
-			cerr << "Error in tree " << k << " of size " << n << endl;
-			cerr << "    Brute force alg: " << Vr_bf << endl
-				 << "    Alg for general: " << Vr_gen << endl
+			std::cerr << "Error in tree " << k << " of size " << n << '\n';
+			std::cerr << "    Brute force alg: " << Vr_bf << '\n'
+				 << "    Alg for general: " << Vr_gen << '\n'
 				 << "    Alg for trees: " << Vr_trees
-				 << endl;
-			cerr << tree << endl;
+				 << '\n';
+			std::cerr << tree << '\n';
 			return false;
 		}
 
@@ -161,51 +155,51 @@ bool check_ExpVar_C_all_trees(uint64_t n) noexcept {
 }
 
 bool check_ExpVar_C_mixed_trees(uint64_t r, uint64_t n_trees, uint64_t size_trees) {
-	rand_ulab_free_trees TreeGen(size_trees);
-	undirected_graph forest;
+	lal::generate::rand_ulab_free_trees TreeGen(size_trees);
+	lal::graphs::undirected_graph forest;
 
 	for (uint64_t i = 0; i < r; ++i) {
 		forest.clear();
 		for (uint64_t j = 0; j < n_trees; ++j) {
-			const free_tree rand_tree = TreeGen.get_tree();
+			const lal::graphs::free_tree rand_tree = TreeGen.get_tree();
 			forest.disjoint_union(rand_tree);
 		}
 		if (not forest.is_normalised()) {
 			forest.normalise();
 		}
 
-		const rational Vr_bf = nonLAL_variance_C_freqs_rational(forest);
-		const rational Vr_gen = var_num_crossings_rational(forest);
-		const rational Vr_forests = var_num_crossings_forest_rational(forest);
+		const lal::numeric::rational Vr_bf = nonLAL_variance_C_freqs_rational(forest);
+		const lal::numeric::rational Vr_gen = lal::properties::var_num_crossings_rational(forest);
+		const lal::numeric::rational Vr_forests = lal::properties::var_num_crossings_forest_rational(forest);
 
 		if (Vr_bf != Vr_gen or Vr_bf != Vr_forests) {
-			cerr << "Error in forest with " << n_trees
-				 << " trees each of size " << size_trees << endl;
-			cerr << "    Brute force alg: " << Vr_bf << endl
-				 << "    Alg for general: " << Vr_gen << endl
+			std::cerr << "Error in forest with " << n_trees
+				 << " trees each of size " << size_trees << '\n';
+			std::cerr << "    Brute force alg: " << Vr_bf << '\n'
+				 << "    Alg for general: " << Vr_gen << '\n'
 				 << "    Alg for forests: " << Vr_forests
-				 << endl;
-			cerr << forest << endl;
+				 << '\n';
+			std::cerr << forest << '\n';
 			return false;
 		}
 	}
 	return true;
 }
 
-err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
-	const set<string> allowed_procs(
+err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin) {
+	const std::set<std::string> allowed_procs(
 		{"brute_force", "formula-Q",
 		 "formula-no_Q-reuse", "formula-no_Q-no-reuse",
 		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
 
-	string proc;
+	std::string proc;
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Received '" << proc << "'." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Wrong value for procedure type.\n";
+		std::cerr << "    Received '" << proc << "'.\n";
 		return err_type::test_format;
 	}
 
@@ -237,8 +231,8 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 		TEST_GOODBYE
 	}
 	else {
-		undirected_graph G;
-		for (size_t i = 0; i < inputs.size(); ++i) {
+		lal::graphs::undirected_graph G;
+		for (std::size_t i = 0; i < inputs.size(); ++i) {
 			G.clear();
 			const err_type r =
 			io_wrapper::read_graph(inputs[i].first, inputs[i].second, G, false);
@@ -265,8 +259,8 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, ifstream& fin) {
 				output_ExpVar_C_forests(G);
 			}
 			else {
-				cerr << ERROR << endl;
-				cerr << "    Procedure '" << proc << "' not captured." << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Procedure '" << proc << "' not captured.\n";
 				return err_type::test_execution;
 			}
 		}

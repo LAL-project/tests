@@ -45,48 +45,44 @@
 #include <random>
 #include <string>
 #include <set>
-using namespace std;
-
 // lal includes
 #include <lal/definitions.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
-using namespace lal;
-using namespace graphs;
 
 namespace tests {
 
-bool command_is_comment(const string& s) noexcept
-{ return (s == "/*") or (s.find("/*") != string::npos); }
+bool command_is_comment(const std::string& s) noexcept
+{ return (s == "/*") or (s.find("/*") != std::string::npos); }
 
-void process_comment(ifstream& fin) noexcept {
-	string comment;
+void process_comment(std::ifstream& fin) noexcept {
+	std::string comment;
 	do {
 		fin >> comment;
 	}
-	while (comment.find("*/") == string::npos);
+	while (comment.find("*/") == std::string::npos);
 }
 
-string read_output_string(ifstream& fin) noexcept {
+std::string read_output_string(std::ifstream& fin) noexcept {
 
-	string total_message = "";
-	string msg;
+	std::string total_message = "";
+	std::string msg;
 
-	// first string
+	// first std::string
 	fin >> msg;
 	total_message += msg.substr(1, msg.length());
 
-	// first string is also last string
+	// first std::string is also last std::string
 	if (msg[msg.length() - 1] == '"') {
 		return total_message.substr(0, total_message.length() - 1);
 	}
 
-	// read the whole string
-	while (fin >> msg and msg.find('"') == string::npos) {
+	// read the whole std::string
+	while (fin >> msg and msg.find('"') == std::string::npos) {
 		total_message += " " + msg;
 	}
 
-	// process last string
+	// process last std::string
 	total_message += " " + msg.substr(0, msg.length() - 1);
 	return total_message;
 }
@@ -94,18 +90,18 @@ string read_output_string(ifstream& fin) noexcept {
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
-vector<node> invlinarr(const linear_arrangement& arr) noexcept {
-	vector<node> ilin(arr.size());
+std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr) noexcept {
+	std::vector<lal::node> ilin(arr.size());
 	for (uint64_t p : arr) { ilin[ arr[p] ] = p; }
 	return ilin;
 }
 
 #define to_uint64(x) static_cast<uint64_t>(x)
 
-void relabel_edges(const uint64_t n, vector<edge>& edges, node& r) noexcept {
+void relabel_edges(const uint64_t n, std::vector<lal::edge>& edges, lal::node& r) noexcept {
 	std::mt19937 gen(1234);
 
-	vector<node> relab(n);
+	std::vector<lal::node> relab(n);
 	std::iota(relab.begin(), relab.end(), 0);
 
 	// relabel 'n' times
@@ -121,9 +117,8 @@ void relabel_edges(const uint64_t n, vector<edge>& edges, node& r) noexcept {
 	}
 }
 
-void shuffle_graph_edges(
-	vector<edge>& edges, undirected_graph& G, bool normalise, bool check
-)
+void shuffle_graph_edges
+(std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G, bool normalise, bool check)
 noexcept
 {
 	const uint64_t n = G.get_num_nodes();
@@ -140,12 +135,12 @@ noexcept
 }
 
 void relabel_graph_vertices(
-	vector<edge>& edges, undirected_graph& G, bool normalise, bool check
+	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G, bool normalise, bool check
 )
 noexcept
 {
 	const uint64_t n = G.get_num_nodes();
-	node dummy = 0;
+	lal::node dummy = 0;
 	relabel_edges(G.get_num_nodes(), edges, dummy);
 
 	G.clear();
@@ -154,11 +149,11 @@ noexcept
 }
 
 void relabel_tree_vertices(
-	vector<edge>& edges, rooted_tree& T, bool normalise, bool check
+	std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T, bool normalise, bool check
 )
 noexcept
 {
-	node r = T.get_root();
+	lal::node r = T.get_root();
 	relabel_edges(T.get_num_nodes(), edges, r);
 
 	T.clear();
@@ -168,11 +163,11 @@ noexcept
 }
 
 void relabel_tree_vertices(
-	vector<edge>& edges, free_tree& T, bool normalise, bool check
+	std::vector<lal::edge>& edges, lal::graphs::free_tree& T, bool normalise, bool check
 )
 noexcept
 {
-	node dummy = 0;
+	lal::node dummy = 0;
 	relabel_edges(T.get_num_nodes(), edges, dummy);
 
 	T.clear();

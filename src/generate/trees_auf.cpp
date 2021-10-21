@@ -41,7 +41,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
@@ -49,10 +48,6 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
 #include <lal/utilities/tree_isomorphism.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -64,14 +59,14 @@ using namespace numeric;
 #include "common/tree_validity_check.hpp"
 
 // number of caterpillar trees of a given size
-inline integer num_caterpillar_trees(uint64_t n) noexcept {
+inline lal::numeric::integer num_caterpillar_trees(uint64_t n) noexcept {
 	if (n == 1) { return 1; }
 	if (n == 2) { return 1; }
 	if (n == 3) { return 1; }
 	if (n == 4) { return 2; }
-	integer n1 = 2;
+	lal::numeric::integer n1 = 2;
 	n1.powt(n - 4);
-	integer n2 = 2;
+	lal::numeric::integer n2 = 2;
 	n2.powt((n - 4)/2);
 	n1 += n2;
 	return n1;
@@ -82,32 +77,32 @@ namespace generate {
 
 namespace auf {
 struct extra_params {
-	vector<integer> UFT;
+	std::vector<lal::numeric::integer> UFT;
 };
 
 #define process																\
 	const ftree_check err = test_validity_tree(n, T);						\
 	if (err != ftree_check::correct) {										\
-		cerr << ERROR << endl;												\
-		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
-		cerr << "    Error: " << tree_check_to_string(err) << endl;			\
-		cerr << T << endl;													\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    Tree of index " << gen << " is not correct.\n";	\
+		std::cerr << "    Error: " << tree_check_to_string(err) << '\n';	\
+		std::cerr << T << '\n';												\
 		return err_type::test_execution;									\
 	}																		\
 	/* compute 'statistics' */												\
-	n_caterpillar += T.is_of_tree_type(tree_type::caterpillar);				\
+	n_caterpillar += T.is_of_tree_type(lal::graphs::tree_type::caterpillar);\
 	gen += 1;																\
 	/* ensure uniqueness */													\
-	for (size_t j = 0; j < it; ++j) {										\
-		if (utilities::are_trees_isomorphic(all_free_trees[j], T)) {		\
-			cerr << ERROR << endl;											\
-			cerr << "    Found two isomorphic trees!." << endl;				\
-			cerr << "    After generating the " << it << " tree." << endl;	\
-			cerr << "    The isomorphic tree is at j= " << j << endl;		\
-			cerr << "    Just generated:" << endl;							\
-			cerr << T << endl;												\
-			cerr << "   The tree at position j= " << j << ":" << endl;		\
-			cerr << all_free_trees[j] << endl;								\
+	for (std::size_t j = 0; j < it; ++j) {									\
+		if (lal::utilities::are_trees_isomorphic(all_free_trees[j], T)) {	\
+			std::cerr << ERROR << '\n';										\
+			std::cerr << "    Found two isomorphic trees!.\n";				\
+			std::cerr << "    After generating the " << it << " tree.\n";	\
+			std::cerr << "    The isomorphic tree is at j= " << j << '\n';	\
+			std::cerr << "    Just generated:\n";							\
+			std::cerr << T << '\n';											\
+			std::cerr << "   The tree at position j= " << j << ":\n";		\
+			std::cerr << all_free_trees[j] << '\n';							\
 			return err_type::test_execution;								\
 		}																	\
 	}																		\
@@ -116,41 +111,41 @@ struct extra_params {
 
 #define check																							\
 	/* check the number of caterpillar trees is correct */												\
-	const integer n_cat = num_caterpillar_trees(n);														\
+	const lal::numeric::integer n_cat = num_caterpillar_trees(n);														\
 	if (n_cat != n_caterpillar) {																		\
-		cerr << ERROR << endl;																			\
-		cerr << "    Number of caterpillar trees detected does not agree with the formula." << endl;	\
-		cerr << "    Number of vertices: " << n << endl;												\
-		cerr << "    Formula:  " << n_cat << endl;														\
-		cerr << "    Detected: " << n_caterpillar << endl;												\
+		std::cerr << ERROR << '\n';																			\
+		std::cerr << "    Number of caterpillar trees detected does not agree with the formula.\n";	\
+		std::cerr << "    Number of vertices: " << n << '\n';												\
+		std::cerr << "    Formula:  " << n_cat << '\n';														\
+		std::cerr << "    Detected: " << n_caterpillar << '\n';												\
 		return err_type::test_execution;																\
 	}																									\
 	/* make sure that the amount of trees generate coincides with the series from the OEIS */			\
 	if (n < UFT.size() and gen != UFT[n]) {																\
-		cerr << ERROR << endl;																			\
-		cerr << "    Exhaustive generation of unlabelled free trees" << endl;							\
-		cerr << "    Amount of trees should be: " << UFT[n] << endl;									\
-		cerr << "    But generated: " << gen << endl;													\
-		cerr << "    For a size of " << n << " vertices" << endl;										\
+		std::cerr << ERROR << '\n';																			\
+		std::cerr << "    Exhaustive generation of unlabelled free trees\n";							\
+		std::cerr << "    Amount of trees should be: " << UFT[n] << '\n';									\
+		std::cerr << "    But generated: " << gen << '\n';													\
+		std::cerr << "    For a size of " << n << " vertices\n";										\
 		return err_type::test_execution;																\
 	}
 
 err_type test_for_n_while
-(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 
 	// number of caterpillar trees
-	integer n_caterpillar = 0;
+	lal::numeric::integer n_caterpillar = 0;
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
-		free_tree T = TreeGen.get_tree();
+		lal::graphs::free_tree T = TreeGen.get_tree();
 		TreeGen.next();
 		process;
 	}
@@ -160,21 +155,21 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 
 	// number of caterpillar trees
-	integer n_caterpillar = 0;
+	lal::numeric::integer n_caterpillar = 0;
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	std::size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
-		free_tree T = TreeGen.get_tree();
+		lal::graphs::free_tree T = TreeGen.get_tree();
 		process;
 	}
 
@@ -183,21 +178,21 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint64_t n, all_ulab_free_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
 {
 	const auto& UFT = params.UFT;
 
 	// number of caterpillar trees
-	integer n_caterpillar = 0;
+	lal::numeric::integer n_caterpillar = 0;
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
-		free_tree T = TreeGen.yield_tree();
+		lal::graphs::free_tree T = TreeGen.yield_tree();
 		process;
 	}
 
@@ -209,21 +204,21 @@ template<bool init>
 err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) noexcept {
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
 		(n1, n2, test_for_n_while, ep);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
 		(n1, n2, test_for_n_for, ep);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_free_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
 		(n1, n2, test_for_n_yield, ep);
 	if (err != err_type::no_error) { return err; }
 	}
@@ -233,7 +228,7 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) 
 
 } // -- namespace auf
 
-err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) {
 
 	/* BUILD TESTING DATA */
 
@@ -243,7 +238,7 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 	// size of the vector with the number of unlabelled free trees
 
 	params.UFT =
-	vector<integer>{
+	std::vector<lal::numeric::integer>{
 		1,
 		1,
 		1,
@@ -269,26 +264,26 @@ err_type exe_gen_trees_auf(const input_list& inputs, ifstream& fin) {
 		5623756,
 		14828074,
 		39299897,
-		integer("104636890"),
-		integer("279793450"),
-		integer("751065460"),
-		integer("2023443032"),
-		integer("5469566585"),
-		integer("14830871802"),
-		integer("40330829030"),
-		integer("109972410221"),
-		integer("300628862480"),
-		integer("823779631721"),
-		integer("2262366343746"),
-		integer("6226306037178")
+		{"104636890"},
+		{"279793450"},
+		{"751065460"},
+		{"2023443032"},
+		{"5469566585"},
+		{"14830871802"},
+		{"40330829030"},
+		{"109972410221"},
+		{"300628862480"},
+		{"823779631721"},
+		{"2262366343746"},
+		{"6226306037178"}
 	};
 
 	// -------------------------------------------------------------------------
 
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 

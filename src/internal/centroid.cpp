@@ -44,8 +44,6 @@
 #include <fstream>
 #include <random>
 #include <set>
-using namespace std;
-
 // lal includes
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
@@ -55,26 +53,23 @@ using namespace std;
 #include <lal/detail/properties/tree_centroid.hpp>
 #include <lal/detail/graphs/size_subtrees.hpp>
 #include <lal/detail/graphs/traversal.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
 
 // common includes
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 
 inline bool is_centroidal(
-	const graphs::rooted_tree& t, uint64_t size_cc, node u, uint64_t *sizes
+	const lal::graphs::rooted_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes
 )
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
-	detail::get_size_subtrees(t, u, sizes);
-	for (const node v : t.get_out_neighbours(u)) {
+	lal::detail::get_size_subtrees(t, u, sizes);
+	for (const lal::node v : t.get_out_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}
 	}
-	for (const node v : t.get_in_neighbours(u)) {
+	for (const lal::node v : t.get_in_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}
@@ -83,12 +78,12 @@ inline bool is_centroidal(
 }
 
 inline bool is_centroidal(
-	const graphs::free_tree& t, uint64_t size_cc, node u, uint64_t *sizes
+	const lal::graphs::free_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes
 )
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
-	detail::get_size_subtrees(t, u, sizes);
-	for (const node v : t.get_neighbours(u)) {
+	lal::detail::get_size_subtrees(t, u, sizes);
+	for (const lal::node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}
@@ -97,16 +92,16 @@ inline bool is_centroidal(
 }
 
 template<class T>
-pair<node,node> straightforward_centroid(const T& t, node x) {
+std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x) {
 	const uint64_t n = t.get_num_nodes();
 
 	uint64_t size_cc = 0;
-	vector<node> reachable;
+	std::vector<lal::node> reachable;
 	{
-	detail::BFS<T> bfs(t);
+	lal::detail::BFS<T> bfs(t);
 	bfs.set_use_rev_edges(t.is_rooted());
 	bfs.set_process_current(
-	[&](const auto&, node s) -> void { reachable.push_back(s); ++size_cc; }
+	[&](const auto&, lal::node s) -> void { reachable.push_back(s); ++size_cc; }
 	);
 	bfs.start_at(x);
 	}
@@ -114,10 +109,10 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	// allocate and initialise memory
 	uint64_t *sizes = static_cast<uint64_t *>(malloc(n*sizeof(uint64_t)));
 
-	node u1, u2;
+	lal::node u1, u2;
 	u1 = u2 = n;
 
-	for (const node u : reachable) {
+	for (const lal::node u : reachable) {
 		const bool cc = is_centroidal(t, size_cc, u, sizes);
 		if (cc) {
 			if (u1 == n) { u1 = u; }
@@ -126,13 +121,13 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	}
 
 	free(sizes);
-	return (u1 < u2 ? make_pair(u1,u2) : make_pair(u2,u1));
+	return (u1 < u2 ? std::make_pair(u1,u2) : std::make_pair(u2,u1));
 }
 
 inline
 bool are_centroids_equal(
-	const tree& t,
-	const pair<node,node>& c1, const pair<node,node>& c2
+	const lal::graphs::tree& t,
+	const std::pair<lal::node,lal::node>& c1, const std::pair<lal::node,lal::node>& c2
 )
 {
 	if (c1.first != c2.first) { return false; }
@@ -146,11 +141,11 @@ namespace tests {
 namespace internal {
 
 template<class TREE_TYPE>
-err_type exe_commands_utils_centroid(ifstream& fin) {
+err_type exe_commands_utils_centroid(std::ifstream& fin) {
 	TREE_TYPE t;
 	uint64_t n;
 
-	string option;
+	std::string option;
 	while (fin >> option) {
 		if (command_is_comment(option)) {
 			process_comment(fin);
@@ -158,7 +153,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		}
 
 		if (option == "output") {
-			cout << read_output_string(fin) << endl;
+			std::cout << read_output_string(fin) << '\n';
 		}
 		else if (option == "init") {
 			fin >> n;
@@ -166,22 +161,22 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		}
 		else if (option == "add_edges") {
 			fin >> n;
-			vector<edge> es(n);
+			std::vector<lal::edge> es(n);
 			for (uint64_t i = 0; i < n; ++i) {
 				fin >> es[i].first >> es[i].second;
 			}
 			t.add_edges(es);
 		}
 		else if (option == "find_centroid") {
-			node s;
+			lal::node s;
 			fin >> s;
 			const auto centroid = lal::detail::retrieve_centroid(t, s);
-			cout << "centroid: " << centroid.first;
-			if (centroid.second < t.get_num_nodes()) { cout << " " << centroid.second; }
-			cout << endl;
+			std::cout << "centroid: " << centroid.first;
+			if (centroid.second < t.get_num_nodes()) { std::cout << " " << centroid.second; }
+			std::cout << '\n';
 		}
 		else if (option == "centroid_is") {
-			node start_at;
+			lal::node start_at;
 			fin >> start_at;
 			const auto centroid = lal::detail::retrieve_centroid(t, start_at);
 
@@ -189,97 +184,97 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 			fin >> centroid_size;
 
 			if (centroid_size == 1) {
-				node u;
+				lal::node u;
 				fin >> u;
 
 				if (centroid.first != u) {
-					cerr << ERROR << endl;
-					cerr << "    Centroid does not coincide." << endl;
-					cerr << "    Started at: " << start_at << endl;
-					cerr << "    Result (algorithm): " << centroid.first << endl;
-					cerr << "    Received (ground truth): " << u << endl;
-					cerr << "    For tree:" << endl;
-					cerr << t << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Centroid does not coincide.\n";
+					std::cerr << "    Started at: " << start_at << '\n';
+					std::cerr << "    Result (algorithm): " << centroid.first << '\n';
+					std::cerr << "    Received (ground truth): " << u << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << t << '\n';
 					return err_type::test_execution;
 				}
 			}
 			else if (centroid_size == 2) {
-				node u, v;
+				lal::node u, v;
 				fin >> u >> v;
 				if (u > v) {
-					cerr << ERROR << endl;
-					cerr << "    The first vertex must be smaller than the second." << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    The first vertex must be smaller than the second.\n";
 					return err_type::test_format;
 				}
 				if (u == v) {
-					cerr << ERROR << endl;
-					cerr << "    The two vertices are the same: " << u << " <-> " << v << "." << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    The two vertices are the same: " << u << " <-> " << v << ".\n";
 					return err_type::test_format;
 				}
 
 				if (centroid.first != u and centroid.second != v) {
-					cerr << ERROR << endl;
-					cerr << "    Centroids do not coincide." << endl;
-					cerr << "    Started at: " << start_at << endl;
-					cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << endl;
-					cerr << "    Received (ground truth): " << u << " " << v << endl;
-					cerr << "    For tree:" << endl;
-					cerr << t << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Centroids do not coincide.\n";
+					std::cerr << "    Started at: " << start_at << '\n';
+					std::cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << '\n';
+					std::cerr << "    Received (ground truth): " << u << " " << v << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << t << '\n';
 					return err_type::test_execution;
 				}
 			}
 			else {
-				cerr << ERROR << endl;
-				cerr << "    Centroid size has to be either 1 or 2. Instead, received '" << centroid_size << "'." << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Centroid size has to be either 1 or 2. Instead, received '" << centroid_size << "'.\n";
 				return err_type::test_format;
 			}
 		}
 		else if (option == "output_graph") {
-			cout << t << endl;
+			std::cout << t << '\n';
 		}
-		else if (option == "remove_edge") {
-			node u,v;
+		else if (option == "remove_lal::edge") {
+			lal::node u,v;
 			fin >> u >> v;
 			t.remove_edge(u,v);
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Invalid command '" << option << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Invalid command '" << option << "'.\n";
 			return err_type::test_format;
 		}
 	}
 	return err_type::no_error;
 }
 
-err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
-	string how;
+err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& fin) {
+	std::string how;
 	fin >> how;
 	if (how != "exhaustive" and how != "random") {
-		cerr << ERROR << endl;
-		cerr << "    Method of enumeration '" << how << "' is invalid." << endl;
-		cerr << "    It must be either 'exhaustive' or 'random'." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Method of enumeration '" << how << "' is invalid.\n";
+		std::cerr << "    It must be either 'exhaustive' or 'random'.\n";
 		return err_type::test_format;
 	}
 
 #define test_correctness(T)											\
 {																	\
-	const auto lib_centroid = lal::detail::retrieve_centroid(T, 0);\
+	const auto lib_centroid = lal::detail::retrieve_centroid(T, 0);	\
 	const auto easy_centroid = straightforward_centroid(T, 0);		\
 	if (not are_centroids_equal(T,lib_centroid, easy_centroid)) {	\
-		cerr << ERROR << endl;										\
-		cerr << "    Centroids differ." << endl;					\
-		cerr << "    Library: " << lib_centroid.first;				\
+		std::cerr << ERROR << '\n';									\
+		std::cerr << "    Centroids differ.\n";						\
+		std::cerr << "    Library: " << lib_centroid.first;			\
 		if (lib_centroid.second < n) {								\
-			cerr << " " << lib_centroid.second;						\
+			std::cerr << " " << lib_centroid.second;				\
 		}															\
-		cerr << endl;												\
-		cerr << "    Straightforward: " << easy_centroid.first;		\
+		std::cerr << '\n';											\
+		std::cerr << "    Straightforward: " << easy_centroid.first;\
 		if (easy_centroid.second < n) {								\
-			cerr << " " << easy_centroid.second;					\
+			std::cerr << " " << easy_centroid.second;				\
 		}															\
-		cerr << endl;												\
-		cerr << "    For tree:" << endl;							\
-		cerr << T << endl;											\
+		std::cerr << '\n';											\
+		std::cerr << "    For tree:\n";								\
+		std::cerr << T << '\n';										\
 		return err_type::test_execution;							\
 	}																\
 }
@@ -307,54 +302,54 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 	while (fin >> n) {
 		if (graph_type == "ftree") {
 			if (how == "exhaustive") {
-				exe_exhaustive(all_ulab_free_trees, n)
+				exe_exhaustive(lal::generate::all_ulab_free_trees, n)
 			}
 			else {
-				exe_random(rand_ulab_free_trees, n)
+				exe_random(lal::generate::rand_ulab_free_trees, n)
 			}
 		}
 		else {
 			if (how == "exhaustive") {
-				exe_exhaustive(all_ulab_rooted_trees, n)
+				exe_exhaustive(lal::generate::all_ulab_rooted_trees, n)
 			}
 			else {
-				exe_random(rand_ulab_free_trees, n)
+				exe_random(lal::generate::rand_ulab_free_trees, n)
 			}
 		}
 	}
 	return err_type::no_error;
 }
 
-err_type exe_internal_centroid(const input_list& inputs, ifstream& fin) {
+err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	string mode, graph_type;
+	std::string mode, graph_type;
 	fin >> mode >> graph_type;
 
 	if (mode != "manual" and mode != "automatic") {
-		cerr << ERROR << endl;
-		cerr << "    Expected execution mode 'manual' or 'automatic'." << endl;
-		cerr << "    Found '" << mode << "'" << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Expected execution mode 'manual' or 'automatic'.\n";
+		std::cerr << "    Found '" << mode << "'\n";
 		return err_type::test_format;
 	}
 
 	if (graph_type != "ftree" and graph_type != "rtree") {
-		cerr << ERROR << endl;
-		cerr << "    Expected graph type 'ftree' or 'rtree'." << endl;
-		cerr << "    Found '" << graph_type << "'" << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Expected graph type 'ftree' or 'rtree'.\n";
+		std::cerr << "    Found '" << graph_type << "'\n";
 		return err_type::test_format;
 	}
 
 	const err_type err =
 	(mode == "manual" ?
 		(graph_type == "ftree" ?
-		exe_commands_utils_centroid<free_tree>(fin) :
-		exe_commands_utils_centroid<rooted_tree>(fin))
+		exe_commands_utils_centroid<lal::graphs::free_tree>(fin) :
+		exe_commands_utils_centroid<lal::graphs::rooted_tree>(fin))
 		:
 		exe_full_utils_centroid(graph_type, fin)
 	);

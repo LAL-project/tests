@@ -42,7 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
@@ -51,11 +50,6 @@ using namespace std;
 #include <lal/properties/mean_hierarchical_distance.hpp>
 #include <lal/numeric/rational_output.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace generate;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -64,33 +58,33 @@ using namespace properties;
 namespace tests {
 namespace properties {
 
-err_type exe_properties_MHD_All_trees(const input_list& inputs, ifstream& fin) {
+err_type exe_properties_MHD_All_trees(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
 	uint64_t n;
 	while (fin >> n) {
-		cout << "----------------------------------------" << endl;
-		cout << "n= " << n << endl;
+		std::cout << "----------------------------------------\n";
+		std::cout << "n= " << n << '\n';
 
 		int i = 0;
-		all_ulab_free_trees TreeGen(n);
+		lal::generate::all_ulab_free_trees TreeGen(n);
 		while (not TreeGen.end()) {
-			const free_tree t = TreeGen.get_tree();
+			const lal::graphs::free_tree t = TreeGen.get_tree();
 			TreeGen.next();
 
-			cout << i << ")" << endl;
+			std::cout << i << ")\n";
 
-			// for each node, make a rooted tree at that node
-			for (node r = 0; r < t.get_num_nodes(); ++r) {
-				const rooted_tree R(t, r);
-				const rational mhd =
+			// for each lal::node, make a rooted tree at that lal::node
+			for (lal::node r = 0; r < t.get_num_nodes(); ++r) {
+				const lal::graphs::rooted_tree R(t, r);
+				const lal::numeric::rational mhd =
 					lal::properties::mean_hierarchical_distance_rational(R);
-				cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << endl;
+				std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
 			}
 
 			++i;

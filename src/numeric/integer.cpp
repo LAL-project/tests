@@ -42,13 +42,10 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-using namespace std;
 
 // lal includes
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
-using namespace lal;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -57,33 +54,33 @@ using namespace numeric;
 
 #define assert_exists_variable(varname)										\
 	if (not map_has(integer_vars, varname)) {								\
-		cerr << ERROR << endl;												\
-		cerr << "    Variable '" << varname << "' does not exist." << endl;	\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    Variable '" << varname << "' does not exist.\n";	\
 		return err_type::test_execution;									\
 	}
 
 #define var_type(var)	(vtypes.find(var)->second)
-#define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
+#define message_in_func(f) std::cerr << "    -- In '" << f << "' --\n";
 #define assert_correct_var_type(assertion, vt)							\
 	if (vt != "integer") {												\
-		cerr << ERROR << endl;											\
+		std::cerr << ERROR << '\n';											\
 		message_in_func(assertion)										\
-		cerr << "    Invalid variable type '" << vt << "'." << endl;	\
+		std::cerr << "    Invalid variable type '" << vt << "'.\n";	\
 		return err_type::test_format;									\
 	}
 #define assert_correct_format(assertion, f)								\
-	if (f != "int" and f != "string") {									\
-		cerr << ERROR << endl;											\
+	if (f != "int" and f != "std::string") {									\
+		std::cerr << ERROR << '\n';											\
 		message_in_func(assertion)										\
-		cerr << "    Invalid format type '" << f << "'." << endl;		\
+		std::cerr << "    Invalid format type '" << f << "'.\n";		\
 		return err_type::test_format;									\
 	}
 
 #define comparison_error(op, var1, var2, val_var1, val_var2)	\
-	cerr << ERROR << endl;										\
-	cerr << "    Assertion '" << op << "' failed for" << endl;	\
-	cerr << "        '" << var1 << "' = " << val_var1 << endl;	\
-	cerr << "        '" << var2 << "' = " << val_var2 << endl;
+	std::cerr << ERROR << '\n';										\
+	std::cerr << "    Assertion '" << op << "' failed for\n";	\
+	std::cerr << "        '" << var1 << "' = " << val_var1 << '\n';	\
+	std::cerr << "        '" << var2 << "' = " << val_var2 << '\n';
 
 #define get_var_value(M, var) M.find(var)->second
 
@@ -92,8 +89,8 @@ namespace numeric {
 
 template<typename U, typename V>
 static inline err_type resolve_comp_integer(
-	const string& var1, const string& var2,
-	const U& val1, const string& op, const V& val2
+	const std::string& var1, const std::string& var2,
+	const U& val1, const std::string& op, const V& val2
 )
 {
 	if (op == "==") {
@@ -137,51 +134,53 @@ static inline err_type resolve_comp_integer(
 		}
 	}
 	else {
-		cerr << ERROR << endl;
+		std::cerr << ERROR << '\n';
 		message_in_func("comparison " + op)
-		cerr << "    Operator is not one of ==, !=, >=, >, <=, <" << endl;
-		cerr << "    Operator is: " << op << endl;
+		std::cerr << "    Operator is not one of ==, !=, >=, >, <=, <\n";
+		std::cerr << "    Operator is: " << op << '\n';
 		return err_type::test_format;
 	}
 	return err_type::no_error;
 }
 
 static inline err_type comp_integer(
-	const map<string, integer>& integer_vars,
-	ifstream& fin
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::ifstream& fin
 )
 {
-	string op_comp;
-	string var1, var2;
+	std::string op_comp;
+	std::string var1, var2;
 	fin >> var1 >> op_comp >> var2;
 
 	assert_exists_variable(var1)
 	assert_exists_variable(var2)
 
-	const integer& val1 = get_var_value(integer_vars, var1);
-	const integer& val2 = get_var_value(integer_vars, var2);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val2 = get_var_value(integer_vars, var2);
 	return resolve_comp_integer(var1, var2, val1, op_comp, val2);
 }
 
 static inline err_type comp_integer_lit(
-	const map<string, integer>& integer_vars,
-	ifstream& fin
+	const std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::ifstream& fin
 )
 {
-	string op_comp;
-	string var1;
+	std::string op_comp;
+	std::string var1;
 	int64_t val2;
 	fin >> var1 >> op_comp >> val2;
 
 	assert_exists_variable(var1)
 
-	const integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 	return resolve_comp_integer(var1, "literal", val1, op_comp, val2);
 }
 
 template<typename U, typename V>
 static inline
-integer resolve_integer_operation(const U& var1, const string& op, const V& var2) {
+lal::numeric::integer resolve_integer_operation
+(const U& var1, const std::string& op, const V& var2)
+{
 	if (op == "+") { return var1 + var2; }
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
@@ -193,59 +192,59 @@ integer resolve_integer_operation(const U& var1, const string& op, const V& var2
 }
 
 static inline err_type op_integer(
-	map<string, integer>& integer_vars,
-	ifstream& fin
+	std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::ifstream& fin
 )
 {
-	string op;
-	string var0, var1, var2;
+	std::string op;
+	std::string var0, var1, var2;
 	fin >> var0 >> var1 >> op >> var2;
 
 	assert_exists_variable(var0)
 	assert_exists_variable(var1)
 	assert_exists_variable(var2)
 
-	const integer& val1 = get_var_value(integer_vars, var1);
-	const integer& val2 = get_var_value(integer_vars, var2);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val2 = get_var_value(integer_vars, var2);
 
-	const integer R = resolve_integer_operation(val1, op, val2);
+	const lal::numeric::integer R = resolve_integer_operation(val1, op, val2);
 	integer_vars[var0] = R;
 	return err_type::no_error;
 }
 
 static inline err_type op_integer_lit(
-	map<string, integer>& integer_vars,
-	ifstream& fin
+	std::map<std::string, lal::numeric::integer>& integer_vars,
+	std::ifstream& fin
 )
 {
-	string op;
-	string var0, var1;
+	std::string op;
+	std::string var0, var1;
 	int64_t val2;
 	fin >> var0 >> var1 >> op >> val2;
 
 	assert_exists_variable(var0)
 	assert_exists_variable(var1)
 
-	const integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 
-	const integer R = resolve_integer_operation(val1, op, val2);
+	const lal::numeric::integer R = resolve_integer_operation(val1, op, val2);
 	integer_vars[var0] = R;
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
+err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	map<string, integer> integer_vars;
+	std::map<std::string, lal::numeric::integer> integer_vars;
 
-	string command;
-	string var_name;
-	string format;
+	std::string command;
+	std::string var_name;
+	std::string format;
 	err_type err;
 
 	while (fin >> command) {
@@ -258,10 +257,10 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 				fin >> val;
 				integer_vars[var_name] = val;
 			}
-			else if (format == "string") {
-				string val;
+			else if (format == "std::string") {
+				std::string val;
 				fin >> val;
-				integer_vars[var_name] = integer(val);
+				integer_vars[var_name] = lal::numeric::integer(val);
 			}
 		}
 		else if (command == "assign") {
@@ -274,7 +273,7 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 		else if (command == "print") {
 			fin >> var_name;
 			assert_exists_variable(var_name)
-			cout << var_name << "= " << get_var_value(integer_vars, var_name) << endl;
+			std::cout << var_name << "= " << get_var_value(integer_vars, var_name) << '\n';
 		}
 		else if (command == "compare") {
 			err = comp_integer(integer_vars, fin);
@@ -293,8 +292,8 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 			if (err != err_type::no_error) { return err; }
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Invalid command '" << command << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Invalid command '" << command << "'.\n";
 			return err_type::test_format;
 		}
 	}
@@ -303,11 +302,11 @@ err_type exe_numeric_integer(const input_list& inputs, ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer_manual(const input_list& inputs, ifstream&) {
+err_type exe_numeric_integer_manual(const input_list& inputs, std::ifstream&) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
@@ -316,16 +315,16 @@ err_type exe_numeric_integer_manual(const input_list& inputs, ifstream&) {
 #define check_result(WHAT, EXPR, RES)										\
 	i += 1;																	\
 	if (EXPR != RES) {														\
-		cerr << ERROR << endl;												\
-		cerr << "    At expression " << i << ")" << endl;					\
-		cerr << "    Input expression computes a result different" << endl;	\
-		cerr << "    from the ground truth." << endl;						\
-		cerr << "    Result of '" << WHAT << "'= " << EXPR << endl;			\
-		cerr << "    Expected: " << RES << endl;							\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    At expression " << i << ")\n";					\
+		std::cerr << "    Input expression computes a result different\n";	\
+		std::cerr << "    from the ground truth.\n";						\
+		std::cerr << "    Result of '" << WHAT << "'= " << EXPR << '\n';			\
+		std::cerr << "    Expected: " << RES << '\n';							\
 		return err_type::test_execution;									\
 	}
 
-	integer k(3);
+	lal::numeric::integer k(3);
 	check_result("k + 3", k + 3, 6);
 	check_result("3 + k", 3 + k, 6);
 	check_result("k - 3", k - 3, 0);
@@ -350,7 +349,7 @@ err_type exe_numeric_integer_manual(const input_list& inputs, ifstream&) {
 	check_result("(-3)/(-k)", (-3)/(-k), 1);
 
 	check_result("18/k", 18/k, 6);
-	check_result("18/integer(1234)", 18/integer(1234), 0);
+	check_result("18/integer(1234)", 18/lal::numeric::integer(1234), 0);
 
 	k = 6;
 	check_result("k + 3", k + 3, 9);

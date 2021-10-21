@@ -42,16 +42,12 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/directed_graph.hpp>
 #include <lal/numeric/rational_output.hpp>
 #include <lal/linarr/head_initial.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -61,18 +57,18 @@ using namespace numeric;
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
+err_type exe_linarr_headedness(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Only one input file si allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Only one input file si allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	directed_graph G;
+	lal::graphs::directed_graph G;
 	{
-	const string graph_name = inputs[0].first;
-	const string graph_format = inputs[0].second;
+	const std::string graph_name = inputs[0].first;
+	const std::string graph_format = inputs[0].second;
 	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
@@ -81,29 +77,29 @@ err_type exe_linarr_headedness(const input_list& inputs, ifstream& fin) {
 
 	// linear arrangement
 	const uint64_t n = G.get_num_nodes();
-	vector<node> T(n);
-	linear_arrangement pi(n);
+	std::vector<lal::node> T(n);
+	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
-	size_t n_linarrs;
+	std::size_t n_linarrs;
 	fin >> n_linarrs;
 
-	for (size_t i = 0; i < n_linarrs; ++i) {
+	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (node u = 0; u < G.get_num_nodes(); ++u) {
+		for (lal::node u = 0; u < G.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
 		// output
-		cout << "[" << T[0];
-		for (node j = 1; j < G.get_num_nodes(); ++j) {
-			cout << ", " << T[j];
+		std::cout << "[" << T[0];
+		for (lal::node j = 1; j < G.get_num_nodes(); ++j) {
+			std::cout << ", " << T[j];
 		}
-		cout << "]: ";
+		std::cout << "]: ";
 
-		const rational h = lal::linarr::head_initial_rational(G, pi);
-		cout << h << endl;
+		const lal::numeric::rational h = lal::linarr::head_initial_rational(G, pi);
+		std::cout << h << '\n';
 	}
 
 	return err_type::no_error;

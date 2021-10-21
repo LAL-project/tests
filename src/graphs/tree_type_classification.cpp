@@ -43,7 +43,6 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/free_tree.hpp>
@@ -52,8 +51,6 @@ using namespace std;
 #include <lal/graphs/output.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/detail/graphs/tree_type.hpp>
-using namespace lal;
-using namespace graphs;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -64,47 +61,47 @@ namespace graphs {
 
 namespace tree_type_class {
 
-tree_type string_to_tt(const string& s) {
-	if (s == "empty") { return tree_type::empty; }
-	if (s == "singleton") { return tree_type::singleton; }
-	if (s == "linear") { return tree_type::linear; }
-	if (s == "star") { return tree_type::star; }
-	if (s == "quasistar") { return tree_type::quasistar; }
-	if (s == "bistar") { return tree_type::bistar; }
-	if (s == "caterpillar") { return tree_type::caterpillar; }
-	if (s == "spider") { return tree_type::spider; }
-	if (s == "unknown") { return tree_type::unknown; }
-	cerr << ERROR << endl;
-	cerr << "    String '" << s << "' could not be converted into a tree type." << endl;
-	return tree_type::unknown;
+lal::graphs::tree_type string_to_tt(const std::string& s) {
+	if (s == "empty") { return lal::graphs::tree_type::empty; }
+	if (s == "singleton") { return lal::graphs::tree_type::singleton; }
+	if (s == "linear") { return lal::graphs::tree_type::linear; }
+	if (s == "star") { return lal::graphs::tree_type::star; }
+	if (s == "quasistar") { return lal::graphs::tree_type::quasistar; }
+	if (s == "bistar") { return lal::graphs::tree_type::bistar; }
+	if (s == "caterpillar") { return lal::graphs::tree_type::caterpillar; }
+	if (s == "spider") { return lal::graphs::tree_type::spider; }
+	if (s == "unknown") { return lal::graphs::tree_type::unknown; }
+	std::cerr << ERROR << '\n';
+	std::cerr << "    String '" << s << "' could not be converted into a tree type.\n";
+	return lal::graphs::tree_type::unknown;
 }
 
-vector<uint64_t> parse_treestr(const string& s) {
+std::vector<uint64_t> parse_treestr(const std::string& s) {
 	// read numbers in line
-	stringstream ss(s);
-	vector<uint64_t> L;
+	std::stringstream ss(s);
+	std::vector<uint64_t> L;
 	uint64_t v;
 	while (ss >> v) { L.push_back(v); }
 	return L;
 }
 
-vector<bool> parse_classes_tt(string s) {
+std::vector<bool> parse_classes_tt(std::string s) {
 	// classes vector
-	vector<bool> classes(lal::graphs::__tree_type_size, false);
+	std::vector<bool> classes(lal::graphs::__tree_type_size, false);
 	bool read_sth = false;
 
-	// parse classes in string
+	// parse classes in std::string
 	std::replace(s.begin(), s.end(), ',', ' ');
-	stringstream ss(s);
-	string cls;
+	std::stringstream ss(s);
+	std::string cls;
 	while (ss >> cls) {
-		const size_t idx = static_cast<size_t>(string_to_tt(cls));
+		const std::size_t idx = static_cast<std::size_t>(string_to_tt(cls));
 		classes[idx] = true;
 		read_sth = true;
 	}
 
 	if (not read_sth) {
-		const size_t idx = static_cast<size_t>(string_to_tt("unknown"));
+		const std::size_t idx = static_cast<std::size_t>(string_to_tt("unknown"));
 		classes[idx] = true;
 	}
 	return classes;
@@ -112,99 +109,99 @@ vector<bool> parse_classes_tt(string s) {
 
 } // -- namespace tree_type_class
 
-err_type exe_graphs_tree_type_classification(const input_list& inputs, ifstream& fin) {
+err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	string line;
-	size_t lineno = 3;
+	std::string line;
+	std::size_t lineno = 3;
 	getline(fin, line); // skip header
 
 	while (getline(fin, line)) {
 		++lineno;
 
-		size_t semicolon = line.find(';');
-		if (semicolon == string::npos) {
-			cerr << ERROR << endl;
-			cerr << "    Input line is malformed." << endl;
-			cerr << "    In line: " << lineno << "'." << endl;
-			cerr << "    Line '" << lineno << "' does not have the ';'." << endl;
+		std::size_t semicolon = line.find(';');
+		if (semicolon == std::string::npos) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Input line is malformed.\n";
+			std::cerr << "    In line: " << lineno << "'.\n";
+			std::cerr << "    Line '" << lineno << "' does not have the ';'.\n";
 			return err_type::test_format;
 		}
 
 		// parse line
-		const string treestr = line.substr(0, semicolon);
-		const string classlist = line.substr(semicolon+1, line.length()-semicolon);
+		const std::string treestr = line.substr(0, semicolon);
+		const std::string classlist = line.substr(semicolon+1, line.length()-semicolon);
 
 		// ground truth classification
-		const vector<bool> ground_classes = tree_type_class::parse_classes_tt(classlist);
+		const std::vector<bool> ground_classes = tree_type_class::parse_classes_tt(classlist);
 
 		// parse data in line
 		const auto L = tree_type_class::parse_treestr(treestr);
 		const auto P = lal::graphs::from_head_vector_to_free_tree(L);
-		rooted_tree rT = rooted_tree(P.first, P.second);
-		free_tree fT = P.first;
+		lal::graphs::rooted_tree rT(P.first, P.second);
+		lal::graphs::free_tree fT = P.first;
 
 		// each tree's classification
 		rT.calculate_tree_type();
-		vector<string> rClasses = rT.get_tree_type_list();
+		std::vector<std::string> rClasses = rT.get_tree_type_list();
 		sort(rClasses.begin(), rClasses.end());
 		fT.calculate_tree_type();
-		vector<string> fClasses = fT.get_tree_type_list();
+		std::vector<std::string> fClasses = fT.get_tree_type_list();
 		sort(fClasses.begin(), fClasses.end());
 
 		// check result is correct
 		if (rClasses != fClasses) {
-			cerr << ERROR << endl;
-			cerr << "    Classes found at the two trees are not the same." << endl;
-			cerr << "    Rooted tree:" << endl;
-			for (const string& s : rClasses) {
-			cerr << "        " << s
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Classes found at the two trees are not the same.\n";
+			std::cerr << "    Rooted tree:\n";
+			for (const std::string& s : rClasses) {
+			std::cerr << "        " << s
 				 << (binary_search(fClasses.begin(), fClasses.end(), s) ?
 						 "" : " <--- not in the free tree")
-				 << endl;
+				 << '\n';
 			}
-			cerr << "    Free tree:" << endl;
-			for (const string& s : rClasses) {
-			cerr << "        " << s
+			std::cerr << "    Free tree:\n";
+			for (const std::string& s : rClasses) {
+			std::cerr << "        " << s
 				 << (binary_search(rClasses.begin(), rClasses.end(), s) ?
 						 "" : " <--- not in the rooted tree")
-				 << endl;
+				 << '\n';
 			}
 			return err_type::test_execution;
 		}
 
-		vector<bool> LAL_types(__tree_type_size, false);
-		for (const string& s : fClasses) {
-			LAL_types[ static_cast<size_t>(tree_type_class::string_to_tt(s)) ] = true;
+		std::vector<bool> LAL_types(lal::graphs::__tree_type_size, false);
+		for (const std::string& s : fClasses) {
+			LAL_types[ static_cast<std::size_t>(tree_type_class::string_to_tt(s)) ] = true;
 		}
 
 		if (LAL_types != ground_classes) {
-			cerr << ERROR << endl;
-			cerr << "    In line '" << lineno << "'." << endl;
-			cerr << "    Line's content: '" << line << "'" << endl;
-			cerr << "    Tree:" << endl;
-			cerr << fT << endl;
-			cerr << "    Ground truth classes:" << endl;
-			for (size_t i = 0; i < ground_classes.size(); ++i) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    In line '" << lineno << "'.\n";
+			std::cerr << "    Line's content: '" << line << "'\n";
+			std::cerr << "    Tree:\n";
+			std::cerr << fT << '\n';
+			std::cerr << "    Ground truth classes:\n";
+			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
-					cout << "        "
-						 << detail::tree_type_string(static_cast<tree_type>(i))
+					std::cout << "        "
+						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
 						 << (not LAL_types[i] ? "  <--- missing" : "")
-						 << endl;
+						 << '\n';
 				}
 			}
-			cerr << "    LAL's classes:" << endl;
-			for (size_t i = 0; i < LAL_types.size(); ++i) {
+			std::cerr << "    LAL's classes:\n";
+			for (std::size_t i = 0; i < LAL_types.size(); ++i) {
 				if (LAL_types[i]) {
-					cout << "        "
-						 << detail::tree_type_string(static_cast<tree_type>(i))
+					std::cout << "        "
+						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
-						 << endl;
+						 << '\n';
 				}
 			}
 			return err_type::test_execution;

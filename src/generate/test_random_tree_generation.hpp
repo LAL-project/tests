@@ -74,16 +74,16 @@ noexcept
 			const auto err = test_validity_tree(n, T);
 			if (err != decltype(err)::correct) {
 				errs << ERROR << '\n';
-				errs << "    Tree is not correct." << '\n';
+				errs << "    Tree is not correct.\n";
 				errs << "    Error: " << tree_check_to_string(err) << '\n';
 				errs << T << '\n';
-				return err_type::test_execution;
+				return tests::err_type::test_execution;
 			}
 		}
 
 		TreeGen.clear();
 	}
-	return err_type::no_error;
+	return tests::err_type::no_error;
 }
 
 } // -- namespace generate

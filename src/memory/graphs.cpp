@@ -42,13 +42,10 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
-using namespace lal;
-using namespace graphs;
 
 // common includes
 #include "common/definitions.hpp"
@@ -76,38 +73,38 @@ void test_generate() {
 
 	{
 	begin_case;
-	generate::all_ulab_free_trees Gen(10);
+	lal::generate::all_ulab_free_trees Gen(10);
 	Gen.next();
-	const free_tree f = Gen.get_tree();
+	const lal::graphs::free_tree f = Gen.get_tree();
 	}
 
 	{
 	begin_case;
-	generate::all_ulab_free_trees Gen(10);
+	lal::generate::all_ulab_free_trees Gen(10);
 	Gen.next();
-	free_tree f = Gen.get_tree();
+	lal::graphs::free_tree f = Gen.get_tree();
 	}
 
 	{
 	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
+	lal::generate::all_ulab_rooted_trees Gen(10);
 	Gen.next();
-	const rooted_tree f = Gen.get_tree();
+	const lal::graphs::rooted_tree f = Gen.get_tree();
 	}
 
 	{
 	begin_case;
-	generate::all_ulab_rooted_trees Gen(10);
+	lal::generate::all_ulab_rooted_trees Gen(10);
 	Gen.next();
-	rooted_tree f = Gen.get_tree();
+	lal::graphs::rooted_tree f = Gen.get_tree();
 	}
 }
 
-err_type exe_memory_graphs(const input_list& inputs, ifstream&) {
+err_type exe_memory_graphs(const input_list& inputs, std::ifstream&) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 

@@ -40,7 +40,6 @@
 
 // C++ includes
 #include <iostream>
-using namespace std;
 
 // common includes
 #include "common/parse_keywords.hpp"
@@ -52,23 +51,23 @@ namespace tests {
 namespace memory {
 
 err_type call_memory_internal
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "data_array") {
 		return parse_header(exe_memory_internal_data_array, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
 err_type call_memory
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "graphs") {
 		return parse_header(exe_memory_graphs, fin);
 	}
@@ -79,20 +78,20 @@ err_type call_memory
 		return call_memory_internal(keywords, i+1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const vector<string>& keywords, ifstream& fin) {
-	const string& key = keywords[0];
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+	const std::string& key = keywords[0];
 	if (key == "memory") {
 		return call_memory(keywords, 1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at 0: '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
 }

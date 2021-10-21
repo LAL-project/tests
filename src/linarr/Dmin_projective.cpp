@@ -42,7 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
@@ -50,9 +49,6 @@ using namespace std;
 #include <lal/linarr/Dmin.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace linarr;
 
 // common includes
 #include "common/definitions.hpp"
@@ -68,32 +64,32 @@ namespace dmin_projective {
 template<class T>
 err_type examine_dmin_projective
 (
-	const string& filename,
+	const std::string& filename,
 	const TreeInit<T>& tree_initializer,
 	const lal::linarr::algorithms_Dmin_projective& algo
 )
 noexcept
 {
-	ifstream input_file(filename);
+	std::ifstream input_file(filename);
 	if (not input_file.is_open()) {
-		cerr << ERROR << endl;
-		cerr << "    Input file '" << filename << "' could not be opened." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Input file '" << filename << "' could not be opened.\n";
 		return err_type::io;
 	}
 
-	const auto err = linarr_brute_force_testing<rooted_tree>
+	const auto err = linarr_brute_force_testing<lal::graphs::rooted_tree>
 	(
-		[=](const rooted_tree& t) {
-			return min_sum_edge_lengths_projective(t, algo);
+		[=](const lal::graphs::rooted_tree& t) {
+			return lal::linarr::min_sum_edge_lengths_projective(t, algo);
 		},
-		[](const rooted_tree& t, const linear_arrangement& arr) {
-			return sum_edge_lengths(t, arr);
+		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
+			return lal::linarr::sum_edge_lengths(t, arr);
 		},
-		[](const rooted_tree& t, const linear_arrangement& arr) {
+		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
 			return lal::linarr::is_projective(t, arr);
 		},
-		[](const head_vector& v) {
-			return from_head_vector_to_rooted_tree(v);
+		[](const lal::head_vector& v) {
+			return lal::graphs::from_head_vector_to_rooted_tree(v);
 		},
 		tree_initializer,
 		input_file
@@ -107,25 +103,25 @@ noexcept
 
 } // -- namespace dmin_projective
 
-err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
+err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Exactly one input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Exactly one input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_algos({"AEF", "HS"});
+	const std::set<std::string> allowed_algos({"AEF", "HS"});
 
-	string algo;
+	std::string algo;
 	fin >> algo;
 
 	if (allowed_algos.find(algo) == allowed_algos.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Unrecognized algorithm '" << algo << "'." << endl;
-		cerr << "    Allowed algorithms:" << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
+		std::cerr << "    Allowed algorithms:\n";
 		for (const auto& s : allowed_algos) {
-		cerr << "    - " << s << endl;
+		std::cerr << "    - " << s << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -137,10 +133,10 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 	);
 
 	const auto err1 =
-	dmin_projective::examine_dmin_projective<rooted_tree>
+	dmin_projective::examine_dmin_projective<lal::graphs::rooted_tree>
 	(
 		inputs[0].first,
-		[](rooted_tree& t) {
+		[](lal::graphs::rooted_tree& t) {
 			t.calculate_size_subtrees();
 		},
 		algo_id
@@ -149,10 +145,10 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, ifstream& fin) {
 
 	// do not calculate size subtrees so as to be able to test it
 	const auto err2 =
-	dmin_projective::examine_dmin_projective<rooted_tree>
+	dmin_projective::examine_dmin_projective<lal::graphs::rooted_tree>
 	(
 		inputs[0].first,
-		[](rooted_tree&) { },
+		[](lal::graphs::rooted_tree&) { },
 		algo_id
 	);
 	if (err2 != err_type::no_error) { return err2; }

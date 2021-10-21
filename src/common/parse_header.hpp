@@ -60,27 +60,27 @@ err_type parse_header(
 	fin >> field;
 
 	if (field != "INPUT") {
-		std::cerr << ERROR << std::endl;
-		std::cerr << "    Expected field: INPUT" << std::endl;
-		std::cerr << "    Found: " << field << std::endl;
-		return err_type::test_format;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Expected field: INPUT\n";
+		std::cerr << "    Found: " << field << '\n';
+		return tests::err_type::test_format;
 	}
 
-	size_t n_inputs;
+	std::size_t n_inputs;
 	fin >> n_inputs;
 	input_list inputs(n_inputs);
-	for (size_t i = 0; i < n_inputs; ++i) {
+	for (std::size_t i = 0; i < n_inputs; ++i) {
 		std::string file, format;
 		fin >> file >> format;
-		inputs[i] = make_pair(file, format);
+		inputs[i] = std::make_pair(file, format);
 	}
 
 	fin >> field;
 	if (field != "BODY") {
-		std::cerr << ERROR << std::endl;
-		std::cerr << "    Expected field: BODY" << std::endl;
-		std::cerr << "    Found: " << field << std::endl;
-		return err_type::test_format;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Expected field: BODY\n";
+		std::cerr << "    Found: " << field << '\n';
+		return tests::err_type::test_format;
 	}
 
 	return F(inputs, fin, P...);
@@ -88,11 +88,11 @@ err_type parse_header(
 
 void mark_wrong_keyword
 (const std::vector<std::string>& keywords,
- const std::vector<size_t>& k, const std::string& tab)
+ const std::vector<std::size_t>& k, const std::string& tab)
 {
 	std::cerr << tab;
 	// sure 'keywords' has at least one keyword
-	for (size_t i = 0; i < keywords.size(); ++i) {
+	for (std::size_t i = 0; i < keywords.size(); ++i) {
 		if (keywords[i].length() >= 2) {
 			std::cerr << keywords[i] << " ";
 		}
@@ -100,22 +100,22 @@ void mark_wrong_keyword
 			std::cerr << keywords[i] << "  ";
 		}
 	}
-	std::cerr << std::endl;
+	std::cerr << '\n';
 
 	// display the /\ where needed
-	size_t it = 0;
+	std::size_t it = 0;
 	std::cerr << tab;
-	for (size_t i = 0; i < keywords.size(); ++i) {
-		size_t l = keywords[i].length();
+	for (std::size_t i = 0; i < keywords.size(); ++i) {
+		std::size_t l = keywords[i].length();
 		if (it < k.size()) {
 			if (k[it] != i) {
-				std::cerr << string(l, ' ') << " ";
+				std::cerr << std::string(l, ' ') << " ";
 				if (l < 2) { std::cerr << " "; }
 			}
 			else {
 				std::cerr << "/\\";
 				if (l > 2) {
-					std::cerr << string(l - 2, ' ') << " ";
+					std::cerr << std::string(l - 2, ' ') << " ";
 				}
 				else {
 					std::cerr << "   ";
@@ -124,7 +124,7 @@ void mark_wrong_keyword
 			}
 		}
 	}
-	std::cerr << std::endl;
+	std::cerr << '\n';
 }
 
 } // -- namespace tests

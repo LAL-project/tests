@@ -43,21 +43,21 @@
 #define MLINE __LINE__ << ":: "
 
 #define begin_function										\
-	cout << "+++++++++++++++++++++++++++++++++" << endl;	\
-	cout << "function: " << __PRETTY_FUNCTION__ << endl;
+	std::cout << "+++++++++++++++++++++++++++++++++\n";	\
+	std::cout << "function: " << __PRETTY_FUNCTION__ << '\n';
 
 #define begin_case											\
-	cout << "-----------------------------------" << endl;	\
-	cout << "case starting at line: " << __LINE__ << endl;
+	std::cout << "-----------------------------------\n";	\
+	std::cout << "case starting at line: " << __LINE__ << '\n';
 
 #define output_array(A)							\
 	if (A.size() == 0) {						\
-		cout << MLINE << "Empty" << endl;		\
+		std::cout << MLINE << "Empty\n";		\
 	}											\
 	else {										\
-		cout << MLINE;							\
-		for (size_t i = 0; i < A.size(); ++i) {	\
-			cout << " " << A[i];				\
+		std::cout << MLINE;							\
+		for (std::size_t i = 0; i < A.size(); ++i) {	\
+			std::cout << " " << A[i];				\
 		}										\
-		cout << endl;							\
+		std::cout << '\n';							\
 	}

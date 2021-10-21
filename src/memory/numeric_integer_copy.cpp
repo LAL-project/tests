@@ -43,12 +43,9 @@
 // C++ includes
 #include <iostream>
 #include <vector>
-using namespace std;
 
 // lal includes
 #include <lal/numeric/integer_output.hpp>
-using namespace lal;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -59,76 +56,76 @@ namespace memory {
 err_type test_integer_copy() {
 	// copy constructor
 	{
-	integer i1 = 50;
-	integer i2 = i1;
+	lal::numeric::integer i1 = 50;
+	lal::numeric::integer i2 = i1;
 	check_eq(i1, i2);
 	}
 	{
-	vector<integer> v;
-	integer i1 = 1234;
+	std::vector<lal::numeric::integer> v;
+	lal::numeric::integer i1 = 1234;
 	v.push_back(i1);
 	check_eq(i1, v[0]);
 	}
 	{
-	integer i = 1234;
-	vector<integer> v;
+	lal::numeric::integer i = 1234;
+	std::vector<lal::numeric::integer> v;
 	v.emplace_back(i);
 	check_1v(v[0], 1234);
 	}
 	{
-	integer i = 1234;
-	vector<integer> v;
+	lal::numeric::integer i = 1234;
+	std::vector<lal::numeric::integer> v;
 	v.push_back(i);
 	check_1v(v[0], 1234);
 	}
 
 	// copy operator
 	{
-	integer i1 = 50;
-	integer i2;
+	lal::numeric::integer i1 = 50;
+	lal::numeric::integer i2;
 	i2 = i1;
 	check_eq(i1, i2);
 	}
 
 	{
-	integer i1 = 50;
-	integer i2 = 200;
+	lal::numeric::integer i1 = 50;
+	lal::numeric::integer i2 = 200;
 	i2 = i1;
 	check_eq(i1, i2);
 	}
 
 	{
-	vector<integer> v;
-	v.push_back(integer());
-	integer i1 = 1234;
+	std::vector<lal::numeric::integer> v;
+	v.push_back(lal::numeric::integer());
+	lal::numeric::integer i1 = 1234;
 	v[0] = i1;
 	check_eq(i1, v[0]);
 	}
 
 	{
-	vector<integer> v;
-	v.push_back(integer(5678));
-	integer i1 = 1234;
+	std::vector<lal::numeric::integer> v;
+	v.push_back(lal::numeric::integer(5678));
+	lal::numeric::integer i1 = 1234;
 	v[0] = i1;
 	check_eq(i1, v[0]);
 	}
 
 	{
-	vector<integer> v;
-	integer i1 = 1234;
+	std::vector<lal::numeric::integer> v;
+	lal::numeric::integer i1 = 1234;
 	v.push_back(i1);
 	check_eq(i1, v[0]);
 	}
 	{
-	vector<integer> v;
-	integer i1;
+	std::vector<lal::numeric::integer> v;
+	lal::numeric::integer i1;
 	v.push_back(i1);
 	check_1v_1v(i1, 0, v[0], 0);
 	}
 
 	{
-	vector<integer> v;
-	integer i1 = 1234;
+	std::vector<lal::numeric::integer> v;
+	lal::numeric::integer i1 = 1234;
 	v.push_back(i1);
 	check_eq(v[0], i1);
 	}

@@ -109,7 +109,7 @@ inline bool equal_graphs(const G& g1, const G& g2)
 #define RTREE_anti_arborescence rooted_tree::rooted_tree_type::anti_arborescence
 #define RTREE_none rooted_tree::rooted_tree_type::none
 
-#define message_in_func(f) cerr << "    -- In '" << f << "' --" << endl;
+#define message_in_func(f) std::cerr << "    -- In '" << f << "' --\n";
 
 static const std::vector<std::string> graph_types(
 	{UGRAPH, DGRAPH}
@@ -137,58 +137,58 @@ static const std::vector<std::string> all_types(
 
 #define assert_string_is_rooted_tree_type(assertion, t)					\
 if (t != "arborescence" and t != "anti_arborescence" and t != "none") {	\
-	cerr << ERROR << endl;												\
+	std::cerr << ERROR << '\n';											\
 	message_in_func(assertion)											\
-	cerr << "    Invalid drtree type '" << t << "'." << endl;			\
-	return err_type::test_format;										\
+	std::cerr << "    Invalid drtree type '" << t << "'.\n";			\
+	return tests::err_type::test_format;										\
 }
 
 #define assert_correct_boolean(assertion, str)									\
 if (str != "true" and str != "false") {											\
-	cerr << ERROR << endl;														\
+	std::cerr << ERROR << '\n';													\
 	message_in_func(assertion)													\
-	cerr << "    Invalid Boolean value." << endl;								\
-	cerr << "    Received '" << str << "'. Valid values: true/false." << endl;	\
-	return err_type::test_format;												\
+	std::cerr << "    Invalid Boolean value.\n";								\
+	std::cerr << "    Received '" << str << "'. Valid values: true/false.\n";	\
+	return tests::err_type::test_format;										\
 }
 
 #define assert_exists_variable(FUNC, var)									\
 if (not exists_variable(var)) {												\
-	cerr << ERROR << endl;													\
+	std::cerr << ERROR << '\n';												\
 	message_in_func(FUNC)													\
-	cerr << "    Variable graph '" << var << "' not declared." << endl;		\
-	return err_type::test_execution;										\
+	std::cerr << "    Variable graph '" << var << "' not declared.\n";		\
+	return tests::err_type::test_execution;									\
 }
 
 #define assert_not_exists_variable(FUNC, var)								\
 if (exists_variable(var)) {													\
-	cerr << ERROR << endl;													\
+	std::cerr << ERROR << '\n';												\
 	message_in_func(FUNC)													\
-	cerr << "    Variable graph '" << var << "' already declared." << endl;	\
-	return err_type::test_execution;										\
+	std::cerr << "    Variable graph '" << var << "' already declared.\n";	\
+	return tests::err_type::test_execution;									\
 }
 
-#define assert_correct_graph_type(FUNC, type, TYPES)					\
-if (not in_collection(type, TYPES)) {									\
-	cerr << ERROR << endl;												\
-	message_in_func(FUNC)												\
-	cerr << "    Graph type '" << type << "' is incorrect." << endl;	\
-	return err_type::test_execution;									\
+#define assert_correct_graph_type(FUNC, type, TYPES)				\
+if (not in_collection(type, TYPES)) {								\
+	std::cerr << ERROR << '\n';										\
+	message_in_func(FUNC)											\
+	std::cerr << "    Graph type '" << type << "' is incorrect.\n";	\
+	return tests::err_type::test_execution;							\
 }
 
-#define assert_equal_types(assertion, var1, var2)														\
-if (graph_type(var1) != graph_type(var2)) {															\
-	cerr << ERROR << endl;																			\
+#define assert_equal_types(assertion, var1, var2)												\
+if (graph_type(var1) != graph_type(var2)) {														\
+	std::cerr << ERROR << '\n';																	\
 	message_in_func(assertion)																	\
-	cerr << "    Graphs '" << var1 << "' and '" << var2 << "' are not of the same type." << endl;	\
-	cerr << "    Type of graph " << var1 << ": " << graph_type(var1) << endl;						\
-	cerr << "    Type of graph " << var2 << ": " << graph_type(var2) << endl;						\
-	return err_type::test_execution;																\
+	std::cerr << "    Graphs '" << var1 << "' and '" << var2 << "' are not of the same type.\n";\
+	std::cerr << "    Type of graph " << var1 << ": " << graph_type(var1) << '\n';				\
+	std::cerr << "    Type of graph " << var2 << ": " << graph_type(var2) << '\n';				\
+	return tests::err_type::test_execution;														\
 }
 
 /* USEFUL FUNCTIONS */
 
-#define are_graphs_equal(v1, v2)																	\
+#define are_graphs_equal(v1, v2)																\
 [&]() -> bool {																					\
 	if (graph_type(v1) == UGRAPH)	{ return equal_graphs(ugraphvars[v1], ugraphvars[v2]); }	\
 	if (graph_type(v1) == DGRAPH)	{ return equal_graphs(dgraphvars[v1], dgraphvars[v2]); }	\
@@ -320,47 +320,46 @@ if (graph_type(v) == RTREE)			{ rtreevars[v].FUNC; }
 }()
 
 
-#define output_graph(v)													\
-if (graph_type(v) == UGRAPH)		{ cerr << ugraphvars[v] << endl; }	\
-else if (graph_type(v) == DGRAPH)	{ cerr << dgraphvars[v] << endl; }	\
-else if (graph_type(v) == FTREE)	{ cerr << ftreevars[v] << endl; }	\
-else if (graph_type(v) == RTREE)	{ cerr << rtreevars[v] << endl; }
+#define output_graph(v)														\
+if (graph_type(v) == UGRAPH)		{ std::cerr << ugraphvars[v] << '\n'; }	\
+else if (graph_type(v) == DGRAPH)	{ std::cerr << dgraphvars[v] << '\n'; }	\
+else if (graph_type(v) == FTREE)	{ std::cerr << ftreevars[v] << '\n'; }	\
+else if (graph_type(v) == RTREE)	{ std::cerr << rtreevars[v] << '\n'; }
 
-#define output_graph_stdout(v)											\
-if (graph_type(v) == UGRAPH)		{ cout << ugraphvars[v] << endl; }	\
-else if (graph_type(v) == DGRAPH)	{ cout << dgraphvars[v] << endl; }	\
-else if (graph_type(v) == FTREE)	{ cout << ftreevars[v] << endl; }	\
-else if (graph_type(v) == RTREE)	{ cout << rtreevars[v] << endl; }
+#define output_graph_stdout(v)												\
+if (graph_type(v) == UGRAPH)		{ std::cout << ugraphvars[v] << '\n'; }	\
+else if (graph_type(v) == DGRAPH)	{ std::cout << dgraphvars[v] << '\n'; }	\
+else if (graph_type(v) == FTREE)	{ std::cout << ftreevars[v] << '\n'; }	\
+else if (graph_type(v) == RTREE)	{ std::cout << rtreevars[v] << '\n'; }
 
 
 #define WRONG_TYPE_EXT(my_assert, g, T, my_type)					\
-cerr << ERROR << endl;												\
+std::cerr << ERROR << '\n';											\
 message_in_func(my_assert)											\
-cerr << "    Graph '" << g << "' is not " << T << "." << endl;		\
-cerr << "    Graph '" << g << "' is " << my_type << "." << endl;
+std::cerr << "    Graph '" << g << "' is not " << T << ".\n";		\
+std::cerr << "    Graph '" << g << "' is " << my_type << ".\n";
 
 #define WRONG_TYPE(my_assert, g, T) WRONG_TYPE_EXT(my_assert, g, T, graph_type(g))
 
-#define assert_is_rtree(g1, FUNC)										\
-if (not mfunction_rtrees(g1, is_tree())) {								\
-	cerr << "ERROR" << endl;											\
-	message_in_func(FUNC)												\
-	cerr << "    Tree '" << g1 << "' is not an actual tree." << endl;	\
-	return err_type::test_execution;									\
-}																		\
-if (not mfunction_rtrees(g1, has_root())) {								\
-	cerr << "ERROR" << endl;											\
-	message_in_func(FUNC)												\
-	cerr << "    Tree '" << g1 << "' does not have a root." << endl;	\
-	return err_type::test_execution;									\
-}																		\
-if (not mfunction_rtrees(g1, is_directed())) {							\
-	cerr << "ERROR" << endl;											\
-	message_in_func(FUNC)												\
-	cerr << "    Tree '" << g1 << "' is not directed." << endl;			\
-	return err_type::test_execution;									\
+#define assert_is_rtree(g1, FUNC)									\
+if (not mfunction_rtrees(g1, is_tree())) {							\
+	std::cerr << "ERROR\n";											\
+	message_in_func(FUNC)											\
+	std::cerr << "    Tree '" << g1 << "' is not an actual tree.\n";\
+	return tests::err_type::test_execution;							\
+}																	\
+if (not mfunction_rtrees(g1, has_root())) {							\
+	std::cerr << "ERROR\n";											\
+	message_in_func(FUNC)											\
+	std::cerr << "    Tree '" << g1 << "' does not have a root.\n";	\
+	return tests::err_type::test_execution;							\
+}																	\
+if (not mfunction_rtrees(g1, is_directed())) {						\
+	std::cerr << "ERROR\n";											\
+	message_in_func(FUNC)											\
+	std::cerr << "    Tree '" << g1 << "' is not directed.\n";		\
+	return tests::err_type::test_execution;							\
 }
-
 
 #define rooted_tree_type_to_string(t)							\
 [](rooted_tree::rooted_tree_type __t) -> std::string {			\

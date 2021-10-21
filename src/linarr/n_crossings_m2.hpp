@@ -59,11 +59,11 @@ inline uint64_t num_crossings_brute_force(
 #define sorted_by_pos(A,B) \
 	(pi[A] < pi[B] ? std::make_pair(pi[A],pi[B]) : std::make_pair(pi[B],pi[A]))
 
-	for (size_t i = 0; i < edges.size(); ++i) {
+	for (std::size_t i = 0; i < edges.size(); ++i) {
 		const auto& [s,t] = edges[i];
 		const auto [a,b] = sorted_by_pos(s,t);
 
-		for (size_t j = i + 1; j < edges.size(); ++j) {
+		for (std::size_t j = i + 1; j < edges.size(); ++j) {
 			const auto& [u,v] = edges[j];
 			const auto [c,d] = sorted_by_pos(u,v);
 
@@ -82,7 +82,7 @@ inline std::vector<uint64_t> num_crossings_brute_force(
 )
 {
 	std::vector<uint64_t> C(pis.size());
-	for (size_t i = 0; i < pis.size(); ++i) {
+	for (std::size_t i = 0; i < pis.size(); ++i) {
 		C[i] = num_crossings_brute_force(g, pis[i]);
 	}
 	return C;

@@ -47,14 +47,10 @@
 
 // C++ includes
 #include <vector>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/detail/data_array.hpp>
-using namespace lal;
-using namespace numeric;
-using namespace graphs;
 
 enum class frequency_type : int8_t {
 	invalid,
@@ -68,26 +64,26 @@ namespace properties {
 /* UTILITIES */
 
 inline constexpr
-int tau(const edge& st, const edge& uv, const edge& wx, const edge& yz) {
+int tau(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
 	return
 		static_cast<int>(st == wx or st == yz) +
 		static_cast<int>(uv == wx or uv == yz);
 }
 
 inline constexpr
-int share(const edge& e1, const edge& e2) {
+int share(const lal::edge& e1, const lal::edge& e2) {
 	return
 		static_cast<int>(e1.first == e2.first or e1.first == e2.second) +
 		static_cast<int>(e1.second == e2.first or e1.second == e2.second);
 }
 
 inline constexpr
-int phi(const edge& st, const edge& uv, const edge& wx, const edge& yz) {
+int phi(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
 	return share(st, wx) + share(st, yz) + share(uv, wx) + share(uv, yz);
 }
 
 inline constexpr
-int subtype(const edge& st, const edge& uv, const edge& wx, const edge& yz) {
+int subtype(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
 	const int e1e3 = share(st, wx);
 	const int e1e4 = share(st, yz);
 	const int e2e3 = share(uv, wx);
@@ -103,12 +99,12 @@ int subtype(const edge& st, const edge& uv, const edge& wx, const edge& yz) {
 }
 
 inline constexpr
-frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
+frequency_type edge_pair_type(const lal::edge_pair& ep1, const lal::edge_pair& ep2)
 {
-	const edge& st = ep1.first;
-	const edge& uv = ep1.second;
-	const edge& wx = ep2.first;
-	const edge& yz = ep2.second;
+	const lal::edge& st = ep1.first;
+	const lal::edge& uv = ep1.second;
+	const lal::edge& wx = ep2.first;
+	const lal::edge& yz = ep2.second;
 
 	const int t = tau(st, uv, wx, yz);
 	const int p = phi(st, uv, wx, yz);
@@ -177,27 +173,31 @@ frequency_type edge_pair_type(const edge_pair& ep1, const edge_pair& ep2)
 // ---------------------
 // Number of crossings C
 
-rational nonLAL_variance_C_freqs_rational(const undirected_graph& g) {
+lal::numeric::rational nonLAL_variance_C_freqs_rational
+(const lal::graphs::undirected_graph& g)
+{
 	// compute set Q(g)
 	const auto Q = g.get_Q();
 	return nonLAL_variance_C_freqs_Q_rational(Q);
 }
 
-rational nonLAL_variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
+lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
+(const std::vector<lal::edge_pair>& Q)
+{
 	// frequencies f00 and f01 are not measured
 	// because they have expectation 0
 
-	static const rational exps[9] =
+	static const lal::numeric::rational exps[9] =
 	{
-		rational(0),		// 0, f00:   0
-		rational(2, 9),		// 1, f24:   2/9
-		rational(1, 18),	// 2, f13:   1/18
-		rational(1, 45),	// 3, f12:   1/45
-		rational(-1, 9),	// 4, f04:  -1/9
-		rational(-1, 36),	// 5, f03:  -1/36
-		rational(-1, 90),	// 6, f021: -1/90
-		rational(1, 180),	// 7, f022:  1/180
-		rational(0)			// 8, f01:   0
+		lal::numeric::rational(0),		// 0, f00:   0
+		lal::numeric::rational(2, 9),		// 1, f24:   2/9
+		lal::numeric::rational(1, 18),	// 2, f13:   1/18
+		lal::numeric::rational(1, 45),	// 3, f12:   1/45
+		lal::numeric::rational(-1, 9),	// 4, f04:  -1/9
+		lal::numeric::rational(-1, 36),	// 5, f03:  -1/36
+		lal::numeric::rational(-1, 90),	// 6, f021: -1/90
+		lal::numeric::rational(1, 180),	// 7, f022:  1/180
+		lal::numeric::rational(0)			// 8, f01:   0
 	};
 
 	// values of the frequencies
@@ -206,18 +206,18 @@ rational nonLAL_variance_C_freqs_Q_rational(const vector<edge_pair>& Q) {
 	uint64_t f24(0);
 
 	// for a small enough set Q
-	for (const edge_pair& q1 : Q) {
-		for (const edge_pair& q2 : Q) {
+	for (const lal::edge_pair& q1 : Q) {
+		for (const lal::edge_pair& q2 : Q) {
 			frequency_type ft = edge_pair_type(q1, q2);
 			classify(ft, f021, f022, f03, f04, f12, f13, f24);
 		}
 	}
 
 	// value of V_rla[C]
-	rational V(0);
+	lal::numeric::rational V(0);
 
 	{
-	integer J(0);
+	lal::numeric::integer J(0);
 	//J.init_ui(f00);  V += exps[0]*f00;
 	J.set_number(f24);  V += exps[1]*J;
 	J.set_number(f13);  V += exps[2]*J;

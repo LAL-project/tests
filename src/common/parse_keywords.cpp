@@ -43,22 +43,21 @@
 #include <fstream>
 #include <vector>
 #include <string>
-using namespace std;
 
 // common includes
 #include "common/definitions.hpp"
 
 namespace tests {
 
-err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
-	string field;
+err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type) {
+	std::string field;
 	fin >> field;
 
 	if (field != "TYPE") {
-		cerr << ERROR << endl;
-		cerr << "    In input test file '" << filename << "'." << endl;
-		cerr << "    First field is not 'TYPE'." << endl;
-		cerr << "    Field found: '" << field << "'." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    In input test file '" << filename << "'.\n";
+		std::cerr << "    First field is not 'TYPE'.\n";
+		std::cerr << "    Field found: '" << field << "'.\n";
 		return err_type::test_format;
 	}
 
@@ -66,14 +65,14 @@ err_type get_type_keyword(const string& filename, ifstream& fin, string& type) {
 	return err_type::no_error;
 }
 
-vector<string> get_keywords(const string& type) {
-	vector<string> keywords;
+std::vector<std::string> get_keywords(const std::string& type) {
+	std::vector<std::string> keywords;
 	bool finish = false;
 
-	size_t dash_pos = 0;
+	std::size_t dash_pos = 0;
 	do {
-		size_t new_dash_pos = type.find("-", dash_pos);
-		if (new_dash_pos != string::npos) {
+		std::size_t new_dash_pos = type.find("-", dash_pos);
+		if (new_dash_pos != std::string::npos) {
 			keywords.push_back(type.substr(dash_pos, new_dash_pos - dash_pos));
 			dash_pos = new_dash_pos + 1;
 		}

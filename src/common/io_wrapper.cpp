@@ -40,14 +40,11 @@
 
 // C++ includes
 #include <iostream>
-using namespace std;
 
 // lal includes
 #include <lal/io/edge_list.hpp>
 #include <lal/io/head_vector.hpp>
 #include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
 
 // common includes
 #include "common/definitions.hpp"
@@ -56,14 +53,14 @@ namespace tests {
 namespace io_wrapper {
 
 template<class G>
-err_type __read_graph(const string& file, const string& format, G& g, bool norm) {
+err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm) {
 
-	if (format == "edge_list" or format == "edge-list") {
-		auto r = io::read_edge_list<G>(file, norm, false);
+	if (format == "lal::edge_list" or format == "lal::edge-list") {
+		auto r = lal::io::read_edge_list<G>(file, norm, false);
 		if (not r) {
-			cerr << ERROR << endl;
-			cerr << "    When attempting to read an edge-list-formatted" << endl;
-			cerr << "    graph from file: '" << file << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    When attempting to read an lal::edge-list-formatted\n";
+			std::cerr << "    graph from file: '" << file << "'.\n";
 			return err_type::io;
 		}
 
@@ -73,15 +70,15 @@ err_type __read_graph(const string& file, const string& format, G& g, bool norm)
 
 	if (format == "head_vector") {
 		if constexpr (
-			std::is_base_of_v<rooted_tree, G> or
-			std::is_base_of_v<free_tree, G>
+			std::is_base_of_v<lal::graphs::rooted_tree, G> or
+			std::is_base_of_v<lal::graphs::free_tree, G>
 		)
 		{
-			auto r = io::read_head_vector<G>(file, norm, false);
+			auto r = lal::io::read_head_vector<G>(file, norm, false);
 			if (not r) {
-				cerr << ERROR << endl;
-				cerr << "    When attempting to read an edge-list-formatted" << endl;
-				cerr << "    graph from file: '" << file << "'." << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    When attempting to read an lal::edge-list-formatted\n";
+				std::cerr << "    graph from file: '" << file << "'.\n";
 				return err_type::io;
 			}
 
@@ -89,36 +86,36 @@ err_type __read_graph(const string& file, const string& format, G& g, bool norm)
 			return err_type::no_error;
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Type of graph is not allowed when reading a head vector file." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Type of graph is not allowed when reading a head vector file.\n";
 			return err_type::test_format;
 		}
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unsupported file format: '" << format << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unsupported file format: '" << format << "'.\n";
 	return err_type::test_format;
 }
 
 err_type read_graph
-(const string& file, const string& format, undirected_graph& G, bool norm)
+(const std::string& file, const std::string& format, lal::graphs::undirected_graph& G, bool norm)
 {
 	return __read_graph(file, format, G, norm);
 }
 err_type read_graph
-(const string& file, const string& format, directed_graph& G, bool norm)
-{
-	return __read_graph(file, format, G, norm);
-}
-
-err_type read_graph
-(const string& file, const string& format, free_tree& G, bool norm)
+(const std::string& file, const std::string& format, lal::graphs::directed_graph& G, bool norm)
 {
 	return __read_graph(file, format, G, norm);
 }
 
 err_type read_graph
-(const string& file, const string& format, rooted_tree& G, bool norm)
+(const std::string& file, const std::string& format, lal::graphs::free_tree& G, bool norm)
+{
+	return __read_graph(file, format, G, norm);
+}
+
+err_type read_graph
+(const std::string& file, const std::string& format, lal::graphs::rooted_tree& G, bool norm)
 {
 	return __read_graph(file, format, G, norm);
 }

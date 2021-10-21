@@ -41,7 +41,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
@@ -52,10 +51,6 @@ using namespace std;
 #include <lal/io/basic_output.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
-using namespace properties;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -66,39 +61,39 @@ namespace tests {
 namespace properties {
 
 err_type exe_properties_expected_D_planar_brute_force
-(const input_list& inputs, ifstream& fin)
+(const input_list& inputs, std::ifstream& fin)
 {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
 	uint64_t n;
 	fin >> n;
 
-	head_vector hv(n);
+	lal::head_vector hv(n);
 	while (fin >> hv[0]) {
 		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
 
-		const free_tree T = from_head_vector_to_free_tree(hv).first;
+		const lal::graphs::free_tree T = lal::graphs::from_head_vector_to_free_tree(hv).first;
 
 		// calculate the value with the algorithm
 		const auto algo_value = lal::properties::exp_sum_edge_lengths_planar_rational(T);
 
-		string ground_truth_str;
+		std::string ground_truth_str;
 		fin >> ground_truth_str;
 
-		const rational ground_truth(ground_truth_str);
+		const lal::numeric::rational ground_truth(ground_truth_str);
 		if (algo_value != ground_truth) {
-			cerr << ERROR << endl;
-			cerr << "    Value calculated with algorithm does not coincide with" << endl;
-			cerr << "    ground truth value." << endl;
-			cerr << "    Algorithm: " << algo_value << endl;
-			cerr << "    Ground truth: " << ground_truth << endl;
-			cerr << "    For tree:" << endl;
-			cerr << T << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Value calculated with algorithm does not coincide with\n";
+			std::cerr << "    ground truth value.\n";
+			std::cerr << "    Algorithm: " << algo_value << '\n';
+			std::cerr << "    Ground truth: " << ground_truth << '\n';
+			std::cerr << "    For tree:\n";
+			std::cerr << T << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -107,12 +102,12 @@ err_type exe_properties_expected_D_planar_brute_force
 	return err_type::no_error;
 }
 
-rational quadratic_E_pr_D(const free_tree& t) {
+lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t) {
 	const uint64_t n = t.get_num_nodes();
-	const rational correction_factor((n - 1)*(n - 2), 6*n);
-	rational S = 0;
-	for (node u = 0; u < n; ++u) {
-		rooted_tree rt(t, u);
+	const lal::numeric::rational correction_factor((n - 1)*(n - 2), 6*n);
+	lal::numeric::rational S = 0;
+	for (lal::node u = 0; u < n; ++u) {
+		lal::graphs::rooted_tree rt(t, u);
 		rt.calculate_size_subtrees();
 		S += lal::properties::exp_sum_edge_lengths_projective_rational(rt);
 	}
@@ -120,41 +115,41 @@ rational quadratic_E_pr_D(const free_tree& t) {
 }
 
 err_type exe_properties_expected_D_planar_quadratic
-(const input_list& inputs, ifstream& fin)
+(const input_list& inputs, std::ifstream& fin)
 {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	string option;
+	std::string option;
 	fin >> option;
 
 	uint64_t n;
 	if (option == "exhaustive") {
 		while (fin >> n) {
-			size_t idx = 0;
-			generate::all_ulab_free_trees gen(n);
+			std::size_t idx = 0;
+			lal::generate::all_ulab_free_trees gen(n);
 			while (not gen.end()) {
 				const auto t = gen.yield_tree();
 
 				// linear time algorithm
-				const rational linear_algo =
+				const lal::numeric::rational linear_algo =
 					lal::properties::exp_sum_edge_lengths_planar_rational(t);
 
 				// quadratic time algorithm
-				const rational quadratic_algo = quadratic_E_pr_D(t);
+				const lal::numeric::rational quadratic_algo = quadratic_E_pr_D(t);
 
 				if (linear_algo != quadratic_algo) {
-					cerr << ERROR << endl;
-					cerr << "    Value calculated with O(n) algorithm differs from the" << endl;
-					cerr << "    value calculated with the O(n^2) algorithm." << endl;
-					cerr << "    Linear-time: " << linear_algo << endl;
-					cerr << "    Quadratic-time: " << quadratic_algo << endl;
-					cerr << "    For tree of index: " << idx << endl;
-					cerr << t << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Value calculated with O(n) algorithm differs from the\n";
+					std::cerr << "    value calculated with the O(n^2) algorithm.\n";
+					std::cerr << "    Linear-time: " << linear_algo << '\n';
+					std::cerr << "    Quadratic-time: " << quadratic_algo << '\n';
+					std::cerr << "    For tree of index: " << idx << '\n';
+					std::cerr << t << '\n';
 					return err_type::test_execution;
 				}
 				++idx;
@@ -164,25 +159,25 @@ err_type exe_properties_expected_D_planar_quadratic
 	else {
 		uint64_t nrand;
 		while (fin >> n >> nrand) {
-			generate::rand_ulab_free_trees gen(n, 1234);
+			lal::generate::rand_ulab_free_trees gen(n, 1234);
 			for (uint64_t i = 0; i < nrand; ++i) {
 				const auto t = gen.yield_tree();
 
 				// linear time algorithm
-				const rational linear_algo =
+				const lal::numeric::rational linear_algo =
 					lal::properties::exp_sum_edge_lengths_planar_rational(t);
 
 				// quadratic time algorithm
-				const rational quadratic_algo = quadratic_E_pr_D(t);
+				const lal::numeric::rational quadratic_algo = quadratic_E_pr_D(t);
 
 				if (linear_algo != quadratic_algo) {
-					cerr << ERROR << endl;
-					cerr << "    Value calculated with O(n) algorithm differs from the" << endl;
-					cerr << "    value calculated with the O(n^2) algorithm." << endl;
-					cerr << "    Linear-time: " << linear_algo << endl;
-					cerr << "    Quadratic-time: " << quadratic_algo << endl;
-					cerr << "    For tree:" << endl;
-					cerr << t << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Value calculated with O(n) algorithm differs from the\n";
+					std::cerr << "    value calculated with the O(n^2) algorithm.\n";
+					std::cerr << "    Linear-time: " << linear_algo << '\n';
+					std::cerr << "    Quadratic-time: " << quadratic_algo << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << t << '\n';
 					return err_type::test_execution;
 				}
 			}

@@ -40,7 +40,6 @@
 
 // C++ includes
 #include <iostream>
-using namespace std;
 
 // common includes
 #include "common/parse_keywords.hpp"
@@ -51,9 +50,9 @@ using namespace std;
 namespace tests {
 namespace properties {
 
-err_type call_expected_D_planar(const vector<string>& keywords, size_t i, ifstream& fin)
+err_type call_expected_D_planar(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "brute_force") {
 		return parse_header(exe_properties_expected_D_planar_brute_force, fin);
 	}
@@ -61,15 +60,15 @@ err_type call_expected_D_planar(const vector<string>& keywords, size_t i, ifstre
 		return parse_header(exe_properties_expected_D_planar_quadratic, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_expected_D(const vector<string>& keywords, size_t i, ifstream& fin)
+err_type call_expected_D(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "Projective") {
 		return parse_header(exe_properties_expected_D_projective, fin);
 	}
@@ -77,15 +76,15 @@ err_type call_expected_D(const vector<string>& keywords, size_t i, ifstream& fin
 		return call_expected_D_planar(keywords, i+1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin)
+err_type call_properties(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "general") {
 		return parse_header(exe_properties_general, fin);
 	}
@@ -102,20 +101,20 @@ err_type call_properties(const vector<string>& keywords, size_t i, ifstream& fin
 		return call_expected_D(keywords, i+1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const vector<string>& keywords, ifstream& fin) {
-	const string& key = keywords[0];
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+	const std::string& key = keywords[0];
 	if (key == "properties") {
 		return call_properties(keywords, 1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at 0: '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
 }

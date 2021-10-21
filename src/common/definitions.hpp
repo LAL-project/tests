@@ -53,7 +53,7 @@
 #define INVALID_KEYWORD "¡@/#/?234!"
 
 #define TEST_GOODBYE \
-	cout << "Test finished without apparent errors." << endl;
+	std::cout << "Test finished without apparent errors.\n";
 
 namespace tests {
 

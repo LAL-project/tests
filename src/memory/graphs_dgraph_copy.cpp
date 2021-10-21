@@ -41,11 +41,8 @@
 #include "graphs.hpp"
 
 // C++ includes
-using namespace std;
 
 // lal includes
-using namespace lal;
-using namespace graphs;
 
 namespace tests {
 namespace memory {
@@ -56,35 +53,35 @@ void test_copy_directed_graph() {
 	// copy constructor
 	{
 	begin_case;
-	directed_graph g1(10);
+	lal::graphs::directed_graph g1(10);
 	output_graph("g1",g1);
 
-	cout << "Copy constructor: 'g2 <- g1'" << endl;
-	directed_graph g2 = g1;
-	output_graph("g1",g1);
-	output_graph("g2",g2)
-	}
-
-	{
-	begin_case;
-	directed_graph g1(6);
-	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
-	output_graph("g1",g1);
-
-	cout << "Copy constructor: 'g2 <- g1'" << endl;
-	directed_graph g2 = g1;
+	std::cout << "Copy constructor: 'g2 <- g1'\n";
+	lal::graphs::directed_graph g2 = g1;
 	output_graph("g1",g1);
 	output_graph("g2",g2)
 	}
 
 	{
 	begin_case;
-	directed_graph g1(6);
-	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	lal::graphs::directed_graph g1(6);
+	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
 	output_graph("g1",g1);
 
-	cout << "Copy constructor: 'v[0] <- g1'" << endl;
-	vector<directed_graph> v;
+	std::cout << "Copy constructor: 'g2 <- g1'\n";
+	lal::graphs::directed_graph g2 = g1;
+	output_graph("g1",g1);
+	output_graph("g2",g2)
+	}
+
+	{
+	begin_case;
+	lal::graphs::directed_graph g1(6);
+	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
+	output_graph("g1",g1);
+
+	std::cout << "Copy constructor: 'v[0] <- g1'\n";
+	std::vector<lal::graphs::directed_graph> v;
 	v.push_back(g1);
 	output_graph("g1",g1);
 	output_graph("v[0]", v[0]);
@@ -93,11 +90,11 @@ void test_copy_directed_graph() {
 	// copy operator
 	{
 	begin_case;
-	directed_graph g1(10);
+	lal::graphs::directed_graph g1(10);
 	output_graph("g1",g1);
 
-	cout << "Copy operator: 'g2 <- g1'" << endl;
-	directed_graph g2;
+	std::cout << "Copy operator: 'g2 <- g1'\n";
+	lal::graphs::directed_graph g2;
 	g2 = g1;
 	output_graph("g1",g1);
 	output_graph("g2",g2)
@@ -105,12 +102,12 @@ void test_copy_directed_graph() {
 
 	{
 	begin_case;
-	directed_graph g1(6);
-	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	lal::graphs::directed_graph g1(6);
+	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
 	output_graph("g1",g1);
 
-	cout << "Copy operator: 'g2 <- g1'" << endl;
-	directed_graph g2;
+	std::cout << "Copy operator: 'g2 <- g1'\n";
+	lal::graphs::directed_graph g2;
 	g2 = g1;
 	output_graph("g1",g1);
 	output_graph("g2",g2)
@@ -118,13 +115,13 @@ void test_copy_directed_graph() {
 
 	{
 	begin_case;
-	directed_graph g1(6);
-	g1.add_edges(vector<edge>{edge(0,1), edge(0,2), edge(1,2), edge(1,5), edge(2,4)});
+	lal::graphs::directed_graph g1(6);
+	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
 	output_graph("g1",g1);
 
-	cout << "Copy operator: 'v[0] <- g1'" << endl;
-	vector<directed_graph> v;
-	v.push_back(directed_graph());
+	std::cout << "Copy operator: 'v[0] <- g1'\n";
+	std::vector<lal::graphs::directed_graph> v;
+	v.push_back(lal::graphs::directed_graph());
 	v[0] = g1;
 	output_graph("g1",g1);
 	output_graph("v[0]", v[0]);

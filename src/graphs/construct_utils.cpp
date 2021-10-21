@@ -41,71 +41,68 @@
 // C++ includes
 #include <vector>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/directed_graph.hpp>
 #include <lal/graphs/undirected_graph.hpp>
-using namespace lal;
-using namespace graphs;
 
 namespace tests {
 namespace graphs {
 
-vector<edge> enumerate_edges_brute_force(const directed_graph& g) {
+std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::directed_graph& g) {
 	const uint64_t n = g.get_num_nodes();
-	set<edge> E;
-	for (node s = 0; s < n; ++s) {
+	std::set<lal::edge> E;
+	for (lal::node s = 0; s < n; ++s) {
 	for (auto t : g.get_out_neighbours(s)) {
-		edge st(s,t);
+		lal::edge st(s,t);
 		if (g.is_undirected()) {
 			if (s > t) { std::swap(st.first, st.second); }
 		}
 		E.insert(st);
 	}}
-	return vector<edge>(E.begin(), E.end());
+	return std::vector<lal::edge>(E.begin(), E.end());
 }
 
-vector<edge> enumerate_edges_brute_force(const undirected_graph& g) {
+std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::undirected_graph& g) {
 	const uint64_t n = g.get_num_nodes();
-	set<edge> E;
-	for (node s = 0; s < n; ++s) {
+	std::set<lal::edge> E;
+	for (lal::node s = 0; s < n; ++s) {
 	for (auto t : g.get_neighbours(s)) {
-		edge st(s,t);
+		lal::edge st(s,t);
 		if (g.is_undirected()) {
 			if (s > t) { std::swap(st.first, st.second); }
 		}
 		E.insert(st);
 	}}
-	return vector<edge>(E.begin(), E.end());
+	return std::vector<lal::edge>(E.begin(), E.end());
 }
 
-bool share_vertices(const edge_pair& st_uv) {
-	const edge& st = st_uv.first;
-	const edge& uv = st_uv.second;
-	const node s = st.first;
-	const node t = st.second;
-	const node u = uv.first;
-	const node v = uv.second;
+bool share_vertices(const lal::edge_pair& st_uv) {
+	const lal::edge& st = st_uv.first;
+	const lal::edge& uv = st_uv.second;
+	const lal::node s = st.first;
+	const lal::node t = st.second;
+	const lal::node u = uv.first;
+	const lal::node v = uv.second;
 	return s == u or s == v or t == u or t == v;
 }
 
-vector<edge_pair> enumerate_Q_brute_force(const undirected_graph& g) {
+std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::undirected_graph& g) {
 	const uint64_t n = g.get_num_nodes();
-	set<edge_pair> Q;
-	for (node s = 0; s < n; ++s) {
-	for (node t : g.get_neighbours(s)) {
+	std::set<lal::edge_pair> Q;
+	for (lal::node s = 0; s < n; ++s) {
+	for (lal::node t : g.get_neighbours(s)) {
 
-		for (node u = s + 1; u < n; ++u) {
-		for (node v : g.get_neighbours(u)) {
+		for (lal::node u = s + 1; u < n; ++u) {
+		for (lal::node v : g.get_neighbours(u)) {
 
 			// s != u and t != u
 			if (s == v or s == u) { continue; }
 			if (t == v or t == u) { continue; }
 
-			// an undirected edge should not be sorted
-			edge st(s,t);
-			edge uv(u,v);
+			// an undirected lal::edge should not be sorted
+			lal::edge st(s,t);
+			lal::edge uv(u,v);
 			if (g.is_undirected()) {
 				if (s > t) { std::swap(st.first, st.second); }
 				if (u > v) { std::swap(uv.first, uv.second); }
@@ -114,28 +111,28 @@ vector<edge_pair> enumerate_Q_brute_force(const undirected_graph& g) {
 			if (st > uv) { std::swap(st, uv); }
 
 			// no common endpoints
-			Q.insert( edge_pair(st, uv) );
+			Q.insert( lal::edge_pair(st, uv) );
 		}}
 	}}
-	return vector<edge_pair>(Q.begin(), Q.end());
+	return std::vector<lal::edge_pair>(Q.begin(), Q.end());
 }
 
-vector<edge_pair> enumerate_Q_brute_force(const directed_graph& g) {
+std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::directed_graph& g) {
 	const uint64_t n = g.get_num_nodes();
-	set<edge_pair> Q;
-	for (node s = 0; s < n; ++s) {
-	for (node t : g.get_out_neighbours(s)) {
+	std::set<lal::edge_pair> Q;
+	for (lal::node s = 0; s < n; ++s) {
+	for (lal::node t : g.get_out_neighbours(s)) {
 
-		for (node u = s + 1; u < n; ++u) {
-		for (node v : g.get_out_neighbours(u)) {
+		for (lal::node u = s + 1; u < n; ++u) {
+		for (lal::node v : g.get_out_neighbours(u)) {
 
 			// s != u and t != u
 			if (s == v or s == u) { continue; }
 			if (t == v or t == u) { continue; }
 
-			// an undirected edge should not be sorted
-			edge st(s,t);
-			edge uv(u,v);
+			// an undirected lal::edge should not be sorted
+			lal::edge st(s,t);
+			lal::edge uv(u,v);
 			if (g.is_undirected()) {
 				if (s > t) { std::swap(st.first, st.second); }
 				if (u > v) { std::swap(uv.first, uv.second); }
@@ -144,10 +141,10 @@ vector<edge_pair> enumerate_Q_brute_force(const directed_graph& g) {
 			if (st > uv) { std::swap(st, uv); }
 
 			// no common endpoints
-			Q.insert( edge_pair(st, uv) );
+			Q.insert( lal::edge_pair(st, uv) );
 		}}
 	}}
-	return vector<edge_pair>(Q.begin(), Q.end());
+	return std::vector<lal::edge_pair>(Q.begin(), Q.end());
 }
 
 } // -- namespace graphs

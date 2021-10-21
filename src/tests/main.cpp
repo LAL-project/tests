@@ -5,62 +5,60 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // common includes
 #include "common/definitions.hpp"
 #include "common/parse_keywords.hpp"
-using namespace tests;
 
 int main(int argc, char *argv[]) {
 	// error checking
 	if (argc == 1) {
-		cerr << ERROR << endl;
-		cerr << "    No arguments given. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No arguments given. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 	if (argc > 3) {
-		cerr << ERROR << endl;
-		cerr << "    Too many arguments given. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Too many arguments given. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 	if (strcmp(argv[1], "-i") != 0 and strcmp(argv[1], "--input") != 0) {
-		cerr << ERROR << endl;
-		cerr << "    Unrecognised parameter '" << string(argv[1]) << "'. Use" << endl;
-		cerr << "        ./tests -i" << endl;
-		cerr << "        ./tests --input" << endl;
-		cerr << "    to specify an input test file." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unrecognised parameter '" << std::string(argv[1]) << "'. Use\n";
+		std::cerr << "        ./tests -i\n";
+		std::cerr << "        ./tests --input\n";
+		std::cerr << "    to specify an input test file.\n";
 		return 1;
 	}
 
-	const string input_file(argv[2]);
-	if (not filesystem::exists(input_file)) {
-		cerr << ERROR << endl;
-		cerr << "    Input test '" << input_file << "' does not exist." << endl;
+	const std::string input_file(argv[2]);
+	if (not std::filesystem::exists(input_file)) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Input test '" << input_file << "' does not exist.\n";
 		return 1;
 	}
 
-	ifstream fin;
+	std::ifstream fin;
 	fin.open(input_file.c_str());
 
-	string type;
-	const err_type r = get_type_keyword(input_file, fin, type);
+	std::string type;
+	const tests::err_type r = tests::get_type_keyword(input_file, fin, type);
 	fin.close();
 
-	if (r == err_type::test_format) {
-		cerr << "***********************" << endl;
-		cerr << "Exiting with error type: test_format_error" << endl;
+	if (r == tests::err_type::test_format) {
+		std::cerr << "***********************\n";
+		std::cerr << "Exiting with error type: test_format_error\n";
 		return 1;
 	}
 
-	const vector<string> keywords_type = get_keywords(type);
-	const string call_to_exe =
+	const std::vector<std::string> keywords_type = tests::get_keywords(type);
+	const std::string call_to_exe =
 #if defined DEBUG
 		"build-debug/"
 #else

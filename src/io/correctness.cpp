@@ -42,11 +42,9 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/io/check_correctness.hpp>
-using namespace lal;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -55,51 +53,51 @@ using namespace lal;
 namespace tests {
 namespace io {
 
-err_type exe_io_correctness(const input_list& inputs, ifstream& fin) {
+err_type exe_io_correctness(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_file_types{"treebank", "treebank_dataset"};
+	const std::set<std::string> allowed_file_types{"treebank", "treebank_dataset"};
 
-	string file_type;
-	string file_path;
+	std::string file_type;
+	std::string file_path;
 
 	while (fin >> file_type >> file_path) {
 		if (allowed_file_types.find(file_type) == allowed_file_types.end()) {
-			cerr << ERROR << endl;
-			cerr << "    Wrong file type '" << file_type << "'." << endl;
-			cerr << "    Allowed file types:" << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Wrong file type '" << file_type << "'.\n";
+			std::cerr << "    Allowed file types:\n";
 			for (const auto& v : allowed_file_types) {
-			cerr << "    - " << v << endl;
+			std::cerr << "    - " << v << '\n';
 			}
 			return err_type::test_format;
 		}
 
 		if (file_type == "treebank") {
 			const auto errs = lal::io::check_correctness_treebank(file_path);
-			cout << "A total of " << errs.size() << " errors were found for treebank file '"
-				 << file_path << "'." << endl;
+			std::cout << "A total of " << errs.size() << " errors were found for treebank file '"
+				 << file_path << "'.\n";
 			if (errs.size() > 0) {
 				for (const auto& err : errs) {
-					cout << "    * At line: " << err.get_line_number() << endl;
-					cout << "      What:    " << err.get_error_message() << endl;
+					std::cout << "    * At line: " << err.get_line_number() << '\n';
+					std::cout << "      What:    " << err.get_error_message() << '\n';
 				}
 			}
 		}
 		else {
 			const auto errs = lal::io::check_correctness_treebank_collection(file_path);
-			cout << "A total of " << errs.size() << " errors were found for treebank dataset '"
-				 << file_path << "'." << endl;
+			std::cout << "A total of " << errs.size() << " errors were found for treebank dataset '"
+				 << file_path << "'.\n";
 			if (errs.size() > 0) {
 			for (const auto& err : errs) {
-			cout << "    * Line within main file: " << err.get_line_within_main_file() << endl;
-			cout << "      At treebank file:      " << err.get_treebank_file_name() << endl;
-			cout << "      At treebank file line: " << err.get_treebank_file_line() << endl;
-			cout << "      What:                  " << err.get_error_message() << endl;
+			std::cout << "    * Line within main file: " << err.get_line_within_main_file() << '\n';
+			std::cout << "      At treebank file:      " << err.get_treebank_file_name() << '\n';
+			std::cout << "      At treebank file line: " << err.get_treebank_file_line() << '\n';
+			std::cout << "      What:                  " << err.get_error_message() << '\n';
 			}
 			}
 		}

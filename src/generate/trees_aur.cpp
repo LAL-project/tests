@@ -42,7 +42,6 @@
 #include <iostream>
 #include <cassert>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_rooted_trees.hpp>
@@ -50,10 +49,6 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
 #include <lal/utilities/tree_isomorphism.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -69,31 +64,31 @@ namespace generate {
 
 namespace aur {
 struct extra_params {
-	vector<integer> URT;
+	std::vector<lal::numeric::integer> URT;
 };
 
 #define process																\
 	const rtree_check err = test_validity_tree(n, T);						\
 	if (err != rtree_check::correct) {										\
-		cerr << ERROR << endl;												\
-		cerr << "    Tree of index " << gen << " is not correct." << endl;	\
-		cerr << "    Error: " << tree_check_to_string(err) << endl;			\
-		cerr << T << endl;													\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    Tree of index " << gen << " is not correct.\n";	\
+		std::cerr << "    Error: " << tree_check_to_string(err) << '\n';	\
+		std::cerr << T << '\n';												\
 		return err_type::test_execution;									\
 	}																		\
 	/* compute 'statistics' */												\
 	gen += 1;																\
 	/* ensure uniqueness */													\
-	for (size_t j = 0; j < it; ++j) {										\
-		if (utilities::are_trees_isomorphic(all_rooted_trees[j], T)) {		\
-			cerr << ERROR << endl;											\
-			cerr << "    Found two isomorphic trees!." << endl;				\
-			cerr << "    After generating the " << it << " tree." << endl;	\
-			cerr << "    The isomorphic tree is at j= " << j << endl;		\
-			cerr << "    Just generated:" << endl;							\
-			cerr << T << endl;												\
-			cerr << "   The tree at position j= " << j << ":" << endl;		\
-			cerr << all_rooted_trees[j] << endl;							\
+	for (std::size_t j = 0; j < it; ++j) {									\
+		if (lal::utilities::are_trees_isomorphic(all_rooted_trees[j], T)) {	\
+			std::cerr << ERROR << '\n';										\
+			std::cerr << "    Found two isomorphic trees!.\n";				\
+			std::cerr << "    After generating the " << it << " tree.\n";	\
+			std::cerr << "    The isomorphic tree is at j= " << j << '\n';	\
+			std::cerr << "    Just generated:\n";							\
+			std::cerr << T << '\n';											\
+			std::cerr << "   The tree at position j= " << j << ":\n";		\
+			std::cerr << all_rooted_trees[j] << '\n';						\
 			return err_type::test_execution;								\
 		}																	\
 	}																		\
@@ -104,27 +99,27 @@ struct extra_params {
 	/* make sure that the amount of trees generate coincides					\
 	   with the series from the OEIS */											\
 	if (n < URT.size() and gen != URT[n]) {										\
-		cerr << ERROR << endl;													\
-		cerr << "    Exhaustive generation of unlabelled rooted trees" << endl;	\
-		cerr << "    Amount of trees should be: " << URT[n] << endl;			\
-		cerr << "    But generated: " << gen << endl;							\
-		cerr << "    For a size of " << n << " vertices" << endl;				\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    Exhaustive generation of unlabelled rooted trees\n";	\
+		std::cerr << "    Amount of trees should be: " << URT[n] << '\n';		\
+		std::cerr << "    But generated: " << gen << '\n';						\
+		std::cerr << "    For a size of " << n << " vertices\n";				\
 		return err_type::test_execution;										\
 	}
 
 err_type test_for_n_while
-(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
-	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
-		rooted_tree T = TreeGen.get_tree();
+		lal::graphs::rooted_tree T = TreeGen.get_tree();
 		TreeGen.next();
 		process;
 	}
@@ -133,18 +128,18 @@ err_type test_for_n_while
 }
 
 err_type test_for_n_for
-(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
-	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	std::size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
-		rooted_tree T = TreeGen.get_tree();
+		lal::graphs::rooted_tree T = TreeGen.get_tree();
 		process;
 	}
 	check;
@@ -152,18 +147,18 @@ err_type test_for_n_for
 }
 
 err_type test_for_n_yield
-(uint64_t n, all_ulab_rooted_trees& TreeGen, const extra_params& params)
+(uint64_t n, lal::generate::all_ulab_rooted_trees& TreeGen, const extra_params& params)
 {
 	const auto& URT = params.URT;
 
 	// number of generated trees
-	integer gen = 0;
+	lal::numeric::integer gen = 0;
 
-	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
-	size_t it = 0;
+	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
-		rooted_tree T = TreeGen.yield_tree();
+		lal::graphs::rooted_tree T = TreeGen.yield_tree();
 		process;
 	}
 	check;
@@ -176,21 +171,21 @@ noexcept
 {
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_rooted_trees>
 		(n1, n2, test_for_n_while, ep);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_rooted_trees>
 		(n1, n2, test_for_n_for, ep);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
-		test_exhaustive_enumeration_of_trees<init, all_ulab_rooted_trees>
+		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_rooted_trees>
 		(n1, n2, test_for_n_yield, ep);
 	if (err != err_type::no_error) { return err; }
 	}
@@ -199,7 +194,7 @@ noexcept
 
 } // -- namespace aur
 
-err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin) {
 
 	/* BUILD TESTING DATA */
 
@@ -208,7 +203,7 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 	aur::extra_params params;
 
 	params.URT =
-	vector<integer>{
+	std::vector<lal::numeric::integer>{
 		0,
 		1,
 		1,
@@ -234,20 +229,20 @@ err_type exe_gen_trees_aur(const input_list& inputs, ifstream& fin) {
 		97055181,
 		268282855,
 		743724984,
-		integer("2067174645"),
-		integer("5759636510"),
-		integer("16083734329"),
-		integer("45007066269"),
-		integer("126186554308"),
-		integer("354426847597")
+		{"2067174645"},
+		{"5759636510"},
+		{"16083734329"},
+		{"45007066269"},
+		{"126186554308"},
+		{"354426847597"}
 	};
 
 	// -------------------------------------------------------------------------
 
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 

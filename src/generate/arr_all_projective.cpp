@@ -42,8 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
-
 // lal includes
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
@@ -51,10 +49,6 @@ using namespace std;
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/linarr/formal_constraints.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
-using namespace generate;
 
 // common includes
 #include "common/definitions.hpp"
@@ -64,31 +58,31 @@ using namespace generate;
 namespace tests {
 namespace generate {
 
-inline integer factorial(int64_t f) noexcept {
+inline lal::numeric::integer factorial(uint64_t f) noexcept {
 	if (f == 0) { return 1; }
-	const integer f1 = factorial(f - 1);
+	const lal::numeric::integer f1 = factorial(f - 1);
 	return f1*f;
 }
 
-inline integer amount_projective(const rooted_tree& rT) noexcept {
-	integer k = 1;
-	for (node u = 0; u < rT.get_num_nodes(); ++u) {
+inline lal::numeric::integer amount_projective(const lal::graphs::rooted_tree& rT) noexcept {
+	lal::numeric::integer k = 1;
+	for (lal::node u = 0; u < rT.get_num_nodes(); ++u) {
 		k *= factorial(rT.get_out_degree(u) + 1);
 	}
 	return k;
 }
 
-inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
-	vector<edge> edges = rT.get_edges();
+inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noexcept {
+	std::vector<lal::edge> edges = rT.get_edges();
 
 #define check_arrangement													\
 	if (not lal::linarr::is_projective(rT, arr)) {							\
-		cerr << ERROR << endl;												\
-		cerr << "    Generation of arrangement failed with error:" << endl;	\
-		cerr << "    Arrangement:     " << arr << endl;						\
-		cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;			\
-		cerr << "    For tree:" << endl;									\
-		cerr << rT << endl;													\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    Generation of arrangement failed with error:\n";	\
+		std::cerr << "    Arrangement:     " << arr << '\n';				\
+		std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';		\
+		std::cerr << "    For tree:\n";										\
+		std::cerr << rT << '\n';											\
 		return err_type::test_execution;									\
 	}																		\
 	++iterations;															\
@@ -96,18 +90,18 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 
 #define final_check															\
 	if (formula != iterations or formula != list_arrs.size()) {				\
-		cerr << ERROR << endl;												\
-		cerr << "    Number of projective arrangements generated" << endl;	\
-		cerr << "    does not agree with the formula." << endl;				\
-		cerr << "        formula= " << formula << endl;						\
-		cerr << "        iterations= " << iterations << endl;				\
-		cerr << "        unique amount= " << list_arrs.size() << endl;		\
-		cerr << "    List of arrangements:" << endl;						\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    Number of projective arrangements generated\n";	\
+		std::cerr << "    does not agree with the formula.\n";				\
+		std::cerr << "        formula= " << formula << '\n';				\
+		std::cerr << "        iterations= " << iterations << '\n';			\
+		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
+		std::cerr << "    List of arrangements:\n";							\
 		for (const auto& v : list_arrs) {									\
-		cerr << "        " << v << endl;									\
+		std::cerr << "        " << v << '\n';								\
 		}																	\
-		cerr << "    For tree:" << endl;									\
-		cerr << rT << endl;													\
+		std::cerr << "    For tree:\n";										\
+		std::cerr << rT << '\n';											\
 		return err_type::test_execution;									\
 	}
 
@@ -115,10 +109,10 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 		relabel_tree_vertices(edges, rT, (i < nrelabs ? false : true), false);
 
 		uint64_t iterations = 0;
-		set<linear_arrangement> list_arrs;
-		const integer formula = amount_projective(rT);
+		std::set<lal::linear_arrangement> list_arrs;
+		const lal::numeric::integer formula = amount_projective(rT);
 
-		all_projective_arrangements ArrGen(rT);
+		lal::generate::all_projective_arrangements ArrGen(rT);
 
 		// USAGE 1
 		iterations = 0;
@@ -126,7 +120,7 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 		list_arrs.clear();
 		{
 		while (not ArrGen.end()) {
-			const linear_arrangement arr = ArrGen.get_arrangement();
+			const lal::linear_arrangement arr = ArrGen.get_arrangement();
 			ArrGen.next();
 
 			// Do some sanity checks.
@@ -141,7 +135,7 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 		list_arrs.clear();
 		{
 		for (; not ArrGen.end(); ArrGen.next()) {
-			const linear_arrangement arr = ArrGen.get_arrangement();
+			const lal::linear_arrangement arr = ArrGen.get_arrangement();
 
 			// Do some sanity checks.
 			check_arrangement;
@@ -155,7 +149,7 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 		list_arrs.clear();
 		{
 		while (not ArrGen.end()) {
-			const linear_arrangement arr = ArrGen.yield_arrangement();
+			const lal::linear_arrangement arr = ArrGen.yield_arrangement();
 
 			// Do some sanity checks.
 			check_arrangement;
@@ -166,21 +160,21 @@ inline err_type test_a_tree(rooted_tree& rT, uint64_t nrelabs) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_gen_arr_all_projective(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_arr_all_projective(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
 	uint64_t n, nrelabs;
 	while (fin >> n >> nrelabs) {
 		// do 'ntrees' trees of 'n' vertices
-		all_ulab_rooted_trees TreeGen(n);
+		lal::generate::all_ulab_rooted_trees TreeGen(n);
 
 		while (not TreeGen.end()) {
-			rooted_tree rT = TreeGen.get_tree();
+			lal::graphs::rooted_tree rT = TreeGen.get_tree();
 			TreeGen.next();
 
 			const err_type e = test_a_tree(rT, nrelabs);

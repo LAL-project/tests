@@ -44,30 +44,26 @@
 #include <ostream>
 #include <vector>
 
-namespace std {
-
 template<typename T>
-ostream& operator<< (ostream& os, const vector<T>& v) {
+std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 	if (v.size() == 0) { return os; }
 	os << v[0];
-	for (size_t i = 1; i < v.size(); ++i) {
+	for (std::size_t i = 1; i < v.size(); ++i) {
 		os << ", " << v[i];
 	}
 	return os;
 }
 
 template<typename T>
-istream& operator>> (istream& is, const vector<T>& v) {
-	for (size_t i = 0; i < v.size(); ++i) {
+std::istream& operator>> (std::istream& is, const std::vector<T>& v) {
+	for (std::size_t i = 0; i < v.size(); ++i) {
 		is >> v[i];
 	}
 	return is;
 }
 
 template<typename T, typename U>
-ostream& operator<< (ostream& os, const pair<T,U>& p) {
+std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) {
 	os << "(" << p.first << "," << p.second << ")";
 	return os;
-}
-
 }

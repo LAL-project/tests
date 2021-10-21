@@ -41,7 +41,6 @@
 // C++ includes
 #include <iostream>
 #include <set>
-using namespace std;
 
 // common includes
 #include "common/parse_keywords.hpp"
@@ -53,9 +52,9 @@ namespace tests {
 namespace linarr {
 
 err_type call_linarr_Dmin
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "Projective") {
 		return parse_header(exe_linarr_Dmin_projective, fin);
 	}
@@ -69,32 +68,32 @@ err_type call_linarr_Dmin
 		return parse_header(exe_linarr_Dmin_comparison, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
 err_type call_linarr_klevel
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const set<string> allowed_levels({"1", "2"});
-	const set<string> allowed_keywords({"MDD"});
+	const std::set<std::string> allowed_levels({"1", "2"});
+	const std::set<std::string> allowed_keywords({"MDD"});
 
-	const string& level = keywords[i];
+	const std::string& level = keywords[i];
 	bool correct_level = allowed_levels.find(level) != allowed_levels.end();
-	const string& key = keywords[i + 1];
+	const std::string& key = keywords[i + 1];
 	bool correct_key = allowed_keywords.find(key) != allowed_keywords.end();
 
 	if (not correct_level or not correct_key) {
-		cerr << ERROR << endl;
-		vector<size_t> what_keys;
+		std::cerr << ERROR << '\n';
+		std::vector<std::size_t> what_keys;
 		if (not correct_level) {
-			cerr << "    Wrong keyword at " << i << ": '" << level << "'." << endl;
+			std::cerr << "    Wrong keyword at " << i << ": '" << level << "'.\n";
 			what_keys.push_back(i);
 		}
 		if (not correct_key) {
-			cerr << "    Wrong keyword at " << i + 1 << ": '" << key << "'." << endl;
+			std::cerr << "    Wrong keyword at " << i + 1 << ": '" << key << "'.\n";
 			what_keys.push_back(i + 1);
 		}
 		mark_wrong_keyword(keywords, what_keys, "    ");
@@ -105,7 +104,7 @@ err_type call_linarr_klevel
 }
 
 err_type call_linarr_C
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
 	// There is no need to give more keywords.
 	// If, after this keyword, there are no more of them,
@@ -114,7 +113,7 @@ err_type call_linarr_C
 		return parse_header(exe_linarr_C, fin, false);
 	}
 
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "list") {
 		return parse_header<char>(exe_linarr_C_list, fin, 0);
 	}
@@ -128,16 +127,16 @@ err_type call_linarr_C
 		return parse_header<char>(exe_linarr_C_list, fin, 2);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
 err_type call_linarr
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "compute_C") {
 		return call_linarr_C(keywords, i + 1, fin);
 	}
@@ -167,20 +166,20 @@ err_type call_linarr
 		return parse_header(exe_linarr_arrangement_validity, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const vector<string>& keywords, ifstream& fin) {
-	const string& key = keywords[0];
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+	const std::string& key = keywords[0];
 	if (key == "linarr") {
 		return call_linarr(keywords, 1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at 0: '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
 }

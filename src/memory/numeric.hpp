@@ -42,25 +42,25 @@
 
 #define check_0(i)													\
 if (i.is_initialized()) {											\
-	cerr << ERROR << endl;											\
-	cerr << "    i is initialized, but it should not be." << endl;	\
-	return err_type::test_execution;								\
+	std::cerr << ERROR << '\n';											\
+	std::cerr << "    i is initialized, but it should not be.\n";	\
+	return tests::err_type::test_execution;								\
 }
 
 #define check_1(i)													\
 if (not i.is_initialized()) {										\
-	cerr << ERROR << endl;											\
-	cerr << "    i is not initialized, but it should be." << endl;	\
-	return err_type::test_execution;								\
+	std::cerr << ERROR << '\n';											\
+	std::cerr << "    i is not initialized, but it should be.\n";	\
+	return tests::err_type::test_execution;								\
 }
 
 #define check_1v(i, v)										\
 check_1(i);													\
 if (i != v) {												\
-	cerr << ERROR << endl;									\
-	cerr << "    Value of i is not '" << v << "'." << endl;	\
-	cerr << "    Value is          '" << i << "'." << endl;	\
-	return err_type::test_execution;						\
+	std::cerr << ERROR << '\n';									\
+	std::cerr << "    Value of i is not '" << v << "'.\n";	\
+	std::cerr << "    Value is          '" << i << "'.\n";	\
+	return tests::err_type::test_execution;						\
 }
 
 #define check_00(i1, i2)	\
@@ -97,28 +97,28 @@ check_1(i2);
 check_1(i1);															\
 check_1(i2);															\
 if (i1 != i2) {															\
-	cerr << ERROR << endl;												\
-	cerr << "    i1 is different from i2. They should not be." << endl;	\
-	cerr << "    i1=: " << i1 << endl;									\
-	cerr << "    i2=: " << i2 << endl;									\
-	return err_type::test_execution;									\
+	std::cerr << ERROR << '\n';												\
+	std::cerr << "    i1 is different from i2. They should not be.\n";	\
+	std::cerr << "    i1=: " << i1 << '\n';									\
+	std::cerr << "    i2=: " << i2 << '\n';									\
+	return tests::err_type::test_execution;									\
 }																		\
 
 #define check_eq(i1, i2)												\
 if (i1 != i2) {															\
-	cerr << ERROR << endl;												\
-	cerr << "    i1 is different from i2. They should not be." << endl;	\
-	cerr << "    i1=: " << i1 << endl;									\
-	cerr << "    i2=: " << i2 << endl;									\
-	return err_type::test_execution;									\
+	std::cerr << ERROR << '\n';												\
+	std::cerr << "    i1 is different from i2. They should not be.\n";	\
+	std::cerr << "    i1=: " << i1 << '\n';									\
+	std::cerr << "    i2=: " << i2 << '\n';									\
+	return tests::err_type::test_execution;									\
 }																		\
 
 #define test_eq(data, good)															\
 if (data != good) {																	\
-	cerr << ERROR << endl;															\
-	cerr << "    Rational values do not coincide." << endl;							\
-	cerr << "    Expected '" << good << "', retrieved '" << data << "'." << endl;	\
-	return err_type::test_execution;												\
+	std::cerr << ERROR << '\n';															\
+	std::cerr << "    Rational values do not coincide.\n";							\
+	std::cerr << "    Expected '" << good << "', retrieved '" << data << "'.\n";	\
+	return tests::err_type::test_execution;												\
 }
 
 #define iff_value "1000000000000000000000000000000000000000000"

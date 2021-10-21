@@ -46,8 +46,6 @@
 #include <fstream>
 #include <cassert>
 #include <queue>
-using namespace std;
-
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
@@ -59,10 +57,6 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/graphs/conversions.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace linarr;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
@@ -71,7 +65,7 @@ using namespace numeric;
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
 
-typedef pair<uint64_t, linear_arrangement> algo_result;
+typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;
 
 namespace tests {
 namespace linarr {
@@ -79,36 +73,36 @@ namespace linarr {
 namespace dmin_unconstrained {
 
 inline
-bool check_correctness_arr(const free_tree& tree, const pair<uint64_t, linear_arrangement>& res) {
-	const linear_arrangement& arr = res.second;
+bool check_correctness_arr(const lal::graphs::free_tree& tree, const std::pair<uint64_t, lal::linear_arrangement>& res) {
+	const lal::linear_arrangement& arr = res.second;
 	// ensure that the result is an arrangement
 	if (not lal::linarr::is_permutation(arr)) {
-		cerr << ERROR << endl;
-		cerr << "    The result is not an arrangement (permutation)." << endl;
-		cerr << "        Arrangement: " << arr << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    The result is not an arrangement (permutation).\n";
+		std::cerr << "        Arrangement: " << arr << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	// ensure that value of D is correct
-	const uint64_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
 	if (D != res.first) {
-		cerr << ERROR << endl;
-		cerr << "    Value of D returned by method is incorrect." << endl;
-		cerr << "        Arrangement:     " << res.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res.second) << endl;
-		cerr << "        Value of D returned: " << res.first << endl;
-		cerr << "        Actual value of D:   " << D << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Value of D returned by method is incorrect.\n";
+		std::cerr << "        Arrangement:     " << res.second << '\n';
+		std::cerr << "        Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "        Value of D returned: " << res.first << '\n';
+		std::cerr << "        Actual value of D:   " << D << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	return true;
 }
 
 bool test_correctness_arr_formula(
-	const free_tree& tree, const pair<uint64_t, linear_arrangement>& res_lib,
-	const string& tree_class, const uint64_t val_formula
+	const lal::graphs::free_tree& tree, const std::pair<uint64_t, lal::linear_arrangement>& res_lib,
+	const std::string& tree_class, const uint64_t val_formula
 )
 {
 	if (not check_correctness_arr(tree, res_lib)) {
@@ -116,16 +110,16 @@ bool test_correctness_arr_formula(
 	}
 	/* compare results obtained by the library and by a formula */
 	if (res_lib.first != val_formula) {
-		cerr << ERROR << endl;
-		cerr << "    Values of unconstrained Dmin do not coincide." << endl;
-		cerr << "    Library:" << endl;
-		cerr << "        Value: " << res_lib.first << endl;
-		cerr << "        Arrangement:     " << res_lib.second << endl;
-		cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << endl;
-		cerr << "    Formula for class of trees '" << tree_class << "':" << endl;
-		cerr << "        Value: " << val_formula << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Values of unconstrained Dmin do not coincide.\n";
+		std::cerr << "    Library:\n";
+		std::cerr << "        Value: " << res_lib.first << '\n';
+		std::cerr << "        Arrangement:     " << res_lib.second << '\n';
+		std::cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << '\n';
+		std::cerr << "    Formula for class of trees '" << tree_class << "':\n";
+		std::cerr << "        Value: " << val_formula << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	return true;
@@ -136,30 +130,30 @@ bool test_correctness_arr_formula(
 err_type test_bf_algorithm(
 	// A is a function that encapsulates an algorithm
 	// -- be it Shiloach's, be it Fan Chung's
-	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
-	ifstream& fin
+	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
+	std::ifstream& fin
 )
 {
-	const auto err = linarr_brute_force_testing<free_tree>
+	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
 	(
 		// calculate result
-		[&](const free_tree& t) {
+		[&](const lal::graphs::free_tree& t) {
 			return A(t);
 		},
 		// evaluate input tree with an arrangement
-		[](const free_tree& t, const linear_arrangement& arr) {
-			return sum_edge_lengths(t, arr);
+		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+			return lal::linarr::sum_edge_lengths(t, arr);
 		},
 		// check correctness of "arrangement"
-		[](const free_tree& t, const linear_arrangement& arr) {
-			return is_arrangement(t, arr);
+		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+			return lal::linarr::is_arrangement(t, arr);
 		},
 		// convert what you read from input to a (free) tree
-		[](const vector<node>& v) {
-			return from_head_vector_to_free_tree(v).first;
+		[](const std::vector<lal::node>& v) {
+			return lal::graphs::from_head_vector_to_free_tree(v).first;
 		},
 		// function to initialise a (free) tree
-		[](free_tree&) { },
+		[](lal::graphs::free_tree&) { },
 		// where to read from
 		fin
 	);
@@ -167,29 +161,29 @@ err_type test_bf_algorithm(
 }
 
 err_type test_class_algorithm(
-	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
-	ifstream& fin
+	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
+	std::ifstream& fin
 )
 {
-	string tree_class;
+	std::string tree_class;
 	uint64_t n1, n2;
 
 	// read class of tree to test
 	// read size of the tree
 	while (fin >> tree_class) {
 		fin >> n1 >> n2;
-		cout << tree_class;
+		std::cout << tree_class;
 
 		if (tree_class == "linear") {
-			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
+			std::cout << " -> [" << n1 << ", " << n2 << "]\n";
 
 			for (uint64_t n = n1; n <= n2; ++n) {
-				cout << "    " << n << endl;
-				free_tree T(n);
+				std::cout << "    " << n << '\n';
+				lal::graphs::free_tree T(n);
 
 				if (n > 1) {
-					vector<edge> es;
-					for (node u = 0; u < n - 1; ++u) { es.push_back({u,u+1}); }
+					std::vector<lal::edge> es;
+					for (lal::node u = 0; u < n - 1; ++u) { es.push_back({u,u+1}); }
 					T.set_edges(es);
 				}
 
@@ -201,32 +195,32 @@ err_type test_class_algorithm(
 				const bool correct =
 				test_correctness_arr_formula(T, algo_res, "Linear", Dmin_lintree);
 				if (not correct) {
-					cerr << ERROR << endl;
-					cerr << "    When dealing with a linear tree of " << n << " vertices." << endl;
-					cerr << "    Tree:" << endl;
-					cerr << T << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When dealing with a linear tree of " << n << " vertices.\n";
+					std::cerr << "    Tree:\n";
+					std::cerr << T << '\n';
 					return err_type::test_execution;
 				}
 			}
 		}
 		else if (tree_class == "caterpillar") {
-			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
+			std::cout << " -> [" << n1 << ", " << n2 << "]\n";
 
 			for (uint64_t n = n1; n <= n2; ++n) {
-				cout << "    " << n << endl;
+				std::cout << "    " << n << '\n';
 
-				generate::all_ulab_free_trees TreeGen(n);
+				lal::generate::all_ulab_free_trees TreeGen(n);
 				while (not TreeGen.end()) {
-					const free_tree tree = TreeGen.get_tree();
+					const lal::graphs::free_tree tree = TreeGen.get_tree();
 					TreeGen.next();
 
 					// filter non-caterpillar
-					if (not tree.is_of_tree_type(tree_type::caterpillar))
+					if (not tree.is_of_tree_type(lal::graphs::tree_type::caterpillar))
 					{ continue; }
 
 					// Dmin for caterpillar trees
 					uint64_t Dmin_cat = 0;
-					for (node u = 0; u < n; ++u) {
+					for (lal::node u = 0; u < n; ++u) {
 						const uint64_t du = tree.get_degree(u);
 						Dmin_cat += du*du + (du%2 == 1 ? 1 : 0);
 					}
@@ -238,20 +232,20 @@ err_type test_class_algorithm(
 					const bool correct =
 					test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
 					if (not correct) {
-						cerr << ERROR << endl;
-						cerr << "    When dealing with a caterpillat tree of " << n << " vertices." << endl;
-						cerr << "    Tree:" << endl;
-						cerr << tree << endl;
+						std::cerr << ERROR << '\n';
+						std::cerr << "    When dealing with a caterpillat tree of " << n << " vertices.\n";
+						std::cerr << "    Tree:\n";
+						std::cerr << tree << '\n';
 						return err_type::test_execution;
 					}
 				}
 			}
 		}
 		else if (tree_class == "binary-complete") {
-			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
+			std::cout << " -> [" << n1 << ", " << n2 << "]\n";
 
 			for (uint64_t n = n1; n <= n2; ++n) {
-				cout << "    " << n << endl;
+				std::cout << "    " << n << '\n';
 
 				// We should interpret 'n' as the *heigh*.
 				// The height of a single vertex is h=1
@@ -260,31 +254,31 @@ err_type test_class_algorithm(
 				// total amount of vertices
 				uint64_t N;
 				{
-				integer _N = 2;
+				lal::numeric::integer _N = 2;
 				_N.powt(h);
 				_N -= 1;
 				N = static_cast<uint64_t>(_N.to_uint());
 				}
 
 				// build k-complete tree of height h
-				free_tree T(N);
+				lal::graphs::free_tree T(N);
 				{
-				node next_node = 1;
-				queue<node> attach_to;
+				lal::node next_node = 1;
+				std::queue<lal::node> attach_to;
 				attach_to.push(0);
 
-				vector<edge> edges(N - 1);
-				size_t e_it = 0;
+				std::vector<lal::edge> edges(N - 1);
+				std::size_t e_it = 0;
 
 				while (not attach_to.empty()) {
-					const node s = attach_to.front();
+					const lal::node s = attach_to.front();
 					attach_to.pop();
 
 					for (uint64_t d = 0; d < 2 and next_node < N; ++d, ++next_node) {
-						const node t = next_node;
+						const lal::node t = next_node;
 						attach_to.push(t);
 
-						edges[e_it] = edge(s,t);
+						edges[e_it] = lal::edge(s,t);
 						++e_it;
 					}
 				}
@@ -293,12 +287,12 @@ err_type test_class_algorithm(
 
 				uint64_t Dmin_bin_complete = 0;
 				{
-				rational F = h;
+				lal::numeric::rational F = h;
 				F /= 3; // k/3
-				F += rational(5,18); // k/3 + 5/18
-				F *= integer(2).pow(h); // 2^k(k/3 + 5/18)
+				F += lal::numeric::rational(5,18); // k/3 + 5/18
+				F *= lal::numeric::integer(2).pow(h); // 2^k(k/3 + 5/18)
 
-				F += rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
+				F += lal::numeric::rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
 				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
 				Dmin_bin_complete = static_cast<uint64_t>(F.to_integer().to_uint());
 
@@ -311,22 +305,22 @@ err_type test_class_algorithm(
 				const bool correct =
 				test_correctness_arr_formula(T, res_algo, "Binary complete", Dmin_bin_complete);
 				if (not correct) {
-					cerr << ERROR << endl;
-					cerr << "    When dealing with a complete binary tree of " << n << " vertices." << endl;
-					cerr << "    Tree:" << endl;
-					cerr << T << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When dealing with a complete binary tree of " << n << " vertices.\n";
+					std::cerr << "    Tree:\n";
+					std::cerr << T << '\n';
 					return err_type::test_execution;
 				}
 			}
 		}
 		else if (tree_class == "star") {
-			cout << " -> [" << n1 << ", " << n2 << "]" << endl;
+			std::cout << " -> [" << n1 << ", " << n2 << "]\n";
 
 			for (uint64_t n = n1; n <= n2; ++n) {
-				cout << "    " << n << endl;
+				std::cout << "    " << n << '\n';
 
-				free_tree T(n);
-				for (node u = 1; u < n; ++u) { T.add_edge(0, u); }
+				lal::graphs::free_tree T(n);
+				for (lal::node u = 1; u < n; ++u) { T.add_edge(0, u); }
 
 				const uint64_t Dmin_star = (n*n - n%2)/4;
 
@@ -336,17 +330,17 @@ err_type test_class_algorithm(
 				const bool correct =
 				test_correctness_arr_formula(T, res_algo, "Star", Dmin_star);
 				if (not correct) {
-					cerr << ERROR << endl;
-					cerr << "    When dealing with a star tree of " << n << " vertices." << endl;
-					cerr << "    Tree:" << endl;
-					cerr << T << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When dealing with a star tree of " << n << " vertices.\n";
+					std::cerr << "    Tree:\n";
+					std::cerr << T << '\n';
 					return err_type::test_execution;
 				}
 			}
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Tree class '" << tree_class << "' not recognised." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Tree class '" << tree_class << "' not recognised.\n";
 			return err_type::test_format;
 		}
 	}
@@ -354,22 +348,22 @@ err_type test_class_algorithm(
 }
 
 err_type test_tree_algorithm(
-	const function< pair<uint64_t, linear_arrangement> (const free_tree&) >& A,
-	ifstream& fin
+	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
+	std::ifstream& fin
 )
 {
 	// read number of vertices
 	uint64_t n;
 	while (fin >> n) {
-		free_tree T(n);
-		node u,v;
+		lal::graphs::free_tree T(n);
+		lal::node u,v;
 		for (uint64_t i = 0; i < n - 1; ++i) {
 			fin >> u >> v;
 			T.add_edge(u,v);
 		}
 
 		const auto& r = A(T);
-		cout << r.first << endl;
+		std::cout << r.first << '\n';
 	}
 
 	return err_type::no_error;
@@ -377,8 +371,8 @@ err_type test_tree_algorithm(
 
 } // -- namespace dmin_unconstrained
 
-err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) {
-	string what;
+err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin) {
+	std::string what;
 	fin >> what;
 
 	err_type r;
@@ -386,23 +380,23 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	// YOSSI SHILOACH
 	if (what == "YS_bruteforce") {
 		if (inputs.size() != 1) {
-			cerr << ERROR << endl;
-			cerr << "    Exactly one input files are allowed in this test." << endl;
-			cerr << "    Instead, " << inputs.size() << " were given." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Exactly one input files are allowed in this test.\n";
+			std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 			return err_type::test_format;
 		}
 
-		if (not filesystem::exists(inputs[0].first)) {
-			cerr << ERROR << endl;
-			cerr << "    Input file '" << inputs[0].first << "' does not exist." << endl;
+		if (not std::filesystem::exists(inputs[0].first)) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Input file '" << inputs[0].first << "' does not exist.\n";
 			return err_type::io;
 		}
-		ifstream input_file(inputs[0].first);
+		std::ifstream input_file(inputs[0].first);
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Shiloach);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
 			}
 		, input_file
 		);
@@ -412,8 +406,8 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "YS_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Shiloach);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
 			}
 		, fin
 		);
@@ -421,8 +415,8 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "YS_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Shiloach);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
 			}
 		, fin
 		);
@@ -431,23 +425,23 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	// FAN R. K. CHUNG
 	else if (what == "FC_bruteforce") {
 		if (inputs.size() != 1) {
-			cerr << ERROR << endl;
-			cerr << "    Exactly one input files are allowed in this test." << endl;
-			cerr << "    Instead, " << inputs.size() << " were given." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Exactly one input files are allowed in this test.\n";
+			std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 			return err_type::test_format;
 		}
 
-		if (not filesystem::exists(inputs[0].first)) {
-			cerr << ERROR << endl;
-			cerr << "    Input file '" << inputs[0].first << "' does not exist." << endl;
+		if (not std::filesystem::exists(inputs[0].first)) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Input file '" << inputs[0].first << "' does not exist.\n";
 			return err_type::io;
 		}
-		ifstream input_file(inputs[0].first);
+		std::ifstream input_file(inputs[0].first);
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Chung_2);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			}
 		, input_file
 		);
@@ -457,8 +451,8 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "FC_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Chung_2);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			}
 		, fin
 		);
@@ -466,15 +460,15 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, ifstream& fin) 
 	else if (what == "FC_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const free_tree& t) -> pair<uint64_t, linear_arrangement> {
-				return min_sum_edge_lengths(t, algorithms_Dmin::Chung_2);
+			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			}
 		, fin
 		);
 	}
 	else {
-		cerr << ERROR << endl;
-		cerr << "    Test not implemented for '" << what << "'." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Test not implemented for '" << what << "'.\n";
 		r = err_type::not_implemented;
 	}
 

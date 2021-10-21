@@ -44,7 +44,6 @@
 #include <fstream>
 #include <cmath>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
@@ -53,12 +52,6 @@ using namespace std;
 #include <lal/properties/C_rla.hpp>
 #include <lal/linarr/C.hpp>
 #include <lal/io/basic_output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace iterators;
-using namespace numeric;
-using namespace properties;
-using namespace linarr;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -117,18 +110,18 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 }
 
 template<typename GRAPH>
-rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
-	rational Ec2(0);
+lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi) {
+	lal::numeric::rational Ec2(0);
 	const uint64_t n = g.get_num_nodes();
 
-	for (iterators::Q_iterator<GRAPH> q_it(g); not q_it.end(); q_it.next()) {
-		const edge_pair st_uv = q_it.get_edge_pair();
-		const edge st = st_uv.first;
-		const edge uv = st_uv.second;
-		const node s = st.first;
-		const node t = st.second;
-		const node u = uv.first;
-		const node v = uv.second;
+	for (lal::iterators::Q_iterator<GRAPH> q_it(g); not q_it.end(); q_it.next()) {
+		const lal::edge_pair st_uv = q_it.get_edge_pair();
+		const lal::edge st = st_uv.first;
+		const lal::edge uv = st_uv.second;
+		const lal::node s = st.first;
+		const lal::node t = st.second;
+		const lal::node u = uv.first;
+		const lal::node v = uv.second;
 
 		uint64_t al;
 		uint64_t be;
@@ -147,27 +140,27 @@ rational E_2Cd_brute_force(GRAPH& g, const linear_arrangement& pi) {
 			be = beta(n, len_uv, len_st);
 		}
 
-		Ec2 += rational(to_int64(al), be);
+		Ec2 += lal::numeric::rational(to_int64(al), be);
 	}
 
 	return Ec2;
 }
 
-err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
-	set<string> allowed_procs({"E_2[C|d]"});
+err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
+	std::set<std::string> allowed_procs({"E_2[C|d]"});
 
 	if (inputs.size() != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Only one input file si allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Only one input file si allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	undirected_graph uG;
-	directed_graph dG;
+	lal::graphs::undirected_graph uG;
+	lal::graphs::directed_graph dG;
 	{
-	const string graph_name = inputs[0].first;
-	const string graph_format = inputs[0].second;
+	const std::string graph_name = inputs[0].first;
+	const std::string graph_format = inputs[0].second;
 	err_type r;
 	r = io_wrapper::read_graph(graph_name, graph_format, uG);
 	if (r != err_type::no_error) { return r; }
@@ -175,76 +168,76 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, ifstream& fin) {
 	if (r != err_type::no_error) { return r; }
 	}
 
-	string proc;
+	std::string proc;
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Procedure '" << proc << "' was found." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Wrong value for procedure type.\n";
+		std::cerr << "    Procedure '" << proc << "' was found.\n";
 		return err_type::test_format;
 	}
 
 	// linear arrangement
 	const uint64_t n = uG.get_num_nodes();
-	vector<node> T(n);
-	linear_arrangement pi(n);
+	std::vector<lal::node> T(n);
+	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
 	uint64_t n_linarrs;
 	fin >> n_linarrs;
 
-	for (size_t i = 0; i < n_linarrs; ++i) {
+	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (node u = 0; u < uG.get_num_nodes(); ++u) {
+		for (lal::node u = 0; u < uG.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
 		// compute value using library and compare it with brute force method
-		const rational ap_lib_u = predicted_num_crossings_rational(uG, pi);
-		const rational ap_lib_d = predicted_num_crossings_rational(dG, pi);
+		const lal::numeric::rational ap_lib_u = lal::linarr::predicted_num_crossings_rational(uG, pi);
+		const lal::numeric::rational ap_lib_d = lal::linarr::predicted_num_crossings_rational(dG, pi);
 		if (ap_lib_d != ap_lib_u) {
-			cerr << ERROR << endl;
-			cerr << "    Library's values for directed and undirected graphs" << endl;
-			cerr << "    do not coincide." << endl;
-			cerr << "        ap_lib_u= " << ap_lib_u << endl;
-			cerr << "        ap_lib_d= " << ap_lib_d << endl;
-			cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (size_t _i = 1; _i < T.size(); ++_i) {
-				cerr << ", " << T[_i];
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Library's values for directed and undirected graphs\n";
+			std::cerr << "    do not coincide.\n";
+			std::cerr << "        ap_lib_u= " << ap_lib_u << '\n';
+			std::cerr << "        ap_lib_d= " << ap_lib_d << '\n';
+			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (std::size_t _i = 1; _i < T.size(); ++_i) {
+				std::cerr << ", " << T[_i];
 			}
-			cerr << "]" << endl;
+			std::cerr << "]\n";
 			return err_type::test_execution;
 		}
 
-		const rational ap_bf_u = E_2Cd_brute_force(uG, pi);
-		const rational ap_bf_d = E_2Cd_brute_force(dG, pi);
+		const lal::numeric::rational ap_bf_u = E_2Cd_brute_force(uG, pi);
+		const lal::numeric::rational ap_bf_d = E_2Cd_brute_force(dG, pi);
 		if (ap_lib_d != ap_lib_u) {
-			cerr << ERROR << endl;
-			cerr << "    Brute force values for directed and undirected graphs" << endl;
-			cerr << "    do not coincide." << endl;
-			cerr << "        ap_bf_u= " << ap_bf_u << endl;
-			cerr << "        ap_bf_d= " << ap_bf_d << endl;
-			cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (size_t _i = 1; _i < T.size(); ++_i) {
-				cerr << ", " << T[_i];
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Brute force values for directed and undirected graphs\n";
+			std::cerr << "    do not coincide.\n";
+			std::cerr << "        ap_bf_u= " << ap_bf_u << '\n';
+			std::cerr << "        ap_bf_d= " << ap_bf_d << '\n';
+			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (std::size_t _i = 1; _i < T.size(); ++_i) {
+				std::cerr << ", " << T[_i];
 			}
-			cerr << "]" << endl;
+			std::cerr << "]\n";
 			return err_type::test_execution;
 		}
 
 		if (ap_lib_u != ap_bf_u) {
-			cerr << ERROR << endl;
-			cerr << "    The value of E_2[C|d] using the library is not equal to the" << endl;
-			cerr << "    brute force value." << endl;
-			cerr << "        Library's value: " << ap_lib_u << endl;
-			cerr << "        Brute force's value: " << ap_bf_u << endl;
-			cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (size_t _i = 1; _i < T.size(); ++_i) {
-				cerr << ", " << T[_i];
+			std::cerr << ERROR << '\n';
+			std::cerr << "    The value of E_2[C|d] using the library is not equal to the\n";
+			std::cerr << "    brute force value.\n";
+			std::cerr << "        Library's value: " << ap_lib_u << '\n';
+			std::cerr << "        Brute force's value: " << ap_bf_u << '\n';
+			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
+			for (std::size_t _i = 1; _i < T.size(); ++_i) {
+				std::cerr << ", " << T[_i];
 			}
-			cerr << "]" << endl;
+			std::cerr << "]\n";
 			return err_type::test_execution;
 		}
 	}

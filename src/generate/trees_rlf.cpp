@@ -41,14 +41,10 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 // lal includes
 #include <lal/generate/rand_lab_free_trees.hpp>
 #include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
 
 // common includes
 #include "common/definitions.hpp"
@@ -57,11 +53,11 @@ using namespace generate;
 namespace tests {
 namespace generate {
 
-err_type exe_gen_trees_rlf(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
@@ -72,11 +68,11 @@ err_type exe_gen_trees_rlf(const input_list& inputs, ifstream& fin) {
 	while (fin >> n1 >> n2 >> num_trees) {
 		test_random_generation_of_trees
 		<true, 100, lal::generate::rand_lab_free_trees>
-		(n1, n2, num_trees, cerr);
+		(n1, n2, num_trees, std::cerr);
 
 		test_random_generation_of_trees
 		<false, 100, lal::generate::rand_lab_free_trees>
-		(n1, n2, num_trees, cerr);
+		(n1, n2, num_trees, std::cerr);
 	}
 
 	TEST_GOODBYE

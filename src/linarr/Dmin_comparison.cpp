@@ -46,7 +46,6 @@
 #include <cassert>
 #include <queue>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
@@ -59,17 +58,13 @@ using namespace std;
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/detail/graphs/conversions.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace linarr;
-using namespace numeric;
 
 // common includes
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
 #include "common/test_utils.hpp"
 
-typedef pair<uint64_t, linear_arrangement> algo_result;
+typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;
 
 bool lt(const algo_result& r1, const algo_result& r2) { return r1.first < r2.first; }
 bool le(const algo_result& r1, const algo_result& r2) { return r1.first <= r2.first; }
@@ -84,31 +79,31 @@ namespace tests_Dmin_comparison {
 
 inline
 bool check_correctness_arr(
-	const free_tree& tree,
-	const pair<uint64_t, linear_arrangement>& res
+	const lal::graphs::free_tree& tree,
+	const std::pair<uint64_t, lal::linear_arrangement>& res
 )
 {
-	const linear_arrangement& arr = res.second;
+	const lal::linear_arrangement& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not lal::linarr::is_permutation(arr)) {
-		cerr << ERROR << endl;
-		cerr << "    The result is not an arrangement (permutation)." << endl;
-		cerr << "    Arrangement: " << arr << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    The result is not an arrangement (permutation).\n";
+		std::cerr << "    Arrangement: " << arr << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint64_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
 	if (D != res.first) {
-		cerr << ERROR << endl;
-		cerr << "    Value of D returned by method is incorrect." << endl;
-		cerr << "    Arrangement:     " << res.second << endl;
-		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
-		cerr << "    Value of D returned: " << res.first << endl;
-		cerr << "    Actual value of D:   " << D << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Value of D returned by method is incorrect.\n";
+		std::cerr << "    Arrangement:     " << res.second << '\n';
+		std::cerr << "    Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "    Value of D returned: " << res.first << '\n';
+		std::cerr << "    Actual value of D:   " << D << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	return true;
@@ -119,11 +114,11 @@ bool check_correctness_arr(
 #define correct_algo_str(algo)												\
 {																			\
 	if (allowed_algos.find(algo) == allowed_algos.end()) {					\
-		cerr << ERROR << endl;												\
-		cerr << "    Algorithm name '" << algo << "' is invalid." << endl;	\
-		cerr << "    Must be one of:" << endl;								\
-		for (const string& s : allowed_algos) {								\
-		cerr << "        " << s << endl;									\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    Algorithm name '" << algo << "' is invalid.\n";	\
+		std::cerr << "    Must be one of:\n";								\
+		for (const std::string& s : allowed_algos) {						\
+		std::cerr << "        " << s << '\n';								\
 		}																	\
 		return err_type::test_format;										\
 	}																		\
@@ -132,11 +127,11 @@ bool check_correctness_arr(
 #define correct_comp_str(comp)											\
 {																		\
 	if (allowed_comps.find(comp) == allowed_comps.end()) {				\
-		cerr << ERROR << endl;											\
-		cerr << "    Comparison '" << comp << "' is invalid." << endl;	\
-		cerr << "    Must be one of:" << endl;							\
-		for (const string& s : allowed_comps) {							\
-		cerr << "        " << s << endl;								\
+		std::cerr << ERROR << '\n';										\
+		std::cerr << "    Comparison '" << comp << "' is invalid.\n";	\
+		std::cerr << "    Must be one of:\n";							\
+		for (const std::string& s : allowed_comps) {					\
+		std::cerr << "        " << s << '\n';							\
 		}																\
 		return err_type::test_format;									\
 	}																	\
@@ -144,43 +139,43 @@ bool check_correctness_arr(
 
 } // -- namespace tests_Dmin_comparison
 
-err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
+err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	const set<string> allowed_algos({"Plan", "YS", "FC"});
+	const std::set<std::string> allowed_algos({"Plan", "YS", "FC"});
 
-	const auto Plan = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths_planar(t); };
-	const auto FC = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths(t, algorithms_Dmin::Chung_2); };
-	const auto YS = [](const free_tree& t) -> algo_result { return min_sum_edge_lengths(t, algorithms_Dmin::Shiloach); };
+	const auto Plan = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths_planar(t); };
+	const auto FC = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
+	const auto YS = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
 
-	map<string, function<algo_result (const free_tree&)> > ALGOS;
+	std::map<std::string, std::function<algo_result (const lal::graphs::free_tree&)> > ALGOS;
 	ALGOS["Plan"] = Plan;
 	ALGOS["YS"] = YS;
 	ALGOS["FC"] = FC;
 
-	const set<string> allowed_comps({"<", "<=", "==", ">=", ">"});
-	map<string, function<bool (const algo_result&, const algo_result&)>> COMPS;
+	const std::set<std::string> allowed_comps({"<", "<=", "==", ">=", ">"});
+	std::map<std::string, std::function<bool (const algo_result&, const algo_result&)>> COMPS;
 	COMPS["<"] = lt;
 	COMPS["<="] = le;
 	COMPS["=="] = eq;
 	COMPS[">="] = ge;
 	COMPS[">"] = gt;
 
-	string mode;
+	std::string mode;
 	while (fin >> mode) {
 		if (mode != "exhaustive" and mode != "random") {
-			cerr << ERROR << endl;
-			cerr << "    Mode '" << mode << "' is invalid." << endl;
-			cerr << "    Must be either 'exhaustive' or 'random'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Mode '" << mode << "' is invalid.\n";
+			std::cerr << "    Must be either 'exhaustive' or 'random'.\n";
 			return err_type::test_format;
 		}
 
-		string algo1, comp, algo2;
+		std::string algo1, comp, algo2;
 		fin >> algo1 >> comp >> algo2;
 
 		correct_algo_str(algo1);
@@ -190,16 +185,16 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		uint64_t n;
 		fin >> n;
 
-		cout << "Testing '" << mode << "' for "
+		std::cout << "Testing '" << mode << "' for "
 			 << "'" << algo1 << "' " << comp << " '" << algo2 << "'"
 			 << " on size: " << n;
 
 		if (mode == "exhaustive") {
-			cout << endl;
+			std::cout << '\n';
 
-			generate::all_ulab_free_trees TreeGen(n);
+			lal::generate::all_ulab_free_trees TreeGen(n);
 			while (not TreeGen.end()) {
-				const free_tree tree = TreeGen.get_tree();
+				const lal::graphs::free_tree tree = TreeGen.get_tree();
 				TreeGen.next();
 
 				const auto res1 = ALGOS[algo1](tree);
@@ -211,20 +206,20 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
 				if (not COMPS[comp](res1, res2)) {
-					cerr << ERROR << endl;
-					cerr << "    Result of algorithm '" << algo1 << "' is not "
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Result of algorithm '" << algo1 << "' is not "
 						 << "'" << comp << "'"
 						 << " with respect to the result of algorithm "
 						 << "'" << algo2 << "'."
-						 << endl;
-					cerr << "    Algorithm: " << algo1 << endl;
-					cerr << "        D= " << res1.first << endl;
-					cerr << "        Arrangement: " << res1.second << endl;
-					cerr << "    Algorithm: " << algo2 << endl;
-					cerr << "        D= " << res2.first << endl;
-					cerr << "        Arrangement: " << res2.second << endl;
-					cerr << " In tree:" << endl;
-					cerr << tree << endl;
+						 << '\n';
+					std::cerr << "    Algorithm: " << algo1 << '\n';
+					std::cerr << "        D= " << res1.first << '\n';
+					std::cerr << "        Arrangement: " << res1.second << '\n';
+					std::cerr << "    Algorithm: " << algo2 << '\n';
+					std::cerr << "        D= " << res2.first << '\n';
+					std::cerr << "        Arrangement: " << res2.second << '\n';
+					std::cerr << " In tree:\n";
+					std::cerr << tree << '\n';
 					return err_type::test_execution;
 				}
 			}
@@ -232,11 +227,11 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 		else {
 			uint64_t N;
 			fin >> N;
-			cout << " (N= " << N << ")" << endl;
+			std::cout << " (N= " << N << ")\n";
 
-			generate::rand_ulab_free_trees TreeGen(n);
+			lal::generate::rand_ulab_free_trees TreeGen(n);
 			for (uint64_t i = 0; i < N; ++i) {
-				const free_tree tree = TreeGen.get_tree();
+				const lal::graphs::free_tree tree = TreeGen.get_tree();
 
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
@@ -247,20 +242,20 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
 				if (not COMPS[comp](res1, res2)) {
-					cerr << ERROR << endl;
-					cerr << "    Result of algorithm '" << algo1 << "' is not "
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Result of algorithm '" << algo1 << "' is not "
 						 << "'" << comp << "'"
 						 << " with respect to the result of algorithm "
 						 << "'" << algo2 << "'."
-						 << endl;
-					cerr << "    Algorithm: " << algo1 << endl;
-					cerr << "        D= " << res1.first << endl;
-					cerr << "        Arrangement: " << res1.second << endl;
-					cerr << "    Algorithm: " << algo2 << endl;
-					cerr << "        D= " << res2.first << endl;
-					cerr << "        Arrangement: " << res2.second << endl;
-					cerr << " In tree:" << endl;
-					cerr << tree << endl;
+						 << '\n';
+					std::cerr << "    Algorithm: " << algo1 << '\n';
+					std::cerr << "        D= " << res1.first << '\n';
+					std::cerr << "        Arrangement: " << res1.second << '\n';
+					std::cerr << "    Algorithm: " << algo2 << '\n';
+					std::cerr << "        D= " << res2.first << '\n';
+					std::cerr << "        Arrangement: " << res2.second << '\n';
+					std::cerr << " In tree:\n";
+					std::cerr << tree << '\n';
 					return err_type::test_execution;
 				}
 			}

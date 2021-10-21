@@ -40,7 +40,6 @@
 
 // C++ includes
 #include <iostream>
-using namespace std;
 
 // common includes
 #include "common/parse_keywords.hpp"
@@ -52,9 +51,9 @@ namespace tests {
 namespace internal {
 
 err_type call_internal
-(const vector<string>& keywords, size_t i, ifstream& fin)
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
-	const string& key = keywords[i];
+	const std::string& key = keywords[i];
 	if (key == "sorting") {
 		return parse_header(exe_internal_sorting, fin);
 	}
@@ -68,20 +67,20 @@ err_type call_internal
 		return parse_header(exe_internal_centroid, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at " << i << ": '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const vector<string>& keywords, ifstream& fin) {
-	const string& key = keywords[0];
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+	const std::string& key = keywords[0];
 	if (key == "internal") {
 		return call_internal(keywords, 1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at 0: '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
 }

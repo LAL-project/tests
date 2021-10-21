@@ -42,14 +42,9 @@
 
 // C++ includes
 #include <vector>
-using namespace std;
 
 // lal includes
 #include <lal/iterators/E_iterator.hpp>
-using namespace lal;
-using namespace iterators;
-using namespace numeric;
-using namespace graphs;
 
 typedef uint64_t bigint;
 
@@ -58,7 +53,7 @@ namespace properties {
 
 inline void compute_data_gen_graphs_Q
 (
-	const undirected_graph& g, const vector<edge_pair>& Q,
+	const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q,
 	bigint& Qs, bigint& Kg,
 	bigint& n_paths_4, bigint& n_cycles_4, bigint& graphlet,
 	bigint& n_paths_5, bigint& pair_C3_L2,
@@ -67,18 +62,18 @@ inline void compute_data_gen_graphs_Q
 )
 {
 	// adjacency matrix
-	vector<vector<bool> > A(g.get_num_nodes(), vector<bool>(g.get_num_nodes(), false));
-	for (E_iterator e_it(g); not e_it.end(); e_it.next()) {
-		const edge e = e_it.get_edge();
+	std::vector<std::vector<bool> > A(g.get_num_nodes(), std::vector<bool>(g.get_num_nodes(), false));
+	for (lal::iterators::E_iterator e_it(g); not e_it.end(); e_it.next()) {
+		const lal::edge e = e_it.get_edge();
 		A[e.first][e.second] = true;
 		A[e.second][e.first] = true;
 	}
 
-	for (const edge_pair& ep : Q) {
-		const node s = ep.first.first;
-		const node t = ep.first.second;
-		const node u = ep.second.first;
-		const node v = ep.second.second;
+	for (const lal::edge_pair& ep : Q) {
+		const lal::node s = ep.first.first;
+		const lal::node t = ep.first.second;
+		const lal::node u = ep.second.first;
+		const lal::node v = ep.second.second;
 
 		const bigint ks = g.get_degree(s);
 		const bigint kt = g.get_degree(t);
@@ -105,19 +100,19 @@ inline void compute_data_gen_graphs_Q
 			ku*(A[s][v] + A[t][v]) +
 			kv*(A[s][u] + A[t][u]);
 
-		const neighbourhood& ns = g.get_neighbours(s);
-		for (const node& ws : ns) {
+		const lal::neighbourhood& ns = g.get_neighbours(s);
+		for (const lal::node& ws : ns) {
 			if (ws == t or ws == u or ws == v) { continue; }
 			n_paths_5 += A[u][ws] + A[v][ws];
 			pair_C3_L2 += A[t][ws];
 		}
-		const neighbourhood& nt = g.get_neighbours(t);
-		for (const node& wt : nt) {
+		const lal::neighbourhood& nt = g.get_neighbours(t);
+		for (const lal::node& wt : nt) {
 			if (wt == s or wt == u or wt == v) { continue; }
 			n_paths_5 += A[u][wt] + A[v][wt];
 		}
-		const neighbourhood& nu = g.get_neighbours(u);
-		for (const node& wu : nu) {
+		const lal::neighbourhood& nu = g.get_neighbours(u);
+		for (const lal::node& wu : nu) {
 			if (wu == s or wu == t or wu == v) { continue; }
 			pair_C3_L2 += A[v][wu];
 		}
@@ -127,7 +122,7 @@ inline void compute_data_gen_graphs_Q
 	n_cycles_4 /= 2;
 }
 
-rational nonLAL_var_num_crossings_rational_Q(const undirected_graph& g, const vector<edge_pair>& Q) {
+lal::numeric::rational nonLAL_var_num_crossings_rational_Q(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q) {
 	const bigint m = g.get_num_edges();
 
 	// ----------------------------
@@ -146,7 +141,7 @@ rational nonLAL_var_num_crossings_rational_Q(const undirected_graph& g, const ve
 	// (a_{tu} + a_{sv})(a_{tv} + a_{su})
 	bigint graphlet = 0;
 	// the amount of pairs of disjoint
-	// triangle and edge in the graph.
+	// triangle and lal::edge in the graph.
 	bigint pair_C3_L2 = 0;
 
 	// k_s + k_t + k_u + k_v
@@ -172,21 +167,21 @@ rational nonLAL_var_num_crossings_rational_Q(const undirected_graph& g, const ve
 		Lambda_1, Lambda_2
 	);
 
-	integer J(0);
+	lal::numeric::integer J(0);
 
 	// V[C]
-	rational V(0);
-	J.set_number((m + 2)*Qs);			V += rational(2,45)*J;
-	J.set_number((2*m + 7)*n_paths_4);	V -= rational(1,180)*J;
-	J.set_number(n_paths_5);			V -= rational(1,180)*J;
-	J.set_number(Kg);					V += rational(1,90)*J;
-	J.set_number(n_cycles_4);			V -= rational(3,45)*J;
-	J.set_number(Lambda_1);				V -= rational(1,60)*J;
-	J.set_number(Lambda_2);				V += rational(1,180)*J;
-	J.set_number(Phi_2);				V += rational(1,180)*J;
-	J.set_number(Phi_1);				V -= rational(1,90)*J;
-	J.set_number(graphlet);				V += rational(1,30)*J;
-	J.set_number(pair_C3_L2);			V += rational(1,90)*J;
+	lal::numeric::rational V(0);
+	J.set_number((m + 2)*Qs);			V += lal::numeric::rational(2,45)*J;
+	J.set_number((2*m + 7)*n_paths_4);	V -= lal::numeric::rational(1,180)*J;
+	J.set_number(n_paths_5);			V -= lal::numeric::rational(1,180)*J;
+	J.set_number(Kg);					V += lal::numeric::rational(1,90)*J;
+	J.set_number(n_cycles_4);			V -= lal::numeric::rational(3,45)*J;
+	J.set_number(Lambda_1);				V -= lal::numeric::rational(1,60)*J;
+	J.set_number(Lambda_2);				V += lal::numeric::rational(1,180)*J;
+	J.set_number(Phi_2);				V += lal::numeric::rational(1,180)*J;
+	J.set_number(Phi_1);				V -= lal::numeric::rational(1,90)*J;
+	J.set_number(graphlet);				V += lal::numeric::rational(1,30)*J;
+	J.set_number(pair_C3_L2);			V += lal::numeric::rational(1,90)*J;
 	return V;
 }
 

@@ -42,7 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/numeric/rational.hpp>
@@ -50,9 +49,6 @@ using namespace std;
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/linarr/D.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace numeric;
 
 // common includes
 #include "common/io_wrapper.hpp"
@@ -61,68 +57,68 @@ using namespace numeric;
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_D(const input_list& inputs, ifstream& fin) {
-	const set<string> allowed_procs(
+err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) {
+	const std::set<std::string> allowed_procs(
 	{"D", "MDD"}
 	);
 
 	if (inputs.size() != 1) {
-		cerr << ERROR << endl;
-		cerr << "    Only one input file si allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Only one input file si allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	undirected_graph G;
+	lal::graphs::undirected_graph G;
 	{
-	const string graph_name = inputs[0].first;
-	const string graph_format = inputs[0].second;
+	const std::string graph_name = inputs[0].first;
+	const std::string graph_format = inputs[0].second;
 	const err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
 	}
 	}
 
-	string proc;
+	std::string proc;
 	fin >> proc;
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Wrong value for procedure type." << endl;
-		cerr << "    Procedure '" << proc << "' was found." << endl;
-		for (const string& p : allowed_procs) {
-		cerr << "    - " << p << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Wrong value for procedure type.\n";
+		std::cerr << "    Procedure '" << proc << "' was found.\n";
+		for (const std::string& p : allowed_procs) {
+		std::cerr << "    - " << p << '\n';
 		}
 		return err_type::test_format;
 	}
 
 	// linear arrangement
 	const uint64_t n = G.get_num_nodes();
-	vector<node> T(n);
-	linear_arrangement pi(n);
+	std::vector<lal::node> T(n);
+	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
-	size_t n_linarrs;
+	std::size_t n_linarrs;
 	fin >> n_linarrs;
 
-	for (size_t i = 0; i < n_linarrs; ++i) {
+	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (node u = 0; u < G.get_num_nodes(); ++u) {
+		for (lal::node u = 0; u < G.get_num_nodes(); ++u) {
 			fin >> T[u];
 			pi[ T[u] ] = u;
 		}
 
 		// output
-		cout << "[" << T[0];
-		for (node j = 1; j < G.get_num_nodes(); ++j) {
-			cout << ", " << T[j];
+		std::cout << "[" << T[0];
+		for (lal::node j = 1; j < G.get_num_nodes(); ++j) {
+			std::cout << ", " << T[j];
 		}
-		cout << "]: ";
+		std::cout << "]: ";
 
 		if (proc == "D") {
-			cout << lal::linarr::sum_edge_lengths(G, pi) << endl;
+			std::cout << lal::linarr::sum_edge_lengths(G, pi) << '\n';
 		}
 		else if (proc == "MDD") {
-			cout << lal::linarr::mean_dependency_distance_rational(G, pi) << endl;
+			std::cout << lal::linarr::mean_dependency_distance_rational(G, pi) << '\n';
 		}
 	}
 

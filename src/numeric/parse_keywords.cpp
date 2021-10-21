@@ -40,7 +40,6 @@
 
 // C++ includes
 #include <iostream>
-using namespace std;
 
 // common includes
 #include "common/parse_keywords.hpp"
@@ -51,8 +50,8 @@ using namespace std;
 namespace tests {
 namespace numeric {
 
-err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
-	const string& num_type1 = keywords[i];
+err_type call_numeric(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin) {
+	const std::string& num_type1 = keywords[i];
 
 	if (num_type1 == "integer") {
 		return parse_header(exe_numeric_integer, fin);
@@ -68,20 +67,20 @@ err_type call_numeric(const vector<string>& keywords, size_t i, ifstream& fin) {
 		return parse_header(exe_numeric_rational_manual, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Wrong keyword at " << i << ": '" << num_type1 << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const vector<string>& keywords, ifstream& fin) {
-	const string& key = keywords[0];
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+	const std::string& key = keywords[0];
 	if (key == "numeric") {
 		return call_numeric(keywords, 1, fin);
 	}
 
-	cerr << ERROR << endl;
-	cerr << "    Unhandled keyword at 0: '" << key << "'." << endl;
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at 0: '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {0}, "    ");
 	return err_type::wrong_keyword;
 }

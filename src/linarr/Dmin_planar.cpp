@@ -42,8 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
-
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
@@ -52,9 +50,6 @@ using namespace std;
 #include <lal/linarr/D.hpp>
 #include <lal/linarr/Dmin.hpp>
 #include <lal/linarr/formal_constraints.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace linarr;
 
 // common includes
 #include "common/definitions.hpp"
@@ -67,12 +62,12 @@ namespace linarr {
 
 namespace tests_Dmin_planar {
 
-pair<uint64_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
-	uint64_t Dmin_planar = numeric_limits<uint64_t>::max();
-	linear_arrangement arr;
+std::pair<uint64_t,lal::linear_arrangement> Dmin_planar_quadratic(const lal::graphs::free_tree& t) {
+	uint64_t Dmin_planar = std::numeric_limits<uint64_t>::max();
+	lal::linear_arrangement arr;
 
-	for (node u = 0; u < t.get_num_nodes(); ++u) {
-		rooted_tree rt(t, u);
+	for (lal::node u = 0; u < t.get_num_nodes(); ++u) {
+		lal::graphs::rooted_tree rt(t, u);
 		rt.calculate_size_subtrees();
 
 		const auto Dmin_proj = lal::linarr::min_sum_edge_lengths_projective(rt);
@@ -86,38 +81,38 @@ pair<uint64_t,linear_arrangement> Dmin_planar_quadratic(const free_tree& t) {
 
 inline
 bool check_correctness_arr(
-	const free_tree& tree,
-	const pair<uint64_t, linear_arrangement>& res
+	const lal::graphs::free_tree& tree,
+	const std::pair<uint64_t, lal::linear_arrangement>& res
 )
 {
-	const linear_arrangement& arr = res.second;
+	const lal::linear_arrangement& arr = res.second;
 	/* ensure planarity of arrangement */
 	if (not lal::linarr::is_planar(tree, arr)) {
-		cerr << ERROR << endl;
-		cerr << "    The arrangement produced by the library is not an actual" << endl;
-		cerr << "    arrangement or is not planar." << endl;
-		cerr << "    Arrangement: " << arr << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    The arrangement produced by the library is not an actual\n";
+		std::cerr << "    arrangement or is not planar.\n";
+		std::cerr << "    Arrangement: " << arr << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	/* ensure that value of D is correct */
-	const uint64_t D = sum_edge_lengths(tree, arr);
+	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
 	if (D != res.first) {
-		cerr << ERROR << endl;
-		cerr << "    Value of D returned by method is incorrect." << endl;
-		cerr << "    Arrangement:     " << res.second << endl;
-		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
-		cerr << "    Value of D returned: " << res.first << endl;
-		cerr << "    Actual value of D:   " << D << endl;
-		cerr << "    For tree: " << endl;
-		cerr << tree << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Value of D returned by method is incorrect.\n";
+		std::cerr << "    Arrangement:     " << res.second << '\n';
+		std::cerr << "    Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "    Value of D returned: " << res.first << '\n';
+		std::cerr << "    Actual value of D:   " << D << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << tree << '\n';
 		return false;
 	}
 	return true;
 }
 
-err_type check_tree(const free_tree& T, const algorithms_Dmin_planar& algo) {
+err_type check_tree(const lal::graphs::free_tree& T, const lal::linarr::algorithms_Dmin_planar& algo) {
 	const auto Dmin_planar_library = lal::linarr::min_sum_edge_lengths_planar(T, algo);
 
 	const auto Dmin_planar_quadratic =
@@ -132,15 +127,15 @@ err_type check_tree(const free_tree& T, const algorithms_Dmin_planar& algo) {
 	if (not correct2) { return err_type::test_execution; }
 
 	if (Dmin_planar_quadratic.first != Dmin_planar_library.first) {
-		cerr << ERROR << endl;
-		cerr << "    The library produced a result that does not correspond to" << endl;
-		cerr << "    quadratic algorithm's result." << endl;
-		cerr << "    Library: " << Dmin_planar_library.first << endl;
-		cerr << "        Arrangement: " << Dmin_planar_library.second << endl;
-		cerr << "    Quadratic: " << Dmin_planar_quadratic.first << endl;
-		cerr << "        Arrangement: " << Dmin_planar_quadratic.second << endl;
-		cerr << "    For tree:" << endl;
-		cerr << T << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    The library produced a result that does not correspond to\n";
+		std::cerr << "    quadratic algorithm's result.\n";
+		std::cerr << "    Library: " << Dmin_planar_library.first << '\n';
+		std::cerr << "        Arrangement: " << Dmin_planar_library.second << '\n';
+		std::cerr << "    Quadratic: " << Dmin_planar_quadratic.first << '\n';
+		std::cerr << "        Arrangement: " << Dmin_planar_quadratic.second << '\n';
+		std::cerr << "    For tree:\n";
+		std::cerr << T << '\n';
 		return err_type::test_execution;
 	}
 	return err_type::no_error;
@@ -148,18 +143,18 @@ err_type check_tree(const free_tree& T, const algorithms_Dmin_planar& algo) {
 
 } // -- namespace tests_Dmin_planar
 
-err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
-	const set<string> allowed_algos({"AEF", "HS", "quadratic"});
-	const set<string> allowed_quadratic_modes({"exhaustive", "random"});
+err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin) {
+	const std::set<std::string> allowed_algos({"AEF", "HS", "quadratic"});
+	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"});
 
-	string algo;
+	std::string algo;
 	fin >> algo;
 	if (allowed_algos.find(algo) == allowed_algos.end()) {
-		cerr << ERROR << endl;
-		cerr << "    Unrecognized algorithm '" << algo << "'." << endl;
-		cerr << "    Allowed algorithms:" << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
+		std::cerr << "    Allowed algorithms:\n";
 		for (const auto& s : allowed_algos) {
-		cerr << "    - " << s << endl;
+		std::cerr << "    - " << s << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -168,98 +163,98 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 
 	if (algo == "AEF" or algo == "HS") {
 		if (inputs.size() != 1) {
-			cerr << ERROR << endl;
-			cerr << "    Exactly one input files are allowed in this test." << endl;
-			cerr << "    Instead, " << inputs.size() << " were given." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Exactly one input files are allowed in this test.\n";
+			std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 			return err_type::test_format;
 		}
 
-		ifstream input_file(inputs[0].first);
+		std::ifstream input_file(inputs[0].first);
 		if (not input_file.is_open()) {
-			cerr << ERROR << endl;
-			cerr << "    Input file '" << inputs[0].first << "' could not be opened." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Input file '" << inputs[0].first << "' could not be opened.\n";
 			return err_type::io;
 		}
 
-		algorithms_Dmin_planar algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		lal::linarr::algorithms_Dmin_planar algo_choice = lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer;
 		if (algo == "AEF") {
-			algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+			algo_choice = lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer;
 		}
 		else if (algo == "HS") {
-			algo_choice = algorithms_Dmin_planar::HochbergStallmann;
+			algo_choice = lal::linarr::algorithms_Dmin_planar::HochbergStallmann;
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "Algorithm '" << algo << "' not recognised." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "Algorithm '" << algo << "' not recognised.\n";
 			return err_type::test_format;
 		}
 
-		err = linarr_brute_force_testing<free_tree>
+		err = tests::linarr::linarr_brute_force_testing<lal::graphs::free_tree>
 		(
-			[=](const free_tree& t) {
-				return min_sum_edge_lengths_planar(t, algo_choice);
+			[=](const lal::graphs::free_tree& t) {
+				return lal::linarr::min_sum_edge_lengths_planar(t, algo_choice);
 			},
-			[](const free_tree& t, const linear_arrangement& arr) {
-				return sum_edge_lengths(t, arr);
+			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+				return lal::linarr::sum_edge_lengths(t, arr);
 			},
-			[](const free_tree& t, const linear_arrangement& arr) {
+			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
 				return lal::linarr::is_planar(t, arr);
 			},
-			[](const vector<node>& v) {
-				return from_head_vector_to_free_tree(v).first;
+			[](const std::vector<lal::node>& v) {
+				return lal::graphs::from_head_vector_to_free_tree(v).first;
 			},
-			[](free_tree&) { },
+			[](lal::graphs::free_tree&) { },
 			input_file
 		);
 	}
 	else if (algo == "quadratic") {
 		if (inputs.size() != 0) {
-			cerr << ERROR << endl;
-			cerr << "    No input files are allowed in this test." << endl;
-			cerr << "    Instead, " << inputs.size() << " were given." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    No input files are allowed in this test.\n";
+			std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 			return err_type::test_format;
 		}
 
-		string mode;
+		std::string mode;
 		fin >> mode;
 		if (allowed_quadratic_modes.find(mode) == allowed_quadratic_modes.end()) {
-			cerr << ERROR << endl;
-			cerr << "    Unrecognized mode for quadratic algorithm '" << mode << "'." << endl;
-			cerr << "    Allowed modes:" << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Unrecognized mode for quadratic algorithm '" << mode << "'.\n";
+			std::cerr << "    Allowed modes:\n";
 			for (const auto& s : allowed_quadratic_modes) {
-			cerr << "    - " << s << endl;
+			std::cerr << "    - " << s << '\n';
 			}
 			return err_type::test_format;
 		}
 
 		fin >> algo;
 		if (allowed_algos.find(algo) == allowed_algos.end()) {
-			cerr << ERROR << endl;
-			cerr << "    Unrecognized algorithm '" << algo << "'." << endl;
-			cerr << "    Allowed algorithms:" << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
+			std::cerr << "    Allowed algorithms:\n";
 			for (const auto& s : allowed_algos) {
-			cerr << "    - " << s << endl;
+			std::cerr << "    - " << s << '\n';
 			}
 			return err_type::test_format;
 		}
 
-		algorithms_Dmin_planar algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+		lal::linarr::algorithms_Dmin_planar algo_choice = lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer;
 		if (algo == "AEF") {
-			algo_choice = algorithms_Dmin_planar::AlemanyEstebanFerrer;
+			algo_choice = lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer;
 		}
 		else if (algo == "HS") {
-			algo_choice = algorithms_Dmin_planar::HochbergStallmann;
+			algo_choice = lal::linarr::algorithms_Dmin_planar::HochbergStallmann;
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "Algorithm '" << algo << "' not recognised." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "Algorithm '" << algo << "' not recognised.\n";
 			return err_type::test_format;
 		}
 
 		uint64_t n;
 		while (fin >> n) {
 			if (mode == "exhaustive") {
-				generate::all_ulab_free_trees Gen(n);
+				lal::generate::all_ulab_free_trees Gen(n);
 				while (not Gen.end()) {
 					const auto T = Gen.get_tree();
 					Gen.next();
@@ -270,11 +265,11 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, ifstream& fin) {
 				}
 			}
 			else if (mode == "random") {
-				size_t n_rand_trees;
+				std::size_t n_rand_trees;
 				fin >> n_rand_trees;
 
-				generate::rand_ulab_free_trees Gen(n, 1234);
-				for (size_t i = 0; i < n_rand_trees; ++i) {
+				lal::generate::rand_ulab_free_trees Gen(n, 1234);
+				for (std::size_t i = 0; i < n_rand_trees; ++i) {
 					const auto T = Gen.get_tree();
 					err = tests_Dmin_planar::check_tree(T, algo_choice);
 					if (err != err_type::no_error) {

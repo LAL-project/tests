@@ -42,7 +42,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/output.hpp>
@@ -51,10 +50,6 @@ using namespace std;
 #include <lal/linarr/C.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/iterators/E_iterator.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace generate;
-using namespace iterators;
 
 // common includes
 #include "common/definitions.hpp"
@@ -64,51 +59,51 @@ using namespace iterators;
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand_projective(const input_list& inputs, ifstream& fin) {
+err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
 	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices
-		rand_ulab_rooted_trees TreeGen(n);
+		lal::generate::rand_ulab_rooted_trees TreeGen(n);
 
 		for (uint64_t nt = 0; nt < ntrees; ++nt) {
-			const rooted_tree rT = TreeGen.get_tree();
-			const free_tree fT = rT.to_free_tree();
+			const lal::graphs::rooted_tree rT = TreeGen.get_tree();
+			const lal::graphs::free_tree fT = rT.to_free_tree();
 
-			rand_projective_arrangements RandArr(rT, 100);
+			lal::generate::rand_projective_arrangements RandArr(rT, 100);
 
 			for (uint64_t it = 0; it < nit; ++it) {
-				const linear_arrangement arr = RandArr.get_arrangement();
+				const lal::linear_arrangement arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
 				if (not lal::linarr::is_projective(rT, arr)) {
-					cerr << ERROR << endl;
-					cerr << "    Generation of random arrangement failed with error:" << endl;
-					cerr << "    Arrangement:     " << arr << endl;
-					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Generation of random arrangement failed with error:\n";
+					std::cerr << "    Arrangement:     " << arr << '\n';
+					std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << rT << '\n';
 					return err_type::test_execution;
 				}
 			}
 
 			for (uint64_t it = 0; it < nit; ++it) {
-				const linear_arrangement arr = RandArr.yield_arrangement();
+				const lal::linear_arrangement arr = RandArr.yield_arrangement();
 
 				// Do some sanity checks.
 				if (not lal::linarr::is_projective(rT, arr)) {
-					cerr << ERROR << endl;
-					cerr << "    Generation of random arrangement failed with error:" << endl;
-					cerr << "    Arrangement:     " << arr << endl;
-					cerr << "    Inv Arrangement: " << invlinarr(arr) << endl;
-					cerr << "    For tree:" << endl;
-					cerr << rT << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Generation of random arrangement failed with error:\n";
+					std::cerr << "    Arrangement:     " << arr << '\n';
+					std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << rT << '\n';
 					return err_type::test_execution;
 				}
 			}

@@ -43,11 +43,10 @@
 #include <iostream>
 #include <fstream>
 #include <cassert>
-#include <cstring>
+#include <string>
 #include <string>
 #include <map>
 #include <set>
-using namespace std;
 
 // lal includes
 #include <lal/graphs/conversions.hpp>
@@ -57,9 +56,6 @@ using namespace std;
 #include <lal/io/edge_list.hpp>
 #include <lal/io/basic_output.hpp>
 #include <lal/properties/Q.hpp>
-using namespace lal;
-using namespace graphs;
-using namespace iterators;
 
 // common includes
 #include "exe_construction.hpp"
@@ -81,7 +77,7 @@ using namespace iterators;
 #define FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO "remove_edges_incident_to"
 #define FUNC_GRAPH_NORMALISE "normalise"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
-#define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
+#define FUNC_GRAPH_CHECK_EDGE_IT "check_lal::edge_iterator"
 #define FUNC_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_OUTPUT_Q "output_Q"
@@ -94,53 +90,53 @@ using namespace iterators;
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
-#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_edge_orientation"
+#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_lal::edge_orientation"
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
 #define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
 
 namespace tests {
 namespace graphs {
 
-err_type exe_construction_test(ifstream& fin) {
-	map<string, undirected_graph> ugraphvars;
-	map<string, directed_graph> dgraphvars;
-	map<string, free_tree> ftreevars;
-	map<string, rooted_tree> rtreevars;
+err_type exe_construction_test(std::ifstream& fin) {
+	std::map<std::string, lal::graphs::undirected_graph> ugraphvars;
+	std::map<std::string, lal::graphs::directed_graph> dgraphvars;
+	std::map<std::string, lal::graphs::free_tree> ftreevars;
+	std::map<std::string, lal::graphs::rooted_tree> rtreevars;
 
-	map<string, string> gtypes;
+	std::map<std::string, std::string> gtypes;
 
-	string option, assert_what;
-	string type, g1, g2, g3, file, file_type, Boolean1, Boolean2;
+	std::string option, assert_what;
+	std::string type, g1, g2, g3, file, file_type, Boolean1, Boolean2;
 	uint64_t n_nodes, n_edges;
-	node u, v;
+	lal::node u, v;
 
 	while (fin >> option) {
 		if (command_is_comment(option)) {
 			process_comment(fin);
 		}
 		else if (option == "output") {
-			cout << read_output_string(fin) << endl;
+			std::cout << read_output_string(fin) << '\n';
 		}
 		else if (option == FUNC_GRAPH_CREATE) {
 			fin >> type >> g1 >> n_nodes;
 			assert_correct_graph_type(FUNC_GRAPH_CREATE, type, all_types);
 			gtypes[g1] = type;
 			if (type == UGRAPH) {
-				ugraphvars[g1] = undirected_graph(n_nodes);
+				ugraphvars[g1] = lal::graphs::undirected_graph(n_nodes);
 			}
 			else if (type == DGRAPH) {
-				dgraphvars[g1] = directed_graph(n_nodes);
+				dgraphvars[g1] = lal::graphs::directed_graph(n_nodes);
 			}
 			else if (type == FTREE) {
-				ftreevars[g1] = free_tree(n_nodes);
+				ftreevars[g1] = lal::graphs::free_tree(n_nodes);
 			}
 			else if (type == RTREE) {
-				rtreevars[g1] = rooted_tree(n_nodes);
+				rtreevars[g1] = lal::graphs::rooted_tree(n_nodes);
 			}
 			else {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_CREATE)
-				cerr << "    Unhandled type '" << type << "'." << endl;
+				std::cerr << "    Unhandled type '" << type << "'.\n";
 				return err_type::test_execution;
 			}
 		}
@@ -152,50 +148,50 @@ err_type exe_construction_test(ifstream& fin) {
 
 			err_type err = err_type::no_error;
 			if (type == DGRAPH) {
-				dgraphvars[g1] = directed_graph();
+				dgraphvars[g1] = lal::graphs::directed_graph();
 				err = io_wrapper::read_graph(
 					file, file_type, dgraphvars[g1], Boolean1 == "true"
 				);
 			}
 			else if (type == UGRAPH) {
-				ugraphvars[g1] = undirected_graph();
+				ugraphvars[g1] = lal::graphs::undirected_graph();
 				err = io_wrapper::read_graph(
 					file, file_type, ugraphvars[g1], Boolean1 == "true"
 				);
 			}
 			else if (type == FTREE) {
-				ftreevars[g1] = free_tree();
+				ftreevars[g1] = lal::graphs::free_tree();
 				err = io_wrapper::read_graph(
 					file, file_type, ftreevars[g1], Boolean1 == "true"
 				);
 			}
 			else if (type == RTREE) {
-				rtreevars[g1] = rooted_tree();
+				rtreevars[g1] = lal::graphs::rooted_tree();
 				err = io_wrapper::read_graph(
 					file, file_type, rtreevars[g1], Boolean1 == "true"
 				);
 			}
 			else {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_READ);
-				cerr << "    I/O operation not implemented for " << gtypes[g1] << endl;
+				std::cerr << "    I/O operation not implemented for " << gtypes[g1] << '\n';
 				return err_type::test_format;
 			}
 
 			if (err != err_type::no_error) {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_READ);
-				cerr << "    I/O operation failed when attempting to read file '" << file << "'." << endl;
+				std::cerr << "    I/O operation failed when attempting to read file '" << file << "'.\n";
 				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_OUTPUT) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_OUTPUT, g1)
-			cout << "-----------------------------" << endl;
-			cout << "Contents of graph '" << g1 << "'" << endl;
+			std::cout << "-----------------------------\n";
+			std::cout << "Contents of graph '" << g1 << "'\n";
 			output_graph_stdout(g1)
-			cout << "-----------------------------" << endl;
+			std::cout << "-----------------------------\n";
 		}
 		else if (option == FUNC_GRAPH_INIT) {
 			fin >> g1 >> n_nodes;
@@ -231,8 +227,8 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGES) {
 			fin >> g1 >> n_edges;
-			vector<edge> edge_list(n_edges);
-			for (edge& e : edge_list) { fin >> e.first >> e.second; }
+			std::vector<lal::edge> edge_list(n_edges);
+			for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
 			fin >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean1);
@@ -241,8 +237,8 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == FUNC_GRAPH_SET_EDGES) {
 			fin >> g1 >> n_edges;
-			vector<edge> edge_list(n_edges);
-			for (edge& e : edge_list) { fin >> e.first >> e.second; }
+			std::vector<lal::edge> edge_list(n_edges);
+			for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
 			fin >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_SET_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_SET_EDGES, Boolean1);
@@ -258,8 +254,8 @@ err_type exe_construction_test(ifstream& fin) {
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGES) {
 			fin >> g1 >> n_edges;
-			vector<edge> edge_list(n_edges);
-			for (edge& e : edge_list) { fin >> e.first >> e.second; }
+			std::vector<lal::edge> edge_list(n_edges);
+			for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
 			fin >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1);
@@ -287,17 +283,17 @@ err_type exe_construction_test(ifstream& fin) {
 			//assert_not_exists_variable(FUNC_GRAPH_DISJ_UNION, g1)
 			gtypes[g1] = graph_type(g2);
 			if (graph_type(g2) == UGRAPH) {
-				undirected_graph uG = ugraphvars[g2];
+				lal::graphs::undirected_graph uG = ugraphvars[g2];
 				uG.disjoint_union(ugraphvars[g3]);
 				ugraphvars[g1] = uG;
 			}
 			else if (graph_type(g2) == DGRAPH) {
-				directed_graph dG = dgraphvars[g2];
+				lal::graphs::directed_graph dG = dgraphvars[g2];
 				dG.disjoint_union(dgraphvars[g3]);
 				dgraphvars[g1] = dG;
 			}
 			else if (graph_type(g2) == FTREE) {
-				free_tree fT = ftreevars[g2];
+				lal::graphs::free_tree fT = ftreevars[g2];
 				fT.disjoint_union(ftreevars[g3]);
 				ftreevars[g1] = fT;
 			}
@@ -305,77 +301,77 @@ err_type exe_construction_test(ifstream& fin) {
 				fin >> Boolean1;
 				assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1);
 
-				rooted_tree rT = rtreevars[g2];
+				lal::graphs::rooted_tree rT = rtreevars[g2];
 				rT.disjoint_union(rtreevars[g3], Boolean1 == "true");
 				rtreevars[g1] = rT;
 			}
 			else {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_DISJ_UNION)
-				cerr << "    Type of graph '" << g1 << "' and '" << g2 << "' is not" << endl;
-				cerr << "    " << UGRAPH << endl;
-				cerr << "    " << DGRAPH << endl;
-				cerr << "    " << FTREE << endl;
-				cerr << "    " << RTREE << endl;
+				std::cerr << "    Type of graph '" << g1 << "' and '" << g2 << "' is not\n";
+				std::cerr << "    " << UGRAPH << '\n';
+				std::cerr << "    " << DGRAPH << '\n';
+				std::cerr << "    " << FTREE << '\n';
+				std::cerr << "    " << RTREE << '\n';
 				return err_type::test_execution;
 			}
 		}
 		else if (option == FUNC_GRAPH_CHECK_EDGE_IT) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_CHECK_EDGE_IT, g1);
-			vector<edge> iter_edges;
+			std::vector<lal::edge> iter_edges;
 			if (graph_type(g1) == DGRAPH) {
-				for (E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
+				for (lal::iterators::E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
 					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == UGRAPH) {
-				for (E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
+				for (lal::iterators::E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
 					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == FTREE) {
-				for (E_iterator e_it(ftreevars[g1]); not e_it.end(); e_it.next()) {
+				for (lal::iterators::E_iterator e_it(ftreevars[g1]); not e_it.end(); e_it.next()) {
 					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 			else if (graph_type(g1) == RTREE) {
-				for (E_iterator e_it(rtreevars[g1]); not e_it.end(); e_it.next()) {
+				for (lal::iterators::E_iterator e_it(rtreevars[g1]); not e_it.end(); e_it.next()) {
 					iter_edges.push_back(e_it.get_edge());
 				}
 			}
 
 			// check size
 			if (iter_edges.size() != mfunction(g1, get_num_edges())) {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_CHECK_EDGE_IT);
-				cerr << "    The amount of edges obtained differs from the amount of edges in the graph." << endl;
-				cerr << "    Number of edges obtained: " << iter_edges.size() << endl;
-				cerr << "    Number of edges in the graph: " << mfunction(g1, get_num_edges()) << endl;
+				std::cerr << "    The amount of edges obtained differs from the amount of edges in the graph.\n";
+				std::cerr << "    Number of edges obtained: " << iter_edges.size() << '\n';
+				std::cerr << "    Number of edges in the graph: " << mfunction(g1, get_num_edges()) << '\n';
 				return err_type::test_execution;
 			}
 			sort(iter_edges.begin(), iter_edges.end());
-			vector<edge> graph_edges = ffunction(g1, enumerate_edges_brute_force);
+			std::vector<lal::edge> graph_edges = ffunction(g1, enumerate_edges_brute_force);
 			sort(graph_edges.begin(), graph_edges.end());
 			if (iter_edges != graph_edges) {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_CHECK_EDGE_IT);
-				cerr << "    The edges in graph '" << g1
-					 << "' do not coincide with those in the list." << endl;
-				cerr << "    List (" << iter_edges.size() << "):" << endl;
+				std::cerr << "    The edges in graph '" << g1
+					 << "' do not coincide with those in the list.\n";
+				std::cerr << "    List (" << iter_edges.size() << "):\n";
 				for (auto e : iter_edges) {
-					cerr << "    " << edge_out(e);
+					std::cerr << "    " << edge_out(e);
 					auto it = find(graph_edges.begin(), graph_edges.end(), e);
 					if (it == graph_edges.end()) {
-						cerr << " <- not in the graph!";
+						std::cerr << " <- not in the graph!";
 					}
-					cerr << endl;
+					std::cerr << '\n';
 				}
-				cerr << "    Graph (" << graph_edges.size() << "):" << endl;
+				std::cerr << "    Graph (" << graph_edges.size() << "):\n";
 				for (auto e : graph_edges) {
-					cerr << "    " << edge_out(e) << endl;
+					std::cerr << "    " << edge_out(e) << '\n';
 				}
-				cerr << "    Contents:" << endl;
+				std::cerr << "    Contents:\n";
 				output_graph(g1)
 				return err_type::test_execution;
 			}
@@ -384,78 +380,78 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_exists_variable(FUNC_OUTPUT_EDGES, g1);
 			if (graph_type(g1) == DGRAPH) {
-				for (E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
-					const edge e = e_it.get_edge();
-					cout << e.first << " " << e.second << endl;
+				for (lal::iterators::E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
+					const lal::edge e = e_it.get_edge();
+					std::cout << e.first << " " << e.second << '\n';
 				}
 			}
 			if (graph_type(g1) == UGRAPH) {
-				for (E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
-					const edge e = e_it.get_edge();
-					cout << e.first << " " << e.second << endl;
+				for (lal::iterators::E_iterator e_it(ugraphvars[g1]); not e_it.end(); e_it.next()) {
+					const lal::edge e = e_it.get_edge();
+					std::cout << e.first << " " << e.second << '\n';
 				}
 			}
 		}
 		else if (option == FUNC_GRAPH_CHECK_Q_IT) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_CHECK_Q_IT, g1);
-			vector<edge_pair> iter_pair_edges;
+			std::vector<lal::edge_pair> iter_pair_edges;
 			if (graph_type(g1) == DGRAPH) {
-				for (Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
+				for (lal::iterators::Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == UGRAPH) {
-				for (Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
+				for (lal::iterators::Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == FTREE) {
-				for (Q_iterator q_it(ftreevars[g1]); not q_it.end(); q_it.next()) {
+				for (lal::iterators::Q_iterator q_it(ftreevars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 			else if (graph_type(g1) == RTREE) {
-				for (Q_iterator q_it(rtreevars[g1]); not q_it.end(); q_it.next()) {
+				for (lal::iterators::Q_iterator q_it(rtreevars[g1]); not q_it.end(); q_it.next()) {
 					iter_pair_edges.push_back(q_it.get_edge_pair());
 					assert(not share_vertices(q_it.get_edge_pair()));
 				}
 			}
 
 			// check size
-			if (iter_pair_edges.size() != ffunction(g1, properties::num_pairs_independent_edges)) {
-				cerr << ERROR << endl;
+			if (iter_pair_edges.size() != ffunction(g1, lal::properties::num_pairs_independent_edges)) {
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_CHECK_Q_IT);
-				cerr << "    The amount of pairs obtained differs from the size of the set Q." << endl;
-				cerr << "    Number of pairs obtained: " << iter_pair_edges.size() << endl;
-				cerr << "    Size of the set Q: " << ffunction(g1, properties::num_pairs_independent_edges) << endl;
+				std::cerr << "    The amount of pairs obtained differs from the size of the set Q.\n";
+				std::cerr << "    Number of pairs obtained: " << iter_pair_edges.size() << '\n';
+				std::cerr << "    Size of the set Q: " << ffunction(g1, lal::properties::num_pairs_independent_edges) << '\n';
 				return err_type::test_execution;
 			}
 			sort(iter_pair_edges.begin(), iter_pair_edges.end());
-			vector<edge_pair> gpe = ffunction(g1, enumerate_Q_brute_force);
+			std::vector<lal::edge_pair> gpe = ffunction(g1, enumerate_Q_brute_force);
 			sort(gpe.begin(), gpe.end());
 			if (iter_pair_edges != gpe) {
-				cerr << ERROR << endl;
+				std::cerr << ERROR << '\n';
 				message_in_func(FUNC_GRAPH_CHECK_Q_IT);
-				cerr << "    The pairs in graph '" << g1
-					 << "' do not coincide with those in the list." << endl;
-				cerr << "    List (" << iter_pair_edges.size() << "):" << endl;
+				std::cerr << "    The pairs in graph '" << g1
+					 << "' do not coincide with those in the list.\n";
+				std::cerr << "    List (" << iter_pair_edges.size() << "):\n";
 				for (auto e : iter_pair_edges) {
-					cerr << "    " << edge_pair_out(e);
+					std::cerr << "    " << edge_pair_out(e);
 					auto it = find(gpe.begin(), gpe.end(), e);
 					if (it == gpe.end()) {
-						cerr << " <- not in the graph!";
+						std::cerr << " <- not in the graph!";
 					}
-					cerr << endl;
+					std::cerr << '\n';
 				}
-				cerr << "    Graph (" << gpe.size() << "):" << endl;
+				std::cerr << "    Graph (" << gpe.size() << "):\n";
 				for (auto e : gpe) {
-					cerr << "    " << edge_pair_out(e) << endl;
+					std::cerr << "    " << edge_pair_out(e) << '\n';
 				}
-				cerr << "    Contents:" << endl;
+				std::cerr << "    Contents:\n";
 				output_graph(g1)
 				return err_type::test_execution;
 			}
@@ -465,21 +461,21 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_OUTPUT_Q, g1);
 
 			if (graph_type(g1) == DGRAPH) {
-				for (Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
-					const edge_pair e = q_it.get_edge_pair();
-					cout
+				for (lal::iterators::Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
+					const lal::edge_pair e = q_it.get_edge_pair();
+					std::cout
 						<< "(" << e.first.first << " " << e.first.second << "), ("
 						<< e.second.first << " " << e.second.second << ")"
-						<< endl;
+						<< '\n';
 				}
 			}
 			if (graph_type(g1) == UGRAPH) {
-				for (Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
-					const edge_pair e = q_it.get_edge_pair();
-					cout
+				for (lal::iterators::Q_iterator q_it(ugraphvars[g1]); not q_it.end(); q_it.next()) {
+					const lal::edge_pair e = q_it.get_edge_pair();
+					std::cout
 						<< "(" << e.first.first << " " << e.first.second << "), ("
 						<< e.second.first << " " << e.second.second << ")"
-						<< endl;
+						<< '\n';
 				}
 			}
 		}
@@ -487,11 +483,11 @@ err_type exe_construction_test(ifstream& fin) {
 			fin >> g1;
 			assert_exists_variable(FUNC_Q_SIZE, g1)
 
-			cout <<
+			std::cout <<
 				(graph_type(g1) == DGRAPH ?
-					properties::num_pairs_independent_edges_integer(dgraphvars[g1]) :
-					properties::num_pairs_independent_edges_integer(ugraphvars[g1]))
-			<< endl;
+					lal::properties::num_pairs_independent_edges_integer(dgraphvars[g1]) :
+					lal::properties::num_pairs_independent_edges_integer(ugraphvars[g1]))
+			<< '\n';
 
 		}
 
@@ -516,13 +512,13 @@ err_type exe_construction_test(ifstream& fin) {
 			if (graph_type(g1) == FTREE) {
 				fin >> u;
 				const auto hv = ftreevars[g1].get_head_vector(u);
-				for (const auto& p : hv) { cout << p << " "; }
-				cout << endl;
+				for (const auto& p : hv) { std::cout << p << " "; }
+				std::cout << '\n';
 			}
 			else if (graph_type(g1) == RTREE) {
 				const auto hv = rtreevars[g1].get_head_vector();
-				for (const auto& p : hv) { cout << p << " "; }
-				cout << endl;
+				for (const auto& p : hv) { std::cout << p << " "; }
+				std::cout << '\n';
 			}
 		}
 
@@ -533,8 +529,8 @@ err_type exe_construction_test(ifstream& fin) {
 
 			uint64_t n;
 			fin >> n;
-			head_vector hv(n);
-			for (node& q : hv) { fin >> q; }
+			lal::head_vector hv(n);
+			for (lal::node& q : hv) { fin >> q; }
 
 			fin >> Boolean1 >> Boolean2;
 			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1);
@@ -544,7 +540,7 @@ err_type exe_construction_test(ifstream& fin) {
 				lal::graphs::from_head_vector_to_free_tree
 				(hv, Boolean1 == "true", Boolean2 == "true");
 
-			cout << "Root: " << t_root.second << endl;
+			std::cout << "Root: " << t_root.second << '\n';
 			ftreevars[g1] = std::move(t_root.first);
 			gtypes[g1] = FTREE;
 		}
@@ -554,7 +550,7 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2);
 			assert_not_exists_variable(FUNC_FTREE_TO_RTREE, g1);
 			assert_correct_graph_type(FUNC_FTREE_TO_RTREE, graph_type(g2), free_tree_types);
-			rtreevars[g1] = rooted_tree(ftreevars[g2], u);
+			rtreevars[g1] = lal::graphs::rooted_tree(ftreevars[g2], u);
 			gtypes[g1] = RTREE;
 		}
 
@@ -565,8 +561,8 @@ err_type exe_construction_test(ifstream& fin) {
 
 			uint64_t n;
 			fin >> n;
-			head_vector hv(n);
-			for (node& q : hv) { fin >> q; }
+			lal::head_vector hv(n);
+			for (lal::node& q : hv) { fin >> q; }
 
 			fin >> Boolean1 >> Boolean2;
 			assert_correct_boolean(FUNC_GRAPH_READ, Boolean1);
@@ -634,13 +630,13 @@ err_type exe_construction_test(ifstream& fin) {
 			assert_is_rtree(g1, FUNC_RTREE_DIR_TO_UNDIR);
 			const auto& T = rtreevars[g1];
 			if (not T.are_size_subtrees_valid()) {
-				cerr << ERROR << endl;
-				cerr << "    Tree '" << g1 << "' does not have valid subtree sizes." << endl;
+				std::cerr << ERROR << '\n';
+				std::cerr << "    Tree '" << g1 << "' does not have valid subtree sizes.\n";
 				return err_type::test_execution;
 			}
-			cout << "Subtree sizes:" << endl;
-			for (node ww = 0; ww < T.get_num_nodes(); ++ww) {
-				cout << "    " << ww << ": " << T.get_num_nodes_subtree(ww) << endl;
+			std::cout << "Subtree sizes:\n";
+			for (lal::node ww = 0; ww < T.get_num_nodes(); ++ww) {
+				std::cout << "    " << ww << ": " << T.get_num_nodes_subtree(ww) << '\n';
 			}
 		}
 
@@ -656,8 +652,8 @@ err_type exe_construction_test(ifstream& fin) {
 			if (e != err_type::no_error) { return e; }
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Invalid option '" << option << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Invalid option '" << option << "'.\n";
 			return err_type::test_format;
 		}
 	}
@@ -665,11 +661,11 @@ err_type exe_construction_test(ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_graphs_construction(const input_list& inputs, ifstream& fin) {
+err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 

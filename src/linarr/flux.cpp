@@ -42,33 +42,29 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
-using namespace std;
-
 // lal includes
 #include <lal/linarr/dependency_flux.hpp>
 #include <lal/linarr/flux.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
-using namespace lal;
-using namespace graphs;
 
 // common includes
 #include "common/definitions.hpp"
 
 #define test_integral_field(FIELD, field_str)									\
-	for (size_t i = 0; i < S; ++i) {											\
+	for (std::size_t i = 0; i < S; ++i) {											\
 		if (input_flux[i].FIELD() != algo_flux[i].FIELD()) {					\
-			cerr << ERROR << endl;												\
-			cerr << "    " << field_str << " do not agree at: " << i << endl;	\
-			cerr << "    Input:     " << input_flux[i].FIELD() << endl;			\
-			cerr << "    Algorithm: " << algo_flux[i].FIELD() << endl;			\
-			cerr << "    At tree:   " << tree_idx << endl;						\
+			std::cerr << ERROR << '\n';												\
+			std::cerr << "    " << field_str << " do not agree at: " << i << '\n';	\
+			std::cerr << "    Input:     " << input_flux[i].FIELD() << '\n';			\
+			std::cerr << "    Algorithm: " << algo_flux[i].FIELD() << '\n';			\
+			std::cerr << "    At tree:   " << tree_idx << '\n';						\
 			return err_type::test_execution;									\
 		}																		\
 	}
 
 #define hidden_stringize(x) #x
-#define stringize(x) hidden_stringize(x)
+#define stringize(x) hidden_std::stringize(x)
 
 #define parse_integral_field(FIELD)	\
 	for (auto& v : input_flux) { fin >> v.FIELD(); }
@@ -77,16 +73,16 @@ namespace tests {
 namespace linarr {
 
 namespace test_flux {
-inline ostream& operator<< (ostream& out, const edge& e) {
+inline std::ostream& operator<< (std::ostream& out, const lal::edge& e) {
 	out << "(" << e.first << "," << e.second << ")";
 	return out;
 }
 
 inline
-ostream& operator<< (ostream& out, const vector<edge>& deps) {
+std::ostream& operator<< (std::ostream& out, const std::vector<lal::edge>& deps) {
 	if (deps.size() > 0) {
 		out << deps[0];
-		for (size_t i = 1; i < deps.size(); ++i) {
+		for (std::size_t i = 1; i < deps.size(); ++i) {
 			out << " " << deps[i];
 		}
 	}
@@ -95,21 +91,21 @@ ostream& operator<< (ostream& out, const vector<edge>& deps) {
 } // -- namespace test_flux
 using namespace test_flux;
 
-err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
+err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin) {
 	if (inputs.size() != 0) {
-		cerr << ERROR << endl;
-		cerr << "    No input files are allowed in this test." << endl;
-		cerr << "    Instead, " << inputs.size() << " were given." << endl;
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}
 
-	string field;
-	free_tree T;
+	std::string field;
+	lal::graphs::free_tree T;
 
-	vector<lal::linarr::dependency_flux> algo_flux;
-	vector<lal::linarr::dependency_flux> input_flux;
-	size_t S = 0;
-	size_t tree_idx = 0;
+	std::vector<lal::linarr::dependency_flux> algo_flux;
+	std::vector<lal::linarr::dependency_flux> input_flux;
+	std::size_t S = 0;
+	std::size_t tree_idx = 0;
 
 	while (fin >> field) {
 		if (field == "tree") {
@@ -120,11 +116,11 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			assert(n > 0);
 #endif
 
-			vector<uint64_t> linear_sequence(n);
+			std::vector<uint64_t> linear_sequence(n);
 			for (auto& v : linear_sequence) { fin >> v; }
 
 			T.clear();
-			T = from_head_vector_to_free_tree(linear_sequence).first;
+			T = lal::graphs::from_head_vector_to_free_tree(linear_sequence).first;
 
 			algo_flux = lal::linarr::compute_flux(T);
 			input_flux.resize(n - 1);
@@ -150,18 +146,18 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			}
 
 			// test dependencies
-			for (size_t i = 0; i < S; ++i) {
+			for (std::size_t i = 0; i < S; ++i) {
 				auto ideps = input_flux[i].get_dependencies();
 				auto adeps = algo_flux[i].get_dependencies();
 
 				std::sort(ideps.begin(), ideps.end());
 				std::sort(adeps.begin(), adeps.end());
 				if (ideps != adeps) {
-					cerr << ERROR << endl;
-					cerr << "    Dependencies do not agree at: " << i << endl;
-					cerr << "    Input:     " << ideps << endl;
-					cerr << "    Algorithm: " << adeps << endl;
-					cerr << "    At tree:   " << tree_idx << endl;
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Dependencies do not agree at: " << i << '\n';
+					std::cerr << "    Input:     " << ideps << '\n';
+					std::cerr << "    Algorithm: " << adeps << '\n';
+					std::cerr << "    At tree:   " << tree_idx << '\n';
 					return err_type::test_execution;
 				}
 			}
@@ -171,9 +167,9 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,ifstream& fin) {
 			test_integral_field(get_weight, "Weights");
 		}
 		else {
-			cerr << ERROR << endl;
-			cerr << "    Input field/option not valid." << endl;
-			cerr << "    Received: '" << field << "'." << endl;
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Input field/option not valid.\n";
+			std::cerr << "    Received: '" << field << "'.\n";
 			return err_type::test_format;
 		}
 	}
