@@ -49,10 +49,10 @@ using namespace std;
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/graphs/directed_graph.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/graphs/cycles.hpp>
-#include <lal/internal/graphs/reachability.hpp>
+#include <lal/detail/graphs/cycles.hpp>
+#include <lal/detail/graphs/reachability.hpp>
 using namespace lal;
-using namespace internal;
+using namespace detail;
 using namespace graphs;
 
 // common includes
@@ -68,7 +68,7 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 	node s, t;
 	if (assert_what == "is_reachable") {
 		fin >> s >> t;
-		const bool is = lal::internal::is_node_reachable_from(g, s, t);
+		const bool is = lal::detail::is_node_reachable_from(g, s, t);
 		if (not is) {
 			cerr << ERROR << endl;
 			cerr << "    Vertex " << t << " is not reachable from " << s << endl;
@@ -77,7 +77,7 @@ err_type process_common_assertions(const G& g, const string& assert_what, ifstre
 	}
 	else if (assert_what == "is_not_reachable") {
 		fin >> s >> t;
-		const bool is = lal::internal::is_node_reachable_from(g, s, t);
+		const bool is = lal::detail::is_node_reachable_from(g, s, t);
 		if (is) {
 			cerr << ERROR << endl;
 			cerr << "    Vertex " << t << " is reachable from " << s << endl;
@@ -96,7 +96,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_dir_cycle") {
-		const bool has = lal::internal::has_directed_cycles(g);
+		const bool has = lal::detail::has_directed_cycles(g);
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have directed cycles" << endl;
@@ -104,7 +104,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		}
 	}
 	else if (assert_what == "hasnt_dir_cycle") {
-		const bool has = lal::internal::has_directed_cycles(g);
+		const bool has = lal::detail::has_directed_cycles(g);
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have directed cycles" << endl;
@@ -112,7 +112,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		}
 	}
 	else if (assert_what == "has_undir_cycle") {
-		const bool has = lal::internal::has_undirected_cycles(g);
+		const bool has = lal::detail::has_undirected_cycles(g);
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have undirected cycles" << endl;
@@ -120,7 +120,7 @@ err_type process_assert(const directed_graph& g, ifstream& fin) {
 		}
 	}
 	else if (assert_what == "hasnt_undir_cycle") {
-		const bool has = lal::internal::has_undirected_cycles(g);
+		const bool has = lal::detail::has_undirected_cycles(g);
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have undirected cycles" << endl;
@@ -138,7 +138,7 @@ err_type process_assert(const undirected_graph& g, ifstream& fin) {
 	string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_undir_cycle") {
-		const bool has = lal::internal::has_undirected_cycles(g);
+		const bool has = lal::detail::has_undirected_cycles(g);
 		if (not has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does not have undirected cycles" << endl;
@@ -146,7 +146,7 @@ err_type process_assert(const undirected_graph& g, ifstream& fin) {
 		}
 	}
 	else if (assert_what == "hasnt_undir_cycle") {
-		const bool has = lal::internal::has_undirected_cycles(g);
+		const bool has = lal::detail::has_undirected_cycles(g);
 		if (has) {
 			cerr << ERROR << endl;
 			cerr << "    Graph does have undirected cycles" << endl;

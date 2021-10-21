@@ -51,10 +51,10 @@ using namespace std;
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/internal/properties/tree_centre.hpp>
-#include <lal/internal/graphs/traversal.hpp>
+#include <lal/detail/properties/tree_centre.hpp>
+#include <lal/detail/graphs/traversal.hpp>
 using namespace lal;
-using namespace internal;
+using namespace detail;
 using namespace graphs;
 using namespace generate;
 
@@ -190,7 +190,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "find_centre") {
 			node s;
 			fin >> s;
-			const auto centre = lal::internal::retrieve_centre(t, s);
+			const auto centre = lal::detail::retrieve_centre(t, s);
 			cout << "centre: " << centre.first;
 			if (centre.second < t.get_num_nodes()) { cout << " " << centre.second; }
 			cout << endl;
@@ -198,7 +198,7 @@ err_type exe_commands_utils_centre(ifstream& fin) {
 		else if (option == "centre_is") {
 			node s;
 			fin >> s;
-			const auto centre = lal::internal::retrieve_centre(t, s);
+			const auto centre = lal::detail::retrieve_centre(t, s);
 
 			uint64_t centre_size;
 			fin >> centre_size;
@@ -268,7 +268,7 @@ err_type exe_full_utils_centre(const string& graph_type, ifstream& fin) {
 
 #define test_correctness(T)										\
 {																\
-	const auto lib_centre = lal::internal::retrieve_centre(T, 0);\
+	const auto lib_centre = lal::detail::retrieve_centre(T, 0);\
 	const auto easy_centre = straightforward_centre(T, 0);		\
 	if (not are_centres_equal(T.get_num_nodes(), lib_centre, easy_centre)) { \
 		cerr << ERROR << endl;									\

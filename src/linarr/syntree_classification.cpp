@@ -50,7 +50,7 @@ using namespace std;
 #include <lal/linarr/syntactic_dependency_structure.hpp>
 #include <lal/linarr/classify_syntactic_dependency_structure.hpp>
 #include <lal/graphs/conversions.hpp>
-#include <lal/internal/make_array.hpp>
+#include <lal/detail/make_array.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;
@@ -100,7 +100,7 @@ array<bool, __syntactic_dependency_structure_size> parse_ground_classes(string s
 {
 	// classes vector
 	auto classes =
-		lal::internal::make_array_with_value<bool, __syntactic_dependency_structure_size, false>();
+		lal::detail::make_array_with_value<bool, __syntactic_dependency_structure_size, false>();
 
 	if (s.length() == 0) {
 		const syndepstr_type sdtt = string_to_syntreetype("none").first;

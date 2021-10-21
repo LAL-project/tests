@@ -120,7 +120,7 @@ err_type test_for_n_while
 	// number of generated trees
 	integer gen = 0;
 
-	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
 	size_t it = 0;
 
 	while (not TreeGen.end()) {
@@ -140,7 +140,7 @@ err_type test_for_n_for
 	// number of generated trees
 	integer gen = 0;
 
-	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
 	size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -159,7 +159,7 @@ err_type test_for_n_yield
 	// number of generated trees
 	integer gen = 0;
 
-	internal::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
+	detail::data_array<rooted_tree> all_rooted_trees(URT[n].to_uint());
 	size_t it = 0;
 
 	while (not TreeGen.end()) {

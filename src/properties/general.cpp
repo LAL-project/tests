@@ -58,7 +58,7 @@ using namespace std;
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/properties/mean_hierarchical_distance.hpp>
-#include <lal/internal/graphs/is_tree.hpp>
+#include <lal/detail/graphs/is_tree.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace numeric;
@@ -170,8 +170,8 @@ err_type mmt_in_deg(const undirected_graph& uG, const directed_graph& dG, uint64
 		 << moment_in_degree_rational(dG, p)
 		 << endl;
 
-	const bool is_tree_dG = internal::is_graph_a_tree(dG);
-	const bool is_tree_uG = internal::is_graph_a_tree(uG);
+	const bool is_tree_dG = detail::is_graph_a_tree(dG);
+	const bool is_tree_uG = detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
 		cerr << ERROR << endl;
@@ -217,8 +217,8 @@ err_type mmt_out_deg(const undirected_graph& uG, const directed_graph& dG, uint6
 		 << moment_out_degree_rational(dG, p)
 		 << endl;
 
-	const bool is_tree_dG = internal::is_graph_a_tree(dG);
-	const bool is_tree_uG = internal::is_graph_a_tree(uG);
+	const bool is_tree_dG = detail::is_graph_a_tree(dG);
+	const bool is_tree_uG = detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
 		cerr << ERROR << endl;
@@ -252,7 +252,7 @@ err_type mmt_out_deg(const undirected_graph& uG, const directed_graph& dG, uint6
 //
 
 void hubiness_coefficient(const undirected_graph& g) {
-	if (not internal::is_graph_a_tree(g)) { return; }
+	if (not detail::is_graph_a_tree(g)) { return; }
 	if (g.get_num_nodes() > 3) {
 		rational h = hubiness_rational(g);
 		cout << "hubiness= " << h << endl;
@@ -260,7 +260,7 @@ void hubiness_coefficient(const undirected_graph& g) {
 }
 
 void MHD(const undirected_graph& g, node r) {
-	if (not internal::is_graph_a_tree(g)) { return; }
+	if (not detail::is_graph_a_tree(g)) { return; }
 	const free_tree t(g);
 	const rooted_tree R(t, r);
 	const rational mhd = mean_hierarchical_distance_rational(R);

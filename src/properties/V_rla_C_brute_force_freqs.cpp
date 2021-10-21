@@ -51,7 +51,7 @@ using namespace std;
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
-#include <lal/internal/data_array.hpp>
+#include <lal/detail/data_array.hpp>
 using namespace lal;
 using namespace numeric;
 using namespace graphs;

@@ -58,7 +58,7 @@ using namespace std;
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/internal/graphs/conversions.hpp>
+#include <lal/detail/graphs/conversions.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace linarr;

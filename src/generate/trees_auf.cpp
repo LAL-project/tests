@@ -146,7 +146,7 @@ err_type test_for_n_while
 	integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	internal::data_array<free_tree> all_free_trees(UFT[n].to_uint());
+	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
 	size_t it = 0;
 
 	while (not TreeGen.end()) {
@@ -170,7 +170,7 @@ err_type test_for_n_for
 	integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	internal::data_array<free_tree> all_free_trees(UFT[n].to_uint());
+	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
 	size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -193,7 +193,7 @@ err_type test_for_n_yield
 	integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	internal::data_array<free_tree> all_free_trees(UFT[n].to_uint());
+	detail::data_array<free_tree> all_free_trees(UFT[n].to_uint());
 	size_t it = 0;
 
 	while (not TreeGen.end()) {

@@ -45,8 +45,8 @@
 using namespace std;
 
 // lal includes
-#include <lal/internal/data_array.hpp>
-using namespace lal::internal;
+#include <lal/detail/data_array.hpp>
+using namespace lal::detail;
 
 // common includes
 #include "common/definitions.hpp"

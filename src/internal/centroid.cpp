@@ -52,9 +52,9 @@ using namespace std;
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/internal/properties/tree_centroid.hpp>
-#include <lal/internal/graphs/size_subtrees.hpp>
-#include <lal/internal/graphs/traversal.hpp>
+#include <lal/detail/properties/tree_centroid.hpp>
+#include <lal/detail/graphs/size_subtrees.hpp>
+#include <lal/detail/graphs/traversal.hpp>
 using namespace lal;
 using namespace graphs;
 using namespace generate;
@@ -68,7 +68,7 @@ inline bool is_centroidal(
 )
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
-	internal::get_size_subtrees(t, u, sizes);
+	detail::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_out_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
@@ -87,7 +87,7 @@ inline bool is_centroidal(
 )
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
-	internal::get_size_subtrees(t, u, sizes);
+	detail::get_size_subtrees(t, u, sizes);
 	for (const node v : t.get_neighbours(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
@@ -103,7 +103,7 @@ pair<node,node> straightforward_centroid(const T& t, node x) {
 	uint64_t size_cc = 0;
 	vector<node> reachable;
 	{
-	internal::BFS<T> bfs(t);
+	detail::BFS<T> bfs(t);
 	bfs.set_use_rev_edges(t.is_rooted());
 	bfs.set_process_current(
 	[&](const auto&, node s) -> void { reachable.push_back(s); ++size_cc; }
@@ -175,7 +175,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "find_centroid") {
 			node s;
 			fin >> s;
-			const auto centroid = lal::internal::retrieve_centroid(t, s);
+			const auto centroid = lal::detail::retrieve_centroid(t, s);
 			cout << "centroid: " << centroid.first;
 			if (centroid.second < t.get_num_nodes()) { cout << " " << centroid.second; }
 			cout << endl;
@@ -183,7 +183,7 @@ err_type exe_commands_utils_centroid(ifstream& fin) {
 		else if (option == "centroid_is") {
 			node start_at;
 			fin >> start_at;
-			const auto centroid = lal::internal::retrieve_centroid(t, start_at);
+			const auto centroid = lal::detail::retrieve_centroid(t, start_at);
 
 			uint64_t centroid_size;
 			fin >> centroid_size;
@@ -263,7 +263,7 @@ err_type exe_full_utils_centroid(const string& graph_type, ifstream& fin) {
 
 #define test_correctness(T)											\
 {																	\
-	const auto lib_centroid = lal::internal::retrieve_centroid(T, 0);\
+	const auto lib_centroid = lal::detail::retrieve_centroid(T, 0);\
 	const auto easy_centroid = straightforward_centroid(T, 0);		\
 	if (not are_centroids_equal(T,lib_centroid, easy_centroid)) {	\
 		cerr << ERROR << endl;										\

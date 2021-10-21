@@ -49,9 +49,9 @@
 using namespace std;
 
 // lal includes
-#include <lal/internal/sorting/insertion_sort.hpp>
-#include <lal/internal/sorting/bit_sort.hpp>
-#include <lal/internal/sorting/counting_sort.hpp>
+#include <lal/detail/sorting/insertion_sort.hpp>
+#include <lal/detail/sorting/bit_sort.hpp>
+#include <lal/detail/sorting/counting_sort.hpp>
 using namespace lal;
 
 // common includes
@@ -237,11 +237,11 @@ void here_counting_sort(
 {
 	const size_t size = std::distance(begin,end);
 	if (incr) {
-		lal::internal::counting_sort<T,It,lal::internal::countingsort::increasing_t>
+		lal::detail::counting_sort<T,It,lal::detail::countingsort::increasing_t>
 		(begin, end, n, size, key);
 	}
 	else {
-		lal::internal::counting_sort<T,It,lal::internal::countingsort::decreasing_t>
+		lal::detail::counting_sort<T,It,lal::detail::countingsort::decreasing_t>
 		(begin, end, n, size, key);
 	}
 }
@@ -317,7 +317,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			lal::internal::insertion_sort(begin, end);
+			lal::detail::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e = check_sorting("insertion", s, n, this_sort, true);
@@ -334,7 +334,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			lal::internal::bit_sort<Ui>
+			lal::detail::bit_sort<Ui>
 			(begin, end, std::distance(begin, end));
 		};
 		for (Ui k = 0; k < R; ++k) {
@@ -352,7 +352,7 @@ err_type exe_rand_sorting(const string& option, ifstream& fin) {
 		// bit array
 		vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			lal::internal::bit_sort_mem<Ui>
+			lal::detail::bit_sort_mem<Ui>
 			(begin, end, std::distance(begin, end), &seen[0]);
 		};
 		// execute test
