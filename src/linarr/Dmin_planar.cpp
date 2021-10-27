@@ -73,10 +73,10 @@ std::pair<uint64_t,lal::linear_arrangement> Dmin_planar_quadratic(const lal::gra
 		const auto Dmin_proj = lal::linarr::min_sum_edge_lengths_projective(rt);
 		if (Dmin_planar > Dmin_proj.first) {
 			Dmin_planar = Dmin_proj.first;
-			arr = Dmin_proj.second;
+			arr = std::move(Dmin_proj.second);
 		}
 	}
-	return {Dmin_planar, arr};
+	return {Dmin_planar, std::move(arr)};
 }
 
 inline
@@ -91,7 +91,8 @@ bool check_correctness_arr(
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The arrangement produced by the library is not an actual\n";
 		std::cerr << "    arrangement or is not planar.\n";
-		std::cerr << "    Arrangement: " << arr << '\n';
+		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
+		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 		std::cerr << "    For tree: \n";
 		std::cerr << tree << '\n';
 		return false;
@@ -101,8 +102,8 @@ bool check_correctness_arr(
 	if (D != res.first) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "    Arrangement:     " << res.second << '\n';
-		std::cerr << "    Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "    Arrangement:     " << res.second.direct_as_vector() << '\n';
+		std::cerr << "    Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
 		std::cerr << "    Value of D returned: " << res.first << '\n';
 		std::cerr << "    Actual value of D:   " << D << '\n';
 		std::cerr << "    For tree: \n";
@@ -131,9 +132,9 @@ err_type check_tree(const lal::graphs::free_tree& T, const lal::linarr::algorith
 		std::cerr << "    The library produced a result that does not correspond to\n";
 		std::cerr << "    quadratic algorithm's result.\n";
 		std::cerr << "    Library: " << Dmin_planar_library.first << '\n';
-		std::cerr << "        Arrangement: " << Dmin_planar_library.second << '\n';
+		std::cerr << "        Arrangement: " << Dmin_planar_library.second.direct_as_vector() << '\n';
 		std::cerr << "    Quadratic: " << Dmin_planar_quadratic.first << '\n';
-		std::cerr << "        Arrangement: " << Dmin_planar_quadratic.second << '\n';
+		std::cerr << "        Arrangement: " << Dmin_planar_quadratic.second.direct_as_vector() << '\n';
 		std::cerr << "    For tree:\n";
 		std::cerr << T << '\n';
 		return err_type::test_execution;

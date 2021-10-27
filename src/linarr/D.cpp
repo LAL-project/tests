@@ -53,6 +53,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/std_utils.hpp"
 
 namespace tests {
 namespace linarr {
@@ -93,7 +94,6 @@ err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) {
 
 	// linear arrangement
 	const uint64_t n = G.get_num_nodes();
-	std::vector<lal::node> T(n);
 	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
@@ -101,18 +101,15 @@ err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) {
 	fin >> n_linarrs;
 
 	for (std::size_t i = 0; i < n_linarrs; ++i) {
-		// read linear arrangement
-		for (lal::node u = 0; u < G.get_num_nodes(); ++u) {
-			fin >> T[u];
-			pi[ T[u] ] = u;
+		// read ¡INVERSE! linear arrangement
+		lal::node u;
+		for (lal::position pu = 0; pu < n; ++pu) {
+			fin >> u;
+			pi.assign(u, pu);
 		}
 
 		// output
-		std::cout << "[" << T[0];
-		for (lal::node j = 1; j < G.get_num_nodes(); ++j) {
-			std::cout << ", " << T[j];
-		}
-		std::cout << "]: ";
+		std::cout << "[" << pi.inverse_as_vector() << "]: ";
 
 		if (proc == "D") {
 			std::cout << lal::linarr::sum_edge_lengths(G, pi) << '\n';

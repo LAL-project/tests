@@ -56,6 +56,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/std_utils.hpp"
 #include "common/time.hpp"
 
 #define to_int64(x) static_cast<int64_t>(x)
@@ -118,16 +119,20 @@ lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement
 		const lal::edge_pair st_uv = q_it.get_edge_pair();
 		const lal::edge st = st_uv.first;
 		const lal::edge uv = st_uv.second;
-		const lal::node s = st.first;
-		const lal::node t = st.second;
-		const lal::node u = uv.first;
-		const lal::node v = uv.second;
+		const lal::node_t s = st.first;
+		const lal::node_t t = st.second;
+		const lal::node_t u = uv.first;
+		const lal::node_t v = uv.second;
 
 		uint64_t al;
 		uint64_t be;
 
-		const uint64_t len_st = to_uint64(std::abs(to_int64(pi[s]) - to_int64(pi[t])));
-		const uint64_t len_uv = to_uint64(std::abs(to_int64(pi[u]) - to_int64(pi[v])));
+		const uint64_t len_st =
+			to_uint64(std::abs(to_int64(pi[s]) - to_int64(pi[t])));
+
+		const uint64_t len_uv =
+			to_uint64(std::abs(to_int64(pi[u]) - to_int64(pi[v])));
+
 		assert(len_st <= n);
 		assert(len_uv <= n);
 
@@ -180,7 +185,6 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 
 	// linear arrangement
 	const uint64_t n = uG.get_num_nodes();
-	std::vector<lal::node> T(n);
 	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
@@ -189,9 +193,10 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 
 	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (lal::node u = 0; u < uG.get_num_nodes(); ++u) {
-			fin >> T[u];
-			pi[ T[u] ] = u;
+		lal::node u;
+		for (lal::position pu = 0; pu < n; ++pu) {
+			fin >> u;
+			pi.assign(u, pu);
 		}
 
 		// compute value using library and compare it with brute force method
@@ -203,11 +208,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 			std::cerr << "    do not coincide.\n";
 			std::cerr << "        ap_lib_u= " << ap_lib_u << '\n';
 			std::cerr << "        ap_lib_d= " << ap_lib_d << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (std::size_t _i = 1; _i < T.size(); ++_i) {
-				std::cerr << ", " << T[_i];
-			}
-			std::cerr << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 
@@ -219,11 +220,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 			std::cerr << "    do not coincide.\n";
 			std::cerr << "        ap_bf_u= " << ap_bf_u << '\n';
 			std::cerr << "        ap_bf_d= " << ap_bf_d << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (std::size_t _i = 1; _i < T.size(); ++_i) {
-				std::cerr << ", " << T[_i];
-			}
-			std::cerr << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 
@@ -233,11 +230,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 			std::cerr << "    brute force value.\n";
 			std::cerr << "        Library's value: " << ap_lib_u << '\n';
 			std::cerr << "        Brute force's value: " << ap_bf_u << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << T[0];
-			for (std::size_t _i = 1; _i < T.size(); ++_i) {
-				std::cerr << ", " << T[_i];
-			}
-			std::cerr << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 	}

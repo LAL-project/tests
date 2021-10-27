@@ -46,7 +46,7 @@
 #include <string>
 #include <set>
 // lal includes
-#include <lal/definitions.hpp>
+#include <lal/basic_types.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 
@@ -89,12 +89,6 @@ std::string read_output_string(std::ifstream& fin) noexcept {
 
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
-
-std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr) noexcept {
-	std::vector<lal::node> ilin(arr.size());
-	for (uint64_t p : arr) { ilin[ arr[p] ] = p; }
-	return ilin;
-}
 
 #define to_uint64(x) static_cast<uint64_t>(x)
 

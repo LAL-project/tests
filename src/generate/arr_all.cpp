@@ -62,8 +62,8 @@
 		std::cerr << ERROR << '\n';											\
 		std::cerr << "    In check: " << c << '\n';							\
 		std::cerr << "    Generation of arrangement failed with error:\n";	\
-		std::cerr << "    Arrangement:     " << arr << '\n';				\
-		std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';		\
+		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n'; \
+		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n'; \
 		std::cerr << "    For tree:\n";										\
 		std::cerr << T << '\n';												\
 		std::cerr << T.get_head_vector() << '\n';							\
@@ -83,7 +83,7 @@
 		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
 		std::cerr << "    List of arrangements:\n";							\
 		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v << '\n';								\
+		std::cerr << "        " << v.direct_as_vector() << '\n';\
 		}																	\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << T << '\n';												\

@@ -78,15 +78,14 @@ err_type test_arrangement(std::ifstream& fin) {
 	g.set_edges(edges);
 	}
 
-	std::vector<lal::node> inv_arr;
+	lal::linear_arrangement arr;
 	{
+	std::vector<lal::node> inv_arr;
 	int p;
-	while (fin >> p and p != -1) { inv_arr.push_back(p); }
+	while (fin >> p and p != -1) {
+		inv_arr.push_back(p);
 	}
-
-	lal::linear_arrangement arr(inv_arr.size());
-	for (lal::position p = 0; p < inv_arr.size(); ++p) {
-		arr[inv_arr[p]] = p;
+	arr = lal::linear_arrangement::from_inverse(inv_arr);
 	}
 
 	std::string check;
@@ -97,7 +96,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is not a permutation\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Input: " << arr << '\n';
+				std::cerr << "    Input: " << arr.direct_as_vector() << '\n';
 				return err_type::test_execution;
 			}
 		}
@@ -107,7 +106,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is a permutation.\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Input: " << arr << '\n';
+				std::cerr << "    Input: " << arr.direct_as_vector() << '\n';
 				return err_type::test_execution;
 			}
 		}
@@ -117,7 +116,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is not an arrangement of the input graph\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -129,7 +128,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is an arrangement of the input graph\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -141,7 +140,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is not a planar arrangement of the input graph\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Number of crossings: "
 					 << lal::linarr::num_crossings(g, arr)
 					 << '\n';
@@ -156,7 +155,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is a planar arrangement of the input graph\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Number of crossings: "
 					 << lal::linarr::num_crossings(g, arr)
 					 << '\n';
@@ -178,7 +177,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is not a projective arrangement of the input graph\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Number of crossings: "
 					 << lal::linarr::num_crossings(g, arr)
 					 << '\n';
@@ -201,7 +200,7 @@ err_type test_arrangement(std::ifstream& fin) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input arrangement is a projective arrangement of the input graph\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 				std::cerr << "    Number of crossings: "
 					 << lal::linarr::num_crossings(g, arr)
 					 << '\n';

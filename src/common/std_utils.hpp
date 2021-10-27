@@ -44,6 +44,9 @@
 #include <ostream>
 #include <vector>
 
+// lal includes
+#include <lal/linear_arrangement.hpp>
+
 template<typename T>
 std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 	if (v.size() == 0) { return os; }

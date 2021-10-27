@@ -55,7 +55,7 @@ namespace io_wrapper {
 template<class G>
 err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm) {
 
-	if (format == "lal::edge_list" or format == "lal::edge-list") {
+	if (format == "edge_list" or format == "edge-list") {
 		auto r = lal::io::read_edge_list<G>(file, norm, false);
 		if (not r) {
 			std::cerr << ERROR << '\n';

@@ -88,7 +88,7 @@ bool check_correctness_arr(
 	if (not lal::linarr::is_permutation(arr)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The result is not an arrangement (permutation).\n";
-		std::cerr << "    Arrangement: " << arr << '\n';
+		std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
 		std::cerr << "    For tree: \n";
 		std::cerr << tree << '\n';
 		return false;
@@ -98,8 +98,8 @@ bool check_correctness_arr(
 	if (D != res.first) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "    Arrangement:     " << res.second << '\n';
-		std::cerr << "    Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "    Arrangement:     " << res.second.direct_as_vector() << '\n';
+		std::cerr << "    Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
 		std::cerr << "    Value of D returned: " << res.first << '\n';
 		std::cerr << "    Actual value of D:   " << D << '\n';
 		std::cerr << "    For tree: \n";
@@ -149,9 +149,15 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin
 
 	const std::set<std::string> allowed_algos({"Plan", "YS", "FC"});
 
-	const auto Plan = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths_planar(t); };
-	const auto FC = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
-	const auto YS = [](const lal::graphs::free_tree& t) -> algo_result { return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
+	const auto Plan =
+		[](const lal::graphs::free_tree& t) -> algo_result
+		{ return lal::linarr::min_sum_edge_lengths_planar(t); };
+	const auto FC =
+		[](const lal::graphs::free_tree& t) -> algo_result
+		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
+	const auto YS =
+		[](const lal::graphs::free_tree& t) -> algo_result
+		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
 
 	std::map<std::string, std::function<algo_result (const lal::graphs::free_tree&)> > ALGOS;
 	ALGOS["Plan"] = Plan;
@@ -185,9 +191,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin
 		uint64_t n;
 		fin >> n;
 
-		std::cout << "Testing '" << mode << "' for "
-			 << "'" << algo1 << "' " << comp << " '" << algo2 << "'"
-			 << " on size: " << n;
+		std::cout
+			<< "Testing '" << mode << "' for "
+			<< "'" << algo1 << "' " << comp << " '" << algo2 << "'"
+			<< " on size: " << n;
 
 		if (mode == "exhaustive") {
 			std::cout << '\n';
@@ -214,10 +221,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin
 						 << '\n';
 					std::cerr << "    Algorithm: " << algo1 << '\n';
 					std::cerr << "        D= " << res1.first << '\n';
-					std::cerr << "        Arrangement: " << res1.second << '\n';
+					std::cerr << "        Arrangement: " << res1.second.direct_as_vector() << '\n';
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
-					std::cerr << "        Arrangement: " << res2.second << '\n';
+					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
 					std::cerr << " In tree:\n";
 					std::cerr << tree << '\n';
 					return err_type::test_execution;
@@ -250,10 +257,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin
 						 << '\n';
 					std::cerr << "    Algorithm: " << algo1 << '\n';
 					std::cerr << "        D= " << res1.first << '\n';
-					std::cerr << "        Arrangement: " << res1.second << '\n';
+					std::cerr << "        Arrangement: " << res1.second.direct_as_vector() << '\n';
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
-					std::cerr << "        Arrangement: " << res2.second << '\n';
+					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
 					std::cerr << " In tree:\n";
 					std::cerr << tree << '\n';
 					return err_type::test_execution;

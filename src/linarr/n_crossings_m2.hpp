@@ -42,7 +42,8 @@
 #include <vector>
 
 // lal includes
-#include <lal/definitions.hpp>
+#include <lal/basic_types.hpp>
+#include <lal/linear_arrangement.hpp>
 
 namespace tests {
 namespace linarr {
@@ -56,16 +57,18 @@ inline uint64_t num_crossings_brute_force(
 	const std::vector<lal::edge> edges = g.get_edges();
 	uint64_t C = 0;
 
-#define sorted_by_pos(A,B) \
-	(pi[A] < pi[B] ? std::make_pair(pi[A],pi[B]) : std::make_pair(pi[B],pi[A]))
+#define sorted_by_pos(pA,pB) \
+	(pA < pB ? std::make_pair(pA,pB) : std::make_pair(pB,pA))
 
 	for (std::size_t i = 0; i < edges.size(); ++i) {
-		const auto& [s,t] = edges[i];
-		const auto [a,b] = sorted_by_pos(s,t);
+		const lal::node_t s = edges[i].first;
+		const lal::node_t t = edges[i].second;
+		const auto [a,b] = sorted_by_pos(pi[s], pi[t]);
 
 		for (std::size_t j = i + 1; j < edges.size(); ++j) {
-			const auto& [u,v] = edges[j];
-			const auto [c,d] = sorted_by_pos(u,v);
+			const lal::node_t u = edges[j].first;
+			const lal::node_t v = edges[j].second;
+			const auto [c,d] = sorted_by_pos(pi[u],pi[v]);
 
 			C += (c < a and a < d and d < b) or (a < c and c < b and b < d);
 		}

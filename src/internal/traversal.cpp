@@ -182,7 +182,7 @@ err_type test_without_graph(std::ifstream& fin) {
 	G g;
 	std::string command;
 	while (fin >> command) {
-		if (command == "add_lal::edge") {
+		if (command == "add_edge") {
 			lal::node u,v;
 			fin >> u >> v;
 			g.add_edge(u,v);

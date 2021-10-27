@@ -79,7 +79,8 @@ bool check_correctness_arr(const lal::graphs::free_tree& tree, const std::pair<u
 	if (not lal::linarr::is_permutation(arr)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The result is not an arrangement (permutation).\n";
-		std::cerr << "        Arrangement: " << arr << '\n';
+		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
+		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 		std::cerr << "    For tree: \n";
 		std::cerr << tree << '\n';
 		return false;
@@ -89,8 +90,8 @@ bool check_correctness_arr(const lal::graphs::free_tree& tree, const std::pair<u
 	if (D != res.first) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "        Arrangement:     " << res.second << '\n';
-		std::cerr << "        Inv Arrangement: " << invlinarr(res.second) << '\n';
+		std::cerr << "        Arrangement:     " << res.second.direct_as_vector() << '\n';
+		std::cerr << "        Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
 		std::cerr << "        Value of D returned: " << res.first << '\n';
 		std::cerr << "        Actual value of D:   " << D << '\n';
 		std::cerr << "    For tree: \n";
@@ -114,8 +115,8 @@ bool test_correctness_arr_formula(
 		std::cerr << "    Values of unconstrained Dmin do not coincide.\n";
 		std::cerr << "    Library:\n";
 		std::cerr << "        Value: " << res_lib.first << '\n';
-		std::cerr << "        Arrangement:     " << res_lib.second << '\n';
-		std::cerr << "        Inv Arrangement: " << invlinarr(res_lib.second) << '\n';
+		std::cerr << "        Arrangement:     " << res_lib.second.direct_as_vector() << '\n';
+		std::cerr << "        Inv Arrangement: " << res_lib.second.inverse_as_vector() << '\n';
 		std::cerr << "    Formula for class of trees '" << tree_class << "':\n";
 		std::cerr << "        Value: " << val_formula << '\n';
 		std::cerr << "    For tree: \n";

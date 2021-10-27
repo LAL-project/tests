@@ -225,14 +225,16 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) {
 			}
 			else {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Centroid size has to be either 1 or 2. Instead, received '" << centroid_size << "'.\n";
+				std::cerr
+					<< "    Centroid size has to be either 1 or 2. Instead, received '"
+					<< centroid_size << "'.\n";
 				return err_type::test_format;
 			}
 		}
 		else if (option == "output_graph") {
 			std::cout << t << '\n';
 		}
-		else if (option == "remove_lal::edge") {
+		else if (option == "remove_edge") {
 			lal::node u,v;
 			fin >> u >> v;
 			t.remove_edge(u,v);

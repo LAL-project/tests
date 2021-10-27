@@ -51,6 +51,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/std_utils.hpp"
 #include "common/time.hpp"
 
 // linarr includes
@@ -110,16 +111,18 @@ err_type exe_linarr_C_list
 	fin >> n_linarrs;
 
 	// linear arrangements
-	std::vector<std::vector<lal::node>> inv_arrs(n_linarrs, std::vector<lal::node>(uG.get_num_nodes()));
-	std::vector<lal::linear_arrangement> arrangements(n_linarrs, lal::linear_arrangement(uG.get_num_nodes()));
+	std::vector<lal::linear_arrangement> arrangements
+			(n_linarrs, lal::linear_arrangement(n));
+
 	uint64_t single_upper_bound;
 	std::vector<uint64_t> list_upper_bounds(n_linarrs, 0);
 
 	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint64_t u = 0; u < uG.get_num_nodes(); ++u) {
-			fin >> inv_arrs[i][u];
-			arrangements[i][ inv_arrs[i][u] ] = u;
+		for (lal::node u = 0; u < n; ++u) {
+			lal::position p;
+			fin >> p;
+			arrangements[i].assign(u, p);
 		}
 
 		if (upper_bound_type == 2) {
@@ -139,11 +142,7 @@ err_type exe_linarr_C_list
 			std::cerr << "        uCbfs: " << uCbfs[i] << '\n';
 			std::cerr << "        dCbfs: " << dCbfs[i] << '\n';
 			std::cerr << "    For linear arrangement " << i << ":\n";
-			std::cerr << "    [" << inv_arrs[i][0];
-			for (std::size_t j = 1; j < n; ++j) {
-				std::cerr << "," << inv_arrs[i][j];
-			}
-			std::cerr << "]\n";
+			std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -183,11 +182,7 @@ err_type exe_linarr_C_list
 			std::cerr << "        " << proc << " (undirected): " << uCs[i] << '\n';
 			std::cerr << "        " << proc << " (directed): " << dCs[i] << '\n';
 			std::cerr << "    For linear arrangement " << i << ":\n";
-			std::cerr << "    [" << inv_arrs[i][0];
-			for (std::size_t j = 1; j < n; ++j) {
-				std::cerr << "," << inv_arrs[i][j];
-			}
-			std::cerr << "]\n";
+			std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -201,11 +196,7 @@ err_type exe_linarr_C_list
 				std::cerr << "        brute force: " << uCbfs[i] << '\n';
 				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
 				std::cerr << "    For linear arrangement " << i << ":\n";
-				std::cerr << "    [" << inv_arrs[i][0];
-				for (std::size_t j = 1; j < n; ++j) {
-					std::cerr << "," << inv_arrs[i][j];
-				}
-				std::cerr << "]\n";
+				std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
 				return err_type::test_execution;
 			}
 		}
@@ -228,12 +219,8 @@ err_type exe_linarr_C_list
 				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbfs[i] << '\n';
 				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
-				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-				std::cerr << "    [" << inv_arrs[i][0];
-				for (std::size_t j = 1; j < n; ++j) {
-					std::cerr << "," << inv_arrs[i][j];
-				}
-				std::cerr << "]\n";
+				std::cerr << "    For linear arrangement function " << i << ":\n";
+				std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
 				std::cerr << "    Undirected graph:\n";
 				std::cerr << uG << '\n';
 				std::cerr << "    Directed graph:\n";
@@ -261,11 +248,7 @@ err_type exe_linarr_C_list
 				std::cerr << "        brute force: " << uCbfs[i] << '\n';
 				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
 				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-				std::cerr << "    [" << inv_arrs[i][0];
-				for (std::size_t j = 1; j < n; ++j) {
-					std::cerr << "," << inv_arrs[i][j];
-				}
-				std::cerr << "]\n";
+				std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
 				std::cerr << "    Undirected graph:\n";
 				std::cerr << uG << '\n';
 				std::cerr << "    Directed graph:\n";

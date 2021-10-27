@@ -79,8 +79,8 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 	if (not lal::linarr::is_projective(rT, arr)) {							\
 		std::cerr << ERROR << '\n';											\
 		std::cerr << "    Generation of arrangement failed with error:\n";	\
-		std::cerr << "    Arrangement:     " << arr << '\n';				\
-		std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';		\
+		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';	\
+		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << rT << '\n';											\
 		return err_type::test_execution;									\
@@ -98,7 +98,7 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
 		std::cerr << "    List of arrangements:\n";							\
 		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v << '\n';								\
+		std::cerr << "        " << v.direct_as_vector() << '\n';\
 		}																	\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << rT << '\n';											\

@@ -40,12 +40,15 @@
 
 #include "graphs.hpp"
 
-// C++ includes
-
-// lal includes
-
 namespace tests {
 namespace memory {
+
+// NOTE: blank lines left intentionally. DO NOT REMOVE or the tests will
+// fail with error (because the number lines of the new execution will not
+// match the number lines in the base output).
+//
+//
+//
 
 void test_move_directed_graph() {
 	begin_function;

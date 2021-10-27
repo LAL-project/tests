@@ -54,6 +54,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/std_utils.hpp"
 #include "common/time.hpp"
 
 // linarr includes
@@ -100,7 +101,6 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 
 	// linear arrangement
 	const uint64_t n = uG.get_num_nodes();
-	std::vector<lal::node> T(n);
 	lal::linear_arrangement pi(n);
 
 	// amount of linear arrangements
@@ -109,9 +109,10 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 
 	for (std::size_t i = 0; i < n_linarrs; ++i) {
 		// read linear arrangement
-		for (uint64_t u = 0; u < uG.get_num_nodes(); ++u) {
-			fin >> T[u];
-			pi[ T[u] ] = u;
+		lal::position p;
+		for (lal::node u = 0; u < n; ++u) {
+			fin >> p;
+			pi.assign(u, p);
 		}
 
 		const uint64_t uCbf = num_crossings_brute_force(uG, pi);
@@ -122,12 +123,8 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 			std::cerr << "    Comparing results for directed and undirected graphs.\n";
 			std::cerr << "    uCbf= " << uCbf << '\n';
 			std::cerr << "    dCbf= " << dCbf << '\n';
-			std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-			std::cerr << "    [" << T[0];
-			for (std::size_t j = 1; j < n; ++j) {
-				std::cerr << "," << T[j];
-			}
-			std::cerr << "]\n";
+			std::cerr << "    For linear arrangement function " << i << ":\n";
+			std::cerr << "        " << pi.direct_as_vector() << '\n';
 			return err_type::test_execution;
 		}
 
@@ -163,12 +160,8 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 			std::cerr << "    coincide with the undirected graph.\n";
 			std::cerr << "    uC= " << uC << '\n';
 			std::cerr << "    dC= " << dC << '\n';
-			std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-			std::cerr << "    [" << T[0];
-			for (std::size_t j = 1; j < n; ++j) {
-				std::cerr << "," << T[j];
-			}
-			std::cerr << "]\n";
+			std::cerr << "    For linear arrangement function " << i << ":\n";
+			std::cerr << "        " << pi.direct_as_vector() << '\n';
 			return err_type::test_execution;
 		}
 
@@ -189,12 +182,8 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
-				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-				std::cerr << "    [" << T[0];
-				for (std::size_t j = 1; j < n; ++j) {
-					std::cerr << "," << T[j];
-				}
-				std::cerr << "]\n";
+				std::cerr << "    For linear arrangement function " << i << ":\n";
+				std::cerr << "        direct: " << pi.direct_as_vector() << '\n';
 				std::cerr << "    Undirected graph:\n";
 				std::cerr << uG << '\n';
 				std::cerr << "    Directed graph:\n";
@@ -209,12 +198,8 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
-				std::cerr << "    For inverse linear arrangement function " << i << ":\n";
-				std::cerr << "    [" << T[0];
-				for (std::size_t j = 1; j < n; ++j) {
-					std::cerr << "," << T[j];
-				}
-				std::cerr << "]\n";
+				std::cerr << "    For linear arrangement function " << i << ":\n";
+				std::cerr << "        direct: " << pi.direct_as_vector() << '\n';
 				std::cerr << "    Undirected graph:\n";
 				std::cerr << uG << '\n';
 				std::cerr << "    Directed graph:\n";

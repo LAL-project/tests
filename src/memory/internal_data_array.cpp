@@ -56,6 +56,7 @@ using namespace lal::detail;
 #define MOVE
 #define COPY
 
+// LINE LEFT BLANK INTENTIONALLY
 namespace tests {
 namespace memory {
 

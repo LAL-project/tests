@@ -237,7 +237,7 @@ err_type exe_commands_utils_centre(std::ifstream& fin) {
 		else if (option == "output_graph") {
 			std::cout << t << '\n';
 		}
-		else if (option == "remove_lal::edge") {
+		else if (option == "remove_edge") {
 			lal::node u,v;
 			fin >> u >> v;
 			t.remove_edge(u,v);

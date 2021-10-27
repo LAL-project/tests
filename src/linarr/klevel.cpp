@@ -124,14 +124,11 @@ err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin) {
 		}
 	}
 
-	// linear arrangement
-	std::vector<std::vector<lal::node>> Ts;
-	std::vector<lal::linear_arrangement> pis;
-
 	// amount of linear arrangements
 	std::size_t n_linarrs;
 	fin >> n_linarrs;
 
+	// only valid values: 0, Gs.size()
 	if (not (n_linarrs == 0 or n_linarrs == Gs.size())) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The number of linear arrangements does not equal 0\n";
@@ -141,20 +138,23 @@ err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin) {
 		return err_type::test_format;
 	}
 
+	// linear arrangements
+	std::vector<lal::linear_arrangement> pis;
+
 	if (n_linarrs != 0) {
-		Ts = std::vector<std::vector<lal::position>>(n_linarrs);
+		// read arrangements from input
 		pis = std::vector<lal::linear_arrangement>(n_linarrs);
 
 		for (std::size_t i = 0; i < n_linarrs; ++i) {
 			const uint64_t Ni = Gs[i].get_num_nodes();
 
-			Ts[i] = std::vector<lal::position>(Ni);
 			pis[i] = lal::linear_arrangement(Ni);
 
-			// read all linear arrangement
-			for (lal::node u = 0; u < Ni; ++u) {
-				fin >> Ts[i][u];
-				pis[i][ Ts[i][u] ] = u;
+			// read all ¡INVERSE! linear arrangement
+			lal::node u;
+			for (lal::position pu = 0; pu < Ni; ++pu) {
+				fin >> u;
+				pis[i].assign(u, pu);
 			}
 		}
 	}

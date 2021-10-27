@@ -85,8 +85,8 @@ err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fi
 				if (not lal::linarr::is_projective(rT, arr)) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Generation of random arrangement failed with error:\n";
-					std::cerr << "    Arrangement:     " << arr << '\n';
-					std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';
+					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
+					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << rT << '\n';
 					return err_type::test_execution;
@@ -100,8 +100,8 @@ err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fi
 				if (not lal::linarr::is_projective(rT, arr)) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Generation of random arrangement failed with error:\n";
-					std::cerr << "    Arrangement:     " << arr << '\n';
-					std::cerr << "    Inv Arrangement: " << invlinarr(arr) << '\n';
+					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
+					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << rT << '\n';
 					return err_type::test_execution;

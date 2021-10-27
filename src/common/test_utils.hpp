@@ -44,7 +44,7 @@
 #include <string>
 
 // lal includes
-#include <lal/definitions.hpp>
+#include <lal/basic_types.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 
@@ -58,8 +58,6 @@ std::string read_output_string(std::ifstream& fin) noexcept;
 
 /* -------------------------------------------------------------------------- */
 /* ----- Utilities related to the library -- not so much to the tests ------- */
-
-std::vector<lal::node> invlinarr(const lal::linear_arrangement& arr) noexcept;
 
 void shuffle_graph_edges(
 	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G,
