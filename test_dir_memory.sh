@@ -10,14 +10,14 @@ memory_graphs_DIRS=(\
 	"memory/graphs" "memory/graphs" \
 	)
 
-# internal tests
-memory_internal_DIRS=(\
-	"memory/internal" "memory/internal" \
+# detail tests
+memory_detail_DIRS=(\
+	"memory/detail" "memory/detail" \
 	)
 
 # memory tests
 memory_DIRS=(\
 	"${memory_numeric_DIRS[@]}" \
 	"${memory_graphs_DIRS[@]}" \
-	"${memory_internal_DIRS[@]}" \
+	"${memory_detail_DIRS[@]}" \
 	)

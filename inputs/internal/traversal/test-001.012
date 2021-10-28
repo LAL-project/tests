@@ -1,7 +1,0 @@
-TYPE internal-traversal
-INPUT 1 graphs/complete/10 edge-list
-BODY
-	dgraph
-	
-	assert hasnt_dir_cycle
-	assert has_undir_cycle

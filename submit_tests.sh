@@ -33,7 +33,7 @@ group=graphs
 echo $group" - "$mode
 sbatch --mem=$memory --job-name=tests_"$mode" -p $queue -o $info/"$group".out -e $info/"$group".err ./test.sh $valgrind_param --$mode --exe-group=$group --log-file="$group"_log --storage-dir=$info
 
-group=internal
+group=detail
 echo $group" - "$mode
 sbatch --mem=$memory --job-name=tests_"$mode" -p $queue -o $info/"$group".out -e $info/"$group".err ./test.sh $valgrind_param --$mode --exe-group=$group --log-file="$group"_log --storage-dir=$info
 

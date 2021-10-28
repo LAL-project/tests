@@ -1,0 +1,6 @@
+TYPE detail-traversal
+INPUT 1 graphs/linear-tree/010 edge-list
+BODY
+	dgraph
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle

@@ -109,25 +109,25 @@ struct extra_params {
 	all_free_trees[it] = std::move(T);										\
 	++it;
 
-#define check																							\
-	/* check the number of caterpillar trees is correct */												\
-	const lal::numeric::integer n_cat = num_caterpillar_trees(n);														\
-	if (n_cat != n_caterpillar) {																		\
-		std::cerr << ERROR << '\n';																			\
+#define check																						\
+	/* check the number of caterpillar trees is correct */											\
+	const lal::numeric::integer n_cat = num_caterpillar_trees(n);									\
+	if (n_cat != n_caterpillar) {																	\
+		std::cerr << ERROR << '\n';																	\
 		std::cerr << "    Number of caterpillar trees detected does not agree with the formula.\n";	\
-		std::cerr << "    Number of vertices: " << n << '\n';												\
-		std::cerr << "    Formula:  " << n_cat << '\n';														\
-		std::cerr << "    Detected: " << n_caterpillar << '\n';												\
-		return err_type::test_execution;																\
-	}																									\
-	/* make sure that the amount of trees generate coincides with the series from the OEIS */			\
-	if (n < UFT.size() and gen != UFT[n]) {																\
-		std::cerr << ERROR << '\n';																			\
-		std::cerr << "    Exhaustive generation of unlabelled free trees\n";							\
-		std::cerr << "    Amount of trees should be: " << UFT[n] << '\n';									\
-		std::cerr << "    But generated: " << gen << '\n';													\
-		std::cerr << "    For a size of " << n << " vertices\n";										\
-		return err_type::test_execution;																\
+		std::cerr << "    Number of vertices: " << n << '\n';										\
+		std::cerr << "    Formula:  " << n_cat << '\n';												\
+		std::cerr << "    Detected: " << n_caterpillar << '\n';										\
+		return err_type::test_execution;															\
+	}																								\
+	/* make sure that the amount of trees generate coincides with the series from the OEIS */		\
+	if (n < UFT.size() and gen != UFT[n]) {															\
+		std::cerr << ERROR << '\n';																	\
+		std::cerr << "    Exhaustive generation of unlabelled free trees\n";						\
+		std::cerr << "    Amount of trees should be: " << UFT[n] << '\n';							\
+		std::cerr << "    But generated: " << gen << '\n';											\
+		std::cerr << "    For a size of " << n << " vertices\n";									\
+		return err_type::test_execution;															\
 	}
 
 err_type test_for_n_while

@@ -29,11 +29,11 @@ groups_list=(\
 		"graphs_construction" \
 		"graphs_tree_types" \
 	\
-	"internal" \
-		"internal_centre" \
-		"internal_centroid" \
-		"internal_sorting" \
-		"internal_traversal" \
+	"detail" \
+		"detail_centre" \
+		"detail_centroid" \
+		"detail_sorting" \
+		"detail_traversal" \
 	\
 	"io"
 	"io_correctness"
@@ -87,7 +87,7 @@ groups_list=(\
 	"memory" \
 		"memory_graphs" \
 		"memory_numeric" \
-		"memory_internal" \
+		"memory_detail" \
 	\
 	"numeric" \
 	\

@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    detail \
     common \
 	generate \
     graphs \
-	internal \
 	io \
 	linarr \
 	memory \
@@ -13,9 +13,9 @@ SUBDIRS += \
 	utilities \
 	tests
 
+detail.depends = common
 generate.depends = common
 graphs.depends = common
-internal.depends = common
 io.depends = common
 linarr.depends = common
 memory.depends = common

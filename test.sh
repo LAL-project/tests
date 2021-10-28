@@ -5,9 +5,9 @@
 
 source test_groups.sh
 
+source test_dir_detail.sh
 source test_dir_generate.sh
 source test_dir_graphs.sh
-source test_dir_internal.sh
 source test_dir_io.sh
 source test_dir_linarr.sh
 source test_dir_memory.sh
@@ -65,6 +65,12 @@ function show_usage() {
 	echo "    --exe-group=t : execute a group of tests. Available groups are:"
 	echo "        all : execute all tests"
 	echo ""
+	echo "        detail : execute detail tests"
+	echo "            detail_sorting : execute sorting detail tests"
+	echo "            detail_centre : execute centre detail tests"
+	echo "            detail_centroid : execute centroid detail tests"
+	echo "            detail_traversal : execute traversal detail tests"
+	echo ""
 	echo "        generate : execute generation tests"
 	echo "            generate_trees : execute generation tests for all trees"
 	echo "                generate_trees_all : execute tests for exhaustive generation of trees"
@@ -90,12 +96,6 @@ function show_usage() {
 	echo "        graphs : execute all graph tests"
 	echo "            graphs_construction : execute graph construction tests"
 	echo "            graphs_tree_types : execute tree classification tests"
-	echo ""
-	echo "        internal : execute internal tests"
-	echo "            internal_sorting : execute sorting internal tests"
-	echo "            internal_centre : execute centre internal tests"
-	echo "            internal_centroid : execute centroid internal tests"
-	echo "            internal_traversal : execute traversal internal tests"
 	echo ""
 	echo "        io : execute io tests"
 	echo "            io_correctness : execute correctness tests of treebanks"
@@ -149,7 +149,7 @@ function show_usage() {
 	echo "        memory : execute tests that try to stress the memory (Usage of valgrind and execution of a debug compilation are encouraged)"
 	echo "            memory_graphs : execute tests for the graphs namespace only"
 	echo "            memory_numeric : execute tests for the numeric namespace only"
-	echo "            memory_internal : execute tests for the internal namespace only"
+	echo "            memory_detail : execute tests for the detail namespace only"
 	echo ""
 	echo "        numeric : execute numeric tests"
 	echo ""
@@ -718,7 +718,7 @@ echo "$(date +"%Y/%m/%d.%T")" >> $log_file
 echo "$(date +"%Y/%m/%d.%T")" >> $log_file
 if [ $EXECUTE_FROM_GROUP == 1 ]; then
 	if [ "$exe_group" == "all" ]; then
-		for g in "generate" "graphs" "internal" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
+		for g in "detail" "generate" "graphs" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
 			apply_group $g
 		done
 	else

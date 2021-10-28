@@ -1,0 +1,50 @@
+TYPE detail-traversal
+INPUT 0
+BODY
+	dgraph
+	init 10
+	
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 3 4
+	
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
+	add_edge 5 6
+	add_edge 6 7
+	add_edge 7 8
+	add_edge 8 9
+	
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
+	add_edge 0 2
+	
+	assert hasnt_dir_cycle
+	assert has_undir_cycle
+	
+	init 10
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 3 4
+	
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
+	add_edge 1 3
+	
+	assert hasnt_dir_cycle
+	assert has_undir_cycle
+
+	init 10
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 3
+	add_edge 3 4
+	
+	assert hasnt_dir_cycle
+	assert hasnt_undir_cycle
+	add_edge 2 4
+	
+	assert hasnt_dir_cycle
+	assert has_undir_cycle

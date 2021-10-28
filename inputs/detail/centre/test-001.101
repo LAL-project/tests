@@ -1,0 +1,12 @@
+TYPE detail-centre
+INPUT 0
+BODY
+	automatic rtree
+	random
+	50 5000
+	55 5000
+	60 5000
+	100 5000
+	73 5000
+	91 5000
+	101 5000

@@ -1,0 +1,36 @@
+TYPE detail-centroid
+INPUT 0
+BODY
+	manual ftree
+	init 1
+	centroid_is 0 1 0
+	
+	
+	
+	init 2
+	centroid_is 0 1 0
+	centroid_is 1 1 1
+	
+	add_edges 1
+		0 1
+	centroid_is 0 2 0 1
+	centroid_is 1 2 0 1
+
+
+
+	init 3
+	centroid_is 0 1 0
+	centroid_is 1 1 1
+	centroid_is 2 1 2
+	
+	add_edges 1
+		0 1
+	centroid_is 0 2 0 1
+	centroid_is 1 2 0 1
+	centroid_is 2 1 2
+	
+	add_edges 1
+		1 2
+	centroid_is 0 1 1
+	centroid_is 1 1 1
+	centroid_is 2 1 1

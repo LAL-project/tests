@@ -1,0 +1,6 @@
+TYPE detail-traversal
+INPUT 1 graphs/complete-bipartite/4-9 edge-list
+BODY
+	dgraph
+	assert hasnt_dir_cycle
+	assert has_undir_cycle

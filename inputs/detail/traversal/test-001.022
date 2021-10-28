@@ -1,0 +1,19 @@
+TYPE detail-traversal
+INPUT 0
+BODY
+	dgraph
+	init 5
+	add_edge 3 0
+	add_edge 3 2
+	
+	add_edge 0 1
+	add_edge 1 2
+	add_edge 2 0
+	
+	add_edge 0 4
+	add_edge 1 4
+	add_edge 2 4
+	
+	
+	assert has_dir_cycle
+	assert has_undir_cycle
