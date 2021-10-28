@@ -56,7 +56,6 @@ err_type test_exhaustive_enumeration_of_trees
 (uint64_t n1, uint64_t n2, const Callable& f, const extra_params& ep)
 noexcept
 {
-
 	Gen TreeGen;
 
 	for (auto n = n1; n <= n2; ++n) {
