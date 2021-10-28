@@ -52,7 +52,6 @@
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
-#include "common/time.hpp"
 
 // linarr includes
 #include "linarr/n_crossings_m2.hpp"
@@ -100,9 +99,6 @@ err_type exe_linarr_C_list
 		}
 		return err_type::test_format;
 	}
-
-	timing::time_point begin, end;
-	double total_elapsed = 0.0;
 
 	const uint64_t n = uG.get_num_nodes();
 
@@ -159,7 +155,6 @@ err_type exe_linarr_C_list
 	std::vector<uint64_t> uCs, dCs;
 
 	// compute all C
-	begin = timing::now();
 	if (upper_bound_type == 0) {
 		uCs = num_crossings_list(uG, arrangements, choose_algo);
 		dCs = num_crossings_list(dG, arrangements, choose_algo);
@@ -172,8 +167,6 @@ err_type exe_linarr_C_list
 		uCs = is_num_crossings_lesseq_than_list(uG, arrangements, list_upper_bounds, choose_algo);
 		dCs = is_num_crossings_lesseq_than_list(dG, arrangements, list_upper_bounds, choose_algo);
 	}
-	end = timing::now();
-	total_elapsed += timing::elapsed_milliseconds(begin, end);
 
 	for (uint64_t i = 0; i < n_linarrs; ++i) {
 		if (dCs[i] != uCs[i]) {
@@ -256,13 +249,6 @@ err_type exe_linarr_C_list
 				return err_type::test_execution;
 			}
 		}
-	}
-
-	std::string time_filename;
-	if (fin >> time_filename) {
-		std::ofstream fout;
-		fout.open(time_filename.c_str());
-		fout << "Total time: " << total_elapsed << " ms\n";
 	}
 
 	TEST_GOODBYE

@@ -55,7 +55,6 @@
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
-#include "common/time.hpp"
 
 // linarr includes
 #include "linarr/n_crossings_m2.hpp"
@@ -96,8 +95,6 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 		std::cerr << "    Procedure '" << proc << "' was found.\n";
 		return err_type::test_format;
 	}
-
-	double total_elapsed = 0.0;
 
 	// linear arrangement
 	const uint64_t n = uG.get_num_nodes();
@@ -140,18 +137,12 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 		uint64_t upper_bound;
 		if (has_upper_bound) {
 			fin >> upper_bound;
-			const auto begin = timing::now();
 			uC = is_num_crossings_lesseq_than(uG, pi, upper_bound, choose_algo);
 			dC = is_num_crossings_lesseq_than(dG, pi, upper_bound, choose_algo);
-			const auto end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 		else {
-			const auto begin = timing::now();
 			uC = num_crossings(uG, pi, choose_algo);
 			dC = num_crossings(dG, pi, choose_algo);
-			const auto end = timing::now();
-			total_elapsed += timing::elapsed_milliseconds(begin, end);
 		}
 
 		if (uC != dC) {
@@ -207,14 +198,6 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 				return err_type::test_execution;
 			}
 		}
-	}
-
-	std::string time_filename;
-	if (fin >> time_filename) {
-		std::ofstream fout;
-		fout.open(time_filename.c_str());
-		fout << "Total time: " << total_elapsed << " ms\n";
-		fout.close();
 	}
 
 	TEST_GOODBYE
