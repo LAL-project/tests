@@ -20,11 +20,11 @@ function make_makefiles {
 
 	make_single common $DEBCONF
 
+	make_single detail $DEBCONF
+
 	make_single generate $DEBCONF
 
 	make_single graphs $DEBCONF
-
-	make_single internal $DEBCONF
 
 	make_single io $DEBCONF
 
