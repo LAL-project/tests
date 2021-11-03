@@ -71,6 +71,7 @@ err_type exe_linarr_C_list(const input_list& inputs, std::ifstream& fin, char up
 err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_headedness(const input_list& inputs,std::ifstream& fin);
 err_type exe_linarr_syntree_classification(const input_list& inputs,std::ifstream& fin);
+err_type exe_linarr_linear_arrangement(const input_list& inputs,std::ifstream& fin);
 err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin);
 err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin);
 err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin);

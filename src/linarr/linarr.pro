@@ -63,6 +63,7 @@ SOURCES += \
 	flux.cpp \
 	headedness.cpp \
 	klevel.cpp \
+	linear_arrangement.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	predicted_C.cpp \

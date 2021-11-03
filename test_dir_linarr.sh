@@ -5,6 +5,11 @@ linarr_arrangement_validity_DIRS=(\
 	"linarr/arrangement_validity" "linarr/arrangement_validity" \
 	)
 
+# tests on the construction of linear arrangements
+linarr_linear_arrangement_DIRS=(\
+	"linarr/linear_arrangement" "linarr/linear_arrangement" \
+	)
+
 # approximation of the number of crossings
 linarr_E_2Cd_DIRS=(\
 	"linarr/E_2Cd" "linarr/E_2Cd" \
@@ -184,6 +189,7 @@ linarr_MDD_DIRS=(\
 # linear arrangements tests
 linarr_DIRS=(\
 	"${linarr_arrangement_validity_DIRS[@]}" \
+	"${linarr_linear_arrangement_DIRS[@]}" \
 	"${linarr_E_2Cd_DIRS[@]}" \
 	"${linarr_D_DIRS[@]}" \
 	"${linarr_Dmin_DIRS[@]}" \

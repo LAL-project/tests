@@ -83,6 +83,7 @@ groups_list=(\
 		"linarr_k_level" \
 		"linarr_MDD" \
 		"linarr_arrangement_validity" \
+		"linarr_linear_arrangement" \
 	\
 	"memory" \
 		"memory_graphs" \

@@ -153,6 +153,9 @@ err_type call_linarr
 	if (key == "dependency_flux") {
 		return parse_header(exe_linarr_dependency_flux, fin);
 	}
+	if (key == "linear_arrangement") {
+		return parse_header(exe_linarr_linear_arrangement, fin);
+	}
 	if (key == "approx_exp_C") {
 		return parse_header(exe_linarr_approx_Exp_C, fin);
 	}

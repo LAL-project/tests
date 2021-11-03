@@ -102,6 +102,7 @@ function show_usage() {
 	echo ""
 	echo "        linarr : execute linear arrangement tests"
 	echo "            linarr_arrangement_validity : tests for the classification of arrangements in projective, planar and unconstrained"
+	echo "            linarr_linear_arrangement : tests for the construction of linear arrangements"
 	echo "            linarr_E_2Cd : execute linear arrangement (approximation of C) tests"
 	echo "                linarr_C : number of edge crossings tests"
 	echo "                linarr_C_bruteforce : number of edge crossings tests (brute force algorithm)"
