@@ -44,6 +44,9 @@
 
 // lal includes
 #include <lal/linear_arrangement.hpp>
+#include <lal/generate/rand_lab_free_trees.hpp>
+#include <lal/linarr/C.hpp>
+#include <lal/graphs/output.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -331,6 +334,42 @@ void case_6() noexcept {
 	__case_6(5, {{1,0}, {2,3}, {0,4}, {1,3}});
 }
 
+err_type case_7() {
+	begin_function;
+
+	lal::generate::rand_lab_free_trees Gen;
+	for (uint64_t n = 10; n < 210; n += 10) {
+		begin_case;
+		std::cout << "n= " << n << '\n';
+
+		Gen.init(n, 1234);
+		for (std::size_t i = 0; i < 100; ++i) {
+			const auto t = Gen.get_tree();
+
+			lal::linear_arrangement arr = lal::linear_arrangement::identity(n);
+			const auto C = lal::linarr::num_crossings(t, arr);
+
+			for (std::size_t j = 0; j < n; ++j) {
+				arr.shift_left();
+				auto C2 = lal::linarr::num_crossings(t, arr);
+
+				if (C != C2) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Number of crossings differ.\n";
+					std::cerr << "    C(identity)= " << C << '\n';
+					std::cerr << "    C(shifted)= " << C2 << '\n';
+					std::cerr << "   " << arr << '\n';
+					std::cerr << "    For tree:\n";
+					std::cerr << t << '\n';
+					return err_type::test_execution;
+				}
+			}
+		}
+	}
+
+	return err_type::no_error;
+}
+
 err_type exe_linarr_linear_arrangement
 (const input_list& inputs, std::ifstream&)
 {
@@ -352,6 +391,13 @@ err_type exe_linarr_linear_arrangement
 	// set of manual manipulations
 
 	case_6();
+
+	// ensuring that the number of crossings stays the same
+
+	{
+	auto r = case_7();
+	if (r != err_type::no_error) { return r; }
+	}
 
 	return err_type::no_error;
 }
