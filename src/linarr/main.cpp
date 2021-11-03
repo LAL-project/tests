@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	std::string input_file(argv[2]);
+	const std::string input_file(argv[2]);
 	if (not std::filesystem::exists(input_file)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Input test '" << input_file << "' does not exist.\n";
