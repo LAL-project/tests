@@ -83,7 +83,7 @@ struct extra_params { };
 	   with labelled ROOTED trees!															\
 	   https://oeis.org/A000169/list */														\
 	const lal::numeric::integer nn(n);														\
-	const lal::numeric::integer total(n == 1 ? 1 : (nn.pow(nn - 1)));						\
+	const lal::numeric::integer total(n == 1 ? 1 : (nn.power(nn - 1)));						\
 	if (gen != total) {																		\
 		std::cerr << ERROR << '\n';															\
 		std::cerr << "    Exhaustive generation of labelled rooted trees\n";				\

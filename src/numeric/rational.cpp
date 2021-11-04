@@ -240,7 +240,7 @@ static inline lal::numeric::rational resolve_op_rational(
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
 	if (op == "/") { return var1 / var2; }
-	if (op == "^") { return var1.pow(var2); }
+	if (op == "^") { return var1.power(var2); }
 	return -1;
 }
 

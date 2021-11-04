@@ -187,7 +187,7 @@ lal::numeric::integer resolve_integer_operation
 	if (op == "/") { return var1 / var2; }
 	// NOTE: var2, when it is an int64_t, its
 	// signedness changes into uint64_t.
-	if (op == "^") { return var1.pow(var2); }
+	if (op == "^") { return var1.power(var2); }
 	return -1;
 }
 

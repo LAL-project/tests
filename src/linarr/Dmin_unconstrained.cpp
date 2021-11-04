@@ -291,7 +291,7 @@ err_type test_class_algorithm(
 				lal::numeric::rational F = h;
 				F /= 3; // k/3
 				F += lal::numeric::rational(5,18); // k/3 + 5/18
-				F *= lal::numeric::integer(2).pow(h); // 2^k(k/3 + 5/18)
+				F *= lal::numeric::integer(2).power(h); // 2^k(k/3 + 5/18)
 
 				F += lal::numeric::rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
 				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
