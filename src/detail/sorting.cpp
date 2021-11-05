@@ -238,11 +238,11 @@ noexcept
 {
 	const std::size_t size = std::distance(begin,end);
 	if (incr) {
-		lal::detail::counting_sort<T,It,lal::detail::countingsort::increasing_t>
+		lal::detail::counting_sort<T,It,lal::detail::countingsort::non_decreasing_t>
 		(begin, end, n, size, key);
 	}
 	else {
-		lal::detail::counting_sort<T,It,lal::detail::countingsort::decreasing_t>
+		lal::detail::counting_sort<T,It,lal::detail::countingsort::non_increasing_t>
 		(begin, end, n, size, key);
 	}
 }
