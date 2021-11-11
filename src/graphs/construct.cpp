@@ -77,7 +77,7 @@
 #define FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO "remove_edges_incident_to"
 #define FUNC_GRAPH_NORMALISE "normalise"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
-#define FUNC_GRAPH_CHECK_EDGE_IT "check_lal::edge_iterator"
+#define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
 #define FUNC_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_OUTPUT_Q "output_Q"
@@ -90,7 +90,7 @@
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
-#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_lal::edge_orientation"
+#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_edge_orientation"
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
 #define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
 
