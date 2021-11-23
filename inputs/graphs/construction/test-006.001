@@ -10,6 +10,8 @@ BODY
 		false true
 	assert normalised t1
 	assert not_exists_edge t1 2 3
+	assert tree_type_not_valid t1
+	/* we can't calculate the tree type of t1 because it is not an actual tree */
 	
 	create_graph ftree t2 4
 	add_edges t2 3
@@ -20,9 +22,15 @@ BODY
 	assert normalised t2
 	assert exists_edge t2 2 3
 	
+	assert is_tree t2
+	assert tree_type_not_valid t2
+	calculate_tree_type t2
+	assert tree_type_valid t2
+	
 	create_graph ftree T 0
 	disjoint_union T T t1
 	disjoint_union T T t2
+	assert tree_type_not_valid T
 	
 	assert not_exists_edge T 2 3
 	assert exists_edge T 8 9
@@ -33,3 +41,6 @@ BODY
 	add_edge T 2 3 false true
 	add_edge T 5 6 false true
 	assert is_tree T
+	assert tree_type_not_valid T
+	calculate_tree_type T
+	assert tree_type_valid T

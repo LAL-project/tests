@@ -12,6 +12,9 @@ BODY
 		3 4
 		false true
 	set_root t1 0
+	assert tree_type_not_valid t1
+	calculate_tree_type t1
+	assert tree_type_valid t1
 	
 	create_graph rtree t2 4
 	add_edges t2 3
@@ -20,12 +23,17 @@ BODY
 		2 3
 		false true
 	set_root t2 0
+	assert tree_type_not_valid t2
+	calculate_tree_type t2
+	assert tree_type_valid t2
 	
 	disjoint_union T T t1 false
 	assert has_root T
+	assert tree_type_valid T
 	
 	disjoint_union T T t2 false
 	assert has_root T
+	assert tree_type_not_valid T
 	
 	assert not_exists_edge T 0 6
 	

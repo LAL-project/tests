@@ -1,0 +1,45 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree t 6
+	
+	set_edges t 5
+		0 1
+		1 2
+		2 3
+		3 4
+		4 5
+		true true
+	
+	assert tree_type_not_valid t
+	calculate_tree_type t
+	assert tree_type_valid t
+	
+	remove_edge t 4 5 true true
+	assert is_not_tree t
+	assert tree_type_not_valid t
+	
+	add_edge t 4 5 true true
+	assert is_tree t
+	assert tree_type_not_valid t
+	calculate_tree_type t
+	assert tree_type_valid t
+	
+	remove_edges t 2
+		4 5
+		3 4
+		true true
+	assert is_not_tree t
+	assert tree_type_not_valid t
+	
+	add_edges t 2
+		4 5
+		3 4
+		true true
+	assert tree_type_not_valid t
+	calculate_tree_type t
+	assert tree_type_valid t
+	
+	remove_edges_incident_to t 3 true true
+	assert is_not_tree t
+	assert tree_type_not_valid t
