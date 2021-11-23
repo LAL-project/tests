@@ -202,6 +202,12 @@ COMMANDS AVAILABLE
 	-- is_not_rooted TREE
 		asserts that the tree is NOT rooted
 	
+	-- tree_type_valid TREE
+		asserts that the tree type (linear, caterpillar, ...) is valid
+	
+	-- tree_type_not_valid TREE
+		asserts that the tree type (linear, caterpillar, ...) is not valid
+	
 	ROOTED TREES
 	============
 	
@@ -252,6 +258,9 @@ TREES
 	Outputs the head vector of a tree.
 	In case the tree is a FREE tree then we need an extra value which the root node.
 	In case the tree is a ROOTED tree there is no extra value.
+
+** calculate_tree_type TREE
+	Calculates the type of tree (linear, caterpillar, ...)
 
 ROOTED TREES
 ============

@@ -676,6 +676,32 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 	}
+	else if (assert_what == ASSERT_TREE_TYPE_VALID) {
+		fin >> g1;
+		assert_exists_variable(ASSERT_TREE_TYPE_VALID, g1)
+		assert_correct_graph_type(
+			ASSERT_TREE_TYPE_VALID, graph_type(g1), tree_types
+		)
+		if (not mfunction_trees(g1, is_tree_type_valid())) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_TREE_TYPE_VALID)
+			std::cerr << "    Tree type of tree '" << g1 << "' is not valid.\n";
+			return err_type::test_execution;
+		}
+	}
+	else if (assert_what == ASSERT_TREE_TYPE_NOT_VALID) {
+		fin >> g1;
+		assert_exists_variable(ASSERT_TREE_TYPE_NOT_VALID, g1)
+		assert_correct_graph_type(
+			ASSERT_TREE_TYPE_NOT_VALID, graph_type(g1), tree_types
+		)
+		if (mfunction_trees(g1, is_tree_type_valid())) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_TREE_TYPE_NOT_VALID)
+			std::cerr << "    Tree type of tree '" << g1 << "' is valid.\n";
+			return err_type::test_execution;
+		}
+	}
 
 	// ROOTED TREES
 	else if (assert_what == ASSERT_RTREE_SUBSTREE_SIZES_VALID) {

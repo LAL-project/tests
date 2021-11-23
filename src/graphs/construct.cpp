@@ -86,6 +86,7 @@
 #define FUNC_TREE_OUTPUT_HEAD_VECTOR "output_head_vector"
 #define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
 #define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
+#define FUNC_FTREE_CALCULATE_TREE_TYPE "calculate_tree_type"
 #define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
@@ -504,10 +505,12 @@ err_type exe_construction_test(std::ifstream& fin) {
 			gtypes[g1] = UGRAPH;
 		}
 
+		// TREES
 		else if (option == FUNC_TREE_OUTPUT_HEAD_VECTOR) {
 			fin >> g1;
 			assert_exists_variable(FUNC_DGRAPH_TO_UGRAPH, g1);
-			assert_correct_graph_type(FUNC_TREE_OUTPUT_HEAD_VECTOR, graph_type(g1), tree_types);
+			assert_correct_graph_type
+				(FUNC_TREE_OUTPUT_HEAD_VECTOR, graph_type(g1), tree_types);
 
 			if (graph_type(g1) == FTREE) {
 				fin >> u;
@@ -519,6 +522,19 @@ err_type exe_construction_test(std::ifstream& fin) {
 				const auto hv = rtreevars[g1].get_head_vector();
 				for (const auto& p : hv) { std::cout << p << " "; }
 				std::cout << '\n';
+			}
+		}
+		else if (option == FUNC_FTREE_CALCULATE_TREE_TYPE) {
+			fin >> g1;
+			assert_exists_variable(FUNC_FTREE_CALCULATE_TREE_TYPE, g1);
+			assert_correct_graph_type
+				(FUNC_FTREE_CALCULATE_TREE_TYPE, graph_type(g1), tree_types);
+
+			if (graph_type(g1) == FTREE) {
+				ftreevars[g1].calculate_tree_type();
+			}
+			else if (graph_type(g1) == RTREE) {
+				rtreevars[g1].calculate_tree_type();
 			}
 		}
 
@@ -544,7 +560,6 @@ err_type exe_construction_test(std::ifstream& fin) {
 			ftreevars[g1] = std::move(t_root.first);
 			gtypes[g1] = FTREE;
 		}
-
 		else if (option == FUNC_FTREE_TO_RTREE) {
 			fin >> g1 >> g2 >> u;
 			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2);
