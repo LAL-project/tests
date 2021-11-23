@@ -205,10 +205,10 @@ COMMANDS AVAILABLE
 	ROOTED TREES
 	============
 	
-	-- valid_subtree_sizes TREE
+	-- subtree_sizes_valid TREE
 		asserts that the number of subtrees calculated is valid.
 	
-	-- invalid_subtree_sizes TREE
+	-- subtree_sizes_not_valid TREE
 		asserts that the number of subtrees calculated is not valid.
 	
 	-- has_root TREE

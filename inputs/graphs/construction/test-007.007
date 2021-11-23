@@ -13,9 +13,9 @@ BODY
 	assert is_tree t1
 	find_edge_orientation t1
 	assert rtree_orientation_valid t1
-	assert invalid_subtree_sizes t1
+	assert subtree_sizes_not_valid t1
 	calculate_size_subtrees t1
-	assert valid_subtree_sizes t1
+	assert subtree_sizes_valid t1
 	
 	assert num_nodes_subtree t1 0 6
 	assert num_nodes_subtree t1 1 4
@@ -34,9 +34,9 @@ BODY
 	assert is_tree t2
 	find_edge_orientation t2
 	assert rtree_orientation_valid t2
-	assert invalid_subtree_sizes t2
+	assert subtree_sizes_not_valid t2
 	calculate_size_subtrees t2
-	assert valid_subtree_sizes t2
+	assert subtree_sizes_valid t2
 	
 	assert num_nodes_subtree t2 0 4
 	assert num_nodes_subtree t2 1 3
@@ -47,7 +47,7 @@ BODY
 	/* true or false, when |V(T)|=0 it does not matter */
 	disjoint_union T T t2 false
 	assert has_root T
-	assert valid_subtree_sizes T
+	assert subtree_sizes_valid T
 	assert rtree_orientation_valid T
 	
 	assert num_nodes_subtree t2 0 4
@@ -58,7 +58,7 @@ BODY
 	disjoint_union T T t1 true
 	assert has_root T
 	assert has_root T
-	assert valid_subtree_sizes T
+	assert subtree_sizes_valid T
 	assert rtree_orientation_valid T
 	
 	assert num_nodes_subtree T 0 10

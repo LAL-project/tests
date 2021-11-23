@@ -11,7 +11,7 @@ BODY
 		false true
 	set_root t1 0
 	assert has_root t1
-	assert invalid_subtree_sizes t1
+	assert subtree_sizes_not_valid t1
 	
 	create_graph rtree t2 4
 	add_edges t2 1
@@ -19,19 +19,19 @@ BODY
 		false true
 	set_root t2 0
 	assert has_root t2
-	assert invalid_subtree_sizes t2
+	assert subtree_sizes_not_valid t2
 	
 	create_graph rtree T 0
-	assert invalid_subtree_sizes T
+	assert subtree_sizes_not_valid T
 	/* using true or false should not make any difference here */
 	disjoint_union T T t1 true
 	assert has_root T
-	assert invalid_subtree_sizes T
+	assert subtree_sizes_not_valid T
 	
 	disjoint_union T T t2 true
 	assert has_root T
-	assert invalid_subtree_sizes T
+	assert subtree_sizes_not_valid T
 	
 	/* make sure that the edge that joins the roots exist */
 	assert exists_edge T 0 6
-	assert invalid_subtree_sizes T
+	assert subtree_sizes_not_valid T

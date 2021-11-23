@@ -17,7 +17,7 @@ BODY
 	find_edge_orientation g1
 	assert rtree_orientation_valid g1
 	calculate_size_subtrees g1
-	assert valid_subtree_sizes g1
+	assert subtree_sizes_valid g1
 	
 	retrieve_subtree s1 g1 0
 	assert is_tree s1
@@ -25,5 +25,5 @@ BODY
 	assert num_nodes s1 1
 	assert num_edges s1 0
 	output_graph s1
-	assert valid_subtree_sizes s1
+	assert subtree_sizes_valid s1
 	assert num_nodes_subtree s1 0 1

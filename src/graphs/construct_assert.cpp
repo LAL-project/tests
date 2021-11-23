@@ -90,16 +90,16 @@
 #define ASSERT_TREE_SIZE_CC "num_nodes_component"
 #define ASSERT_TREE_IS_ROOTED "is_rooted"
 #define ASSERT_TREE_IS_NOT_ROOTED "is_not_rooted"
-#define ASSERT_RTREE_VALID_SUBSTREE_SIZES "valid_subtree_sizes"
-#define ASSERT_RTREE_INVALID_SUBSTREE_SIZES "invalid_subtree_sizes"
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_ROOT_IS "root_is"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
+#define ASSERT_TREE_TYPE_VALID "tree_type_valid"
+#define ASSERT_TREE_TYPE_NOT_VALID "tree_type_not_valid"
+#define ASSERT_RTREE_SUBSTREE_SIZES_VALID "subtree_sizes_valid"
+#define ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID "subtree_sizes_not_valid"
 #define ASSERT_RTREE_ORIENTATION_VALID "rtree_orientation_valid"
 #define ASSERT_RTREE_ORIENTATION_NOT_VALID "rtree_orientation_not_valid"
-#define ASSERT_RTREE_IS_TYPE "is_rtree_type"
-#define ASSERT_RTREE_IS_NOT_TYPE "is_not_rtree_type"
 
 namespace tests {
 namespace graphs {
@@ -678,29 +678,29 @@ err_type process_assert(
 	}
 
 	// ROOTED TREES
-	else if (assert_what == ASSERT_RTREE_VALID_SUBSTREE_SIZES) {
+	else if (assert_what == ASSERT_RTREE_SUBSTREE_SIZES_VALID) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_VALID_SUBSTREE_SIZES, g1)
+		assert_exists_variable(ASSERT_RTREE_SUBSTREE_SIZES_VALID, g1)
 		assert_correct_graph_type(
-			ASSERT_RTREE_VALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types
+			ASSERT_RTREE_SUBSTREE_SIZES_VALID, graph_type(g1), rooted_tree_types
 		)
 		if (not mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_RTREE_VALID_SUBSTREE_SIZES)
+			message_in_func(ASSERT_RTREE_SUBSTREE_SIZES_VALID)
 			std::cerr << "    Sizes of subtrees in tree '" << g1 << "' are not valid."
 				 << '\n';
 			return err_type::test_execution;
 		}
 	}
-	else if (assert_what == ASSERT_RTREE_INVALID_SUBSTREE_SIZES) {
+	else if (assert_what == ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_INVALID_SUBSTREE_SIZES, g1)
+		assert_exists_variable(ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID, g1)
 		assert_correct_graph_type(
-			ASSERT_RTREE_INVALID_SUBSTREE_SIZES, graph_type(g1), rooted_tree_types
+			ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID, graph_type(g1), rooted_tree_types
 		)
 		if (mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_RTREE_INVALID_SUBSTREE_SIZES)
+			message_in_func(ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID)
 			std::cerr << "    Sizes of subtrees in tree '" << g1 << "' are valid."
 				 << '\n';
 			return err_type::test_execution;

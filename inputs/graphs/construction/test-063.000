@@ -17,9 +17,9 @@ BODY
 	find_edge_orientation g
 	assert rtree_orientation_valid g
 	
-	assert invalid_subtree_sizes g
+	assert subtree_sizes_not_valid g
 	calculate_size_subtrees g
-	assert valid_subtree_sizes g
+	assert subtree_sizes_valid g
 	
 	assert num_nodes_subtree g 0 5
 	assert num_nodes_subtree g 1 4
@@ -52,9 +52,9 @@ BODY
 	find_edge_orientation h
 	assert rtree_orientation_valid h
 	
-	assert invalid_subtree_sizes h
+	assert subtree_sizes_not_valid h
 	calculate_size_subtrees h
-	assert valid_subtree_sizes h
+	assert subtree_sizes_valid h
 	
 	assert num_nodes_subtree h 0 5
 	assert num_nodes_subtree h 1 4
@@ -88,9 +88,9 @@ BODY
 	find_edge_orientation f
 	assert rtree_orientation_valid f
 	
-	assert invalid_subtree_sizes f
+	assert subtree_sizes_not_valid f
 	calculate_size_subtrees f
-	assert valid_subtree_sizes f
+	assert subtree_sizes_valid f
 	
 	assert num_nodes_subtree f 0 5
 	assert num_nodes_subtree f 1 1

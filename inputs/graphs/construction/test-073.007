@@ -25,7 +25,7 @@ BODY
 	assert rtree_orientation_valid g1
 	
 	calculate_size_subtrees g1
-	assert valid_subtree_sizes g1
+	assert subtree_sizes_valid g1
 	
 	assert num_nodes_subtree g1 0 10
 	assert num_nodes_subtree g1 1 3
@@ -45,7 +45,7 @@ BODY
 	assert has_root s0
 	assert num_nodes s0 10
 	assert num_edges s0 9
-	assert valid_subtree_sizes s0
+	assert subtree_sizes_valid s0
 	
 	output_size_subtrees s0
 	
@@ -56,7 +56,7 @@ BODY
 	assert has_root s1
 	assert num_nodes s1 3
 	assert num_edges s1 2
-	assert valid_subtree_sizes s1
+	assert subtree_sizes_valid s1
 	
 	output_size_subtrees s1
 	
@@ -67,7 +67,7 @@ BODY
 	assert has_root s4
 	assert num_nodes s4 1
 	assert num_edges s4 0
-	assert valid_subtree_sizes s4
+	assert subtree_sizes_valid s4
 	
 	output_size_subtrees s4
 
@@ -78,7 +78,7 @@ BODY
 	assert has_root s5
 	assert num_nodes s5 5
 	assert num_edges s5 4
-	assert valid_subtree_sizes s5
+	assert subtree_sizes_valid s5
 	
 	output_size_subtrees s5
 
@@ -89,7 +89,7 @@ BODY
 	assert has_root s9
 	assert num_nodes s9 1
 	assert num_edges s9 0
-	assert valid_subtree_sizes s9
+	assert subtree_sizes_valid s9
 	
 	output_size_subtrees s9
 	
@@ -100,6 +100,6 @@ BODY
 	assert has_root s6
 	assert num_nodes s6 3
 	assert num_edges s6 2
-	assert valid_subtree_sizes s6
+	assert subtree_sizes_valid s6
 	
 	output_size_subtrees s6
