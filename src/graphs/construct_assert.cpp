@@ -182,7 +182,7 @@ err_type process_assert(
 		if (not mfunction(g1, has_edge(u, v))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_EXISTS_EDGE);
-			std::cerr << "    Graph '" << g1 << "' does not have lal::edge "
+			std::cerr << "    Graph '" << g1 << "' does not have edge "
 				 << "(" << u << ", " << v << ").\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -195,7 +195,7 @@ err_type process_assert(
 		if (mfunction(g1, has_edge(u, v))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NOT_EXISTS_EDGE);
-			std::cerr << "    Graph '" << g1 << "' has lal::edge "
+			std::cerr << "    Graph '" << g1 << "' has edge "
 				 << "(" << u << ", " << v << ").\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -208,10 +208,9 @@ err_type process_assert(
 		if (mfunction(g1, get_num_nodes()) != n) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NUM_NODES);
-			std::cerr << "    Graph '" << g1 << "' does not have "
-				 << n << " lal::nodes.\n";
+			std::cerr << "    Graph '" << g1 << "' does not have " << n << " nodes.\n";
 			std::cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, get_num_nodes()) << " lal::nodes.\n";
+				 << mfunction(g1, get_num_nodes()) << " nodes.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -563,7 +562,7 @@ err_type process_assert(
 		if (not can) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_CAN_ADD_EDGE)
-			std::cerr << "    Cannot add lal::edge with vertices {" << u << "," << v << "} "
+			std::cerr << "    Cannot add edge with vertices {" << u << "," << v << "} "
 				 << "to graph '" << g1 << "'\n";
 			std::cout << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
@@ -800,8 +799,6 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 	}
-
-	// ROOTED DIRECTED TREES
 	else if (assert_what == ASSERT_RTREE_ORIENTATION_VALID) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_ORIENTATION_VALID, g1)
@@ -811,10 +808,10 @@ err_type process_assert(
 		if (not rtreevars[g1].is_orientation_valid()) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
-			std::cerr << "    Tree '" << g1 << "' does not have a valid lal::edge orientation."
-				 << '\n';
-			std::cerr << rtreevars[g1] << '\n';
+			std::cerr << "    Tree '" << g1 << "' does not have a valid edge orientation."
+					  << '\n';
 			return err_type::test_execution;
+			std::cerr << rtreevars[g1] << '\n';
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_ORIENTATION_NOT_VALID) {
@@ -826,12 +823,13 @@ err_type process_assert(
 		if (rtreevars[g1].is_orientation_valid()) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
-			std::cerr << "    Tree '" << g1 << "' has a valid lal::edge orientation."
-				 << '\n';
+			std::cerr << "    Tree '" << g1 << "' has a valid edge orientation."
+					  << '\n';
 			std::cerr << rtreevars[g1] << '\n';
 			return err_type::test_execution;
 		}
 	}
+
 	else {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Invalid assertion '" << assert_what << "'.\n";

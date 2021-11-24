@@ -70,6 +70,7 @@
 #define FUNC_GRAPH_ADD_EDGE "add_edge"
 #define FUNC_GRAPH_ADD_EDGE_BULK "add_edge_bulk"
 #define FUNC_GRAPH_FINISH_BULK_ADD "finish_bulk_add"
+#define FUNC_GRAPH_REMOVE_NODE "remove_node"
 #define FUNC_GRAPH_ADD_EDGES "add_edges"
 #define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_REMOVE_EDGE "remove_edge"
@@ -107,7 +108,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 	std::map<std::string, std::string> gtypes;
 
 	std::string option, assert_what;
-	std::string type, g1, g2, g3, file, file_type, Boolean1, Boolean2;
+	std::string type, g1, g2, g3, file, file_type, Boolean1, Boolean2, Boolean3;
 	uint64_t n_nodes, n_edges;
 	lal::node u, v;
 
@@ -206,6 +207,37 @@ err_type exe_construction_test(std::ifstream& fin) {
 			gtypes[g1] = graph_type(g2);
 			if (graph_type(g2) == DGRAPH) { dgraphvars[g1] = dgraphvars[g2]; }
 			else { ugraphvars[g1] = ugraphvars[g2]; }
+		}
+		else if (option == FUNC_GRAPH_REMOVE_NODE) {
+			fin >> g1 >> u >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_GRAPH_REMOVE_NODE, g1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_NODE, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_NODE, Boolean2);
+			
+			if (graph_type(g1) == UGRAPH) {
+				ugraphvars[g1].remove_node(u, Boolean1 == "true", Boolean2 == "true");
+			}
+			else if (graph_type(g1) == DGRAPH) {
+				dgraphvars[g1].remove_node(u, Boolean1 == "true", Boolean2 == "true");
+			}
+			else if (graph_type(g1) == FTREE) {
+				ftreevars[g1].remove_node(u, Boolean1 == "true", Boolean2 == "true");
+			}
+			else if (graph_type(g1) == RTREE) {
+				fin >> Boolean3;
+				assert_correct_boolean(FUNC_GRAPH_REMOVE_NODE, Boolean3);
+				rtreevars[g1].remove_node(u, Boolean1 == "true", Boolean2 == "true", Boolean3 == "true");
+			}
+			else {
+				std::cerr << ERROR << '\n';
+				message_in_func(FUNC_GRAPH_REMOVE_NODE)
+				std::cerr << "    Type of graph '" << g1 << "' is not\n";
+				std::cerr << "    " << UGRAPH << '\n';
+				std::cerr << "    " << DGRAPH << '\n';
+				std::cerr << "    " << FTREE << '\n';
+				std::cerr << "    " << RTREE << '\n';
+				return err_type::test_execution;
+			}
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGE) {
 			fin >> g1 >> u >> v >> Boolean1 >> Boolean2;
