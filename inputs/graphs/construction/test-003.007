@@ -15,9 +15,6 @@ BODY
 		true true
 	output_graph t
 	
-	find_edge_orientation t
-	assert rtree_orientation_valid t
-	
 	assert cant_add_edge t 0 1
 	assert cant_add_edge t 0 2
 	assert cant_add_edge t 0 3

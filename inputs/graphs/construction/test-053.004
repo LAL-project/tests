@@ -14,13 +14,10 @@ BODY
 		4 9
 		4 10
 		false true
-	assert rtree_orientation_not_valid g
 	assert not_has_root g
 	set_root g 0
 	assert has_root g
 	assert is_tree g
-	find_edge_orientation g
-	assert rtree_orientation_valid g
 	
 	create_graph rtree f 11
 	add_edges f 10
@@ -35,13 +32,10 @@ BODY
 		4 9
 		4 10
 		false true
-	assert rtree_orientation_not_valid f
-	assert not_has_root f
+		assert not_has_root f
 	set_root f 3
 	assert has_root f
 	assert is_tree f
-	find_edge_orientation f
-	assert rtree_orientation_valid f
 	
 	create_graph rtree h 11
 	assert cant_add_edges h 10
@@ -56,11 +50,8 @@ BODY
 		9 4
 		10 4
 	/*
-	assert rtree_orientation_not_valid h
-	assert not_has_root h
+		assert not_has_root h
 	set_root h 3
 	assert has_root h
 	assert is_tree h
-	find_edge_orientation h
-	assert rtree_orientation_not_valid h
-	*/
+		*/

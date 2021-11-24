@@ -8,7 +8,6 @@ BODY
 	assert is_rooted t
 	
 	assert subtree_sizes_not_valid t
-	assert rtree_orientation_not_valid t
 	
 	assert not_has_root t
 	set_root t 1
@@ -22,18 +21,13 @@ BODY
 	assert normalised t
 	
 	assert subtree_sizes_not_valid t
-	assert rtree_orientation_not_valid t
 	
 	assert has_root t
 	set_root t 0
 	assert has_root t
 	
-	find_edge_orientation t
 	calculate_size_subtrees t
 	calculate_size_subtrees t
 	
 	assert subtree_sizes_valid t
-	assert rtree_orientation_valid t
-	set_root t 1
-	assert subtree_sizes_not_valid t
-	assert rtree_orientation_not_valid t
+	assert root_is_not_valid t 1

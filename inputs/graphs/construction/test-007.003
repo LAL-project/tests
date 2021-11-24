@@ -40,5 +40,3 @@ BODY
 	
 	assert is_tree T
 	assert has_root T
-	find_edge_orientation T
-	assert rtree_orientation_valid T

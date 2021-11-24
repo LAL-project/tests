@@ -114,12 +114,7 @@ BODY
 	assert cant_add_edge g 2 4
 	assert cant_add_edge g 3 4
 	
-	assert rtree_orientation_not_valid g
+	assert root_is_valid g 0
+	assert root_is_not_valid g 1
+	
 	set_root g 0
-	assert rtree_orientation_not_valid g
-	find_edge_orientation g
-	assert rtree_orientation_valid g
-	set_root g 0
-	assert rtree_orientation_not_valid g
-	set_root g 1
-	assert rtree_orientation_not_valid g

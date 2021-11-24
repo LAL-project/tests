@@ -13,13 +13,10 @@ BODY
 		0 8
 		0 9
 		false true
-	assert rtree_orientation_not_valid g10
-	assert not_has_root g10
+		assert not_has_root g10
 	set_root g10 0
 	assert has_root g10
 	assert is_tree g10
-	find_edge_orientation g10
-	assert rtree_orientation_valid g10
 	
 	/* this is an anti-arborescence */
 	create_graph rtree f10 10
@@ -34,11 +31,8 @@ BODY
 		8 0
 		9 0
 	/*
-	assert rtree_orientation_not_valid f10
-	assert not_has_root f10
+		assert not_has_root f10
 	set_root f10 0
 	assert has_root f10
 	assert is_tree f10
-	find_edge_orientation f10
-	assert rtree_orientation_not_valid f10
-	*/
+		*/

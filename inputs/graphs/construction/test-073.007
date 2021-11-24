@@ -21,9 +21,6 @@ BODY
 	assert is_tree g1
 	output_graph g1
 	
-	find_edge_orientation g1
-	assert rtree_orientation_valid g1
-	
 	calculate_size_subtrees g1
 	assert subtree_sizes_valid g1
 	

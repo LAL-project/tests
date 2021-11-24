@@ -118,26 +118,21 @@ BODY
 	assert cant_add_edge g 3 4
 
 	assert not_has_root g
-	assert rtree_orientation_not_valid g
 	assert subtree_sizes_not_valid g
+	assert root_is_valid g 0
 	set_root g 0
-	assert rtree_orientation_not_valid g
 	assert subtree_sizes_not_valid g
 	
-	find_edge_orientation g
 	calculate_size_subtrees g
 	calculate_size_subtrees g
 	
-	assert rtree_orientation_valid g
 	assert subtree_sizes_valid g
 	set_root g 0
-	assert rtree_orientation_not_valid g
 	assert subtree_sizes_not_valid g
 	
-	find_edge_orientation g
 	calculate_size_subtrees g
 	calculate_size_subtrees g
 	
-	set_root g 1
-	assert rtree_orientation_not_valid g
+	assert root_is_not_valid g 1
+	set_root g 0
 	assert subtree_sizes_not_valid g

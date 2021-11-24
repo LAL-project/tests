@@ -14,13 +14,10 @@ BODY
 		15 17
 		17 18
 		true true
-	assert rtree_orientation_not_valid h
-	assert not_has_root h
+		assert not_has_root h
 	set_root h 0
 	assert has_root h
 	assert is_tree h
-	find_edge_orientation h
-	assert rtree_orientation_valid h
 	
 	calculate_size_subtrees h
 	assert num_nodes_subtree h 0 19

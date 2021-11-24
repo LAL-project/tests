@@ -16,7 +16,6 @@ BODY
 	
 	assert root_is t05 0
 	assert has_root t05
-	assert rtree_orientation_valid t05
 	assert num_edges t05 4
 
 	assert num_nodes_component t05 0 5
@@ -26,8 +25,6 @@ BODY
 	assert num_nodes_component t05 4 5
 	
 	
-
-
 	create_graph rtree t10 10
 	assert num_nodes t10 10
 	assert num_edges t10 0
@@ -47,7 +44,6 @@ BODY
 	
 	assert has_root t10
 	assert root_is t10 0
-	assert rtree_orientation_valid t10
 	assert num_edges t10 9
 
 	assert num_nodes_component t10 0 10
@@ -60,8 +56,6 @@ BODY
 	assert num_nodes_component t10 7 10
 	assert num_nodes_component t10 8 10
 	assert num_nodes_component t10 9 10
-	
-	
 	
 	
 	
@@ -90,7 +84,6 @@ BODY
 	
 	assert has_root t15
 	assert root_is t15 0
-	assert rtree_orientation_valid t15
 	assert num_edges t15 14
 
 	assert num_nodes_component t15 0 15

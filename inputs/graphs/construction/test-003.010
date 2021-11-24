@@ -18,8 +18,6 @@ BODY
 	finish_bulk_add t10 true true
 	
 	set_root t10 0
-	find_edge_orientation t10
-	assert rtree_orientation_valid t10
 	
 	output_graph t10
 	assert num_edges t10 9

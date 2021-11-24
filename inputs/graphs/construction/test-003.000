@@ -7,7 +7,6 @@ BODY
 	assert is_rooted g
 	assert is_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_valid g
 	
 	create_graph rtree g 1
 	assert num_nodes g 1
@@ -15,7 +14,6 @@ BODY
 	assert is_rooted g
 	assert is_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_valid g
 	
 	assert num_nodes_component g 0 1
 	
@@ -25,7 +23,6 @@ BODY
 	assert is_rooted g
 	assert is_not_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_not_valid g
 	
 	assert num_nodes_component g 0 1
 	assert num_nodes_component g 1 1
@@ -36,7 +33,6 @@ BODY
 	assert is_rooted g
 	assert is_not_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_not_valid g
 	
 	assert num_nodes_component g 0 1
 	assert num_nodes_component g 1 1
@@ -48,7 +44,6 @@ BODY
 	assert is_rooted g
 	assert is_not_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_not_valid g
 	
 	assert num_nodes_component g 0 1
 	assert num_nodes_component g 1 1
@@ -61,7 +56,6 @@ BODY
 	assert is_rooted g
 	assert is_not_tree g
 	assert subtree_sizes_not_valid g
-	assert rtree_orientation_not_valid g
 	
 	assert num_nodes_component g 0 1
 	assert num_nodes_component g 1 1

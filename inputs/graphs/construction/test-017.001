@@ -11,8 +11,6 @@ BODY
 		4 5
 		4 6
 		true true
-	find_edge_orientation rT
-	assert rtree_orientation_valid rT
 	
 	rtree_to_ftree rT fT
 	

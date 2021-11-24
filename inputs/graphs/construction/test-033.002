@@ -9,10 +9,7 @@ BODY
 	check_Q_iterator g1
 	assert is_rooted g1
 	assert has_root g1
-	assert rtree_orientation_valid g1
-	find_edge_orientation g1
-	assert rtree_orientation_valid g1
-
+	
 	read_graph rtree g2 graphs/exhaustive-trees/rooted/007-0037.head_vector head_vector true
 	assert normalised g2
 	assert num_nodes g2 7
@@ -21,10 +18,7 @@ BODY
 	check_Q_iterator g2
 	assert is_rooted g2
 	assert has_root g2
-	assert rtree_orientation_valid g2
-	find_edge_orientation g2
-	assert rtree_orientation_valid g2
-
+	
 	read_graph rtree g3 graphs/exhaustive-trees/rooted/009-0245.head_vector head_vector true
 	assert normalised g3
 	assert num_nodes g3 9
@@ -33,6 +27,4 @@ BODY
 	check_Q_iterator g3
 	assert is_rooted g3
 	assert has_root g3
-	assert rtree_orientation_valid g3
-	find_edge_orientation g3
-	assert rtree_orientation_valid g3
+	

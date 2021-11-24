@@ -231,6 +231,12 @@ COMMANDS AVAILABLE
 	
 	-- rtree_orientation_not_valid TREE
 		asserts that the orientation of the tree's edges is not valid.
+	
+	-- root_is_valid TREE NODE
+		asserts that the root NODE is valid for the tree TREE
+	
+	-- root_is_not_valid TREE NODE
+		asserts that the root NODE is not valid for the tree TREE
 
 +++++++++++++++++++++++++++++++++++++++++
 

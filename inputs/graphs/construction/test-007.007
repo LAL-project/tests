@@ -11,8 +11,6 @@ BODY
 		false true
 	set_root t1 0
 	assert is_tree t1
-	find_edge_orientation t1
-	assert rtree_orientation_valid t1
 	assert subtree_sizes_not_valid t1
 	calculate_size_subtrees t1
 	assert subtree_sizes_valid t1
@@ -36,8 +34,6 @@ BODY
 		false true
 	set_root t2 0
 	assert is_tree t2
-	find_edge_orientation t2
-	assert rtree_orientation_valid t2
 	assert subtree_sizes_not_valid t2
 	calculate_size_subtrees t2
 	assert subtree_sizes_valid t2
@@ -56,7 +52,6 @@ BODY
 	disjoint_union T T t2 false
 	assert has_root T
 	assert subtree_sizes_valid T
-	assert rtree_orientation_valid T
 	
 	assert tree_type_valid T
 	
@@ -69,7 +64,6 @@ BODY
 	assert has_root T
 	assert has_root T
 	assert subtree_sizes_valid T
-	assert rtree_orientation_valid T
 	assert tree_type_not_valid T
 	
 	assert num_nodes_subtree T 0 10

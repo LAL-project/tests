@@ -14,8 +14,6 @@ BODY
 		3 8
 		3 0
 		true true
-	find_edge_orientation rT
-	assert rtree_orientation_valid rT
 	
 	output_graph rT
 	

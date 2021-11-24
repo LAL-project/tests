@@ -4,6 +4,16 @@ BODY
 	create_graph rtree t 5
 	assert num_nodes t 5
 	assert num_edges t 0
+	assert root_is_valid t 0
+	assert root_is_valid t 1
+	assert root_is_valid t 2
+	assert root_is_valid t 3
+	assert root_is_valid t 4
+	set_root t 0
+	set_root t 1
+	set_root t 2
+	set_root t 3
+	set_root t 4
 	set_root t 0
 	assert has_root t
 	
@@ -31,15 +41,9 @@ BODY
 		true true
 	output_graph t
 	
-	find_edge_orientation t
-	assert rtree_orientation_valid t
-	
 	assert cant_add_edge t 1 4
 	remove_edge t 0 4 true true
 	output_graph t
 	assert can_add_edge t 1 4
 	add_edge t 1 4 true true
 	output_graph t
-	
-	find_edge_orientation t
-	assert rtree_orientation_valid t
