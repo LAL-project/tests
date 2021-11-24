@@ -90,12 +90,14 @@
 #define ASSERT_TREE_SIZE_CC "num_nodes_component"
 #define ASSERT_TREE_IS_ROOTED "is_rooted"
 #define ASSERT_TREE_IS_NOT_ROOTED "is_not_rooted"
+#define ASSERT_TREE_TYPE_VALID "tree_type_valid"
+#define ASSERT_TREE_TYPE_NOT_VALID "tree_type_not_valid"
+#define ASSERT_RTREE_ROOT_IS_VALID "root_is_valid"
+#define ASSERT_RTREE_ROOT_IS_NOT_VALID "root_is_not_valid"
 #define ASSERT_RTREE_HAS_ROOT "has_root"
 #define ASSERT_RTREE_NOT_HAS_ROOT "not_has_root"
 #define ASSERT_RTREE_ROOT_IS "root_is"
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
-#define ASSERT_TREE_TYPE_VALID "tree_type_valid"
-#define ASSERT_TREE_TYPE_NOT_VALID "tree_type_not_valid"
 #define ASSERT_RTREE_SUBSTREE_SIZES_VALID "subtree_sizes_valid"
 #define ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID "subtree_sizes_not_valid"
 
@@ -729,6 +731,36 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 	}
+
+	else if (assert_what == ASSERT_RTREE_ROOT_IS_VALID) {
+		fin >> g1 >> u;
+		assert_exists_variable(ASSERT_RTREE_ROOT_IS_VALID, g1)
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS_VALID, graph_type(g1), rooted_tree_types
+		)
+		if (not mfunction_rtrees(g1, is_root_valid(u))) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_ROOT_IS_VALID)
+			std::cerr << "    Root '" << u << "' is not valid in tree:\n";
+			std::cerr << rtreevars[g1] << '\n';
+			return err_type::test_execution;
+		}
+	}
+	else if (assert_what == ASSERT_RTREE_ROOT_IS_NOT_VALID) {
+		fin >> g1 >> u;
+		assert_exists_variable(ASSERT_RTREE_ROOT_IS_NOT_VALID, g1)
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS_NOT_VALID, graph_type(g1), rooted_tree_types
+		)
+		if (mfunction_rtrees(g1, is_root_valid(u))) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_ROOT_IS_NOT_VALID)
+			std::cerr << "    Root '" << u << "' is valid in tree:\n";
+			std::cerr << rtreevars[g1] << '\n';
+			return err_type::test_execution;
+		}
+	}
+
 	else if (assert_what == ASSERT_RTREE_HAS_ROOT) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_HAS_ROOT, g1)
