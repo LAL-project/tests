@@ -70,7 +70,6 @@ void test_move_rooted_tree() {
 	lal::graphs::rooted_tree t1(5);
 	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
-	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
@@ -85,7 +84,6 @@ void test_move_rooted_tree() {
 	lal::graphs::rooted_tree t1(5);
 	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
-	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
@@ -114,7 +112,6 @@ void test_move_rooted_tree() {
 	lal::graphs::rooted_tree t1(5);
 	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
-	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 
@@ -130,7 +127,6 @@ void test_move_rooted_tree() {
 	lal::graphs::rooted_tree t1(5);
 	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
 	t1.set_root(3);
-	t1.set_valid_orientation(true);
 	t1.calculate_size_subtrees();
 	output_rooted_tree_info("t1", t1)
 

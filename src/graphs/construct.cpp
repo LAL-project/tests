@@ -92,7 +92,6 @@
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
-#define FUNC_RTREE_FIND_EDGE_ORIENTATION "find_edge_orientation"
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
 #define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
 
@@ -651,14 +650,6 @@ err_type exe_construction_test(std::ifstream& fin) {
 				rtreevars[g2] = rtreevars[g1].get_subtree(u);
 				gtypes[g2] = RTREE;
 			}
-		}
-		else if (option == FUNC_RTREE_FIND_EDGE_ORIENTATION) {
-			fin >> g1;
-			assert_exists_variable(FUNC_RTREE_FIND_EDGE_ORIENTATION, g1);
-			assert_correct_graph_type(FUNC_RTREE_FIND_EDGE_ORIENTATION, graph_type(g1), rooted_tree_types);
-			assert_is_rtree(g1, FUNC_RTREE_FIND_EDGE_ORIENTATION);
-
-			rtreevars[g1].find_edge_orientation();
 		}
 		else if (option == FUNC_RTREE_DIR_TO_UNDIR) {
 			fin >> g1 >> g2;

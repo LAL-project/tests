@@ -94,7 +94,6 @@ void read_rooted(std::ifstream& fin, T& t) {
 	lal::node r;
 	fin >> r;
 	t.set_root(r);
-	t.find_edge_orientation();
 }
 
 err_type free_isomorphism_test(std::ifstream& fin) {
@@ -136,25 +135,6 @@ err_type rooted_isomorphism_test(std::ifstream& fin) {
 		lal::graphs::rooted_tree t1(n), t2(n);
 		read_rooted(fin, t1);
 		read_rooted(fin, t2);
-
-		const bool has_t1 = t1.is_orientation_valid();
-		const bool has_t2 = t2.is_orientation_valid();
-
-		// ensure correct format of trees
-		if (not has_t1) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    Rooted tree\n";
-			std::cerr << t1 << '\n';
-			std::cerr << "    is not an arborescence.\n";
-			return err_type::test_format;
-		}
-		if (not has_t2) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    Rooted tree\n";
-			std::cerr << t2 << '\n';
-			std::cerr << "    is not an arborescence.\n";
-			return err_type::test_format;
-		}
 
 		const bool are_iso = lal::utilities::are_trees_isomorphic(t1,t2);
 		std::cout << "Are isomorphic? " << std::boolalpha << are_iso << '\n';

@@ -108,11 +108,6 @@ err_type linarr_brute_force_testing(
 		// construct tree
 		T tree = conv(tree_as_head_vector);
 		tree_initializer(tree);
-		if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, T>) {
-#if defined DEBUG
-			assert(tree.find_edge_orientation());
-#endif
-		}
 
 		// read value of D calculated by brute force
 		uint64_t brute_force_value;

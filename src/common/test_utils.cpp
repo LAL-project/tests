@@ -153,7 +153,6 @@ noexcept
 	T.clear();
 	T.init(to_uint64(edges.size() + 1));
 	T.set_edges(edges, normalise, check);
-	T.set_valid_orientation(true);
 }
 
 void relabel_tree_vertices(

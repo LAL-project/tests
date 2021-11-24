@@ -98,8 +98,6 @@
 #define ASSERT_TREE_TYPE_NOT_VALID "tree_type_not_valid"
 #define ASSERT_RTREE_SUBSTREE_SIZES_VALID "subtree_sizes_valid"
 #define ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID "subtree_sizes_not_valid"
-#define ASSERT_RTREE_ORIENTATION_VALID "rtree_orientation_valid"
-#define ASSERT_RTREE_ORIENTATION_NOT_VALID "rtree_orientation_not_valid"
 
 namespace tests {
 namespace graphs {
@@ -799,37 +797,6 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 	}
-	else if (assert_what == ASSERT_RTREE_ORIENTATION_VALID) {
-		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_ORIENTATION_VALID, g1)
-		assert_correct_graph_type(
-			ASSERT_RTREE_ORIENTATION_VALID, graph_type(g1), rooted_tree_types
-		)
-		if (not rtreevars[g1].is_orientation_valid()) {
-			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
-			std::cerr << "    Tree '" << g1 << "' does not have a valid edge orientation."
-					  << '\n';
-			return err_type::test_execution;
-			std::cerr << rtreevars[g1] << '\n';
-		}
-	}
-	else if (assert_what == ASSERT_RTREE_ORIENTATION_NOT_VALID) {
-		fin >> g1;
-		assert_exists_variable(ASSERT_RTREE_ORIENTATION_VALID, g1)
-		assert_correct_graph_type(
-			ASSERT_RTREE_ORIENTATION_NOT_VALID, graph_type(g1), rooted_tree_types
-		)
-		if (rtreevars[g1].is_orientation_valid()) {
-			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_RTREE_ORIENTATION_VALID)
-			std::cerr << "    Tree '" << g1 << "' has a valid edge orientation."
-					  << '\n';
-			std::cerr << rtreevars[g1] << '\n';
-			return err_type::test_execution;
-		}
-	}
-
 	else {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Invalid assertion '" << assert_what << "'.\n";

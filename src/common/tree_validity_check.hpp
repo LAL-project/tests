@@ -138,9 +138,6 @@ noexcept
 	if (not T.has_root()) {
 		return rtree_check::without_root;
 	}
-	if (not T.is_orientation_valid()) {
-		return rtree_check::invalid_edges_orientation;
-	}
 	return rtree_check::correct;
 }
 
