@@ -1,0 +1,53 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph dgraph g1 5
+	
+	assert num_nodes g1 5
+	assert num_edges g1 0
+	
+	add_edges g1 10
+		0 1 1 0
+		1 2 2 1
+		2 3 3 2
+		3 4 4 3
+		4 0 0 4
+		true true
+	
+	assert num_edges g1 10
+	assert exists_edge g1 0 1
+	assert exists_edge g1 1 0
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 1
+	assert exists_edge g1 2 3
+	assert exists_edge g1 3 2
+	assert exists_edge g1 3 4
+	assert exists_edge g1 4 3
+	assert exists_edge g1 4 0
+	assert exists_edge g1 0 4
+	
+	output_graph g1
+	
+	/* remove node 4 */
+	
+	remove_node g1 4 true true
+	assert num_nodes g1 4
+	assert num_edges g1 6
+	assert exists_edge g1 0 1
+	assert exists_edge g1 1 0
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 1
+	assert exists_edge g1 2 3
+	assert exists_edge g1 3 2
+	
+	output_graph g1
+	
+	/* remove node 1 */
+	
+	remove_node g1 1 true true
+	assert num_nodes g1 3
+	assert num_edges g1 2
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 1
+	
+	output_graph g1

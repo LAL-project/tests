@@ -1,0 +1,38 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ugraph g1 5
+	
+	assert num_nodes g1 5
+	assert num_edges g1 0
+	
+	add_edges g1 4
+		0 1
+		0 2
+		0 3
+		0 4
+		true true
+	
+	assert num_edges g1 4
+	assert exists_edge g1 0 1
+	assert exists_edge g1 0 2
+	assert exists_edge g1 0 3
+	assert exists_edge g1 0 4
+	
+	output_graph g1
+	
+	/* remove node 0 */
+	
+	remove_node g1 0 true true
+	assert num_nodes g1 4
+	assert num_edges g1 0
+	
+	output_graph g1
+	
+	/* remove node 0 */
+	
+	remove_node g1 0 true true
+	assert num_nodes g1 3
+	assert num_edges g1 0
+	
+	output_graph g1

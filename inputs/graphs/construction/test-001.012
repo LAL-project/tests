@@ -1,0 +1,81 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	/* ---------------------- */
+
+	create_graph dgraph g1 1
+	
+	assert num_nodes g1 1
+	assert num_edges g1 0
+	
+	output_graph g1
+	
+	remove_node g1 0 true true
+	
+	output_graph g1
+	
+	assert num_nodes g1 0
+	assert num_edges g1 0
+	
+	/* ---------------------- */
+
+	create_graph dgraph g2 3
+	
+	assert num_nodes g2 3
+	assert num_edges g2 0
+	
+	output_graph g2
+	remove_node g2 0 true true
+	assert num_nodes g2 2
+	
+	output_graph g2
+	remove_node g2 0 true true
+	assert num_nodes g2 1
+	
+	output_graph g2
+	remove_node g2 0 true true
+	assert num_nodes g2 0
+	
+	output_graph g2
+	
+	/* ---------------------- */
+
+	create_graph dgraph g3 3
+	
+	assert num_nodes g3 3
+	assert num_edges g3 0
+	
+	output_graph g3
+	remove_node g3 2 true true
+	assert num_nodes g3 2
+	
+	output_graph g3
+	remove_node g3 1 true true
+	assert num_nodes g3 1
+	
+	output_graph g3
+	remove_node g3 0 true true
+	assert num_nodes g3 0
+	
+	output_graph g3
+	
+	/* ---------------------- */
+
+	create_graph dgraph g4 3
+	
+	assert num_nodes g4 3
+	assert num_edges g4 0
+	
+	output_graph g4
+	remove_node g4 1 true true
+	assert num_nodes g4 2
+	
+	output_graph g4
+	remove_node g4 1 true true
+	assert num_nodes g4 1
+	
+	output_graph g4
+	remove_node g4 0 true true
+	assert num_nodes g4 0
+	
+	output_graph g4

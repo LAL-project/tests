@@ -1,0 +1,23 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree t1 6
+	add_edges t1 2
+		0 1
+		2 3
+		true true
+	assert cant_add_edge t1 1 3
+	assert cant_add_edges t1 2
+		4 5
+		1 3
+	
+	create_graph rtree t2 6
+	assert can_add_edge t2 1 3
+	assert can_add_edge t2 0 1
+	assert can_add_edge t2 2 3
+	assert cant_add_edges t2 4
+		0 1
+		2 3
+		4 5
+		1 3
+	

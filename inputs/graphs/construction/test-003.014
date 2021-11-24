@@ -1,0 +1,19 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	/* ----------- */
+	create_graph rtree t1 1
+	assert num_nodes t1 1
+	assert num_edges t1 0
+	
+	output_graph t1
+	remove_node t1 0 false true true
+	output_graph t1
+	
+	/* ----------- */
+	create_graph rtree t2 2
+	output_graph t2
+	remove_node t2 0 false true true
+	output_graph t2
+	remove_node t2 0 false true true
+	output_graph t2

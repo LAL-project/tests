@@ -1,0 +1,122 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	/* -------------------------------------- */
+	create_graph rtree t1 7
+	add_edges t1 6
+		0 1
+		1 3
+		1 4
+		0 2
+		2 5
+		2 6
+		true true
+	
+	output "t1: Before removal"
+	output_graph t1
+	
+	remove_node t1 1 true true true
+	output "t1: After removal"
+	output_graph t1
+	
+	assert is_tree t1
+	assert num_nodes t1 6
+	assert num_edges t1 5
+	
+	remove_node t1 1 true true true
+	output "t1: After removal"
+	output_graph t1
+	
+	assert is_tree t1
+	assert num_nodes t1 5
+	assert num_edges t1 4
+	
+	/* -------------------------------------- */
+	create_graph rtree t2 7
+	add_edges t2 6
+		0 1
+		1 3
+		1 4
+		0 2
+		2 5
+		2 6
+		true true
+	
+	output "t2: Before removal"
+	output_graph t2
+	
+	remove_node t2 1 false true true
+	output "t2: After removal"
+	output_graph t2
+	
+	assert is_not_tree t2
+	assert num_nodes t2 6
+	assert num_edges t2 3
+	
+	remove_node t2 1 true true true
+	output "t2: After removal"
+	output_graph t2
+	
+	assert is_not_tree t2
+	assert num_nodes t2 5
+	assert num_edges t2 2
+	
+	/* -------------------------------------- */
+	create_graph rtree t3 7
+	add_edges t3 6
+		0 1
+		1 3
+		1 4
+		0 2
+		2 5
+		2 6
+		true true
+	
+	output "t3: Before removal"
+	output_graph t3
+	
+	remove_node t3 1 true true true
+	output "t3: After removal"
+	output_graph t3
+	
+	assert is_tree t3
+	assert num_nodes t3 6
+	assert num_edges t3 5
+	
+	remove_node t3 1 false true true
+	output "t3: After removal"
+	output_graph t3
+	
+	assert is_not_tree t3
+	assert num_nodes t3 5
+	assert num_edges t3 2
+	
+	/* -------------------------------------- */
+	create_graph rtree t4 7
+	add_edges t4 6
+		0 1
+		1 3
+		1 4
+		0 2
+		2 5
+		2 6
+		true true
+	
+	output "t4: Before removal"
+	output_graph t4
+	
+	remove_node t4 1 false true true
+	output "t4: After removal"
+	output_graph t4
+	
+	assert is_not_tree t4
+	assert num_nodes t4 6
+	assert num_edges t4 3
+	
+	remove_node t4 1 false true true
+	output "t4: After removal"
+	output_graph t4
+	
+	assert is_not_tree t4
+	assert num_nodes t4 5
+	assert num_edges t4 0

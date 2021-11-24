@@ -1,0 +1,49 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ftree t 6
+	
+	set_edges t 5
+		0 1
+		1 2
+		2 3
+		3 4
+		4 5
+		true true
+	
+	assert is_tree t
+	output_graph t
+	
+	assert num_nodes_component t 0 6
+	assert num_nodes_component t 1 6
+	assert num_nodes_component t 2 6
+	assert num_nodes_component t 3 6
+	assert num_nodes_component t 4 6
+	assert num_nodes_component t 5 6
+	
+	remove_node t 0 true true
+	assert is_tree t
+	output_graph t
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	
+	remove_node t 2 true true
+	assert is_not_tree t
+	output_graph t
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 2
+	assert num_nodes_component t 3 2
+	
+	remove_node t 3 true true
+	assert is_not_tree t
+	output_graph t
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
