@@ -23,7 +23,7 @@ BODY
 	
 	/* this is an anti-arborescence */
 	create_graph rtree f10 10
-	add_edges f10 9
+	assert cant_add_edges f10 9
 		1 0
 		2 0
 		3 0
@@ -33,7 +33,7 @@ BODY
 		7 0
 		8 0
 		9 0
-		false true
+	/*
 	assert rtree_orientation_not_valid f10
 	assert not_has_root f10
 	set_root f10 0
@@ -41,3 +41,4 @@ BODY
 	assert is_tree f10
 	find_edge_orientation f10
 	assert rtree_orientation_not_valid f10
+	*/

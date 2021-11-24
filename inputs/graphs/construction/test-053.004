@@ -44,7 +44,7 @@ BODY
 	assert rtree_orientation_valid f
 	
 	create_graph rtree h 11
-	add_edges h 10
+	assert cant_add_edges h 10
 		1 3
 		5 1
 		6 5
@@ -55,7 +55,7 @@ BODY
 		8 4
 		9 4
 		10 4
-		false true
+	/*
 	assert rtree_orientation_not_valid h
 	assert not_has_root h
 	set_root h 3
@@ -63,3 +63,4 @@ BODY
 	assert is_tree h
 	find_edge_orientation h
 	assert rtree_orientation_not_valid h
+	*/

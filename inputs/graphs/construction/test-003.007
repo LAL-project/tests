@@ -44,11 +44,11 @@ BODY
 	assert num_nodes_component t 4 4
 	
 	assert can_add_edge t 0 1
-	assert can_add_edge t 0 2
-	assert can_add_edge t 0 3
-	assert can_add_edge t 0 4
+	assert cant_add_edge t 0 2
+	assert cant_add_edge t 0 3
+	assert cant_add_edge t 0 4
 	
-	add_edge t 0 4 true true
+	add_edge t 0 1 true true
 	output_graph t
 	
 	assert num_nodes_component t 0 5

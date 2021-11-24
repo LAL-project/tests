@@ -77,16 +77,16 @@ BODY
 	assert can_add_edge g 0 2
 	assert can_add_edge g 0 3
 	assert can_add_edge g 0 4
-	assert can_add_edge g 0 5
+	assert cant_add_edge g 0 5
 	assert can_add_edge g 1 2
 	assert can_add_edge g 1 3
 	assert can_add_edge g 1 4
-	assert can_add_edge g 1 5
+	assert cant_add_edge g 1 5
 	assert can_add_edge g 2 3
 	assert can_add_edge g 2 4
-	assert can_add_edge g 2 5
+	assert cant_add_edge g 2 5
 	assert can_add_edge g 3 4
-	assert can_add_edge g 3 5
+	assert cant_add_edge g 3 5
 	assert cant_add_edge g 4 5
 	
 	add_edge g 2 3 false true
@@ -103,18 +103,18 @@ BODY
 	
 	assert cant_add_edge g 0 1
 	assert can_add_edge g 0 2
-	assert can_add_edge g 0 3
+	assert cant_add_edge g 0 3
 	assert can_add_edge g 0 4
-	assert can_add_edge g 0 5
+	assert cant_add_edge g 0 5
 	assert can_add_edge g 1 2
-	assert can_add_edge g 1 3
+	assert cant_add_edge g 1 3
 	assert can_add_edge g 1 4
-	assert can_add_edge g 1 5
+	assert cant_add_edge g 1 5
 	assert cant_add_edge g 2 3
 	assert can_add_edge g 2 4
-	assert can_add_edge g 2 5
+	assert cant_add_edge g 2 5
 	assert can_add_edge g 3 4
-	assert can_add_edge g 3 5
+	assert cant_add_edge g 3 5
 	assert cant_add_edge g 4 5
 	
 	add_edge g 2 4 false true
@@ -132,13 +132,13 @@ BODY
 	
 	assert cant_add_edge g 0 1
 	assert can_add_edge g 0 2
-	assert can_add_edge g 0 3
-	assert can_add_edge g 0 4
-	assert can_add_edge g 0 5
+	assert cant_add_edge g 0 3
+	assert cant_add_edge g 0 4
+	assert cant_add_edge g 0 5
 	assert can_add_edge g 1 2
-	assert can_add_edge g 1 3
-	assert can_add_edge g 1 4
-	assert can_add_edge g 1 5
+	assert cant_add_edge g 1 3
+	assert cant_add_edge g 1 4
+	assert cant_add_edge g 1 5
 	assert cant_add_edge g 2 3
 	assert cant_add_edge g 2 4
 	assert cant_add_edge g 2 5
@@ -146,7 +146,7 @@ BODY
 	assert cant_add_edge g 3 5
 	assert cant_add_edge g 4 5
 
-	add_edge g 1 3 false true
+	add_edge g 1 2 false true
 	
 	assert num_nodes_component g 0 6
 	assert num_nodes_component g 1 6
