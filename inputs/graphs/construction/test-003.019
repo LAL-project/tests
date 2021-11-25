@@ -1,0 +1,28 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree t1 10
+	add_edges t1 9
+		4 0
+		4 1
+		4 2
+		4 3
+		4 5
+		1 6
+		1 7
+		1 8
+		1 9
+		true true
+	
+	assert root_is_valid t1 4
+	set_root t1 4
+	output "t1: Before removal"
+	output_graph t1
+	
+	remove_node t1 1 true true true
+	output "t1: After removal"
+	output_graph t1
+	
+	assert is_tree t1
+	calculate_size_subtrees t1
+	assert num_nodes_subtree t1 3 9
