@@ -5,7 +5,9 @@
  *
  *  Copyright (C) 2019 - 2021
  *
- *  This file is part of Tests of the Linear Arrangement Library.
+ *  This file is part of Tests of the Linear Arrangement Library. The full code
+ *  is available at:
+ *      https://github.com/LAL-project/tests.git
  *
  *  Tests of the Linear Arrangement Library is free software: you can
  *  redistribute it and/or modify it under the terms of the GNU Affero
