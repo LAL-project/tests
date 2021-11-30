@@ -10,17 +10,17 @@ These tests require LAL to be installed in your system. Go to [LAL's webpage](ht
 
 We wrote different sets of instructions for compiling the tests for
 
-- Windows in [this](https://github.com/LAL-project/LAL-tests/blob/21.07/instructions/compilation-tests-windows.md) file.
-- Linux in [this](https://github.com/LAL-project/LAL-tests/blob/21.07/instructions/compilation-tests-linux.md) file.
+- Windows in [this](https://github.com/LAL-project/tests/blob/21.07/instructions/compilation-tests-windows.md) file.
+- Linux in [this](https://github.com/LAL-project/tests/blob/21.07/instructions/compilation-tests-linux.md) file.
 
 ## Graphs for testing
 
-[This](https://github.com/LAL-project/LAL-tests/blob/21.07/graphs) directory contains several graphs used for testing.
+[This](https://github.com/LAL-project/tests/blob/21.07/graphs) directory contains several graphs used for testing.
 
 ## Execution of the tests
 
-See [this](https://github.com/LAL-project/LAL-tests/blob/21.07/instructions/tests-instructions.md) file for instructions on how to execute the tests.
+See [this](https://github.com/LAL-project/tests/blob/21.07/instructions/tests-execution-instructions.md) file for instructions on how to execute the tests.
 
 ## Format of the tests
 
-The way we test LAL in an automatic manner is explained [here](https://github.com/LAL-project/LAL-tests/blob/21.07/instructions/tests-format.md).
+The general format of the tests we use is explained [here](https://github.com/LAL-project/tests/blob/21.07/instructions/tests-format.md).
