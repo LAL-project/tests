@@ -199,9 +199,9 @@ err_type exe_linarr_C_list
 	else if (upper_bound_type == 1) {
 		for (uint64_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > single_upper_bound) {
-				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
+				if (uCs[i] <= list_upper_bounds[i]) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Expected number of crossings to be >m^2.\n";
+					std::cerr << "    Expected number of crossings to be > upper_bound.\n";
 					std::cerr << "    Instead, received: " << uCs[i] << '\n';
 					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
 					std::cerr << "    Upper bound: " << single_upper_bound << '\n';
@@ -227,9 +227,9 @@ err_type exe_linarr_C_list
 	else if (upper_bound_type == 2) {
 		for (uint64_t i = 0; i < n_linarrs; ++i) {
 			if (uCbfs[i] > list_upper_bounds[i]) {
-				if (uCs[i] <= uG.get_num_edges()*uG.get_num_edges()) {
+				if (uCs[i] <= list_upper_bounds[i]) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Expected number of crossings to be >m^2.\n";
+					std::cerr << "    Expected number of crossings to be > upper_bound.\n";
 					std::cerr << "    Instead, received: " << uCs[i] << '\n';
 					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
 					std::cerr << "    Upper bound: " << list_upper_bounds[i] << '\n';
