@@ -49,7 +49,7 @@
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/properties/mean_hierarchical_distance.hpp>
+#include <lal/properties/hierarchical_distance.hpp>
 #include <lal/numeric/rational_output.hpp>
 #include <lal/io/basic_output.hpp>
 

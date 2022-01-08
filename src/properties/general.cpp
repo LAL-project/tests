@@ -58,7 +58,7 @@
 #include <lal/numeric/rational_output.hpp>
 #include <lal/properties/degrees.hpp>
 #include <lal/properties/Q.hpp>
-#include <lal/properties/mean_hierarchical_distance.hpp>
+#include <lal/properties/hierarchical_distance.hpp>
 #include <lal/detail/graphs/is_tree.hpp>
 
 // common includes
