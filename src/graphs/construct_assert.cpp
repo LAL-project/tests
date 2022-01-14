@@ -102,6 +102,8 @@
 #define ASSERT_RTREE_SIZE_SUBTREE "num_nodes_subtree"
 #define ASSERT_RTREE_SUBSTREE_SIZES_VALID "subtree_sizes_valid"
 #define ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID "subtree_sizes_not_valid"
+#define ASSERT_RTREE_SUBSTREE_CONTAINS_NODE "subtree_contains_node"
+#define ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE "subtree_not_contains_node"
 
 namespace tests {
 namespace graphs {
@@ -826,6 +828,56 @@ err_type process_assert(
 			std::cerr << "    The size of subtree rooted at '" << u
 				 << "' is not '" << v << "'.\n";
 			std::cerr << "    The size of the subtree is: " << n << '\n';
+			std::cerr << "    Contents of '" << g1 << "':\n";
+			output_graph(g1);
+			return err_type::test_execution;
+		}
+	}
+	else if (assert_what == ASSERT_RTREE_SUBSTREE_CONTAINS_NODE) {
+		fin >> g1 >> u >> v;
+		assert_exists_variable(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE, g1);
+		assert_correct_graph_type
+		(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE, graph_type(g1), rooted_tree_types);
+
+		assert_is_rtree(g1, ASSERT_RTREE_SUBSTREE_CONTAINS_NODE);
+		if (not mfunction_rtrees(g1, is_rooted_tree())) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE)
+			std::cerr << "    Tree '" << g1 << "' is not a rooted tree.\n";
+			return err_type::test_execution;
+		}
+
+		if (not mfunction_rtrees(g1, subtree_contains_node(u,v))) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE);
+			std::cerr
+				<< "    The subtree of '" << g1 << "' rooted at '" << u
+				<< "' does not contain '" << v << "'.\n";
+			std::cerr << "    Contents of '" << g1 << "':\n";
+			output_graph(g1);
+			return err_type::test_execution;
+		}
+	}
+	else if (assert_what == ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE) {
+		fin >> g1 >> u >> v;
+		assert_exists_variable(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE, g1);
+		assert_correct_graph_type
+		(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE, graph_type(g1), rooted_tree_types);
+
+		assert_is_rtree(g1, ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE);
+		if (not mfunction_rtrees(g1, is_rooted_tree())) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE)
+			std::cerr << "    Tree '" << g1 << "' is not a rooted tree.\n";
+			return err_type::test_execution;
+		}
+
+		if (mfunction_rtrees(g1, subtree_contains_node(u,v))) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE);
+			std::cerr
+				<< "    The subtree of '" << g1 << "' rooted at '" << u
+				<< "' contains '" << v << "'.\n";
 			std::cerr << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
 			return err_type::test_execution;

@@ -237,6 +237,12 @@ COMMANDS AVAILABLE
 	
 	-- root_is_not_valid TREE NODE
 		asserts that the root NODE is not valid for the tree TREE
+	
+	-- subtree_contains_node TREE NODE_1 NODE_2
+		asserts that the subtree of TREE rooted at NODE_1 contains NODE_2
+	
+	-- subtree_not_contains_node TREE NODE_1 NODE_2
+		asserts that the subtree of TREE rooted at NODE_1 does not contain NODE_2
 
 +++++++++++++++++++++++++++++++++++++++++
 
