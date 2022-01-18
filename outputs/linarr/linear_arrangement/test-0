@@ -1,33 +1,33 @@
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_1()
 -----------------------------------
-case starting at line: 94
+case starting at line: 96
         Original arrangement: (0) (0)
               left shift (0): (0) (0)
 -----------------------------------
-case starting at line: 100
+case starting at line: 102
         Original arrangement: (0) (0)
              right shift (0): (0) (0)
 -----------------------------------
-case starting at line: 106
+case starting at line: 108
         Original arrangement: (0) (0)
               left shift (0): (0) (0)
         Original arrangement: (0) (0)
              right shift (0): (0) (0)
 -----------------------------------
-case starting at line: 113
+case starting at line: 115
         Original arrangement: (0) (0)
              right shift (0): (0) (0)
         Original arrangement: (0) (0)
               left shift (0): (0) (0)
 -----------------------------------
-case starting at line: 120
+case starting at line: 122
         Original arrangement: (0) (0)
               left shift (0): (0) (0)
         Original arrangement: (0) (0)
               left shift (0): (0) (0)
 -----------------------------------
-case starting at line: 127
+case starting at line: 129
         Original arrangement: (0) (0)
              right shift (0): (0) (0)
         Original arrangement: (0) (0)
@@ -35,17 +35,17 @@ case starting at line: 127
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_2()
 -----------------------------------
-case starting at line: 138
+case starting at line: 140
         Original arrangement: (0, 1) (0, 1)
               left shift (0): (1, 0) (1, 0)
               left shift (1): (0, 1) (0, 1)
 -----------------------------------
-case starting at line: 144
+case starting at line: 146
         Original arrangement: (0, 1) (0, 1)
              right shift (0): (1, 0) (1, 0)
              right shift (1): (0, 1) (0, 1)
 -----------------------------------
-case starting at line: 150
+case starting at line: 152
         Original arrangement: (0, 1) (0, 1)
               left shift (0): (1, 0) (1, 0)
               left shift (1): (0, 1) (0, 1)
@@ -53,7 +53,7 @@ case starting at line: 150
              right shift (0): (1, 0) (1, 0)
              right shift (1): (0, 1) (0, 1)
 -----------------------------------
-case starting at line: 157
+case starting at line: 159
         Original arrangement: (0, 1) (0, 1)
              right shift (0): (1, 0) (1, 0)
              right shift (1): (0, 1) (0, 1)
@@ -61,7 +61,7 @@ case starting at line: 157
               left shift (0): (1, 0) (1, 0)
               left shift (1): (0, 1) (0, 1)
 -----------------------------------
-case starting at line: 164
+case starting at line: 166
         Original arrangement: (0, 1) (0, 1)
               left shift (0): (1, 0) (1, 0)
               left shift (1): (0, 1) (0, 1)
@@ -69,7 +69,7 @@ case starting at line: 164
               left shift (0): (1, 0) (1, 0)
               left shift (1): (0, 1) (0, 1)
 -----------------------------------
-case starting at line: 171
+case starting at line: 173
         Original arrangement: (0, 1) (0, 1)
              right shift (0): (1, 0) (1, 0)
              right shift (1): (0, 1) (0, 1)
@@ -79,19 +79,19 @@ case starting at line: 171
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_3()
 -----------------------------------
-case starting at line: 182
+case starting at line: 184
         Original arrangement: (0, 1, 2) (0, 1, 2)
               left shift (0): (2, 0, 1) (1, 2, 0)
               left shift (1): (1, 2, 0) (2, 0, 1)
               left shift (2): (0, 1, 2) (0, 1, 2)
 -----------------------------------
-case starting at line: 188
+case starting at line: 190
         Original arrangement: (0, 1, 2) (0, 1, 2)
              right shift (0): (1, 2, 0) (2, 0, 1)
              right shift (1): (2, 0, 1) (1, 2, 0)
              right shift (2): (0, 1, 2) (0, 1, 2)
 -----------------------------------
-case starting at line: 194
+case starting at line: 196
         Original arrangement: (0, 1, 2) (0, 1, 2)
               left shift (0): (2, 0, 1) (1, 2, 0)
               left shift (1): (1, 2, 0) (2, 0, 1)
@@ -101,7 +101,7 @@ case starting at line: 194
              right shift (1): (2, 0, 1) (1, 2, 0)
              right shift (2): (0, 1, 2) (0, 1, 2)
 -----------------------------------
-case starting at line: 201
+case starting at line: 203
         Original arrangement: (0, 1, 2) (0, 1, 2)
              right shift (0): (1, 2, 0) (2, 0, 1)
              right shift (1): (2, 0, 1) (1, 2, 0)
@@ -111,7 +111,7 @@ case starting at line: 201
               left shift (1): (1, 2, 0) (2, 0, 1)
               left shift (2): (0, 1, 2) (0, 1, 2)
 -----------------------------------
-case starting at line: 208
+case starting at line: 210
         Original arrangement: (0, 1, 2) (0, 1, 2)
               left shift (0): (2, 0, 1) (1, 2, 0)
               left shift (1): (1, 2, 0) (2, 0, 1)
@@ -121,7 +121,7 @@ case starting at line: 208
               left shift (1): (1, 2, 0) (2, 0, 1)
               left shift (2): (0, 1, 2) (0, 1, 2)
 -----------------------------------
-case starting at line: 215
+case starting at line: 217
         Original arrangement: (0, 1, 2) (0, 1, 2)
              right shift (0): (1, 2, 0) (2, 0, 1)
              right shift (1): (2, 0, 1) (1, 2, 0)
@@ -133,7 +133,7 @@ case starting at line: 215
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_4()
 -----------------------------------
-case starting at line: 226
+case starting at line: 228
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
               left shift (0): (9, 0, 1, 2, 3, 4, 5, 6, 7, 8) (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
               left shift (1): (8, 9, 0, 1, 2, 3, 4, 5, 6, 7) (2, 3, 4, 5, 6, 7, 8, 9, 0, 1)
@@ -146,7 +146,7 @@ case starting at line: 226
               left shift (8): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
               left shift (9): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 -----------------------------------
-case starting at line: 232
+case starting at line: 234
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
              right shift (0): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
              right shift (1): (2, 3, 4, 5, 6, 7, 8, 9, 0, 1) (8, 9, 0, 1, 2, 3, 4, 5, 6, 7)
@@ -159,7 +159,7 @@ case starting at line: 232
              right shift (8): (9, 0, 1, 2, 3, 4, 5, 6, 7, 8) (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
              right shift (9): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 -----------------------------------
-case starting at line: 238
+case starting at line: 240
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
               left shift (0): (9, 0, 1, 2, 3, 4, 5, 6, 7, 8) (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
               left shift (1): (8, 9, 0, 1, 2, 3, 4, 5, 6, 7) (2, 3, 4, 5, 6, 7, 8, 9, 0, 1)
@@ -183,7 +183,7 @@ case starting at line: 238
              right shift (8): (9, 0, 1, 2, 3, 4, 5, 6, 7, 8) (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
              right shift (9): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 -----------------------------------
-case starting at line: 245
+case starting at line: 247
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
              right shift (0): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
              right shift (1): (2, 3, 4, 5, 6, 7, 8, 9, 0, 1) (8, 9, 0, 1, 2, 3, 4, 5, 6, 7)
@@ -207,7 +207,7 @@ case starting at line: 245
               left shift (8): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
               left shift (9): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 -----------------------------------
-case starting at line: 252
+case starting at line: 254
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
               left shift (0): (9, 0, 1, 2, 3, 4, 5, 6, 7, 8) (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
               left shift (1): (8, 9, 0, 1, 2, 3, 4, 5, 6, 7) (2, 3, 4, 5, 6, 7, 8, 9, 0, 1)
@@ -231,7 +231,7 @@ case starting at line: 252
               left shift (8): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
               left shift (9): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 -----------------------------------
-case starting at line: 259
+case starting at line: 261
         Original arrangement: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
              right shift (0): (1, 2, 3, 4, 5, 6, 7, 8, 9, 0) (9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
              right shift (1): (2, 3, 4, 5, 6, 7, 8, 9, 0, 1) (8, 9, 0, 1, 2, 3, 4, 5, 6, 7)
@@ -257,7 +257,7 @@ case starting at line: 259
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_5()
 -----------------------------------
-case starting at line: 270
+case starting at line: 272
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
               left shift (0): (0, 1, 5, 9, 4, 2, 7, 3, 8, 6) (0, 1, 5, 7, 4, 2, 9, 6, 8, 3)
               left shift (1): (9, 0, 4, 8, 3, 1, 6, 2, 7, 5) (1, 5, 7, 4, 2, 9, 6, 8, 3, 0)
@@ -270,7 +270,7 @@ case starting at line: 270
               left shift (8): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
               left shift (9): (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
 -----------------------------------
-case starting at line: 276
+case starting at line: 278
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
              right shift (0): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
              right shift (1): (3, 4, 8, 2, 7, 5, 0, 6, 1, 9) (6, 8, 3, 0, 1, 5, 7, 4, 2, 9)
@@ -283,7 +283,7 @@ case starting at line: 276
              right shift (8): (0, 1, 5, 9, 4, 2, 7, 3, 8, 6) (0, 1, 5, 7, 4, 2, 9, 6, 8, 3)
              right shift (9): (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
 -----------------------------------
-case starting at line: 282
+case starting at line: 284
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
               left shift (0): (0, 1, 5, 9, 4, 2, 7, 3, 8, 6) (0, 1, 5, 7, 4, 2, 9, 6, 8, 3)
               left shift (1): (9, 0, 4, 8, 3, 1, 6, 2, 7, 5) (1, 5, 7, 4, 2, 9, 6, 8, 3, 0)
@@ -307,7 +307,7 @@ case starting at line: 282
              right shift (8): (0, 1, 5, 9, 4, 2, 7, 3, 8, 6) (0, 1, 5, 7, 4, 2, 9, 6, 8, 3)
              right shift (9): (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
 -----------------------------------
-case starting at line: 289
+case starting at line: 291
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
              right shift (0): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
              right shift (1): (3, 4, 8, 2, 7, 5, 0, 6, 1, 9) (6, 8, 3, 0, 1, 5, 7, 4, 2, 9)
@@ -331,7 +331,7 @@ case starting at line: 289
               left shift (8): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
               left shift (9): (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
 -----------------------------------
-case starting at line: 296
+case starting at line: 298
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
               left shift (0): (0, 1, 5, 9, 4, 2, 7, 3, 8, 6) (0, 1, 5, 7, 4, 2, 9, 6, 8, 3)
               left shift (1): (9, 0, 4, 8, 3, 1, 6, 2, 7, 5) (1, 5, 7, 4, 2, 9, 6, 8, 3, 0)
@@ -355,7 +355,7 @@ case starting at line: 296
               left shift (8): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
               left shift (9): (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
 -----------------------------------
-case starting at line: 303
+case starting at line: 305
         Original arrangement: (1, 2, 6, 0, 5, 3, 8, 4, 9, 7) (3, 0, 1, 5, 7, 4, 2, 9, 6, 8)
              right shift (0): (2, 3, 7, 1, 6, 4, 9, 5, 0, 8) (8, 3, 0, 1, 5, 7, 4, 2, 9, 6)
              right shift (1): (3, 4, 8, 2, 7, 5, 0, 6, 1, 9) (6, 8, 3, 0, 1, 5, 7, 4, 2, 9)
@@ -381,7 +381,7 @@ case starting at line: 303
 +++++++++++++++++++++++++++++++++
 function: void tests::linarr::case_6()
 -----------------------------------
-case starting at line: 327
+case starting at line: 329
     (0, 1, 2, 3, 4) (0, 1, 2, 3, 4)
 Swapping vertices: 0 1
     (1, 0, 2, 3, 4) (1, 0, 2, 3, 4)
@@ -392,7 +392,7 @@ Swapping vertices: 0 3
 Swapping vertices: 0 4
     (4, 0, 1, 2, 3) (1, 2, 3, 4, 0)
 -----------------------------------
-case starting at line: 330
+case starting at line: 332
     (0, 1, 2, 3, 4) (0, 1, 2, 3, 4)
 Swapping vertices: 1 0
     (1, 0, 2, 3, 4) (1, 0, 2, 3, 4)
@@ -403,7 +403,7 @@ Swapping vertices: 0 4
 Swapping vertices: 1 3
     (4, 2, 3, 0, 1) (3, 4, 1, 2, 0)
 -----------------------------------
-case starting at line: 333
+case starting at line: 335
     (0, 1, 2, 3, 4) (0, 1, 2, 3, 4)
 Swapping vertices: 1 0
     (1, 0, 2, 3, 4) (1, 0, 2, 3, 4)
@@ -416,62 +416,62 @@ Swapping vertices: 1 3
 +++++++++++++++++++++++++++++++++
 function: tests::err_type tests::linarr::case_7()
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 10
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 20
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 30
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 40
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 50
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 60
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 70
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 80
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 90
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 100
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 110
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 120
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 130
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 140
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 150
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 160
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 170
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 180
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 190
 -----------------------------------
-case starting at line: 342
+case starting at line: 344
 n= 200
