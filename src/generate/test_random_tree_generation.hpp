@@ -51,7 +51,7 @@ namespace generate {
 template<
 	bool use_constructor,
 	int seed,
-	typename Gen,
+	class Gen,
 	class errstream
 >
 inline
@@ -71,7 +71,7 @@ noexcept
 		}
 
 		for (int i = 0; i < num_trees; ++i) {
-			const typename Gen::tree_type_t T = TreeGen.get_tree();
+			const typename Gen::generated_tree_t T = TreeGen.get_tree();
 
 			const auto err = test_validity_tree(n, T);
 			if (err != decltype(err)::correct) {
