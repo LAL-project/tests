@@ -204,6 +204,15 @@ void test_copy_constructor() {
 	}
 }
 
+class class_with_array {
+public:
+	void init() {
+		A.resize(10, 5);
+	}
+
+	data_array<int> A;
+};
+
 void test_copy_assignment() {
 	begin_function;
 	data_array<int> TO(0);
@@ -258,6 +267,30 @@ void test_copy_assignment() {
 	A = TO;
 	output_array(A);
 	output_array(TO);
+	}
+
+	{
+	begin_case;
+	data_array<int> A;
+	output_array(A);
+	A = data_array<int>(10, 5);
+	output_array(A);
+	}
+
+	{
+	begin_case;
+	data_array<int> A;
+	output_array(A);
+	A.resize(10, 5);
+	output_array(A);
+	}
+
+	{
+	begin_case;
+	class_with_array cwa;
+	output_array(cwa.A);
+	cwa.init();
+	output_array(cwa.A);
 	}
 }
 #endif
