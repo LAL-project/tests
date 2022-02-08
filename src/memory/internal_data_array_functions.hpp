@@ -44,22 +44,22 @@
 
 #define MLINE __LINE__ << ":: "
 
-#define begin_function										\
-	std::cout << "+++++++++++++++++++++++++++++++++\n";	\
+#define begin_function											\
+	std::cout << "+++++++++++++++++++++++++++++++++\n";			\
 	std::cout << "function: " << __PRETTY_FUNCTION__ << '\n';
 
-#define begin_case											\
-	std::cout << "-----------------------------------\n";	\
+#define begin_case												\
+	std::cout << "-----------------------------------\n";		\
 	std::cout << "case starting at line: " << __LINE__ << '\n';
 
-#define output_array(A)							\
-	if (A.size() == 0) {						\
-		std::cout << MLINE << "Empty\n";		\
-	}											\
-	else {										\
+#define output_array(A)								\
+	if (A.size() == 0) {							\
+		std::cout << MLINE << "Empty\n";			\
+	}												\
+	else {											\
 		std::cout << MLINE;							\
-		for (std::size_t i = 0; i < A.size(); ++i) {	\
+		for (std::size_t i = 0; i < A.size(); ++i) {\
 			std::cout << " " << A[i];				\
-		}										\
+		}											\
 		std::cout << '\n';							\
 	}
