@@ -1,105 +1,139 @@
 +++++++++++++++++++++++++++++++++
 function: void tests::memory::lal_data_array::test_move_constructor()
 -----------------------------------
-case starting at line: 70
-72:: Empty
+case starting at line: 72
 74:: Empty
-75:: Empty
+76:: Empty
+77:: Empty
 -----------------------------------
-case starting at line: 79
-81:: Empty
+case starting at line: 81
 83:: Empty
-84:: Empty
+85:: Empty
+86:: Empty
 -----------------------------------
-case starting at line: 88
-90::  100 100 100 100 100
-92:: Empty
-93::  100 100 100 100 100
+case starting at line: 90
+92::  100 100 100 100 100
+94:: Empty
+95::  100 100 100 100 100
 -----------------------------------
-case starting at line: 97
-99::  1 1 1 1 1 1 1 1 1 1
-101:: Empty
-102::  1 1 1 1 1 1 1 1 1 1
+case starting at line: 99
+101::  1 1 1 1 1 1 1 1 1 1
+103:: Empty
+104::  1 1 1 1 1 1 1 1 1 1
 +++++++++++++++++++++++++++++++++
 function: void tests::memory::lal_data_array::test_move_assignment()
 -----------------------------------
-case starting at line: 111
-113:: Empty
+case starting at line: 113
 115:: Empty
-116:: Empty
-119:: Empty
-120:: Empty
+117:: Empty
+118:: Empty
+121:: Empty
+122:: Empty
 -----------------------------------
-case starting at line: 124
-126:: Empty
+case starting at line: 126
 128:: Empty
-129:: Empty
-132:: Empty
-133:: Empty
+130:: Empty
+131:: Empty
+134:: Empty
+135:: Empty
 -----------------------------------
-case starting at line: 137
-139::  100 100 100 100 100
-141:: Empty
-142::  100 100 100 100 100
-145::  100 100 100 100 100
-146:: Empty
+case starting at line: 139
+141::  100 100 100 100 100
+143:: Empty
+144::  100 100 100 100 100
+147::  100 100 100 100 100
+148:: Empty
 -----------------------------------
-case starting at line: 150
-152::  1 1 1 1 1 1 1 1 1 1
-154:: Empty
-155::  1 1 1 1 1 1 1 1 1 1
-158::  1 1 1 1 1 1 1 1 1 1
-159:: Empty
+case starting at line: 152
+154::  1 1 1 1 1 1 1 1 1 1
+156:: Empty
+157::  1 1 1 1 1 1 1 1 1 1
+160::  1 1 1 1 1 1 1 1 1 1
+161:: Empty
 +++++++++++++++++++++++++++++++++
 function: void tests::memory::lal_data_array::test_copy_constructor()
 -----------------------------------
-case starting at line: 169
-171:: Empty
+case starting at line: 171
 173:: Empty
-174:: Empty
+175:: Empty
+176:: Empty
 -----------------------------------
-case starting at line: 178
-180:: Empty
+case starting at line: 180
 182:: Empty
-183:: Empty
+184:: Empty
+185:: Empty
 -----------------------------------
-case starting at line: 187
-189::  100 100 100 100 100
+case starting at line: 189
 191::  100 100 100 100 100
-192::  100 100 100 100 100
+193::  100 100 100 100 100
+194::  100 100 100 100 100
 -----------------------------------
-case starting at line: 196
-198::  1 1 1 1 1 1 1 1 1 1
+case starting at line: 198
 200::  1 1 1 1 1 1 1 1 1 1
-201::  1 1 1 1 1 1 1 1 1 1
+202::  1 1 1 1 1 1 1 1 1 1
+203::  1 1 1 1 1 1 1 1 1 1
 +++++++++++++++++++++++++++++++++
 function: void tests::memory::lal_data_array::test_copy_assignment()
 -----------------------------------
-case starting at line: 210
-212:: Empty
+case starting at line: 212
 214:: Empty
-215:: Empty
-218:: Empty
-219:: Empty
+216:: Empty
+217:: Empty
+220:: Empty
+221:: Empty
 -----------------------------------
-case starting at line: 223
-225:: Empty
+case starting at line: 225
 227:: Empty
-228:: Empty
-231:: Empty
-232:: Empty
+229:: Empty
+230:: Empty
+233:: Empty
+234:: Empty
 -----------------------------------
-case starting at line: 236
-238::  100 100 100 100 100
+case starting at line: 238
 240::  100 100 100 100 100
-241::  100 100 100 100 100
-244::  100 100 100 100 100
-245::  100 100 100 100 100
+242::  100 100 100 100 100
+243::  100 100 100 100 100
+246::  100 100 100 100 100
+247::  100 100 100 100 100
 -----------------------------------
-case starting at line: 249
-251::  1 1 1 1 1 1 1 1 1 1
+case starting at line: 251
 253::  1 1 1 1 1 1 1 1 1 1
-254::  1 1 1 1 1 1 1 1 1 1
-257::  1 1 1 1 1 1 1 1 1 1
-258::  1 1 1 1 1 1 1 1 1 1
+255::  1 1 1 1 1 1 1 1 1 1
+256::  1 1 1 1 1 1 1 1 1 1
+259::  1 1 1 1 1 1 1 1 1 1
+260::  1 1 1 1 1 1 1 1 1 1
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_resize_fill() [with bool clear = false]
+-----------------------------------
+case starting at line: 271
+273::  1
+-----------------------------------
+case starting at line: 277
+279::  2 2
+-----------------------------------
+case starting at line: 283
+285::  10 10 10 10 10 10 10 10 10 10
+-----------------------------------
+case starting at line: 289
+291::  10 10 10 10 10 10 10 10 10 10
+-----------------------------------
+case starting at line: 295
+298::  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_data_array::test_resize_fill() [with bool clear = true]
+-----------------------------------
+case starting at line: 271
+273::  1
+-----------------------------------
+case starting at line: 277
+279::  2 2
+-----------------------------------
+case starting at line: 283
+285::  10 10 10 10 10 10 10 10 10 10
+-----------------------------------
+case starting at line: 289
+291::  10 10 10 10 10 10 10 10 10 10
+-----------------------------------
+case starting at line: 295
+298::  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
 Test finished without apparent errors.
