@@ -3,7 +3,7 @@ CONFIG += static
 CONFIG -= app_bundle
 CONFIG -= qt
 
-QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17
+QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17 -fsanitize=address
 QMAKE_CXXFLAGS +=										\
 	-Wpedantic -Wshadow -Wall -Wextra -Wconversion		\
 	-Wold-style-cast -Wrestrict -Wduplicated-cond		\
@@ -13,6 +13,7 @@ QMAKE_CXXFLAGS_DEBUG += -O3 -DDEBUG -D_GLIBCXX_DEBUG
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3 -UDEBUG -DNDEBUG -fstrict-aliasing
 
+LIBS += -lasan
 LIBS += -lgmp -fopenmp -lpthread
 
 isEmpty(ENVIR) {
