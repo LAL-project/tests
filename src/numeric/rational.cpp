@@ -57,7 +57,7 @@
 
 #define assert_exists_variable(varname)										\
 	if (not map_has(vtypes, varname)) {										\
-		std::cerr << ERROR << '\n';												\
+		std::cerr << ERROR << '\n';											\
 		std::cerr << "    Variable '" << varname << "' does not exist.\n";	\
 		return err_type::test_execution;									\
 	}
@@ -66,22 +66,22 @@
 #define message_in_func(f) std::cerr << "    -- In '" << f << "' --\n";
 #define assert_correct_var_type(assertion, vt)						\
 	if (vt != "integer" and vt != "rational") {						\
-		std::cerr << ERROR << '\n';										\
+		std::cerr << ERROR << '\n';									\
 		message_in_func(assertion)									\
-		std::cerr << "    Invalid variable type '" << vt << "'.\n";\
+		std::cerr << "    Invalid variable type '" << vt << "'.\n";	\
 		return err_type::test_format;								\
 	}
 #define assert_correct_format(assertion, f)							\
-	if (f != "int" and f != "std::string") {								\
-		std::cerr << ERROR << '\n';										\
+	if (f != "int" and f != "string") {								\
+		std::cerr << ERROR << '\n';									\
 		message_in_func(assertion)									\
 		std::cerr << "    Invalid format type '" << f << "'.\n";	\
 		return err_type::test_format;								\
 	}
 
-#define comparison_error(op, var1, var2, val_var1, val_var2)	\
+#define comparison_error(op, var1, var2, val_var1, val_var2)		\
 	std::cerr << ERROR << '\n';										\
-	std::cerr << "    Assertion '" << op << "' failed for\n";	\
+	std::cerr << "    Assertion '" << op << "' failed for\n";		\
 	std::cerr << "        '" << var1 << "' = " << val_var1 << '\n';	\
 	std::cerr << "        '" << var2 << "' = " << val_var2 << '\n';
 
@@ -439,7 +439,7 @@ err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) {
 					fin >> val;
 					rational_vars[var_name] = val;
 				}
-				else if (format == "std::string") {
+				else if (format == "string") {
 					std::string val;
 					fin >> val;
 					rational_vars[var_name] = lal::numeric::rational(val);
