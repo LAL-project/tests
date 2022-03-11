@@ -159,9 +159,9 @@ std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node 
 	return std::make_pair(longest_path[h], n);
 }
 
-template<class G>
+template<class tree_t>
 err_type exe_commands_utils_centre(std::ifstream& fin) {
-	G t;
+	tree_t t;
 	uint64_t n;
 
 	std::string option;
@@ -182,7 +182,12 @@ err_type exe_commands_utils_centre(std::ifstream& fin) {
 			for (uint64_t i = 0; i < n; ++i) {
 				fin >> es[i].first >> es[i].second;
 			}
-			t.add_edges(es);
+			if (n == t.get_num_nodes() - 1) {
+				t.set_edges(es);
+			}
+			else {
+				t.add_edges(es);
+			}
 		}
 		else if (option == "find_centre") {
 			lal::node s;
