@@ -75,28 +75,39 @@ namespace linarr {
 namespace dmin_unconstrained {
 
 inline
-bool check_correctness_arr(const lal::graphs::free_tree& tree, const std::pair<uint64_t, lal::linear_arrangement>& res) {
-	const lal::linear_arrangement& arr = res.second;
-	// ensure that the result is an arrangement
+bool check_correctness_arr(
+	const lal::graphs::free_tree& tree,
+	const std::pair<uint64_t, lal::linear_arrangement>& res_algo,
+	const std::string& algorithm
+)
+noexcept
+{
+	const lal::linear_arrangement& arr = res_algo.second;
+	/* ensure that the result is an arrangement */
 	if (not lal::linarr::is_permutation(arr)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The result is not an arrangement (permutation).\n";
+		std::cerr << "    Algorithm executed: " << algorithm << '\n';
 		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 		std::cerr << "    For tree: \n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 		std::cerr << tree << '\n';
 		return false;
 	}
-	// ensure that value of D is correct
+	/* ensure that value of D is correct */
 	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
-	if (D != res.first) {
+	if (D != res_algo.first) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "        Arrangement:     " << res.second.direct_as_vector() << '\n';
-		std::cerr << "        Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
-		std::cerr << "        Value of D returned: " << res.first << '\n';
-		std::cerr << "        Actual value of D:   " << D << '\n';
+		std::cerr << "    Arrangement:     " << res_algo.second.direct_as_vector() << '\n';
+		std::cerr << "    Inv Arrangement: " << res_algo.second.inverse_as_vector() << '\n';
+		std::cerr << "    Value of D returned: " << res_algo.first << '\n';
+		std::cerr << "    Actual value of D:   " << D << '\n';
 		std::cerr << "    For tree: \n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 		std::cerr << tree << '\n';
 		return false;
 	}
@@ -104,11 +115,15 @@ bool check_correctness_arr(const lal::graphs::free_tree& tree, const std::pair<u
 }
 
 bool test_correctness_arr_formula(
-	const lal::graphs::free_tree& tree, const std::pair<uint64_t, lal::linear_arrangement>& res_lib,
-	const std::string& tree_class, const uint64_t val_formula
+	const lal::graphs::free_tree& tree,
+	const std::pair<uint64_t, lal::linear_arrangement>& res_lib,
+	const std::string& tree_class,
+	const uint64_t val_formula,
+	const std::string& algorithm
 )
+noexcept
 {
-	if (not check_correctness_arr(tree, res_lib)) {
+	if (not check_correctness_arr(tree, res_lib, algorithm)) {
 		return false;
 	}
 	/* compare results obtained by the library and by a formula */
@@ -130,12 +145,8 @@ bool test_correctness_arr_formula(
 
 // -----------------------------------------------------------------------------
 
-err_type test_bf_algorithm(
-	// A is a function that encapsulates an algorithm
-	// -- be it Shiloach's, be it Fan Chung's
-	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
-	std::ifstream& fin
-)
+template<typename func_Dmin>
+err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 {
 	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
 	(
@@ -163,10 +174,13 @@ err_type test_bf_algorithm(
 	return err;
 }
 
+template<typename func_Dmin>
 err_type test_class_algorithm(
-	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
+	const func_Dmin& A,
+	const std::string& algorithm,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string tree_class;
 	uint64_t n1, n2;
@@ -195,8 +209,9 @@ err_type test_class_algorithm(
 				// Dmin from the algorithm is
 				const auto algo_res = A(T);
 
-				const bool correct =
-				test_correctness_arr_formula(T, algo_res, "Linear", Dmin_lintree);
+				const bool correct = test_correctness_arr_formula
+					(T, algo_res, "Linear", Dmin_lintree, algorithm);
+
 				if (not correct) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    When dealing with a linear tree of " << n << " vertices.\n";
@@ -232,8 +247,9 @@ err_type test_class_algorithm(
 					// compute Dmin using the library's algorithm
 					const auto res_algo = A(tree);
 
-					const bool correct =
-					test_correctness_arr_formula(tree, res_algo, "Caterpillar", Dmin_cat);
+					const bool correct = test_correctness_arr_formula
+						(tree, res_algo, "Caterpillar", Dmin_cat, algorithm);
+
 					if (not correct) {
 						std::cerr << ERROR << '\n';
 						std::cerr << "    When dealing with a caterpillat tree of " << n << " vertices.\n";
@@ -305,8 +321,9 @@ err_type test_class_algorithm(
 				// compute Dmin using the library's algorithm
 				const auto res_algo = A(T);
 
-				const bool correct =
-				test_correctness_arr_formula(T, res_algo, "Binary complete", Dmin_bin_complete);
+				const bool correct = test_correctness_arr_formula
+					(T, res_algo, "Binary complete", Dmin_bin_complete, algorithm);
+
 				if (not correct) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    When dealing with a complete binary tree of " << n << " vertices.\n";
@@ -330,8 +347,9 @@ err_type test_class_algorithm(
 				// compute Dmin using the library's algorithm
 				const auto res_algo = A(T);
 
-				const bool correct =
-				test_correctness_arr_formula(T, res_algo, "Star", Dmin_star);
+				const bool correct = test_correctness_arr_formula
+					(T, res_algo, "Star", Dmin_star, algorithm);
+
 				if (not correct) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    When dealing with a star tree of " << n << " vertices.\n";
@@ -350,10 +368,13 @@ err_type test_class_algorithm(
 	return err_type::no_error;
 }
 
+template<typename func_Dmin>
 err_type test_tree_algorithm(
-	const std::function< std::pair<uint64_t, lal::linear_arrangement> (const lal::graphs::free_tree&) >& A,
+	const func_Dmin& A,
+	const std::string& algorithm,
 	std::ifstream& fin
 )
+noexcept
 {
 	// read number of vertices
 	uint64_t n;
@@ -365,8 +386,17 @@ err_type test_tree_algorithm(
 			T.add_edge(u,v);
 		}
 
-		const auto& r = A(T);
-		std::cout << r.first << '\n';
+		if (not T.is_tree()) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "Input tree is not a tree.\n";
+			return err_type::test_execution;
+		}
+
+		const auto& res_algo = A(T);
+		const bool correct = check_correctness_arr(T, res_algo, algorithm);
+		if (not correct) {
+			return err_type::test_execution;
+		}
 	}
 
 	return err_type::no_error;
@@ -374,7 +404,9 @@ err_type test_tree_algorithm(
 
 } // -- namespace dmin_unconstrained
 
-err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	std::string what;
 	fin >> what;
 
@@ -411,8 +443,9 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 		dmin_unconstrained::test_class_algorithm(
 			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
-			}
-		, fin
+			},
+			"Shiloach",
+			fin
 		);
 	}
 	else if (what == "YS_tree") {
@@ -420,8 +453,9 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 		dmin_unconstrained::test_tree_algorithm(
 			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
-			}
-		, fin
+			},
+			"Shiloach",
+			fin
 		);
 	}
 	// ---------------
@@ -445,8 +479,8 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 		dmin_unconstrained::test_bf_algorithm(
 			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
-			}
-		, input_file
+			},
+			input_file
 		);
 
 		input_file.close();
@@ -456,8 +490,9 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 		dmin_unconstrained::test_class_algorithm(
 			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
-			}
-		, fin
+			},
+			"Chung_2",
+			fin
 		);
 	}
 	else if (what == "FC_tree") {
@@ -465,8 +500,9 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 		dmin_unconstrained::test_tree_algorithm(
 			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
-			}
-		, fin
+			},
+			"Chung_2",
+			fin
 		);
 	}
 	else {
