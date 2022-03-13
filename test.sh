@@ -96,6 +96,7 @@ function show_usage() {
 	echo "        graphs : execute all graph tests"
 	echo "            graphs_construction : execute graph construction tests"
 	echo "            graphs_tree_types : execute tree classification tests"
+	echo "            graphs_graph_literals : execute graph literals tests"
 	echo ""
 	echo "        io : execute io tests"
 	echo "            io_correctness : execute correctness tests of treebanks"

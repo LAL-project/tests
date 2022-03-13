@@ -64,6 +64,10 @@ err_type call_graphs
 		return parse_header(exe_graphs_tree_type_classification, fin);
 	}
 
+	if (key == "graph_literals") {
+		return parse_header(exe_graphs_graph_literals, fin);
+	}
+
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
 	mark_wrong_keyword(keywords, {i}, "    ");

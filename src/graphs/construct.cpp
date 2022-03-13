@@ -709,7 +709,7 @@ err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin) {
 		return err_type::test_format;
 	}
 
-	err_type e = exe_construction_test(fin);
+	const err_type e = exe_construction_test(fin);
 	if (e == err_type::no_error) {
 		TEST_GOODBYE
 	}

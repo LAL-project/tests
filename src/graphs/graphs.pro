@@ -56,6 +56,7 @@ SOURCES += \
 	construct.cpp \
 	construct_assert.cpp \
 	construct_utils.cpp \
+	graph_literals.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	tree_type_classification.cpp

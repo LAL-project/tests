@@ -40,31 +40,70 @@
  *
  ********************************************************************/
 
-#pragma once
-
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be recompiled.
- */
-
-// C++ includes
-#include <functional>
-#include <fstream>
-#include <vector>
-#include <string>
-
 // common includes
-#include "common/definitions.hpp"
+#include "exe_construction.hpp"
+#include "common/test_utils.hpp"
+#include "common/io_wrapper.hpp"
+
+// lal includes
+#include <lal/graphs/tree_literals.hpp>
+#include <lal/graphs/output.hpp>
 
 namespace tests {
 namespace graphs {
 
-err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin);
-err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin);
-err_type exe_graphs_graph_literals(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_graphs_graph_literals(const input_list& inputs, std::ifstream&)
+noexcept
+{
+	if (inputs.size() != 0) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    No input files are allowed in this test.\n";
+		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
+		return err_type::test_format;
+	}
+
+	{
+	std::cout << "Free tree and root (" << __LINE__ << ")\n";
+	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
+			= "0 1 1 1 1 1"_pfree_tree;
+	std::cout << ftree_and_root.first << '\n';
+	std::cout << ftree_and_root.second << '\n';
+	}
+
+	{
+	std::cout << "Free tree and root (" << __LINE__ << ")\n";
+	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
+			= "0 1 2 3 4 5"_pfree_tree;
+	std::cout << ftree_and_root.first << '\n';
+	std::cout << ftree_and_root.second << '\n';
+	}
+
+	{
+	std::cout << "Free tree (" << __LINE__ << ")\n";
+	const lal::graphs::free_tree ftree = "0 1 1 1 1 1"_free_tree;
+	std::cout << ftree << '\n';
+	}
+
+	{
+	std::cout << "Free tree (" << __LINE__ << ")\n";
+	const lal::graphs::free_tree ftree = "0 1 2 3 4 5"_free_tree;
+	std::cout << ftree << '\n';
+	}
+
+	{
+	std::cout << "Rooted tree (" << __LINE__ << ")\n";
+	const lal::graphs::rooted_tree rtree = "0 1 1 1 1 1"_rooted_tree;
+	std::cout << rtree << '\n';
+	}
+
+	{
+	std::cout << "Rooted tree (" << __LINE__ << ")\n";
+	const lal::graphs::rooted_tree rtree = "0 1 2 3 4 5"_rooted_tree;
+	std::cout << rtree << '\n';
+	}
+
+	return err_type::no_error;
+}
 
 } // -- namespace graphs
 } // -- namespace tests
