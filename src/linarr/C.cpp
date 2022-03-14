@@ -64,6 +64,14 @@
 namespace tests {
 namespace linarr {
 
+#define output_arr_graph												\
+	std::cerr << "    For linear arrangement function " << i << ":\n";	\
+	std::cerr << "        " << pi.inverse_as_vector() << '\n';			\
+	std::cerr << "    For (directed) graph\n";							\
+	std::cerr << dG << '\n';											\
+	std::cerr << "    For (undirected) graph\n";						\
+	std::cerr << uG << '\n';											\
+
 err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upper_bound) {
 	std::set<std::string> allowed_procs({
 		"bruteforce", "dyn_prog", "ladder", "stack_based"
@@ -122,8 +130,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 			std::cerr << "    Comparing results for directed and undirected graphs.\n";
 			std::cerr << "    uCbf= " << uCbf << '\n';
 			std::cerr << "    dCbf= " << dCbf << '\n';
-			std::cerr << "    For linear arrangement function " << i << ":\n";
-			std::cerr << "        " << pi.direct_as_vector() << '\n';
+			output_arr_graph;
 			return err_type::test_execution;
 		}
 
@@ -153,8 +160,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 			std::cerr << "    coincide with the undirected graph.\n";
 			std::cerr << "    uC= " << uC << '\n';
 			std::cerr << "    dC= " << dC << '\n';
-			std::cerr << "    For linear arrangement function " << i << ":\n";
-			std::cerr << "        " << pi.direct_as_vector() << '\n';
+			output_arr_graph;
 			return err_type::test_execution;
 		}
 
@@ -166,6 +172,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 					std::cerr << "    Instead, received: " << uC << '\n';
 					std::cerr << "    Actual number of crossings: " << uCbf << '\n';
 					std::cerr << "    Upper bound: " << upper_bound << '\n';
+					output_arr_graph;
 					return err_type::test_execution;
 				}
 			}
@@ -175,12 +182,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
-				std::cerr << "    For linear arrangement function " << i << ":\n";
-				std::cerr << "        direct: " << pi.direct_as_vector() << '\n';
-				std::cerr << "    Undirected graph:\n";
-				std::cerr << uG << '\n';
-				std::cerr << "    Directed graph:\n";
-				std::cerr << dG << '\n';
+				output_arr_graph;
 				return err_type::test_execution;
 			}
 		}
@@ -191,12 +193,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
-				std::cerr << "    For linear arrangement function " << i << ":\n";
-				std::cerr << "        direct: " << pi.direct_as_vector() << '\n';
-				std::cerr << "    Undirected graph:\n";
-				std::cerr << uG << '\n';
-				std::cerr << "    Directed graph:\n";
-				std::cerr << dG << '\n';
+				output_arr_graph;
 				return err_type::test_execution;
 			}
 		}
