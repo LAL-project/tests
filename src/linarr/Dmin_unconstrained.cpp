@@ -397,6 +397,7 @@ noexcept
 		if (not correct) {
 			return err_type::test_execution;
 		}
+		std::cout << res_algo.first << '\n';
 	}
 
 	return err_type::no_error;
