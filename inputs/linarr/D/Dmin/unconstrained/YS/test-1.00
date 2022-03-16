@@ -3,6 +3,3 @@ INPUT 0
 BODY
 	YS_class
 	linear 1 100
-	star 1 100
-	caterpillar 1 22
-	binary-complete 2 10

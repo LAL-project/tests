@@ -1,0 +1,4 @@
+TYPE linarr-Dmin-comparison
+INPUT 0
+BODY
+	random YS == FC 180 100

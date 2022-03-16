@@ -1,0 +1,4 @@
+TYPE linarr-Dmin-comparison
+INPUT 0
+BODY
+	exhaustive YS == FC 5

@@ -1,0 +1,4 @@
+TYPE linarr-Dmin-comparison
+INPUT 0
+BODY
+	random FC <= Plan 150 100

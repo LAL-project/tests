@@ -2,4 +2,4 @@ TYPE linarr-Dmin-Unconstrained
 INPUT 0
 BODY
 	FC_class
-	linear 1 100
+	binary-complete 2 10
