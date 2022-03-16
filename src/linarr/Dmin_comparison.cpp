@@ -202,14 +202,7 @@ noexcept
 		uint64_t n;
 		fin >> n;
 
-		std::cout
-			<< "Testing '" << mode << "' for "
-			<< "'" << algo1 << "' " << comp << " '" << algo2 << "'"
-			<< " on size: " << n;
-
 		if (mode == "exhaustive") {
-			std::cout << '\n';
-
 			lal::generate::all_ulab_free_trees TreeGen(n);
 			while (not TreeGen.end()) {
 				const lal::graphs::free_tree tree = TreeGen.get_tree();
@@ -245,7 +238,6 @@ noexcept
 		else {
 			uint64_t N;
 			fin >> N;
-			std::cout << " (N= " << N << ")\n";
 
 			lal::generate::rand_ulab_free_trees TreeGen(n, 9999);
 			for (uint64_t i = 0; i < N; ++i) {
@@ -268,12 +260,15 @@ noexcept
 						 << '\n';
 					std::cerr << "    Algorithm: " << algo1 << '\n';
 					std::cerr << "        D= " << res1.first << '\n';
-					std::cerr << "        Arrangement: " << res1.second.direct_as_vector() << '\n';
+					std::cerr << "        Arrangement:     " << res1.second.direct_as_vector() << '\n';
+					std::cerr << "        Inv Arrangement: " << res1.second.inverse_as_vector() << '\n';
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
 					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
-					std::cerr << " In tree:\n";
+					std::cerr << "        Inv Arrangement: " << res1.second.inverse_as_vector() << '\n';
+					std::cerr << "    For tree:\n";
 					std::cerr << tree << '\n';
+					std::cerr << "    Head vector: " << tree.get_head_vector(0) << '\n';
 					return err_type::test_execution;
 				}
 			}
