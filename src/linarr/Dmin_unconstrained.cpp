@@ -84,7 +84,7 @@ noexcept
 {
 	const lal::linear_arrangement& arr = res_algo.second;
 	/* ensure that the result is an arrangement */
-	if (not lal::linarr::is_permutation(arr)) {
+	if (not lal::linarr::is_arrangement(tree, arr)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The result is not an arrangement (permutation).\n";
 		std::cerr << "    Algorithm executed: " << algorithm << '\n';
