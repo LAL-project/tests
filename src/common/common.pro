@@ -23,7 +23,7 @@ isEmpty(ENVIR) {
 # configure home
 equals(ENVIR, "HOME") {
     LAL_DIR = /home/lluis/Documents/projects/LAL-DISTRIBUTION/21.07/linear-arrangement-library
-	THIS_DIR = /home/lluis/Documents/projects/LAL-tests/src
+	THIS_DIR = /home/lluis/Documents/projects/LAL-DISTRIBUTION/21.07/LAL-tests/src
 }
 
 # configure cluster
