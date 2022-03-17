@@ -82,7 +82,7 @@ inline
 bool check_correctness_arr(const free_tree& tree, const pair<uint32_t, linear_arrangement>& res) {
 	const linear_arrangement& arr = res.second;
 	// ensure that the result is an arrangement
-	if (not lal::linarr::is_permutation(arr)) {
+	if (not lal::linarr::is_arrangement(tree, arr)) {
 		cerr << ERROR << endl;
 		cerr << "    The result is not an arrangement (permutation)." << endl;
 		cerr << "        Arrangement: " << arr << endl;
@@ -370,6 +370,9 @@ err_type test_tree_algorithm(
 
 		const auto& r = A(T);
 		cout << r.first << endl;
+		
+		const bool correct = check_correctness_arr(T, r);
+		if (not correct) { return err_type::test_execution; }
 	}
 
 	return err_type::no_error;

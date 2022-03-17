@@ -85,14 +85,15 @@ namespace tests_Dmin_comparison {
 inline
 bool check_correctness_arr(
 	const free_tree& tree,
-	const pair<uint32_t, linear_arrangement>& res
+	const pair<uint32_t, linear_arrangement>& res,
+	const std::string& algo
 )
 {
 	const linear_arrangement& arr = res.second;
 	/* ensure that the result is an arrangement */
 	if (not lal::linarr::is_permutation(arr)) {
 		cerr << ERROR << endl;
-		cerr << "    The result is not an arrangement (permutation)." << endl;
+		cerr << "    The result of '" << algo << "' is not an arrangement (permutation)." << endl;
 		cerr << "    Arrangement: " << arr << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
@@ -102,13 +103,14 @@ bool check_correctness_arr(
 	const uint32_t D = sum_edge_lengths(tree, arr);
 	if (D != res.first) {
 		cerr << ERROR << endl;
-		cerr << "    Value of D returned by method is incorrect." << endl;
+		cerr << "    Value of D returned by method '" << algo << "' is incorrect." << endl;
 		cerr << "    Arrangement:     " << res.second << endl;
 		cerr << "    Inv Arrangement: " << invlinarr(res.second) << endl;
 		cerr << "    Value of D returned: " << res.first << endl;
 		cerr << "    Actual value of D:   " << D << endl;
 		cerr << "    For tree: " << endl;
 		cerr << tree << endl;
+		cerr << "    Of edge list: " << tree.get_edges() << '\n';
 		return false;
 	}
 	return true;
@@ -203,10 +205,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				TreeGen.next();
 
 				const auto res1 = ALGOS[algo1](tree);
-				const auto res2 = ALGOS[algo2](tree);
+				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1, algo1);
 
-				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1);
-				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2);
+				const auto res2 = ALGOS[algo2](tree);
+				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2, algo2);
 
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
@@ -239,10 +241,10 @@ err_type exe_linarr_Dmin_comparison(const input_list& inputs, ifstream& fin) {
 				const free_tree tree = TreeGen.get_tree();
 
 				const auto res1 = ALGOS[algo1](tree);
-				const auto res2 = ALGOS[algo2](tree);
+				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1, algo1);
 
-				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1);
-				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2);
+				const auto res2 = ALGOS[algo2](tree);
+				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2, algo2);
 
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
