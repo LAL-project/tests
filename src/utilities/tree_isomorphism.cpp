@@ -40,6 +40,7 @@
 
 // C++ includes
 #include <iostream>
+#include <optional>
 #include <fstream>
 #include <random>
 using namespace std;
