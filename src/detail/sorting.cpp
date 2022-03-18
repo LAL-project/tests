@@ -240,11 +240,11 @@ noexcept
 {
 	const std::size_t size = std::distance(begin,end);
 	if (incr) {
-		lal::detail::counting_sort<T,It,lal::detail::countingsort::non_decreasing_t>
+		lal::detail::sorting::counting_sort<T,It,lal::detail::sorting::non_decreasing_t>
 		(begin, end, n, size, key);
 	}
 	else {
-		lal::detail::counting_sort<T,It,lal::detail::countingsort::non_increasing_t>
+		lal::detail::sorting::counting_sort<T,It,lal::detail::sorting::non_increasing_t>
 		(begin, end, n, size, key);
 	}
 }
@@ -320,7 +320,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			lal::detail::insertion_sort(begin, end);
+			lal::detail::sorting::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e = check_sorting("insertion", s, n, this_sort, true);
@@ -337,7 +337,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			lal::detail::bit_sort<Ui>
+			lal::detail::sorting::bit_sort<Ui>
 			(begin, end, std::distance(begin, end));
 		};
 		for (Ui k = 0; k < R; ++k) {
@@ -355,7 +355,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
 		// bit array
 		std::vector<char> seen(n, 0);
 		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			lal::detail::bit_sort_mem<Ui>
+			lal::detail::sorting::bit_sort_mem<Ui>
 			(begin, end, std::distance(begin, end), &seen[0]);
 		};
 		// execute test
