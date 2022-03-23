@@ -62,9 +62,10 @@
 namespace tests {
 namespace detail {
 
-inline bool are_centres_equal(
+bool are_centres_equal(
 	const uint64_t n,
-	const std::pair<lal::node,lal::node>& c1, const std::pair<lal::node,lal::node>& c2
+	const std::pair<lal::node,lal::node>& c1,
+	const std::pair<lal::node,lal::node>& c2
 )
 noexcept
 {
@@ -78,7 +79,9 @@ noexcept
 
 // this is a very simple algorithm to calculate the centre
 template<class T>
-std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node u) {
+std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node u)
+noexcept
+{
 	const auto n = tree.get_num_nodes();
 
 	// First simple case:
@@ -98,7 +101,7 @@ std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node 
 
 	// farthest vertex from 'u' and distance
 	uint64_t max_dist = 0;
-	lal::node v;
+	lal::node v = n + 1;
 
 	bfs.set_process_neighbour(
 	[&](const auto&, lal::node s, lal::node t, bool) {
@@ -111,6 +114,10 @@ std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node 
 	);
 	bfs.start_at(u);
 
+#if defined DEBUG
+	assert(v < n);
+#endif
+
 	// early termination
 	if (v == u) {
 		return std::make_pair(u, n);
@@ -120,15 +127,16 @@ std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node 
 	// 2. find vertex 'w' farthest from 'v' and keep
 	// track of the vertices from 'v' to 'w'
 
-	fill(dists.begin(), dists.end(), 0);
+	std::fill(dists.begin(), dists.end(), 0);
 	std::vector<std::vector<lal::node>> paths(tree.get_num_nodes());
-	paths[v] = std::vector<lal::node>(1, v);
+	paths[v] = {v};
 
 	max_dist = 0;
 	std::vector<lal::node> longest_path;
-	lal::node w;
+	lal::node w = n + 1;
 
 	bfs.reset_visited();
+	bfs.clear_queue();
 	bfs.set_process_neighbour(
 	[&](const auto&, lal::node s, lal::node t, bool) {
 		dists[t] = dists[s] + 1;
@@ -144,6 +152,10 @@ std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node 
 	}
 	);
 	bfs.start_at(v);
+
+#if defined DEBUG
+	assert(w < n);
+#endif
 
 	// return centre
 
