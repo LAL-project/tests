@@ -135,7 +135,7 @@ noexcept
 	std::vector<lal::node> longest_path;
 	lal::node w = n + 1;
 
-	bfs.reset_visited();
+	bfs.clear_visited();
 	bfs.clear_queue();
 	bfs.set_process_neighbour(
 	[&](const auto&, lal::node s, lal::node t, bool) {
