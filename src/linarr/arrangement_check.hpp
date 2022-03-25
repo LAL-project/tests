@@ -41,58 +41,62 @@
  ********************************************************************/
 
 // C++ includes
-#include <vector>
+#include <iostream>
 
 // lal includes
-#include <lal/basic_types.hpp>
+#include <lal/linarr/D.hpp>
 #include <lal/linear_arrangement.hpp>
+
+// common includes
+#include "common/definitions.hpp"
+#include "common/std_utils.hpp"
 
 namespace tests {
 namespace linarr {
 
-template<class graph_t>
-uint64_t num_crossings_brute_force(
-	const graph_t& g,
-	const lal::linear_arrangement& pi
+template<typename tree_t>
+bool check_correctness_arr(
+	const tree_t& tree,
+	const std::pair<uint64_t, lal::linear_arrangement>& res,
+	const std::string& error_header,
+	const std::string& algorithm,
+	bool (*check_arrangement)(const tree_t&, const lal::linear_arrangement&)
 )
 noexcept
 {
-	const std::vector<lal::edge> edges = g.get_edges();
-	uint64_t C = 0;
+	const lal::linear_arrangement& arr = res.second;
 
-#define sorted_by_pos(pA,pB) \
-	(pA < pB ? std::make_pair(pA,pB) : std::make_pair(pB,pA))
-
-	for (std::size_t i = 0; i < edges.size(); ++i) {
-		const lal::node_t s = edges[i].first;
-		const lal::node_t t = edges[i].second;
-		const auto [a,b] = sorted_by_pos(pi[s], pi[t]);
-
-		for (std::size_t j = i + 1; j < edges.size(); ++j) {
-			const lal::node_t u = edges[j].first;
-			const lal::node_t v = edges[j].second;
-			const auto [c,d] = sorted_by_pos(pi[u],pi[v]);
-
-			C += (c < a and a < d and d < b) or (a < c and c < b and b < d);
-		}
+	/* ensure planarity of arrangement */
+	if (not check_arrangement(tree, arr)) {
+		std::cerr << error_header << '\n';
+		std::cerr << "    The arrangement produced by the library is not an actual\n";
+		std::cerr << "    Algorithm executed: " << algorithm << '\n';
+		std::cerr << "    arrangement or is not planar.\n";
+		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
+		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
+		std::cerr << tree << '\n';
+		return false;
 	}
-
-#undef sorted_by_pos
-	return C;
-}
-
-template<class graph_t>
-std::vector<uint64_t> num_crossings_brute_force(
-	const graph_t& g,
-	const std::vector<lal::linear_arrangement>& pis
-)
-noexcept
-{
-	std::vector<uint64_t> C(pis.size());
-	for (std::size_t i = 0; i < pis.size(); ++i) {
-		C[i] = num_crossings_brute_force(g, pis[i]);
+	/* ensure that value of D is correct */
+	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
+	if (D != res.first) {
+		std::cerr << error_header << '\n';
+		std::cerr << "    Value of D returned by method is incorrect.\n";
+		std::cerr << "    Algorithm executed: " << algorithm << '\n';
+		std::cerr << "    Arrangement:     " << res.second.direct_as_vector() << '\n';
+		std::cerr << "    Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
+		std::cerr << "    Value of D returned: " << res.first << '\n';
+		std::cerr << "    Actual value of D:   " << D << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
+		std::cerr << tree << '\n';
+		return false;
 	}
-	return C;
+	return true;
 }
 
 } // -- namespace linarr

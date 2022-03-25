@@ -66,6 +66,7 @@
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
+#include "linarr/arrangement_check.hpp"
 
 typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;
 
@@ -73,46 +74,6 @@ namespace tests {
 namespace linarr {
 
 namespace dmin_unconstrained {
-
-inline
-bool check_correctness_arr(
-	const lal::graphs::free_tree& tree,
-	const std::pair<uint64_t, lal::linear_arrangement>& res_algo,
-	const std::string& algorithm
-)
-noexcept
-{
-	const lal::linear_arrangement& arr = res_algo.second;
-	/* ensure that the result is an arrangement */
-	if (not lal::linarr::is_arrangement(tree, arr)) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    The result is not an arrangement (permutation).\n";
-		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
-		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
-		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
-		std::cerr << tree << '\n';
-		return false;
-	}
-	/* ensure that value of D is correct */
-	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
-	if (D != res_algo.first) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "    Arrangement:     " << res_algo.second.direct_as_vector() << '\n';
-		std::cerr << "    Inv Arrangement: " << res_algo.second.inverse_as_vector() << '\n';
-		std::cerr << "    Value of D returned: " << res_algo.first << '\n';
-		std::cerr << "    Actual value of D:   " << D << '\n';
-		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
-		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
-		std::cerr << tree << '\n';
-		return false;
-	}
-	return true;
-}
 
 bool test_correctness_arr_formula(
 	const lal::graphs::free_tree& tree,
@@ -123,7 +84,15 @@ bool test_correctness_arr_formula(
 )
 noexcept
 {
-	if (not check_correctness_arr(tree, res_lib, algorithm)) {
+	const bool arr_check =
+		check_correctness_arr
+		(
+			tree, res_lib, ERROR_str,
+			algorithm + " applied to class of trees: " + tree_class,
+			lal::linarr::is_arrangement
+		);
+
+	if (not arr_check) {
 		return false;
 	}
 	/* compare results obtained by the library and by a formula */
@@ -393,7 +362,10 @@ noexcept
 		}
 
 		const auto& res_algo = A(T);
-		const bool correct = check_correctness_arr(T, res_algo, algorithm);
+		const bool correct =
+			check_correctness_arr
+			(T, res_algo, ERROR_str, algorithm, lal::linarr::is_arrangement);
+
 		if (not correct) {
 			return err_type::test_execution;
 		}
@@ -405,7 +377,8 @@ noexcept
 
 } // -- namespace dmin_unconstrained
 
-err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin)
+err_type exe_linarr_Dmin_unconstrained
+(const input_list& inputs, std::ifstream& fin)
 noexcept
 {
 	std::string what;

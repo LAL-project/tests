@@ -71,6 +71,7 @@ SOURCES += \
 	syntree_classification.cpp
 
 HEADERS += \
+	arrangement_check.hpp \
 	exe_tests.hpp \
 	linarr_brute_force_testing.hpp \
 	n_crossings_m2.hpp \

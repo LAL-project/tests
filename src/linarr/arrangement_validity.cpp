@@ -61,7 +61,7 @@ namespace tests {
 namespace linarr {
 
 template<class G>
-err_type test_arrangement(std::ifstream& fin) {
+err_type test_arrangement(std::ifstream& fin) noexcept {
 	G g;
 	{
 	uint64_t num_nodes = 0;
@@ -221,7 +221,10 @@ err_type test_arrangement(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_linarr_arrangement_validity(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_arrangement_validity
+(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

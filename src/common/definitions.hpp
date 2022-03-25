@@ -52,6 +52,11 @@
 	"Error [file " << std::filesystem::path(__FILE__).filename() << ", function '" \
 	<< __func__ << "', line " << __LINE__ << "]:"
 
+#define ERROR_str \
+	"Error [file " + std::string(std::filesystem::path(__FILE__).filename()) + \
+	", function '" + \
+	std::string(__func__) + "', line " + std::to_string(__LINE__) + "]:"
+
 #define INVALID_KEYWORD "¡@/#/?234!"
 
 #define TEST_GOODBYE \

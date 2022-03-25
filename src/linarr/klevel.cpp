@@ -62,7 +62,9 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	const std::set<std::string> allowed_levels(
 	{"1", "2"}
 	);

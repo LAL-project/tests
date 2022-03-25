@@ -151,7 +151,7 @@ err_type linarr_brute_force_testing(
 		const auto library_res = solver(tree);
 		const lal::linear_arrangement& library_arr = library_res.second;
 
-		// ensure that the arrangement is a planar permutation
+		// ensure that the arrangement is correctly built
 		{
 		if (not arrgmnt_check(tree, library_arr)) {
 			std::cerr << ERROR << '\n';

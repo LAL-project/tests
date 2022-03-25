@@ -66,6 +66,9 @@
 #include "common/std_utils.hpp"
 #include "common/test_utils.hpp"
 
+// linarr includes
+#include "linarr/arrangement_check.hpp"
+
 typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;
 
 bool lt(const algo_result& r1, const algo_result& r2) noexcept { return r1.first < r2.first; }
@@ -78,45 +81,6 @@ namespace tests {
 namespace linarr {
 
 namespace tests_Dmin_comparison {
-
-bool check_correctness_arr(
-	const lal::graphs::free_tree& tree,
-	const std::pair<uint64_t, lal::linear_arrangement>& res_algo,
-	const std::string& algorithm
-)
-noexcept
-{
-	const lal::linear_arrangement& arr = res_algo.second;
-	/* ensure that the result is an arrangement */
-	if (not lal::linarr::is_permutation(arr)) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    The result is not an arrangement (permutation).\n";
-		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
-		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
-		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
-		std::cerr << tree << '\n';
-		return false;
-	}
-	/* ensure that value of D is correct */
-	const uint64_t D = lal::linarr::sum_edge_lengths(tree, arr);
-	if (D != res_algo.first) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Value of D returned by method is incorrect.\n";
-		std::cerr << "    Arrangement:     " << res_algo.second.direct_as_vector() << '\n';
-		std::cerr << "    Inv Arrangement: " << res_algo.second.inverse_as_vector() << '\n';
-		std::cerr << "    Value of D returned: " << res_algo.first << '\n';
-		std::cerr << "    Actual value of D:   " << D << '\n';
-		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
-		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
-		std::cerr << tree << '\n';
-		return false;
-	}
-	return true;
-}
 
 // -----------------------------------------------------------------------------
 
@@ -211,8 +175,13 @@ noexcept
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1, algo1);
-				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2, algo2);
+				const bool correct1 =
+					check_correctness_arr
+					(tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement);
+
+				const bool correct2 =
+					check_correctness_arr
+					(tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement);
 
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
@@ -246,8 +215,12 @@ noexcept
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				const bool correct1 = tests_Dmin_comparison::check_correctness_arr(tree, res1, algo1);
-				const bool correct2 = tests_Dmin_comparison::check_correctness_arr(tree, res2, algo2);
+				const bool correct1 =
+					check_correctness_arr
+					(tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement);
+				const bool correct2 =
+					check_correctness_arr
+					(tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement);
 
 				if (not correct1 or not correct2) { return err_type::test_execution; }
 
@@ -266,9 +239,10 @@ noexcept
 					std::cerr << "        D= " << res2.first << '\n';
 					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
 					std::cerr << "        Inv Arrangement: " << res1.second.inverse_as_vector() << '\n';
-					std::cerr << "    For tree:\n";
+					std::cerr << "    For tree: \n";
+					std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+					std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 					std::cerr << tree << '\n';
-					std::cerr << "    Head vector: " << tree.get_head_vector(0) << '\n';
 					return err_type::test_execution;
 				}
 			}
