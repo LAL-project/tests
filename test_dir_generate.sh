@@ -90,12 +90,12 @@ generate_arrangements_rand_planar_DIRS=(\
 
 # generate tests for arrangements
 generate_arrangements_all_DIRS=(\
-	"${generate_arrangements_all_unc[@]}" \
+	"${generate_arrangements_all_unc_DIRS[@]}" \
 	"${generate_arrangements_all_projective_DIRS[@]}" \
 	"${generate_arrangements_all_planar_DIRS[@]}" \
 	)
 generate_arrangements_rand_DIRS=(\
-	"${generate_arrangements_rand_unc[@]}" \
+	"${generate_arrangements_rand_unc_DIRS[@]}" \
 	"${generate_arrangements_rand_projective_DIRS[@]}" \
 	"${generate_arrangements_rand_planar_DIRS[@]}" \
 	)
