@@ -62,54 +62,18 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_klevel(const input_list& inputs, std::ifstream& fin)
+err_type exe_linarr_klevel(
+	const input_list& inputs,
+	std::ifstream& fin,
+	uint64_t level, const std::string& proc
+)
 noexcept
 {
-	const std::set<std::string> allowed_levels(
-	{"1", "2"}
-	);
-
 	const std::set<std::string> allowed_procs(
-	{"MDD"}
+		{"MDD"}
 	);
 
-	/* FUNCTIONS */
-
-	std::string level, proc;
-	fin >> level >> proc;
-	if (allowed_levels.find(level) == allowed_levels.end()) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Wrong value for level.\n";
-		std::cerr << "    Level '" << level << "' was found.\n";
-		std::cerr << "    Valid values:\n";
-		for (const std::string& l : allowed_levels) {
-		std::cerr << "    - " << l << '\n';
-		}
-		return err_type::test_format;
-	}
-	if (allowed_procs.find(level) == allowed_procs.end()) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Wrong value for procedure.\n";
-		std::cerr << "    Procedure '" << proc << "' was found.\n";
-		std::cerr << "    Valid values:\n";
-		for (const std::string& p : allowed_procs) {
-		std::cerr << "    - " << p << '\n';
-		}
-		return err_type::test_format;
-	}
-
-	auto MDD_F = [level](const std::vector<lal::graphs::undirected_graph>& Gs, const std::vector<lal::linear_arrangement>& pis) {
-		if (level == "1") { return lal::linarr::mean_dependency_distance_1level_rational(Gs, pis); }
-		if (level == "2") { return lal::linarr::mean_dependency_distance_2level_rational(Gs, pis); }
-
-		// return invalid value
-		std::cerr << ERROR << '\n';
-		return lal::numeric::rational(-1);
-	};
-
-	/* TEST's CODE */
-
-	if (inputs.size() == 1) {
+	if (inputs.size() == 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Expected at least one input.\n";
 		std::cerr << "    Instead, none were given.\n";
@@ -122,7 +86,7 @@ noexcept
 		const std::string graph_name = inputs[i].first;
 		const std::string graph_format = inputs[i].second;
 
-		err_type r = io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
+		const err_type r = io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
 		if (r != err_type::no_error) {
 			return r;
 		}
@@ -147,16 +111,16 @@ noexcept
 
 	if (n_linarrs != 0) {
 		// read arrangements from input
-		pis = std::vector<lal::linear_arrangement>(n_linarrs);
+		pis.resize(n_linarrs);
 
 		for (std::size_t i = 0; i < n_linarrs; ++i) {
-			const uint64_t Ni = Gs[i].get_num_nodes();
+			const uint64_t ni = Gs[i].get_num_nodes();
 
-			pis[i] = lal::linear_arrangement(Ni);
+			pis[i] = lal::linear_arrangement(ni );
 
 			// read all ¡INVERSE! linear arrangement
 			lal::node u;
-			for (lal::position pu = 0; pu < Ni; ++pu) {
+			for (lal::position pu = 0; pu < ni ; ++pu) {
 				fin >> u;
 				pis[i].assign(u, pu);
 			}
@@ -164,10 +128,18 @@ noexcept
 	}
 
 	if (proc == "MDD") {
-		const lal::numeric::rational MDD = MDD_F(Gs, pis);
-		std::cout << level << "-level MDD= " << MDD << '\n';
+		lal::numeric::rational MDD;
+		if (level == 1) {
+			MDD = lal::linarr::mean_dependency_distance_1level_rational(Gs, pis);
+		}
+		else if (level == 2) {
+			MDD = lal::linarr::mean_dependency_distance_2level_rational(Gs, pis);
+		}
+
+		std::cout << MDD << '\n';
 	}
 
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

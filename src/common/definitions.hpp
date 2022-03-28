@@ -90,6 +90,9 @@ enum class err_type : int8_t {
 	/// an error occurred when reading a file
 	io,
 
+	/// Unhandled case
+	unhandled,
+
 	/// test not implemented
 	not_implemented
 };

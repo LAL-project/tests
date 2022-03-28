@@ -80,12 +80,12 @@ err_type call_linarr_klevel
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
 	const std::set<std::string> allowed_levels({"1", "2"});
-	const std::set<std::string> allowed_keywords({"MDD"});
+	const std::set<std::string> allowed_procs({"MDD"});
 
 	const std::string& level = keywords[i];
 	bool correct_level = allowed_levels.find(level) != allowed_levels.end();
-	const std::string& key = keywords[i + 1];
-	bool correct_key = allowed_keywords.find(key) != allowed_keywords.end();
+	const std::string& proc = keywords[i + 1];
+	bool correct_key = allowed_procs.find(proc) != allowed_procs.end();
 
 	if (not correct_level or not correct_key) {
 		std::cerr << ERROR << '\n';
@@ -95,14 +95,17 @@ err_type call_linarr_klevel
 			what_keys.push_back(i);
 		}
 		if (not correct_key) {
-			std::cerr << "    Wrong keyword at " << i + 1 << ": '" << key << "'.\n";
+			std::cerr << "    Wrong keyword at " << i + 1 << ": '" << proc << "'.\n";
 			what_keys.push_back(i + 1);
 		}
 		mark_wrong_keyword(keywords, what_keys, "    ");
 		return err_type::wrong_keyword;
 	}
 
-	return parse_header(exe_linarr_klevel, fin);
+	const uint64_t level_int = static_cast<uint64_t>(atoi(level.c_str()));
+
+	return parse_header<uint64_t,const std::string&>
+			(exe_linarr_klevel, fin, level_int, proc);
 }
 
 err_type call_linarr_C
