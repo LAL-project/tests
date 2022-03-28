@@ -177,8 +177,8 @@ linarr_headedness_DIRS=(\
 
 # k-level
 linarr_k_level_DIRS=(\
-	"linarr/k-level/1-MDD" "linarr/k-level/1-MDD" \
-	"linarr/k-level/2-MDD" "linarr/k-level/2-MDD" \
+	"linarr/k-level/MDD" "linarr/k-level/MDD" \
+	"linarr/k-level/MDD" "linarr/k-level/MDD" \
 	)
 
 # MDD
