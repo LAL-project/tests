@@ -379,11 +379,11 @@ err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin) {
 	);
 
 	if (err != err_type::no_error) {
-		// avoid TEST_GOODBYE
+		// avoid TEST_GOODBYE;
 		return err;
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

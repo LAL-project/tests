@@ -490,7 +490,7 @@ err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) {
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
@@ -603,7 +603,7 @@ err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
 
 	check_result("18/k", 18/k, lal::numeric::rational(24));
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

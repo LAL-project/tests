@@ -356,7 +356,7 @@ err_type exe_memory_internal_data_array(const input_list& inputs, std::ifstream&
 	lal_data_array::test_resize_fill<false>();
 	lal_data_array::test_resize_fill<true>();
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

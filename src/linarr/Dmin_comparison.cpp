@@ -249,7 +249,7 @@ noexcept
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

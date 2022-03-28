@@ -215,7 +215,7 @@ err_type exe_linarr_syntree_classification(const input_list& inputs, std::ifstre
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

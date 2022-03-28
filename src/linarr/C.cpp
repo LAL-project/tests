@@ -199,7 +199,7 @@ err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upp
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

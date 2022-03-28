@@ -300,7 +300,7 @@ err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin) {
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
@@ -379,7 +379,7 @@ err_type exe_numeric_integer_manual(const input_list& inputs, std::ifstream&) {
 
 	check_result("18/k", 18/k, 3);
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

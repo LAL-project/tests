@@ -112,7 +112,7 @@ err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fi
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

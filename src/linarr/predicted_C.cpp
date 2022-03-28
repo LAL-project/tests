@@ -237,7 +237,7 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

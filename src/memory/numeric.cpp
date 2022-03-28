@@ -114,7 +114,7 @@ err_type exe_memory_numeric(const input_list& inputs, std::ifstream&) {
 	}
 	return_if(test_memory_integer())
 	return_if(test_memory_rational())
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

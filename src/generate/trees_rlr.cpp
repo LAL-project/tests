@@ -77,7 +77,7 @@ err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin) {
 		(n1, n2, num_trees, std::cerr);
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

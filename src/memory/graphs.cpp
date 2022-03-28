@@ -147,7 +147,7 @@ err_type exe_memory_graphs(const input_list& inputs, std::ifstream&) {
 
 	test_generate();
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

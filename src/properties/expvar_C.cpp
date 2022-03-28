@@ -217,7 +217,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin) {
 				return err_type::test_execution;
 			}
 		}
-		TEST_GOODBYE
+		TEST_GOODBYE;
 	}
 	else if (proc == "mixed-trees") {
 		uint64_t rep, n_pairs, n_trees, size_trees;
@@ -230,7 +230,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin) {
 				return err_type::test_execution;
 			}
 		}
-		TEST_GOODBYE
+		TEST_GOODBYE;
 	}
 	else {
 		lal::graphs::undirected_graph G;

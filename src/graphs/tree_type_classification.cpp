@@ -210,7 +210,7 @@ err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifst
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

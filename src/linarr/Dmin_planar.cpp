@@ -279,7 +279,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin) {
 		return err;
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

@@ -231,7 +231,7 @@ err_type exe_gen_arr_all_planar(const input_list& inputs, std::ifstream& fin) {
 		}
 	}
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

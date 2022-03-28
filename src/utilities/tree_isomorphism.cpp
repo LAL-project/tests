@@ -397,7 +397,7 @@ err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream&
 	}
 
 	if (r == err_type::no_error) {
-		TEST_GOODBYE
+		TEST_GOODBYE;
 	}
 	return r;
 }

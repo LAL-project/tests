@@ -487,7 +487,7 @@ noexcept
 
 	if (r != err_type::no_error) { return r; }
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 

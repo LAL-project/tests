@@ -263,7 +263,7 @@ err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin) {
 
 	if (r != err_type::no_error) { return r; }
 
-	TEST_GOODBYE
+	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
