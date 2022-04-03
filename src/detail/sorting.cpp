@@ -240,11 +240,11 @@ noexcept
 {
 	const std::size_t size = std::distance(begin,end);
 	if (incr) {
-		lal::detail::sorting::counting_sort<T,It,lal::detail::sorting::non_decreasing_t>
+		lal::detail::sorting::counting_sort<T,lal::detail::sorting::non_decreasing_t>
 		(begin, end, n, size, key);
 	}
 	else {
-		lal::detail::sorting::counting_sort<T,It,lal::detail::sorting::non_increasing_t>
+		lal::detail::sorting::counting_sort<T,lal::detail::sorting::non_increasing_t>
 		(begin, end, n, size, key);
 	}
 }
