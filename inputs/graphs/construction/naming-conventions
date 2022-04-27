@@ -58,6 +58,9 @@ We are currently using the following names:
 	011: inspection of E and Q in dgraph
 	012: inspection of the head vector of free trees and of rooted trees
 	
+	013: inspection of connected component representative in free trees
+	014: inspection of connected component representative in rooted trees
+	
 	015: conversion of dgraph to ugraph.
 	016: convert a ftree to a rtree
 	017: convert a rtree to a ftree

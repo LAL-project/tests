@@ -1,0 +1,133 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph ftree t1 10
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 0 1 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 2 3 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 4 5 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 6 7 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 8 9 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 0 8 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 5 7 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 3 5 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	
+	add_edge t1 0 3 true true
+	
+	assert same_representative_component t1 0
+	assert same_representative_component t1 1
+	assert same_representative_component t1 2
+	assert same_representative_component t1 3
+	assert same_representative_component t1 4
+	assert same_representative_component t1 5
+	assert same_representative_component t1 6
+	assert same_representative_component t1 7
+	assert same_representative_component t1 8
+	assert same_representative_component t1 9
+	

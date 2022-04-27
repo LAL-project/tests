@@ -196,6 +196,13 @@ COMMANDS AVAILABLE
 		u belongs to is equal to N (with the special consideration for
 		directed trees).
 	
+	-- same_representative_component TREE u
+		Notation: let cc(u) be the connected component to which vertex u belongs.
+		
+		Asserts that the vertices in cc(u) have the same connected component
+		representative. More precisely, for every v in cc(u), check that
+			rep(cc(u)) == rep(cc(v))
+	
 	-- is_rooted TREE
 		asserts that the tree is rooted
 	
