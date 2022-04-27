@@ -58,6 +58,7 @@
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/io/edge_list.hpp>
 #include <lal/io/basic_output.hpp>
+#include <lal/detail/graphs/traversal.hpp>
 
 // common includes
 #include "exe_construction.hpp"
@@ -90,6 +91,7 @@
 #define ASSERT_TREE_CAN_ADD_EDGES "can_add_edges"
 #define ASSERT_TREE_CANT_ADD_EDGES "cant_add_edges"
 #define ASSERT_TREE_SIZE_CC "num_nodes_component"
+#define ASSERT_TREE_REPRESENTATIVE_CC "same_representative_component"
 #define ASSERT_TREE_IS_ROOTED "is_rooted"
 #define ASSERT_TREE_IS_NOT_ROOTED "is_not_rooted"
 #define ASSERT_TREE_TYPE_VALID "tree_type_valid"
@@ -638,10 +640,10 @@ err_type process_assert(
 	}
 	else if (assert_what == ASSERT_TREE_SIZE_CC) {
 		fin >> g1 >> u >> n;
-		assert_exists_variable(ASSERT_TREE_SIZE_CC, g1)
+		assert_exists_variable(ASSERT_TREE_SIZE_CC, g1);
 		if (mfunction_trees(g1, get_num_nodes_component(u)) != n) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_TREE_SIZE_CC)
+			message_in_func(ASSERT_TREE_SIZE_CC);
 			std::cerr << "    The component of vertex '" << u << "'"
 				 << " in '" << g1 << "' does not have "
 				 << n << " vertices.\n";
@@ -653,9 +655,67 @@ err_type process_assert(
 			return err_type::test_execution;
 		}
 	}
+	else if (assert_what == ASSERT_TREE_REPRESENTATIVE_CC) {
+		fin >> g1 >> u;
+		assert_exists_variable(ASSERT_TREE_REPRESENTATIVE_CC, g1);
+
+		std::set<lal::node> representatives;
+		std::vector<lal::node> representative_per_node;
+
+		const auto check = [&](const auto& t) {
+			const auto n_nodes = t.get_num_nodes();
+			representative_per_node = std::vector<lal::node>(n_nodes, n_nodes + 1);
+
+			lal::detail::BFS bfs(t);
+			if (t.is_directed()) {
+				bfs.set_use_rev_edges(true);
+			}
+			bfs.start_at(u);
+
+			for (lal::node w = 0; w < n_nodes; ++w) {
+				if (bfs.node_was_visited(w)) {
+					const auto r = t.get_component_representative(w);
+					representative_per_node[w] = r;
+					representatives.insert(r);
+				}
+			}
+		};
+
+		if (graph_type(g1) == FTREE) {
+			check(ftreevars[g1]);
+		}
+		else {
+			check(rtreevars[g1]);
+		}
+
+		if (representatives.size() == 0) {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_TREE_REPRESENTATIVE_CC);
+			std::cerr << "    No vertices were found in the connected component.\n";
+			return err_type::test_execution;
+		}
+		else if (representatives.size() == 1) {
+			// everything OK!
+			// only one representative :)
+		}
+		else {
+			std::cerr << ERROR << '\n';
+			message_in_func(ASSERT_TREE_REPRESENTATIVE_CC);
+			std::cerr << "    More than one representative was found.\n";
+			for (lal::node w = 0; w < representative_per_node.size(); ++w) {
+			if (representative_per_node[w] < representative_per_node.size()) {
+			std::cerr << "        Node "
+					  << w << " has representative: "
+					  << representative_per_node[w]
+					  << '\n';
+			}
+			}
+			return err_type::test_execution;
+		}
+	}
 	else if (assert_what == ASSERT_TREE_IS_ROOTED) {
 		fin >> g1;
-		assert_exists_variable(ASSERT_TREE_IS_ROOTED, g1)
+		assert_exists_variable(ASSERT_TREE_IS_ROOTED, g1);
 		assert_correct_graph_type(
 			ASSERT_TREE_IS_ROOTED, graph_type(g1), tree_types
 		)
