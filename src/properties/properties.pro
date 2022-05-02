@@ -56,6 +56,7 @@ SOURCES += \
 	MHD_All_trees.cpp \
 	V_rla_C_brute_force_Q.cpp \
 	V_rla_C_brute_force_freqs.cpp \
+	diameter.cpp \
 	expected_D_planar.cpp \
 	expected_D_projective.cpp \
 	expvar_C.cpp \

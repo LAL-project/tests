@@ -1,0 +1,61 @@
+TYPE properties-diameter
+INPUT 0
+BODY
+	manual ftree
+	
+	init 9
+	add_edges 6
+		0 4
+		4 5
+		0 8
+		6 7
+		1 2
+		2 3
+	
+	diameter_is 0 3
+	diameter_is 1 2
+	diameter_is 2 2
+	diameter_is 3 2
+	diameter_is 4 3
+	diameter_is 5 3
+	diameter_is 6 1
+	diameter_is 7 1
+	diameter_is 8 3
+	
+	add_edges 1
+		0 6
+	
+	diameter_is 0 4
+	diameter_is 1 2
+	diameter_is 2 2
+	diameter_is 3 2
+	diameter_is 4 4
+	diameter_is 5 4
+	diameter_is 6 4
+	diameter_is 7 4
+	diameter_is 8 4
+
+	add_edges 1
+		0 1
+	
+	diameter_is 0 5
+	diameter_is 1 5
+	diameter_is 2 5
+	diameter_is 3 5
+	diameter_is 4 5
+	diameter_is 5 5
+	diameter_is 6 5
+	diameter_is 7 5
+	diameter_is 8 5
+	
+	remove_edge 0 4
+	
+	diameter_is 0 5
+	diameter_is 1 5
+	diameter_is 2 5
+	diameter_is 3 5
+	diameter_is 4 1
+	diameter_is 5 1
+	diameter_is 6 5
+	diameter_is 7 5
+	diameter_is 8 5

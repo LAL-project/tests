@@ -108,6 +108,9 @@ err_type call_properties(const std::vector<std::string>& keywords, std::size_t i
 	if (key == "centroid") {
 		return parse_header(exe_properties_centroid, fin);
 	}
+	if (key == "diameter") {
+		return parse_header(exe_properties_diameter, fin);
+	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";

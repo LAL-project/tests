@@ -1,0 +1,8 @@
+TYPE properties-diameter
+INPUT 0
+BODY
+	manual ftree
+	init 1
+	
+	find_diameter 0
+	diameter_is 0 0

@@ -68,6 +68,7 @@ err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin);
 err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin);
 err_type exe_properties_centre(const input_list& inputs, std::ifstream& fin);
 err_type exe_properties_centroid(const input_list& inputs, std::ifstream& fin);
+err_type exe_properties_diameter(const input_list& inputs, std::ifstream& fin);
 err_type exe_properties_expected_D_projective(const input_list& inputs,std::ifstream& fin);
 err_type exe_properties_expected_D_planar_brute_force(const input_list& inputs,std::ifstream& fin);
 err_type exe_properties_expected_D_planar_quadratic(const input_list& inputs,std::ifstream& fin);

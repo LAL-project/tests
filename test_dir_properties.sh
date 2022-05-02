@@ -10,6 +10,11 @@ properties_centroid_DIRS=(\
 	"properties/centroid" "properties/centroid" \
 	)
 
+# properties_centre tests
+properties_diameter_DIRS=(\
+	"properties/diameter" "properties/diameter" \
+	)
+
 # basic properties (size of Q, ...)
 properties_basic_DIRS=(\
 	"properties" "properties" \
@@ -71,4 +76,5 @@ properties_DIRS=(\
 	"${properties_exp_var_C_DIRS[@]}" \
 	"${properties_centre_DIRS[@]}" \
 	"${properties_centroid_DIRS[@]}" \
+	"${properties_diameter_DIRS[@]}" \
 	)
