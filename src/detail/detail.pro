@@ -53,8 +53,6 @@ INCLUDEPATH += $${THIS_DIR}
 DEPENDPATH += $${LAL_DIR}
 
 SOURCES += \
-	centre.cpp \
-	centroid.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	sorting.cpp \

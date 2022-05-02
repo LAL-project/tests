@@ -57,16 +57,10 @@ err_type call_internal
 {
 	const std::string& key = keywords[i];
 	if (key == "sorting") {
-		return parse_header(exe_internal_sorting, fin);
+		return parse_header(exe_detail_sorting, fin);
 	}
 	if (key == "traversal") {
-		return parse_header(exe_internal_bfs, fin);
-	}
-	if (key == "centre") {
-		return parse_header(exe_internal_centre, fin);
-	}
-	if (key == "centroid") {
-		return parse_header(exe_internal_centroid, fin);
+		return parse_header(exe_detail_bfs, fin);
 	}
 
 	std::cerr << ERROR << '\n';

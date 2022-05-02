@@ -62,7 +62,9 @@ SOURCES += \
 	expvar_D.cpp \
 	general.cpp \
 	main.cpp \
-	parse_keywords.cpp
+	parse_keywords.cpp \
+	centre.cpp \
+	centroid.cpp
 
 HEADERS += \
 	C_rla_brute_force_algorithms.hpp \

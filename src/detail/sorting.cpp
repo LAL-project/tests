@@ -430,7 +430,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
 	return err_type::test_format;
 }
 
-err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin) {
+err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin) {
 	const std::set<std::string> allowed_options({
 		"insertion_sort_rand",
 		"bit_sort_rand", "bit_sort_mem_rand",

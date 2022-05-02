@@ -62,10 +62,8 @@
 namespace tests {
 namespace detail {
 
-err_type exe_internal_sorting(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_centre(const input_list& inputs, std::ifstream& fin);
-err_type exe_internal_centroid(const input_list& inputs, std::ifstream& fin);
+err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin);
+err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin);
 
 } // -- namespace detail
 } // -- namespace tests

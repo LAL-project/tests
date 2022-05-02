@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# properties_centre tests
+properties_centre_DIRS=(\
+	"properties/centre" "properties/centre" \
+	)
+
+# properties_centre tests
+properties_centroid_DIRS=(\
+	"properties/centroid" "properties/centroid" \
+	)
+
 # basic properties (size of Q, ...)
 properties_basic_DIRS=(\
 	"properties" "properties" \
@@ -59,4 +69,6 @@ properties_DIRS=(\
 	"${properties_basic_DIRS[@]}" \
 	"${properties_exp_var_D_DIRS[@]}" \
 	"${properties_exp_var_C_DIRS[@]}" \
+	"${properties_centre_DIRS[@]}" \
+	"${properties_centroid_DIRS[@]}" \
 	)

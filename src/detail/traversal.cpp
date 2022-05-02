@@ -223,7 +223,7 @@ err_type execute_utils_bfs_test(
 	return err_type::no_error;
 }
 
-err_type exe_internal_bfs(const input_list& inputs, std::ifstream& fin) {
+err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) {
 	const std::set<std::string> allowed_options({
 		"sort_insertion", "sort_boolean"
 	});
