@@ -65,7 +65,7 @@ noexcept
 	{
 	std::cout << "Free tree and root (" << __LINE__ << ")\n";
 	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
-			= "0 1 1 1 1 1"_pfree_tree;
+			= "0 1 1 1 1 1"_root_free_tree;
 	std::cout << ftree_and_root.first << '\n';
 	std::cout << ftree_and_root.second << '\n';
 	}
@@ -73,7 +73,23 @@ noexcept
 	{
 	std::cout << "Free tree and root (" << __LINE__ << ")\n";
 	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
-			= "0 1 2 3 4 5"_pfree_tree;
+			= "{0 1} {0 2} {0 3} {0 4} {0 5}"_root_free_tree;
+	std::cout << ftree_and_root.first << '\n';
+	std::cout << ftree_and_root.second << '\n';
+	}
+
+	{
+	std::cout << "Free tree and root (" << __LINE__ << ")\n";
+	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
+			= "0 1 2 3 4 5"_root_free_tree;
+	std::cout << ftree_and_root.first << '\n';
+	std::cout << ftree_and_root.second << '\n';
+	}
+
+	{
+	std::cout << "Free tree and root (" << __LINE__ << ")\n";
+	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
+			= "{0 1} {1 2} {2 3} {3 4} {4 5}"_root_free_tree;
 	std::cout << ftree_and_root.first << '\n';
 	std::cout << ftree_and_root.second << '\n';
 	}
@@ -86,7 +102,20 @@ noexcept
 
 	{
 	std::cout << "Free tree (" << __LINE__ << ")\n";
+	const lal::graphs::free_tree ftree = "{0 1} {0 2} {0 3} {0 4} {0 5}"_free_tree;
+	std::cout << ftree << '\n';
+	}
+
+	{
+	std::cout << "Free tree (" << __LINE__ << ")\n";
 	const lal::graphs::free_tree ftree = "0 1 2 3 4 5"_free_tree;
+	std::cout << ftree << '\n';
+	}
+
+	{
+	std::cout << "Free tree (" << __LINE__ << ")\n";
+	const lal::graphs::free_tree ftree
+			= "{0 1} {1 2} {2 3} {3 4} {4 5}"_free_tree;
 	std::cout << ftree << '\n';
 	}
 
@@ -98,7 +127,20 @@ noexcept
 
 	{
 	std::cout << "Rooted tree (" << __LINE__ << ")\n";
+	const lal::graphs::rooted_tree rtree = "0 1 1 1 1 1"_rooted_tree;
+	std::cout << rtree << '\n';
+	}
+
+	{
+	std::cout << "Rooted tree (" << __LINE__ << ")\n";
 	const lal::graphs::rooted_tree rtree = "0 1 2 3 4 5"_rooted_tree;
+	std::cout << rtree << '\n';
+	}
+
+	{
+	std::cout << "Rooted tree (" << __LINE__ << ")\n";
+	const lal::graphs::rooted_tree rtree
+			= "{0 1} {1 2} {2 3} {3 4} {4 5}"_rooted_tree;
 	std::cout << rtree << '\n';
 	}
 
