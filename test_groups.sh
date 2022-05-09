@@ -28,10 +28,9 @@ groups_list=(\
 	"graphs" \
 		"graphs_construction" \
 		"graphs_tree_types" \
+		"graphs_graph_literals" \
 	\
 	"detail" \
-		"detail_centre" \
-		"detail_centroid" \
 		"detail_sorting" \
 		"detail_traversal" \
 	\
@@ -103,6 +102,9 @@ groups_list=(\
 			"properties_exp_D_projective" \
 			"properties_exp_D_planar" \
 			"properties_exp_var_D_unconstrained" \
+		"properties_centre" \
+		"properties_centroid" \
+		"properties_diameter" \
 	\
 	"utilities" \
 		"utilities_isomorphism" \
