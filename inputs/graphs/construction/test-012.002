@@ -1,0 +1,44 @@
+TYPE graphs-construction
+INPUT 0
+BODY
+	create_graph rtree t1 5
+	set_edges t1 4
+		0 1
+		1 2
+		2 3
+		3 4
+		true true
+	output_graph t1
+	output_head_vector_with_arrangement t1 0 1 2 3 4
+	output_head_vector_with_arrangement t1 0 1 4 3 2
+	output_head_vector_with_arrangement t1 1 4 0 2 3
+
+	create_graph rtree t2 7
+	set_edges t2 6
+		0 1
+		1 2
+		1 5
+		0 3
+		3 4
+		3 6
+		true true
+	output_graph t2
+	output_head_vector_with_arrangement t2 0 1 2 3 4 5 6
+	output_head_vector_with_arrangement t2 3 2 5 0 1 6 4
+	output_head_vector_with_arrangement t2 6 1 5 0 2 4 3
+	
+	create_graph rtree t3 10
+	set_edges t3 9
+		0 1
+		0 2
+		0 3
+		1 4
+		1 5
+		2 6
+		3 7
+		3 8
+		3 9
+		true true
+	output_graph t3
+	output_head_vector_with_arrangement t3 0 1 2 3 4 5 6 7 8 9
+	output_head_vector_with_arrangement t3 8 4 0 3 5 1 7 6 2 9
