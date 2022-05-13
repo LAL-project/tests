@@ -191,16 +191,16 @@ err_type exe_construction_test(std::ifstream& fin) {
 		}
 		else if (option == FUNC_GRAPH_OUTPUT) {
 			fin >> g1;
-			assert_exists_variable(FUNC_GRAPH_OUTPUT, g1)
+			assert_exists_variable(FUNC_GRAPH_OUTPUT, g1);
 			std::cout << "-----------------------------\n";
 			std::cout << "Contents of graph '" << g1 << "'\n";
-			output_graph_stdout(g1)
+			output_graph_stdout(g1);
 			std::cout << "-----------------------------\n";
 		}
 		else if (option == FUNC_GRAPH_INIT) {
 			fin >> g1 >> n_nodes;
 			assert_exists_variable(FUNC_GRAPH_INIT, g1);
-			if_mfunction(g1, init(n_nodes))
+			if_mfunction(g1, init(n_nodes));
 		}
 		else if (option == FUNC_GRAPH_ASSIGN) {
 			fin >> g1 >> g2;
@@ -232,7 +232,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 			}
 			else {
 				std::cerr << ERROR << '\n';
-				message_in_func(FUNC_GRAPH_REMOVE_NODE)
+				message_in_func(FUNC_GRAPH_REMOVE_NODE);
 				std::cerr << "    Type of graph '" << g1 << "' is not\n";
 				std::cerr << "    " << UGRAPH << '\n';
 				std::cerr << "    " << DGRAPH << '\n';
@@ -251,7 +251,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 		else if (option == FUNC_GRAPH_ADD_EDGE_BULK) {
 			fin >> g1 >> u >> v;
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGE_BULK, g1);
-			if_mfunction(g1, add_edge_bulk(u, v))
+			if_mfunction(g1, add_edge_bulk(u, v));
 		}
 		else if (option == FUNC_GRAPH_FINISH_BULK_ADD) {
 			fin >> g1 >> Boolean1 >> Boolean2;
@@ -268,7 +268,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGES, Boolean2);
-			if_mfunction(g1, add_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, add_edges(edge_list, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_SET_EDGES) {
 			fin >> g1 >> n_edges;
@@ -278,14 +278,14 @@ err_type exe_construction_test(std::ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_SET_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_SET_EDGES, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_SET_EDGES, Boolean2);
-			if_mfunction(g1, set_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, set_edges(edge_list, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGE) {
 			fin >> g1 >> u >> v >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGE, g1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean2);
-			if_mfunction(g1, remove_edge(u, v, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, remove_edge(u, v, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGES) {
 			fin >> g1 >> n_edges;
@@ -295,7 +295,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGES, g1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES, Boolean2);
-			if_mfunction(g1, remove_edges(edge_list, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, remove_edges(edge_list, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO) {
 			fin >> g1 >> u;
@@ -303,12 +303,12 @@ err_type exe_construction_test(std::ifstream& fin) {
 			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, g1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO, Boolean2);
-			if_mfunction(g1, remove_edges_incident_to(u, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, remove_edges_incident_to(u, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_NORMALISE) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_NORMALISE, g1);
-			if_mfunction(g1, normalise())
+			if_mfunction(g1, normalise());
 		}
 		else if (option == FUNC_GRAPH_DISJ_UNION) {
 			fin >> g1 >> g2 >> g3;
@@ -342,7 +342,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 			}
 			else {
 				std::cerr << ERROR << '\n';
-				message_in_func(FUNC_GRAPH_DISJ_UNION)
+				message_in_func(FUNC_GRAPH_DISJ_UNION);
 				std::cerr << "    Type of graph '" << g1 << "' and '" << g2 << "' is not\n";
 				std::cerr << "    " << UGRAPH << '\n';
 				std::cerr << "    " << DGRAPH << '\n';
@@ -407,7 +407,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 					std::cerr << "    " << edge_out(e) << '\n';
 				}
 				std::cerr << "    Contents:\n";
-				output_graph(g1)
+				output_graph(g1);
 				return err_type::test_execution;
 			}
 		}
@@ -487,7 +487,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 					std::cerr << "    " << edge_pair_out(e) << '\n';
 				}
 				std::cerr << "    Contents:\n";
-				output_graph(g1)
+				output_graph(g1);
 				return err_type::test_execution;
 			}
 		}
@@ -516,7 +516,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 		}
 		else if (option == FUNC_Q_SIZE) {
 			fin >> g1;
-			assert_exists_variable(FUNC_Q_SIZE, g1)
+			assert_exists_variable(FUNC_Q_SIZE, g1);
 
 			std::cout <<
 				(graph_type(g1) == DGRAPH ?
@@ -656,7 +656,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 			assert_exists_variable(FUNC_RTREE_SET_ROOT, g1);
 			assert_correct_graph_type(FUNC_RTREE_SET_ROOT, graph_type(g1), rooted_tree_types);
 
-			if_mfunction_rtrees(g1, set_root(u))
+			if_mfunction_rtrees(g1, set_root(u));
 		}
 		else if (option == FUNC_RTREE_CALC_SIZE_SUBTREE) {
 			fin >> g1;
