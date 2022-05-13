@@ -87,6 +87,7 @@
 #define FUNC_Q_SIZE "size_Q"
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
 #define FUNC_TREE_OUTPUT_HEAD_VECTOR "output_head_vector"
+#define FUNC_TREE_OUTPUT_HEAD_VECTOR_ARR "output_head_vector_with_arrangement"
 #define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
 #define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
 #define FUNC_FTREE_CALCULATE_TREE_TYPE "calculate_tree_type"
@@ -541,7 +542,7 @@ err_type exe_construction_test(std::ifstream& fin) {
 		// TREES
 		else if (option == FUNC_TREE_OUTPUT_HEAD_VECTOR) {
 			fin >> g1;
-			assert_exists_variable(FUNC_DGRAPH_TO_UGRAPH, g1);
+			assert_exists_variable(FUNC_TREE_OUTPUT_HEAD_VECTOR, g1);
 			assert_correct_graph_type
 				(FUNC_TREE_OUTPUT_HEAD_VECTOR, graph_type(g1), tree_types);
 
@@ -553,6 +554,34 @@ err_type exe_construction_test(std::ifstream& fin) {
 			}
 			else if (graph_type(g1) == RTREE) {
 				const auto hv = rtreevars[g1].get_head_vector();
+				for (const auto& p : hv) { std::cout << p << " "; }
+				std::cout << '\n';
+			}
+		}
+		else if (option == FUNC_TREE_OUTPUT_HEAD_VECTOR_ARR) {
+			fin >> g1;
+			assert_exists_variable(FUNC_TREE_OUTPUT_HEAD_VECTOR_ARR, g1);
+			assert_correct_graph_type
+				(FUNC_TREE_OUTPUT_HEAD_VECTOR_ARR, graph_type(g1), tree_types);
+
+			if (graph_type(g1) == FTREE) {
+				fin >> u;
+				lal::linear_arrangement arr(ftreevars[g1].get_num_nodes());
+				for (lal::position_t p = 0ull; p < arr.size(); ++p) {
+					fin >> v;
+					arr.assign(v, p);
+				}
+				const auto hv = ftreevars[g1].get_head_vector(u, arr);
+				for (const auto& p : hv) { std::cout << p << " "; }
+				std::cout << '\n';
+			}
+			else if (graph_type(g1) == RTREE) {
+				lal::linear_arrangement arr(rtreevars[g1].get_num_nodes());
+				for (lal::position_t p = 0ull; p < arr.size(); ++p) {
+					fin >> v;
+					arr.assign(v, p);
+				}
+				const auto hv = rtreevars[g1].get_head_vector(arr);
 				for (const auto& p : hv) { std::cout << p << " "; }
 				std::cout << '\n';
 			}

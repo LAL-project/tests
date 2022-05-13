@@ -278,6 +278,13 @@ TREES
 	In case the tree is a FREE tree then we need an extra value which the root node.
 	In case the tree is a ROOTED tree there is no extra value.
 
+** output_head_vector_with_arrangement TREE (node) (inverse arrangement)
+	Outputs the head vector of a tree when its vertices are arranged with the
+		inverse arrangement; it is a list of 'n' vertices where 'n' is the number
+		of nodes of the tree.
+	In case the tree is a FREE tree then we need an extra value which the root node.
+	In case the tree is a ROOTED tree there is no extra value.
+
 ** calculate_tree_type TREE
 	Calculates the type of tree (linear, caterpillar, ...)
 
