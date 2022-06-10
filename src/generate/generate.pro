@@ -3,7 +3,11 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17 -fsanitize=address
+isEmpty(ENVIR) {
+    ENVIR = "HOME"
+}
+
+QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17
 QMAKE_CXXFLAGS +=										\
 	-Wpedantic -Wshadow -Wall -Wextra -Wconversion		\
 	-Wold-style-cast -Wrestrict -Wduplicated-cond		\
@@ -13,15 +17,15 @@ QMAKE_CXXFLAGS_DEBUG += -O3 -DDEBUG -D_GLIBCXX_DEBUG
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3 -UDEBUG -DNDEBUG -fstrict-aliasing
 
-LIBS += -lasan
+equals(ENVIR, "CLUSTER") {
+    QMAKE_CXXFLAGS += -fsanitize=address
+	LIBS += -lasan
+}
+
 LIBS += -L../common/ -lcommon
 LIBS += -lgmp -fopenmp -lpthread
 
 PRE_TARGETDEPS += ../common/libcommon.a
-
-isEmpty(ENVIR) {
-	ENVIR = "HOME"
-}
 
 # configure home
 equals(ENVIR, "HOME") {
