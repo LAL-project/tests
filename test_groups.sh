@@ -76,6 +76,12 @@ groups_list=(\
 			"linarr_Dmin_Unconstrained" \
 				"linarr_Dmin_Unconstrained_YS" \
 				"linarr_Dmin_Unconstrained_FC" \
+		"linarr_DMax" \
+			"linarr_DMax_Comparison" \
+			"linarr_DMax_Projective" \
+				"linarr_DMax_Projective_AEF" \
+			"linarr_DMax_Planar" \
+				"linarr_DMax_Planar_AEF" \
 		"linarr_syndepstruc_class" \
 		"linarr_comp_dependency_flux" \
 		"linarr_headedness" \

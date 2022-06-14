@@ -48,7 +48,7 @@
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/linarr/D.hpp>
-#include <lal/linarr/Dmin.hpp>
+#include <lal/linarr/DMax.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
 
@@ -58,17 +58,25 @@
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
 
+namespace lal {
+namespace linarr {
+enum class algorithms_DMax_projective {
+	AlemanyEstebanFerrer
+};
+}
+}
+
 namespace tests {
 namespace linarr {
 
 namespace dmin_projective {
 
 template<class T>
-err_type examine_Dmin_projective
+err_type examine_DMax_projective
 (
 	const std::string& filename,
 	const TreeInit<T>& tree_initializer,
-	const lal::linarr::algorithms_Dmin_projective& algo
+	[[maybe_unused]] const lal::linarr::algorithms_DMax_projective& algo
 )
 noexcept
 {
@@ -82,7 +90,7 @@ noexcept
 	const auto err = linarr_brute_force_testing<lal::graphs::rooted_tree>
 	(
 		[&](const lal::graphs::rooted_tree& t) {
-			return lal::linarr::min_sum_edge_lengths_projective(t, algo);
+			return lal::linarr::max_sum_edge_lengths_projective(t);
 		},
 		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
 			return lal::linarr::sum_edge_lengths(t, arr);
@@ -105,7 +113,7 @@ noexcept
 
 } // -- namespace dmin_projective
 
-err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin) {
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Exactly one input files are allowed in this test.\n";
@@ -113,7 +121,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin
 		return err_type::test_format;
 	}
 
-	const std::set<std::string> allowed_algos({"AEF", "HS"});
+	const std::set<std::string> allowed_algos({"AEF"});
 
 	std::string algo;
 	fin >> algo;
@@ -128,14 +136,10 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin
 		return err_type::test_format;
 	}
 
-	const auto algo_id = (
-		algo == "AEF" ?
-		lal::linarr::algorithms_Dmin_projective::AlemanyEstebanFerrer :
-		lal::linarr::algorithms_Dmin_projective::HochbergStallmann
-	);
+	const auto algo_id = lal::linarr::algorithms_DMax_projective::AlemanyEstebanFerrer;
 
 	const auto err1 =
-	dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>
+	dmin_projective::examine_DMax_projective<lal::graphs::rooted_tree>
 	(
 		inputs[0].first,
 		[](lal::graphs::rooted_tree& t) {
@@ -147,7 +151,7 @@ err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin
 
 	// do not calculate size subtrees so as to be able to test it
 	const auto err2 =
-	dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>
+	dmin_projective::examine_DMax_projective<lal::graphs::rooted_tree>
 	(
 		inputs[0].first,
 		[](lal::graphs::rooted_tree&) { },

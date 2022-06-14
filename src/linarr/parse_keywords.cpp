@@ -76,6 +76,26 @@ err_type call_linarr_Dmin
 	return err_type::wrong_keyword;
 }
 
+err_type call_linarr_DMax
+(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+{
+	const std::string& key = keywords[i];
+	if (key == "Projective") {
+		return parse_header(exe_linarr_DMax_projective, fin);
+	}
+	if (key == "Planar") {
+		return parse_header(exe_linarr_DMax_planar, fin);
+	}
+	if (key == "comparison") {
+		//return parse_header(exe_linarr_DMax_comparison, fin);
+	}
+
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
 err_type call_linarr_klevel
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
@@ -153,6 +173,9 @@ err_type call_linarr
 	}
 	if (key == "Dmin") {
 		return call_linarr_Dmin(keywords, i + 1, fin);
+	}
+	if (key == "DMax") {
+		return call_linarr_DMax(keywords, i + 1, fin);
 	}
 
 	if (key == "dependency_flux") {

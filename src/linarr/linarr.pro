@@ -60,6 +60,8 @@ SOURCES += \
 	C.cpp \
 	C_list.cpp \
 	D.cpp \
+	DMax_planar.cpp \
+	DMax_projective.cpp \
 	Dmin_comparison.cpp \
 	Dmin_planar.cpp \
 	Dmin_projective.cpp \

@@ -1,0 +1,4 @@
+TYPE linarr-DMax-Projective
+INPUT 1 inputs/linarr/optimal_linearizations/DMax/projective/07 *
+BODY
+	AEF

@@ -1,0 +1,11 @@
+TYPE linarr-DMax-Planar
+INPUT 0
+BODY
+	quadratic
+	random
+	AEF
+	
+	100 1000
+	200 1000
+	300 1000
+	400 1000
