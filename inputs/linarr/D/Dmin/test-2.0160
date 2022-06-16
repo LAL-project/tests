@@ -1,4 +1,5 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	random FC <= Plan 160 100
+	random Unc_YS <= Plan_AEF 160 100
+	random Unc_YS <= Plan_HS 160 100

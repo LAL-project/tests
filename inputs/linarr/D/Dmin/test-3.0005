@@ -1,0 +1,5 @@
+TYPE linarr-Dmin-comparison
+INPUT 0
+BODY
+	exhaustive Unc_FC2 <= Plan_AEF 5
+	exhaustive Unc_FC2 <= Plan_HS 5

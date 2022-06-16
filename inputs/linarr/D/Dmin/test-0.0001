@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	exhaustive YS == FC 1
+	exhaustive Unc_YS == Unc_FC2 1

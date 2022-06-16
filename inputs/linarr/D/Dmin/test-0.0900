@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	random YS == FC 900 10
+	random Unc_YS == Unc_FC2 900 10

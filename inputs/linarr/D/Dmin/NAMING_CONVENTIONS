@@ -1,0 +1,28 @@
+
+test-0.*
+
+	Comparison
+		Yossi Shiloach
+		==
+		Fan Chung (2)
+
+test-1.*
+
+	Comparison
+		Planar AEF
+		==
+		Planar HS
+
+test-2.*
+
+	Comparison
+		Yossi Shiloach
+		<=
+		Planar AEF, Planar HS
+
+test-3.*
+
+	Comparison
+		Fan Chung (2)
+		<=
+		Planar AEF, Planar HS

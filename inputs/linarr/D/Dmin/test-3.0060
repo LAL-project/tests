@@ -1,0 +1,5 @@
+TYPE linarr-Dmin-comparison
+INPUT 0
+BODY
+	random Unc_FC2 <= Plan_AEF 60 1000
+	random Unc_FC2 <= Plan_HS 60 1000

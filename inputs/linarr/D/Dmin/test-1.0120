@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	random YS <= Plan 120 100
+	random Plan_AEF == Plan_HS 120 100

@@ -1,4 +1,5 @@
 TYPE linarr-Dmin-comparison
 INPUT 0
 BODY
-	exhaustive FC <= Plan 9
+	exhaustive Unc_YS <= Plan_AEF 9
+	exhaustive Unc_YS <= Plan_HS 9
