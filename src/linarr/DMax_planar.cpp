@@ -74,7 +74,7 @@ enum class algorithms_DMax_planar {
 namespace tests {
 namespace linarr {
 
-namespace tests_DMax_planar {
+namespace dmax_planar {
 
 std::pair<uint64_t,lal::linear_arrangement> DMax_planar_quadratic
 (const lal::graphs::free_tree& t)
@@ -107,7 +107,7 @@ noexcept
 		lal::linarr::max_sum_edge_lengths_planar(T);
 
 	const auto DMax_planar_quadratic =
-		tests_DMax_planar::DMax_planar_quadratic(T);
+		dmax_planar::DMax_planar_quadratic(T);
 
 	// check correctness of library's result
 	const bool correct1 =
@@ -140,7 +140,7 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace tests_DMax_planar
+} // -- namespace dmax_planar
 
 err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) {
 	const std::set<std::string> allowed_algos({"AEF", "quadratic"});
@@ -160,7 +160,7 @@ err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) {
 
 	err_type err = err_type::no_error;
 
-	if (algo == "AEF" or algo == "HS") {
+	if (algo == "AEF") {
 		if (inputs.size() != 1) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Exactly one input files are allowed in this test.\n";
@@ -255,7 +255,7 @@ err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) {
 				while (not Gen.end()) {
 					const auto T = Gen.get_tree();
 					Gen.next();
-					err = tests_DMax_planar::check_tree(T, algo_name, algo_choice);
+					err = dmax_planar::check_tree(T, algo_name, algo_choice);
 					if (err != err_type::no_error) {
 						return err;
 					}
@@ -268,7 +268,7 @@ err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) {
 				lal::generate::rand_ulab_free_trees Gen(n, 1234);
 				for (std::size_t i = 0; i < n_rand_trees; ++i) {
 					const auto T = Gen.get_tree();
-					err = tests_DMax_planar::check_tree(T, algo_name, algo_choice);
+					err = dmax_planar::check_tree(T, algo_name, algo_choice);
 					if (err != err_type::no_error) {
 						return err;
 					}

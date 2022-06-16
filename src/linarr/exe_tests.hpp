@@ -87,6 +87,8 @@ err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& 
 err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin);
+err_type exe_linarr_DMax_projective_all_max_roots(const input_list& inputs, std::ifstream& fin)
+noexcept;
 err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin);
 
 err_type exe_linarr_arrangement_validity(const input_list& inputs, std::ifstream& fin);

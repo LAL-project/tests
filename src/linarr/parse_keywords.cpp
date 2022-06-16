@@ -86,8 +86,8 @@ err_type call_linarr_DMax
 	if (key == "Planar") {
 		return parse_header(exe_linarr_DMax_planar, fin);
 	}
-	if (key == "comparison") {
-		//return parse_header(exe_linarr_DMax_comparison, fin);
+	if (key == "projective_all_roots") {
+		return parse_header(exe_linarr_DMax_projective_all_max_roots, fin);
 	}
 
 	std::cerr << ERROR << '\n';
