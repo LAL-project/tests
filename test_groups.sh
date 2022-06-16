@@ -67,6 +67,9 @@ groups_list=(\
 				"linarr_C_stack_based_C_list_upper_bound_list" \
 		"linarr_Dmin" \
 			"linarr_Dmin_Comparison" \
+				"linarr_Dmin_Comparison_Plan_vs_Plan" \
+				"linarr_Dmin_Comparison_Plan_vs_Unc" \
+				"linarr_Dmin_Comparison_Unc_vs_Unc" \
 			"linarr_Dmin_Projective" \
 				"linarr_Dmin_Projective_AEF" \
 				"linarr_Dmin_Projective_HS" \
@@ -77,7 +80,6 @@ groups_list=(\
 				"linarr_Dmin_Unconstrained_YS" \
 				"linarr_Dmin_Unconstrained_FC" \
 		"linarr_DMax" \
-			"linarr_DMax_Comparison" \
 			"linarr_DMax_Projective" \
 				"linarr_DMax_Projective_AEF" \
 			"linarr_DMax_Planar" \

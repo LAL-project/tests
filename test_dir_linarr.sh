@@ -140,8 +140,19 @@ linarr_Dmin_Planar_DIRS=(\
 	"${linarr_Dmin_Planar_AEF_DIRS[@]}" \
 	"${linarr_Dmin_Planar_HS_DIRS[@]}" \
 	)
+linarr_Dmin_Comparison_Plan_vs_Plan_DIRS=(\
+	"linarr/D/Dmin/comparison/plan_plan" "linarr/D/Dmin/comparison/plan_plan" \
+	)
+linarr_Dmin_Comparison_Plan_vs_Unc_DIRS=(\
+	"linarr/D/Dmin/comparison/plan_unc" "linarr/D/Dmin/comparison/plan_unc" \
+	)
+linarr_Dmin_Comparison_Unc_vs_Unc_DIRS=(\
+	"linarr/D/Dmin/comparison/unc_unc" "linarr/D/Dmin/comparison/unc_unc" \
+	)
 linarr_Dmin_Comparison_DIRS=(\
-	"linarr/D/Dmin/" "linarr/D/Dmin/" \
+	"${linarr_Dmin_Comparison_Plan_vs_Plan_DIRS[@]}" \
+	"${linarr_Dmin_Comparison_Plan_vs_Unc_DIRS[@]}" \
+	"${linarr_Dmin_Comparison_Unc_vs_Unc_DIRS[@]}" \
 	)
 linarr_Dmin_Unconstrained_YS_DIRS=(\
 	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/" \
