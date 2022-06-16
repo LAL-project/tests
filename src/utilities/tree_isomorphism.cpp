@@ -81,7 +81,7 @@ std::optional<bool> read_should_be_or_not(std::ifstream& fin) {
 	return {};
 }
 
-template<class T>
+template <class T>
 void read_free(std::ifstream& fin, T& t) {
 	std::vector<lal::edge> edges(t.get_num_nodes() - 1);
 	for (auto& e : edges) {
@@ -90,7 +90,7 @@ void read_free(std::ifstream& fin, T& t) {
 	t.add_edges(edges);
 }
 
-template<class T>
+template <class T>
 void read_rooted(std::ifstream& fin, T& t) {
 	read_free(fin, t);
 	lal::node r;
@@ -177,7 +177,7 @@ err_type exe_utils_tree_iso_manual(std::ifstream& fin) {
 
 // ground truth: ISOMORPHIC
 
-template<class Tree, class GEN>
+template <class Tree, class GEN>
 err_type pos_exh_test(std::ifstream& fin) {
 	Tree relab_tree;
 
@@ -216,7 +216,7 @@ err_type pos_exh_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template<class Tree, class GEN>
+template <class Tree, class GEN>
 err_type pos_rand_test(std::ifstream& fin) {
 	uint64_t n, N_trees, N_relabs;
 	fin >> n >> N_trees >> N_relabs;
@@ -254,7 +254,7 @@ err_type pos_rand_test(std::ifstream& fin) {
 
 // ground truth: NON-ISOMORPHIC
 
-template<class Tree, class GEN>
+template <class Tree, class GEN>
 err_type neg_exh_test(std::ifstream& fin) {
 	uint64_t n, N_relabs;
 	fin >> n >> N_relabs;
@@ -316,7 +316,7 @@ err_type neg_exh_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template<class T, class Exh_Gen, class Rand_Gen>
+template <class T, class Exh_Gen, class Rand_Gen>
 err_type exe_test_auto(const std::string& expected, const std::string& mode, std::ifstream& fin) {
 	if (expected == "positive") {
 		if (mode == "exhaustive") { return pos_exh_test<T,Exh_Gen>(fin); }

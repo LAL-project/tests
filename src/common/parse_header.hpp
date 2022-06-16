@@ -51,7 +51,7 @@
 
 namespace tests {
 
-template<typename ... Params>
+template <typename ... Params>
 err_type parse_header(
 	err_type (*F)(const input_list&, std::ifstream&, Params...),
 

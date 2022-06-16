@@ -111,10 +111,10 @@ static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) {
 
 // -----------------------------------------------------------------------------
 
-template<std::size_t idx = 0>
+template <std::size_t idx = 0>
 struct struct_output {
 
-template<typename V1, typename ... Params>
+template <typename V1, typename ... Params>
 static constexpr void output(const std::tuple<V1, Params...>& t, std::ostream& out) {
 	out << " " << std::get<idx>(t);
 
@@ -129,10 +129,10 @@ static constexpr void output(const Ui& t, std::ostream& out) {
 
 };
 
-template<std::size_t idx = 0>
+template <std::size_t idx = 0>
 struct struct_assign {
 
-template<typename Tuple, typename V1, typename... Params>
+template <typename Tuple, typename V1, typename... Params>
 static void assign(
 	Tuple& t,
 	const V1& v1, const Params&... params
@@ -145,7 +145,7 @@ static void assign(
 	}
 }
 
-template<typename Tuple, typename V1, typename... Params>
+template <typename Tuple, typename V1, typename... Params>
 static void assign(
 	Tuple& t,
 	V1&& v1, Params&&... params
@@ -172,7 +172,7 @@ namespace detail {
 //     v2 is sorted by our algorithm
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
-template<class T, class It>
+template <class T, class It>
 err_type __check_sorting
 (
 	const std::string& algo, std::vector<T> v1, std::vector<T> v2,
@@ -226,7 +226,7 @@ err_type check_sorting
 
 // -----------------------------------------------------------------------------
 
-template<
+template <
 	typename It,
 	typename T = typename std::iterator_traits<It>::value_type
 >

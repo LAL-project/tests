@@ -50,7 +50,7 @@
 namespace tests {
 namespace linarr {
 
-template<class graph_t>
+template <class graph_t>
 uint64_t num_crossings_brute_force(
 	const graph_t& g,
 	const lal::linear_arrangement& pi
@@ -81,7 +81,7 @@ noexcept
 	return C;
 }
 
-template<class graph_t>
+template <class graph_t>
 std::vector<uint64_t> num_crossings_brute_force(
 	const graph_t& g,
 	const std::vector<lal::linear_arrangement>& pis

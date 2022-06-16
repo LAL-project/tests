@@ -90,7 +90,7 @@
 namespace tests {
 namespace numeric {
 
-template<typename U, typename V>
+template <typename U, typename V>
 static inline err_type resolve_comp_rational(
 	const std::string& var1, const std::string& var2,
 	const U& val1, const std::string& op, const V& val2
@@ -216,7 +216,7 @@ static inline err_type comp_rational_lit(
 	);
 }
 
-template<typename U>
+template <typename U>
 static inline lal::numeric::rational resolve_op_rational(
 	const U& var1, const std::string& op, const lal::numeric::rational& var2
 )
@@ -228,7 +228,7 @@ static inline lal::numeric::rational resolve_op_rational(
 	return -1;
 }
 
-template<
+template <
 	typename U, typename V,
 	typename std::enable_if_t<
 		std::is_same<V, lal::numeric::integer>::value || std::is_integral<V>::value, int

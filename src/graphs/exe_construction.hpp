@@ -59,7 +59,7 @@
 namespace tests {
 namespace graphs {
 
-template<typename G>
+template <typename G>
 inline bool equal_graphs(const G& g1, const G& g2)
 {
 	if (g1.get_num_nodes() != g2.get_num_nodes()) { return false; }

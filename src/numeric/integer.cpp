@@ -89,7 +89,7 @@
 namespace tests {
 namespace numeric {
 
-template<typename U, typename V>
+template <typename U, typename V>
 static inline err_type resolve_comp_integer(
 	const std::string& var1, const std::string& var2,
 	const U& val1, const std::string& op, const V& val2
@@ -178,7 +178,7 @@ static inline err_type comp_integer_lit(
 	return resolve_comp_integer(var1, "literal", val1, op_comp, val2);
 }
 
-template<typename U, typename V>
+template <typename U, typename V>
 static inline
 lal::numeric::integer resolve_integer_operation
 (const U& var1, const std::string& op, const V& var2)

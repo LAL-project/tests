@@ -46,7 +46,7 @@
 #include <ostream>
 #include <vector>
 
-template<typename T>
+template <typename T>
 std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 	if (v.size() == 0) { return os; }
 	os << v[0];
@@ -56,7 +56,7 @@ std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 	return os;
 }
 
-template<typename T>
+template <typename T>
 std::istream& operator>> (std::istream& is, const std::vector<T>& v) {
 	for (std::size_t i = 0; i < v.size(); ++i) {
 		is >> v[i];
@@ -64,7 +64,7 @@ std::istream& operator>> (std::istream& is, const std::vector<T>& v) {
 	return is;
 }
 
-template<typename T, typename U>
+template <typename T, typename U>
 std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) {
 	os << "(" << p.first << "," << p.second << ")";
 	return os;

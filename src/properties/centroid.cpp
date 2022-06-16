@@ -93,7 +93,7 @@ inline bool is_centroidal(
 	return true;
 }
 
-template<class T>
+template <class T>
 std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x) {
 	const uint64_t n = t.get_num_nodes();
 
@@ -142,7 +142,7 @@ bool are_centroids_equal(
 namespace tests {
 namespace properties {
 
-template<class TREE_TYPE>
+template <class TREE_TYPE>
 err_type exe_commands_utils_centroid(std::ifstream& fin) {
 	TREE_TYPE t;
 	uint64_t n;

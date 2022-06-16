@@ -63,7 +63,7 @@ namespace tests {
 namespace properties {
 
 // this is a very simple algorithm to calculate the centre
-template<class tree_t>
+template <class tree_t>
 uint64_t straightforward_diameter
 (const tree_t& tree, lal::node u)
 noexcept
@@ -99,7 +99,7 @@ noexcept
 	return max_dist;
 }
 
-template<class tree_t>
+template <class tree_t>
 err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept {
 	tree_t t;
 	uint64_t n;

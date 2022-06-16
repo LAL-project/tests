@@ -60,7 +60,7 @@
 namespace tests {
 namespace linarr {
 
-template<class G>
+template <class G>
 err_type test_arrangement(std::ifstream& fin) noexcept {
 	G g;
 	{

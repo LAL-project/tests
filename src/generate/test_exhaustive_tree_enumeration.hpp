@@ -47,7 +47,7 @@
 namespace tests {
 namespace generate {
 
-template<
+template <
 	bool use_constructor,
 	typename Gen,
 	typename Callable,

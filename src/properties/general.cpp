@@ -101,7 +101,7 @@ lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph
 	return dg;
 }
 
-template<class G>
+template <class G>
 void enum_E(const G& g) {
 	std::size_t total = 0;
 
@@ -115,7 +115,7 @@ void enum_E(const G& g) {
 	std::cout << "Total number of elements: " << total << '\n';
 }
 
-template<class G>
+template <class G>
 void enum_Q(const G& g) {
 	std::size_t total = 0;
 
@@ -136,7 +136,7 @@ void enum_Q(const G& g) {
 	std::cout << "Total number of elements: " << total << '\n';
 }
 
-template<class G>
+template <class G>
 void Q_size(const G& g) {
 	const lal::numeric::integer Q = lal::properties::num_pairs_independent_edges_integer(g);
 	std::cout << "size of Q: " << Q << '\n';

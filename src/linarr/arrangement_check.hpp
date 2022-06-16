@@ -54,7 +54,7 @@
 namespace tests {
 namespace linarr {
 
-template<typename tree_t>
+template <typename tree_t>
 bool check_correctness_arr(
 	const tree_t& tree,
 	const std::pair<uint64_t, lal::linear_arrangement>& res,

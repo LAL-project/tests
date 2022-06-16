@@ -60,7 +60,7 @@
 namespace tests {
 namespace detail {
 
-template<class G>
+template <class G>
 err_type process_common_assertions(const G& g, const std::string& assert_what, std::ifstream& fin)
 {
 	lal::node s, t;
@@ -158,7 +158,7 @@ err_type process_assert(const lal::graphs::undirected_graph& g, std::ifstream& f
 	return err_type::no_error;
 }
 
-template<class G>
+template <class G>
 err_type process_instruction(const G& g, const std::string& command, std::ifstream& fin) {
 	if (command == "output_graph") {
 		std::cout << g << '\n';
@@ -179,7 +179,7 @@ err_type process_instruction(const G& g, const std::string& command, std::ifstre
 	return err_type::no_error;
 }
 
-template<class G>
+template <class G>
 err_type test_without_graph(std::ifstream& fin) {
 	G g;
 	std::string command;
@@ -204,7 +204,7 @@ err_type test_without_graph(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template<class G>
+template <class G>
 err_type execute_utils_bfs_test(
 	const std::string& graph_name,
 	const std::string& graph_format,

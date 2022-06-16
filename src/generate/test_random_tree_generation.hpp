@@ -48,7 +48,7 @@
 namespace tests {
 namespace generate {
 
-template<
+template <
 	bool use_constructor,
 	int seed,
 	class Gen,

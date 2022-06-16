@@ -54,7 +54,7 @@
 namespace tests {
 namespace io_wrapper {
 
-template<class G>
+template <class G>
 err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm) {
 
 	if (format == "edge_list" or format == "edge-list") {

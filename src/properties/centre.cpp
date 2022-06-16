@@ -78,7 +78,7 @@ noexcept
 }
 
 // this is a very simple algorithm to calculate the centre
-template<class T>
+template <class T>
 std::pair<lal::node, lal::node> straightforward_centre(const T& tree, lal::node u)
 noexcept
 {
@@ -171,7 +171,7 @@ noexcept
 	return std::make_pair(longest_path[h], n);
 }
 
-template<class tree_t>
+template <class tree_t>
 err_type exe_commands_utils_centre(std::ifstream& fin) {
 	tree_t t;
 	uint64_t n;

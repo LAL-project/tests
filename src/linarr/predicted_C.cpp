@@ -67,7 +67,7 @@
 namespace tests {
 namespace linarr {
 
-template<typename INT>
+template <typename INT>
 inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
 	/*if (s1 == s2) { return true; }
 	if (s1 == s2 + d2) { return true; }
@@ -112,7 +112,7 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 	return c;
 }
 
-template<typename GRAPH>
+template <typename GRAPH>
 lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi) {
 	lal::numeric::rational Ec2(0);
 	const uint64_t n = g.get_num_nodes();

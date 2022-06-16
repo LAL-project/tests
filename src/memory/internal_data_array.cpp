@@ -295,7 +295,7 @@ void test_copy_assignment() {
 }
 #endif
 
-template<bool clear>
+template <bool clear>
 void test_resize_fill() {
 	begin_function;
 

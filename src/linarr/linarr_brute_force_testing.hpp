@@ -60,22 +60,22 @@
 namespace tests {
 namespace linarr {
 
-template<class T> using Solver =
+template <class T> using Solver =
 	std::function< std::pair<uint64_t, lal::linear_arrangement>(const T&) >;
 
-template<class T> using TreeEval =
+template <class T> using TreeEval =
 	std::function< uint64_t (const T&, const lal::linear_arrangement&) >;
 
-template<class T> using ArrgmtCheck =
+template <class T> using ArrgmtCheck =
 	std::function< bool (const T&, const lal::linear_arrangement&) >;
 
-template<class T> using InputConv =
+template <class T> using InputConv =
 	std::function< T (const std::vector<lal::node>&) >;
 
-template<class T> using TreeInit =
+template <class T> using TreeInit =
 	std::function< void (T&) >;
 
-template<class T>
+template <class T>
 err_type linarr_brute_force_testing(
 	// function that computes the solution
 	const Solver<T>& solver,

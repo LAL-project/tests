@@ -63,7 +63,7 @@ namespace linarr {
 
 namespace dmin_projective {
 
-template<class T>
+template <class T>
 err_type examine_Dmin_projective
 (
 	const std::string& filename,

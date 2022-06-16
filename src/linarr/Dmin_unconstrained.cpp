@@ -114,7 +114,7 @@ noexcept
 
 // -----------------------------------------------------------------------------
 
-template<typename func_Dmin>
+template <typename func_Dmin>
 err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 {
 	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
@@ -143,7 +143,7 @@ err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 	return err;
 }
 
-template<typename func_Dmin>
+template <typename func_Dmin>
 err_type test_class_algorithm(
 	const func_Dmin& A,
 	const std::string& algorithm,
@@ -337,7 +337,7 @@ noexcept
 	return err_type::no_error;
 }
 
-template<typename func_Dmin>
+template <typename func_Dmin>
 err_type test_tree_algorithm(
 	const func_Dmin& A,
 	const std::string& algorithm,

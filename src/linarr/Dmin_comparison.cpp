@@ -80,10 +80,6 @@ bool gt(const algo_result& r1, const algo_result& r2) noexcept { return r1.first
 namespace tests {
 namespace linarr {
 
-namespace tests_Dmin_comparison {
-
-// -----------------------------------------------------------------------------
-
 #define correct_algo_str(algo)												\
 {																			\
 	if (allowed_algos.find(algo) == allowed_algos.end()) {					\
@@ -110,8 +106,6 @@ namespace tests_Dmin_comparison {
 	}																	\
 }
 
-} // -- namespace tests_Dmin_comparison
-
 err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin)
 noexcept
 {
@@ -122,22 +116,26 @@ noexcept
 		return err_type::test_format;
 	}
 
-	const std::set<std::string> allowed_algos({"Plan", "YS", "FC"});
+	const std::set<std::string> allowed_algos({"Plan_AEF", "Plan_HS", "Unc_YS", "Unc_FC2"});
 
-	const auto Plan =
+	const auto Plan_HS =
 		[](const lal::graphs::free_tree& t) -> algo_result
-		{ return lal::linarr::min_sum_edge_lengths_planar(t); };
-	const auto FC =
+		{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::HochbergStallmann); };
+	const auto Plan_AEF =
+		[](const lal::graphs::free_tree& t) -> algo_result
+		{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer); };
+	const auto Unc_FC2 =
 		[](const lal::graphs::free_tree& t) -> algo_result
 		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
-	const auto YS =
+	const auto Unc_YS =
 		[](const lal::graphs::free_tree& t) -> algo_result
 		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
 
 	std::map<std::string, std::function<algo_result (const lal::graphs::free_tree&)> > ALGOS;
-	ALGOS["Plan"] = Plan;
-	ALGOS["YS"] = YS;
-	ALGOS["FC"] = FC;
+	ALGOS["Plan_AEF"] = Plan_AEF;
+	ALGOS["Plan_HS"] = Plan_HS;
+	ALGOS["Unc_YS"] = Unc_YS;
+	ALGOS["Unc_FC2"] = Unc_FC2;
 
 	const std::set<std::string> allowed_comps({"<", "<=", "==", ">=", ">"});
 	std::map<std::string, std::function<bool (const algo_result&, const algo_result&)>> COMPS;
@@ -238,7 +236,7 @@ noexcept
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
 					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
-					std::cerr << "        Inv Arrangement: " << res1.second.inverse_as_vector() << '\n';
+					std::cerr << "        Inv Arrangement: " << res2.second.inverse_as_vector() << '\n';
 					std::cerr << "    For tree: \n";
 					std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
 					std::cerr << "        Edge list: " << tree.get_edges() << '\n';

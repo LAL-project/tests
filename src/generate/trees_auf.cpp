@@ -202,7 +202,7 @@ err_type test_for_n_yield
 	return err_type::no_error;
 }
 
-template<bool init>
+template <bool init>
 err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) noexcept {
 	{
 	const auto err =
