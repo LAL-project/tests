@@ -79,7 +79,8 @@ err_type exe_properties_expected_D_planar_brute_force
 	while (fin >> hv[0]) {
 		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
 
-		const lal::graphs::free_tree T = lal::graphs::from_head_vector_to_free_tree(hv).first;
+		const lal::graphs::free_tree T =
+			std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
 
 		// calculate the value with the algorithm
 		const auto algo_value = lal::properties::exp_sum_edge_lengths_planar_rational(T);

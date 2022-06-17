@@ -74,7 +74,7 @@ typedef t3_vec::iterator t3_vec_it;
 // -----------------------------------------------------------------------------
 
 // size, values in range [0,n)
-static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) {
+static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) noexcept {
 	// always use the same seed
 	std::mt19937 gen(1234);
 
@@ -99,7 +99,7 @@ static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) {
 
 // -----------------------------------------------------------------------------
 
-static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) {
+static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) noexcept {
 	// always use the same seed
 	std::mt19937 gen(1234);
 	std::uniform_int_distribution<Ui> U(0, n);
@@ -114,49 +114,53 @@ static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) {
 template <std::size_t idx = 0>
 struct struct_output {
 
-template <typename V1, typename ... Params>
-static constexpr void output(const std::tuple<V1, Params...>& t, std::ostream& out) {
-	out << " " << std::get<idx>(t);
+	template <typename V1, typename ... Params>
+	static constexpr void output(const std::tuple<V1, Params...>& t, std::ostream& out)
+	noexcept
+	{
+		out << " " << std::get<idx>(t);
 
-	if constexpr (idx < sizeof...(Params)) {
-		struct_output<idx+1>::output(t, out);
+		if constexpr (idx < sizeof...(Params)) {
+			struct_output<idx+1>::output(t, out);
+		}
 	}
-}
 
-static constexpr void output(const Ui& t, std::ostream& out) {
-	out << " " << t;
-}
+	static constexpr void output(const Ui& t, std::ostream& out) noexcept {
+		out << " " << t;
+	}
 
 };
 
 template <std::size_t idx = 0>
 struct struct_assign {
 
-template <typename Tuple, typename V1, typename... Params>
-static void assign(
-	Tuple& t,
-	const V1& v1, const Params&... params
-)
-{
-	std::get<idx>(t) = v1;
+	template <typename Tuple, typename V1, typename... Params>
+	static void assign(
+		Tuple& t,
+		const V1& v1, const Params&... params
+	)
+	noexcept
+	{
+		std::get<idx>(t) = v1;
 
-	if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
-		struct_assign<idx+1>::assign(t, params...);
+		if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
+			struct_assign<idx+1>::assign(t, params...);
+		}
 	}
-}
 
-template <typename Tuple, typename V1, typename... Params>
-static void assign(
-	Tuple& t,
-	V1&& v1, Params&&... params
-)
-{
-	std::get<idx>(t) = std::move(v1);
+	template <typename Tuple, typename V1, typename... Params>
+	static void assign(
+		Tuple& t,
+		V1&& v1, Params&&... params
+	)
+	noexcept
+	{
+		std::get<idx>(t) = std::move(v1);
 
-	if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
-		struct_assign<idx+1>::assign(t, params...);
+		if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
+			struct_assign<idx+1>::assign(t, params...);
+		}
 	}
-}
 
 };
 
@@ -179,6 +183,7 @@ err_type __check_sorting
 	const std::function<void (It begin, It end)>& sort_F,
 	bool incr
 )
+noexcept
 {
 	// sort with C++'s standard library's algorithm
 	std::sort(v1.begin(), v1.end());
@@ -219,6 +224,7 @@ err_type check_sorting
 	std::function<void (Ui_it begin, Ui_it end)> sort_F,
 	bool incr
 )
+noexcept
 {
 	const std::vector<Ui> R = random_vector_unique(s, n);
 	return __check_sorting(algo, R, R, sort_F, incr);
@@ -315,7 +321,7 @@ noexcept
 	return err_type::test_format;
 }
 
-err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
+err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept {
 	if (option == "insertion_sort_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
@@ -430,7 +436,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) {
 	return err_type::test_format;
 }
 
-err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin) {
+err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_options({
 		"insertion_sort_rand",
 		"bit_sort_rand", "bit_sort_mem_rand",

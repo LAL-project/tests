@@ -122,7 +122,7 @@ err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin)
 			for (auto& v : linear_sequence) { fin >> v; }
 
 			T.clear();
-			T = lal::graphs::from_head_vector_to_free_tree(linear_sequence).first;
+			T = std::move(lal::graphs::from_head_vector_to_free_tree(linear_sequence).first);
 
 			algo_flux = lal::linarr::compute_flux(T);
 			input_flux.resize(n - 1);

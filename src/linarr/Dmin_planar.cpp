@@ -193,7 +193,7 @@ err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin) {
 				return lal::linarr::is_planar(t, arr);
 			},
 			[](const std::vector<lal::node>& v) {
-				return lal::graphs::from_head_vector_to_free_tree(v).first;
+				return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
 			},
 			[](lal::graphs::free_tree&) { },
 			input_file

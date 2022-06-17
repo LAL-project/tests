@@ -60,8 +60,10 @@
 namespace tests {
 namespace detail {
 
-template <class G>
-err_type process_common_assertions(const G& g, const std::string& assert_what, std::ifstream& fin)
+template <class graph_t>
+err_type process_common_assertions
+(const graph_t& g, const std::string& assert_what, std::ifstream& fin)
+noexcept
 {
 	lal::node s, t;
 	if (assert_what == "is_reachable") {
@@ -90,7 +92,9 @@ err_type process_common_assertions(const G& g, const std::string& assert_what, s
 	return err_type::no_error;
 }
 
-err_type process_assert(const lal::graphs::directed_graph& g, std::ifstream& fin) {
+err_type process_assert(const lal::graphs::directed_graph& g, std::ifstream& fin)
+noexcept
+{
 	std::string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_dir_cycle") {
@@ -132,7 +136,9 @@ err_type process_assert(const lal::graphs::directed_graph& g, std::ifstream& fin
 	return err_type::no_error;
 }
 
-err_type process_assert(const lal::graphs::undirected_graph& g, std::ifstream& fin) {
+err_type process_assert(const lal::graphs::undirected_graph& g, std::ifstream& fin)
+noexcept
+{
 	std::string assert_what;
 	fin >> assert_what;
 	if (assert_what == "has_undir_cycle") {
@@ -158,8 +164,10 @@ err_type process_assert(const lal::graphs::undirected_graph& g, std::ifstream& f
 	return err_type::no_error;
 }
 
-template <class G>
-err_type process_instruction(const G& g, const std::string& command, std::ifstream& fin) {
+template <class graph_t>
+err_type process_instruction(const graph_t& g, const std::string& command, std::ifstream& fin)
+noexcept
+{
 	if (command == "output_graph") {
 		std::cout << g << '\n';
 	}
@@ -179,9 +187,9 @@ err_type process_instruction(const G& g, const std::string& command, std::ifstre
 	return err_type::no_error;
 }
 
-template <class G>
-err_type test_without_graph(std::ifstream& fin) {
-	G g;
+template <class graph_t>
+err_type test_without_graph(std::ifstream& fin) noexcept {
+	graph_t g;
 	std::string command;
 	while (fin >> command) {
 		if (command == "add_edge") {
@@ -204,14 +212,15 @@ err_type test_without_graph(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template <class G>
+template <class graph_t>
 err_type execute_utils_bfs_test(
 	const std::string& graph_name,
 	const std::string& graph_format,
 	std::ifstream& fin
 )
+noexcept
 {
-	G g;
+	graph_t g;
 	err_type r1 = io_wrapper::read_graph(graph_name, graph_format, g);
 	if (r1 != err_type::no_error) { return r1; }
 
@@ -223,7 +232,7 @@ err_type execute_utils_bfs_test(
 	return err_type::no_error;
 }
 
-err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) {
+err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_options({
 		"sort_insertion", "sort_boolean"
 	});
@@ -247,8 +256,8 @@ err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) {
 	err_type r = err_type::no_error;
 	std::cout << "graph_type: " << graph_type << '\n';
 	if (inputs.size() == 1) {
-		const std::string file_name = inputs[0].first;
-		const std::string file_format = inputs[0].second;
+		const std::string& file_name = inputs[0].first;
+		const std::string& file_format = inputs[0].second;
 		r = (graph_type == "ugraph" ?
 			execute_utils_bfs_test<lal::graphs::undirected_graph>(file_name, file_format, fin) :
 			execute_utils_bfs_test<lal::graphs::directed_graph>(file_name, file_format, fin)

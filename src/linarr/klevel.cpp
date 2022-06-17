@@ -83,8 +83,8 @@ noexcept
 	const std::size_t n_inputs = inputs.size();
 	std::vector<lal::graphs::undirected_graph> Gs(n_inputs);
 	for (std::size_t i = 0; i < n_inputs; ++i) {
-		const std::string graph_name = inputs[i].first;
-		const std::string graph_format = inputs[i].second;
+		const std::string& graph_name = inputs[i].first;
+		const std::string& graph_format = inputs[i].second;
 
 		const err_type r = io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
 		if (r != err_type::no_error) {

@@ -166,8 +166,8 @@ err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
 	lal::graphs::undirected_graph uG;
 	lal::graphs::directed_graph dG;
 	{
-	const std::string graph_name = inputs[0].first;
-	const std::string graph_format = inputs[0].second;
+	const std::string& graph_name = inputs[0].first;
+	const std::string& graph_format = inputs[0].second;
 	err_type r;
 	r = io_wrapper::read_graph(graph_name, graph_format, uG);
 	if (r != err_type::no_error) { return r; }

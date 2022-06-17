@@ -66,7 +66,7 @@ inline void compute_data_gen_graphs_Q
 	// adjacency matrix
 	std::vector<std::vector<bool> > A(g.get_num_nodes(), std::vector<bool>(g.get_num_nodes(), false));
 	for (lal::iterators::E_iterator e_it(g); not e_it.end(); e_it.next()) {
-		const lal::edge e = e_it.get_edge();
+		const lal::edge& e = e_it.get_edge();
 		A[e.first][e.second] = true;
 		A[e.second][e.first] = true;
 	}

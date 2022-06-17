@@ -216,7 +216,9 @@ err_type exe_gen_arr_all_planar(const input_list& inputs, std::ifstream& fin) {
 			uint64_t k;
 			while (ss >> k) { hv.push_back(k); }
 
-			const lal::graphs::free_tree T = lal::graphs::from_head_vector_to_free_tree(hv).first;
+			const lal::graphs::free_tree T =
+				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
+
 			const auto formula = amount_planar(T);
 
 			std::set<lal::linear_arrangement> list_arrs;

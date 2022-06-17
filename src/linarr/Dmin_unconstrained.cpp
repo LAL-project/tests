@@ -133,7 +133,7 @@ err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 		},
 		// convert what you read from input to a (free) tree
 		[](const std::vector<lal::node>& v) {
-			return lal::graphs::from_head_vector_to_free_tree(v).first;
+			return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
 		},
 		// function to initialise a (free) tree
 		[](lal::graphs::free_tree&) { },

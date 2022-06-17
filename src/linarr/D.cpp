@@ -74,8 +74,8 @@ err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) {
 
 	lal::graphs::undirected_graph G;
 	{
-	const std::string graph_name = inputs[0].first;
-	const std::string graph_format = inputs[0].second;
+	const std::string& graph_name = inputs[0].first;
+	const std::string& graph_format = inputs[0].second;
 	const err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
 	if (r != err_type::no_error) {
 		return r;
