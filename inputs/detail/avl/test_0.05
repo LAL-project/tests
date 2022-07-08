@@ -1,0 +1,48 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+insert 7
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 6
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 5
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 4
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 3
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 2
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+insert 1
+print_tree
+largest_element
+smallest_element
+sanity_check
+
+total_elements
+num_nodes

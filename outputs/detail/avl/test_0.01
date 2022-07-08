@@ -1,0 +1,29 @@
+1) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+3) sanity_check
+4) largest_element
+(largest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+6) total_elements
+Number of occurrences in the tree: 1
+7) num_nodes
+Number of nodes in the tree: 1
+Test finished without apparent errors.

@@ -1,0 +1,215 @@
+1) insert
+(insert 7) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) print_tree
+(7, '7'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+3) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+4) smallest_element
+(smallest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) sanity_check
+6) insert
+(insert 6) frequencies:
+    counter_equal:    1
+    counter_larger:   1
+    num_nodes_larger: 1
+
+7) print_tree
+(7, '7'), nc= 1, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: (6, '6'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+8) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+9) smallest_element
+(smallest element (6, '6')) frequencies:
+    counter_equal:    1
+    counter_larger:   1
+    num_nodes_larger: 1
+
+10) sanity_check
+11) insert
+(insert 5) frequencies:
+    counter_equal:    1
+    counter_larger:   2
+    num_nodes_larger: 2
+
+12) print_tree
+(6, '6'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: (5, '5'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (7, '7'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+13) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+14) smallest_element
+(smallest element (5, '5')) frequencies:
+    counter_equal:    1
+    counter_larger:   2
+    num_nodes_larger: 2
+
+15) sanity_check
+16) insert
+(insert 4) frequencies:
+    counter_equal:    1
+    counter_larger:   3
+    num_nodes_larger: 3
+
+17) print_tree
+(6, '6'), nc= 1, s= 0, ls= 2, rs= 1, h= 2, ts= 4, tc= 4, bf= -1
+| -l-: (5, '5'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: (4, '4'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: ∅
+| +r+: (7, '7'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+18) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+19) smallest_element
+(smallest element (4, '4')) frequencies:
+    counter_equal:    1
+    counter_larger:   3
+    num_nodes_larger: 3
+
+20) sanity_check
+21) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   4
+    num_nodes_larger: 4
+
+22) print_tree
+(6, '6'), nc= 1, s= 0, ls= 3, rs= 1, h= 2, ts= 5, tc= 5, bf= -1
+| -l-: (4, '4'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: (3, '3'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (7, '7'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+23) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+24) smallest_element
+(smallest element (3, '3')) frequencies:
+    counter_equal:    1
+    counter_larger:   4
+    num_nodes_larger: 4
+
+25) sanity_check
+26) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   5
+    num_nodes_larger: 5
+
+27) print_tree
+(4, '4'), nc= 1, s= 0, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: (3, '3'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: (2, '2'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: ∅
+| +r+: (6, '6'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: (5, '5'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: ∅
+| +r+: | +r+: (7, '7'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+28) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+29) smallest_element
+(smallest element (2, '2')) frequencies:
+    counter_equal:    1
+    counter_larger:   5
+    num_nodes_larger: 5
+
+30) sanity_check
+31) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 6
+
+32) print_tree
+(4, '4'), nc= 1, s= 0, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| -l-: (2, '2'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (6, '6'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: (5, '5'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: ∅
+| +r+: | +r+: (7, '7'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+33) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+34) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 6
+
+35) sanity_check
+36) total_elements
+Number of occurrences in the tree: 7
+37) num_nodes
+Number of nodes in the tree: 7
+Test finished without apparent errors.

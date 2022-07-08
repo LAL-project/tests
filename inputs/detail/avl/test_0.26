@@ -1,0 +1,18 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+
+insert 2 print_tree sanity_check
+insert 1 print_tree sanity_check
+insert 3 print_tree sanity_check
+
+remove_non_unique 1 print_tree sanity_check
+
+clear
+
+insert 2 print_tree sanity_check
+insert 1 print_tree sanity_check
+insert 3 print_tree sanity_check
+
+remove_unique 1 print_tree sanity_check

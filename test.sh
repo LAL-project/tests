@@ -68,6 +68,7 @@ function show_usage() {
 	echo "        detail : execute detail tests"
 	echo "            detail_sorting : execute sorting detail tests"
 	echo "            detail_traversal : execute traversal detail tests"
+	echo "            detail_avl : execute AVL detail tests"
 	echo ""
 	echo "        generate : execute generation tests"
 	echo "            generate_trees : execute generation tests for all trees"

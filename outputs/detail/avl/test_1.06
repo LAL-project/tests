@@ -1,0 +1,2457 @@
+1) remove_non_unique
+(remove -4832) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) sanity_check
+3) print_tree
+∅
+
+4) remove_non_unique
+(remove -4310) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) sanity_check
+6) print_tree
+∅
+
+7) remove_non_unique
+(remove 8505) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) sanity_check
+9) remove_unique
+(remove -6294) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+10) sanity_check
+11) remove_non_unique
+(remove -3996) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+12) sanity_check
+13) remove_unique
+(remove 7728) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+14) sanity_check
+15) remove_non_unique
+(remove -7465) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+16) sanity_check
+17) remove_unique
+(remove -8788) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+18) sanity_check
+19) remove_unique
+(remove 8355) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+20) sanity_check
+21) print_tree
+∅
+
+22) remove_unique
+(remove -2119) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+23) sanity_check
+24) join_trees
+25) remove_non_unique
+(remove 4032) frequencies:
+    counter_equal:    0
+    counter_larger:   2
+    num_nodes_larger: 2
+
+26) sanity_check
+27) insert
+(insert 5382) frequencies:
+    counter_equal:    1
+    counter_larger:   1
+    num_nodes_larger: 1
+
+28) sanity_check
+29) remove_non_unique
+(remove -7663) frequencies:
+    counter_equal:    0
+    counter_larger:   10
+    num_nodes_larger: 10
+
+30) sanity_check
+31) insert
+(insert -6445) frequencies:
+    counter_equal:    1
+    counter_larger:   9
+    num_nodes_larger: 9
+
+32) sanity_check
+33) remove_unique
+(remove -7164) frequencies:
+    counter_equal:    0
+    counter_larger:   10
+    num_nodes_larger: 10
+
+34) sanity_check
+35) remove_unique
+(remove -1491) frequencies:
+    counter_equal:    0
+    counter_larger:   5
+    num_nodes_larger: 5
+
+36) sanity_check
+37) join_trees
+38) remove_non_unique
+(remove 6123) frequencies:
+    counter_equal:    0
+    counter_larger:   9
+    num_nodes_larger: 9
+
+39) sanity_check
+40) remove_unique
+(remove -4098) frequencies:
+    counter_equal:    0
+    counter_larger:   16
+    num_nodes_larger: 16
+
+41) sanity_check
+42) print_tree
+(6945, '6945'), nc= 1, s= 0, ls= 11, rs= 7, h= 4, ts= 19, tc= 19, bf= 0
+| -l-: (-1891, '-1891'), nc= 1, s= l, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | +r+: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+43) join_trees
+44) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 19, rs= 17, h= 5, ts= 37, tc= 37, bf= 0
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 11, rs= 7, h= 4, ts= 19, tc= 19, bf= 0
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | -l-: | +r+: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7043, '7043'), nc= 1, s= r, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+45) remove_unique
+(remove -9706) frequencies:
+    counter_equal:    0
+    counter_larger:   37
+    num_nodes_larger: 37
+
+46) sanity_check
+47) join_trees
+48) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 19, rs= 28, h= 6, ts= 48, tc= 48, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 11, rs= 7, h= 4, ts= 19, tc= 19, bf= 0
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | -l-: | +r+: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7121, '7121'), nc= 1, s= r, ls= 17, rs= 10, h= 5, ts= 28, tc= 28, bf= -1
+| +r+: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7142, '7142'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7177, '7177'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+49) remove_non_unique
+(remove -8932) frequencies:
+    counter_equal:    0
+    counter_larger:   48
+    num_nodes_larger: 48
+
+50) sanity_check
+51) remove_non_unique
+(remove 1880) frequencies:
+    counter_equal:    0
+    counter_larger:   41
+    num_nodes_larger: 41
+
+52) sanity_check
+53) remove_unique
+(remove -5029) frequencies:
+    counter_equal:    0
+    counter_larger:   45
+    num_nodes_larger: 45
+
+54) sanity_check
+55) remove_non_unique
+(remove -3456) frequencies:
+    counter_equal:    0
+    counter_larger:   45
+    num_nodes_larger: 45
+
+56) sanity_check
+57) remove_unique
+(remove 902) frequencies:
+    counter_equal:    0
+    counter_larger:   41
+    num_nodes_larger: 41
+
+58) sanity_check
+59) remove_unique
+(remove -7494) frequencies:
+    counter_equal:    0
+    counter_larger:   48
+    num_nodes_larger: 48
+
+60) sanity_check
+61) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 19, rs= 28, h= 6, ts= 48, tc= 48, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 11, rs= 7, h= 4, ts= 19, tc= 19, bf= 0
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | -l-: | +r+: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7121, '7121'), nc= 1, s= r, ls= 17, rs= 10, h= 5, ts= 28, tc= 28, bf= -1
+| +r+: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7142, '7142'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7177, '7177'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+62) remove_unique
+(remove 5894) frequencies:
+    counter_equal:    0
+    counter_larger:   38
+    num_nodes_larger: 38
+
+63) sanity_check
+64) insert
+(insert 5561) frequencies:
+    counter_equal:    1
+    counter_larger:   38
+    num_nodes_larger: 38
+
+65) sanity_check
+66) remove_unique
+(remove -3117) frequencies:
+    counter_equal:    0
+    counter_larger:   46
+    num_nodes_larger: 46
+
+67) sanity_check
+68) join_trees
+69) join_trees
+70) remove_non_unique
+(remove -112) frequencies:
+    counter_equal:    0
+    counter_larger:   50
+    num_nodes_larger: 50
+
+71) sanity_check
+72) insert
+(insert -628) frequencies:
+    counter_equal:    1
+    counter_larger:   50
+    num_nodes_larger: 50
+
+73) sanity_check
+74) insert
+(insert -9022) frequencies:
+    counter_equal:    1
+    counter_larger:   58
+    num_nodes_larger: 58
+
+75) sanity_check
+76) remove_non_unique
+(remove -4190) frequencies:
+    counter_equal:    0
+    counter_larger:   55
+    num_nodes_larger: 55
+
+77) sanity_check
+78) join_trees
+79) remove_non_unique
+(remove 9954) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+80) sanity_check
+81) insert
+(insert 3758) frequencies:
+    counter_equal:    1
+    counter_larger:   64
+    num_nodes_larger: 64
+
+82) sanity_check
+83) remove_non_unique
+(remove 1442) frequencies:
+    counter_equal:    0
+    counter_larger:   66
+    num_nodes_larger: 66
+
+84) sanity_check
+85) join_trees
+86) remove_non_unique
+(remove 6158) frequencies:
+    counter_equal:    0
+    counter_larger:   75
+    num_nodes_larger: 75
+
+87) sanity_check
+88) remove_unique
+(remove 5539) frequencies:
+    counter_equal:    0
+    counter_larger:   76
+    num_nodes_larger: 76
+
+89) sanity_check
+90) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 23, rs= 65, h= 7, ts= 89, tc= 89, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 15, rs= 7, h= 5, ts= 23, tc= 23, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 6, rs= 8, h= 4, ts= 15, tc= 15, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5382, '5382'), nc= 1, s= r, ls= 5, rs= 2, h= 3, ts= 8, tc= 8, bf= -1
+| -l-: | -l-: | +r+: | -l-: (3718, '3718'), nc= 1, s= l, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: (-628, '-628'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (5038, '5038'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7121, '7121'), nc= 1, s= r, ls= 17, rs= 47, h= 6, ts= 65, tc= 65, bf= 1
+| +r+: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7325, '7325'), nc= 1, s= r, ls= 18, rs= 28, h= 5, ts= 47, tc= 47, bf= 0
+| +r+: | +r+: | -l-: (7267, '7267'), nc= 1, s= l, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | +r+: | -l-: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 13, h= 4, ts= 28, tc= 28, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7465, '7465'), nc= 1, s= r, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+91) insert
+(insert 2029) frequencies:
+    counter_equal:    1
+    counter_larger:   80
+    num_nodes_larger: 80
+
+92) sanity_check
+93) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 24, rs= 65, h= 7, ts= 90, tc= 90, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 16, rs= 7, h= 5, ts= 24, tc= 24, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 6, rs= 9, h= 4, ts= 16, tc= 16, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5382, '5382'), nc= 1, s= r, ls= 6, rs= 2, h= 3, ts= 9, tc= 9, bf= -1
+| -l-: | -l-: | +r+: | -l-: (3718, '3718'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (5038, '5038'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7121, '7121'), nc= 1, s= r, ls= 17, rs= 47, h= 6, ts= 65, tc= 65, bf= 1
+| +r+: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7325, '7325'), nc= 1, s= r, ls= 18, rs= 28, h= 5, ts= 47, tc= 47, bf= 0
+| +r+: | +r+: | -l-: (7267, '7267'), nc= 1, s= l, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | +r+: | -l-: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 13, h= 4, ts= 28, tc= 28, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7465, '7465'), nc= 1, s= r, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+94) join_trees
+95) remove_unique
+(remove -5916) frequencies:
+    counter_equal:    0
+    counter_larger:   91
+    num_nodes_larger: 91
+
+96) sanity_check
+97) remove_non_unique
+(remove -9843) frequencies:
+    counter_equal:    0
+    counter_larger:   94
+    num_nodes_larger: 94
+
+98) sanity_check
+99) remove_unique
+(remove -8921) frequencies:
+    counter_equal:    0
+    counter_larger:   93
+    num_nodes_larger: 93
+
+100) sanity_check
+101) remove_non_unique
+(remove -8923) frequencies:
+    counter_equal:    0
+    counter_larger:   93
+    num_nodes_larger: 93
+
+102) sanity_check
+103) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 24, rs= 69, h= 7, ts= 94, tc= 94, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 16, rs= 7, h= 5, ts= 24, tc= 24, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 6, rs= 9, h= 4, ts= 16, tc= 16, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5382, '5382'), nc= 1, s= r, ls= 6, rs= 2, h= 3, ts= 9, tc= 9, bf= -1
+| -l-: | -l-: | +r+: | -l-: (3718, '3718'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (5038, '5038'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 32, h= 6, ts= 69, tc= 69, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 17, h= 5, ts= 32, tc= 32, bf= 1
+| +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7465, '7465'), nc= 1, s= r, ls= 5, rs= 11, h= 4, ts= 17, tc= 17, bf= 1
+| +r+: | +r+: | +r+: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 7, rs= 3, h= 3, ts= 11, tc= 11, bf= -1
+| +r+: | +r+: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7595, '7595'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7601, '7601'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+104) insert
+(insert 7806) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+105) sanity_check
+106) join_trees
+107) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 24, rs= 75, h= 7, ts= 100, tc= 100, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 16, rs= 7, h= 5, ts= 24, tc= 24, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 6, rs= 9, h= 4, ts= 16, tc= 16, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5382, '5382'), nc= 1, s= r, ls= 6, rs= 2, h= 3, ts= 9, tc= 9, bf= -1
+| -l-: | -l-: | +r+: | -l-: (3718, '3718'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (5038, '5038'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 38, h= 6, ts= 75, tc= 75, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 23, h= 5, ts= 38, tc= 38, bf= 1
+| +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 13, rs= 9, h= 4, ts= 23, tc= 23, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7465, '7465'), nc= 1, s= l, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7847, '7847'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7595, '7595'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7601, '7601'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7806, '7806'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7851, '7851'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7850, '7850'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7875, '7875'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7893, '7893'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+108) remove_unique
+(remove 8838) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+109) sanity_check
+110) remove_unique
+(remove 6826) frequencies:
+    counter_equal:    0
+    counter_larger:   85
+    num_nodes_larger: 85
+
+111) sanity_check
+112) insert
+(insert 6981) frequencies:
+    counter_equal:    1
+    counter_larger:   79
+    num_nodes_larger: 79
+
+113) sanity_check
+114) remove_unique
+(remove -3857) frequencies:
+    counter_equal:    0
+    counter_larger:   97
+    num_nodes_larger: 97
+
+115) sanity_check
+116) remove_non_unique
+(remove 1742) frequencies:
+    counter_equal:    0
+    counter_larger:   92
+    num_nodes_larger: 92
+
+117) sanity_check
+118) remove_non_unique
+(remove -5503) frequencies:
+    counter_equal:    0
+    counter_larger:   98
+    num_nodes_larger: 98
+
+119) sanity_check
+120) insert
+(insert -4399) frequencies:
+    counter_equal:    1
+    counter_larger:   97
+    num_nodes_larger: 97
+
+121) sanity_check
+122) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 26, rs= 75, h= 7, ts= 102, tc= 102, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 17, rs= 8, h= 5, ts= 26, tc= 26, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: (-4399, '-4399'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5382, '5382'), nc= 1, s= r, ls= 6, rs= 2, h= 3, ts= 9, tc= 9, bf= -1
+| -l-: | -l-: | +r+: | -l-: (3718, '3718'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (5038, '5038'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 5, h= 3, ts= 8, tc= 8, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: (6981, '6981'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 38, h= 6, ts= 75, tc= 75, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 23, h= 5, ts= 38, tc= 38, bf= 1
+| +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 13, rs= 9, h= 4, ts= 23, tc= 23, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7465, '7465'), nc= 1, s= l, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7847, '7847'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7595, '7595'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7601, '7601'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7806, '7806'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7851, '7851'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7850, '7850'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7875, '7875'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7893, '7893'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+123) insert
+(insert 1212) frequencies:
+    counter_equal:    1
+    counter_larger:   92
+    num_nodes_larger: 92
+
+124) sanity_check
+125) remove_non_unique
+(remove 9773) frequencies:
+    counter_equal:    0
+    counter_larger:   0
+    num_nodes_larger: 0
+
+126) sanity_check
+127) remove_non_unique
+(remove -1722) frequencies:
+    counter_equal:    0
+    counter_larger:   95
+    num_nodes_larger: 95
+
+128) sanity_check
+129) insert
+(insert 7824) frequencies:
+    counter_equal:    1
+    counter_larger:   5
+    num_nodes_larger: 5
+
+130) sanity_check
+131) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 27, rs= 76, h= 7, ts= 104, tc= 104, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 18, rs= 8, h= 5, ts= 27, tc= 27, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 7, rs= 10, h= 4, ts= 18, tc= 18, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: (-4399, '-4399'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 10, bf= 0
+| -l-: | -l-: | +r+: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| -l-: | -l-: | +r+: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (1212, '1212'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 5, h= 3, ts= 8, tc= 8, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: (6981, '6981'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 39, h= 6, ts= 76, tc= 76, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 24, h= 5, ts= 39, tc= 39, bf= 1
+| +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 13, rs= 10, h= 4, ts= 24, tc= 24, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7465, '7465'), nc= 1, s= l, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7847, '7847'), nc= 1, s= r, ls= 5, rs= 4, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7595, '7595'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7806, '7806'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7601, '7601'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7824, '7824'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7851, '7851'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7850, '7850'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7875, '7875'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7893, '7893'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+132) remove_non_unique
+(remove -1397) frequencies:
+    counter_equal:    0
+    counter_larger:   96
+    num_nodes_larger: 96
+
+133) sanity_check
+134) remove_non_unique
+(remove 2715) frequencies:
+    counter_equal:    0
+    counter_larger:   92
+    num_nodes_larger: 92
+
+135) sanity_check
+136) insert
+(insert 2314) frequencies:
+    counter_equal:    1
+    counter_larger:   92
+    num_nodes_larger: 92
+
+137) sanity_check
+138) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 28, rs= 76, h= 7, ts= 105, tc= 105, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 19, rs= 8, h= 5, ts= 28, tc= 28, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 7, rs= 11, h= 4, ts= 19, tc= 19, bf= 1
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: (-4399, '-4399'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: | +r+: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | -l-: | +r+: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (1212, '1212'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (2314, '2314'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 5, h= 3, ts= 8, tc= 8, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: (6981, '6981'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 39, h= 6, ts= 76, tc= 76, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7422, '7422'), nc= 1, s= r, ls= 14, rs= 24, h= 5, ts= 39, tc= 39, bf= 1
+| +r+: | +r+: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 13, rs= 10, h= 4, ts= 24, tc= 24, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7465, '7465'), nc= 1, s= l, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7847, '7847'), nc= 1, s= r, ls= 5, rs= 4, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7595, '7595'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7806, '7806'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7601, '7601'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7824, '7824'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7851, '7851'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7850, '7850'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7875, '7875'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7893, '7893'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+139) remove_unique
+(remove -2357) frequencies:
+    counter_equal:    0
+    counter_larger:   98
+    num_nodes_larger: 98
+
+140) sanity_check
+141) join_trees
+142) insert
+(insert -4360) frequencies:
+    counter_equal:    1
+    counter_larger:   115
+    num_nodes_larger: 115
+
+143) sanity_check
+144) remove_non_unique
+(remove -4453) frequencies:
+    counter_equal:    0
+    counter_larger:   117
+    num_nodes_larger: 117
+
+145) sanity_check
+146) print_tree
+(7008, '7008'), nc= 1, s= 0, ls= 29, rs= 91, h= 7, ts= 121, tc= 121, bf= 1
+| -l-: (6945, '6945'), nc= 1, s= l, ls= 20, rs= 8, h= 5, ts= 29, tc= 29, bf= -1
+| -l-: | -l-: (-1891, '-1891'), nc= 1, s= l, ls= 8, rs= 11, h= 4, ts= 20, tc= 20, bf= 0
+| -l-: | -l-: | -l-: (-5090, '-5090'), nc= 1, s= l, ls= 3, rs= 4, h= 3, ts= 8, tc= 8, bf= 1
+| -l-: | -l-: | -l-: | -l-: (-7335, '-7335'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: (-9022, '-9022'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: (-6445, '-6445'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (-3052, '-3052'), nc= 1, s= r, ls= 2, rs= 1, h= 2, ts= 4, tc= 4, bf= -1
+| -l-: | -l-: | -l-: | +r+: | -l-: (-4399, '-4399'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: (-4360, '-4360'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: (-2736, '-2736'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (3718, '3718'), nc= 1, s= r, ls= 5, rs= 5, h= 3, ts= 11, tc= 11, bf= 0
+| -l-: | -l-: | +r+: | -l-: (-628, '-628'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| -l-: | -l-: | +r+: | -l-: | -l-: (-731, '-731'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: (2029, '2029'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: (1212, '1212'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (2314, '2314'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: (5382, '5382'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: (5038, '5038'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: (3758, '3758'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: (6924, '6924'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: (5561, '5561'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (6960, '6960'), nc= 1, s= r, ls= 2, rs= 5, h= 3, ts= 8, tc= 8, bf= 1
+| -l-: | +r+: | -l-: (6952, '6952'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: (6957, '6957'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: (6988, '6988'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| -l-: | +r+: | +r+: | -l-: (6961, '6961'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: (6981, '6981'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: | +r+: | +r+: (6989, '6989'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: (6995, '6995'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: (7325, '7325'), nc= 1, s= r, ls= 36, rs= 54, h= 6, ts= 91, tc= 91, bf= 0
+| +r+: | -l-: (7121, '7121'), nc= 1, s= l, ls= 17, rs= 18, h= 5, ts= 36, tc= 36, bf= 0
+| +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 7, rs= 9, h= 4, ts= 17, tc= 17, bf= 0
+| +r+: | -l-: | -l-: | -l-: (7018, '7018'), nc= 1, s= l, ls= 2, rs= 4, h= 3, ts= 7, tc= 7, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: (7014, '7014'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7015, '7015'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: (7026, '7026'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7019, '7019'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7027, '7027'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: (7041, '7041'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (7064, '7064'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: (7046, '7046'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7043, '7043'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7062, '7062'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: (7064, '7064'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (7075, '7075'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7066, '7066'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7081, '7081'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: (7087, '7087'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (7267, '7267'), nc= 1, s= r, ls= 11, rs= 6, h= 4, ts= 18, tc= 18, bf= -1
+| +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 4, rs= 6, h= 3, ts= 11, tc= 11, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: (7128, '7128'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: (7124, '7124'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: (7137, '7137'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: (7140, '7140'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: (7158, '7158'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7142, '7142'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: (7145, '7145'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7187, '7187'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: (7177, '7177'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: (7243, '7243'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (7306, '7306'), nc= 1, s= r, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: (7271, '7271'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7287, '7287'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7308, '7308'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7319, '7319'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (7531, '7531'), nc= 1, s= r, ls= 28, rs= 25, h= 5, ts= 54, tc= 54, bf= 0
+| +r+: | +r+: | -l-: (7422, '7422'), nc= 1, s= l, ls= 14, rs= 13, h= 4, ts= 28, tc= 28, bf= 0
+| +r+: | +r+: | -l-: | -l-: (7368, '7368'), nc= 1, s= l, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: (7337, '7337'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: (7328, '7328'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | +r+: (7329, '7329'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: (7356, '7356'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: (7350, '7350'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: (7368, '7368'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: (7393, '7393'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7378, '7378'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: (7375, '7375'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: (7391, '7391'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7402, '7402'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: (7396, '7396'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: (7405, '7405'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (7465, '7465'), nc= 1, s= r, ls= 5, rs= 7, h= 3, ts= 13, tc= 13, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: (7437, '7437'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: (7436, '7436'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: (7458, '7458'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: (7449, '7449'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: (7460, '7460'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (7493, '7493'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: (7486, '7486'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: (7473, '7473'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: (7490, '7490'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7495, '7495'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: (7493, '7493'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: (7505, '7505'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (7896, '7896'), nc= 1, s= r, ls= 10, rs= 14, h= 4, ts= 25, tc= 25, bf= 0
+| +r+: | +r+: | +r+: | -l-: (7847, '7847'), nc= 1, s= l, ls= 5, rs= 4, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: (7595, '7595'), nc= 1, s= l, ls= 1, rs= 3, h= 2, ts= 5, tc= 5, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: (7542, '7542'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7806, '7806'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: (7601, '7601'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: (7824, '7824'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (7851, '7851'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7850, '7850'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7875, '7875'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: (7893, '7893'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (7927, '7927'), nc= 1, s= r, ls= 6, rs= 7, h= 3, ts= 14, tc= 14, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: (7906, '7906'), nc= 1, s= l, ls= 2, rs= 3, h= 2, ts= 6, tc= 6, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7898, '7898'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: (7901, '7901'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7913, '7913'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: (7910, '7910'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: (7919, '7919'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (7950, '7950'), nc= 1, s= r, ls= 3, rs= 3, h= 2, ts= 7, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7945, '7945'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: (7939, '7939'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: (7949, '7949'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7970, '7970'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: (7960, '7960'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: (7992, '7992'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+147) remove_non_unique
+(remove -7668) frequencies:
+    counter_equal:    0
+    counter_larger:   120
+    num_nodes_larger: 120
+
+148) sanity_check
+149) insert
+(insert -8396) frequencies:
+    counter_equal:    1
+    counter_larger:   120
+    num_nodes_larger: 120
+
+150) sanity_check
+151) join_trees
+152) remove_non_unique
+(remove 5121) frequencies:
+    counter_equal:    0
+    counter_larger:   112
+    num_nodes_larger: 112
+
+153) sanity_check
+154) insert
+(insert 7159) frequencies:
+    counter_equal:    1
+    counter_larger:   73
+    num_nodes_larger: 73
+
+155) sanity_check
+156) remove_non_unique
+(remove 5831) frequencies:
+    counter_equal:    0
+    counter_larger:   111
+    num_nodes_larger: 111
+
+157) sanity_check
+158) remove_non_unique
+(remove -8632) frequencies:
+    counter_equal:    0
+    counter_larger:   130
+    num_nodes_larger: 130
+
+159) sanity_check
+160) join_trees
+161) remove_unique
+(remove 6797) frequencies:
+    counter_equal:    0
+    counter_larger:   128
+    num_nodes_larger: 128
+
+162) sanity_check
+163) remove_unique
+(remove 4698) frequencies:
+    counter_equal:    0
+    counter_larger:   131
+    num_nodes_larger: 131
+
+164) sanity_check
+165) insert
+(insert 3758) frequencies:
+    counter_equal:    2
+    counter_larger:   131
+    num_nodes_larger: 131
+
+166) sanity_check
+167) sanity_check
+Test finished without apparent errors.

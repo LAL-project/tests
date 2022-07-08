@@ -1,0 +1,16 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+
+join_trees 1	1
+print_tree sanity_check
+
+join_trees 2	2 3
+print_tree sanity_check
+
+join_trees 3	4 5 6
+print_tree sanity_check
+
+join_trees 4	7 8 9 10
+print_tree sanity_check

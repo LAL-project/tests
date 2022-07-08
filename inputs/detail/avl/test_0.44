@@ -1,0 +1,26 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+
+insert 1
+insert 1
+insert 1
+insert 2
+insert 2
+insert 2
+print_tree
+remove_non_unique_smallest
+sanity_check
+print_tree
+
+clear
+
+insert 1
+insert 2
+insert 2
+insert 2
+print_tree
+remove_non_unique_smallest
+sanity_check
+print_tree

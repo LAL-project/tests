@@ -1,0 +1,215 @@
+1) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) sanity_check
+3) print_tree
+(3, '3'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+4) insert
+(insert 3) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) sanity_check
+6) print_tree
+(3, '3'), nc= 2, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+7) insert
+(insert 3) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) sanity_check
+9) print_tree
+(3, '3'), nc= 3, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+10) insert
+(insert 3) frequencies:
+    counter_equal:    4
+    counter_larger:   0
+    num_nodes_larger: 0
+
+11) sanity_check
+12) print_tree
+(3, '3'), nc= 4, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+13) insert
+(insert 3) frequencies:
+    counter_equal:    5
+    counter_larger:   0
+    num_nodes_larger: 0
+
+14) sanity_check
+15) print_tree
+(3, '3'), nc= 5, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 5, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+16) insert
+(insert 3) frequencies:
+    counter_equal:    6
+    counter_larger:   0
+    num_nodes_larger: 0
+
+17) sanity_check
+18) print_tree
+(3, '3'), nc= 6, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+19) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 1
+
+20) sanity_check
+21) print_tree
+(3, '3'), nc= 6, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 7, bf= -1
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+22) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 1
+
+23) sanity_check
+24) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 8, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+25) insert
+(insert 2) frequencies:
+    counter_equal:    2
+    counter_larger:   6
+    num_nodes_larger: 1
+
+26) sanity_check
+27) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+28) insert
+(insert 2) frequencies:
+    counter_equal:    3
+    counter_larger:   6
+    num_nodes_larger: 1
+
+29) sanity_check
+30) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 10, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+31) insert
+(insert 2) frequencies:
+    counter_equal:    4
+    counter_larger:   6
+    num_nodes_larger: 1
+
+32) sanity_check
+33) print_tree
+(2, '2'), nc= 4, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 11, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+34) insert
+(insert 2) frequencies:
+    counter_equal:    5
+    counter_larger:   6
+    num_nodes_larger: 1
+
+35) sanity_check
+36) print_tree
+(2, '2'), nc= 5, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 12, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+37) insert
+(insert 2) frequencies:
+    counter_equal:    6
+    counter_larger:   6
+    num_nodes_larger: 1
+
+38) sanity_check
+39) print_tree
+(2, '2'), nc= 6, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 13, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+40) insert
+(insert 2) frequencies:
+    counter_equal:    7
+    counter_larger:   6
+    num_nodes_larger: 1
+
+41) sanity_check
+42) print_tree
+(2, '2'), nc= 7, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 14, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+43) insert
+(insert 1) frequencies:
+    counter_equal:    2
+    counter_larger:   13
+    num_nodes_larger: 2
+
+44) sanity_check
+45) print_tree
+(2, '2'), nc= 7, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 15, bf= 0
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 6, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 6, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+Test finished without apparent errors.

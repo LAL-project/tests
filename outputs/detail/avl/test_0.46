@@ -1,0 +1,66 @@
+1) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+3) insert
+(insert 2) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+4) insert
+(insert 2) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+6) insert
+(insert 3) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+7) insert
+(insert 3) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 7, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 3, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+9) remove_non_unique_smallest
+(remove (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 2
+
+10) sanity_check
+11) print_tree
+(2, '2'), nc= 3, s= 0, ls= 0, rs= 1, h= 1, ts= 2, tc= 6, bf= 1
+| -l-: ∅
+| +r+: (3, '3'), nc= 3, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+Test finished without apparent errors.

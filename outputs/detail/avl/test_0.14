@@ -1,0 +1,61 @@
+1) join_trees
+2) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+3) sanity_check
+4) join_trees
+5) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+6) sanity_check
+7) join_trees
+8) print_tree
+(4, '4'), nc= 1, s= 0, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: (2, '2'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: ∅
+| +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+9) sanity_check
+10) join_trees
+11) print_tree
+(7, '7'), nc= 1, s= 0, ls= 6, rs= 3, h= 3, ts= 10, tc= 10, bf= -1
+| -l-: (4, '4'), nc= 1, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 6, bf= 0
+| -l-: | -l-: (2, '2'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: | -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: ∅
+| +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: ∅
+| +r+: | +r+: (10, '10'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+12) sanity_check
+Test finished without apparent errors.

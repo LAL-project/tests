@@ -1,0 +1,518 @@
+1) join_trees
+2) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+3) sanity_check
+4) insert
+(insert 1) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) sanity_check
+6) insert
+(insert 1) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+7) sanity_check
+8) insert
+(insert 1) frequencies:
+    counter_equal:    4
+    counter_larger:   0
+    num_nodes_larger: 0
+
+9) sanity_check
+10) print_tree
+(1, '1'), nc= 4, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+11) sanity_check
+12) join_trees
+13) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 6, bf= 0
+| -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+14) sanity_check
+15) insert
+(insert 2) frequencies:
+    counter_equal:    2
+    counter_larger:   1
+    num_nodes_larger: 1
+
+16) sanity_check
+17) insert
+(insert 2) frequencies:
+    counter_equal:    3
+    counter_larger:   1
+    num_nodes_larger: 1
+
+18) sanity_check
+19) insert
+(insert 2) frequencies:
+    counter_equal:    4
+    counter_larger:   1
+    num_nodes_larger: 1
+
+20) sanity_check
+21) sanity_check
+22) print_tree
+(2, '2'), nc= 4, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+23) join_trees
+24) sanity_check
+25) print_tree
+(4, '4'), nc= 1, s= 0, ls= 3, rs= 2, h= 2, ts= 6, tc= 12, bf= 0
+| -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: ∅
+| +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+26) insert
+(insert 4) frequencies:
+    counter_equal:    2
+    counter_larger:   2
+    num_nodes_larger: 2
+
+27) sanity_check
+28) insert
+(insert 4) frequencies:
+    counter_equal:    3
+    counter_larger:   2
+    num_nodes_larger: 2
+
+29) sanity_check
+30) insert
+(insert 4) frequencies:
+    counter_equal:    4
+    counter_larger:   2
+    num_nodes_larger: 2
+
+31) sanity_check
+32) sanity_check
+33) print_tree
+(4, '4'), nc= 4, s= 0, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: ∅
+| +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+34) join_trees
+35) sanity_check
+36) print_tree
+(7, '7'), nc= 1, s= 0, ls= 6, rs= 3, h= 3, ts= 10, tc= 19, bf= -1
+| -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: ∅
+| +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: ∅
+| +r+: | +r+: (10, '10'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+37) insert
+(insert 7) frequencies:
+    counter_equal:    2
+    counter_larger:   3
+    num_nodes_larger: 3
+
+38) sanity_check
+39) insert
+(insert 7) frequencies:
+    counter_equal:    3
+    counter_larger:   3
+    num_nodes_larger: 3
+
+40) sanity_check
+41) insert
+(insert 7) frequencies:
+    counter_equal:    4
+    counter_larger:   3
+    num_nodes_larger: 3
+
+42) sanity_check
+43) print_tree
+(7, '7'), nc= 4, s= 0, ls= 6, rs= 3, h= 3, ts= 10, tc= 22, bf= -1
+| -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: | +r+: ∅
+| +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: ∅
+| +r+: | +r+: (10, '10'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+44) sanity_check
+45) join_trees
+46) print_tree
+(10, '10'), nc= 1, s= 0, ls= 9, rs= 20, h= 5, ts= 30, tc= 42, bf= 1
+| -l-: (7, '7'), nc= 4, s= l, ls= 6, rs= 2, h= 3, ts= 9, tc= 21, bf= -1
+| -l-: | -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (20, '20'), nc= 1, s= r, ls= 9, rs= 10, h= 4, ts= 20, tc= 20, bf= 0
+| +r+: | -l-: (15, '15'), nc= 1, s= l, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: (12, '12'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: (11, '11'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (13, '13'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (14, '14'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (17, '17'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: (16, '16'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (18, '18'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (19, '19'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (25, '25'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 10, bf= 0
+| +r+: | +r+: | -l-: (22, '22'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (21, '21'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (23, '23'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (24, '24'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (28, '28'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 5, bf= 0
+| +r+: | +r+: | +r+: | -l-: (26, '26'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (27, '27'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (29, '29'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (30, '30'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+47) sanity_check
+48) assert_occurrences
+49) insert
+(insert 30) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+50) insert
+(insert 30) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+51) print_tree
+(10, '10'), nc= 1, s= 0, ls= 9, rs= 20, h= 5, ts= 30, tc= 44, bf= 1
+| -l-: (7, '7'), nc= 4, s= l, ls= 6, rs= 2, h= 3, ts= 9, tc= 21, bf= -1
+| -l-: | -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (20, '20'), nc= 1, s= r, ls= 9, rs= 10, h= 4, ts= 20, tc= 22, bf= 0
+| +r+: | -l-: (15, '15'), nc= 1, s= l, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: (12, '12'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: (11, '11'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (13, '13'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (14, '14'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (17, '17'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: (16, '16'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (18, '18'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (19, '19'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (25, '25'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 12, bf= 0
+| +r+: | +r+: | -l-: (22, '22'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (21, '21'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (23, '23'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (24, '24'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (28, '28'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: (26, '26'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (27, '27'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (29, '29'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (30, '30'), nc= 3, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+52) sanity_check
+53) assert_occurrences
+54) print_tree
+(10, '10'), nc= 1, s= 0, ls= 9, rs= 20, h= 5, ts= 30, tc= 44, bf= 1
+| -l-: (7, '7'), nc= 4, s= l, ls= 6, rs= 2, h= 3, ts= 9, tc= 21, bf= -1
+| -l-: | -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (20, '20'), nc= 1, s= r, ls= 9, rs= 10, h= 4, ts= 20, tc= 22, bf= 0
+| +r+: | -l-: (15, '15'), nc= 1, s= l, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: | -l-: (12, '12'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: | -l-: (11, '11'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | -l-: | +r+: (13, '13'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: (14, '14'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | -l-: | +r+: (17, '17'), nc= 1, s= r, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | +r+: | -l-: (16, '16'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | -l-: | -l-: ∅
+| +r+: | -l-: | +r+: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: | +r+: (18, '18'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: (19, '19'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (25, '25'), nc= 1, s= r, ls= 4, rs= 5, h= 3, ts= 10, tc= 12, bf= 0
+| +r+: | +r+: | -l-: (22, '22'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | +r+: | -l-: | -l-: (21, '21'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: (23, '23'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: (24, '24'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: (28, '28'), nc= 1, s= r, ls= 2, rs= 2, h= 2, ts= 5, tc= 7, bf= 0
+| +r+: | +r+: | +r+: | -l-: (26, '26'), nc= 1, s= l, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | +r+: | +r+: | -l-: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: (27, '27'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | -l-: | +r+: | +r+: ∅
+| +r+: | +r+: | +r+: | +r+: (29, '29'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 4, bf= 1
+| +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: (30, '30'), nc= 3, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| +r+: | +r+: | +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: | +r+: | +r+: ∅
+
+55) sanity_check
+56) remove_unique
+(remove 30) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+57) remove_unique
+(remove 29) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+58) remove_unique
+(remove 28) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+59) remove_unique
+(remove 27) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+60) remove_unique
+(remove 26) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+61) remove_unique
+(remove 25) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+62) remove_unique
+(remove 24) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+63) remove_unique
+(remove 23) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+64) remove_unique
+(remove 22) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+65) remove_unique
+(remove 21) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+66) remove_unique
+(remove 20) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+67) assert_occurrences
+68) print_tree
+(10, '10'), nc= 1, s= 0, ls= 9, rs= 9, h= 4, ts= 19, tc= 31, bf= 0
+| -l-: (7, '7'), nc= 4, s= l, ls= 6, rs= 2, h= 3, ts= 9, tc= 21, bf= -1
+| -l-: | -l-: (4, '4'), nc= 4, s= l, ls= 3, rs= 2, h= 2, ts= 6, tc= 15, bf= 0
+| -l-: | -l-: | -l-: (2, '2'), nc= 4, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 9, bf= 0
+| -l-: | -l-: | -l-: | -l-: (1, '1'), nc= 4, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| -l-: | -l-: | -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | -l-: | -l-: | +r+: ∅
+| -l-: | -l-: | -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | -l-: | +r+: | +r+: ∅
+| -l-: | -l-: | +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: | -l-: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: (6, '6'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | +r+: | +r+: | -l-: ∅
+| -l-: | -l-: | +r+: | +r+: | +r+: ∅
+| -l-: | +r+: (9, '9'), nc= 1, s= r, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: | +r+: | -l-: (8, '8'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: | -l-: ∅
+| -l-: | +r+: | -l-: | +r+: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (15, '15'), nc= 1, s= r, ls= 4, rs= 4, h= 3, ts= 9, tc= 9, bf= 0
+| +r+: | -l-: (12, '12'), nc= 1, s= l, ls= 1, rs= 2, h= 2, ts= 4, tc= 4, bf= 1
+| +r+: | -l-: | -l-: (11, '11'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | -l-: | +r+: (13, '13'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| +r+: | -l-: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: (14, '14'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: | +r+: | +r+: | -l-: ∅
+| +r+: | -l-: | +r+: | +r+: | +r+: ∅
+| +r+: | +r+: (18, '18'), nc= 1, s= r, ls= 2, rs= 1, h= 2, ts= 4, tc= 4, bf= -1
+| +r+: | +r+: | -l-: (17, '17'), nc= 1, s= l, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| +r+: | +r+: | -l-: | -l-: (16, '16'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | -l-: | -l-: | -l-: ∅
+| +r+: | +r+: | -l-: | -l-: | +r+: ∅
+| +r+: | +r+: | -l-: | +r+: ∅
+| +r+: | +r+: | +r+: (19, '19'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: | +r+: ∅
+
+69) sanity_check
+70) assert_occurrences
+Test finished without apparent errors.

@@ -1,0 +1,194 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+remove_unique -7858 sanity_check
+insert -8198 sanity_check
+remove_unique 7243 sanity_check
+remove_unique -5730 sanity_check
+join_trees 5 -8177 -8170 -8122 -8121 -8111 
+print_tree
+join_trees 2 -8091 -8062 
+join_trees 16 -8048 -8035 -8029 -8023 -8021 -8017 -8016 -8002 -7999 -7999 -7997 -7983 -7981 -7978 -7971 -7968 
+print_tree
+join_trees 11 -7954 -7942 -7929 -7928 -7922 -7914 -7911 -7899 -7898 -7896 -7894 
+join_trees 7 -7880 -7861 -7852 -7850 -7838 -7817 -7805 
+insert 7632 sanity_check
+remove_non_unique 5726 sanity_check
+remove_unique 8902 sanity_check
+print_tree
+remove_unique 8056 sanity_check
+remove_unique 61 sanity_check
+insert -8814 sanity_check
+insert -9442 sanity_check
+join_trees 4 7666 7680 7702 7712 
+remove_unique 1428 sanity_check
+remove_non_unique 1154 sanity_check
+remove_unique 7496 sanity_check
+join_trees 20 7714 7716 7723 7729 7730 7739 7743 7747 7748 7749 7756 7759 7760 7769 7774 7782 7792 7801 7806 7810 
+remove_non_unique -1843 sanity_check
+print_tree
+join_trees 8 7826 7854 7854 7860 7871 7888 7897 7904 
+join_trees 8 7925 7934 7938 7948 7966 7970 7983 7988 
+insert -9424 sanity_check
+remove_unique -4919 sanity_check
+print_tree
+remove_unique -8192 sanity_check
+remove_non_unique 7383 sanity_check
+print_tree
+remove_non_unique -2912 sanity_check
+print_tree
+remove_non_unique -458 sanity_check
+remove_unique 5360 sanity_check
+join_trees 11 7995 7997 8012 8013 8027 8036 8056 8060 8062 8076 8080 
+print_tree
+remove_unique 2355 sanity_check
+remove_non_unique 1292 sanity_check
+join_trees 17 8084 8087 8095 8108 8111 8112 8116 8125 8133 8144 8151 8155 8162 8172 8173 8178 8179 
+print_tree
+remove_non_unique -9941 sanity_check
+insert 1210 sanity_check
+remove_unique -4754 sanity_check
+remove_unique -9083 sanity_check
+remove_non_unique -3997 sanity_check
+remove_unique 3250 sanity_check
+print_tree
+insert -8736 sanity_check
+join_trees 6 8224 8233 8235 8244 8249 8269 
+remove_non_unique 3589 sanity_check
+print_tree
+join_trees 1 8327 
+insert 4863 sanity_check
+remove_non_unique 3098 sanity_check
+remove_unique -6149 sanity_check
+print_tree
+remove_unique -7780 sanity_check
+join_trees 17 8342 8347 8347 8352 8366 8373 8377 8382 8383 8384 8386 8389 8398 8405 8416 8419 8421 
+print_tree
+insert -3762 sanity_check
+insert 5238 sanity_check
+print_tree
+remove_non_unique 9291 sanity_check
+print_tree
+join_trees 10 8425 8438 8441 8473 8481 8481 8484 8506 8511 8518 
+print_tree
+remove_non_unique 9282 sanity_check
+insert -7873 sanity_check
+insert -2875 sanity_check
+join_trees 3 8533 8546 8553 
+join_trees 19 8556 8569 8590 8599 8600 8601 8604 8609 8609 8609 8616 8616 8616 8618 8637 8638 8644 8651 8652 
+remove_non_unique 5104 sanity_check
+print_tree
+remove_unique 2407 sanity_check
+join_trees 18 8656 8664 8666 8672 8676 8676 8679 8682 8687 8690 8690 8694 8700 8711 8714 8740 8747 8749 
+print_tree
+insert -3549 sanity_check
+remove_non_unique -8448 sanity_check
+join_trees 5 8758 8790 8807 8814 8821 
+remove_non_unique -5025 sanity_check
+print_tree
+remove_non_unique -4570 sanity_check
+remove_unique 6029 sanity_check
+join_trees 7 8857 8885 8888 8898 8909 8911 8916 
+join_trees 18 8924 8929 8933 8934 8936 8942 8948 8955 8971 8975 8982 8985 8990 8994 8999 9009 9009 9010 
+insert -1422 sanity_check
+insert -8115 sanity_check
+join_trees 11 9011 9027 9028 9032 9044 9061 9065 9077 9088 9091 9096 
+join_trees 9 9172 9176 9177 9179 9180 9180 9184 9192 9194 
+insert -3357 sanity_check
+insert 5335 sanity_check
+insert -662 sanity_check
+print_tree
+insert 7213 sanity_check
+remove_unique -8140 sanity_check
+join_trees 5 9206 9250 9272 9287 9292 
+insert 9582 sanity_check
+remove_non_unique -4123 sanity_check
+insert -8339 sanity_check
+join_trees 5 9616 9652 9661 9674 9674 
+join_trees 11 9676 9680 9682 9691 9718 9719 9726 9727 9738 9740 9759 
+print_tree
+remove_unique 1419 sanity_check
+join_trees 10 9774 9777 9788 9794 9805 9831 9832 9833 9835 9857 
+print_tree
+insert -2753 sanity_check
+remove_non_unique 6219 sanity_check
+remove_non_unique 1115 sanity_check
+join_trees 12 9862 9864 9867 9891 9891 9895 9898 9901 9919 9920 9934 9947 
+join_trees 2 9956 9962 
+remove_non_unique -1004 sanity_check
+insert 6484 sanity_check
+remove_non_unique -9896 sanity_check
+remove_unique -1689 sanity_check
+join_trees 13 9972 9972 9986 9993 10003 10007 10019 10020 10023 10024 10030 10039 10055 
+remove_unique 7159 sanity_check
+remove_unique -2658 sanity_check
+print_tree
+join_trees 13 10060 10062 10067 10070 10078 10083 10088 10094 10100 10108 10120 10136 10148 
+remove_unique -9131 sanity_check
+remove_non_unique 6269 sanity_check
+join_trees 13 10150 10158 10168 10175 10180 10186 10191 10192 10205 10209 10211 10229 10246 
+insert -777 sanity_check
+join_trees 6 10293 10301 10322 10325 10326 10339 
+insert 247 sanity_check
+remove_non_unique -956 sanity_check
+insert -1141 sanity_check
+remove_unique -7927 sanity_check
+remove_non_unique 7191 sanity_check
+remove_non_unique -4806 sanity_check
+remove_unique 2813 sanity_check
+insert -4091 sanity_check
+remove_non_unique -5371 sanity_check
+print_tree
+join_trees 20 10343 10346 10348 10361 10369 10376 10388 10391 10397 10399 10403 10404 10405 10411 10411 10414 10419 10419 10431 10434 
+remove_non_unique -4147 sanity_check
+print_tree
+remove_non_unique 3732 sanity_check
+insert 866 sanity_check
+remove_non_unique -3418 sanity_check
+remove_unique -5470 sanity_check
+print_tree
+remove_non_unique -8066 sanity_check
+insert 4607 sanity_check
+insert 1905 sanity_check
+print_tree
+insert 3491 sanity_check
+join_trees 9 10465 10476 10495 10496 10498 10511 10513 10519 10525 
+remove_unique 7158 sanity_check
+join_trees 16 10526 10527 10530 10533 10538 10544 10560 10565 10570 10574 10596 10597 10614 10616 10616 10624 
+print_tree
+join_trees 6 10639 10642 10644 10652 10664 10700 
+remove_unique -3904 sanity_check
+insert 4504 sanity_check
+insert -6577 sanity_check
+join_trees 1 10711 
+print_tree
+remove_unique -9688 sanity_check
+insert -1154 sanity_check
+print_tree
+remove_non_unique 2152 sanity_check
+remove_unique 5595 sanity_check
+remove_non_unique 401 sanity_check
+remove_non_unique -7352 sanity_check
+print_tree
+remove_unique -2790 sanity_check
+remove_non_unique -5117 sanity_check
+join_trees 16 10713 10717 10732 10733 10733 10734 10735 10736 10739 10739 10740 10746 10777 10793 10794 10794 
+remove_non_unique 2004 sanity_check
+print_tree
+remove_unique -8973 sanity_check
+remove_unique 7146 sanity_check
+print_tree
+remove_unique 6446 sanity_check
+remove_non_unique 1254 sanity_check
+insert -2512 sanity_check
+remove_unique -2681 sanity_check
+remove_unique 6049 sanity_check
+insert -3049 sanity_check
+insert -5330 sanity_check
+insert -729 sanity_check
+insert 8104 sanity_check
+join_trees 5 10802 10825 10826 10885 10893 
+remove_unique 5706 sanity_check
+insert 8751 sanity_check
+sanity_check

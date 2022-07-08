@@ -1,0 +1,328 @@
+1) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+3) sanity_check
+4) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: ∅
+| +r+: (2, '2'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+6) sanity_check
+7) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+9) sanity_check
+10) remove_non_unique
+(remove 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+11) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+12) sanity_check
+13) insert
+(insert 1) frequencies:
+    counter_equal:    2
+    counter_larger:   1
+    num_nodes_larger: 1
+
+14) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 3, bf= -1
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+15) sanity_check
+16) insert
+(insert 2) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+17) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 4, bf= -1
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+18) sanity_check
+19) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+20) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 5, bf= 0
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+21) sanity_check
+22) insert
+(insert 1) frequencies:
+    counter_equal:    3
+    counter_larger:   3
+    num_nodes_larger: 2
+
+23) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 6, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+24) sanity_check
+25) insert
+(insert 2) frequencies:
+    counter_equal:    3
+    counter_larger:   1
+    num_nodes_larger: 1
+
+26) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 7, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+27) sanity_check
+28) insert
+(insert 3) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+29) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 8, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 2, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+30) sanity_check
+31) remove_non_unique
+(remove 2) frequencies:
+    counter_equal:    3
+    counter_larger:   2
+    num_nodes_larger: 1
+
+32) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 7, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 2, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+33) sanity_check
+34) clear
+35) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+36) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: ∅
+| +r+: ∅
+
+37) sanity_check
+38) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+39) print_tree
+(1, '1'), nc= 1, s= 0, ls= 0, rs= 1, h= 1, ts= 2, tc= 2, bf= 1
+| -l-: ∅
+| +r+: (2, '2'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+40) sanity_check
+41) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+42) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+43) sanity_check
+44) remove_unique
+(remove 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+45) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 2, bf= -1
+| -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+46) sanity_check
+47) insert
+(insert 1) frequencies:
+    counter_equal:    2
+    counter_larger:   1
+    num_nodes_larger: 1
+
+48) print_tree
+(2, '2'), nc= 1, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 3, bf= -1
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+49) sanity_check
+50) insert
+(insert 2) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+51) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 4, bf= -1
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+52) sanity_check
+53) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+54) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 5, bf= 0
+| -l-: (1, '1'), nc= 2, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+55) sanity_check
+56) insert
+(insert 1) frequencies:
+    counter_equal:    3
+    counter_larger:   3
+    num_nodes_larger: 2
+
+57) print_tree
+(2, '2'), nc= 2, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 6, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+58) sanity_check
+59) insert
+(insert 2) frequencies:
+    counter_equal:    3
+    counter_larger:   1
+    num_nodes_larger: 1
+
+60) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 7, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+61) sanity_check
+62) insert
+(insert 3) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+63) print_tree
+(2, '2'), nc= 3, s= 0, ls= 1, rs= 1, h= 1, ts= 3, tc= 8, bf= 0
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: (3, '3'), nc= 2, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 2, bf= 0
+| +r+: | -l-: ∅
+| +r+: | +r+: ∅
+
+64) sanity_check
+65) remove_unique
+(remove 2) frequencies:
+    counter_equal:    3
+    counter_larger:   2
+    num_nodes_larger: 1
+
+66) print_tree
+(3, '3'), nc= 2, s= 0, ls= 1, rs= 0, h= 1, ts= 2, tc= 5, bf= -1
+| -l-: (1, '1'), nc= 3, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 3, bf= 0
+| -l-: | -l-: ∅
+| -l-: | +r+: ∅
+| +r+: ∅
+
+67) sanity_check
+Test finished without apparent errors.

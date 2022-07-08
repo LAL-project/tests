@@ -1,0 +1,28 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+insert 1
+largest_element
+smallest_element
+insert 2
+largest_element
+smallest_element
+insert 3
+largest_element
+smallest_element
+insert 4
+largest_element
+smallest_element
+insert 5
+largest_element
+smallest_element
+insert 6
+largest_element
+smallest_element
+insert 7
+largest_element
+smallest_element
+
+total_elements
+num_nodes

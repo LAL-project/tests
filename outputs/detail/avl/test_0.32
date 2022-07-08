@@ -1,0 +1,77 @@
+1) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+3) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+4) insert
+(insert 4) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) insert
+(insert 5) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+6) insert
+(insert 6) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+7) insert
+(insert 6) frequencies:
+    counter_equal:    2
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) insert
+(insert 6) frequencies:
+    counter_equal:    3
+    counter_larger:   0
+    num_nodes_larger: 0
+
+9) insert
+(insert 6) frequencies:
+    counter_equal:    4
+    counter_larger:   0
+    num_nodes_larger: 0
+
+10) print_tree
+(4, '4'), nc= 1, s= 0, ls= 3, rs= 2, h= 2, ts= 6, tc= 9, bf= 0
+| -l-: (2, '2'), nc= 1, s= l, ls= 1, rs= 1, h= 1, ts= 3, tc= 3, bf= 0
+| -l-: | -l-: (1, '1'), nc= 1, s= l, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | -l-: | -l-: ∅
+| -l-: | -l-: | +r+: ∅
+| -l-: | +r+: (3, '3'), nc= 1, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 1, bf= 0
+| -l-: | +r+: | -l-: ∅
+| -l-: | +r+: | +r+: ∅
+| +r+: (5, '5'), nc= 1, s= r, ls= 0, rs= 1, h= 1, ts= 2, tc= 5, bf= 1
+| +r+: | -l-: ∅
+| +r+: | +r+: (6, '6'), nc= 4, s= r, ls= 0, rs= 0, h= 0, ts= 1, tc= 4, bf= 0
+| +r+: | +r+: | -l-: ∅
+| +r+: | +r+: | +r+: ∅
+
+11) remove_non_unique_largest
+(remove (6, '6')) frequencies:
+    counter_equal:    4
+    counter_larger:   0
+    num_nodes_larger: 0
+
+12) sanity_check
+Test finished without apparent errors.

@@ -1,0 +1,131 @@
+1) insert
+(insert 1) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+2) largest_element
+(largest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+3) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+4) insert
+(insert 2) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+5) largest_element
+(largest element (2, '2')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+6) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   1
+    num_nodes_larger: 1
+
+7) insert
+(insert 3) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+8) largest_element
+(largest element (3, '3')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+9) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   2
+    num_nodes_larger: 2
+
+10) insert
+(insert 4) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+11) largest_element
+(largest element (4, '4')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+12) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   3
+    num_nodes_larger: 3
+
+13) insert
+(insert 5) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+14) largest_element
+(largest element (5, '5')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+15) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   4
+    num_nodes_larger: 4
+
+16) insert
+(insert 6) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+17) largest_element
+(largest element (6, '6')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+18) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   5
+    num_nodes_larger: 5
+
+19) insert
+(insert 7) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+20) largest_element
+(largest element (7, '7')) frequencies:
+    counter_equal:    1
+    counter_larger:   0
+    num_nodes_larger: 0
+
+21) smallest_element
+(smallest element (1, '1')) frequencies:
+    counter_equal:    1
+    counter_larger:   6
+    num_nodes_larger: 6
+
+22) total_elements
+Number of occurrences in the tree: 7
+23) num_nodes
+Number of nodes in the tree: 7
+Test finished without apparent errors.

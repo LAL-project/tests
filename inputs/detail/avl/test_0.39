@@ -1,0 +1,14 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+
+insert 1
+
+print_tree
+
+remove_non_unique_smallest
+
+sanity_check
+
+print_tree

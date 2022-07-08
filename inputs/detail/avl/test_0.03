@@ -1,0 +1,12 @@
+TYPE detail-avl_functions
+INPUT 0
+BODY
+
+insert 1
+insert 1
+insert 1 print_tree sanity_check
+insert 2 print_tree sanity_check
+largest_element
+smallest_element
+total_elements
+num_nodes

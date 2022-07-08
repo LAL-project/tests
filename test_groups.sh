@@ -33,6 +33,7 @@ groups_list=(\
 	"detail" \
 		"detail_sorting" \
 		"detail_traversal" \
+		"detail_avl" \
 	\
 	"io"
 	"io_correctness"
