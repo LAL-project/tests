@@ -63,6 +63,9 @@ noexcept
 	if (key == "traversal") {
 		return parse_header(exe_detail_bfs, fin);
 	}
+	if (key == "avl_functions") {
+		return parse_header(exe_detail_avl_functions, fin);
+	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";

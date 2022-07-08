@@ -7,6 +7,8 @@ isEmpty(ENVIR) {
     ENVIR = "HOME"
 }
 
+DEFINES += __LAL_INSPECT
+
 QMAKE_CXXFLAGS += -fPIC -fopenmp -std=c++17
 QMAKE_CXXFLAGS +=										\
 	-Wpedantic -Wshadow -Wall -Wextra -Wconversion		\
@@ -63,6 +65,7 @@ INCLUDEPATH += $${THIS_DIR}
 DEPENDPATH += $${LAL_DIR}
 
 SOURCES += \
+	avl_functions.cpp \
 	main.cpp \
 	parse_keywords.cpp \
 	sorting.cpp \

@@ -64,6 +64,7 @@ namespace detail {
 
 err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin) noexcept;
 err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_detail_avl_functions(const input_list& inputs, std::ifstream& fin) noexcept;
 
 } // -- namespace detail
 } // -- namespace tests
