@@ -85,7 +85,7 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 	std::vector<lal::node> inv_arr;
 	int p;
 	while (fin >> p and p != -1) {
-		inv_arr.push_back(p);
+		inv_arr.push_back(static_cast<lal::node>(p));
 	}
 	arr = lal::linear_arrangement::from_inverse(inv_arr);
 	}

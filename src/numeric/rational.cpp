@@ -41,6 +41,9 @@
  ********************************************************************/
 
 // C++ includes
+#if defined DEBUG
+#include <cassert>
+#endif
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -242,7 +245,17 @@ static inline lal::numeric::rational resolve_op_rational(
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
 	if (op == "/") { return var1 / var2; }
-	if (op == "^") { return var1.power(var2); }
+	if (op == "^") {
+#if defined DEBUG
+		assert(var2 >= 0);
+#endif
+		if constexpr (std::is_same_v<V, lal::numeric::integer>) {
+			return var1.power(var2);
+		}
+		else {
+			return var1.power(static_cast<uint64_t>(var2));
+		}
+	}
 	return -1;
 }
 

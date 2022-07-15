@@ -245,7 +245,7 @@ noexcept
 				lal::numeric::integer _N = 2;
 				_N.powt(h);
 				_N -= 1;
-				N = static_cast<uint64_t>(_N.to_uint());
+				N = _N.to_uint();
 				}
 
 				// build k-complete tree of height h
@@ -282,7 +282,7 @@ noexcept
 
 				F += lal::numeric::rational(2,9)*(h%2 == 0 ? 1 : -1); // 2^k(k/3 + 5/18) + (-1)^k(2/9)
 				F -= 2; // 2^k(k/3 + 5/18) + (-1)^k(2/9) - 2
-				Dmin_bin_complete = static_cast<uint64_t>(F.to_integer().to_uint());
+				Dmin_bin_complete = F.to_integer().to_uint();
 
 				assert(F == Dmin_bin_complete);
 				}

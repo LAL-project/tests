@@ -50,7 +50,7 @@ template <typename T>
 std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 	if (v.size() == 0) { return os; }
 	os << v[0];
-	for (std::size_t i = 1; i < v.size(); ++i) {
+	for (std::size_t i = 1ull; i < v.size(); ++i) {
 		os << ", " << v[i];
 	}
 	return os;
@@ -58,7 +58,7 @@ std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
 
 template <typename T>
 std::istream& operator>> (std::istream& is, const std::vector<T>& v) {
-	for (std::size_t i = 0; i < v.size(); ++i) {
+	for (std::size_t i = 0ull; i < v.size(); ++i) {
 		is >> v[i];
 	}
 	return is;
@@ -76,12 +76,12 @@ std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) {
 inline
 std::ostream& operator<< (std::ostream& os, const lal::linear_arrangement& arr) {
 	if (arr.size() > 0) {
-		os << "(" << arr[lal::node_t{0ULL}];
-		for (lal::node_t u = 1LL; u < arr.size(); ++u) {
+		os << "(" << arr[lal::node_t{0ull}];
+		for (lal::node_t u = 1ull; u < arr.size(); ++u) {
 			os << ", " << arr[u];
 		}
-		os << ") (" << arr[lal::position_t{0ULL}];
-		for (lal::position_t p = 1LL; p < arr.size(); ++p) {
+		os << ") (" << arr[lal::position_t{0ull}];
+		for (lal::position_t p = 1ull; p < arr.size(); ++p) {
 			os << ", " << arr[p];
 		}
 		os << ')';

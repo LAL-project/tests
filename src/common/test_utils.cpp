@@ -153,7 +153,7 @@ noexcept
 	relabel_edges(T.get_num_nodes(), edges, r);
 
 	T.clear();
-	T.init(to_uint64(edges.size() + 1));
+	T.init(edges.size() + 1);
 	T.set_edges(edges, normalise, check);
 }
 
@@ -166,7 +166,7 @@ noexcept
 	relabel_edges(T.get_num_nodes(), edges, dummy);
 
 	T.clear();
-	T.init(to_uint64(edges.size() + 1));
+	T.init(edges.size() + 1);
 	T.set_edges(edges, normalise, check);
 }
 

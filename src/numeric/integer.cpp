@@ -41,6 +41,9 @@
  ********************************************************************/
 
 // C++ includes
+#if defined DEBUG
+#include <cassert>
+#endif
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -187,9 +190,20 @@ lal::numeric::integer resolve_integer_operation
 	if (op == "-") { return var1 - var2; }
 	if (op == "*") { return var1 * var2; }
 	if (op == "/") { return var1 / var2; }
+
 	// NOTE: var2, when it is an int64_t, its
 	// signedness changes into uint64_t.
-	if (op == "^") { return var1.power(var2); }
+	if (op == "^") {
+#if defined DEBUG
+		assert(var2 >= 0);
+#endif
+		if constexpr (std::is_same_v<V, lal::numeric::integer>) {
+			return var1.power(var2);
+		}
+		else {
+			return var1.power(static_cast<uint64_t>(var2));
+		}
+	}
 	return -1;
 }
 

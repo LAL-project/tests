@@ -327,13 +327,13 @@ void case_6() noexcept {
 	begin_function;
 
 	begin_case;
-	__case_6(5, {{0,1}, {0,2}, {0,3}, {0,4}});
+	__case_6(5, {{0ull,1ull}, {0ull,2ull}, {0ull,3ull}, {0ull,4ull}});
 
 	begin_case;
-	__case_6(5, {{1,0}, {2,3}, {0,4}, {1,3}});
+	__case_6(5, {{1ull,0ull}, {2ull,3ull}, {0ull,4ull}, {1ull,3ull}});
 
 	begin_case;
-	__case_6(5, {{1,0}, {2,3}, {0,4}, {1,3}});
+	__case_6(5, {{1ull,0ull}, {2ull,3ull}, {0ull,4ull}, {1ull,3ull}});
 }
 
 err_type case_7() {
