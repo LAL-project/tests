@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    detail \
-    common \
+	detail \
+	common \
 	generate \
-    graphs \
+	graphs \
 	io \
 	linarr \
 	memory \
