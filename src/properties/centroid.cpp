@@ -108,7 +108,7 @@ std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x)
 	bfs.start_at(x);
 	}
 
-	// allocate and initialise memory
+	// allocate memory
 	uint64_t *sizes = static_cast<uint64_t *>(malloc(n*sizeof(uint64_t)));
 
 	lal::node u1, u2;
@@ -193,8 +193,8 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Centroid does not coincide.\n";
 					std::cerr << "    Started at: " << start_at << '\n';
-					std::cerr << "    Result (algorithm): " << centroid.first << '\n';
-					std::cerr << "    Received (ground truth): " << u << '\n';
+					std::cerr << "    LAL: " << centroid.first << '\n';
+					std::cerr << "    Brute force: " << u << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << t << '\n';
 					return err_type::test_execution;
@@ -218,8 +218,8 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Centroids do not coincide.\n";
 					std::cerr << "    Started at: " << start_at << '\n';
-					std::cerr << "    Result (algorithm): " << centroid.first << " " << centroid.second << '\n';
-					std::cerr << "    Received (ground truth): " << u << " " << v << '\n';
+					std::cerr << "    LAL: " << centroid.first << " " << centroid.second << '\n';
+					std::cerr << "    Brute force: " << u << " " << v << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << t << '\n';
 					return err_type::test_execution;
