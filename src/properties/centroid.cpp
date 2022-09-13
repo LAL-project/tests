@@ -250,6 +250,57 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
+template <class tree_t>
+err_type test_correctness(const tree_t& T) noexcept {
+	const uint64_t n = T.get_num_nodes();
+	const auto lib_result =
+		lal::detail::find_centroidal_vertex
+			<lal::detail::centroid_results::full_centroid_plus_subtree_sizes>
+			(T, 0);
+
+	const auto lib_centroid = lib_result.first;
+	const auto easy_centroid = straightforward_centroid(T, 0);
+	if (not are_centroids_equal(T, lib_centroid, easy_centroid)) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Centroids differ.\n";
+		std::cerr << "    Library: " << lib_centroid.first;
+		if (lib_centroid.second < n) {
+			std::cerr << " " << lib_centroid.second;
+		}
+		std::cerr << '\n';
+		std::cerr << "    Straightforward: " << easy_centroid.first;
+		if (easy_centroid.second < n) {
+			std::cerr << " " << easy_centroid.second;
+		}
+		std::cerr << '\n';
+		std::cerr << "    For tree:\n";
+		std::cerr << T << '\n';
+		return err_type::test_execution;
+	}
+	const auto& sizes_subtrees = lib_result.second;
+
+	lal::graphs::rooted_tree rt;
+	if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, tree_t>) {
+		rt = lal::graphs::rooted_tree(T.to_free_tree(), lib_centroid.first);
+	}
+	else {
+		rt = lal::graphs::rooted_tree(T, lib_centroid.first);
+	}
+
+	rt.calculate_size_subtrees();
+	for (lal::node u = 0; u < n; ++u) {
+		if (rt.get_num_nodes_subtree(u) != sizes_subtrees[u]) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "Subtree sizes differ.\n";
+			std::cerr << "Differences at vertex " << u << '\n';
+			std::cerr << "LAL: " << rt.get_num_nodes_subtree(u) << '\n';
+			std::cerr << "new: " << sizes_subtrees[u] << '\n';
+			return err_type::test_execution;
+		}
+	}
+	return err_type::no_error;
+}
+
 err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& fin) {
 	std::string how;
 	fin >> how;
@@ -260,34 +311,14 @@ err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& f
 		return err_type::test_format;
 	}
 
-#define test_correctness(T)											\
-{																	\
-	const auto lib_centroid = lal::detail::retrieve_centroid(T, 0);	\
-	const auto easy_centroid = straightforward_centroid(T, 0);		\
-	if (not are_centroids_equal(T,lib_centroid, easy_centroid)) {	\
-		std::cerr << ERROR << '\n';									\
-		std::cerr << "    Centroids differ.\n";						\
-		std::cerr << "    Library: " << lib_centroid.first;			\
-		if (lib_centroid.second < n) {								\
-			std::cerr << " " << lib_centroid.second;				\
-		}															\
-		std::cerr << '\n';											\
-		std::cerr << "    Straightforward: " << easy_centroid.first;\
-		if (easy_centroid.second < n) {								\
-			std::cerr << " " << easy_centroid.second;				\
-		}															\
-		std::cerr << '\n';											\
-		std::cerr << "    For tree:\n";								\
-		std::cerr << T << '\n';										\
-		return err_type::test_execution;							\
-	}																\
-}
-
 #define exe_exhaustive(G, n)					\
 {												\
 	for (G Gen(n); not Gen.end(); Gen.next()) {	\
 		const auto T = Gen.get_tree();			\
-		test_correctness(T)						\
+		const auto err = test_correctness(T);	\
+		if (err != err_type::no_error) {		\
+			return err;							\
+		}										\
 	}											\
 }
 
@@ -298,7 +329,10 @@ err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& f
 	G Gen(n);									\
 	for (uint64_t i = 0; i < N; ++i) {			\
 		const auto T = Gen.get_tree();			\
-		test_correctness(T)						\
+		const auto err = test_correctness(T);	\
+		if (err != err_type::no_error) {		\
+			return err;							\
+		}										\
 	}											\
 }
 
