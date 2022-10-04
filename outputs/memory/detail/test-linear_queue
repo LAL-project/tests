@@ -1,0 +1,152 @@
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_linear_queue::test_move_push()
+-----------------------------------
+case starting at line: 103
+Initializing...
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+push 'S{"asdf"}'...
+tests::memory::lal_linear_queue::S::S(std::string&&)
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+push 'S{"qwer"}'...
+tests::memory::lal_linear_queue::S::S(std::string&&)
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+push '{"zxcv"}'...
+tests::memory::lal_linear_queue::S::S(std::string&&)
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+-----------------------------------
+case starting at line: 117
+Initializing...
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S(std::string&&)
+tests::memory::lal_linear_queue::S::S(std::string&&)
+tests::memory::lal_linear_queue::S::S(std::string&&)
+Push 'asdf'
+    string in 'asdf': 'asdf'
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'asdf': ''
+Push 'qwer'
+    string in 'qwer': 'qwer'
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'qwer': ''
+Push 'zxcv'
+    string in 'zxcv': 'zxcv'
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'zxcv': ''
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_linear_queue::test_move_pop()
+-----------------------------------
+case starting at line: 147
+Initializing...
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S(std::string&&)
+Push 'asdf'
+    string in 'asdf': 'asdf'
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'asdf': ''
+Pop queue
+    string in 'asdf': ''
+T&& lal::detail::linear_queue<T>::pop() [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'asdf': 'asdf'
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_linear_queue::test_copy_push()
+-----------------------------------
+case starting at line: 172
+Initializing...
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S(std::string&&)
+tests::memory::lal_linear_queue::S::S(std::string&&)
+tests::memory::lal_linear_queue::S::S(std::string&&)
+Push 'asdf'
+    string in 'asdf': 'asdf'
+void lal::detail::linear_queue<T>::push(const T&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(const tests::memory::lal_linear_queue::S&)
+    string in 'asdf': 'asdf'
+Push 'qwer'
+    string in 'qwer': 'qwer'
+void lal::detail::linear_queue<T>::push(const T&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(const tests::memory::lal_linear_queue::S&)
+    string in 'qwer': 'qwer'
+Push 'zxcv'
+    string in 'zxcv': 'zxcv'
+void lal::detail::linear_queue<T>::push(const T&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(const tests::memory::lal_linear_queue::S&)
+    string in 'zxcv': 'zxcv'
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_linear_queue::test_copy_pop()
++++++++++++++++++++++++++++++++++
+function: void tests::memory::lal_linear_queue::test_copy_pop()
+-----------------------------------
+case starting at line: 204
+Initializing...
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S()
+tests::memory::lal_linear_queue::S::S(std::string&&)
+Push 'asdf'
+    string in 'asdf': 'asdf'
+void lal::detail::linear_queue<T>::push(T&&) [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'asdf': ''
+Pop queue
+    string in 'asdf': ''
+T&& lal::detail::linear_queue<T>::pop() [with T = tests::memory::lal_linear_queue::S]
+tests::memory::lal_linear_queue::S& tests::memory::lal_linear_queue::S::operator=(tests::memory::lal_linear_queue::S&&)
+    string in 'asdf': 'asdf'
+void lal::detail::linear_queue<T>::push(T&&) [with T = int]
+void lal::detail::linear_queue<T>::push(T&&) [with T = int]
+void lal::detail::linear_queue<T>::push(T&&) [with T = int]
+T&& lal::detail::linear_queue<T>::pop() [with T = int]
+T&& lal::detail::linear_queue<T>::pop() [with T = int]
+T&& lal::detail::linear_queue<T>::pop() [with T = int]
+Test finished without apparent errors.
