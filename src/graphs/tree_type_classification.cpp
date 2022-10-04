@@ -63,7 +63,7 @@ namespace graphs {
 
 namespace tree_type_class {
 
-lal::graphs::tree_type string_to_tt(const std::string& s) {
+lal::graphs::tree_type string_to_tt(const std::string& s) noexcept {
 	if (s == "empty") { return lal::graphs::tree_type::empty; }
 	if (s == "singleton") { return lal::graphs::tree_type::singleton; }
 	if (s == "linear") { return lal::graphs::tree_type::linear; }
@@ -72,13 +72,14 @@ lal::graphs::tree_type string_to_tt(const std::string& s) {
 	if (s == "bistar") { return lal::graphs::tree_type::bistar; }
 	if (s == "caterpillar") { return lal::graphs::tree_type::caterpillar; }
 	if (s == "spider") { return lal::graphs::tree_type::spider; }
+	if (s == "bispider") { return lal::graphs::tree_type::bispider; }
 	if (s == "unknown") { return lal::graphs::tree_type::unknown; }
 	std::cerr << ERROR << '\n';
 	std::cerr << "    String '" << s << "' could not be converted into a tree type.\n";
 	return lal::graphs::tree_type::unknown;
 }
 
-std::vector<uint64_t> parse_treestr(const std::string& s) {
+std::vector<uint64_t> parse_treestr(const std::string& s) noexcept {
 	// read numbers in line
 	std::stringstream ss(s);
 	std::vector<uint64_t> L;
@@ -87,7 +88,7 @@ std::vector<uint64_t> parse_treestr(const std::string& s) {
 	return L;
 }
 
-std::vector<bool> parse_classes_tt(std::string s) {
+std::vector<bool> parse_classes_tt(std::string s) noexcept {
 	// classes vector
 	std::vector<bool> classes(lal::graphs::__tree_type_size, false);
 	bool read_sth = false;
@@ -111,7 +112,10 @@ std::vector<bool> parse_classes_tt(std::string s) {
 
 } // -- namespace tree_type_class
 
-err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin) {
+err_type exe_graphs_tree_type_classification
+(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";
