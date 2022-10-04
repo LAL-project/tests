@@ -82,6 +82,7 @@ INCLUDEPATH += $${THIS_DIR}
 DEPENDPATH += $${LAL_DIR}
 
 SOURCES += \
+	data_array.cpp \
 	graphs.cpp \
 	graphs_dgraph_copy.cpp \
 	graphs_dgraph_move.cpp \
@@ -93,7 +94,7 @@ SOURCES += \
 	graphs_ugraph_copy_into_ftree.cpp \
 	graphs_ugraph_move.cpp \
 	graphs_ugraph_move_into_ftree.cpp \
-	internal_data_array.cpp \
+	linear_queue.cpp \
 	main.cpp \
 	numeric.cpp \
 	numeric_integer_copy.cpp \
@@ -105,10 +106,11 @@ SOURCES += \
 	parse_keywords.cpp
 
 HEADERS += \
+	common_utils.hpp \
+	data_array_utils.hpp \
 	exe_tests.hpp \
 	graph_functions.hpp \
-	graphs.hpp \
-	internal_data_array_functions.hpp \
+	graph_utils.hpp \
 	numeric.hpp \
 	numeric_functions.hpp \
 	parse_keywords.hpp

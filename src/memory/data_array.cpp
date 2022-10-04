@@ -53,7 +53,7 @@ using namespace lal::detail;
 #include "common/definitions.hpp"
 
 // memory includes
-#include "memory/internal_data_array_functions.hpp"
+#include "memory/data_array_utils.hpp"
 
 #define MOVE
 #define COPY
@@ -65,7 +65,7 @@ namespace memory {
 namespace lal_data_array {
 
 #if defined MOVE
-void test_move_constructor() {
+void test_move_constructor() noexcept {
 	begin_function;
 
 	{
@@ -105,7 +105,7 @@ void test_move_constructor() {
 	}
 }
 
-void test_move_assignment() {
+void test_move_assignment() noexcept {
 	begin_function;
 	data_array<int> TO(0);
 
@@ -164,7 +164,7 @@ void test_move_assignment() {
 #endif
 
 #if defined COPY
-void test_copy_constructor() {
+void test_copy_constructor() noexcept {
 	begin_function;
 
 	{
@@ -213,7 +213,7 @@ public:
 	data_array<int> A;
 };
 
-void test_copy_assignment() {
+void test_copy_assignment() noexcept {
 	begin_function;
 	data_array<int> TO(0);
 
@@ -296,7 +296,7 @@ void test_copy_assignment() {
 #endif
 
 template <bool clear>
-void test_resize_fill() {
+void test_resize_fill() noexcept {
 	begin_function;
 
 	data_array<int> d;
@@ -335,7 +335,9 @@ void test_resize_fill() {
 
 }
 
-err_type exe_memory_internal_data_array(const input_list& inputs, std::ifstream&) {
+err_type exe_memory_detail_data_array(const input_list& inputs, std::ifstream&)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

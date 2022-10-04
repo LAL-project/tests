@@ -40,7 +40,7 @@
  *
  ********************************************************************/
 
-#include "graphs.hpp"
+#include "graph_utils.hpp"
 
 namespace tests {
 namespace memory {

@@ -52,12 +52,15 @@
 namespace tests {
 namespace memory {
 
-err_type call_memory_internal
+err_type call_memory_detail
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
 {
 	const std::string& key = keywords[i];
 	if (key == "data_array") {
-		return parse_header(exe_memory_internal_data_array, fin);
+		return parse_header(exe_memory_detail_data_array, fin);
+	}
+	if (key == "linear_queue") {
+		return parse_header(exe_memory_detail_linear_queue, fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -77,7 +80,7 @@ err_type call_memory
 		return parse_header(exe_memory_numeric, fin);
 	}
 	if (key == "internal") {
-		return call_memory_internal(keywords, i+1, fin);
+		return call_memory_detail(keywords, i+1, fin);
 	}
 
 	std::cerr << ERROR << '\n';

@@ -53,7 +53,7 @@
 #include "common/definitions.hpp"
 
 // memory includes
-#include "memory/graphs.hpp"
+#include "memory/graph_utils.hpp"
 #include "memory/graph_functions.hpp"
 
 #define MOVE_UGRAPH

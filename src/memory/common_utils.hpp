@@ -42,33 +42,12 @@
 
 #pragma once
 
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be recompiled.
- */
+#define MLINE __LINE__ << ":: "
 
-// C++ includes
-#include <fstream>
-#include <vector>
-#include <string>
+#define begin_function											\
+	std::cout << "+++++++++++++++++++++++++++++++++\n";			\
+	std::cout << "function: " << __PRETTY_FUNCTION__ << '\n';
 
-// common includes
-#include "common/definitions.hpp"
-
-namespace tests {
-namespace memory {
-
-err_type exe_memory_graphs(const input_list& inputs,std::ifstream& fin);
-err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin);
-
-err_type exe_memory_detail_data_array
-(const input_list& inputs,std::ifstream& fin) noexcept;
-
-err_type exe_memory_detail_linear_queue
-(const input_list& inputs,std::ifstream& fin) noexcept;
-
-} // -- namespace memory
-} // -- namespace tests
+#define begin_case												\
+	std::cout << "-----------------------------------\n";		\
+	std::cout << "case starting at line: " << __LINE__ << '\n';
