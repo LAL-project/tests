@@ -3,23 +3,23 @@ INPUT 0
 BODY
 	0 1 2 3 4 1 6 7;linear,caterpillar
 	0 1 2 3 3 1 6 7;spider,caterpillar
-	0 1 2 3 3 1 6 6;caterpillar
+	0 1 2 3 3 1 6 6;caterpillar,bispider
 	0 1 2 3 2 1 6 7;spider,caterpillar
-	0 1 2 3 2 1 6 6;caterpillar
-	0 1 2 3 2 1 6 1;caterpillar
+	0 1 2 3 2 1 6 6;caterpillar,bispider
+	0 1 2 3 2 1 6 1;caterpillar,bispider
 	0 1 2 3 1 5 6 1;spider,caterpillar
 	0 1 2 3 1 5 5 5;spider,caterpillar
-	0 1 2 3 1 5 5 1;caterpillar
-	0 1 2 3 1 5 1 7;spider,
+	0 1 2 3 1 5 5 1;caterpillar,bispider
+	0 1 2 3 1 5 1 7;spider
 	0 1 2 3 1 5 1 1;spider,caterpillar
 	0 1 2 2 2 2 1 7;spider,caterpillar
-	0 1 2 2 2 1 6 6;caterpillar
-	0 1 2 2 2 1 6 1;caterpillar
-	0 1 2 2 2 1 1 1;bistar,caterpillar
+	0 1 2 2 2 1 6 6;caterpillar,bispider
+	0 1 2 2 2 1 6 1;caterpillar,bispider
+	0 1 2 2 2 1 1 1;bistar,caterpillar,bispider
 	0 1 2 2 1 5 5 1;caterpillar
-	0 1 2 2 1 5 1 7;
-	0 1 2 2 1 5 1 1;caterpillar
-	0 1 2 2 1 1 1 1;bistar,caterpillar
+	0 1 2 2 1 5 1 7;bispider
+	0 1 2 2 1 5 1 1;caterpillar,bispider
+	0 1 2 2 1 1 1 1;bistar,caterpillar,bispider
 	0 1 2 1 4 1 6 1;spider
 	0 1 2 1 4 1 1 1;spider,caterpillar
 	0 1 2 1 1 1 1 1;spider,quasistar,bistar,caterpillar

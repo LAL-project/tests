@@ -5,9 +5,9 @@ BODY
 	0 1 2 3 4 5 5;spider,caterpillar
 	0 1 2 3 1 5 1;spider,caterpillar
 	0 1 2 2 2 1 6;spider,caterpillar
-	0 1 2 2 1 5 5;caterpillar
-	0 1 2 2 1 5 1;caterpillar
-	0 1 2 2 1 1 1;bistar,caterpillar
+	0 1 2 2 1 5 5;caterpillar,bispider
+	0 1 2 2 1 5 1;caterpillar,bispider
+	0 1 2 2 1 1 1;bistar,caterpillar,bispider
 	0 1 2 1 4 1 6;spider
 	0 1 2 1 4 1 1;spider,caterpillar
 	0 1 2 1 1 1 1;bistar,spider,quasistar,caterpillar
