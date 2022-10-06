@@ -1,0 +1,7 @@
+TYPE properties-caterpillar_distance
+INPUT 0
+BODY
+	automatic
+	11
+	12
+	13

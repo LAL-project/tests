@@ -1,0 +1,24 @@
+Distance: 0
+0 1
+1 1
+--------------------
+out:
+*0: 1
+ 1:
+in:
+*0:
+ 1: 0
+Distance: 0
+0 1
+1 1
+--------------------
+out:
+ 0:
+*1: 0
+in:
+ 0: 1
+*1:
+Distance: 0
+0 1
+1 1
+Test finished without apparent errors.

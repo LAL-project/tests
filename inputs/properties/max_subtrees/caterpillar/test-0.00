@@ -1,0 +1,12 @@
+TYPE properties-caterpillar_distance
+INPUT 0
+BODY
+	input
+	edge_list
+	25
+	0 1 1 2 2 3 3 4 4 5 6 7 7 8 8 5 5 9 9 10
+	10 11 11 12 12 13
+	10 14 14 15 15 16
+	10 17 17 18
+	18 19 19 20 20 21
+	18 22 22 23 23 24
