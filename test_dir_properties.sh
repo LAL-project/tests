@@ -69,6 +69,16 @@ properties_exp_var_D_DIRS=(\
 	"${properties_exp_var_D_unconstrained_DIRS[@]}" \
 	)
 
+# maximum spanning caterpillars
+properties_maximum_subtrees_caterpillar_DIRS=(\
+	"properties/max_subtrees/caterpillar/" "properties/max_subtrees/caterpillar/" \
+	)
+
+# maximum subtrees
+properties_maximum_subtrees_DIRS=(\
+	"${properties_maximum_subtrees_caterpillars_DIRS[@]}" \
+	)
+
 # properties
 properties_DIRS=(\
 	"${properties_basic_DIRS[@]}" \
@@ -77,4 +87,5 @@ properties_DIRS=(\
 	"${properties_centre_DIRS[@]}" \
 	"${properties_centroid_DIRS[@]}" \
 	"${properties_diameter_DIRS[@]}" \
+	"${properties_maximum_subtrees_DIRS[@]}" \
 	)

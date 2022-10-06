@@ -177,6 +177,8 @@ function show_usage() {
 	echo "                properties_exp_var_D_unconstrained : execute tests for the expectation and variance of D in unconstrained arrangements"
 	echo "                properties_exp_D_planar : execute tests for the expectation of D in planar arrangements"
 	echo "                properties_exp_D_projective : execute tests for the expectation of D in projective arrangements"
+	echo "            properties_maximum_subtrees : execute tests for finding maximum subtrees in a graph"
+	echo "                properties_maximum_subtrees_caterpillar : execute tests for finding maximum spanning caterpillars"
 	echo ""
 	echo "        utilities : execute utilities tests"
 	echo "            utilities_isomorphism : execute tree isomorphism tests"

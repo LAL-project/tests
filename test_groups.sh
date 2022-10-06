@@ -114,6 +114,8 @@ groups_list=(\
 		"properties_centre" \
 		"properties_centroid" \
 		"properties_diameter" \
+		"properties_maximum_subtrees" \
+			"properties_maximum_subtrees_caterpillar" \
 	\
 	"utilities" \
 		"utilities_isomorphism" \
