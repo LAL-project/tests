@@ -46,23 +46,22 @@
 #include <fstream>
 // lal includes
 #include <lal/linarr/dependency_flux.hpp>
-#include <lal/linarr/flux.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
 
 // common includes
 #include "common/definitions.hpp"
 
-#define test_integral_field(FIELD, field_str)									\
+#define test_integral_field(FIELD, field_str)										\
 	for (std::size_t i = 0; i < S; ++i) {											\
-		if (input_flux[i].FIELD() != algo_flux[i].FIELD()) {					\
+		if (input_flux[i].FIELD() != algo_flux[i].FIELD()) {						\
 			std::cerr << ERROR << '\n';												\
 			std::cerr << "    " << field_str << " do not agree at: " << i << '\n';	\
-			std::cerr << "    Input:     " << input_flux[i].FIELD() << '\n';			\
+			std::cerr << "    Input:     " << input_flux[i].FIELD() << '\n';		\
 			std::cerr << "    Algorithm: " << algo_flux[i].FIELD() << '\n';			\
 			std::cerr << "    At tree:   " << tree_idx << '\n';						\
-			return err_type::test_execution;									\
-		}																		\
+			return err_type::test_execution;										\
+		}																			\
 	}
 
 #define hidden_stringize(x) #x
