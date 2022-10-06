@@ -44,7 +44,6 @@
 #include <iostream>
 
 // common includes
-#include "common/parse_keywords.hpp"
 #include "common/parse_header.hpp"
 #include "properties/parse_keywords.hpp"
 #include "properties/exe_tests.hpp"
@@ -110,6 +109,9 @@ err_type call_properties(const std::vector<std::string>& keywords, std::size_t i
 	}
 	if (key == "diameter") {
 		return parse_header(exe_properties_diameter, fin);
+	}
+	if (key == "caterpillar_distance") {
+		return parse_header(exe_properties_caterpillar_distance, fin);
 	}
 
 	std::cerr << ERROR << '\n';
