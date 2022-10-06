@@ -54,9 +54,7 @@
 #include <lal/io/basic_output.hpp>
 
 // common includes
-#include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
-#include "common/time.hpp"
 
 namespace tests {
 namespace properties {
