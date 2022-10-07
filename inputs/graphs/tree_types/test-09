@@ -6,43 +6,43 @@ BODY
 	0 1 2 3 4 1 6 7 6;spider,caterpillar
 	0 1 2 3 4 1 6 7 1;spider,caterpillar
 	0 1 2 3 3 3 1 7 8;spider,caterpillar
-	0 1 2 3 3 2 1 7 8;caterpillar,bispider
-	0 1 2 3 3 1 6 7 7;caterpillar,bispider
-	0 1 2 3 3 1 6 7 6;caterpillar,bispider
-	0 1 2 3 3 1 6 7 1;caterpillar,bispider
-	0 1 2 3 3 1 6 6 6;caterpillar,bispider
+	0 1 2 3 3 2 1 7 8;caterpillar,two_linear
+	0 1 2 3 3 1 6 7 7;caterpillar,two_linear
+	0 1 2 3 3 1 6 7 6;caterpillar,two_linear
+	0 1 2 3 3 1 6 7 1;caterpillar,two_linear
+	0 1 2 3 3 1 6 6 6;caterpillar,two_linear
 	0 1 2 3 3 1 6 6 1;caterpillar
-	0 1 2 3 3 1 6 1 8;bispider
-	0 1 2 3 3 1 6 1 1;caterpillar,bispider
+	0 1 2 3 3 1 6 1 8;two_linear
+	0 1 2 3 3 1 6 1 1;caterpillar,two_linear
 	0 1 2 3 2 5 1 7 8;spider
 	0 1 2 3 2 2 1 7 8;spider,caterpillar
-	0 1 2 3 2 1 6 7 6;caterpillar,bispider
-	0 1 2 3 2 1 6 7 1;caterpillar,bispider
-	0 1 2 3 2 1 6 6 6;caterpillar,bispider
+	0 1 2 3 2 1 6 7 6;caterpillar,two_linear
+	0 1 2 3 2 1 6 7 1;caterpillar,two_linear
+	0 1 2 3 2 1 6 6 6;caterpillar,two_linear
 	0 1 2 3 2 1 6 6 1;caterpillar
-	0 1 2 3 2 1 6 1 8;bispider
-	0 1 2 3 2 1 6 1 1;caterpillar,bispider
+	0 1 2 3 2 1 6 1 8;two_linear
+	0 1 2 3 2 1 6 1 1;caterpillar,two_linear
 	0 1 2 3 1 5 6 1 8;spider
 	0 1 2 3 1 5 6 1 1;spider,caterpillar
 	0 1 2 3 1 5 5 5 5;spider,caterpillar
-	0 1 2 3 1 5 5 5 1;caterpillar,bispider
-	0 1 2 3 1 5 5 1 8;bispider
-	0 1 2 3 1 5 5 1 1;caterpillar,bispider
+	0 1 2 3 1 5 5 5 1;caterpillar,two_linear
+	0 1 2 3 1 5 5 1 8;two_linear
+	0 1 2 3 1 5 5 1 1;caterpillar,two_linear
 	0 1 2 3 1 5 1 7 1;spider
 	0 1 2 3 1 5 1 1 1;spider,caterpillar
 	0 1 2 2 2 2 2 1 8;spider,caterpillar
-	0 1 2 2 2 2 1 7 7;caterpillar,bispider
-	0 1 2 2 2 2 1 7 1;caterpillar,bispider
-	0 1 2 2 2 1 6 6 6;caterpillar,bispider
+	0 1 2 2 2 2 1 7 7;caterpillar,two_linear
+	0 1 2 2 2 2 1 7 1;caterpillar,two_linear
+	0 1 2 2 2 1 6 6 6;caterpillar,two_linear
 	0 1 2 2 2 1 6 6 1;caterpillar
-	0 1 2 2 2 1 6 1 8;bispider
-	0 1 2 2 2 1 6 1 1;caterpillar,bispider
-	0 1 2 2 2 1 1 1 1;bistar,caterpillar,bispider
+	0 1 2 2 2 1 6 1 8;two_linear
+	0 1 2 2 2 1 6 1 1;caterpillar,two_linear
+	0 1 2 2 2 1 1 1 1;bistar,caterpillar,two_linear
 	0 1 2 2 1 5 5 1 8;
 	0 1 2 2 1 5 5 1 1;caterpillar
-	0 1 2 2 1 5 1 7 1;bispider
-	0 1 2 2 1 5 1 1 1;caterpillar,bispider
-	0 1 2 2 1 1 1 1 1;bistar,caterpillar,bispider
+	0 1 2 2 1 5 1 7 1;two_linear
+	0 1 2 2 1 5 1 1 1;caterpillar,two_linear
+	0 1 2 2 1 1 1 1 1;bistar,caterpillar,two_linear
 	0 1 2 1 4 1 6 1 8;spider
 	0 1 2 1 4 1 6 1 1;spider
 	0 1 2 1 4 1 1 1 1;spider,caterpillar

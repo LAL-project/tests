@@ -55,7 +55,6 @@
 #include <lal/detail/graphs/tree_type.hpp>
 
 // common includes
-#include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 
 namespace tests {
@@ -72,7 +71,7 @@ lal::graphs::tree_type string_to_tt(const std::string& s) noexcept {
 	if (s == "bistar") { return lal::graphs::tree_type::bistar; }
 	if (s == "caterpillar") { return lal::graphs::tree_type::caterpillar; }
 	if (s == "spider") { return lal::graphs::tree_type::spider; }
-	if (s == "bispider") { return lal::graphs::tree_type::bispider; }
+	if (s == "two_linear") { return lal::graphs::tree_type::twolinear; }
 	if (s == "unknown") { return lal::graphs::tree_type::unknown; }
 	std::cerr << ERROR << '\n';
 	std::cerr << "    String '" << s << "' could not be converted into a tree type.\n";
