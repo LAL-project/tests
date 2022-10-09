@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph ftree g0 0
 	ftree_to_rtree dg0 g0 0
 	output_graph dg0

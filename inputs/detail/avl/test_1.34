@@ -1,6 +1,5 @@
 TYPE detail-avl_functions
-INPUT 0
-BODY
+
 
 print_tree
 insert 4676 sanity_check

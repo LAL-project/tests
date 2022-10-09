@@ -1,6 +1,7 @@
 TYPE linarr-compute_headedness
-INPUT 1 graphs/er/030-1.00 edge-list
-BODY
+INPUTS 1
+graphs/er/030-1.00 edge-list
+
     20
     24 5 15 3 28 13 18 4 12 26 22 14 25 1 16 29 9 20 17 2 21 6 10 8 23 27 19 11 7 0
     26 29 19 27 6 28 15 10 9 22 25 13 21 23 12 20 14 7 16 17 5 24 4 11 18 3 2 8 1 0

@@ -1,5 +1,5 @@
 TYPE properties-exp_var_C
-INPUT 19
+INPUTS 19
 graphs/complete/02 edge-list
 graphs/complete/03 edge-list
 graphs/complete/04 edge-list
@@ -19,5 +19,5 @@ graphs/complete/17 edge-list
 graphs/complete/18 edge-list
 graphs/complete/19 edge-list
 graphs/complete/20 edge-list
-BODY
+
 	formula-Q

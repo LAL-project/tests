@@ -1,6 +1,5 @@
 TYPE detail-avl_functions
-INPUT 0
-BODY
+
 
 remove_unique -1815 sanity_check
 remove_unique -8668 sanity_check

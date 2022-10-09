@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph dgraph g1 10
 	assert num_edges g1 0
 	set_edges g1 5

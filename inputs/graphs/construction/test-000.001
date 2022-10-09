@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph ugraph g 5
 	assert not_exists_edge g 0 1
 	assert not_exists_edge g 0 2

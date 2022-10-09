@@ -1,5 +1,4 @@
 TYPE properties-diameter
-INPUT 0
-BODY
+
 	automatic ftree
 	exhaustive 5

@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list_upper_bound
-INPUT 1 graphs/cycle/010 edge-list
-BODY
+INPUTS 1
+graphs/cycle/010 edge-list
+
 	ladder
 	25
 	2 6 7 4 3 0 1 5 9 8

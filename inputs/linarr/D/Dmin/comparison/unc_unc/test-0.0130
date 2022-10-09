@@ -1,4 +1,3 @@
 TYPE linarr-Dmin-comparison
-INPUT 0
-BODY
+
 	random Unc_YS == Unc_FC2 130 100

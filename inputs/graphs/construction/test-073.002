@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph rtree g1 5
 	add_edges g1 4
 		1 0

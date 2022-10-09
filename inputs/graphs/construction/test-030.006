@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	read_graph ugraph g2 graphs/complete/02 edge_list true
 	assert normalised g2
 	assert num_nodes g2 2

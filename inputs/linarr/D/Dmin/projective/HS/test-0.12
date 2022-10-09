@@ -1,4 +1,5 @@
 TYPE linarr-Dmin-Projective
-INPUT 1 inputs/linarr/optimal_linearizations/Dmin/projective/12 *
-BODY
+INPUTS 1
+inputs/linarr/optimal_linearizations/Dmin/projective/12 *
+
 	HS

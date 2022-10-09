@@ -1,5 +1,4 @@
 TYPE linarr-Dmin-comparison
-INPUT 0
-BODY
+
 	exhaustive Unc_YS <= Plan_AEF 3
 	exhaustive Unc_YS <= Plan_HS 3

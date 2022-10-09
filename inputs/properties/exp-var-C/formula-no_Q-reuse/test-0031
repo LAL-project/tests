@@ -1,5 +1,5 @@
 TYPE properties-exp_var_C
-INPUT 410
+INPUTS 410
 graphs/er/010-0.10 edge-list
 graphs/er/010-0.20 edge-list
 graphs/er/010-0.30 edge-list
@@ -410,5 +410,5 @@ graphs/er/050-0.70 edge-list
 graphs/er/050-0.80 edge-list
 graphs/er/050-0.90 edge-list
 graphs/er/050-1.00 edge-list
-BODY
+
 	formula-no_Q-reuse

@@ -1,5 +1,5 @@
 TYPE properties-exp_var_C
-INPUT 97
+INPUTS 97
 graphs/star-tree/004 edge-list
 graphs/star-tree/005 edge-list
 graphs/star-tree/006 edge-list
@@ -97,5 +97,5 @@ graphs/star-tree/097 edge-list
 graphs/star-tree/098 edge-list
 graphs/star-tree/099 edge-list
 graphs/star-tree/100 edge-list
-BODY
+
 	trees

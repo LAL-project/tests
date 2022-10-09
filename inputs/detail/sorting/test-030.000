@@ -1,6 +1,5 @@
 TYPE detail-sorting
-INPUT 0
-BODY
+
 	counting_sort_rand increasing 1 10 10 1
 	counting_sort_rand increasing 1 10 10 2
 	counting_sort_rand increasing 1 10 10 3

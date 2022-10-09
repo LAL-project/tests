@@ -1,6 +1,7 @@
 TYPE linarr-compute_C
-INPUT 1 graphs/complete-bipartite/9-9 edge-list
-BODY
+INPUTS 1
+graphs/complete-bipartite/9-9 edge-list
+
 	stack_based
 	100
 	11 14 8 1 6 16 17 12 9 0 4 5 13 15 7 10 2 3

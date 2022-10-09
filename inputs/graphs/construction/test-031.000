@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	read_graph dgraph g graphs/linear-tree/010 edge_list true
 	assert normalised g
 	assert num_edges g 9

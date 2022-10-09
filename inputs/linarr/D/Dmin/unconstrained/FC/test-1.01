@@ -1,5 +1,4 @@
 TYPE linarr-Dmin-Unconstrained
-INPUT 0
-BODY
+
 	FC_class
 	star 1 100

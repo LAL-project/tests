@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	read_graph rtree g1 graphs/exhaustive-trees/rooted/006-0001.head_vector head_vector true
 	assert normalised g1
 	assert num_nodes g1 6

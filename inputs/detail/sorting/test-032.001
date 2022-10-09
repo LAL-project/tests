@@ -1,6 +1,5 @@
 TYPE detail-sorting
-INPUT 0
-BODY
+
 	counting_sort_nrand decreasing 1 1
 	counting_sort_nrand decreasing 1 100
 	counting_sort_nrand decreasing 1 15

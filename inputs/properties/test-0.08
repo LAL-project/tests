@@ -1,5 +1,5 @@
 TYPE properties-general
-INPUT 25
+INPUTS 25
 graphs/cycle/002 edge-list
 graphs/cycle/003 edge-list
 graphs/cycle/004 edge-list
@@ -25,7 +25,7 @@ graphs/cycle/023 edge-list
 graphs/cycle/024 edge-list
 graphs/cycle/025 edge-list
 graphs/cycle/026 edge-list
-BODY
+
 	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir

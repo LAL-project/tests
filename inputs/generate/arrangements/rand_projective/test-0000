@@ -1,6 +1,5 @@
 TYPE generate-arrangements-rand_projective
-INPUT 0
-BODY
+
 	1 10 100
 	2 10 100
 	3 100 1000

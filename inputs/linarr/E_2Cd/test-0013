@@ -1,6 +1,7 @@
 TYPE linarr-approx_exp_C
-INPUT 1 graphs/er/027-0.20 edge-list
-BODY
+INPUTS 1
+graphs/er/027-0.20 edge-list
+
 	E_2[C|d]
 	100
 	3 19 16 18 13 14 26 4 0 15 2 8 5 22 6 24 21 7 12 25 23 17 9 10 20 1 11

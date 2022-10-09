@@ -1,6 +1,5 @@
 TYPE generate-trees-rlf
-INPUT 0
-BODY
+
 	1 5 	50
 	6 7		30
 	8 11	300

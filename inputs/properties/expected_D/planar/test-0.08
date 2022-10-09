@@ -1,6 +1,5 @@
 TYPE properties-expected_D-Planar-brute_force
-INPUT 0
-BODY
+
 	8
 	 0 1 2 3 4 1 6 7    133/8
 	 0 1 2 3 3 1 6 7    203/12

@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph rtree t1 10
 	
 	assert same_representative_component t1 0

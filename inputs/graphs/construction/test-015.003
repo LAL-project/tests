@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph dgraph dg 10
 	
 	add_edges dg 18

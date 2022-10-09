@@ -1,5 +1,6 @@
 TYPE detail-traversal
-INPUT 1 graphs/complete/10 edge-list
-BODY
+INPUTS 1
+graphs/complete/10 edge-list
+
 	ugraph
 	assert has_undir_cycle

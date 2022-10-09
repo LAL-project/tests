@@ -1,6 +1,5 @@
 TYPE numeric-rational
-INPUT 0
-BODY
+
 	let k0 rational int 3
 	let k1 rational int -4
 	let k2 rational string -1234/5678

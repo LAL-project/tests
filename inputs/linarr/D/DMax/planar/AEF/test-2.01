@@ -1,6 +1,5 @@
 TYPE linarr-DMax-Planar
-INPUT 0
-BODY
+
 	quadratic
 	random
 	AEF

@@ -1,6 +1,5 @@
 TYPE properties-caterpillar_distance
-INPUT 0
-BODY
+
 	automatic
 	1
 	2

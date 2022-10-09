@@ -1,5 +1,5 @@
 TYPE properties-exp_var_D
-INPUT 64
+INPUTS 64
 graphs/complete-bipartite/2-2 edge-list
 graphs/complete-bipartite/2-3 edge-list
 graphs/complete-bipartite/2-4 edge-list
@@ -64,6 +64,6 @@ graphs/complete-bipartite/9-6 edge-list
 graphs/complete-bipartite/9-7 edge-list
 graphs/complete-bipartite/9-8 edge-list
 graphs/complete-bipartite/9-9 edge-list
-BODY
+
 	formula
 	complete-bipartite

@@ -1,5 +1,4 @@
 TYPE properties-expected_D-Planar-quadratic
-INPUT 0
-BODY
+
 	exhaustive
 	15

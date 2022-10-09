@@ -1,6 +1,7 @@
 TYPE linarr-compute_C
-INPUT 1 graphs/er/050-0.50 edge-list
-BODY
+INPUTS 1
+graphs/er/050-0.50 edge-list
+
 	bruteforce
 	250
 	23 28 41 30 4 8 3 0 22 2 43 11 6 13 45 34 12 39 37 17 24 15 29 33 5 35 31 44 20 7 21 36 18 10 32 14 19 9 27 38 26 49 25 46 16 40 47 42 1 48

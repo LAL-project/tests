@@ -1,6 +1,5 @@
 TYPE utilities-tree_isomorphism
-INPUT 0
-BODY
+
 	automatic
 	rooted negative exhaustive
 	10 100

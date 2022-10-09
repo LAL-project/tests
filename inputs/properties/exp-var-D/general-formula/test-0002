@@ -1,5 +1,5 @@
 TYPE properties-exp_var_D
-INPUT 50
+INPUTS 50
 graphs/one-regular/002 edge-list
 graphs/one-regular/004 edge-list
 graphs/one-regular/006 edge-list
@@ -50,6 +50,6 @@ graphs/one-regular/094 edge-list
 graphs/one-regular/096 edge-list
 graphs/one-regular/098 edge-list
 graphs/one-regular/100 edge-list
-BODY
+
 	formula
 	one-regular

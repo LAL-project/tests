@@ -1,5 +1,4 @@
 TYPE linarr-Dmin-comparison
-INPUT 0
-BODY
+
 	random Unc_YS <= Plan_AEF 150 100
 	random Unc_YS <= Plan_HS 150 100

@@ -1,6 +1,5 @@
 TYPE detail-avl_functions
-INPUT 0
-BODY
+
 
 join_trees 6 -1371 529 3933 5359 6164 6814 
 insert 3823 sanity_check

@@ -1,6 +1,5 @@
 TYPE properties-centroid
-INPUT 0
-BODY
+
 	automatic rtree
 	exhaustive
 	

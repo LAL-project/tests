@@ -1,9 +1,9 @@
 TYPE linarr-klevel-1-MDD
-INPUT 3
-	graphs/exhaustive-trees/free/008-008.edge_list edge-list
-	graphs/exhaustive-trees/free/005-000.edge_list edge-list
-	graphs/exhaustive-trees/free/007-004.edge_list edge-list
-BODY
+INPUTS 3
+graphs/exhaustive-trees/free/008-008.edge_list edge-list
+graphs/exhaustive-trees/free/005-000.edge_list edge-list
+graphs/exhaustive-trees/free/007-004.edge_list edge-list
+
 	3
 	2 3 4 6 7 0 1 5
 	3 2 0 1 4

@@ -1,6 +1,5 @@
 TYPE properties-diameter
-INPUT 0
-BODY
+
 	manual ftree
 	init 1
 	

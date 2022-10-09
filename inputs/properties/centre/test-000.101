@@ -1,6 +1,5 @@
 TYPE properties-centre
-INPUT 0
-BODY
+
 	automatic ftree
 	random
 	50 1000

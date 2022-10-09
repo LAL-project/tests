@@ -1,6 +1,5 @@
 TYPE utilities-tree_isomorphism
-INPUT 0
-BODY
+
 	automatic
 	free positive random
 	50 1000 1000

@@ -1,5 +1,5 @@
 TYPE properties-general
-INPUT 19
+INPUTS 19
 graphs/complete-bipartite/2-2 edge-list
 graphs/complete-bipartite/2-3 edge-list
 graphs/complete-bipartite/2-4 edge-list
@@ -19,7 +19,7 @@ graphs/complete-bipartite/5-3 edge-list
 graphs/complete-bipartite/5-4 edge-list
 graphs/complete-bipartite/5-5 edge-list
 graphs/complete-bipartite/5-6 edge-list
-BODY
+
 	enumerate_E
 	enumerate_Q
 	Q_size

@@ -1,6 +1,5 @@
 TYPE properties-expected_D-Planar-quadratic
-INPUT 0
-BODY
+
 	random
 	100 1000
 	200 1000

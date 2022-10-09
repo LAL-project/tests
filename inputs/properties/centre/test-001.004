@@ -1,6 +1,5 @@
 TYPE properties-centre
-INPUT 0
-BODY
+
 	manual rtree
 	init 6
 	add_edges 5

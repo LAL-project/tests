@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph rtree t 5
 	assert num_nodes t 5
 	assert num_edges t 0

@@ -1,6 +1,6 @@
 TYPE detail-traversal
 INPUT 0
-BODY
+
 	dgraph
 	init 3
 	add_edge 0 1

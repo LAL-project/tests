@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list_upper_bound
-INPUT 1 graphs/complete-bipartite/2-3 edge-list
-BODY
+INPUTS 1
+graphs/complete-bipartite/2-3 edge-list
+
 	stack_based
 	20
 	3 0 1 4 2

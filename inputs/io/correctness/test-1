@@ -1,6 +1,5 @@
 TYPE io-correctness
-INPUT 0
-BODY
+
 	treebank graphs/treebank_samples/treebank_non_existent
 	treebank graphs/treebank_samples/treebank_1
 	treebank graphs/treebank_samples/treebank_all_correct

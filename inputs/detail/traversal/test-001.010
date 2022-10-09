@@ -1,6 +1,7 @@
 TYPE detail-traversal
-INPUT 1 graphs/star-tree/050 edge-list
-BODY
+INPUTS 1
+graphs/star-tree/050 edge-list
+
 	dgraph
 	assert hasnt_dir_cycle
 	assert hasnt_undir_cycle

@@ -1,5 +1,5 @@
 TYPE properties-exp_var_C
-INPUT 99
+INPUTS 99
 graphs/linear-tree/002 edge-list
 graphs/linear-tree/003 edge-list
 graphs/linear-tree/004 edge-list
@@ -99,5 +99,5 @@ graphs/linear-tree/097 edge-list
 graphs/linear-tree/098 edge-list
 graphs/linear-tree/099 edge-list
 graphs/linear-tree/100 edge-list
-BODY
+
 	formula-no_Q-no-reuse

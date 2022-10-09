@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list
-INPUT 1 graphs/quasi-star-tree/005 edge-list
-BODY
+INPUTS 1
+graphs/quasi-star-tree/005 edge-list
+
 	ladder
 	20
 	3 2 4 0 1

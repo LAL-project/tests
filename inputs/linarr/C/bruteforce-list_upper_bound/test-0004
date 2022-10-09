@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list_upper_bound
-INPUT 1 graphs/cycle/005 edge-list
-BODY
+INPUTS 1
+graphs/cycle/005 edge-list
+
 	bruteforce
 	20
 	4 0 3 1 2

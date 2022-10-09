@@ -1,6 +1,5 @@
 TYPE properties-amount-Planar
-INPUT 0
-BODY
+
 	8
 	 0 1 2 3 4 1 6 7    512
 	 0 1 2 3 3 1 6 7    768

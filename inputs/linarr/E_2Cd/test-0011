@@ -1,6 +1,7 @@
 TYPE linarr-approx_exp_C
-INPUT 1 graphs/star-tree/028 edge-list
-BODY
+INPUTS 1
+graphs/star-tree/028 edge-list
+
 	E_2[C|d]
 	100
 	7 24 8 27 2 5 9 6 14 11 16 13 23 21 25 26 15 18 17 19 0 4 1 3 12 10 20 22

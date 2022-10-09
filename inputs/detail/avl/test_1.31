@@ -1,6 +1,5 @@
 TYPE detail-avl_functions
-INPUT 0
-BODY
+
 
 print_tree
 join_trees 5 -4932 -4462 -3019 -2970 1288 

@@ -1,6 +1,7 @@
 TYPE linarr-approx_exp_C
-INPUT 1 graphs/one-regular/010 edge-list
-BODY
+INPUTS 1
+graphs/one-regular/010 edge-list
+
 	E_2[C|d]
 	20
 	6 5 3 1 0 4 7 8 2 9

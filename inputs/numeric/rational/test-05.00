@@ -1,6 +1,5 @@
 TYPE numeric-rational
-INPUT 0
-BODY
+
 	let k1 rational int 0
 	let two integer int 2
 	let three integer int 3

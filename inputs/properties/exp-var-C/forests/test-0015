@@ -1,6 +1,6 @@
 TYPE properties-exp_var_C
-INPUT 0
-BODY
+INPUTS 0
+
 	mixed-trees
 	10
 	20	6 1

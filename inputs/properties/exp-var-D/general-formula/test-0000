@@ -1,5 +1,5 @@
 TYPE properties-exp_var_D
-INPUT 99
+INPUTS 99
 graphs/cycle/002 edge-list
 graphs/cycle/003 edge-list
 graphs/cycle/004 edge-list
@@ -99,6 +99,6 @@ graphs/cycle/097 edge-list
 graphs/cycle/098 edge-list
 graphs/cycle/099 edge-list
 graphs/cycle/100 edge-list
-BODY
+
 	formula
 	cycle

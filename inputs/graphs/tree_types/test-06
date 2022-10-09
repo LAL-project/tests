@@ -1,6 +1,5 @@
 TYPE graphs-tree_types
-INPUT 0
-BODY
+
 	0 1 2 3 4 5;linear,caterpillar
 	0 1 1 1 4 5;spider,caterpillar
 	0 1 1 1 4 4;bistar,caterpillar,two_linear

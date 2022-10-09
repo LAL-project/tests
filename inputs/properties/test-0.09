@@ -1,5 +1,5 @@
 TYPE properties-general
-INPUT 25
+INPUTS 25
 graphs/linear-tree/002 edge-list
 graphs/linear-tree/003 edge-list
 graphs/linear-tree/004 edge-list
@@ -25,7 +25,7 @@ graphs/linear-tree/023 edge-list
 graphs/linear-tree/024 edge-list
 graphs/linear-tree/025 edge-list
 graphs/linear-tree/026 edge-list
-BODY
+
 	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir

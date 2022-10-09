@@ -1,4 +1,5 @@
 TYPE linarr-Dmin-Unconstrained
-INPUT 1 inputs/linarr/optimal_linearizations/Dmin/unconstrained/02 *
-BODY
+INPUTS 1
+inputs/linarr/optimal_linearizations/Dmin/unconstrained/02 *
+
 	YS_bruteforce

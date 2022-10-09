@@ -1,6 +1,5 @@
 TYPE linarr-syntree_classification
-INPUT 0
-BODY
+
 	graphs/syntactic-dependency-structures/sen-18--0
 	graphs/syntactic-dependency-structures/sen-18--1
 	graphs/syntactic-dependency-structures/sen-18--2

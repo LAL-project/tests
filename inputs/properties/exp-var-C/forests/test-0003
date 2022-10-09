@@ -1,5 +1,5 @@
 TYPE properties-exp_var_C
-INPUT 99
+INPUTS 99
 graphs/quasi-star-tree/002 edge-list
 graphs/quasi-star-tree/003 edge-list
 graphs/quasi-star-tree/004 edge-list
@@ -99,5 +99,5 @@ graphs/quasi-star-tree/097 edge-list
 graphs/quasi-star-tree/098 edge-list
 graphs/quasi-star-tree/099 edge-list
 graphs/quasi-star-tree/100 edge-list
-BODY
+
 	forests

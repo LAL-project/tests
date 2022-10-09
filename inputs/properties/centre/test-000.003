@@ -1,6 +1,5 @@
 TYPE properties-centre
-INPUT 0
-BODY
+
 	manual ftree
 	init 7
 	add_edges 6

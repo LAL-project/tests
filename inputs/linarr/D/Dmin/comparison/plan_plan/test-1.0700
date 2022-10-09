@@ -1,4 +1,3 @@
 TYPE linarr-Dmin-comparison
-INPUT 0
-BODY
+
 	random Plan_AEF == Plan_HS 700 10

@@ -1,5 +1,4 @@
 TYPE generate-arrangements-all_planar
-INPUT 0
-BODY
+
 	automatic
 	1 10

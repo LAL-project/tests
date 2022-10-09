@@ -1,6 +1,7 @@
 TYPE linarr-compute_C
-INPUT 1 graphs/er/030-0.50 edge-list
-BODY
+INPUTS 1
+graphs/er/030-0.50 edge-list
+
 	ladder
 	250
 	6 13 21 12 15 18 16 29 26 8 3 19 17 7 9 20 23 10 1 22 14 24 25 11 28 27 0 2 5 4

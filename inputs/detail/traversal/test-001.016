@@ -1,6 +1,7 @@
 TYPE detail-traversal
-INPUT 1 graphs/complete-bipartite/8-9 edge-list
-BODY
+INPUTS 1
+graphs/complete-bipartite/8-9 edge-list
+
 	dgraph
 	assert hasnt_dir_cycle
 	assert has_undir_cycle

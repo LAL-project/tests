@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list_upper_bound
-INPUT 1 graphs/linear-tree/005 edge-list
-BODY
+INPUTS 1
+graphs/linear-tree/005 edge-list
+
 	bruteforce
 	20
 	1 2 3 0 4

@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph ftree t10 10
 	assert num_nodes t10 10
 	assert num_edges t10 0

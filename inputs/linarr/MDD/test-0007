@@ -1,6 +1,7 @@
 TYPE linarr-D
-INPUT 1 graphs/er/010-0.10 edge-list
-BODY
+INPUTS 1
+graphs/er/010-0.10 edge-list
+
 	MDD
 	20
 	6 7 1 0 3 8 5 4 2 

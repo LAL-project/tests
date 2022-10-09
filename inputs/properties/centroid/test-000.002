@@ -1,6 +1,5 @@
 TYPE properties-centroid
-INPUT 0
-BODY
+
 	manual ftree
 	
 	init 16

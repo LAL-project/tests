@@ -1,6 +1,5 @@
 TYPE numeric-integer
-INPUT 0
-BODY
+
 	let k1 string 0
 	let k2 string -1
 	let k3 string 2

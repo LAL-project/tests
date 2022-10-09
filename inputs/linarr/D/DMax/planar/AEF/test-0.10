@@ -1,4 +1,5 @@
 TYPE linarr-DMax-Planar
-INPUT 1 inputs/linarr/optimal_linearizations/DMax/planar/10 *
-BODY
+INPUTS 1
+inputs/linarr/optimal_linearizations/DMax/planar/10 *
+
 	AEF

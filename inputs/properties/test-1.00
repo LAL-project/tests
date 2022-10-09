@@ -1,6 +1,6 @@
 TYPE properties-general
-INPUT 1
+INPUTS 1
 graphs/linear-tree/002 edge-list
-BODY
+
 	Mean_Hierarchical_Distance 0
 	Mean_Hierarchical_Distance 1

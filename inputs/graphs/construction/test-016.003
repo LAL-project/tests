@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph ftree G 10
 	add_edge G 0 1 false true
 	add_edge G 1 2 false true

@@ -1,8 +1,8 @@
 TYPE properties-general
-INPUT 2
+INPUTS 2
 graphs/complete/17 edge-list
 graphs/complete/18 edge-list
-BODY
+
 	enumerate_E_rand_dir
 	enumerate_Q_rand_dir
 	Q_size_rand_dir

@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list
-INPUT 1 graphs/quasi-star-tree/020 edge-list
-BODY
+INPUTS 1
+graphs/quasi-star-tree/020 edge-list
+
 	dyn_prog
 	20
 	8 17 6 5 19 15 16 12 9 3 14 2 18 11 4 10 13 1 0 7

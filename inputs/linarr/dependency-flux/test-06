@@ -1,6 +1,5 @@
 TYPE linarr-dependency_flux
-INPUT 0
-BODY
+
 	              tree	6	0 1 2 3 4 5
 	         left_span	1 1 1 1 1
 	        right_span	1 1 1 1 1

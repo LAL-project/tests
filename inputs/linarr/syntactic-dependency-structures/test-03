@@ -1,4 +1,3 @@
 TYPE linarr-syntree_classification
-INPUT 0
-BODY
+
 	graphs/syntactic-dependency-structures/sen-03

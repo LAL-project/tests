@@ -1,6 +1,5 @@
 TYPE graphs-construction
-INPUT 0
-BODY
+
 	create_graph dgraph g1 0
 	create_graph dgraph g2 0
 	create_graph dgraph g3 0

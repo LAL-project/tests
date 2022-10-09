@@ -1,6 +1,7 @@
 TYPE linarr-compute_C-list_upper_bound
-INPUT 1 graphs/complete/15 edge-list
-BODY
+INPUTS 1
+graphs/complete/15 edge-list
+
 	stack_based
 	100
 	1 5 6 7 9 13 10 2 8 4 3 14 12 11 0

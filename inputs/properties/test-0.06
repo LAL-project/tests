@@ -1,5 +1,5 @@
 TYPE properties-general
-INPUT 9
+INPUTS 9
 graphs/er/010-0.10 edge-list
 graphs/er/012-0.10 edge-list
 graphs/er/015-0.10 edge-list
@@ -9,7 +9,7 @@ graphs/er/028-0.50 edge-list
 graphs/er/029-0.20 edge-list
 graphs/er/029-0.50 edge-list
 graphs/er/030-0.50 edge-list
-BODY
+
 	enumerate_E
 	enumerate_Q
 	Q_size

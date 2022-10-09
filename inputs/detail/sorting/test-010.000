@@ -1,6 +1,5 @@
 TYPE detail-sorting
-INPUT 0
-BODY
+
 	bit_sort_rand 10 30 50
 	bit_sort_rand 10 30 100
 	bit_sort_rand 10 30 150

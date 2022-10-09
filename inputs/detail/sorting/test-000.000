@@ -1,6 +1,5 @@
 TYPE detail-sorting
-INPUT 0
-BODY
+
 	insertion_sort_rand 10 1 10
 	insertion_sort_rand 10 2 10
 	insertion_sort_rand 10 3 10
