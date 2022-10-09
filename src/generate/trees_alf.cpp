@@ -129,6 +129,7 @@ noexcept
 		TreeGen.next();
 		process;
 	}
+
 	check;
 	return err_type::no_error;
 }
