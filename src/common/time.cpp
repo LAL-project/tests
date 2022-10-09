@@ -49,21 +49,27 @@ namespace timing {
 
 typedef std::chrono::high_resolution_clock::time_point time_point;
 
-time_point now() {
+time_point now() noexcept {
 	return std::chrono::high_resolution_clock::now();
 }
 
-double elapsed_seconds(const time_point& begin, const time_point& end) {
+double elapsed_seconds(const time_point& begin, const time_point& end)
+noexcept
+{
 	return std::chrono::duration<double, std::chrono::seconds::period>
 			( end - begin ).count();
 }
 
-double elapsed_milliseconds(const time_point& begin, const time_point& end) {
+double elapsed_milliseconds(const time_point& begin, const time_point& end)
+noexcept
+{
 	return std::chrono::duration<double, std::chrono::milliseconds::period>
 			( end - begin ).count();
 }
 
-double elapsed_microseconds(const time_point& begin, const time_point& end) {
+double elapsed_microseconds(const time_point& begin, const time_point& end)
+noexcept
+{
 	return std::chrono::duration<double, std::chrono::microseconds::period>
 			( end - begin ).count();
 }

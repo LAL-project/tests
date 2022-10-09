@@ -57,6 +57,7 @@ err_type parse_header(
 
 	std::ifstream& fin, Params... P
 )
+noexcept
 {
 	std::string field;
 	fin >> field;

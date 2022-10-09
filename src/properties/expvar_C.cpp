@@ -156,7 +156,9 @@ bool check_ExpVar_C_all_trees(uint64_t n) noexcept {
 	return true;
 }
 
-bool check_ExpVar_C_mixed_trees(uint64_t r, uint64_t n_trees, uint64_t size_trees) {
+bool check_ExpVar_C_mixed_trees(uint64_t r, uint64_t n_trees, uint64_t size_trees)
+noexcept
+{
 	lal::generate::rand_ulab_free_trees TreeGen(size_trees);
 	lal::graphs::undirected_graph forest;
 
@@ -188,7 +190,9 @@ bool check_ExpVar_C_mixed_trees(uint64_t r, uint64_t n_trees, uint64_t size_tree
 	return true;
 }
 
-err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin) {
+err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	const std::set<std::string> allowed_procs(
 		{"brute_force", "formula-Q",
 		 "formula-no_Q-reuse", "formula-no_Q-no-reuse",

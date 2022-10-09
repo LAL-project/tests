@@ -55,7 +55,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_rational_copy() {
+err_type test_rational_copy() noexcept {
 	// copy constructor
 	{
 	lal::numeric::rational i1 = 50;

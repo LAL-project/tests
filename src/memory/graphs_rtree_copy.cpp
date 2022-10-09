@@ -52,7 +52,7 @@ namespace memory {
 //
 //
 
-void test_copy_rooted_tree() {
+void test_copy_rooted_tree() noexcept {
 	begin_function;
 
 	// copy constructor

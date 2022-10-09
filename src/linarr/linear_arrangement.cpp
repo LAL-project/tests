@@ -336,7 +336,7 @@ void case_6() noexcept {
 	__case_6(5, {{1ull,0ull}, {2ull,3ull}, {0ull,4ull}, {1ull,3ull}});
 }
 
-err_type case_7() {
+err_type case_7() noexcept {
 	begin_function;
 
 	lal::generate::rand_lab_free_trees Gen;
@@ -372,8 +372,8 @@ err_type case_7() {
 	return err_type::no_error;
 }
 
-err_type exe_linarr_linear_arrangement
-(const input_list& inputs, std::ifstream&)
+err_type exe_linarr_linear_arrangement(const input_list& inputs, std::ifstream&)
+noexcept
 {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';

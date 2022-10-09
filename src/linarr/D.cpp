@@ -60,7 +60,7 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_procs(
 	{"D", "MDD"}
 	);

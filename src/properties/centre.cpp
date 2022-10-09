@@ -172,7 +172,7 @@ noexcept
 }
 
 template <class tree_t>
-err_type exe_commands_utils_centre(std::ifstream& fin) {
+err_type exe_commands_utils_centre(std::ifstream& fin) noexcept {
 	tree_t t;
 	uint64_t n;
 
@@ -270,7 +270,9 @@ err_type exe_commands_utils_centre(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_full_utils_centre(const std::string& graph_type, std::ifstream& fin) {
+err_type exe_full_utils_centre(const std::string& graph_type, std::ifstream& fin)
+noexcept
+{
 	std::string how;
 	fin >> how;
 	if (how != "exhaustive" and how != "random") {

@@ -45,20 +45,20 @@
 namespace tests {
 namespace memory {
 
-void test_move_undirected_graph();
-void test_copy_undirected_graph();
+void test_move_undirected_graph() noexcept;
+void test_copy_undirected_graph() noexcept;
 
-void test_move_directed_graph();
-void test_copy_directed_graph();
+void test_move_directed_graph() noexcept;
+void test_copy_directed_graph() noexcept;
 
-void test_move_ugraph_into_ftree();
-void test_copy_ugraph_into_ftree();
+void test_move_ugraph_into_ftree() noexcept;
+void test_copy_ugraph_into_ftree() noexcept;
 
-void test_move_free_tree();
-void test_copy_free_tree();
+void test_move_free_tree() noexcept;
+void test_copy_free_tree() noexcept;
 
-void test_move_rooted_tree();
-void test_copy_rooted_tree();
+void test_move_rooted_tree() noexcept;
+void test_copy_rooted_tree() noexcept;
 
 } // -- namespace memory
 } // -- namespace tests

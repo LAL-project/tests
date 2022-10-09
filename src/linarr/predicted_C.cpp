@@ -68,7 +68,7 @@ namespace tests {
 namespace linarr {
 
 template <typename INT>
-inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
+inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) noexcept {
 	/*if (s1 == s2) { return true; }
 	if (s1 == s2 + d2) { return true; }
 	if (s1 + d1 == s2) { return true; }
@@ -76,7 +76,7 @@ inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) {
 	return (s1 == s2) or (s1 == s2 + d2) or (s1 + d1 == s2) or (s1 + d1 == s2 + d2);
 }
 
-uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
+uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) noexcept {
 	uint64_t c = 0;
 	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
@@ -95,7 +95,7 @@ uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) {
 	return c;
 }
 
-uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
+uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) noexcept {
 	uint64_t c = 0;
 	for (uint64_t s1 = 1; s1 <= n; ++s1) {
 		if (s1 + d1 > n) { continue; }
@@ -113,7 +113,9 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) {
 }
 
 template <typename GRAPH>
-lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi) {
+lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi)
+noexcept
+{
 	lal::numeric::rational Ec2(0);
 	const uint64_t n = g.get_num_nodes();
 
@@ -153,7 +155,9 @@ lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement
 	return Ec2;
 }
 
-err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	std::set<std::string> allowed_procs({"E_2[C|d]"});
 
 	if (inputs.size() != 1) {

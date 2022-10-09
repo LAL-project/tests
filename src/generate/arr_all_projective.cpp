@@ -162,7 +162,7 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 	return err_type::no_error;
 }
 
-err_type exe_gen_arr_all_projective(const input_list& inputs, std::ifstream& fin) {
+err_type exe_gen_arr_all_projective(const input_list& inputs, std::ifstream& fin) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

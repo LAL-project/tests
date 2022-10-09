@@ -63,7 +63,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_memory_integer() {
+err_type test_memory_integer() noexcept {
 	return_if(test_integer_swap())
 	return_if(test_integer_move())
 	return_if(test_integer_copy())
@@ -84,7 +84,7 @@ err_type test_memory_integer() {
 	return err_type::no_error;
 }
 
-err_type test_memory_rational() {
+err_type test_memory_rational() noexcept {
 	return_if(test_rational_swap())
 	return_if(test_rational_move())
 	return_if(test_rational_copy())
@@ -105,7 +105,7 @@ err_type test_memory_rational() {
 	return err_type::no_error;
 }
 
-err_type exe_memory_numeric(const input_list& inputs, std::ifstream&) {
+err_type exe_memory_numeric(const input_list& inputs, std::ifstream&) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

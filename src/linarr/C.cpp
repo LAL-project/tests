@@ -72,7 +72,9 @@ namespace linarr {
 	std::cerr << "    For (undirected) graph\n";						\
 	std::cerr << uG << '\n';											\
 
-err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upper_bound) {
+err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upper_bound)
+noexcept
+{
 	std::set<std::string> allowed_procs({
 		"bruteforce", "dyn_prog", "ladder", "stack_based"
 	});

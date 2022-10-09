@@ -93,10 +93,11 @@ namespace tests {
 namespace numeric {
 
 template <typename U, typename V>
-static inline err_type resolve_comp_integer(
+err_type resolve_comp_integer(
 	const std::string& var1, const std::string& var2,
 	const U& val1, const std::string& op, const V& val2
 )
+noexcept
 {
 	if (op == "==") {
 		if (val1 != val2) {
@@ -148,10 +149,11 @@ static inline err_type resolve_comp_integer(
 	return err_type::no_error;
 }
 
-static inline err_type comp_integer(
+err_type comp_integer(
 	const std::map<std::string, lal::numeric::integer>& integer_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op_comp;
 	std::string var1, var2;
@@ -165,10 +167,11 @@ static inline err_type comp_integer(
 	return resolve_comp_integer(var1, var2, val1, op_comp, val2);
 }
 
-static inline err_type comp_integer_lit(
+err_type comp_integer_lit(
 	const std::map<std::string, lal::numeric::integer>& integer_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op_comp;
 	std::string var1;
@@ -182,9 +185,9 @@ static inline err_type comp_integer_lit(
 }
 
 template <typename U, typename V>
-static inline
 lal::numeric::integer resolve_integer_operation
 (const U& var1, const std::string& op, const V& var2)
+noexcept
 {
 	if (op == "+") { return var1 + var2; }
 	if (op == "-") { return var1 - var2; }
@@ -207,10 +210,11 @@ lal::numeric::integer resolve_integer_operation
 	return -1;
 }
 
-static inline err_type op_integer(
+err_type op_integer(
 	std::map<std::string, lal::numeric::integer>& integer_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op;
 	std::string var0, var1, var2;
@@ -228,10 +232,11 @@ static inline err_type op_integer(
 	return err_type::no_error;
 }
 
-static inline err_type op_integer_lit(
+err_type op_integer_lit(
 	std::map<std::string, lal::numeric::integer>& integer_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op;
 	std::string var0, var1;
@@ -248,7 +253,9 @@ static inline err_type op_integer_lit(
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin) {
+err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";
@@ -318,7 +325,9 @@ err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer_manual(const input_list& inputs, std::ifstream&) {
+err_type exe_numeric_integer_manual(const input_list& inputs, std::ifstream&)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

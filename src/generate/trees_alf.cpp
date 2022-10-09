@@ -113,6 +113,7 @@ struct extra_params { };
 
 err_type test_for_n_while
 (uint64_t n, lal::generate::all_lab_free_trees& TreeGen, const extra_params&)
+noexcept
 {
 	const lal::numeric::integer nn = lal::numeric::integer(n);
 
@@ -134,6 +135,7 @@ err_type test_for_n_while
 
 err_type test_for_n_for
 (uint64_t n, lal::generate::all_lab_free_trees& TreeGen, const extra_params&)
+noexcept
 {
 	const lal::numeric::integer nn = lal::numeric::integer(n);
 
@@ -154,6 +156,7 @@ err_type test_for_n_for
 
 err_type test_for_n_yield
 (uint64_t n, lal::generate::all_lab_free_trees& TreeGen, const extra_params&)
+noexcept
 {
 	const lal::numeric::integer nn = lal::numeric::integer(n);
 
@@ -200,7 +203,7 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2) noexcept {
 
 } // -- namespace alf
 
-err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin) {
+err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

@@ -94,10 +94,11 @@ namespace tests {
 namespace numeric {
 
 template <typename U, typename V>
-static inline err_type resolve_comp_rational(
+err_type resolve_comp_rational(
 	const std::string& var1, const std::string& var2,
 	const U& val1, const std::string& op, const V& val2
 )
+noexcept
 {
 	if (op == "==") {
 		if (val1 != val2) {
@@ -149,12 +150,13 @@ static inline err_type resolve_comp_rational(
 	return err_type::no_error;
 }
 
-static inline err_type comp_rational(
+err_type comp_rational(
 	const std::map<std::string, std::string>& vtypes,
 	const std::map<std::string, lal::numeric::integer>& integer_vars,
 	const std::map<std::string, lal::numeric::rational>& rational_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op_comp;
 	std::string var1, var2;
@@ -192,12 +194,13 @@ static inline err_type comp_rational(
 	return err_type::test_execution;
 }
 
-static inline err_type comp_rational_lit(
+err_type comp_rational_lit(
 	const std::map<std::string, std::string>& vtypes,
 	const std::map<std::string, lal::numeric::integer>& integer_vars,
 	const std::map<std::string, lal::numeric::rational>& rational_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op_comp;
 	std::string var1;
@@ -220,9 +223,9 @@ static inline err_type comp_rational_lit(
 }
 
 template <typename U>
-static inline lal::numeric::rational resolve_op_rational(
-	const U& var1, const std::string& op, const lal::numeric::rational& var2
-)
+lal::numeric::rational resolve_op_rational
+(const U& var1, const std::string& op, const lal::numeric::rational& var2)
+noexcept
 {
 	if (op == "+") { return var1 + var2; }
 	if (op == "-") { return var1 - var2; }
@@ -237,9 +240,9 @@ template <
 		std::is_same<V, lal::numeric::integer>::value || std::is_integral<V>::value, int
 	> = 0
 >
-static inline lal::numeric::rational resolve_op_rational(
-	const U& var1, const std::string& op, const V& var2
-)
+lal::numeric::rational resolve_op_rational
+(const U& var1, const std::string& op, const V& var2)
+noexcept
 {
 	if (op == "+") { return var1 + var2; }
 	if (op == "-") { return var1 - var2; }
@@ -265,6 +268,7 @@ err_type operation(
 	std::map<std::string, lal::numeric::rational>& rational_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op;
 	std::string var0, var1, var2;
@@ -307,12 +311,13 @@ err_type operation(
 	return err_type::no_error;
 }
 
-static inline err_type op_rational_lit(
+err_type op_rational_lit(
 	const std::map<std::string, std::string>& vtypes,
 	const std::map<std::string, lal::numeric::integer>& integer_vars,
 	std::map<std::string, lal::numeric::rational>& rational_vars,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string op;
 	std::string var0, var1;
@@ -340,7 +345,7 @@ static inline err_type op_rational_lit(
 	return err_type::no_error;
 }
 
-err_type test_rational_minutia() {
+err_type test_rational_minutia() noexcept {
 	{
 	lal::numeric::integer i1;
 	lal::numeric::integer i2;
@@ -410,7 +415,7 @@ err_type test_rational_minutia() {
 	return err_type::no_error;
 }
 
-err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) {
+err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";
@@ -507,7 +512,9 @@ err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&) {
+err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

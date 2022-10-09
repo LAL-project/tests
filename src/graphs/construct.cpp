@@ -101,7 +101,7 @@
 namespace tests {
 namespace graphs {
 
-err_type exe_construction_test(std::ifstream& fin) {
+err_type exe_construction_test(std::ifstream& fin) noexcept {
 	std::map<std::string, lal::graphs::undirected_graph> ugraphvars;
 	std::map<std::string, lal::graphs::directed_graph> dgraphvars;
 	std::map<std::string, lal::graphs::free_tree> ftreevars;
@@ -730,7 +730,9 @@ err_type exe_construction_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin) {
+err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

@@ -55,6 +55,7 @@ namespace linarr {
 
 err_type call_linarr_Dmin
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
@@ -78,6 +79,7 @@ err_type call_linarr_Dmin
 
 err_type call_linarr_DMax
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
@@ -98,6 +100,7 @@ err_type call_linarr_DMax
 
 err_type call_linarr_klevel
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::set<std::string> allowed_levels({"1", "2"});
 	const std::set<std::string> allowed_procs({"MDD"});
@@ -130,6 +133,7 @@ err_type call_linarr_klevel
 
 err_type call_linarr_C
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	// There is no need to give more keywords.
 	// If, after this keyword, there are no more of them,
@@ -160,6 +164,7 @@ err_type call_linarr_C
 
 err_type call_linarr
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "compute_C") {
@@ -203,7 +208,9 @@ err_type call_linarr
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+noexcept
+{
 	const std::string& key = keywords[0];
 	if (key == "linarr") {
 		return call_linarr(keywords, 1, fin);

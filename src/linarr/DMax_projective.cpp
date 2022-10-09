@@ -113,7 +113,9 @@ noexcept
 
 } // -- namespace dmin_projective
 
-err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Exactly one input files are allowed in this test.\n";

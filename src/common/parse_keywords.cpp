@@ -51,7 +51,9 @@
 
 namespace tests {
 
-err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type) {
+err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type)
+noexcept
+{
 	std::string field;
 	fin >> field;
 
@@ -67,7 +69,7 @@ err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::
 	return err_type::no_error;
 }
 
-std::vector<std::string> get_keywords(const std::string& type) {
+std::vector<std::string> get_keywords(const std::string& type) noexcept {
 	std::vector<std::string> keywords;
 	bool finish = false;
 

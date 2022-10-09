@@ -55,7 +55,9 @@
 #include "io/parse_keywords.hpp"
 using namespace tests;
 
-err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type) {
+err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type)
+noexcept
+{
 	std::string field;
 	fin >> field;
 
@@ -71,7 +73,7 @@ err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::
 	return err_type::no_error;
 }
 
-void get_keywords(const std::string& type, std::vector<std::string>& keywords) {
+void get_keywords(const std::string& type, std::vector<std::string>& keywords) noexcept {
 	bool finish = false;
 
 	std::size_t dash_pos = 0;

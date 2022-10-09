@@ -61,7 +61,7 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand(const input_list& inputs, std::ifstream& fin) {
+err_type exe_gen_arr_rand(const input_list& inputs, std::ifstream& fin) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

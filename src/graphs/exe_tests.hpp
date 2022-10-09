@@ -62,8 +62,8 @@
 namespace tests {
 namespace graphs {
 
-err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin);
-err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin);
+err_type exe_graphs_construction(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_graphs_tree_type_classification(const input_list& inputs, std::ifstream& fin) noexcept;
 err_type exe_graphs_graph_literals(const input_list& inputs, std::ifstream& fin) noexcept;
 
 } // -- namespace graphs

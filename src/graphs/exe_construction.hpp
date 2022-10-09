@@ -60,7 +60,7 @@ namespace tests {
 namespace graphs {
 
 template <typename G>
-inline bool equal_graphs(const G& g1, const G& g2)
+bool equal_graphs(const G& g1, const G& g2) noexcept
 {
 	if (g1.get_num_nodes() != g2.get_num_nodes()) { return false; }
 
@@ -375,11 +375,11 @@ if (not mfunction_rtrees(g1, is_directed())) {						\
 	}															\
 }(t)
 
-std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::undirected_graph& g);
-std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::directed_graph& g);
-bool share_vertices(const lal::edge_pair& st_uv);
-std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::undirected_graph& g);
-std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::directed_graph& g);
+std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::undirected_graph& g) noexcept;
+std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::directed_graph& g) noexcept;
+bool share_vertices(const lal::edge_pair& st_uv) noexcept;
+std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::undirected_graph& g) noexcept;
+std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::directed_graph& g) noexcept;
 
 err_type process_assert(
 	const std::string& assert_what,
@@ -389,7 +389,7 @@ err_type process_assert(
 	std::map<std::string, lal::graphs::rooted_tree>& rtreevars,
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
-);
+) noexcept;
 
 } // -- namespace graphs
 } // -- namespace tests

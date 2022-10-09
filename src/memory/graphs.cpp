@@ -70,7 +70,7 @@
 namespace tests {
 namespace memory {
 
-void test_generate() {
+void test_generate() noexcept {
 	begin_function
 
 	{
@@ -102,7 +102,7 @@ void test_generate() {
 	}
 }
 
-err_type exe_memory_graphs(const input_list& inputs, std::ifstream&) {
+err_type exe_memory_graphs(const input_list& inputs, std::ifstream&) noexcept {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

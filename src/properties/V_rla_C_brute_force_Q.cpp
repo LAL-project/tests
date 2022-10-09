@@ -53,7 +53,7 @@ typedef uint64_t bigint;
 namespace tests {
 namespace properties {
 
-inline void compute_data_gen_graphs_Q
+void compute_data_gen_graphs_Q
 (
 	const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q,
 	bigint& Qs, bigint& Kg,
@@ -62,6 +62,7 @@ inline void compute_data_gen_graphs_Q
 	bigint& Phi_1, bigint& Phi_2,
 	bigint& Lambda_1, bigint& Lambda_2
 )
+noexcept
 {
 	// adjacency matrix
 	std::vector<std::vector<uint64_t>> A(g.get_num_nodes(), std::vector<uint64_t>(g.get_num_nodes(), 0ull));
@@ -124,7 +125,10 @@ inline void compute_data_gen_graphs_Q
 	n_cycles_4 /= 2;
 }
 
-lal::numeric::rational nonLAL_var_num_crossings_rational_Q(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q) {
+lal::numeric::rational nonLAL_var_num_crossings_rational_Q
+(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q)
+noexcept
+{
 	const bigint m = g.get_num_edges();
 
 	// ----------------------------

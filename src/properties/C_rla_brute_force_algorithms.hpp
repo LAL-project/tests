@@ -63,7 +63,7 @@ namespace properties {
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
 lal::numeric::rational nonLAL_variance_C_freqs_rational
-(const lal::graphs::undirected_graph& g);
+(const lal::graphs::undirected_graph& g) noexcept;
 
 /*
  * @brief Computes the variance of the number of crossings of a graph.
@@ -76,7 +76,7 @@ lal::numeric::rational nonLAL_variance_C_freqs_rational
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
 lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
-(const std::vector<lal::edge_pair>& Q);
+(const std::vector<lal::edge_pair>& Q) noexcept;
 
 /*
  * @brief Computes the variance of the number of crossings of a graph.
@@ -88,7 +88,8 @@ lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
  * @return Returns the exact value of \f$V_{rla}[C]\f$ as a rational value.
  */
 lal::numeric::rational nonLAL_var_num_crossings_rational_Q
-(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q);
+(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q)
+noexcept;
 
 } // -- namespace properties
 } // -- namespace tests

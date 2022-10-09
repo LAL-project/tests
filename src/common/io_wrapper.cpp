@@ -55,7 +55,9 @@ namespace tests {
 namespace io_wrapper {
 
 template <class G>
-err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm) {
+err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm)
+noexcept
+{
 
 	if (format == "edge_list" or format == "edge-list") {
 		auto r = lal::io::read_edge_list<G>(file, norm, false);
@@ -101,23 +103,27 @@ err_type __read_graph(const std::string& file, const std::string& format, G& g, 
 
 err_type read_graph
 (const std::string& file, const std::string& format, lal::graphs::undirected_graph& G, bool norm)
+noexcept
 {
 	return __read_graph(file, format, G, norm);
 }
 err_type read_graph
 (const std::string& file, const std::string& format, lal::graphs::directed_graph& G, bool norm)
+noexcept
 {
 	return __read_graph(file, format, G, norm);
 }
 
 err_type read_graph
 (const std::string& file, const std::string& format, lal::graphs::free_tree& G, bool norm)
+noexcept
 {
 	return __read_graph(file, format, G, norm);
 }
 
 err_type read_graph
 (const std::string& file, const std::string& format, lal::graphs::rooted_tree& G, bool norm)
+noexcept
 {
 	return __read_graph(file, format, G, norm);
 }

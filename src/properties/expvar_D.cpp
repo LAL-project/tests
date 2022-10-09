@@ -63,7 +63,7 @@ namespace properties {
 
 namespace ExpVar_D {
 
-void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) {
+void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) noexcept {
 	const lal::numeric::rational Vr = lal::properties::var_sum_edge_lengths_rational(g);
 	const lal::numeric::rational E1r = lal::properties::exp_sum_edge_lengths_rational(g);
 	const lal::numeric::rational E2r = Vr + E1r*E1r;
@@ -72,7 +72,9 @@ void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) {
 
 } // -- namespace ExpVar_D
 
-err_type exe_properties_ExpVar_D(const input_list& inputs, std::ifstream& fin) {
+err_type exe_properties_ExpVar_D(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	std::string proc;
 	fin >> proc;
 

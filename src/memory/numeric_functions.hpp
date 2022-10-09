@@ -63,13 +63,13 @@ inline lal::numeric::rational rational_from_function() noexcept {
 	return lal::numeric::rational(std::string(iff_value));
 }
 
-err_type test_integer_copy();
-err_type test_integer_swap();
-err_type test_integer_move();
+err_type test_integer_copy() noexcept;
+err_type test_integer_swap() noexcept;
+err_type test_integer_move() noexcept;
 
-err_type test_rational_copy();
-err_type test_rational_swap();
-err_type test_rational_move();
+err_type test_rational_copy() noexcept;
+err_type test_rational_swap() noexcept;
+err_type test_rational_move() noexcept;
 
 } // -- namespace memory
 } // -- namespace tests

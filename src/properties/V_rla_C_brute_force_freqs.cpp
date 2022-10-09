@@ -65,27 +65,31 @@ namespace properties {
 
 /* UTILITIES */
 
-inline constexpr
-int tau(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
+constexpr int tau
+(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz)
+noexcept
+{
 	return
 		static_cast<int>(st == wx or st == yz) +
 		static_cast<int>(uv == wx or uv == yz);
 }
 
-inline constexpr
-int share(const lal::edge& e1, const lal::edge& e2) {
+constexpr int share(const lal::edge& e1, const lal::edge& e2) noexcept {
 	return
 		static_cast<int>(e1.first == e2.first or e1.first == e2.second) +
 		static_cast<int>(e1.second == e2.first or e1.second == e2.second);
 }
 
-inline constexpr
-int phi(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
+constexpr int phi(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz)
+noexcept
+{
 	return share(st, wx) + share(st, yz) + share(uv, wx) + share(uv, yz);
 }
 
-inline constexpr
-int subtype(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz) {
+constexpr
+int subtype(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const lal::edge& yz)
+noexcept
+{
 	const int e1e3 = share(st, wx);
 	const int e1e4 = share(st, yz);
 	const int e2e3 = share(uv, wx);
@@ -100,8 +104,9 @@ int subtype(const lal::edge& st, const lal::edge& uv, const lal::edge& wx, const
 	return 1;
 }
 
-inline constexpr
+constexpr
 frequency_type edge_pair_type(const lal::edge_pair& ep1, const lal::edge_pair& ep2)
+noexcept
 {
 	const lal::edge& st = ep1.first;
 	const lal::edge& uv = ep1.second;
@@ -177,6 +182,7 @@ frequency_type edge_pair_type(const lal::edge_pair& ep1, const lal::edge_pair& e
 
 lal::numeric::rational nonLAL_variance_C_freqs_rational
 (const lal::graphs::undirected_graph& g)
+noexcept
 {
 	// compute set Q(g)
 	const auto Q = g.get_Q();
@@ -185,6 +191,7 @@ lal::numeric::rational nonLAL_variance_C_freqs_rational
 
 lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
 (const std::vector<lal::edge_pair>& Q)
+noexcept
 {
 	// frequencies f00 and f01 are not measured
 	// because they have expectation 0

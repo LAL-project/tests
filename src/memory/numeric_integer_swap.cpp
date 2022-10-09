@@ -55,7 +55,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_integer_swap() {
+err_type test_integer_swap() noexcept {
 	{
 	lal::numeric::integer i1;
 	lal::numeric::integer i2;

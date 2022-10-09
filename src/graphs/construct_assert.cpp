@@ -119,6 +119,7 @@ err_type process_assert(
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
 )
+noexcept
 {
 	std::string g1, g2;
 	uint64_t n;

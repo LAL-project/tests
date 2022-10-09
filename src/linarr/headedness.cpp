@@ -60,7 +60,7 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_headedness(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_headedness(const input_list& inputs, std::ifstream& fin) noexcept {
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Only one input file si allowed in this test.\n";

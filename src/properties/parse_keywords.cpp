@@ -52,6 +52,7 @@ namespace tests {
 namespace properties {
 
 err_type call_expected_D_planar(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "brute_force") {
@@ -68,6 +69,7 @@ err_type call_expected_D_planar(const std::vector<std::string>& keywords, std::s
 }
 
 err_type call_expected_D(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
@@ -84,6 +86,7 @@ err_type call_expected_D(const std::vector<std::string>& keywords, std::size_t i
 }
 
 err_type call_properties(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "general") {
@@ -120,7 +123,9 @@ err_type call_properties(const std::vector<std::string>& keywords, std::size_t i
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+noexcept
+{
 	const std::string& key = keywords[0];
 	if (key == "properties") {
 		return call_properties(keywords, 1, fin);

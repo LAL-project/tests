@@ -52,7 +52,7 @@ namespace memory {
 //
 //
 
-void test_move_ugraph_into_ftree() {
+void test_move_ugraph_into_ftree() noexcept {
 	begin_function;
 
 	// move constructor

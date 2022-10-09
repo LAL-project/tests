@@ -61,8 +61,8 @@
 namespace tests {
 namespace memory {
 
-err_type exe_memory_graphs(const input_list& inputs,std::ifstream& fin);
-err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin);
+err_type exe_memory_graphs(const input_list& inputs,std::ifstream& fin) noexcept;
+err_type exe_memory_numeric(const input_list& inputs,std::ifstream& fin) noexcept;
 
 err_type exe_memory_detail_data_array
 (const input_list& inputs,std::ifstream& fin) noexcept;

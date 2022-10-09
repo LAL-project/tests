@@ -59,7 +59,9 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_expected_D_projective(const input_list& inputs, std::ifstream& fin)
+err_type exe_properties_expected_D_projective
+(const input_list& inputs, std::ifstream& fin)
+noexcept
 {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';

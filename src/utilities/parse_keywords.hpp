@@ -54,7 +54,7 @@ namespace tests {
 namespace utilities {
 
 // parses the first keyword and calls the appropriate main type function
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin);
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept;
 
 } // -- namespace utilities
 } // -- namespace tests

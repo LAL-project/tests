@@ -58,7 +58,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_rational_move() {
+err_type test_rational_move() noexcept {
 	// move constructor
 	{
 	lal::numeric::rational i1 = 50;

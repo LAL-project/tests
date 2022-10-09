@@ -52,7 +52,7 @@ namespace memory {
 //
 //
 
-void test_copy_directed_graph() {
+void test_copy_directed_graph() noexcept {
 	begin_function;
 
 	// copy constructor

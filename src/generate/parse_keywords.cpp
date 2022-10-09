@@ -54,6 +54,7 @@ namespace generate {
 
 err_type call_generate_arrangements
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "all_projective") {
@@ -83,6 +84,7 @@ err_type call_generate_arrangements
 
 err_type call_generate_trees
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "alf") {
@@ -118,6 +120,7 @@ err_type call_generate_trees
 
 err_type call_generate
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "trees") {
@@ -133,7 +136,9 @@ err_type call_generate
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+noexcept
+{
 	const std::string& key = keywords[0];
 	if (key == "generate") {
 		return call_generate(keywords, 1, fin);

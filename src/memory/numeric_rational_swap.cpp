@@ -55,7 +55,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_rational_swap() {
+err_type test_rational_swap() noexcept {
 	{
 	lal::numeric::rational i1;
 	lal::numeric::rational i2;

@@ -74,13 +74,15 @@ namespace tests {
 namespace linarr {
 
 namespace test_flux {
-inline std::ostream& operator<< (std::ostream& out, const lal::edge& e) {
+inline std::ostream& operator<< (std::ostream& out, const lal::edge& e) noexcept {
 	out << "(" << e.first << "," << e.second << ")";
 	return out;
 }
 
 inline
-std::ostream& operator<< (std::ostream& out, const std::vector<lal::edge>& deps) {
+std::ostream& operator<< (std::ostream& out, const std::vector<lal::edge>& deps)
+noexcept
+{
 	if (deps.size() > 0) {
 		out << deps[0];
 		for (std::size_t i = 1; i < deps.size(); ++i) {
@@ -92,7 +94,9 @@ std::ostream& operator<< (std::ostream& out, const std::vector<lal::edge>& deps)
 } // -- namespace test_flux
 using namespace test_flux;
 
-err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin) {
+err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

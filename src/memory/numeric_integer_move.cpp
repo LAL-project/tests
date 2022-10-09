@@ -59,7 +59,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_integer_move() {
+err_type test_integer_move() noexcept {
 	// move constructor
 	{
 	lal::numeric::integer i1 = 50;

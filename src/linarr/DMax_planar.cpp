@@ -142,7 +142,9 @@ noexcept
 
 } // -- namespace dmax_planar
 
-err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	const std::set<std::string> allowed_algos({"AEF", "quadratic"});
 	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"});
 

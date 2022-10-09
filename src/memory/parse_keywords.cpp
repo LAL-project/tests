@@ -54,6 +54,7 @@ namespace memory {
 
 err_type call_memory_detail
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "data_array") {
@@ -71,6 +72,7 @@ err_type call_memory_detail
 
 err_type call_memory
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "graphs") {
@@ -89,7 +91,9 @@ err_type call_memory
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+noexcept
+{
 	const std::string& key = keywords[0];
 	if (key == "memory") {
 		return call_memory(keywords, 1, fin);

@@ -52,16 +52,16 @@ namespace timing {
 typedef std::chrono::high_resolution_clock::time_point time_point;
 
 // Returns the current time
-time_point now();
+time_point now() noexcept;
 
 // Returns the elapsed time between 'begin' and 'end' in seconds
-double elapsed_seconds(const time_point& begin, const time_point& end);
+double elapsed_seconds(const time_point& begin, const time_point& end) noexcept;
 
 // Returns the elapsed time between 'begin' and 'end' in microseconds
-double elapsed_milliseconds(const time_point& begin, const time_point& end);
+double elapsed_milliseconds(const time_point& begin, const time_point& end) noexcept;
 
 // Returns the elapsed time between 'begin' and 'end' in microseconds
-double elapsed_microseconds(const time_point& begin, const time_point& end);
+double elapsed_microseconds(const time_point& begin, const time_point& end) noexcept;
 
 } // -- namespace timing
 } // -- namespace tests

@@ -90,6 +90,7 @@ err_type linarr_brute_force_testing(
 	// the input stream
 	std::ifstream& fin
 )
+noexcept
 {
 	// read number of nodes
 	uint64_t n;

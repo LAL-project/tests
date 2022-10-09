@@ -52,7 +52,7 @@ namespace memory {
 //
 //
 
-void test_move_free_tree() {
+void test_move_free_tree() noexcept {
 	begin_function;
 
 	// move constructor

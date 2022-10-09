@@ -54,6 +54,7 @@ namespace io {
 
 err_type call_io
 (const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
+noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "correctness") {
@@ -66,7 +67,9 @@ err_type call_io
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) {
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+noexcept
+{
 	const std::string& key = keywords[0];
 	if (key == "io") {
 		return call_io(keywords, 1, fin);

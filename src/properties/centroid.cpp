@@ -60,9 +60,9 @@
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 
-inline bool is_centroidal(
-	const lal::graphs::rooted_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes
-)
+bool is_centroidal
+(const lal::graphs::rooted_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes)
+noexcept
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
@@ -79,9 +79,9 @@ inline bool is_centroidal(
 	return true;
 }
 
-inline bool is_centroidal(
-	const lal::graphs::free_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes
-)
+bool is_centroidal
+(const lal::graphs::free_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes)
+noexcept
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
@@ -94,7 +94,9 @@ inline bool is_centroidal(
 }
 
 template <class T>
-std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x) {
+std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x)
+noexcept
+{
 	const uint64_t n = t.get_num_nodes();
 
 	uint64_t size_cc = 0;
@@ -126,11 +128,11 @@ std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x)
 	return (u1 < u2 ? std::make_pair(u1,u2) : std::make_pair(u2,u1));
 }
 
-inline
 bool are_centroids_equal(
 	const lal::graphs::tree& t,
 	const std::pair<lal::node,lal::node>& c1, const std::pair<lal::node,lal::node>& c2
 )
+noexcept
 {
 	if (c1.first != c2.first) { return false; }
 	if (c1.second < t.get_num_nodes()) {
@@ -143,7 +145,7 @@ namespace tests {
 namespace properties {
 
 template <class TREE_TYPE>
-err_type exe_commands_utils_centroid(std::ifstream& fin) {
+err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 	TREE_TYPE t;
 	uint64_t n;
 
@@ -301,7 +303,9 @@ err_type test_correctness(const tree_t& T) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& fin) {
+err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& fin)
+noexcept
+{
 	std::string how;
 	fin >> how;
 	if (how != "exhaustive" and how != "random") {

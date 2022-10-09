@@ -65,7 +65,7 @@
 namespace tests {
 namespace utilities {
 
-std::optional<bool> read_should_be_or_not(std::ifstream& fin) {
+std::optional<bool> read_should_be_or_not(std::ifstream& fin) noexcept {
 	std::string should_what;
 	fin >> should_what;
 	if (should_what == "ISOMORPHIC") {
@@ -81,8 +81,8 @@ std::optional<bool> read_should_be_or_not(std::ifstream& fin) {
 	return {};
 }
 
-template <class T>
-void read_free(std::ifstream& fin, T& t) {
+template <class tree_t>
+void read_free(std::ifstream& fin, tree_t& t) noexcept {
 	std::vector<lal::edge> edges(t.get_num_nodes() - 1);
 	for (auto& e : edges) {
 		fin >> e.first >> e.second;
@@ -91,14 +91,14 @@ void read_free(std::ifstream& fin, T& t) {
 }
 
 template <class T>
-void read_rooted(std::ifstream& fin, T& t) {
+void read_rooted(std::ifstream& fin, T& t) noexcept {
 	read_free(fin, t);
 	lal::node r;
 	fin >> r;
 	t.set_root(r);
 }
 
-err_type free_isomorphism_test(std::ifstream& fin) {
+err_type free_isomorphism_test(std::ifstream& fin) noexcept {
 	const auto sbi = read_should_be_or_not(fin);
 	if (not sbi.has_value()) { return err_type::test_format; }
 	const bool should_be_isomorphic = *sbi;
@@ -127,7 +127,7 @@ err_type free_isomorphism_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type rooted_isomorphism_test(std::ifstream& fin) {
+err_type rooted_isomorphism_test(std::ifstream& fin) noexcept {
 	const auto sbi = read_should_be_or_not(fin);
 	if (not sbi.has_value()) { return err_type::test_format; }
 	const bool should_be_isomorphic = *sbi;
@@ -156,7 +156,7 @@ err_type rooted_isomorphism_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-err_type exe_utils_tree_iso_manual(std::ifstream& fin) {
+err_type exe_utils_tree_iso_manual(std::ifstream& fin) noexcept {
 	std::string tree_type;
 	fin >> tree_type;
 	if (tree_type != "free" and tree_type != "rooted") {
@@ -177,19 +177,19 @@ err_type exe_utils_tree_iso_manual(std::ifstream& fin) {
 
 // ground truth: ISOMORPHIC
 
-template <class Tree, class GEN>
-err_type pos_exh_test(std::ifstream& fin) {
-	Tree relab_tree;
+template <class tree_t, class gen_t>
+err_type pos_exh_test(std::ifstream& fin) noexcept {
+	tree_t relab_tree;
 
 	uint64_t n, N_relabs;
 	while (fin >> n >> N_relabs) {
-		GEN Gen(n);
+		gen_t Gen(n);
 		while (not Gen.end()) {
-			const Tree cur_tree = Gen.get_tree();
+			const tree_t cur_tree = Gen.get_tree();
 			Gen.next();
 
 			std::vector<lal::edge> edges_cur = cur_tree.get_edges();
-			if constexpr (std::is_base_of<lal::graphs::directed_graph, Tree>::value) {
+			if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::value) {
 				relab_tree.init(n);
 				relab_tree.set_root(cur_tree.get_root());
 			}
@@ -216,18 +216,18 @@ err_type pos_exh_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template <class Tree, class GEN>
-err_type pos_rand_test(std::ifstream& fin) {
+template <class tree_t, class gen_t>
+err_type pos_rand_test(std::ifstream& fin) noexcept {
 	uint64_t n, N_trees, N_relabs;
 	fin >> n >> N_trees >> N_relabs;
 
-	Tree relab_tree;
-	GEN Gen(n);
+	tree_t relab_tree;
+	gen_t Gen(n);
 
 	for (uint64_t t = 0; t < N_trees; ++t) {
-		const Tree cur_tree = Gen.get_tree();
+		const tree_t cur_tree = Gen.get_tree();
 		std::vector<lal::edge> edges_cur = cur_tree.get_edges();
-		if constexpr (std::is_base_of<lal::graphs::directed_graph, Tree>::value) {
+		if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::value) {
 			relab_tree.init(n);
 			relab_tree.set_root(cur_tree.get_root());
 		}
@@ -254,12 +254,12 @@ err_type pos_rand_test(std::ifstream& fin) {
 
 // ground truth: NON-ISOMORPHIC
 
-template <class Tree, class GEN>
-err_type neg_exh_test(std::ifstream& fin) {
+template <class tree_t, class gen_t>
+err_type neg_exh_test(std::ifstream& fin) noexcept {
 	uint64_t n, N_relabs;
 	fin >> n >> N_relabs;
 
-	if constexpr (std::is_base_of<lal::graphs::undirected_graph, Tree>::value) {
+	if constexpr (std::is_base_of<lal::graphs::undirected_graph, tree_t>::value) {
 		if (n > 21) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Using n>21 (n=" << n << ") is going to freeze the computer.\n";
@@ -267,7 +267,7 @@ err_type neg_exh_test(std::ifstream& fin) {
 			return err_type::test_execution;
 		}
 	}
-	else if constexpr (std::is_base_of<lal::graphs::directed_graph, Tree>::value) {
+	else if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::value) {
 		if (n > 18) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Using n>18 (n=" << n << ") is going to freeze the computer.\n";
@@ -276,21 +276,21 @@ err_type neg_exh_test(std::ifstream& fin) {
 		}
 	}
 
-	std::vector<Tree> all_trees;
-	GEN Gen(n);
+	std::vector<tree_t> all_trees;
+	gen_t Gen(n);
 	while (not Gen.end()) {
 		all_trees.push_back(Gen.get_tree());
 		Gen.next();
 	}
 
-	Tree relab_tree;
+	tree_t relab_tree;
 	for (std::size_t i = 0; i < all_trees.size(); ++i) {
-		const Tree& ti = all_trees[i];
+		const tree_t& ti = all_trees[i];
 		for (std::size_t j = i + 1; j < all_trees.size(); ++j) {
 
-			const Tree& tj = all_trees[j];
+			const tree_t& tj = all_trees[j];
 			std::vector<lal::edge> edges_tj = tj.get_edges();
-			if constexpr (std::is_base_of<lal::graphs::directed_graph, Tree>::value) {
+			if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::value) {
 				relab_tree.init(n);
 				relab_tree.set_root(tj.get_root());
 			}
@@ -316,18 +316,20 @@ err_type neg_exh_test(std::ifstream& fin) {
 	return err_type::no_error;
 }
 
-template <class T, class Exh_Gen, class Rand_Gen>
-err_type exe_test_auto(const std::string& expected, const std::string& mode, std::ifstream& fin) {
+template <class tree_t, class exh_gen_t, class rand_gen_t>
+err_type exe_test_auto(const std::string& expected, const std::string& mode, std::ifstream& fin)
+noexcept
+{
 	if (expected == "positive") {
-		if (mode == "exhaustive") { return pos_exh_test<T,Exh_Gen>(fin); }
-		else { return pos_rand_test<T,Rand_Gen>(fin); }
+		if (mode == "exhaustive") { return pos_exh_test<tree_t,exh_gen_t>(fin); }
+		else { return pos_rand_test<tree_t,rand_gen_t>(fin); }
 	}
 	else {
-		return neg_exh_test<T,Exh_Gen>(fin);
+		return neg_exh_test<tree_t,exh_gen_t>(fin);
 	}
 }
 
-err_type exe_utils_tree_iso_auto(std::ifstream& fin) {
+err_type exe_utils_tree_iso_auto(std::ifstream& fin) noexcept {
 	std::string tree_type;
 	fin >> tree_type;
 	if (tree_type != "free" and tree_type != "rooted") {
@@ -371,7 +373,9 @@ err_type exe_utils_tree_iso_auto(std::ifstream& fin) {
 
 // -----------------------------------------------------------------------------
 
-err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream& fin) {
+err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";

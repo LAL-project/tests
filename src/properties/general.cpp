@@ -68,7 +68,9 @@
 namespace tests {
 namespace properties {
 
-lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph& g) {
+lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph& g)
+noexcept
+{
 	// coin flips
 	std::default_random_engine gen(1234);
 	std::uniform_int_distribution<int> U(0,1);
@@ -102,7 +104,7 @@ lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph
 }
 
 template <class G>
-void enum_E(const G& g) {
+void enum_E(const G& g) noexcept {
 	std::size_t total = 0;
 
 	std::cout << "Elements of E:\n";
@@ -116,7 +118,7 @@ void enum_E(const G& g) {
 }
 
 template <class G>
-void enum_Q(const G& g) {
+void enum_Q(const G& g) noexcept {
 	std::size_t total = 0;
 
 	std::cout << "Elements of Q:\n";
@@ -137,7 +139,7 @@ void enum_Q(const G& g) {
 }
 
 template <class G>
-void Q_size(const G& g) {
+void Q_size(const G& g) noexcept {
 	const lal::numeric::integer Q = lal::properties::num_pairs_independent_edges_integer(g);
 	std::cout << "size of Q: " << Q << '\n';
 
@@ -147,13 +149,13 @@ void Q_size(const G& g) {
 
 //
 
-void mmt_deg(const lal::graphs::undirected_graph& g, uint64_t p) {
+void mmt_deg(const lal::graphs::undirected_graph& g, uint64_t p) noexcept {
 	std::cout << "(udir) <k^" << p << ">= "
 		 << lal::properties::moment_degree_rational(g, p)
 		 << '\n';
 }
 
-void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) {
+void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) noexcept {
 	std::cout << "( dir) <k^" << p << ">= "
 		 << lal::properties::moment_degree_rational(g, p)
 		 << '\n';
@@ -161,7 +163,10 @@ void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) {
 
 //
 
-err_type mmt_in_deg(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p) {
+err_type mmt_in_deg
+(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p)
+noexcept
+{
 	std::cout << "(graph) <k_out^" << p << ">= "
 		 << lal::properties::moment_in_degree_rational(dG, p)
 		 << '\n';
@@ -208,7 +213,10 @@ err_type mmt_in_deg(const lal::graphs::undirected_graph& uG, const lal::graphs::
 
 //
 
-err_type mmt_out_deg(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p) {
+err_type mmt_out_deg
+(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p)
+noexcept
+{
 	std::cout << "(graph) <k_out^" << p << ">= "
 		 << lal::properties::moment_out_degree_rational(dG, p)
 		 << '\n';
@@ -247,7 +255,7 @@ err_type mmt_out_deg(const lal::graphs::undirected_graph& uG, const lal::graphs:
 
 //
 
-void hubiness_coefficient(const lal::graphs::undirected_graph& g) {
+void hubiness_coefficient(const lal::graphs::undirected_graph& g) noexcept {
 	if (not lal::detail::is_graph_a_tree(g)) { return; }
 	if (g.get_num_nodes() > 3) {
 		lal::numeric::rational h = lal::properties::hubiness_rational(g);
@@ -255,7 +263,7 @@ void hubiness_coefficient(const lal::graphs::undirected_graph& g) {
 	}
 }
 
-void MHD(const lal::graphs::undirected_graph& g, lal::node r) {
+void MHD(const lal::graphs::undirected_graph& g, lal::node r) noexcept {
 	if (not lal::detail::is_graph_a_tree(g)) { return; }
 	const lal::graphs::free_tree t(g);
 	const lal::graphs::rooted_tree R(t, r);
@@ -263,7 +271,7 @@ void MHD(const lal::graphs::undirected_graph& g, lal::node r) {
 	std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
 }
 
-err_type exe_properties_general(const input_list& inputs, std::ifstream& fin) {
+err_type exe_properties_general(const input_list& inputs, std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_instructions({
 		"enumerate_E", "enumerate_E_rand_dir",
 		"enumerate_Q", "enumerate_Q_rand_dir",

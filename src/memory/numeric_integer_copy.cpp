@@ -55,7 +55,7 @@
 namespace tests {
 namespace memory {
 
-err_type test_integer_copy() {
+err_type test_integer_copy() noexcept {
 	// copy constructor
 	{
 	lal::numeric::integer i1 = 50;

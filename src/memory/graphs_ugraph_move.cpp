@@ -52,7 +52,7 @@ namespace memory {
 //
 //
 
-void test_move_undirected_graph() {
+void test_move_undirected_graph() noexcept {
 	begin_function;
 
 	// move constructor

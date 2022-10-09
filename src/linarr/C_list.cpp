@@ -71,6 +71,7 @@ namespace linarr {
 
 err_type exe_linarr_C_list
 (const input_list& inputs, std::ifstream& fin, char upper_bound_type)
+noexcept
 {
 	const std::set<std::string> allowed_procs(
 	{"bruteforce", "dyn_prog", "ladder", "stack_based"}

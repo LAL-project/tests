@@ -134,6 +134,7 @@ struct extra_params {
 
 err_type test_for_n_while
 (uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
+noexcept
 {
 	const auto& UFT = params.UFT;
 
@@ -158,6 +159,7 @@ err_type test_for_n_while
 
 err_type test_for_n_for
 (uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
+noexcept
 {
 	const auto& UFT = params.UFT;
 
@@ -181,6 +183,7 @@ err_type test_for_n_for
 
 err_type test_for_n_yield
 (uint64_t n, lal::generate::all_ulab_free_trees& TreeGen, const extra_params& params)
+noexcept
 {
 	const auto& UFT = params.UFT;
 
@@ -230,7 +233,7 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) 
 
 } // -- namespace auf
 
-err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) {
+err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) noexcept {
 
 	/* BUILD TESTING DATA */
 

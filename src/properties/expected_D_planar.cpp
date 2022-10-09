@@ -62,6 +62,7 @@ namespace properties {
 
 err_type exe_properties_expected_D_planar_brute_force
 (const input_list& inputs, std::ifstream& fin)
+noexcept
 {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
@@ -103,7 +104,9 @@ err_type exe_properties_expected_D_planar_brute_force
 	return err_type::no_error;
 }
 
-lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t) {
+lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t)
+noexcept
+{
 	const uint64_t n = t.get_num_nodes();
 	const lal::numeric::rational correction_factor((n - 1)*(n - 2), 6*n);
 	lal::numeric::rational S = 0;
@@ -117,6 +120,7 @@ lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t) {
 
 err_type exe_properties_expected_D_planar_quadratic
 (const input_list& inputs, std::ifstream& fin)
+noexcept
 {
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';

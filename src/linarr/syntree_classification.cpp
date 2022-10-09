@@ -64,7 +64,7 @@ namespace syntree_class {
 
 typedef lal::linarr::syntactic_dependency_structure syndepstr_type;
 
-std::string sdtt_to_string(const syndepstr_type& t) {
+std::string sdtt_to_string(const syndepstr_type& t) noexcept {
 	switch (t) {
 	case syndepstr_type::projective: return "prj";
 	case syndepstr_type::planar: return "pla";
@@ -74,7 +74,7 @@ std::string sdtt_to_string(const syndepstr_type& t) {
 	}
 }
 
-std::pair<syndepstr_type, bool> std_to_syntreetype(const std::string& s) {
+std::pair<syndepstr_type, bool> std_to_syntreetype(const std::string& s) noexcept {
 	if (s == "prj") { return std::make_pair(syndepstr_type::projective, true); }
 	if (s == "pla") { return std::make_pair(syndepstr_type::planar, true); }
 	if (s == "1ec") { return std::make_pair(syndepstr_type::EC1, true); }
@@ -85,7 +85,7 @@ std::pair<syndepstr_type, bool> std_to_syntreetype(const std::string& s) {
 	return std::make_pair(syndepstr_type::unknown, true);
 }
 
-lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) {
+lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept {
 	// read numbers in line
 	std::stringstream ss(s);
 	std::vector<uint64_t> L;
@@ -94,7 +94,9 @@ lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) {
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
-std::array<bool, lal::linarr::__syntactic_dependency_structure_size> parse_ground_classes(std::string s)
+std::array<bool, lal::linarr::__syntactic_dependency_structure_size>
+parse_ground_classes(std::string s)
+noexcept
 {
 	// classes vector
 	auto classes =
@@ -126,7 +128,7 @@ std::array<bool, lal::linarr::__syntactic_dependency_structure_size> parse_groun
 	return classes;
 }
 
-err_type parse_single_file(const std::string& file) {
+err_type parse_single_file(const std::string& file) noexcept {
 
 	if (not std::filesystem::exists(file)) {
 		std::cerr << ERROR << '\n';
@@ -197,7 +199,9 @@ err_type parse_single_file(const std::string& file) {
 
 } // -- namespace syntree_class
 
-err_type exe_linarr_syntree_classification(const input_list& inputs, std::ifstream& fin) {
+err_type exe_linarr_syntree_classification(const input_list& inputs, std::ifstream& fin)
+noexcept
+{
 	if (inputs.size() != 0) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    No input files are allowed in this test.\n";
