@@ -60,6 +60,7 @@
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
 #include "common/time.hpp"
+#include "common/parse_header.hpp"
 
 #define to_int64(x) static_cast<int64_t>(x)
 #define to_uint64(x) static_cast<uint64_t>(x)
@@ -155,14 +156,14 @@ noexcept
 	return Ec2;
 }
 
-err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	std::set<std::string> allowed_procs({"E_2[C|d]"});
+err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
+	const std::set<std::string> allowed_procs({"E_2[C|d]"});
+
+	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Only one input file si allowed in this test.\n";
+		std::cerr << "    Only one input file is allowed in this test.\n";
 		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 		return err_type::test_format;
 	}

@@ -203,15 +203,7 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2) noexcept {
 
 } // -- namespace alf
 
-err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin) noexcept {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
-	// --- do the tests
+err_type exe_gen_trees_alf(std::ifstream& fin) noexcept {
 
 	uint64_t n1, n2;
 	while (fin >> n1 >> n2) {

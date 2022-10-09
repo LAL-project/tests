@@ -253,15 +253,7 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_numeric_integer(std::ifstream& fin) noexcept {
 
 	std::map<std::string, lal::numeric::integer> integer_vars;
 
@@ -325,16 +317,7 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_numeric_integer_manual(const input_list& inputs, std::ifstream&)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
+err_type exe_numeric_integer_manual(std::ifstream&) noexcept {
 	int i = 0;
 
 #define check_result(WHAT, EXPR, RES)										\

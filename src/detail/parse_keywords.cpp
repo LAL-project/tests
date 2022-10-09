@@ -58,13 +58,13 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "sorting") {
-		return parse_header(exe_detail_sorting, fin);
+		return exe_detail_sorting(fin);
 	}
 	if (key == "traversal") {
-		return parse_header(exe_detail_bfs, fin);
+		return exe_detail_bfs(fin);
 	}
 	if (key == "avl_functions") {
-		return parse_header(exe_detail_avl_functions, fin);
+		return exe_detail_avl_functions(fin);
 	}
 
 	std::cerr << ERROR << '\n';

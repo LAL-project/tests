@@ -61,6 +61,7 @@
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 #include "common/time.hpp"
+#include "common/parse_header.hpp"
 
 // properties includes
 #include "properties/C_rla_brute_force_algorithms.hpp"
@@ -190,14 +191,14 @@ noexcept
 	return true;
 }
 
-err_type exe_properties_ExpVar_C(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
+err_type exe_properties_ExpVar_C(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_procs(
 		{"brute_force", "formula-Q",
 		 "formula-no_Q-reuse", "formula-no_Q-no-reuse",
 		 "trees", "all-trees", "forests", "mixed-trees"}
 	);
+
+	const input_list inputs = read_input_list(fin);
 
 	std::string proc;
 	fin >> proc;

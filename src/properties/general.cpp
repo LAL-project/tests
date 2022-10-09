@@ -64,6 +64,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace properties {
@@ -271,7 +272,7 @@ void MHD(const lal::graphs::undirected_graph& g, lal::node r) noexcept {
 	std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
 }
 
-err_type exe_properties_general(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_properties_general(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_instructions({
 		"enumerate_E", "enumerate_E_rand_dir",
 		"enumerate_Q", "enumerate_Q_rand_dir",
@@ -279,6 +280,8 @@ err_type exe_properties_general(const input_list& inputs, std::ifstream& fin) no
 		"mmt_deg", "mmt_in_deg", "mmt_out_deg",
 		"hubiness_coefficient", "Mean_Hierarchical_Distance"
 	});
+
+	const input_list inputs = read_input_list(fin);
 
 	std::string ins;
 	std::string all_instructions = "";

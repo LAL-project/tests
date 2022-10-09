@@ -95,16 +95,9 @@ struct my_struct {
 	std::string vs;
 };
 
-err_type exe_detail_avl_functions(const input_list& inputs, std::ifstream& fin)
+err_type exe_detail_avl_functions(std::ifstream& fin)
 noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
 	std::string option;
 	lal::detail::AVL<my_struct> t;
 	std::size_t instruction_idx = 0;

@@ -57,6 +57,7 @@
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
+#include "common/parse_header.hpp"
 
 // linarr includes
 #include "linarr/n_crossings_m2.hpp"
@@ -72,12 +73,14 @@ namespace linarr {
 	std::cerr << "    For (undirected) graph\n";						\
 	std::cerr << uG << '\n';											\
 
-err_type exe_linarr_C(const input_list& inputs, std::ifstream& fin, bool has_upper_bound)
+err_type exe_linarr_C(std::ifstream& fin, bool has_upper_bound)
 noexcept
 {
 	std::set<std::string> allowed_procs({
 		"bruteforce", "dyn_prog", "ladder", "stack_based"
 	});
+
+	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';

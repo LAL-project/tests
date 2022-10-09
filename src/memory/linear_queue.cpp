@@ -223,15 +223,7 @@ void test_copy_pop() noexcept {
 
 } // -- namespace lal_linear_queue
 
-err_type exe_memory_detail_linear_queue(const input_list& inputs, std::ifstream&)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_memory_detail_linear_queue(std::ifstream&) noexcept {
 
 #if defined MOVE
 	lal_linear_queue::test_move_push();

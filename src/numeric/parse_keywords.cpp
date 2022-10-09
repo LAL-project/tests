@@ -58,17 +58,17 @@ noexcept
 	const std::string& num_type1 = keywords[i];
 
 	if (num_type1 == "integer") {
-		return parse_header(exe_numeric_integer, fin);
+		return exe_numeric_integer(fin);
 	}
 	if (num_type1 == "integer_manual") {
-		return parse_header(exe_numeric_integer_manual, fin);
+		return exe_numeric_integer_manual(fin);
 	}
 
 	if (num_type1 == "rational") {
-		return parse_header(exe_numeric_rational, fin);
+		return exe_numeric_rational(fin);
 	}
 	if (num_type1 == "rational_manual") {
-		return parse_header(exe_numeric_rational_manual, fin);
+		return exe_numeric_rational_manual(fin);
 	}
 
 	std::cerr << ERROR << '\n';

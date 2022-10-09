@@ -58,7 +58,7 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "correctness") {
-		return parse_header(exe_io_correctness, fin);
+		return exe_io_correctness(fin);
 	}
 
 	std::cerr << ERROR << '\n';

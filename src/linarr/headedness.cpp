@@ -56,11 +56,14 @@
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
 #include "common/time.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_headedness(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_linarr_headedness(std::ifstream& fin) noexcept {
+	const input_list inputs = read_input_list(fin);
+
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Only one input file si allowed in this test.\n";

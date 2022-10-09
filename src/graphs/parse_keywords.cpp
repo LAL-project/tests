@@ -58,15 +58,15 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "construction") {
-		return parse_header(exe_graphs_construction, fin);
+		return exe_graphs_construction(fin);
 	}
 
 	if (key == "tree_types") {
-		return parse_header(exe_graphs_tree_type_classification, fin);
+		return exe_graphs_tree_type_classification(fin);
 	}
 
 	if (key == "graph_literals") {
-		return parse_header(exe_graphs_graph_literals, fin);
+		return exe_graphs_graph_literals(fin);
 	}
 
 	std::cerr << ERROR << '\n';

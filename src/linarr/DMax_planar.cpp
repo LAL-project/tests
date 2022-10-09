@@ -56,6 +56,7 @@
 
 // common includes
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -142,9 +143,7 @@ noexcept
 
 } // -- namespace dmax_planar
 
-err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
+err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_algos({"AEF", "quadratic"});
 	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"});
 
@@ -159,6 +158,8 @@ noexcept
 		}
 		return err_type::test_format;
 	}
+
+	const input_list inputs = read_input_list(fin);
 
 	err_type err = err_type::no_error;
 

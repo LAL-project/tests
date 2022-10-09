@@ -274,16 +274,8 @@ err_type automatic_caterpillar_mode(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_properties_caterpillar_distance(const input_list& inputs, std::ifstream& fin)
-noexcept
+err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
 	const std::set<std::string> allowed_modes({"automatic", "input"});
 
 	std::string mode;

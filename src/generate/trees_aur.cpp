@@ -199,7 +199,7 @@ noexcept
 
 } // -- namespace aur
 
-err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_gen_trees_aur(std::ifstream& fin) noexcept {
 
 	/* BUILD TESTING DATA */
 
@@ -241,15 +241,6 @@ err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin) noexcep
 		{"126186554308"},
 		{"354426847597"}
 	};
-
-	// -------------------------------------------------------------------------
-
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	// --- do the tests
 

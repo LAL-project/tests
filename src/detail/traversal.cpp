@@ -56,6 +56,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace detail {
@@ -232,10 +233,12 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_detail_bfs(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_detail_bfs(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_options({
 		"sort_insertion", "sort_boolean"
 	});
+
+	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() > 1) {
 		std::cerr << ERROR << '\n';

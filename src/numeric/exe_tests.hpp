@@ -62,10 +62,10 @@
 namespace tests {
 namespace numeric {
 
-err_type exe_numeric_integer(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_numeric_integer_manual(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_numeric_rational(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream& fin) noexcept;
+err_type exe_numeric_integer(std::ifstream& fin) noexcept;
+err_type exe_numeric_integer_manual(std::ifstream& fin) noexcept;
+err_type exe_numeric_rational(std::ifstream& fin) noexcept;
+err_type exe_numeric_rational_manual(std::ifstream& fin) noexcept;
 
 } // -- namespace numeric
 } // -- namespace tests

@@ -105,15 +105,10 @@ err_type test_memory_rational() noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_memory_numeric(const input_list& inputs, std::ifstream&) noexcept {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-	return_if(test_memory_integer())
-	return_if(test_memory_rational())
+err_type exe_memory_numeric(std::ifstream&) noexcept {
+
+	return_if(test_memory_integer());
+	return_if(test_memory_rational());
 	TEST_GOODBYE;
 	return err_type::no_error;
 }

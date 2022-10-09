@@ -63,6 +63,7 @@
 // common includes
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
+#include "common/parse_header.hpp"
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -377,10 +378,9 @@ noexcept
 
 } // -- namespace dmin_unconstrained
 
-err_type exe_linarr_Dmin_unconstrained
-(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
+err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
+	const input_list inputs = read_input_list(fin);
+
 	std::string what;
 	fin >> what;
 

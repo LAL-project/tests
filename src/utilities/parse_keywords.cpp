@@ -57,7 +57,7 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "tree_isomorphism") {
-		return parse_header(exe_utilities_tree_isomorphism, fin);
+		return exe_utilities_tree_isomorphism(fin);
 	}
 
 	std::cerr << ERROR << '\n';

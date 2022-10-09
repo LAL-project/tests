@@ -436,19 +436,12 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 	return err_type::test_format;
 }
 
-err_type exe_detail_sorting(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_detail_sorting(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_options({
 		"insertion_sort_rand",
 		"bit_sort_rand", "bit_sort_mem_rand",
 		"counting_sort_rand", "counting_sort_nrand"
 	});
-
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	std::string option;
 	while (fin >> option) {

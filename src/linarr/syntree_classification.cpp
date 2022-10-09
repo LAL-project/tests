@@ -199,15 +199,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 
 } // -- namespace syntree_class
 
-err_type exe_linarr_syntree_classification(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 
 	std::string f;
 	while (fin >> f) {

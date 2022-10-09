@@ -58,27 +58,19 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_klevel(
-	const input_list& inputs,
-	std::ifstream& fin,
-	uint64_t level, const std::string& proc
-)
+err_type exe_linarr_klevel(std::ifstream& fin, uint64_t level, const std::string& proc)
 noexcept
 {
 	const std::set<std::string> allowed_procs(
 		{"MDD"}
 	);
 
-	if (inputs.size() == 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Expected at least one input.\n";
-		std::cerr << "    Instead, none were given.\n";
-		return err_type::test_format;
-	}
+	const input_list inputs = read_input_list(fin);
 
 	const std::size_t n_inputs = inputs.size();
 	std::vector<lal::graphs::undirected_graph> Gs(n_inputs);

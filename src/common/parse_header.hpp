@@ -51,47 +51,23 @@
 
 namespace tests {
 
-template <typename ... Params>
-err_type parse_header(
-	err_type (*F)(const input_list&, std::ifstream&, Params...),
-
-	std::ifstream& fin, Params... P
-)
-noexcept
-{
-	std::string field;
-	fin >> field;
-
-	if (field != "INPUT") {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Expected field: INPUT\n";
-		std::cerr << "    Found: " << field << '\n';
-		return tests::err_type::test_format;
-	}
+inline input_list read_input_list(std::ifstream& fin) noexcept {
+	{ std::string INPUT; fin >> INPUT; }
 
 	std::size_t n_inputs;
 	fin >> n_inputs;
+
 	input_list inputs(n_inputs);
 	for (std::size_t i = 0; i < n_inputs; ++i) {
-		std::string file, format;
-		fin >> file >> format;
-		inputs[i] = std::make_pair(file, format);
+		fin >> inputs[i].first >> inputs[i].second;
 	}
-
-	fin >> field;
-	if (field != "BODY") {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Expected field: BODY\n";
-		std::cerr << "    Found: " << field << '\n';
-		return tests::err_type::test_format;
-	}
-
-	return F(inputs, fin, P...);
+	return inputs;
 }
 
-void mark_wrong_keyword
+inline void mark_wrong_keyword
 (const std::vector<std::string>& keywords,
  const std::vector<std::size_t>& k, const std::string& tab)
+noexcept
 {
 	std::cerr << tab;
 	// sure 'keywords' has at least one keyword

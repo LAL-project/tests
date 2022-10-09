@@ -335,15 +335,7 @@ void test_resize_fill() noexcept {
 
 }
 
-err_type exe_memory_detail_data_array(const input_list& inputs, std::ifstream&)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_memory_detail_data_array(std::ifstream&) noexcept {
 
 #if defined MOVE
 	lal_data_array::test_move_constructor();

@@ -62,36 +62,36 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_approx_Exp_C(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept;
 // upper_bound: is there an upper bound after every arrangement?
-err_type exe_linarr_C(const input_list& inputs,std::ifstream& fin, bool has_upper_bound) noexcept;
+err_type exe_linarr_C(std::ifstream& fin, bool has_upper_bound) noexcept;
 // upper_bound: type of upper_bound
 //	0: no upper bound at all
 //	1: an upper bound at the end of the file
 //	2: an upper bound for every arrangement
-err_type exe_linarr_C_list(const input_list& inputs, std::ifstream& fin, char upper_bound_kind) noexcept;
-err_type exe_linarr_D(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_linarr_headedness(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_linarr_syntree_classification(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_linarr_linear_arrangement(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin) noexcept;
+err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_kind) noexcept;
+err_type exe_linarr_D(std::ifstream& fin) noexcept;
+err_type exe_linarr_headedness(std::ifstream& fin) noexcept;
+err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept;
+err_type exe_linarr_linear_arrangement(std::ifstream& fin) noexcept;
+err_type exe_linarr_dependency_flux(std::ifstream& fin) noexcept;
 
 err_type exe_linarr_klevel(
-	const input_list& inputs, std::ifstream& fin,
+	std::ifstream& fin,
 	uint64_t level, const std::string& proc)
 	noexcept;
 
-err_type exe_linarr_Dmin_projective(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_linarr_Dmin_planar(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_linarr_Dmin_unconstrained(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_linarr_Dmin_comparison(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept;
+err_type exe_linarr_Dmin_planar(std::ifstream& fin) noexcept;
+err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept;
+err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept;
 
-err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_linarr_DMax_projective_all_max_roots(const input_list& inputs, std::ifstream& fin)
+err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept;
+err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin)
 noexcept;
-err_type exe_linarr_DMax_planar(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept;
 
-err_type exe_linarr_arrangement_validity(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_linarr_arrangement_validity(std::ifstream& fin) noexcept;
 
 } // -- namespace linarr
 } // -- namespace tests

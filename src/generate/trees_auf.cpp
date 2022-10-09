@@ -233,7 +233,7 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) 
 
 } // -- namespace auf
 
-err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_gen_trees_auf(std::ifstream& fin) noexcept {
 
 	/* BUILD TESTING DATA */
 
@@ -282,15 +282,6 @@ err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) noexcep
 		{"2262366343746"},
 		{"6226306037178"}
 	};
-
-	// -------------------------------------------------------------------------
-
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	// --- do the tests
 

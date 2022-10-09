@@ -61,14 +61,7 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fin) noexcept {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
+err_type exe_gen_arr_rand_projective(std::ifstream& fin) noexcept {
 	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices

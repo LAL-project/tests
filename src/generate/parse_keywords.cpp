@@ -58,22 +58,22 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "all_projective") {
-		return parse_header(exe_gen_arr_all_projective, fin);
+		return exe_gen_arr_all_projective(fin);
 	}
 	else if (key == "rand_projective") {
-		return parse_header(exe_gen_arr_rand_projective, fin);
+		return exe_gen_arr_rand_projective(fin);
 	}
 	else if (key == "all_planar") {
-		return parse_header(exe_gen_arr_all_planar, fin);
+		return exe_gen_arr_all_planar(fin);
 	}
 	else if (key == "rand_planar") {
-		return parse_header(exe_gen_arr_rand_planar, fin);
+		return exe_gen_arr_rand_planar(fin);
 	}
 	else if (key == "all") {
-		return parse_header(exe_gen_arr_all, fin);
+		return exe_gen_arr_all(fin);
 	}
 	else if (key == "rand") {
-		return parse_header(exe_gen_arr_rand, fin);
+		return exe_gen_arr_rand(fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -88,28 +88,28 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "alf") {
-		return parse_header(exe_gen_trees_alf, fin);
+		return exe_gen_trees_alf(fin);
 	}
 	else if (key == "alr") {
-		return parse_header(exe_gen_trees_alr, fin);
+		return exe_gen_trees_alr(fin);
 	}
 	else if (key == "auf") {
-		return parse_header(exe_gen_trees_auf, fin);
+		return exe_gen_trees_auf(fin);
 	}
 	else if (key == "aur") {
-		return parse_header(exe_gen_trees_aur, fin);
+		return exe_gen_trees_aur(fin);
 	}
 	else if (key == "rlf") {
-		return parse_header(exe_gen_trees_rlf, fin);
+		return exe_gen_trees_rlf(fin);
 	}
 	else if (key == "rlr") {
-		return parse_header(exe_gen_trees_rlr, fin);
+		return exe_gen_trees_rlr(fin);
 	}
 	else if (key == "ruf") {
-		return parse_header(exe_gen_trees_ruf, fin);
+		return exe_gen_trees_ruf(fin);
 	}
 	else if (key == "rur") {
-		return parse_header(exe_gen_trees_rur, fin);
+		return exe_gen_trees_rur(fin);
 	}
 
 	std::cerr << ERROR << '\n';

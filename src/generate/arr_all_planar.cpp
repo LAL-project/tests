@@ -165,15 +165,8 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 	return err_type::no_error;
 }
 
-err_type exe_gen_arr_all_planar(const input_list& inputs, std::ifstream& fin) noexcept {
+err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_modes({"automatic", "manual"});
-
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	std::string mode;
 	fin >> mode;

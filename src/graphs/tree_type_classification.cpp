@@ -111,30 +111,23 @@ std::vector<bool> parse_classes_tt(std::string s) noexcept {
 
 } // -- namespace tree_type_class
 
-err_type exe_graphs_tree_type_classification
-(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 
 	std::string line;
 	std::size_t lineno = 3;
+	getline(fin, line); // skip header
 	getline(fin, line); // skip header
 
 	while (getline(fin, line)) {
 		++lineno;
 
-		std::size_t semicolon = line.find(';');
+		const std::size_t semicolon = line.find(';');
 		if (semicolon == std::string::npos) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Input line is malformed.\n";
 			std::cerr << "    In line: " << lineno << "'.\n";
 			std::cerr << "    Line '" << lineno << "' does not have the ';'.\n";
+			std::cerr << "    Line contents '" << line << "'.\n";
 			return err_type::test_format;
 		}
 
@@ -154,10 +147,10 @@ noexcept
 		// each tree's classification
 		rT.calculate_tree_type();
 		std::vector<std::string> rClasses = rT.get_tree_type_list();
-		sort(rClasses.begin(), rClasses.end());
+		std::sort(rClasses.begin(), rClasses.end());
 		fT.calculate_tree_type();
 		std::vector<std::string> fClasses = fT.get_tree_type_list();
-		sort(fClasses.begin(), fClasses.end());
+		std::sort(fClasses.begin(), fClasses.end());
 
 		// check result is correct
 		if (rClasses != fClasses) {
@@ -166,14 +159,14 @@ noexcept
 			std::cerr << "    Rooted tree:\n";
 			for (const std::string& s : rClasses) {
 			std::cerr << "        " << s
-				 << (binary_search(fClasses.begin(), fClasses.end(), s) ?
+				 << (std::binary_search(fClasses.begin(), fClasses.end(), s) ?
 						 "" : " <--- not in the free tree")
 				 << '\n';
 			}
 			std::cerr << "    Free tree:\n";
 			for (const std::string& s : rClasses) {
 			std::cerr << "        " << s
-				 << (binary_search(rClasses.begin(), rClasses.end(), s) ?
+				 << (std::binary_search(rClasses.begin(), rClasses.end(), s) ?
 						 "" : " <--- not in the rooted tree")
 				 << '\n';
 			}

@@ -58,10 +58,10 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "data_array") {
-		return parse_header(exe_memory_detail_data_array, fin);
+		return exe_memory_detail_data_array(fin);
 	}
 	if (key == "linear_queue") {
-		return parse_header(exe_memory_detail_linear_queue, fin);
+		return exe_memory_detail_linear_queue(fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -76,10 +76,10 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "graphs") {
-		return parse_header(exe_memory_graphs, fin);
+		return exe_memory_graphs(fin);
 	}
 	if (key == "numeric") {
-		return parse_header(exe_memory_numeric, fin);
+		return exe_memory_numeric(fin);
 	}
 	if (key == "internal") {
 		return call_memory_detail(keywords, i+1, fin);

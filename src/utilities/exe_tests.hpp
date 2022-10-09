@@ -62,7 +62,7 @@
 namespace tests {
 namespace utilities {
 
-err_type exe_utilities_tree_isomorphism(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_utilities_tree_isomorphism(std::ifstream& fin) noexcept;
 
 } // -- namespace utilities
 } // -- namespace tests

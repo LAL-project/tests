@@ -94,15 +94,9 @@ noexcept
 } // -- namespace test_flux
 using namespace test_flux;
 
-err_type exe_linarr_dependency_flux(const input_list& inputs,std::ifstream& fin)
+err_type exe_linarr_dependency_flux(std::ifstream& fin)
 noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	std::string field;
 	lal::graphs::free_tree T;

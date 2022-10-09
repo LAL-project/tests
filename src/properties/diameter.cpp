@@ -237,15 +237,7 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_properties_diameter(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_properties_diameter(std::ifstream& fin) noexcept {
 
 	std::string mode, graph_type;
 	fin >> mode >> graph_type;

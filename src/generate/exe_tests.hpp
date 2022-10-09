@@ -62,20 +62,20 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_all(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_arr_rand(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_arr_all_projective(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_arr_rand_projective(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_arr_all_planar(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_arr_rand_planar(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_alf(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_alr(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_auf(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_aur(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_rlr(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_ruf(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_gen_trees_rur(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_gen_arr_all(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_rand(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_all_projective(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_rand_projective(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_alf(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_alr(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_auf(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_aur(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_rlf(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_rlr(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_ruf(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_rur(std::ifstream& fin) noexcept;
 
 } // -- namespace generate
 } // -- namespace tests

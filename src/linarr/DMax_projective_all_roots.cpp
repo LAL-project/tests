@@ -113,16 +113,7 @@ noexcept
 
 } // -- namespace dmin_projective
 
-err_type exe_linarr_DMax_projective_all_max_roots(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
+err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_algos({"AEF"});
 
 	std::string algo;

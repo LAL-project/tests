@@ -60,16 +60,8 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_expected_D_planar_brute_force
-(const input_list& inputs, std::ifstream& fin)
-noexcept
+err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	uint64_t n;
 	fin >> n;
@@ -118,17 +110,8 @@ noexcept
 	return correction_factor + S/n;
 }
 
-err_type exe_properties_expected_D_planar_quadratic
-(const input_list& inputs, std::ifstream& fin)
-noexcept
+err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
 	std::string option;
 	fin >> option;
 

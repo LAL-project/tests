@@ -372,16 +372,8 @@ err_type case_7() noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_linarr_linear_arrangement(const input_list& inputs, std::ifstream&)
-noexcept
+err_type exe_linarr_linear_arrangement(std::ifstream&) noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
 	// set of shifts
 
 	case_1();

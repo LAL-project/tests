@@ -62,17 +62,17 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_general(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_MHD_All_trees(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_ExpVar_C(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_ExpVar_D(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_centre(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_properties_centroid(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_properties_diameter(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_properties_caterpillar_distance(const input_list& inputs, std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_projective(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_brute_force(const input_list& inputs,std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_quadratic(const input_list& inputs,std::ifstream& fin) noexcept;
+err_type exe_properties_general(std::ifstream& fin) noexcept;
+err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept;
+err_type exe_properties_ExpVar_C(std::ifstream& fin) noexcept;
+err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept;
+err_type exe_properties_centre(std::ifstream& fin) noexcept;
+err_type exe_properties_centroid(std::ifstream& fin) noexcept;
+err_type exe_properties_diameter(std::ifstream& fin) noexcept;
+err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept;
+err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept;
+err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexcept;
+err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept;
 
 } // -- namespace properties
 } // -- namespace tests

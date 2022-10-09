@@ -56,10 +56,10 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "brute_force") {
-		return parse_header(exe_properties_expected_D_planar_brute_force, fin);
+		return exe_properties_expected_D_planar_brute_force(fin);
 	}
 	if (key == "quadratic") {
-		return parse_header(exe_properties_expected_D_planar_quadratic, fin);
+		return exe_properties_expected_D_planar_quadratic(fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -73,7 +73,7 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
-		return parse_header(exe_properties_expected_D_projective, fin);
+		return exe_properties_expected_D_projective(fin);
 	}
 	if (key == "Planar") {
 		return call_expected_D_planar(keywords, i+1, fin);
@@ -90,31 +90,31 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "general") {
-		return parse_header(exe_properties_general, fin);
+		return exe_properties_general(fin);
 	}
 	if (key == "MHD_All_Trees") {
-		return parse_header(exe_properties_MHD_All_trees, fin);
+		return exe_properties_MHD_All_trees(fin);
 	}
 	if (key == "exp_var_C") {
-		return parse_header(exe_properties_ExpVar_C, fin);
+		return exe_properties_ExpVar_C(fin);
 	}
 	if (key == "exp_var_D") {
-		return parse_header(exe_properties_ExpVar_D, fin);
+		return exe_properties_ExpVar_D(fin);
 	}
 	if (key == "expected_D") {
 		return call_expected_D(keywords, i+1, fin);
 	}
 	if (key == "centre") {
-		return parse_header(exe_properties_centre, fin);
+		return exe_properties_centre(fin);
 	}
 	if (key == "centroid") {
-		return parse_header(exe_properties_centroid, fin);
+		return exe_properties_centroid(fin);
 	}
 	if (key == "diameter") {
-		return parse_header(exe_properties_diameter, fin);
+		return exe_properties_diameter(fin);
 	}
 	if (key == "caterpillar_distance") {
-		return parse_header(exe_properties_caterpillar_distance, fin);
+		return exe_properties_caterpillar_distance(fin);
 	}
 
 	std::cerr << ERROR << '\n';

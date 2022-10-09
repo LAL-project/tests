@@ -54,6 +54,7 @@
 
 // common includes
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 // linarr includes
 #include "linarr/linarr_brute_force_testing.hpp"
@@ -113,9 +114,9 @@ noexcept
 
 } // -- namespace dmin_projective
 
-err_type exe_linarr_DMax_projective(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
+err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept {
+	const input_list inputs = read_input_list(fin);
+
 	if (inputs.size() != 1) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Exactly one input files are allowed in this test.\n";

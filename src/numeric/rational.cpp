@@ -415,13 +415,7 @@ err_type test_rational_minutia() noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) noexcept {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_numeric_rational(std::ifstream& fin) noexcept {
 
 	std::map<std::string, std::string> vtypes;
 	std::map<std::string, lal::numeric::integer> integer_vars;
@@ -512,27 +506,19 @@ err_type exe_numeric_rational(const input_list& inputs, std::ifstream& fin) noex
 	return err_type::no_error;
 }
 
-err_type exe_numeric_rational_manual(const input_list& inputs,std::ifstream&)
-noexcept
-{
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
+err_type exe_numeric_rational_manual(std::ifstream&) noexcept {
 
 	int i = 0;
 
 #define check_result(WHAT, EXPR, RES)										\
 	i += 1;																	\
 	if (EXPR != RES) {														\
-		std::cerr << ERROR << '\n';												\
+		std::cerr << ERROR << '\n';											\
 		std::cerr << "    At expression " << i << ")\n";					\
 		std::cerr << "    Input expression computes a result different\n";	\
 		std::cerr << "    from the ground truth.\n";						\
-		std::cerr << "    Result of '" << WHAT << "'= " << EXPR << '\n';			\
-		std::cerr << "    Expected: " << RES << '\n';							\
+		std::cerr << "    Result of '" << WHAT << "'= " << EXPR << '\n';	\
+		std::cerr << "    Expected: " << RES << '\n';						\
 		return err_type::test_execution;									\
 	}
 

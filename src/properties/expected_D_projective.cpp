@@ -59,16 +59,8 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_expected_D_projective
-(const input_list& inputs, std::ifstream& fin)
-noexcept
+err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept
 {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
 
 	uint64_t n;
 	fin >> n;

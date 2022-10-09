@@ -55,15 +55,7 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_trees_rlf(const input_list& inputs, std::ifstream& fin) noexcept {
-	if (inputs.size() != 0) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    No input files are allowed in this test.\n";
-		std::cerr << "    Instead, " << inputs.size() << " were given.\n";
-		return err_type::test_format;
-	}
-
-	// --- do the tests
+err_type exe_gen_trees_rlf(std::ifstream& fin) noexcept {
 
 	uint64_t n1, n2;
 	int num_trees;

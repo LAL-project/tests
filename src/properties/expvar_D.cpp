@@ -57,6 +57,7 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace properties {
@@ -72,9 +73,9 @@ void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) noexcept {
 
 } // -- namespace ExpVar_D
 
-err_type exe_properties_ExpVar_D(const input_list& inputs, std::ifstream& fin)
-noexcept
-{
+err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept {
+	const input_list inputs = read_input_list(fin);
+
 	std::string proc;
 	fin >> proc;
 

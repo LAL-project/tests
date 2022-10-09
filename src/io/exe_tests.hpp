@@ -62,7 +62,7 @@
 namespace tests {
 namespace io {
 
-err_type exe_io_correctness(const input_list& inputs, std::ifstream& fin) noexcept;
+err_type exe_io_correctness(std::ifstream& fin) noexcept;
 
 } // -- namespace io
 } // -- namespace tests

@@ -59,16 +59,16 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
-		return parse_header(exe_linarr_Dmin_projective, fin);
+		return exe_linarr_Dmin_projective(fin);
 	}
 	if (key == "Planar") {
-		return parse_header(exe_linarr_Dmin_planar, fin);
+		return exe_linarr_Dmin_planar(fin);
 	}
 	if (key == "Unconstrained") {
-		return parse_header(exe_linarr_Dmin_unconstrained, fin);
+		return exe_linarr_Dmin_unconstrained(fin);
 	}
 	if (key == "comparison") {
-		return parse_header(exe_linarr_Dmin_comparison, fin);
+		return exe_linarr_Dmin_comparison(fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -83,13 +83,13 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
-		return parse_header(exe_linarr_DMax_projective, fin);
+		return exe_linarr_DMax_projective(fin);
 	}
 	if (key == "Planar") {
-		return parse_header(exe_linarr_DMax_planar, fin);
+		return exe_linarr_DMax_planar(fin);
 	}
 	if (key == "projective_all_roots") {
-		return parse_header(exe_linarr_DMax_projective_all_max_roots, fin);
+		return exe_linarr_DMax_projective_all_max_roots(fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -127,8 +127,7 @@ noexcept
 
 	const uint64_t level_int = static_cast<uint64_t>(atoi(level.c_str()));
 
-	return parse_header<uint64_t,const std::string&>
-			(exe_linarr_klevel, fin, level_int, proc);
+	return exe_linarr_klevel(fin, level_int, proc);
 }
 
 err_type call_linarr_C
@@ -139,21 +138,21 @@ noexcept
 	// If, after this keyword, there are no more of them,
 	// execute the simple test.
 	if (i == keywords.size()) {
-		return parse_header(exe_linarr_C, fin, false);
+		return exe_linarr_C(fin, false);
 	}
 
 	const std::string& key = keywords[i];
 	if (key == "list") {
-		return parse_header<char>(exe_linarr_C_list, fin, 0);
+		return exe_linarr_C_list(fin, 0);
 	}
 	if (key == "upper_bound") {
-		return parse_header(exe_linarr_C, fin, true);
+		return exe_linarr_C(fin, true);
 	}
 	if (key == "list_upper_bound") {
-		return parse_header<char>(exe_linarr_C_list, fin, 1);
+		return exe_linarr_C_list(fin, 1);
 	}
 	if (key == "list_upper_bound_list") {
-		return parse_header<char>(exe_linarr_C_list, fin, 2);
+		return exe_linarr_C_list(fin, 2);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -174,7 +173,7 @@ noexcept
 		return call_linarr_klevel(keywords, i + 1, fin);
 	}
 	if (key == "D") {
-		return parse_header(exe_linarr_D, fin);
+		return exe_linarr_D(fin);
 	}
 	if (key == "Dmin") {
 		return call_linarr_Dmin(keywords, i + 1, fin);
@@ -184,22 +183,22 @@ noexcept
 	}
 
 	if (key == "dependency_flux") {
-		return parse_header(exe_linarr_dependency_flux, fin);
+		return exe_linarr_dependency_flux(fin);
 	}
 	if (key == "linear_arrangement") {
-		return parse_header(exe_linarr_linear_arrangement, fin);
+		return exe_linarr_linear_arrangement(fin);
 	}
 	if (key == "approx_exp_C") {
-		return parse_header(exe_linarr_approx_Exp_C, fin);
+		return exe_linarr_approx_Exp_C(fin);
 	}
 	if (key == "compute_headedness") {
-		return parse_header(exe_linarr_headedness, fin);
+		return exe_linarr_headedness(fin);
 	}
 	if (key == "syntree_classification") {
-		return parse_header(exe_linarr_syntree_classification, fin);
+		return exe_linarr_syntree_classification(fin);
 	}
 	if (key == "arrangement_validity") {
-		return parse_header(exe_linarr_arrangement_validity, fin);
+		return exe_linarr_arrangement_validity(fin);
 	}
 
 	std::cerr << ERROR << '\n';
