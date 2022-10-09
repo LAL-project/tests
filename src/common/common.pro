@@ -70,8 +70,7 @@ INCLUDEPATH += $${THIS_DIR}
 SOURCES += \
 	io_wrapper.cpp \
 	parse_keywords.cpp \
-	test_utils.cpp \
-	time.cpp
+	test_utils.cpp
 
 HEADERS += \
 	definitions.hpp \
