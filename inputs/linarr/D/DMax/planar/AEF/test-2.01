@@ -1,4 +1,5 @@
 TYPE linarr-DMax-Planar
+INPUTS 0
 
 	quadratic
 	random

@@ -147,6 +147,8 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_algos({"AEF", "quadratic"});
 	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"});
 
+	const input_list inputs = read_input_list(fin);
+
 	std::string algo;
 	fin >> algo;
 	if (allowed_algos.find(algo) == allowed_algos.end()) {
@@ -158,8 +160,6 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 		}
 		return err_type::test_format;
 	}
-
-	const input_list inputs = read_input_list(fin);
 
 	err_type err = err_type::no_error;
 
