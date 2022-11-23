@@ -1,5 +1,5 @@
 TYPE linarr-Dmin-Unconstrained
-
+INPUT 0
 	FC_tree
 	190
 	0 1 0 12 0 34 0 121

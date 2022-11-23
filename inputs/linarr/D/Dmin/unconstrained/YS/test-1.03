@@ -1,4 +1,4 @@
 TYPE linarr-Dmin-Unconstrained
-
+INPUT 0
 	YS_class
 	binary-complete 2 10
