@@ -52,7 +52,15 @@
 namespace tests {
 
 inline input_list read_input_list(std::ifstream& fin) noexcept {
-	{ std::string INPUT; fin >> INPUT; }
+	{
+	std::string INPUT; fin >> INPUT;
+	if (INPUT != "INPUT") {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    INPUT keyword is not 'INPUT'.\n";
+		std::cerr << "    INPUT: '" << INPUT << "'.\n";
+		return {};
+	}
+	}
 
 	std::size_t n_inputs;
 	fin >> n_inputs;
