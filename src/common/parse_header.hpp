@@ -54,9 +54,9 @@ namespace tests {
 inline input_list read_input_list(std::ifstream& fin) noexcept {
 	{
 	std::string INPUT; fin >> INPUT;
-	if (INPUT != "INPUT") {
+	if (INPUT != "INPUT" and INPUT != "INPUTS") {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    INPUT keyword is not 'INPUT'.\n";
+		std::cerr << "    INPUT keyword is neither 'INPUT' or 'INPUTS'.\n";
 		std::cerr << "    INPUT: '" << INPUT << "'.\n";
 		return {};
 	}
