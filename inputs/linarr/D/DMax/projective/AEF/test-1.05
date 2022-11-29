@@ -1,0 +1,10 @@
+TYPE linarr-DMax-projective_all_roots
+
+	AEF
+
+	from_file
+
+*	5
+-	0 1 2 1 4 8 10 10 10 10
+-	0 1 2 1 1 10 10 10 10 10
+-	0 1 1 1 1 10 10 10 10 10
