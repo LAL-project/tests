@@ -51,12 +51,11 @@
 #include <lal/linarr/DMax.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
+#include <lal/graphs/output.hpp>
+#include <lal/generate/all_ulab_free_trees.hpp>
 
 // common includes
 #include "common/definitions.hpp"
-
-// linarr includes
-#include "linarr/linarr_brute_force_testing.hpp"
 
 namespace lal {
 namespace linarr {
@@ -69,49 +68,95 @@ enum class algorithms_DMax_projective {
 namespace tests {
 namespace linarr {
 
-namespace dmin_projective {
+err_type check_from_source_file(std::ifstream& fin) noexcept {
+	char delim;
+	fin >> delim;
+	uint64_t n;
+	while (delim == '*') {
+		fin >> n;
 
-template <class T>
-err_type examine_DMax_projective
-(
-	const std::string& filename,
-	const TreeInit<T>& tree_initializer,
-	[[maybe_unused]] const lal::linarr::algorithms_DMax_projective& algo
-)
-noexcept
-{
-	std::ifstream input_file(filename);
-	if (not input_file.is_open()) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Input file '" << filename << "' could not be opened.\n";
-		return err_type::io;
+		lal::head_vector hv(n);
+		while (fin >> delim and delim == '-') {
+			for (uint64_t i = 0; i < n; ++i) { fin >> hv[i]; }
+
+			const auto T =
+				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
+			const auto all_dmax_roots =
+				std::move(lal::linarr::max_sum_edge_lengths_projective_roots(T).first);
+
+			uint64_t DMax_u;
+			for (lal::node u = 0; u < n; ++u) {
+				fin >> DMax_u;
+
+				auto rtu = lal::graphs::rooted_tree(T, u);
+				rtu.calculate_size_subtrees();
+				const auto DMax_pr_u = lal::linarr::max_sum_edge_lengths_projective(rtu).first;
+
+				if (all_dmax_roots[u] != DMax_pr_u) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When using lal::linarr::max_sum_edge_lengths_projective.\n";
+					std::cerr << "    DMax projective at '" << u << "' differs from library's value.\n";
+					std::cerr << "    Library value: " << all_dmax_roots[u] << '\n';
+					std::cerr << "    Test value: " << DMax_pr_u << '\n';
+					std::cerr << "    For tree:" << '\n';
+					std::cerr << T << '\n';
+				}
+
+				if (DMax_u != all_dmax_roots[u]) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When using lal::linarr::max_sum_edge_lengths_projective_roots.\n";
+					std::cerr << "    DMax projective at '" << u << "' differs from library's value.\n";
+					std::cerr << "    Library value: " << all_dmax_roots[u] << '\n';
+					std::cerr << "    Test value: " << DMax_u << '\n';
+					std::cerr << "    For tree:" << '\n';
+					std::cerr << T << '\n';
+					return err_type::test_execution;
+				}
+			}
+		}
 	}
 
-	const auto err = linarr_brute_force_testing<lal::graphs::rooted_tree>
-	(
-		[&](const lal::graphs::rooted_tree& t) {
-			return lal::linarr::max_sum_edge_lengths_projective(t);
-		},
-		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
-			return lal::linarr::sum_edge_lengths(t, arr);
-		},
-		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
-			return lal::linarr::is_projective(t, arr);
-		},
-		[](const lal::head_vector& v) {
-			return lal::graphs::from_head_vector_to_rooted_tree(v);
-		},
-		tree_initializer,
-		input_file
-	);
-	if (err != err_type::no_error) {
-		return err;
-	}
-
-	return err;
+	return err_type::no_error;
 }
 
-} // -- namespace dmin_projective
+err_type check_from_code(std::ifstream& fin) noexcept {
+	uint64_t n;
+	while (fin >> n) {
+		lal::generate::all_ulab_free_trees gen(n);
+		while (not gen.end()) {
+			const auto t = gen.get_tree();
+
+			// Library result
+			const auto library_res = lal::linarr::max_sum_edge_lengths_projective_roots(t);
+
+			// Brute force result
+			lal::detail::data_array<uint64_t> brute_force_res(n);
+			for (lal::node u = 0; u < n; ++u) {
+				lal::graphs::rooted_tree rt(t, u);
+				rt.calculate_size_subtrees();
+				brute_force_res[u] = lal::linarr::max_sum_edge_lengths_projective(rt).first;
+			}
+
+			// compare
+			for (lal::node u = 0; u < n; ++u) {
+				if (library_res.first[u] != brute_force_res[u]) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    When using lal::linarr::max_sum_edge_lengths_projective_roots.\n";
+					std::cerr << "    DMax projective at '" << u << "' differs from library's value.\n";
+					std::cerr << "    Library value:     " << library_res.first[u] << '\n';
+					std::cerr << "    Brute force value: " << brute_force_res[u] << '\n';
+					std::cerr << "    For tree:" << '\n';
+					std::cerr << t << '\n';
+					return err_type::test_execution;
+				}
+			}
+
+			gen.next();
+		}
+	}
+
+	return err_type::no_error;
+}
 
 err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_algos({"AEF"});
@@ -141,54 +186,23 @@ err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin) noexcept {
 		return err_type::test_format;
 	}
 
-	char delim;
-	fin >> delim;
-	uint64_t n;
-	while (delim == '*') {
-		fin >> n;
+	std::string source;
+	fin >> source;
 
-		lal::head_vector hv(n);
-		while (fin >> delim and delim == '-') {
-			for (uint64_t i = 0; i < n; ++i) { fin >> hv[i]; }
-
-			const auto T =
-				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
-			const auto all_dmax_roots =
-				std::move(lal::linarr::max_sum_edge_lengths_projective_roots(T).first);
-
-			uint64_t DMax_u;
-			for (lal::node u = 0; u < n; ++u) {
-				fin >> DMax_u;
-
-				auto rtu = lal::graphs::rooted_tree(T, u);
-				rtu.calculate_size_subtrees();
-				const auto DMax_pr_u = lal::linarr::max_sum_edge_lengths_projective(rtu).first;
-
-				if (all_dmax_roots[u] != DMax_pr_u) {
-					std::cerr << ERROR << '\n';
-					std::cerr << "    When using lal::linarr::max_sum_edge_lengths_projective\n";
-					std::cerr << "    DMax projective at '" << u << "' differs from\n";
-					std::cerr << "    library's value\n";
-					std::cerr << "    Library value: " << all_dmax_roots[u] << '\n';
-					std::cerr << "    Test value: " << DMax_pr_u << '\n';
-					std::cerr << "    For tree:" << '\n';
-					std::cerr << T << '\n';
-				}
-
-				if (DMax_u != all_dmax_roots[u]) {
-					std::cerr << ERROR << '\n';
-					std::cerr << "    When using lal::linarr::max_sum_edge_lengths_projective_roots\n";
-					std::cerr << "    DMax projective at '" << u << "' differs from\n";
-					std::cerr << "    library's value\n";
-					std::cerr << "    Library value: " << all_dmax_roots[u] << '\n';
-					std::cerr << "    Test value: " << DMax_u << '\n';
-					std::cerr << "    For tree:" << '\n';
-					std::cerr << T << '\n';
-					return err_type::test_execution;
-				}
-			}
-		}
+	err_type err;
+	if (source == "from_file") {
+		err = check_from_source_file(fin);
 	}
+	else if (source == "from_code") {
+		err = check_from_code(fin);
+	}
+	else {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unknown source: '" << source << "'.\n";
+		err = err_type::test_format;
+	}
+
+	if (err != err_type::no_error) { return err; }
 
 	TEST_GOODBYE;
 	return err_type::no_error;
