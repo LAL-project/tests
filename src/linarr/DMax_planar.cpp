@@ -251,9 +251,9 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 			return err_type::test_format;
 		}
 
-		uint64_t n;
-		while (fin >> n) {
-			if (mode == "exhaustive") {
+		if (mode == "exhaustive") {
+			uint64_t n;
+			while (fin >> n) {
 				lal::generate::all_ulab_free_trees Gen(n);
 				while (not Gen.end()) {
 					const auto T = Gen.get_tree();
@@ -264,10 +264,12 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 					}
 				}
 			}
-			else if (mode == "random") {
-				std::size_t n_rand_trees;
-				fin >> n_rand_trees;
+		}
+		else if (mode == "random") {
+			uint64_t n;
+			std::size_t n_rand_trees;
 
+			while (fin >> n >> n_rand_trees) {
 				lal::generate::rand_ulab_free_trees Gen(n, 1234);
 				for (std::size_t i = 0; i < n_rand_trees; ++i) {
 					const auto T = Gen.get_tree();

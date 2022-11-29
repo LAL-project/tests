@@ -147,7 +147,7 @@ err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept {
 	}
 	else {
 		std::cerr << ERROR << '\n';
-		std::cerr << "Algorithm '" << algo << "' not recognised.\n";
+		std::cerr << "Algorithm '" << algo << "' not handled.\n";
 		return err_type::test_format;
 	}
 
