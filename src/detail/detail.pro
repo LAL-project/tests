@@ -4,12 +4,20 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 isEmpty(ENVIR) {
-	ENVIR = "HOME"
+    ENVIR = "HOME"
+}
+
+isEmpty(LTO) {
+    LTO = "NO"
+}
+
+isEmpty(ADDRESS_SANITIZER) {
+    ADDRESS_SANITIZER = "NO"
 }
 
 DEFINES += __LAL_INSPECT
 
-QMAKE_CXXFLAGS += -std=c++17 -fPIC -fopenmp -flto -fno-fat-lto-objects -O3
+QMAKE_CXXFLAGS += -std=c++17 -fPIC -fopenmp -O3
 QMAKE_CXXFLAGS +=			\
 	-Wall					\
 	-Wextra					\ # reasonable and standard
@@ -39,12 +47,18 @@ QMAKE_CXXFLAGS_DEBUG += -DDEBUG -D_GLIBCXX_DEBUG
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -UDEBUG -DNDEBUG -fstrict-aliasing
 
-# use Inter-Procedural Optimization (IPO)
-QMAKE_LFLAGS += -fPIC -O3 -flto -fno-fat-lto-objects
+QMAKE_LFLAGS += -fPIC -O3 -Wl,-O3
 QMAKE_LFLAGS_RELEASE += -DNDEBUG -UDEBUG
 QMAKE_LFLAGS_DEBUG += -DDEBUG -D_GLIBCXX_DEBUG
 
-equals(ENVIR, "CLUSTER") {
+equals(LTO, "YES") {
+    # use Inter-Procedural Optimization (IPO)
+	QMAKE_CXXFLAGS += -flto -fno-fat-lto-objects
+	QMAKE_LFLAGS += -flto -fno-fat-lto-objects
+}
+
+equals(ADDRESS_SANITIZER, "YES") {
+    # not to be used in combination with valgrind
 	QMAKE_CXXFLAGS += -fsanitize=address
 	LIBS += -lasan
 }
