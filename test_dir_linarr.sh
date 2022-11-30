@@ -184,13 +184,9 @@ linarr_DMax_Planar_AEF_DIRS=(\
 linarr_DMax_Planar_DIRS=(\
 	"${linarr_DMax_Planar_AEF_DIRS[@]}" \
 	)
-linarr_DMax_Comparison_DIRS=(\
-	"linarr/D/DMax/" "linarr/D/DMax/" \
-	)
 linarr_DMax_DIRS=(\
 	"${linarr_DMax_Projective_DIRS[@]}" \
 	"${linarr_DMax_Planar_DIRS[@]}" \
-	"${linarr_DMax_Comparison_DIRS[@]}" \
 	)
 
 # Classification of syntactic dependency structures
