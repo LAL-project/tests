@@ -60,7 +60,7 @@ properties_exp_D_planar_DIRS=(\
 	)
 
 properties_exp_var_D_unconstrained_DIRS=(\
-	"properties/exp-var-D/" "properties/exp-var-D/" \
+	"properties/exp-var-D/general-formula" "properties/exp-var-D/" \
 	)
 
 properties_exp_var_D_DIRS=(\
