@@ -6,7 +6,7 @@ function make_single {
 	
 	mkdir -p $what && cd $what
 	echo "    $PWD"
-	qmake -makefile -o Makefile "ENVIR=CLUSTER" $DEBCONF ../../src/$what/$what.pro
+	qmake -makefile -o Makefile "LTO=YES" "ENVIR=CLUSTER" $DEBCONF ../../src/$what/$what.pro
 	cd ..
 }
 
@@ -16,7 +16,7 @@ function make_makefiles {
 	fi
 
 	echo "    $PWD"
-	qmake -makefile -o Makefile "ENVIR=CLUSTER" $DEBCONF ../src/tests.pro
+	qmake -makefile -o Makefile "LTO=YES" "ENVIR=CLUSTER" $DEBCONF ../src/tests.pro
 
 	make_single common $DEBCONF
 
