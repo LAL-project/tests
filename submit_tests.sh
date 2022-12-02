@@ -1,8 +1,28 @@
 #!/bin/bash
 
+function show_usage {
+	echo "USAGE"
+	echo "====="
+	echo ""
+	echo "Mandatory parameters:"
+	echo "    --build=debug,release"
+	echo "        What to run: debug build, or release build"
+	echo ""
+	echo "Optional parameters:"
+	echo "    --analyzer=valgrind,address-sanitizer"
+	echo "        How to run the test program:"
+	echo "        * valgrind: execute test program with valgrind. This can only be"
+	echo "        run with --build=debug."
+	echo "        * address-sanitizer: indicate that the program was compiled with"
+	echo "        -fsanitize=address. This increases maximum memory for each job."
+}
+
+# usage
+#  usage=0
 # build type (debug, release)
-build=0
+#  build=0
 # analyzer type (valgrind, address-sanitizer
+#  analyzer=0
 
 for i in "$@"; do
 	case $i in
@@ -28,6 +48,17 @@ for i in "$@"; do
 		;;
 	esac
 done
+
+if [ ! -z $usage ]; then
+	show_usage
+	exit
+fi
+
+if [ -z $build ]; then
+	echo -e "\e[1;4;31mError:\e[0m Build parameter cannot be empty"
+	show_usage
+	exit
+fi
 
 if [ "$build" != "debug" ] && [ "$build" != "release" ]; then
 	echo -e "\e[1;4;31mError:\e[0m Wrong value for build: '$build'"
