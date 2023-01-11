@@ -39,33 +39,3 @@
  *         Webpage: https://cqllab.upc.edu/people/rferrericancho/
  *
  ********************************************************************/
-
-#pragma once
-
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be recompiled.
- */
-
-// C++ includes
-#include <functional>
-#include <fstream>
-#include <vector>
-#include <string>
-
-// common includes
-#include "common/definitions.hpp"
-
-namespace tests {
-namespace numeric {
-
-err_type exe_numeric_integer(std::ifstream& fin) noexcept;
-err_type exe_numeric_integer_manual(std::ifstream& fin) noexcept;
-err_type exe_numeric_rational(std::ifstream& fin) noexcept;
-err_type exe_numeric_rational_manual(std::ifstream& fin) noexcept;
-
-} // -- namespace numeric
-} // -- namespace tests
