@@ -41,6 +41,9 @@ groups_list=(\
 	"linarr" \
 		"linarr_E_2Cd" \
 		"linarr_D" \
+		"linarr_chunking" \
+			"linarr_chunking_Anderson" \
+			"linarr_chunking_Macutek" \
 		"linarr_C" \
 			"linarr_C_bruteforce" \
 				"linarr_C_bruteforce_C" \

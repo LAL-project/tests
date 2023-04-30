@@ -107,6 +107,7 @@ SOURCES += \
 	Dmin_projective.cpp \
 	Dmin_unconstrained.cpp \
 	arrangement_validity.cpp \
+	chunking.cpp \
 	flux.cpp \
 	headedness.cpp \
 	klevel.cpp \

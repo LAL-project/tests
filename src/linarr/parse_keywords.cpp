@@ -175,6 +175,9 @@ noexcept
 	if (key == "D") {
 		return exe_linarr_D(fin);
 	}
+	if (key == "chunking") {
+		return exe_linarr_chunking(fin);
+	}
 	if (key == "Dmin") {
 		return call_linarr_Dmin(keywords, i + 1, fin);
 	}

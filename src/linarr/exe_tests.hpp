@@ -75,6 +75,7 @@ err_type exe_linarr_headedness(std::ifstream& fin) noexcept;
 err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept;
 err_type exe_linarr_linear_arrangement(std::ifstream& fin) noexcept;
 err_type exe_linarr_dependency_flux(std::ifstream& fin) noexcept;
+err_type exe_linarr_chunking(std::ifstream& fin) noexcept;
 
 err_type exe_linarr_klevel(
 	std::ifstream& fin,

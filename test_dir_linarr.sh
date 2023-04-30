@@ -119,6 +119,17 @@ linarr_C_DIRS=(\
 	"${linarr_C_stack_based_DIRS[@]}" \
 	)
 
+linarr_chunking_Anderson_DIRS=(\
+	"linarr/chunking/anderson" "linarr/chunking/anderson" \
+	)
+linarr_chunking_Macutek_DIRS=(\
+	"linarr/chunking/macutek" "linarr/chunking/macutek" \
+	)
+linarr_chunking_DIRS=(\
+	"${linarr_chunk_anderson_DIRS[@]}" \
+	"${linarr_chunk_macutek_DIRS[@]}" \
+	)
+
 # Dmin tests
 linarr_Dmin_Projective_AEF_DIRS=(\
 	"linarr/D/Dmin/projective/AEF" "linarr/D/Dmin/projective/" \
@@ -224,6 +235,7 @@ linarr_DIRS=(\
 	"${linarr_Dmin_DIRS[@]}" \
 	"${linarr_DMax_DIRS[@]}" \
 	"${linarr_C_DIRS[@]}" \
+	"${linarr_chunking_DIRS[@]}" \
 	"${linarr_syndepstruc_class_DIRS[@]}" \
 	"${linarr_comp_dependency_flux_DIRS[@]}" \
 	"${linarr_headedness_DIRS[@]}" \
