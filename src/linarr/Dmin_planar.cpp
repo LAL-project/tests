@@ -50,8 +50,8 @@
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/conversions.hpp>
-#include <lal/linarr/D.hpp>
-#include <lal/linarr/Dmin.hpp>
+#include <lal/linarr/D/D.hpp>
+#include <lal/linarr/D/Dmin.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 
 // common includes

@@ -50,7 +50,7 @@
 #include <lal/numeric/rational_output.hpp>
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/linarr/D.hpp>
+#include <lal/linarr/D/D.hpp>
 
 // common includes
 #include "common/io_wrapper.hpp"

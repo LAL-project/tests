@@ -52,7 +52,7 @@
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/numeric/rational_output.hpp>
 #include <lal/properties/C_rla.hpp>
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 #include <lal/io/basic_output.hpp>
 
 // common includes

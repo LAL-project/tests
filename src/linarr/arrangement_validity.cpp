@@ -51,7 +51,7 @@
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/linarr/formal_constraints.hpp>
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 
 // common includes
 #include "common/definitions.hpp"

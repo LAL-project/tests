@@ -50,12 +50,11 @@
 #include <lal/generate/rand_lab_rooted_trees.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/conversions.hpp>
-#include <lal/linarr/algorithms_chunking.hpp>
-#include <lal/linarr/chunking.hpp>
+#include <lal/linarr/chunking/algorithms.hpp>
+#include <lal/linarr/chunking/chunking.hpp>
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/std_utils.hpp"
 #include "common/parse_header.hpp"
 
 namespace tests {

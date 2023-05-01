@@ -46,12 +46,12 @@
 #include <set>
 
 // lal includes
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 #include <lal/iterators/Q_iterator.hpp>
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/properties/Q.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/linarr/algorithms_C.hpp>
+#include <lal/linarr/C/algorithms_C.hpp>
 
 // common includes
 #include "common/io_wrapper.hpp"

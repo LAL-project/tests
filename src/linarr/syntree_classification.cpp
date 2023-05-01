@@ -48,13 +48,12 @@
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/linarr/syntactic_dependency_structure.hpp>
-#include <lal/linarr/classify_syntactic_dependency_structure.hpp>
+#include <lal/linarr/syntactic_dependency_tree/type.hpp>
+#include <lal/linarr/syntactic_dependency_tree/classify.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/detail/make_array.hpp>
 
 // common includes
-#include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 
 namespace tests {
@@ -62,27 +61,27 @@ namespace linarr {
 
 namespace syntree_class {
 
-typedef lal::linarr::syntactic_dependency_structure syndepstr_type;
+typedef lal::linarr::syntactic_dependency_tree syndeptree_type;
 
-std::string sdtt_to_string(const syndepstr_type& t) noexcept {
+std::string sdtt_to_string(const syndeptree_type& t) noexcept {
 	switch (t) {
-	case syndepstr_type::projective: return "prj";
-	case syndepstr_type::planar: return "pla";
-	case syndepstr_type::WG1: return "wg1";
-	case syndepstr_type::EC1: return "1ec";
+	case syndeptree_type::projective: return "prj";
+	case syndeptree_type::planar: return "pla";
+	case syndeptree_type::WG1: return "wg1";
+	case syndeptree_type::EC1: return "1ec";
 	default: return "none";
 	}
 }
 
-std::pair<syndepstr_type, bool> std_to_syntreetype(const std::string& s) noexcept {
-	if (s == "prj") { return std::make_pair(syndepstr_type::projective, true); }
-	if (s == "pla") { return std::make_pair(syndepstr_type::planar, true); }
-	if (s == "1ec") { return std::make_pair(syndepstr_type::EC1, true); }
-	if (s == "wg1") { return std::make_pair(syndepstr_type::WG1, true); }
-	if (s == "mh4") { return std::make_pair(syndepstr_type::unknown, false); }
-	if (s == "mh5") { return std::make_pair(syndepstr_type::unknown, false); }
+std::pair<syndeptree_type, bool> std_to_syntreetype(const std::string& s) noexcept {
+if (s == "prj") { return std::make_pair(syndeptree_type::projective, true); }
+if (s == "pla") { return std::make_pair(syndeptree_type::planar, true); }
+if (s == "1ec") { return std::make_pair(syndeptree_type::EC1, true); }
+if (s == "wg1") { return std::make_pair(syndeptree_type::WG1, true); }
+if (s == "mh4") { return std::make_pair(syndeptree_type::unknown, false); }
+if (s == "mh5") { return std::make_pair(syndeptree_type::unknown, false); }
 
-	return std::make_pair(syndepstr_type::unknown, true);
+return std::make_pair(syndeptree_type::unknown, true);
 }
 
 lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept {
@@ -94,16 +93,16 @@ lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept {
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
-std::array<bool, lal::linarr::__syntactic_dependency_structure_size>
+std::array<bool, lal::linarr::__syntactic_dependency_tree_size>
 parse_ground_classes(std::string s)
 noexcept
 {
 	// classes vector
 	auto classes =
-		lal::detail::make_array_with_value<bool, lal::linarr::__syntactic_dependency_structure_size, false>();
+		lal::detail::make_array_with_value<bool, lal::linarr::__syntactic_dependency_tree_size, false>();
 
 	if (s.length() == 0) {
-		const syndepstr_type sdtt = std_to_syntreetype("none").first;
+	const syndeptree_type sdtt = std_to_syntreetype("none").first;
 		classes[static_cast<std::size_t>(sdtt)] = true;
 		return classes;
 	}
@@ -122,7 +121,7 @@ noexcept
 		}
 	}
 	if (n_accepted_classes == 0) {
-		const syndepstr_type sdtt = std_to_syntreetype("none").first;
+	const syndeptree_type sdtt = std_to_syntreetype("none").first;
 		classes[static_cast<std::size_t>(sdtt)] = true;
 	}
 	return classes;
@@ -164,7 +163,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const auto LAL_classes = lal::linarr::syntactic_dependency_structure_class(T);
+		const auto LAL_classes = lal::linarr::syntactic_dependency_tree_classify(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {
@@ -176,7 +175,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					std::cout << "        "
-						 << sdtt_to_string(static_cast<syndepstr_type>(i))
+							  << sdtt_to_string(static_cast<syndeptree_type>(i))
 						 << (not LAL_classes[i] ? "  <--- missing" : "")
 						 << '\n';
 				}
@@ -185,7 +184,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 			for (std::size_t i = 0; i < LAL_classes.size(); ++i) {
 				if (LAL_classes[i]) {
 					std::cout << "        "
-						 << sdtt_to_string(static_cast<syndepstr_type>(i))
+						  << sdtt_to_string(static_cast<syndeptree_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << '\n';
 				}

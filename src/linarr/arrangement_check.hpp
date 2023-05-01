@@ -44,7 +44,7 @@
 #include <iostream>
 
 // lal includes
-#include <lal/linarr/D.hpp>
+#include <lal/linarr/D/D.hpp>
 #include <lal/linear_arrangement.hpp>
 
 // common includes

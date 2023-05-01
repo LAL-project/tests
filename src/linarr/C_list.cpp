@@ -46,7 +46,7 @@
 #include <set>
 
 // lal includes
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/io/basic_output.hpp>
 

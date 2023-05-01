@@ -47,7 +47,7 @@
 // lal includes
 #include <lal/linear_arrangement.hpp>
 #include <lal/generate/rand_lab_free_trees.hpp>
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 #include <lal/graphs/output.hpp>
 
 // common includes

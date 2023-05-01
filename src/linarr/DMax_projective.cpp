@@ -47,8 +47,8 @@
 
 // lal includes
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/linarr/D.hpp>
-#include <lal/linarr/DMax.hpp>
+#include <lal/linarr/D/D.hpp>
+#include <lal/linarr/D/DMax.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
 

@@ -51,9 +51,9 @@
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/numeric/rational_output.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/linarr/D.hpp>
-#include <lal/linarr/1level.hpp>
-#include <lal/linarr/2level.hpp>
+#include <lal/linarr/D/D.hpp>
+#include <lal/linarr/aggregations/1level.hpp>
+#include <lal/linarr/aggregations/2level.hpp>
 
 // common includes
 #include "common/io_wrapper.hpp"

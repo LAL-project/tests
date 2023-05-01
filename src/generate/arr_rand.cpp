@@ -49,7 +49,7 @@
 #include <lal/graphs/output.hpp>
 #include <lal/generate/rand_arrangements.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
-#include <lal/linarr/C.hpp>
+#include <lal/linarr/C/C.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/iterators/E_iterator.hpp>
 
