@@ -64,7 +64,7 @@ void test_move_undirected_graph() noexcept {
 	std::cout << "Move constructor: 'g2 <- g1'\n";
 	lal::graphs::undirected_graph g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -76,7 +76,7 @@ void test_move_undirected_graph() noexcept {
 	std::cout << "Move constructor: 'g2 <- g1'\n";
 	lal::graphs::undirected_graph g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -89,7 +89,7 @@ void test_move_undirected_graph() noexcept {
 	std::vector<lal::graphs::undirected_graph> v;
 	v.push_back(std::move(g1));
 	output_graph("g1",g1);
-	output_graph("v[0]",v[0])
+	output_graph("v[0]",v[0]);
 	}
 
 	// move operator
@@ -102,7 +102,7 @@ void test_move_undirected_graph() noexcept {
 	lal::graphs::undirected_graph g2;
 	g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -115,7 +115,7 @@ void test_move_undirected_graph() noexcept {
 	lal::graphs::undirected_graph g2;
 	g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -129,7 +129,7 @@ void test_move_undirected_graph() noexcept {
 	v.push_back(lal::graphs::undirected_graph());
 	v[0] = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("v[0]",v[0])
+	output_graph("v[0]",v[0]);
 	}
 }
 

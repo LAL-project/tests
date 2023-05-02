@@ -97,7 +97,7 @@ void test_copy_free_tree() noexcept {
 	lal::graphs::undirected_graph g(5);
 	g.set_edges(std::vector<lal::edge>{lal::edge(0,1),lal::edge(1,2),lal::edge(2,3),lal::edge(3,4)});
 	lal::graphs::free_tree t(g);
-	output_free_tree_info("t", t)
+	output_free_tree_info("t", t);
 	}
 
 	// copy operator

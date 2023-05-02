@@ -128,7 +128,7 @@ err_type test_rational_copy() noexcept {
 	lal::numeric::rational i1 = 1234;
 	check_1v(i1, 1234);
 	v[0] = i1;
-	check_eq(v[0], i1)
+	check_eq(v[0], i1);
 	}
 
 	{

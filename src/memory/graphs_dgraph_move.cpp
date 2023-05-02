@@ -64,7 +64,7 @@ void test_move_directed_graph() noexcept {
 	std::cout << "Move constructor: 'g2 <- g1'\n";
 	lal::graphs::directed_graph g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -76,7 +76,7 @@ void test_move_directed_graph() noexcept {
 	std::cout << "Move constructor: 'g2 <- g1'\n";
 	lal::graphs::directed_graph g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -102,7 +102,7 @@ void test_move_directed_graph() noexcept {
 	lal::graphs::directed_graph g2;
 	g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -115,7 +115,7 @@ void test_move_directed_graph() noexcept {
 	lal::graphs::directed_graph g2;
 	g2 = std::move(g1);
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{

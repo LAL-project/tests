@@ -102,7 +102,7 @@ void test_copy_directed_graph() noexcept {
 	lal::graphs::directed_graph g2;
 	g2 = g1;
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
@@ -115,7 +115,7 @@ void test_copy_directed_graph() noexcept {
 	lal::graphs::directed_graph g2;
 	g2 = g1;
 	output_graph("g1",g1);
-	output_graph("g2",g2)
+	output_graph("g2",g2);
 	}
 
 	{
