@@ -74,8 +74,8 @@ equals(ENVIR, "HOME") {
 
 # configure cluster
 equals(ENVIR, "CLUSTER") {
-	QMAKE_CXX = /home/soft/gcc-11.2.0/bin/g++
-	QMAKE_LINK = /home/soft/gcc-11.2.0/bin/g++
+	QMAKE_CXX = /home/soft/gcc-11.3/bin/g++
+	QMAKE_LINK = /home/soft/gcc-11.3/bin/g++
 
 	LAL_DIR = /home/usuaris/lalemany/LAL-dev/linear-arrangement-library
 	THIS_DIR = /home/usuaris/lalemany/LAL-dev/tests/src
