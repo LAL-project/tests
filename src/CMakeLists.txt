@@ -10,9 +10,9 @@ include(GNUInstallDirs)
 # ******************************************************************************
 # Custom functions
 function(add_comp_flag flag)
-	check_cxx_compiler_flag(${flag} HAS_FLAG)
-	if (HAS_FLAG)
-		message(STATUS "    Adding flag ${flag}...")
+	check_cxx_compiler_flag(${flag} CXX_HAS_FLAG_${flag})
+	
+	if (CXX_HAS_FLAG_${flag})
 		SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
 	else()
 		message(STATUS "    ! Compiler does not support flag ${flag}.")
@@ -20,9 +20,9 @@ function(add_comp_flag flag)
 endfunction(add_comp_flag)
 
 function(add_debug_flag flag)
-	check_cxx_compiler_flag(${flag} HAS_FLAG)
-	if (HAS_FLAG)
-		message(STATUS "    Adding flag ${flag}...")
+	check_cxx_compiler_flag(${flag} CXX_HAS_FLAG_${flag})
+	
+	if (CXX_HAS_FLAG_${flag})
 		SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${flag}" PARENT_SCOPE)
 	else()
 		message(STATUS "    ! Compiler does not support flag ${flag}.")
@@ -30,9 +30,9 @@ function(add_debug_flag flag)
 endfunction(add_debug_flag)
 
 function(add_release_flag flag)
-	check_cxx_compiler_flag(${flag} HAS_FLAG)
-	if (HAS_FLAG)
-		message(STATUS "    Adding flag ${flag}...")
+	check_cxx_compiler_flag(${flag} CXX_HAS_FLAG_${flag})
+	
+	if (CXX_HAS_FLAG_${flag})
 		SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${flag}" PARENT_SCOPE)
 	else()
 		message(STATUS "    ! Compiler does not support flag ${flag}.")
@@ -74,6 +74,7 @@ if (NOT DEFINED LAL_DEV_DIR)
 	message(STATUS "    use 'private' headers of the library, which are not distributed.")
 	message(STATUS "    Please, rerun 'cmake' the location of LAL's development root directory:")
 	message(STATUS "        -DLAL_DEV_DIR=/path/to/the/library")
+	message(STATUS "    Make sure it is an absolute path!")
 	message(FATAL_ERROR "Please, read the last few lines and follow the instructions given.")
 else()
 	if (NOT DEFINED LAL_DEV_DIR)
@@ -129,8 +130,6 @@ add_library(
 		common/io_wrapper.cpp
 		common/parse_keywords.cpp
 		common/test_utils.cpp
-		common/time.cpp
-		common/tree_validity_check.cpp
 )
 
 add_executable(
@@ -142,7 +141,8 @@ add_executable(
 	generate
 		generate/exe_tests.hpp
 		generate/parse_keywords.hpp
-		generate/test_exhaustive_enumeration.hpp
+		generate/test_exhaustive_tree_enumeration.hpp
+		generate/test_random_tree_generation.hpp
 		
 		generate/arr_all.cpp
 		generate/arr_all_planar.cpp
@@ -168,25 +168,25 @@ add_executable(
 		graphs/exe_tests.hpp
 		graphs/parse_keywords.hpp
 		
-		graphs/construct.cpp
 		graphs/construct_assert.cpp
+		graphs/construct.cpp
 		graphs/construct_utils.cpp
+		graphs/graph_literals.cpp
 		graphs/main.cpp
 		graphs/parse_keywords.cpp
 		graphs/tree_type_classification.cpp
 )
 
 add_executable(
-	internal
-		internal/exe_tests.hpp
-		internal/parse_keywords.hpp
+	detail
+		detail/exe_tests.hpp
+		detail/parse_keywords.hpp
 		
-		internal/centre.cpp
-		internal/centroid.cpp
-		internal/main.cpp
-		internal/parse_keywords.cpp
-		internal/sorting.cpp
-		internal/traversal.cpp
+		detail/avl_functions.cpp
+		detail/main.cpp
+		detail/parse_keywords.cpp
+		detail/sorting.cpp
+		detail/traversal.cpp
 )
 
 add_executable(
@@ -201,6 +201,7 @@ add_executable(
 
 add_executable(
 	linarr
+		linarr/arrangement_check.hpp
 		linarr/exe_tests.hpp
 		linarr/linarr_brute_force_testing.hpp
 		linarr/n_crossings_m2.hpp
@@ -210,6 +211,9 @@ add_executable(
 		linarr/C.cpp
 		linarr/C_list.cpp
 		linarr/D.cpp
+		linarr/DMax_planar.cpp
+		linarr/DMax_projective_all_roots.cpp
+		linarr/DMax_projective.cpp
 		linarr/Dmin_comparison.cpp
 		linarr/Dmin_planar.cpp
 		linarr/Dmin_projective.cpp
@@ -217,6 +221,7 @@ add_executable(
 		linarr/flux.cpp
 		linarr/headedness.cpp
 		linarr/klevel.cpp
+		linarr/linear_arrangement.cpp
 		linarr/main.cpp
 		linarr/parse_keywords.cpp
 		linarr/predicted_C.cpp
@@ -225,14 +230,16 @@ add_executable(
 
 add_executable(
 	memory
+		memory/common_utils.hpp
+		memory/data_array_utils.hpp
 		memory/exe_tests.hpp
 		memory/graph_functions.hpp
-		memory/graphs.hpp
-		memory/internal_data_array_functions.hpp
-		memory/numeric.hpp
+		memory/graph_utils.hpp
 		memory/numeric_functions.hpp
+		memory/numeric.hpp
 		memory/parse_keywords.hpp
 		
+		memory/data_array.cpp
 		memory/graphs.cpp
 		memory/graphs_dgraph_copy.cpp
 		memory/graphs_dgraph_move.cpp
@@ -244,7 +251,7 @@ add_executable(
 		memory/graphs_ugraph_copy_into_ftree.cpp
 		memory/graphs_ugraph_move.cpp
 		memory/graphs_ugraph_move_into_ftree.cpp
-		memory/internal_data_array.cpp
+		memory/linear_queue.cpp
 		memory/main.cpp
 		memory/numeric.cpp
 		memory/numeric_integer_copy.cpp
@@ -273,6 +280,10 @@ add_executable(
 		properties/exe_tests.hpp
 		properties/parse_keywords.hpp
 		
+		properties/caterpillar_distance.cpp
+		properties/centre.cpp
+		properties/centroid.cpp
+		properties/diameter.cpp
 		properties/expected_D_planar.cpp
 		properties/expected_D_projective.cpp
 		properties/expvar_C.cpp
@@ -302,7 +313,7 @@ add_executable(
 add_dependencies(tests		common)
 add_dependencies(generate	common)
 add_dependencies(graphs		common)
-add_dependencies(internal	common)
+add_dependencies(detail		common)
 add_dependencies(io			common)
 add_dependencies(linarr		common)
 add_dependencies(memory		common)
@@ -317,7 +328,7 @@ add_dependencies(utilities	common)
 target_include_directories(common		PUBLIC .)
 target_include_directories(generate		PUBLIC .)
 target_include_directories(graphs		PUBLIC .)
-target_include_directories(internal		PUBLIC .)
+target_include_directories(detail		PUBLIC .)
 target_include_directories(io			PUBLIC .)
 target_include_directories(linarr		PUBLIC .)
 target_include_directories(memory		PUBLIC .)
@@ -329,7 +340,7 @@ target_include_directories(utilities	PUBLIC .)
 # common linking
 target_link_libraries(generate		${CMAKE_BINARY_DIR}/libcommon.a)
 target_link_libraries(graphs		${CMAKE_BINARY_DIR}/libcommon.a)
-target_link_libraries(internal		${CMAKE_BINARY_DIR}/libcommon.a)
+target_link_libraries(detail		${CMAKE_BINARY_DIR}/libcommon.a)
 target_link_libraries(io			${CMAKE_BINARY_DIR}/libcommon.a)
 target_link_libraries(linarr		${CMAKE_BINARY_DIR}/libcommon.a)
 target_link_libraries(memory		${CMAKE_BINARY_DIR}/libcommon.a)
@@ -343,7 +354,7 @@ target_link_libraries(utilities 	${CMAKE_BINARY_DIR}/libcommon.a)
 target_include_directories(common		PUBLIC ${LAL_DEV_DIR})
 target_include_directories(generate		PUBLIC ${LAL_DEV_DIR})
 target_include_directories(graphs		PUBLIC ${LAL_DEV_DIR})
-target_include_directories(internal		PUBLIC ${LAL_DEV_DIR})
+target_include_directories(detail		PUBLIC ${LAL_DEV_DIR})
 target_include_directories(io			PUBLIC ${LAL_DEV_DIR})
 target_include_directories(linarr		PUBLIC ${LAL_DEV_DIR})
 target_include_directories(memory		PUBLIC ${LAL_DEV_DIR})
@@ -354,7 +365,7 @@ target_include_directories(utilities	PUBLIC ${LAL_DEV_DIR})
 # lal linking
 target_link_libraries(generate		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 target_link_libraries(graphs		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
-target_link_libraries(internal		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
+target_link_libraries(detail		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 target_link_libraries(io			${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 target_link_libraries(linarr		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 target_link_libraries(memory		${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
@@ -369,7 +380,7 @@ target_link_libraries(utilities 	${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.so)
 # OpenMP
 target_link_libraries(generate		${OpenMP_CXX_LIBRARIES})
 target_link_libraries(graphs		${OpenMP_CXX_LIBRARIES})
-target_link_libraries(internal		${OpenMP_CXX_LIBRARIES})
+target_link_libraries(detail		${OpenMP_CXX_LIBRARIES})
 target_link_libraries(io			${OpenMP_CXX_LIBRARIES})
 target_link_libraries(linarr		${OpenMP_CXX_LIBRARIES})
 target_link_libraries(memory		${OpenMP_CXX_LIBRARIES})
@@ -381,7 +392,7 @@ target_link_libraries(utilities		${OpenMP_CXX_LIBRARIES})
 # GMP
 target_link_libraries(generate		gmp)
 target_link_libraries(graphs		gmp)
-target_link_libraries(internal		gmp)
+target_link_libraries(detail		gmp)
 target_link_libraries(io			gmp)
 target_link_libraries(linarr		gmp)
 target_link_libraries(memory		gmp)
@@ -394,6 +405,7 @@ target_link_libraries(utilities		gmp)
 add_comp_flag(-Wrestrict)
 add_comp_flag(-Wall)
 add_comp_flag(-Wextra)
+add_comp_flag(-D__LAL_INSPECT)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 	add_debug_flag(-O3)
 	add_debug_flag(-DDEBUG)
@@ -405,4 +417,3 @@ else()
 	add_release_flag(-UDEBUG)
 	add_release_flag(-fstrict-aliasing)
 endif()
-
