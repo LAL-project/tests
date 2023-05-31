@@ -15,7 +15,7 @@ Then, we choose one of the branches we want to test
 	$ git checkout master
 	$ git checkout 23.01
 
-The library has to be compiled into two subdirectories within `linear-arrangement-library'. These two directories have to be called `lal-release' and `lal-debug' and will contain, respectively, the release and debug compilations.
+The library has to be compiled into two subdirectories within `linear-arrangement-library`. These two directories have to be called `lal-release` and `lal-debug` and will contain, respectively, the release and debug compilations.
 
 ## Cloning the tests repository
 
@@ -42,7 +42,7 @@ Now we invoke CMake. To do so, we need to specify an absolute path to the librar
 	
 	-DLAL_DEV_DIR=...
 
-And replace `...' with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
+And replace `...` with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
 
 	$ cmake -DLAL_DEV_DIR=$HOME/linear-arrangement-library ../src
 	$ make -j
@@ -57,7 +57,7 @@ Now we invoke CMake. To do so, we need to specify an absolute path to the librar
 	
 	-DLAL_DEV_DIR=...
 
-And replace `...' with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
+And replace `...` with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
 
 	$ cmake -DLAL_DEV_DIR=$HOME/linear-arrangement-library -DCMAKE_BUILD_TYPE=Debug ../src
 	$ make -j
