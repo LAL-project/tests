@@ -4,6 +4,7 @@
 # the value of the parameter --exe-group=*.
 groups_list=(\
 	"all" \
+	"small-tests" \
 	\
 	"generate" \
 		"generate_trees_all" \
