@@ -19,8 +19,8 @@ source test_dir_utilities.sh
 # Functions
 
 function display_two() {
-	test=$1
-	total=$2
+	local test=$1
+	local total=$2
 	echo -n " ("
 	if [ $total -lt 10 ]; then
 		# do nothing
@@ -64,6 +64,8 @@ function show_usage() {
 	echo ""
 	echo "    --exe-group=t : execute a group of tests. Available groups are:"
 	echo "        all : execute all tests"
+	echo ""
+	echo "        small-tests : execute a small amout of tests"
 	echo ""
 	echo "        detail : execute detail tests"
 	echo "            detail_sorting : execute sorting detail tests"
@@ -198,6 +200,9 @@ function show_usage() {
 	echo "    --all : execute tests automatically. This is equivalent to"
 	echo "        --exe-group=all"
 	echo ""
+	echo "    --small-tests : execute smaller tests. This is equivalent to"
+	echo "        --exe-group=small-tests"
+	echo ""
 	echo "    --valgrind : use the memory error detector on every input"
 	echo "        test. This option makes the test ignore the output"
 	echo "        produced and errors are only reported when valgrind"
@@ -218,11 +223,11 @@ function show_usage() {
 # Check the result of the tester when valgrind is used.
 function check_res_valgrind() {
 	# input test file
-	test_name=$1
+	local test_name=$1
 	# the temporary file where the error output is stored
-	test_err=$2
+	local test_err=$2
 	# the file where to store the contents of the error output in case there were any
-	valg_err=$3
+	local valg_err=$3
 	
 	# When using valgrind, we only need to ensure that errors
 	# (memory leaks, out of bounds accesses, ...) were NOT produced.
@@ -242,21 +247,21 @@ function check_res_valgrind() {
 # Check the result of the tester when valgrind is NOT used.
 function check_res_no_valgrind() {
 	# input test file
-	test_name=$1
+	local test_name=$1
 	# output base file
-	base_out_file=$2
+	local base_out_file=$2
 
 	# the file where to store the output of the program if said output
 	# differs from the contents of the output base file
-	test_out=$3
+	local test_out=$3
 	# a temporary file where the error output is stored
-	temp_test_err=$4
+	local temp_test_err="$4.tmp"
 	# the file where to store the error output of the program if it ever
 	# produced an error output (like error messages and whatnot)
-	test_err=$5			
+	local test_err=$4
 
 	# output of the execution of the tester
-	prog_out=$6
+	local prog_out=$5
 	
 	# check if base output exists. If not, issue an error
 	# message and do not execute
@@ -267,7 +272,7 @@ function check_res_no_valgrind() {
 		
 	else
 		# replace Windows-like endlines with Linux-like endlines
-		prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
+		local prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
 		
 		# If the output is incorrect, store it into a file.
 		
@@ -284,9 +289,9 @@ function check_res_no_valgrind() {
 			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> $log_file
 		else
 			# test whether the error output produced is empty or not
-			BASE_CONTENTS=$(cat $base_out_file)
+			local BASE_CONTENTS=$(cat $base_out_file)
 			
-			DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
+			local DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
 			if [ ! -z "$DIFF" ]; then
 				echo -en "\e[1;4;31mDifferent outputs\e[0m "
 				echo "See result in $test_out"
@@ -303,16 +308,16 @@ function check_res_no_valgrind() {
 
 # Execute all tests in an input directory.
 function execute_group() {
-	input=$1
-	output=$2
-	progress_1=$3
-	progress_2=$4
-	storage=$5
+	local input=$1
+	local output=$2
+	local progress_1=$3
+	local progress_2=$4
+	local storage=$5
 	
-	skip=0
+	local skip=0
 	
 	# Make sure the input directory exists
-	input_group=inputs/$input
+	local input_group=inputs/$input
 	if [ ! -d $input_group ]; then
 		echo -en "\e[1;4;31mError:\e[0m Input directory "
 		echo -en "\e[2;4;37m$input_group\e[0m"
@@ -323,7 +328,7 @@ function execute_group() {
 	fi
 	
 	# Make sure the output directory exists
-	output_group=outputs/$output
+	local output_group=outputs/$output
 	if [ ! -d $output_group ]; then
 		echo -en "\e[1;4;31mError:\e[0m Output directory "
 		echo -en "\e[2;4;37m$output_group\e[0m"
@@ -339,9 +344,9 @@ function execute_group() {
 		
 		# Given an input directory a/b/c
 		# keys: is the list a b c
-		keys=$(echo $input | tr "/" "\n");
+		local keys=$(echo $input | tr "/" "\n");
 		# id: is the string a.b.c
-		id=$(echo $keys | tr ' ' '.')
+		local id=$(echo $keys | tr ' ' '.')
 		
 		# TEST_OUT and TEST_ERR are temporary files: a test named, for example,
 		# test-0015 will produce a standard output and an error output into
@@ -349,24 +354,24 @@ function execute_group() {
 		# moved to a unique file for this test, namely into the files
 		# $TEST_OUT.0015 and $TEST_ERR.0015. In case of valgrind the contents
 		# of $TEST_ERR will be moved to $VALG_ERR.0015.
-		TEST_OUT=.out.$id
-		TEST_ERR=.err.$id
-		VALG_ERR=.vgd.$id
+		local TEST_OUT=.out.$id
+		local TEST_ERR=.err.$id
+		local VALG_ERR=.vgd.$id
 		
 		echo -en "\e[1;1;33mExecuting tests in\e[0m \e[1;2;33m$input_group\e[0m"
 		display_two $progress_1 $progress_2
 		echo ""
 		
 		# retrieve the names of the test files
-		all_test_files=$(ls $input_group | grep test)
-		n_test_files=$(ls $input_group | grep test | wc -l)
-		nth_test=1
+		local all_test_files=$(ls $input_group | grep test)
+		local n_test_files=$(ls $input_group | grep test | wc -l)
+		local nth_test=1
 		
 		for f in $all_test_files; do
 			# retrieve id number from input test file
 			# e.g.: 'test-0010' -> '0010'
-			INFILE_LENGTH=${#f}
-			ID=${f:5:($INFILE_LENGTH - 4)}
+			local INFILE_LENGTH=${#f}
+			local ID=${f:5:($INFILE_LENGTH - 4)}
 			
 			# Display the progress within this group:
 			# output the name of the test file plus the index of the
@@ -375,7 +380,7 @@ function execute_group() {
 			display_two $nth_test $n_test_files
 			
 			# Execute the program NOW
-			PROG_OUT=$($EXECUTION_COMMANDAND -i $input_group/$f 2> $storage/$TEST_ERR)
+			local PROG_OUT=$($EXECUTION_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR)
 
 			# increment the amount of tests executed by 1
 			nth_test=$(($nth_test + 1))
@@ -392,7 +397,6 @@ function execute_group() {
 					$input_group/$f				\
 					$output_group/$f			\
 					$storage/$TEST_OUT.$ID 		\
-					$storage/$TEST_ERR 			\
 					$storage/$TEST_ERR.$ID		\
 					"$PROG_OUT"
 			fi
@@ -404,28 +408,101 @@ function execute_group() {
 	fi
 }
 
+function small_tests() {
+	# Pairs of input and output files.
+	# Input file: the file that describes what to test
+	# Output file: the "ground truth" of the corresponding input file
+	local files=(																					\
+		"graphs/construction/test-000.000"						"graphs/construction/test-000.000"	\
+		"graphs/construction/test-000.001"						"graphs/construction/test-000.001"	\
+		"graphs/construction/test-000.002"						"graphs/construction/test-000.002"	\
+		"linarr/C/bruteforce/test-0000"							"linarr/C/test-0000"				\
+		"linarr/C/dyn-prog/test-0000"							"linarr/C/test-0000"				\
+		"linarr/C/ladder/test-0000"								"linarr/C/test-0000"				\
+		"linarr/C/stack-based/test-0000"						"linarr/C/test-0000"				\
+		"properties/exp-var-C/formula-no_Q-no-reuse/test-0017"	"properties/exp-var-C/test-0017"	\
+		"properties/centroid/test-000.000"						"properties/centroid/test-000.000"	\
+	)
+	
+	local n_files=${#files[@]}
+	n_files=$(( $n_files/2 ))
+	
+	for ((i=0; i<$n_files; ++i)); do
+		local idx=$(( $i + 1 ))
+		local i1=$((2*$i    ))
+		local i2=$((2*$i + 1))
+		
+		input_file=${files[$i1]}
+		output_file=${files[$i2]}
+		
+		# ------------------------------------------------
+		# Prepare filenames for standard and error outputs
+		
+		# Given an input directory a/b/c
+		# keys: is the list a b c
+		local keys=$(echo $input_file | tr "/" "\n");
+		# id: is the string a.b.c
+		local id=$(echo $keys | tr ' ' '.')
+		
+		# TEST_OUT and TEST_ERR are temporary files: a test named, for example,
+		# test-0015 will produce a standard output and an error output into
+		# $TEST_OUT and $TEST_ERR. Then, in case of errors, each file will be
+		# moved to a unique file for this test, namely into the files
+		# $TEST_OUT.0015 and $TEST_ERR.0015. In case of valgrind the contents
+		# of $TEST_ERR will be moved to $VALG_ERR.0015.
+		local TEST_OUT=.out.$id
+		local TEST_ERR=.err.$id
+		local VALG_ERR=.vgd.$id
+		
+		echo -en "\e[1;1;33mExecuting test ($idx/$n_files) \e[0m \e[1;2;33m$input_file\e[0m  "
+		
+		# Execute the program NOW
+		local PROG_OUT=$($EXECUTION_COMMAND -i inputs/$input_file 2> $storage_dir/$TEST_ERR)
+		
+		# parse result of execution command differently,
+		# depending on whether we are using valgrind or not.
+		if [ $use_valgrind == 1 ]; then
+			check_res_valgrind 				\
+				inputs/$input_file			\
+				$TEST_ERR					\
+				$VALG_ERR
+		else
+			check_res_no_valgrind 			\
+				inputs/$input_file			\
+				outputs/$output_file		\
+				$TEST_OUT					\
+				$TEST_ERR					\
+				"$PROG_OUT"
+		fi
+		
+		# Remove those unnecessary temporary files.
+		# File $VALG_ERR is never actually used 'as is'.
+		rm -f $TEST_OUT $TEST_ERR
+	done
+}
+
 function apply_group() {
-	exe_group=$1		# execution group
+	local exe_group=$1		# execution group
 	
 	# if the group is valid, then execute it
 	echo "Executing group '$exe_group'"
 	
 	# variable name
-	dir_name="$exe_group""_DIRS[@]"
+	local dir_name="$exe_group""_DIRS[@]"
 	# actual array
-	DIRS_TO_PROCESS=("${!dir_name}")
+	local DIRS_TO_PROCESS=("${!dir_name}")
 	# size of the array
-	n_dirs=${#DIRS_TO_PROCESS[@]}
+	local n_dirs=${#DIRS_TO_PROCESS[@]}
 	# number of input directories
-	n_dirs=$(($n_dirs/2))
+	local n_dirs=$(($n_dirs/2))
 	
 	# execute
 	for ((i=0; i<$n_dirs; ++i)); do
-		idx=$(($i + 1))
-		i1=$((2*$i    ))
-		i2=$((2*$i + 1))
-		in="${DIRS_TO_PROCESS[$i1]}"
-		out="${DIRS_TO_PROCESS[$i2]}"
+		local idx=$(($i + 1))
+		local i1=$((2*$i    ))
+		local i2=$((2*$i + 1))
+		local in="${DIRS_TO_PROCESS[$i1]}"
+		local out="${DIRS_TO_PROCESS[$i2]}"
 
 		echo "$(date +"%Y/%m/%d.%T")        Start executing tests in $in." >> $log_file
 		execute_group $in $out $idx $n_dirs $storage_dir
@@ -516,6 +593,11 @@ for i in "$@"; do
 		
 		--all)
 		exe_group="all"
+		shift
+		;;
+		
+		--small-tests)
+		exe_group="small-tests"
 		shift
 		;;
 		
@@ -661,7 +743,7 @@ if [ $compile -eq 1 ]; then
 			EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/${keywords[0]}"
 			EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
 		else
-			if [ "$exe_group" == "all" ]; then
+			if [ "$exe_group" == "all" ] || [ "$exe_group" == "small-tests" ]; then
 				EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/tests"
 				EXECUTION_FILE="$EXECUTION_DIRECTORY/tests"
 			else
@@ -674,7 +756,13 @@ if [ $compile -eq 1 ]; then
 		fi
 	fi
 	
-	if [ $CMAKE_BUILD == 0 ] && [ $EXECUTE_FROM_INPUT == 0 ] && [ "$exe_group" == "all" ]; then
+	all_or_small=0
+	if [ "$exe_group" == "all" ] || [ "$exe_group" == "small-tests" ]; then
+		all_or_small=1
+	fi
+	
+	if [ $CMAKE_BUILD == 0 ] && [ $EXECUTE_FROM_INPUT == 0 ] && [ $all_or_small == 1 ]; then
+		
 		cd $EXECUTION_DIRECTORY
 		cd ..
 		make -j4
@@ -698,9 +786,9 @@ fi
 # Prepare execution command. If valgrind is
 # requested, make the command appropriately.
 if [ $use_valgrind == 1 ]; then
-	EXECUTION_COMMANDAND="valgrind -q --leak-check=full $EXECUTION_COMMAND"
+	EXECUTION_COMMAND="valgrind -q --leak-check=full $EXECUTION_COMMAND"
 else
-	EXECUTION_COMMANDAND="$EXECUTION_COMMAND"
+	EXECUTION_COMMAND="$EXECUTION_COMMAND"
 fi
 
 ################################################################################
@@ -719,7 +807,7 @@ elif [ "$EXE_MODE" == "release" ]; then
 fi
 
 ################################################################################
-# Display where the files are being written
+# Display where the files will be written
 
 log_file=$storage_dir/$log_file
 
@@ -739,6 +827,10 @@ if [ $EXECUTE_FROM_GROUP == 1 ]; then
 		for g in "detail" "generate" "graphs" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
 			apply_group $g
 		done
+	elif [ "$exe_group" == "small-tests" ]; then
+		
+		small_tests
+		
 	else
 		apply_group $exe_group
 	fi
