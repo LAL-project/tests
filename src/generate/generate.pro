@@ -72,12 +72,12 @@ equals(ENVIR, "CLUSTER") {
 }
 
 CONFIG(debug, debug|release) {
-	LIBS += -L$${LAL_DIR}/lal-debug -llaldebug
-	PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblaldebug.so
+	LIBS += -L$${LAL_DIR}/lal-debug -llal
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-debug/liblal.so
 }
 CONFIG(release, debug|release) {
-	LIBS += -L$${LAL_DIR}/lal-release -llal
-	PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblal.so
+	LIBS += -L$${LAL_DIR}/lal-release -llaloptimized
+	PRE_TARGETDEPS += $${LAL_DIR}/lal-release/liblaloptimized.so
 }
 
 INCLUDEPATH += $${LAL_DIR}
