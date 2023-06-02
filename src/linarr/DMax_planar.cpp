@@ -55,7 +55,6 @@
 #include <lal/linarr/formal_constraints.hpp>
 
 // common includes
-#include "common/definitions.hpp"
 #include "common/parse_header.hpp"
 
 // linarr includes
