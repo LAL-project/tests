@@ -69,8 +69,8 @@ LIBS += -lgmp -fopenmp -lpthread
 
 # configure home
 equals(ENVIR, "HOME") {
-    LAL_DIR = /home/lluis/Documents/projects/LAL-dev/linear-arrangement-library
-	THIS_DIR = /home/lluis/Documents/projects/LAL-dev/tests/src
+	LAL_DIR = /home/lluis/Documents/projects/LAL-dev/23.01/linear-arrangement-library
+	THIS_DIR = /home/lluis/Documents/projects/LAL-dev/23.01/tests/src
 }
 
 # configure cluster
@@ -78,8 +78,8 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXX = /home/soft/gcc-11.2.0/bin/g++
 	QMAKE_LINK = /home/soft/gcc-11.2.0/bin/g++
 
-    LAL_DIR = /home/usuaris/lalemany/LAL-dev/linear-arrangement-library
-	THIS_DIR = /home/usuaris/lalemany/LAL-dev/tests/src
+	LAL_DIR = /home/usuaris/lalemany/LAL-dev/23.01/linear-arrangement-library
+	THIS_DIR = /home/usuaris/lalemany/LAL-dev/23.01/tests/src
 }
 
 INCLUDEPATH += $${LAL_DIR}
