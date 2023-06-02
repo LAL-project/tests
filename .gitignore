@@ -3,7 +3,6 @@ slurm-*
 
 *.pro.user
 
-src/tests.pro.user
 src/CMakeLists.txt.user
 
 build-debug/
