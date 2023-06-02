@@ -1,7 +1,8 @@
 slurm-*
 *.html
 
-src/tests.pro.user
+*.pro.user
+
 src/CMakeLists.txt.user
 
 build-debug/
