@@ -48,7 +48,6 @@
 #include <lal/linear_arrangement.hpp>
 
 // common includes
-#include "common/definitions.hpp"
 #include "common/std_utils.hpp"
 
 namespace tests {
