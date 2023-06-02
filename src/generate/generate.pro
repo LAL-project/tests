@@ -7,10 +7,6 @@ isEmpty(ENVIR) {
 	ENVIR = "HOME"
 }
 
-isEmpty(LTO) {
-    LTO = "NO"
-}
-
 isEmpty(ADDRESS_SANITIZER) {
     ADDRESS_SANITIZER = "NO"
 }
@@ -41,19 +37,13 @@ QMAKE_CXXFLAGS +=			\
 	-Wuseless-cast			\ # warn if you perform a cast to the same type
 	-Wrestrict
 
-QMAKE_CXXFLAGS_DEBUG += -DDEBUG -D_GLIBCXX_DEBUG
+QMAKE_CXXFLAGS_DEBUG += -DDEBUG -D_GLIBCXX_DEBUG -Og
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -UDEBUG -DNDEBUG -fstrict-aliasing
+QMAKE_CXXFLAGS_RELEASE += -UDEBUG -DNDEBUG -O3
 
 QMAKE_LFLAGS += -fPIC -O3 -Wl,-O3
 QMAKE_LFLAGS_RELEASE += -DNDEBUG -UDEBUG -Wl,-O3
 QMAKE_LFLAGS_DEBUG += -DDEBUG -D_GLIBCXX_DEBUG -Wl,-O3
-
-equals(LTO, "YES") {
-    # use Inter-Procedural Optimization (IPO)
-	QMAKE_CXXFLAGS += -flto -fno-fat-lto-objects
-	QMAKE_LFLAGS += -flto -fno-fat-lto-objects
-}
 
 equals(ADDRESS_SANITIZER, "YES") {
     # not to be used in combination with valgrind
