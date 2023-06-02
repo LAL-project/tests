@@ -1,15 +1,61 @@
 # Compilation of the tests (Windows)
 
-The tests can also be compiled in ```RELEASE``` and in ```DEBUG``` mode. However, the tests must be compiled in the same mode in which the library was compiled.
+LAL comes with a set of tests to make sure that there are no bugs in the code and that the library was compiled successfully. To compile the code that will run the tests we use CMake. To compile the tests, however, we need to tell CMake the directory where the branch of LAL we want to test is.
 
-## RELEASE mode
+## Cloning LAL
 
-	cd tests; mkdir build-release; cd build-release
-	cmake -G "MSYS Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ../src
-	make -j 4
+Clone the repository of LAL into a directory. For example, we can run
 
-## DEBUG mode
+	$ cd  # go to our home directory
+	$ git clone git@github.com:LAL-project/linear-arrangement-library.git
+	$ cd linear-arrangement-library
 
-	cd tests; mkdir build-debug; cd build-debug
-	cmake -G "MSYS Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Debug ../src
-	make -j 4
+Then, we choose one of the branches we want to test. In this branch (`master`) we should use 
+
+	$ git checkout master
+
+The library has to be compiled into two subdirectories within `linear-arrangement-library`. These two directories have to be called `lal-release` and `lal-debug` and will contain, respectively, the release and debug compilations.
+
+## Cloning the tests repository
+
+As usual, clone the repository of the tests
+
+	$ cd
+	$ git clone git@github.com:LAL-project/tests
+	$ cd tests
+
+And choose the branch of the tests you want to run. In this branch (`master`) we should use 
+
+	$ git checkout master
+
+## Compile the tests
+
+### Release
+
+First, we create the appropriate directories that will contain the executable files.
+
+	$ cd tests; mkdir build-release; cd build-release
+	
+Now we invoke CMake. To do so, we need to specify an absolute path to the library. To do this, we have to define the symbol
+	
+	-DLAL_DEV_DIR=...
+
+And replace `...` with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
+
+	$ cmake -G "MSYS Makefiles" -DLAL_DEV_DIR=$HOME/linear-arrangement-library ../src
+	$ make -j
+
+### Debug
+
+First, we create the appropriate directories that will contain the executable files.
+
+	$ cd tests; mkdir build-debug; cd build-debug
+	
+Now we invoke CMake. To do so, we need to specify an absolute path to the library. To do this, we have to define the symbol
+	
+	-DLAL_DEV_DIR=...
+
+And replace `...` with the aforementioned absolute path. For instance, if you cloned the repositories in your home folder, you could run
+
+	$ cmake -G "MSYS Makefiles" -DLAL_DEV_DIR=$HOME/linear-arrangement-library -DCMAKE_BUILD_TYPE=Debug ../src
+	$ make -j
