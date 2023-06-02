@@ -1,56 +1,34 @@
 #!/bin/bash
 
-function make_single {
-	what=$1
-	DEBCONF=$2
+CMAKE_DIR=/home/soft/cmake-3.22.1/bin
+
+function make_directories_compiler() {
+	local compiler=$1
+
+	local suffix=""
+	local CXX_compiler=""
+	local C_compiler=""
+	if [ ! -z $compiler ]; then
+		suffix="-$compiler"
+		CXX_compiler="-DCMAKE_CXX_COMPILER=/home/soft/gcc-$compiler/bin/g++"
+		C_compiler="-DCMAKE_C_COMPILER=/home/soft/gcc-$compiler/bin/gcc"
+	else
+		CXX_compiler="-DCMAKE_CXX_COMPILER=/home/soft/gcc-11.3/bin/g++"
+		C_compiler="-DCMAKE_C_COMPILER=/home/soft/gcc-11.3/bin/gcc"
+	fi
 	
-	mkdir -p $what && cd $what
-	echo "        $PWD"
-	qmake -makefile -o Makefile "ENVIR=CLUSTER" $DEBCONF ../../src/$what/$what.pro
+	mkdir -p build-debug$suffix
+	cd build-debug$suffix
+	$CMAKE_DIR/cmake $CXX_compiler $C_compiler -DCMAKE_BUILD_TYPE=Debug -DLAL_DEV_DIR=$HOME/LAL-dev/latest/linear-arrangement-library ../src
+	cd ..
+
+	mkdir -p build-release$suffix
+	cd build-release$suffix
+	$CMAKE_DIR/cmake $CXX_compiler $C_compiler -DCMAKE_BUILD_TYPE=Release -DLAL_DEV_DIR=$HOME/LAL-dev/latest/linear-arrangement-library ../src
 	cd ..
 }
 
-function make_makefiles {
-	if [ ! -z $1 ]; then
-		declare DEBCONF=$1
-	fi
-
-	echo "        $PWD"
-	qmake -makefile -o Makefile "ENVIR=CLUSTER" $DEBCONF ../src/tests.pro
-
-	make_single common $DEBCONF
-
-	make_single detail $DEBCONF
-
-	make_single generate $DEBCONF
-
-	make_single graphs $DEBCONF
-
-	make_single io $DEBCONF
-
-	make_single linarr $DEBCONF
-
-	make_single memory $DEBCONF
-
-	make_single numeric $DEBCONF
-
-	make_single properties $DEBCONF
-
-	make_single tests $DEBCONF
-
-	make_single utilities $DEBCONF
-}
-
-# ----------------------------------------------------------------------
-# RELEASE BUILD
-echo "    Release build..."
-mkdir -p build-release && cd build-release
-make_makefiles
-cd ..
-
-# ----------------------------------------------------------------------
-# DEBUG BUILD
-echo "    Debug build..."
-mkdir -p build-debug && cd build-debug
-make_makefiles "CONFIG+=debug"
-cd ..
+make_directories_compiler
+make_directories_compiler 11.3
+make_directories_compiler 12.3
+make_directories_compiler 13.1

@@ -1,19 +1,19 @@
-rand_linarr.py
-execution_log
-CMakeLists.txt.user
-
-*.html
-*.pro.user
-.out.*
-.err.*
-.vgd.*
-.time-*
-jobs.*
 slurm-*
+*.html
+
+src/tests.pro.user
+src/CMakeLists.txt.user
 
 build-debug/
 build-release/
+build-profile/
+
+build-debug-11.3/
+build-release-11.3/
+build-debug-12.3/
+build-release-12.3/
+build-debug-13.1/
+build-release-13.1/
 
 info_debug/
-info_debug_valgrind/
 info_release/
