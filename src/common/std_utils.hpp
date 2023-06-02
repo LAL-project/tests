@@ -46,6 +46,12 @@
 #include <ostream>
 #include <vector>
 
+template <typename T, typename U>
+std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) noexcept {
+	os << "(" << p.first << "," << p.second << ")";
+	return os;
+}
+
 template <typename T>
 std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) noexcept {
 	if (v.size() == 0) { return os; }
@@ -62,12 +68,6 @@ std::istream& operator>> (std::istream& is, const std::vector<T>& v) noexcept {
 		is >> v[i];
 	}
 	return is;
-}
-
-template <typename T, typename U>
-std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) noexcept {
-	os << "(" << p.first << "," << p.second << ")";
-	return os;
 }
 
 // lal includes
