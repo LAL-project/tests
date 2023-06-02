@@ -10,10 +10,9 @@ Clone the repository of LAL into a directory. For example, we can run
 	$ git clone git@github.com:LAL-project/linear-arrangement-library.git
 	$ cd linear-arrangement-library
 
-Then, we choose one of the branches we want to test
+Then, we choose one of the branches we want to test. In this branch (`master`) we should use 
 
 	$ git checkout master
-	$ git checkout 23.01
 
 The library has to be compiled into two subdirectories within `linear-arrangement-library`. These two directories have to be called `lal-release` and `lal-debug` and will contain, respectively, the release and debug compilations.
 
@@ -25,10 +24,9 @@ As usual, clone the repository of the tests
 	$ git clone git@github.com:LAL-project/tests
 	$ cd tests
 
-And choose the branch of the tests you want to run
+And choose the branch of the tests you want to run. In this branch (`master`) we should use 
 
 	$ git checkout master
-	$ git checkout 23.01
 
 ## Compile the tests
 
