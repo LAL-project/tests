@@ -212,7 +212,7 @@ function show_usage() {
 	echo "        is no need to specify an output (--output)."
 	echo "        The release mode should not be indicated."
 	echo ""
-	echo "    --exe-directory=dir  :specify the directory that contains"
+	echo "    --exe-directory=dir : specify the directory that contains"
 	echo "        the executable files."
 	echo ""
 	echo "    --debug --release: indicate what type of build you want to"
@@ -534,13 +534,11 @@ input_dir=""
 output_dir=""
 # use valgrind
 use_valgrind=0
-
 # the name of the directory that contains the executable files
 exe_directory=""
 # execution mode
 debug=0
 release=0
-
 # execute tests of a certain type
 exe_group=""
 # log file
@@ -758,7 +756,6 @@ if [ $compile -eq 1 ]; then
 	if [ $CMAKE_BUILD == 1 ]; then
 		# choose the execution directory and file for a cmake-based build
 		
-		exe_directory=$exe_directory
 		if [ $EXECUTE_FROM_INPUT == 1 ]; then
 			IFS='/' read -ra keywords <<< "$input_dir"
 			EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
