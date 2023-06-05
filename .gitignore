@@ -18,3 +18,8 @@ build-release-13.1/
 
 info_debug/
 info_release/
+
+info_build-release-11.3/
+info_build-release-12.3/
+info_build-release-13.1/
+
