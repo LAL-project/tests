@@ -5,7 +5,7 @@ function show_usage {
 	echo "====="
 	echo ""
 	echo "Mandatory parameters:"
-	echo "    --mode=debug,release"
+	echo "    --build=debug,release"
 	echo "        What to run: a debug build, or a release build"
 	echo ""
 	echo "    --compiler-version=dir"
