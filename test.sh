@@ -189,15 +189,17 @@ function show_usage() {
 	echo ""	
 	echo "Optional parameters:"
 	echo ""
-	echo "    --log-file : indicate the name of the log file."
+	echo "    --log-file=name : indicate the name of the log file."
 	echo "        Default: 'execution_log'"
 	echo ""
 	echo "    --no-make : prevent the script from invoking 'make'."
 	echo ""
-	echo "    --all : execute tests automatically. This is equivalent to"
+	echo "    --all : execute tests automatically."
+	echo "        This is equivalent to"
 	echo "        --exe-group=all"
 	echo ""
-	echo "    --small-tests : execute smaller tests. This is equivalent to"
+	echo "    --small-tests : execute smaller tests."
+	echo "        This is equivalent to"
 	echo "        --exe-group=small-tests"
 	echo ""
 	echo "    --valgrind : use the memory error detector on every input"
@@ -207,13 +209,22 @@ function show_usage() {
 	echo "        is no need to specify an output (--output)."
 	echo "        The release mode should not be indicated."
 	echo ""
-	echo "    --debug --release: use one of these two options to indicate"
-	echo "        what type of build you want to run the tests with."
+	echo "    --exe-directory=dir : specify the directory that contains"
+	echo "        the executable files."
 	echo ""
-	echo "        --debug : suitable for valgrind in order to detect memory leaks"
-	echo "        --release : suitable when testing lengthy computations."
+	echo "    --debug --release: indicate what type of build you want to"
+	echo "        run the tests with."
 	echo ""
-	echo "        The default option is '--debug'"
+	echo "        --debug : if the build contains debugging symbols,"
+	echo "        --release : if the build is optimized and does not contain"
+	echo "            debugging symbol."
+	echo ""
+	echo "    --run-debug, --run-release : execute a debug or release build"
+	echo ""
+	echo "        These are equivalent to"
+	echo ""
+	echo "        --exe-directory=build-debug --debug"
+	echo "        --exe-directory=build-release --release"
 	echo ""
 }
 
@@ -520,7 +531,9 @@ input_dir=""
 output_dir=""
 # use valgrind
 use_valgrind=0
-# release or debug?
+# the name of the directory that contains the executable files
+exe_directory=""
+# execution mode
 debug=0
 release=0
 # execute tests of a certain type
@@ -565,12 +578,12 @@ for i in "$@"; do
 		storage_dir="${i#*=}"
 		shift
 		;;
-
+		
 		--no-make)
 		compile=0
 		shift
 		;;
-
+		
 		--valgrind)
 		use_valgrind=1
 		shift
@@ -578,13 +591,28 @@ for i in "$@"; do
 		
 		--debug)
 		debug=1
-		release=0
 		shift
 		;;
 		
 		--release)
-		debug=0
 		release=1
+		shift
+		;;
+		
+		--run-debug)
+		exe_directory=build-debug
+		debug=1
+		shift
+		;;
+		
+		--run-release)
+		exe_directory=build-release
+		release=1
+		shift
+		;;
+		
+		--exe-directory=*)
+		exe_directory="${i#*=}"
 		shift
 		;;
 		
@@ -600,12 +628,13 @@ for i in "$@"; do
 		
 		*)
 		echo -e "\e[1;4;31mError:\e[0m Option $i unknown"
+		exit
 		;;
 	esac
 done
 
 # show usage if indicated
-if [ $usage == 1 ] || [ $number_parameters -eq 0 ]; then
+if [ $usage == 1 ] || [ $number_parameters == 0 ]; then
 	show_usage
 	
 	exit
@@ -632,7 +661,7 @@ fi
 if [ $release == 1 ] && [ $use_valgrind == 1 ]; then
 	echo -e "\e[1;4;31mError:\e[0m Conflicting options"
 	echo "    --valgrind --release"
-	echo "    You shouldn't be using valgrind on a release compilation!"
+	echo "    You shouldn't be using valgrind on a release build!"
 	exit
 fi
 
@@ -640,11 +669,22 @@ fi
 # Execution mode (debug/release)
 
 # use debug by default
-EXE_MODE="debug"
-if [ $debug == 1 ]; then
-	EXE_MODE="debug"
-elif [ $release == 1 ]; then
-	EXE_MODE="release"
+if [ $debug == 0 ] && [ $release == 0 ]; then
+	echo -e "\e[1;4;31mError:\e[0m No execution mode was specified"
+	echo "    --debug"
+	echo "    --release"
+	exit
+fi
+if [ $debug == 1 ] && [ $release == 1 ]; then
+	echo -e "\e[1;4;31mError:\e[0m Conflicting execution modes"
+	echo "    debug: $debug"
+	echo "    release: $release"
+	exit
+fi
+
+if [ "$exe_directory" == "" ]; then
+	echo -e "\e[1;4;31mError:\e[0m Execution directory is empty: I won't be able to find the executable file"
+	exit
 fi
 
 ################################################################################
@@ -694,23 +734,17 @@ else
 	fi
 fi
 
-# partially construct the execution directory
-EXECUTION_DIRECTORY=""
-if [ "$EXE_MODE" == "debug" ]; then
-	EXECUTION_DIRECTORY="build-debug"
-elif [ "$EXE_MODE" == "release" ]; then
-	EXECUTION_DIRECTORY="build-release"
-fi
+echo "exe_directory: $exe_directory"
 
 # Locate the executable file
-EXECUTION_FILE=""
+EXECUTABLE_FILE=""
 
 # make sure the executable is up to date
 if [ $compile -eq 1 ]; then
 	wd=$PWD
 	CMAKE_BUILD=0
 	
-	cd $EXECUTION_DIRECTORY
+	cd $exe_directory
 	if [ -f cmake_install.cmake ]; then
 		CMAKE_BUILD=1
 	fi
@@ -719,16 +753,15 @@ if [ $compile -eq 1 ]; then
 	if [ $CMAKE_BUILD == 1 ]; then
 		# choose the execution directory and file for a cmake-based build
 		
-		EXECUTION_DIRECTORY=$EXECUTION_DIRECTORY
 		if [ $EXECUTE_FROM_INPUT == 1 ]; then
 			IFS='/' read -ra keywords <<< "$input_dir"
-			EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+			EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
 		else
 			if [ "$exe_group" == "all" ]; then
-				EXECUTION_FILE="$EXECUTION_DIRECTORY/tests"
+				EXECUTABLE_FILE="$exe_directory/tests"
 			else
 				IFS='_' read -ra keywords <<< "$exe_group"
-				EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+				EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
 			fi
 		fi
 	else
@@ -737,18 +770,18 @@ if [ $compile -eq 1 ]; then
 		if [ $EXECUTE_FROM_INPUT == 1 ]; then
 			IFS='/' read -ra keywords <<< "$input_dir"
 			
-			EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/${keywords[0]}"
-			EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+			exe_directory="$exe_directory/${keywords[0]}"
+			EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
 		else
 			if [ "$exe_group" == "all" ] || [ "$exe_group" == "small-tests" ]; then
-				EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/tests"
-				EXECUTION_FILE="$EXECUTION_DIRECTORY/tests"
+				exe_directory="$exe_directory/tests"
+				EXECUTABLE_FILE="$exe_directory/tests"
 			else
 				echo "exe_group: $exe_group"
 				IFS='_' read -ra keywords <<< "$exe_group"
 				echo "KEYWORDS: ${keywords[0]}"
-				EXECUTION_DIRECTORY="$EXECUTION_DIRECTORY/${keywords[0]}"
-				EXECUTION_FILE="$EXECUTION_DIRECTORY/${keywords[0]}"
+				exe_directory="$exe_directory/${keywords[0]}"
+				EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
 			fi
 		fi
 	fi
@@ -760,23 +793,23 @@ if [ $compile -eq 1 ]; then
 	
 	if [ $CMAKE_BUILD == 0 ] && [ $EXECUTE_FROM_INPUT == 0 ] && [ $all_or_small == 1 ]; then
 		
-		cd $EXECUTION_DIRECTORY
+		cd $exe_directory
 		cd ..
 		make -j4
 		cd $wd
 	else
-		cd $EXECUTION_DIRECTORY
+		cd $exe_directory
 		make -j4
 		cd $wd
 	fi
 fi
 
 EXECUTION_COMMAND=""
-if [ -f $EXECUTION_FILE ]; then
-	EXECUTION_COMMAND=./$EXECUTION_FILE
+if [ -f $EXECUTABLE_FILE ]; then
+	EXECUTION_COMMAND=./$EXECUTABLE_FILE
 else
 	echo -e "\e[1;4;31mError:\e[0m No executable found."
-	echo -e "    Looked for: $EXECUTION_FILE"
+	echo -e "    Looked for: $EXECUTABLE_FILE"
 	exit
 fi
 
@@ -792,14 +825,14 @@ fi
 # Display information about what software is being tested.
 
 echo -en "Testing "
-if [ "$EXE_MODE" == "debug" ]; then
+if [ $debug == 1 ]; then
 	echo -en "in \e[1;3;36mdebug\e[0m mode"
 	if [ $use_valgrind == 1 ]; then
 		echo " and using valgrind."
 	else
 		echo "."
 	fi
-elif [ "$EXE_MODE" == "release" ]; then
+elif [ $release == 1 ]; then
 	echo -e "in \e[1;3;36mrelease\e[0m mode."
 fi
 
