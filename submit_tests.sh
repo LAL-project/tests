@@ -5,8 +5,11 @@ function show_usage {
 	echo "====="
 	echo ""
 	echo "Mandatory parameters:"
-	echo "    --build=debug,release"
-	echo "        What to run: debug build, or release build"
+	echo "    --mode=debug,release"
+	echo "        What to run: a debug build, or a release build"
+	echo ""
+	echo "    --exe-directory=dir"
+	echo "        the directory that contains the executable file"
 	echo ""
 	echo "Optional parameters:"
 	echo "    --analyzer=valgrind,address-sanitizer"
@@ -37,6 +40,11 @@ for i in "$@"; do
 		shift
 		;;
 		
+		--exe-directory=*)
+		exe_directory="${i#*=}"
+		shift
+		;;
+		
 		--analyzer=*)
 		analyzer="${i#*=}"
 		shift
@@ -56,7 +64,11 @@ fi
 
 if [ -z $build ]; then
 	echo -e "\e[1;4;31mError:\e[0m Build parameter cannot be empty"
-	show_usage
+	exit
+fi
+
+if [ -z $exe_directory ]; then
+	echo -e "\e[1;4;31mError:\e[0m Execution directory parameter cannot be empty"
 	exit
 fi
 
@@ -76,7 +88,7 @@ if [ ! -z $analyzer ]; then
 	
 fi
 
-info=info_$build
+info=info_$exe_directory
 valgrind_param=""
 use_valgrind=0
 memory=4GB
@@ -84,11 +96,6 @@ memory=4GB
 if [ ! -z $analyzer ]; then
 	
 	if [ "$analyzer" == "valgrind" ]; then
-		# valgrind analyzer can only be used in debug compilations
-		if [ "$build" != "debug" ]; then
-			echo -e "\e[1;4;31mError:\e[0m Cannot use valgrind in a non-debug build"
-			exit
-		fi
 		
 		use_valgrind=1
 		valgrind_param="--valgrind"
@@ -107,6 +114,7 @@ queue="long"
 
 echo "Execution information"
 echo "    build: '$build'"
+echo "    exe_directory: '$exe_directory'"
 echo "    analyzer: '$analyzer'"
 echo "    job memory: '$memory'"
 echo "    job queue: '$queue'"
@@ -117,5 +125,5 @@ mkdir -p $info
 
 for group in detail generate graphs linarr memory numeric properties utilities; do
 	echo $group" - "$build
-	sbatch --mem=$memory --job-name=tests_"$build" -p $queue -o $info/"$group".out -e $info/"$group".err ./test.sh $valgrind_param --$build --exe-group=$group --log-file="$group"_log --storage-dir=$info
+	echo "sbatch --mem=$memory --job-name=tests_$build -p $queue -o $info/job__$group.out -e $info/job__$group.err ./test.sh $valgrind_param --$build --exe-directory=$exe_directory --exe-group=$group --log-file=log_$group --storage-dir=$info"
 done
