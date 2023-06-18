@@ -137,6 +137,20 @@ for group in detail generate graphs linarr memory numeric properties utilities; 
 	echo $group" - "$build
 	echo "    job_name: $job_name"
 
-	sbatch --mem=$memory --job-name=$job_name -p $queue -o $log_directory/job__$group.out -e $log_directory/job__$group.err ./test.sh $valgrind_param --$build --exe-directory=$exe_directory --exe-group=$group --log-file=log_$group --storage-dir=$log_directory --lal_library_path=$lal_library_path --gcc_library_path=$gcc_library_path
+	sbatch \
+		--mem=$memory \
+		--job-name=$job_name \
+		-p $queue \
+		-o $log_directory/job__$group.out \
+		-e $log_directory/job__$group.err \
+		./test.sh \
+			$valgrind_param \
+			--$build \
+			--exe-directory=$exe_directory \
+			--exe-group=$group \
+			--log-file=log_$group \
+			--storage-dir=$log_directory \
+			--lal_library_path=$lal_library_path \
+			--gcc_library_path=$gcc_library_path
 done
 
