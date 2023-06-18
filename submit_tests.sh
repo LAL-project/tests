@@ -123,6 +123,11 @@ echo "    job memory: '$memory'"
 echo "    job queue: '$queue'"
 echo "    use valgrind: '$use_valgrind'"
 echo "        valgrind param: '$valgrind_param'"
+lal_library_path=$HOME/LAL-dev/latest/linear-arrangement-library/lal-$build-$compiler_version
+gcc_library_path=/home/soft/gcc-$compiler_version/lib64
+
+echo "    lal_library_path: $lal_library_path"
+echo "    gcc_library_path: $gcc_library_path"
 
 mkdir -p $log_directory
 
@@ -132,6 +137,20 @@ for group in detail generate graphs linarr memory numeric properties utilities; 
 	echo $group" - "$build
 	echo "    job_name: $job_name"
 
-	sbatch --mem=$memory --job-name=$job_name -p $queue -o $log_directory/job__$group.out -e $log_directory/job__$group.err ./test.sh $valgrind_param --$build --exe-directory=$exe_directory --exe-group=$group --log-file=log_$group --storage-dir=$log_directory
+	sbatch \
+		--mem=$memory \
+		--job-name=$job_name \
+		-p $queue \
+		-o $log_directory/job__$group.out \
+		-e $log_directory/job__$group.err \
+		./test.sh \
+			$valgrind_param \
+			--$build \
+			--exe-directory=$exe_directory \
+			--exe-group=$group \
+			--log-file=log_$group \
+			--storage-dir=$log_directory \
+			--lal_library_path=$lal_library_path \
+			--gcc_library_path=$gcc_library_path
 done
 
