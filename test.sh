@@ -548,12 +548,26 @@ log_file="execution_log"
 storage_dir="."
 # compile (or not) the executable
 compile=1
+# the path to the gcc library
+gcc_library_path=""
+# the path to the LAL library
+lal_library_path=""
 
 for i in "$@"; do
 	case $i in
 		
 		--help|-h)
 		usage=1
+		shift
+		;;
+
+		--lal_library_path=*)
+		lal_library_path="${i#*=}"
+		shift
+		;;
+
+		--gcc_library_path=*)
+		gcc_library_path="${i#*=}"
 		shift
 		;;
 		
@@ -636,10 +650,29 @@ for i in "$@"; do
 	esac
 done
 
+if [ "$gcc_library_path" != "" ] || [ "$lal_library_path" != "" ]; then
+
+	export LD_LIBRARY_PATH=""
+
+	if [ "$gcc_library_path" != "" ]; then
+		if [ "$LD_LIBRARY_PATH" == "" ]; then
+			export LD_LIBRARY_PATH=$gcc_library_path
+		else
+			export LD_LIBRARY_PATH=$gcc_library_path:$LD_LIBRARY_PATH
+		fi
+	fi
+	if [ "$lal_library_path" != "" ]; then
+		if [ "$LD_LIBRARY_PATH" == "" ]; then
+			export LD_LIBRARY_PATH=$lal_library_path
+		else
+			export LD_LIBRARY_PATH=$lal_library_path:$LD_LIBRARY_PATH
+		fi
+	fi
+fi
+
 # show usage if indicated
 if [ $usage == 1 ] || [ $number_parameters == 0 ]; then
 	show_usage
-	
 	exit
 fi
 
