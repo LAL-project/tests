@@ -22,4 +22,7 @@ info_release/
 info_build-release-11.3/
 info_build-release-12.3/
 info_build-release-13.1/
+info_build-debug-11.3/
+info_build-debug-12.3/
+info_build-debug-13.1/
 
