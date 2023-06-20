@@ -95,6 +95,7 @@
 
 namespace tests {
 namespace generate {
+namespace unconstrained {
 
 inline lal::numeric::integer factorial(uint64_t f) noexcept {
 	if (f == 0) { return 1; }
@@ -164,6 +165,8 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 	return err_type::no_error;
 }
 
+} // -- namespace unconstrained
+
 err_type exe_gen_arr_all(std::ifstream& fin) noexcept {
 	uint64_t n, nrelabs;
 	while (fin >> n >> nrelabs) {
@@ -174,7 +177,7 @@ err_type exe_gen_arr_all(std::ifstream& fin) noexcept {
 			lal::graphs::free_tree fT = TreeGen.get_tree();
 			TreeGen.next();
 
-			const err_type e = test_a_tree(fT, nrelabs);
+			const err_type e = unconstrained::test_a_tree(fT, nrelabs);
 			if (e != err_type::no_error) {
 				return e;
 			}

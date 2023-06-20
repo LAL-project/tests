@@ -82,7 +82,7 @@
 		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
 		std::cerr << "    List of arrangements:\n";							\
 		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v.direct_as_vector() << '\n';\
+		std::cerr << "        " << v.direct_as_vector() << '\n';			\
 		}																	\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << T << '\n';												\
@@ -92,6 +92,7 @@
 
 namespace tests {
 namespace generate {
+namespace planar {
 
 inline lal::numeric::integer factorial(uint64_t f) noexcept {
 	if (f == 0) { return 1; }
@@ -165,6 +166,8 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 	return err_type::no_error;
 }
 
+} // -- namespace planar
+
 err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_modes({"automatic", "manual"});
 
@@ -191,7 +194,7 @@ err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept {
 				lal::graphs::free_tree fT = TreeGen.get_tree();
 				TreeGen.next();
 
-				const err_type e = test_a_tree(fT, nrelabs);
+				const err_type e = planar::test_a_tree(fT, nrelabs);
 				if (e != err_type::no_error) {
 					return e;
 				}
@@ -212,7 +215,7 @@ err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept {
 			const lal::graphs::free_tree T =
 				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
 
-			const auto formula = amount_planar(T);
+			const auto formula = planar::amount_planar(T);
 
 			std::set<lal::linear_arrangement> list_arrs;
 			std::size_t iterations = 0;
