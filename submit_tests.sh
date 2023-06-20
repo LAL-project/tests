@@ -132,7 +132,7 @@ echo "    gcc_library_path: $gcc_library_path"
 mkdir -p $log_directory
 
 for group in detail generate graphs linarr memory numeric properties utilities; do
-	job_name=tests_"$build"_"$group"_"$compiler_version"
+	job_name=latest_tests_"$build"_"$group"_"$compiler_version"
 
 	echo $group" - "$build
 	echo "    job_name: $job_name"
