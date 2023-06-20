@@ -123,7 +123,7 @@ echo "    job memory: '$memory'"
 echo "    job queue: '$queue'"
 echo "    use valgrind: '$use_valgrind'"
 echo "        valgrind param: '$valgrind_param'"
-lal_library_path=$HOME/LAL-dev/latest/linear-arrangement-library/lal-$build-$compiler_version
+lal_library_path=$HOME/LAL-dev/23.01/linear-arrangement-library/lal-$build-$compiler_version
 gcc_library_path=/home/soft/gcc-$compiler_version/lib64
 
 echo "    lal_library_path: $lal_library_path"
