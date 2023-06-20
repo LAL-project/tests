@@ -59,6 +59,7 @@
 
 namespace tests {
 namespace generate {
+namespace projective {
 
 inline lal::numeric::integer factorial(uint64_t f) noexcept {
 	if (f == 0) { return 1; }
@@ -162,6 +163,8 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 	return err_type::no_error;
 }
 
+} // -- namespace projective
+
 err_type exe_gen_arr_all_projective(std::ifstream& fin) noexcept {
 
 	uint64_t n, nrelabs;
@@ -173,7 +176,7 @@ err_type exe_gen_arr_all_projective(std::ifstream& fin) noexcept {
 			lal::graphs::rooted_tree rT = TreeGen.get_tree();
 			TreeGen.next();
 
-			const err_type e = test_a_tree(rT, nrelabs);
+			const err_type e = projective::test_a_tree(rT, nrelabs);
 			if (e != err_type::no_error) {
 				return e;
 			}
