@@ -141,8 +141,8 @@ for group in detail generate graphs linarr memory numeric properties utilities; 
 		--mem=$memory \
 		--job-name=$job_name \
 		-p $queue \
-		-o $log_directory/job__$group.out \
-		-e $log_directory/job__$group.err \
+		-o $log_directory/$group.out \
+		-e $log_directory/$group.err \
 		./test.sh \
 			$valgrind_param \
 			--$build \
