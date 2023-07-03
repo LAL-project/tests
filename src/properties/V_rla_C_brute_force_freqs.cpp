@@ -199,14 +199,14 @@ noexcept
 	static const lal::numeric::rational exps[9] =
 	{
 		lal::numeric::rational(0),		// 0, f00:   0
-		lal::numeric::rational(2, 9),		// 1, f24:   2/9
+		lal::numeric::rational(2, 9),	// 1, f24:   2/9
 		lal::numeric::rational(1, 18),	// 2, f13:   1/18
 		lal::numeric::rational(1, 45),	// 3, f12:   1/45
 		lal::numeric::rational(-1, 9),	// 4, f04:  -1/9
 		lal::numeric::rational(-1, 36),	// 5, f03:  -1/36
 		lal::numeric::rational(-1, 90),	// 6, f021: -1/90
 		lal::numeric::rational(1, 180),	// 7, f022:  1/180
-		lal::numeric::rational(0)			// 8, f01:   0
+		lal::numeric::rational(0)		// 8, f01:   0
 	};
 
 	// values of the frequencies
@@ -217,7 +217,7 @@ noexcept
 	// for a small enough set Q
 	for (const lal::edge_pair& q1 : Q) {
 		for (const lal::edge_pair& q2 : Q) {
-			frequency_type ft = edge_pair_type(q1, q2);
+			const frequency_type ft = edge_pair_type(q1, q2);
 			classify(ft, f021, f022, f03, f04, f12, f13, f24);
 		}
 	}
