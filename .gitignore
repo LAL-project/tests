@@ -11,6 +11,8 @@ build-profile/
 
 build-debug-11.3/
 build-release-11.3/
+build-debug-11.4.0/
+build-release-11.4.0/
 build-debug-12.3/
 build-release-12.3/
 build-debug-13.1/
@@ -20,9 +22,11 @@ info_debug/
 info_release/
 
 info_build-release-11.3/
+info_build-release-11.4.0/
 info_build-release-12.3/
 info_build-release-13.1/
 info_build-debug-11.3/
+info_build-debug-11.4.0/
 info_build-debug-12.3/
 info_build-debug-13.1/
 

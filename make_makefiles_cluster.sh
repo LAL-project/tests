@@ -30,5 +30,6 @@ function make_directories_compiler() {
 
 make_directories_compiler
 make_directories_compiler 11.3
+make_directories_compiler 11.4.0
 make_directories_compiler 12.3
 make_directories_compiler 13.1
