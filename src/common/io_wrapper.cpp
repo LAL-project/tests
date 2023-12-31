@@ -54,13 +54,13 @@
 namespace tests {
 namespace io_wrapper {
 
-template <class G>
-err_type __read_graph(const std::string& file, const std::string& format, G& g, bool norm)
+template <class graph_t>
+err_type __read_graph(const std::string& file, const std::string& format, graph_t& g, bool norm)
 noexcept
 {
 
 	if (format == "edge_list" or format == "edge-list") {
-		auto r = lal::io::read_edge_list<G>(file, norm, false);
+		auto r = lal::io::read_edge_list<graph_t>(file, norm, false);
 		if (not r) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    When attempting to read an lal::edge-list-formatted\n";
@@ -74,11 +74,11 @@ noexcept
 
 	if (format == "head_vector") {
 		if constexpr (
-			std::is_base_of_v<lal::graphs::rooted_tree, G> or
-			std::is_base_of_v<lal::graphs::free_tree, G>
+			std::is_base_of_v<lal::graphs::rooted_tree, graph_t> or
+			std::is_base_of_v<lal::graphs::free_tree, graph_t>
 		)
 		{
-			auto r = lal::io::read_head_vector<G>(file, norm, false);
+			auto r = lal::io::read_head_vector<graph_t>(file, norm, false);
 			if (not r) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    When attempting to read an lal::edge-list-formatted\n";

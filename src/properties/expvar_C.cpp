@@ -43,7 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <cmath>
 #include <set>
 
 // lal includes
@@ -60,7 +59,6 @@
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
-#include "common/time.hpp"
 #include "common/parse_header.hpp"
 
 // properties includes

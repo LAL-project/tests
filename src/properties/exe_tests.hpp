@@ -51,10 +51,7 @@
  */
 
 // C++ includes
-#include <functional>
 #include <fstream>
-#include <vector>
-#include <string>
 
 // common includes
 #include "common/definitions.hpp"
@@ -63,6 +60,7 @@ namespace tests {
 namespace properties {
 
 err_type exe_properties_general(std::ifstream& fin) noexcept;
+err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept;
 err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept;
 err_type exe_properties_ExpVar_C(std::ifstream& fin) noexcept;
 err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept;

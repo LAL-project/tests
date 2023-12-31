@@ -42,7 +42,6 @@
 
 // C includes
 #include <assert.h>
-#include <string.h>
 
 // C++ includes
 #include <algorithm>

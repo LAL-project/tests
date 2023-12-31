@@ -89,6 +89,7 @@ SOURCES += \
 	MHD_All_trees.cpp \
 	V_rla_C_brute_force_Q.cpp \
 	V_rla_C_brute_force_freqs.cpp \
+	bipartite_coloring.cpp \
 	caterpillar_distance.cpp \
 	diameter.cpp \
 	expected_D_planar.cpp \

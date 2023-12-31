@@ -116,6 +116,9 @@ noexcept
 	if (key == "caterpillar_distance") {
 		return exe_properties_caterpillar_distance(fin);
 	}
+	if (key == "bipartite_coloring") {
+		return exe_properties_bipartite_coloring(fin);
+	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
