@@ -170,6 +170,7 @@ function show_usage() {
 	echo ""
 	echo "        properties : execute properties tests"
 	echo "            properties_basic : execute basic properties tests (tests in the root directory of inputs/properties)"
+	echo "            properties_coloring : execute coloring tests"
 	echo "            properties_centre : execute centre tests"
 	echo "            properties_centroid : execute centroid tests"
 	echo "            properties_diameter : execute diameter tests"
