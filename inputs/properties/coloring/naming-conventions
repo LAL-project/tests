@@ -1,0 +1,36 @@
+
+NAMING CONVETIONS
+=================
+
+The format of the test files' names is as follows. All test files start with
+
+    test-
+
+Then follows the "family number" of the test. This is a three-digit number.
+Finally, a three-digit number indicating the test number within the family.
+
+
+              Test number
+
+                  |
+                 ---
+        test-xxx.yyy
+         ---
+          |
+
+      Family test
+           number
+
+
+Family test numbers
+-------------------
+
+We are currently using the following family test numbers:
+
+	000: cycle graphs
+	001: complete bipartite graphs
+	002: forests
+	003: free trees
+	004: rooted trees
+	005: manual tests (undirected graphs)
+	006: manual tests (directed graphs)

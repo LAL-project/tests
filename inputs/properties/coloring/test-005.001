@@ -1,0 +1,36 @@
+TYPE properties-bipartite_coloring
+INPUTS 0
+
+	manual
+	undirected
+	init 10
+	
+	calculate_coloring
+	output_coloring
+	check_coloring_correct
+	is_bipartite
+	
+	add_edge 0 1
+	calculate_coloring
+	output_coloring
+	check_coloring_correct
+	is_bipartite
+	
+	add_edge 1 2
+	add_edge 2 3
+	calculate_coloring
+	output_coloring
+	check_coloring_correct
+	is_bipartite
+	
+	add_edge 0 3
+	calculate_coloring
+	output_coloring
+	check_coloring_correct
+	is_bipartite
+
+	add_edge 1 3
+	calculate_coloring
+	output_coloring
+	check_coloring_correct
+	is_bipartite

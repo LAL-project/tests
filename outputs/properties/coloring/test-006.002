@@ -1,0 +1,61 @@
+Coloring:
+    color[0]= 1
+    color[1]= 0
+    color[2]= 1
+    color[3]= 0
+    color[4]= 1
+    color[5]= 0
+    color[6]= 1
+    color[7]= 0
+    color[8]= 1
+    color[9]= 0
+The graph is bipartite
+Coloring:
+    color[0]= 1
+    color[1]= 0
+    color[2]= 0
+    color[3]= 1
+    color[4]= 1
+    color[5]= 0
+    color[6]= 1
+    color[7]= 0
+    color[8]= 1
+    color[9]= 0
+The graph is bipartite
+Coloring:
+    color[0]= 1
+    color[1]= 0
+    color[2]= 0
+    color[3]= 1
+    color[4]= 1
+    color[5]= 0
+    color[6]= 1
+    color[7]= 0
+    color[8]= 1
+    color[9]= 0
+The graph is bipartite
+Coloring:
+    color[0]= 1
+    color[1]= 0
+    color[2]= 0
+    color[3]= 1
+    color[4]= 1
+    color[5]= 0
+    color[6]= 0
+    color[7]= 1
+    color[8]= 1
+    color[9]= 0
+The graph is bipartite
+Coloring:
+    color[0]= 1
+    color[1]= 0
+    color[2]= 0
+    color[3]= 1
+    color[4]= 1
+    color[5]= 0
+    color[6]= 0
+    color[7]= 1
+    color[8]= 1
+    color[9]= 0
+The graph is bipartite
+Test finished without apparent errors.

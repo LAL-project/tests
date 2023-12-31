@@ -1,0 +1,7 @@
+TYPE properties-bipartite_coloring
+INPUTS 0
+
+	check_all_free_trees 9
+	check_all_free_trees 10
+	check_all_free_trees 11
+	check_all_free_trees 12

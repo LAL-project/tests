@@ -1,0 +1,7 @@
+TYPE properties-bipartite_coloring
+INPUTS 0
+
+	check_all_rooted_trees 5
+	check_all_rooted_trees 6
+	check_all_rooted_trees 7
+	check_all_rooted_trees 8

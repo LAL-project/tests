@@ -1,0 +1,67 @@
+
+COMMANDS AVAILABLE
+==================
+
+
+In files where a series of input graphs were specified:
+-------------------------------------------------------
+
+* assert_is_bipartite
+	
+	Asserts that all input graphs are bipartite
+
+* assert_is_not_bipartite
+	
+	Asserts that none of the input graphs are bipartite
+
+
+In files where no input graph was specified:
+--------------------------------------------
+
+* check_all_free_trees N
+
+	Asserts that all free trees of N vertices are bipartite graphs
+
+* check_all_rooted_trees N
+
+	Asserts that all rooted trees of N vertices are bipartite graphs
+
+
+In manual tests:
+----------------
+
+In these tests the user enters commands to construct a graph edge by edge.
+First, the type of graph should be specified among these two:
+
+	undirected
+	directed
+
+To construct the graph, initialize it with N nodes first, and then add edges.
+A graph can be initialized several times; each initialization clears the
+previous contents.
+
+* init N
+	
+	Initializes the graph with N nodes
+
+* add_edge u v
+
+	Adds edge (u,v).
+
+* calculate_coloring
+
+	Calculates the coloring of the graph. This should be used after an
+	addition of an edge and before any call to 'check_coloring_correct'
+	and/or 'output_coloring' and/or 'is_bipartite'.
+
+* check_coloring_correct
+
+	Ensures that the coloring calculated by the library is correct.
+
+* output_coloring
+
+	Outputs the coloring of the vertices.
+	
+* is_bipartite
+
+	Outputs a message saying whether or not the graph is bipartite
