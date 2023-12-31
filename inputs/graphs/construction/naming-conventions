@@ -4,7 +4,7 @@ NAMING CONVETIONS
 
 The format of the test files' names is as follows. All test files start with
 
-	test-
+     test-
 
 Then follows the "family number" of the test. This is a three-digit number.
 Finally, a three-digit number indicating the test number within the family.
@@ -15,10 +15,10 @@ Finally, a three-digit number indicating the test number within the family.
                   |
                  ---
         test-xxx.yyy
-	     ---
-	      |
+          ---
+           |
 
-	  Family test
+       Family test
            number
 
 
