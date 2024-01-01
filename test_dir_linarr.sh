@@ -195,9 +195,16 @@ linarr_DMax_Planar_AEF_DIRS=(\
 linarr_DMax_Planar_DIRS=(\
 	"${linarr_DMax_Planar_AEF_DIRS[@]}" \
 	)
+linarr_DMax_Bipartite_AEF_DIRS=(\
+	"linarr/D/DMax/bipartite/AEF" "linarr/D/DMax/bipartite" \
+	)
+linarr_DMax_Bipartite_DIRS=(\
+	"${linarr_DMax_Bipartite_AEF_DIRS[@]}" \
+	)
 linarr_DMax_DIRS=(\
 	"${linarr_DMax_Projective_DIRS[@]}" \
 	"${linarr_DMax_Planar_DIRS[@]}" \
+	"${linarr_DMax_Bipartite_DIRS[@]}" \
 	)
 
 # Classification of syntactic dependency structures
