@@ -108,7 +108,7 @@ noexcept
 	return err;
 }
 
-} // -- namespace dmin_projective
+} // -- namespace dmax_projective
 
 err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept {
 	const input_list inputs = read_input_list(fin);
