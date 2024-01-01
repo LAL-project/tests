@@ -1,0 +1,5 @@
+TYPE linarr-DMax-Bipartite
+INPUTS 1
+inputs/linarr/optimal_linearizations/DMax/bipartite/10 *
+
+	AEF
