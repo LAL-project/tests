@@ -89,6 +89,7 @@ SOURCES += \
 	C.cpp \
 	C_list.cpp \
 	D.cpp \
+	DMax_bipartite.cpp \
 	DMax_planar.cpp \
 	DMax_projective.cpp \
 	DMax_projective_all_roots.cpp \
