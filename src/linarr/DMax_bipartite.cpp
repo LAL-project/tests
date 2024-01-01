@@ -109,7 +109,7 @@ noexcept
 
 } // -- namespace dmax_bipartite
 
-err_type exe_linarr_dmax_bipartite(std::ifstream& fin) noexcept {
+err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept {
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {

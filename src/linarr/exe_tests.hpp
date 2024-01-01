@@ -88,9 +88,9 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept;
 err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept;
 
 err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept;
-err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin)
-noexcept;
+err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin) noexcept;
 err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept;
+err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept;
 
 err_type exe_linarr_arrangement_validity(std::ifstream& fin) noexcept;
 

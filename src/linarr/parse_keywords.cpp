@@ -88,6 +88,9 @@ noexcept
 	if (key == "Planar") {
 		return exe_linarr_DMax_planar(fin);
 	}
+	if (key == "Bipartite") {
+		return exe_linarr_DMax_bipartite(fin);
+	}
 	if (key == "projective_all_roots") {
 		return exe_linarr_DMax_projective_all_max_roots(fin);
 	}
