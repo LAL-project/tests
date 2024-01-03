@@ -45,7 +45,6 @@
 #include <set>
 
 // common includes
-#include "common/parse_keywords.hpp"
 #include "common/parse_header.hpp"
 #include "linarr/parse_keywords.hpp"
 #include "linarr/exe_tests.hpp"
@@ -90,6 +89,9 @@ noexcept
 	}
 	if (key == "Bipartite") {
 		return exe_linarr_DMax_bipartite(fin);
+	}
+	if (key == "1_thistle") {
+		return exe_linarr_DMax_1_thistle(fin);
 	}
 	if (key == "projective_all_roots") {
 		return exe_linarr_DMax_projective_all_max_roots(fin);

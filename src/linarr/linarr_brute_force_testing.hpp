@@ -143,6 +143,9 @@ noexcept
 				std::cerr << "        Brute force Inv Arrangement: " << brute_force_arr.inverse_as_vector() << '\n';
 				std::cerr << "        Brute force value:           " << brute_force_value << '\n';
 				std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
+				std::cerr << "    For tree: \n";
+				std::cerr << tree << '\n';
+				std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
 				return tests::err_type::test_format;
 			}
 		}
@@ -157,11 +160,12 @@ noexcept
 		if (not arrgmnt_check(tree, library_arr)) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    The arrangement produced by the algorithm is not correct.\n";
+			std::cerr << "        Size: " << library_arr.size() << '\n';
 			std::cerr << "        Arrangement:     " << library_arr.direct_as_vector() << '\n';
 			std::cerr << "        Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
 			std::cerr << "    For tree: \n";
 			std::cerr << tree << '\n';
-			std::cerr << tree.get_head_vector() << '\n';
+			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
 			return tests::err_type::test_execution;
 		}
 		}
@@ -180,6 +184,7 @@ noexcept
 			std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
 			std::cerr << "    For tree: \n";
 			std::cerr << tree << '\n';
+			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
 			return tests::err_type::test_execution;
 		}
 		}
@@ -196,6 +201,7 @@ noexcept
 			std::cerr << "        Value:           " << brute_force_value << '\n';
 			std::cerr << "    For tree: \n";
 			std::cerr << tree << '\n';
+			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
 			return tests::err_type::test_execution;
 		}
 	}

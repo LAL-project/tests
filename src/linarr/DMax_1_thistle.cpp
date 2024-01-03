@@ -52,6 +52,8 @@
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
 
+#include <lal/detail/linarr/level_sequence.hpp>
+
 // common includes
 #include "common/definitions.hpp"
 #include "common/parse_header.hpp"
@@ -61,7 +63,7 @@
 
 namespace lal {
 namespace linarr {
-enum class algorithms_DMax_bipartite {
+enum class algorithms_DMax_1_thistle{
 	AlemanyEstebanFerrer
 };
 }
@@ -70,13 +72,13 @@ enum class algorithms_DMax_bipartite {
 namespace tests {
 namespace linarr {
 
-namespace dmax_bipartite {
+namespace dmax_1_thistle{
 
 template <class T>
-err_type examine_dmax_bipartite
+err_type examine_dmax_1_thistle
 (
 	const std::string& filename,
-	[[maybe_unused]] const lal::linarr::algorithms_DMax_bipartite& algo
+	[[maybe_unused]] const lal::linarr::algorithms_DMax_1_thistle& algo
 )
 noexcept
 {
@@ -93,7 +95,7 @@ noexcept
 	(
 		// solver
 		[&](const lal::graphs::free_tree& t) {
-			return lal::linarr::max_sum_edge_lengths_bipartite(t, c);
+			return lal::linarr::max_sum_edge_lengths_1_thistle(t, c);
 		},
 		// tree_eval
 		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
@@ -101,7 +103,17 @@ noexcept
 		},
 		// arrgmnt_check
 		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
-			return lal::linarr::is_bipartite(t, c, arr);
+			const auto n = t.get_num_nodes();
+			lal::detail::data_array<int64_t> lev_seq(n, 0);
+			lal::detail::calculate_level_signature
+				<lal::detail::level_signature_type::per_vertex>
+				(t, arr, lev_seq);
+
+			std::size_t num_thistles = 0;
+			for (lal::node u = 0; u < n; ++u) {
+				num_thistles += static_cast<uint64_t>(std::abs(lev_seq[u])) != t.get_degree(u);
+			}
+			return num_thistles == 1;
 		},
 		// conv
 		[](const lal::head_vector& v) {
@@ -116,9 +128,9 @@ noexcept
 	return err;
 }
 
-} // -- namespace dmax_bipartite
+} // -- namespace dmax_1_thistle
 
-err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept {
+err_type exe_linarr_DMax_1_thistle(std::ifstream& fin) noexcept {
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -144,9 +156,9 @@ err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept {
 	}
 
 	std::string algo_name;
-	lal::linarr::algorithms_DMax_bipartite algo_choice;
+	lal::linarr::algorithms_DMax_1_thistle algo_choice;
 	if (algo == "AEF") {
-		algo_choice = lal::linarr::algorithms_DMax_bipartite::AlemanyEstebanFerrer;
+		algo_choice = lal::linarr::algorithms_DMax_1_thistle::AlemanyEstebanFerrer;
 		algo_name = "AEF";
 	}
 	else {
@@ -156,7 +168,7 @@ err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept {
 	}
 
 	const auto err1 =
-		dmax_bipartite::examine_dmax_bipartite<lal::graphs::free_tree>
+		dmax_1_thistle::examine_dmax_1_thistle<lal::graphs::free_tree>
 		(inputs[0].first, algo_choice);
 
 	if (err1 != err_type::no_error) { return err1; }
