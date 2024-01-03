@@ -157,6 +157,8 @@ function show_usage() {
 	echo "                    linarr_DMax_Planar_AEF : execute MLA tests for Planar MaxLA -- algorithm: AEF"
 	echo "                linarr_DMax_Bipartite : execute MLA tests for Bipartite MaxLA"
 	echo "                    linarr_DMax_Bipartite_AEF : execute MLA tests for Bipartite MaxLA -- algorithm: AEF"
+	echo "                linarr_DMax_1_thistle : execute MLA tests for 1-thistle MaxLA"
+	echo "                    linarr_DMax_1_thistle_AEF : execute MLA tests for 1-thistle MaxLA -- algorithm: AEF"
 	echo "            linarr_syndepstruc_class : execute tests of classification of syntactic dependencies structures"
 	echo "            linarr_comp_dependency_flux : execute tests of dependency flux computation"
 	echo "            linarr_headedness : execute headedness tests"

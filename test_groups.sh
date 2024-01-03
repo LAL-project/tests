@@ -91,6 +91,8 @@ groups_list=(\
 				"linarr_DMax_Planar_AEF" \
 			"linarr_DMax_Bipartite" \
 				"linarr_DMax_Bipartite_AEF" \
+			"linarr_DMax_1_thistle" \
+				"linarr_DMax_1_thistle_AEF" \
 		"linarr_syndepstruc_class" \
 		"linarr_comp_dependency_flux" \
 		"linarr_headedness" \
