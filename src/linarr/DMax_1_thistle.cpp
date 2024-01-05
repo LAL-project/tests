@@ -52,7 +52,7 @@
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/graphs/conversions.hpp>
 
-#include <lal/detail/linarr/level_sequence.hpp>
+#include <lal/detail/linarr/level_signature.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -104,14 +104,12 @@ noexcept
 		// arrgmnt_check
 		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
 			const auto n = t.get_num_nodes();
-			lal::detail::data_array<int64_t> lev_seq(n, 0);
-			lal::detail::calculate_level_signature
-				<lal::detail::level_signature_type::per_vertex>
-				(t, arr, lev_seq);
+			lal::linarr::level_signature_per_vertex lev_seq(n);
+			lal::detail::calculate_level_signature(t, arr, lev_seq);
 
 			std::size_t num_thistles = 0;
-			for (lal::node u = 0; u < n; ++u) {
-				num_thistles += static_cast<uint64_t>(std::abs(lev_seq[u])) != t.get_degree(u);
+			for (lal::node_t u = 0ull; u < n; ++u) {
+				num_thistles += lal::linarr::is_thistle_vertex(t, arr, lev_seq, u);
 			}
 			return num_thistles == 1;
 		},
