@@ -104,12 +104,12 @@ noexcept
 		// arrgmnt_check
 		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
 			const auto n = t.get_num_nodes();
-			lal::linarr::level_signature_per_vertex lev_seq(n);
+			lal::detail::level_signature_per_vertex lev_seq(n);
 			lal::detail::calculate_level_signature(t, arr, lev_seq);
 
 			std::size_t num_thistles = 0;
 			for (lal::node_t u = 0ull; u < n; ++u) {
-				num_thistles += lal::linarr::is_thistle_vertex(t, arr, lev_seq, u);
+				num_thistles += lal::detail::is_thistle_vertex(t, lev_seq, u);
 			}
 			return num_thistles == 1;
 		},
