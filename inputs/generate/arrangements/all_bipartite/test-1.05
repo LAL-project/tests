@@ -1,0 +1,4 @@
+TYPE generate-arrangements-all_bipartite
+
+	automatic
+	5 10
