@@ -68,6 +68,16 @@ generate_arrangements_rand_unc_DIRS=(\
 	"generate/arrangements/rand" "generate/arrangements/rand" \
 	)
 
+# generate (all bipartite arrangements) tests
+generate_arrangements_all_bipartite_DIRS=(\
+	"generate/arrangements/all_bipartite" "generate/arrangements/all_bipartite" \
+	)
+
+# generate (rand bipartite arrangements) tests
+generate_arrangements_rand_bipartite_DIRS=(\
+	"generate/arrangements/rand_bipartite" "generate/arrangements/rand_bipartite" \
+	)
+
 # generate (all projective arrangements) tests
 generate_arrangements_all_projective_DIRS=(\
 	"generate/arrangements/all_projective" "generate/arrangements/all_projective" \
@@ -91,11 +101,13 @@ generate_arrangements_rand_planar_DIRS=(\
 # generate tests for arrangements
 generate_arrangements_all_DIRS=(\
 	"${generate_arrangements_all_unc_DIRS[@]}" \
+	"${generate_arrangements_all_bipartite_DIRS[@]}" \
 	"${generate_arrangements_all_projective_DIRS[@]}" \
 	"${generate_arrangements_all_planar_DIRS[@]}" \
 	)
 generate_arrangements_rand_DIRS=(\
 	"${generate_arrangements_rand_unc_DIRS[@]}" \
+	"${generate_arrangements_rand_bipartite_DIRS[@]}" \
 	"${generate_arrangements_rand_projective_DIRS[@]}" \
 	"${generate_arrangements_rand_planar_DIRS[@]}" \
 	)

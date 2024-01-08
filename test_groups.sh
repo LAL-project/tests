@@ -19,10 +19,12 @@ groups_list=(\
 			"generate_trees_rur" \
 		"generate_arrangements_all" \
 			"generate_arrangements_all_unc" \
+			"generate_arrangements_all_bipartite" \
 			"generate_arrangements_all_projective" \
 			"generate_arrangements_all_planar" \
 		"generate_arrangements_rand" \
 			"generate_arrangements_rand_unc" \
+			"generate_arrangements_rand_bipartite" \
 			"generate_arrangements_rand_projective" \
 			"generate_arrangements_rand_planar" \
 	\
