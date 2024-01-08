@@ -44,7 +44,6 @@
 #include <iostream>
 
 // common includes
-#include "common/parse_keywords.hpp"
 #include "common/parse_header.hpp"
 #include "generate/parse_keywords.hpp"
 #include "generate/exe_tests.hpp"
@@ -68,6 +67,12 @@ noexcept
 	}
 	else if (key == "rand_planar") {
 		return exe_gen_arr_rand_planar(fin);
+	}
+	else if (key == "all_bipartite") {
+		return exe_gen_arr_all_bipartite(fin);
+	}
+	else if (key == "rand_bipartite") {
+		return exe_gen_arr_rand_bipartite(fin);
 	}
 	else if (key == "all") {
 		return exe_gen_arr_all(fin);

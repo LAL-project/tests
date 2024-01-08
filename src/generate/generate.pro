@@ -87,9 +87,11 @@ DEPENDPATH += $${LAL_DIR}
 
 SOURCES += \
 	arr_all.cpp \
+	arr_all_bipartite.cpp \
 	arr_all_planar.cpp \
 	arr_all_projective.cpp \
 	arr_rand.cpp \
+	arr_rand_bipartite.cpp \
 	arr_rand_planar.cpp \
 	arr_rand_projective.cpp \
 	main.cpp \

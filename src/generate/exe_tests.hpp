@@ -51,10 +51,7 @@
  */
 
 // C++ includes
-#include <functional>
 #include <fstream>
-#include <vector>
-#include <string>
 
 // common includes
 #include "common/definitions.hpp"
@@ -64,6 +61,8 @@ namespace generate {
 
 err_type exe_gen_arr_all(std::ifstream& fin) noexcept;
 err_type exe_gen_arr_rand(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_all_bipartite(std::ifstream& fin) noexcept;
+err_type exe_gen_arr_rand_bipartite(std::ifstream& fin) noexcept;
 err_type exe_gen_arr_all_projective(std::ifstream& fin) noexcept;
 err_type exe_gen_arr_rand_projective(std::ifstream& fin) noexcept;
 err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept;

@@ -145,9 +145,11 @@ add_executable(
 		generate/test_random_tree_generation.hpp
 		
 		generate/arr_all.cpp
+		generate/arr_all_bipartite.cpp
 		generate/arr_all_planar.cpp
 		generate/arr_all_projective.cpp
 		generate/arr_rand.cpp
+		generate/arr_rand_bipartite.cpp
 		generate/arr_rand_planar.cpp
 		generate/arr_rand_projective.cpp
 		generate/main.cpp
@@ -212,6 +214,8 @@ add_executable(
 		linarr/chunking.cpp
 		linarr/C_list.cpp
 		linarr/D.cpp
+		linarr/DMax_1_thistle.cpp
+		linarr/DMax_bipartite.cpp
 		linarr/DMax_planar.cpp
 		linarr/DMax_projective_all_roots.cpp
 		linarr/DMax_projective.cpp
@@ -281,6 +285,7 @@ add_executable(
 		properties/exe_tests.hpp
 		properties/parse_keywords.hpp
 		
+		properties/bipartite_coloring.cpp
 		properties/caterpillar_distance.cpp
 		properties/centre.cpp
 		properties/centroid.cpp

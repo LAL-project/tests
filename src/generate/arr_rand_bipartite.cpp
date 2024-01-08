@@ -46,7 +46,7 @@
 
 // lal includes
 #include <lal/graphs/output.hpp>
-#include <lal/generate/rand_planar_arrangements.hpp>
+#include <lal/generate/rand_bipartite_arrangements.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/linarr/C/C.hpp>
 #include <lal/linarr/formal_constraints.hpp>
@@ -60,7 +60,31 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
+namespace bipartite {
+
+static constexpr auto blue = lal::properties::bipartite_graph_coloring::blue;
+static constexpr auto red = lal::properties::bipartite_graph_coloring::red;
+void output_coloring(const lal::properties::bipartite_graph_coloring& c) noexcept {
+	for (lal::node u = 0; u < c.size(); ++u) {
+		std::cerr
+			<< "    " << u << " -> ";
+
+		if (c.get_color_of(u) == blue) {
+			std::cerr << "blue";
+		}
+		else if (c.get_color_of(u) == red) {
+			std::cerr << "red";
+		}
+		else {
+			std::cerr << "??";
+		}
+		std::cerr << '\n';
+	}
+}
+
+} // -- namespace bipartite
+
+err_type exe_gen_arr_rand_bipartite(std::ifstream& fin) noexcept {
 	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices
@@ -68,14 +92,16 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
 
 		for (uint64_t nt = 0; nt < ntrees; ++nt) {
 			const lal::graphs::free_tree T = TreeGen.get_tree();
+			const lal::properties::bipartite_graph_coloring c =
+				lal::properties::coloring(T);
 
-			lal::generate::rand_planar_arrangements RandArr(T, 100);
+			lal::generate::rand_bipartite_arrangements RandArr(T, 100);
 
 			for (uint64_t it = 0; it < nit; ++it) {
-				const lal::linear_arrangement arr = RandArr.get_arrangement();
+				const lal::linear_arrangement& arr = RandArr.get_arrangement();
 
 				// Do some sanity checks.
-				if (not lal::linarr::is_planar(T, arr)) {
+				if (not lal::linarr::is_bipartite(T, c, arr)) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Generation (get) of random arrangement failed with error:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
@@ -83,21 +109,23 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
 					std::cerr << "    For tree:\n";
 					std::cerr << T << '\n';
 					std::cerr << T.get_head_vector() << '\n';
+					bipartite::output_coloring(c);
 					return err_type::test_execution;
 				}
 			}
 
 			for (uint64_t it = 0; it < nit; ++it) {
-				const lal::linear_arrangement arr = RandArr.yield_arrangement();
+				const lal::linear_arrangement& arr = RandArr.yield_arrangement();
 
 				// Do some sanity checks.
-				if (not lal::linarr::is_planar(T, arr)) {
+				if (not lal::linarr::is_bipartite(T, c, arr)) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Generation (yield) of random arrangement failed with error:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << T.get_head_vector() << '\n';
+					bipartite::output_coloring(c);
 					return err_type::test_execution;
 				}
 			}

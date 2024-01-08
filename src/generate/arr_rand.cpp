@@ -79,7 +79,7 @@ err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_arrangement(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation of random arrangement failed with error:\n";
+					std::cerr << "    Generation (get) of random arrangement failed with error:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
@@ -94,7 +94,7 @@ err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_arrangement(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation of random arrangement failed with error:\n";
+					std::cerr << "    Generation (yield) of random arrangement failed with error:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
