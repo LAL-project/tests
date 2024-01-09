@@ -398,7 +398,7 @@ function execute_group() {
 			display_two $nth_test $n_test_files
 			
 			# Execute the program NOW
-			local PROG_OUT=$($EXECUTION_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR)
+			local PROG_OUT=$($EXECUTION_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR.$ID.tmp)
 
 			# increment the amount of tests executed by 1
 			nth_test=$(($nth_test + 1))
