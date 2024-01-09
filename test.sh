@@ -306,7 +306,10 @@ function check_res_no_valgrind() {
 			
 			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> $log_file
 		else
-			# test whether the error output produced is empty or not
+			# no errors were produced -- remove the error file
+			rm $temp_test_err
+			
+			# test whether the "normal" output produced is empty or not
 			local BASE_CONTENTS=$(cat $base_out_file)
 			
 			local DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
@@ -408,7 +411,7 @@ function execute_group() {
 			if [ $use_valgrind == 1 ]; then
 				check_res_valgrind 				\
 					$input_group/$f 			\
-					$storage/$TEST_ERR 			\
+					$storage/$TEST_ERR.$ID		\
 					$storage/$VALG_ERR.$ID
 			else
 				check_res_no_valgrind 			\
