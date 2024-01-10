@@ -119,7 +119,7 @@ noexcept
 		},
 		// tree_initializer
 		[&](const lal::graphs::free_tree& t) {
-			c = lal::properties::coloring(t);
+			c = lal::properties::bipartite_coloring(t);
 		},
 		input_file
 	);

@@ -105,7 +105,7 @@ err_type perform_manual_test(std::ifstream& fin) noexcept {
 			g.add_edge(u,v);
 		}
 		else if (option == "calculate_coloring") {
-			c = lal::properties::coloring(g);
+			c = lal::properties::bipartite_coloring(g);
 		}
 		else if (option == "check_coloring_correct") {
 			if (not is_coloring_correct(g, c)) {
@@ -138,7 +138,7 @@ bool are_all_trees_bipartite(uint64_t n) noexcept {
 	gen.deactivate_all_postprocessing_actions();
 	while (not gen.end()) {
 		const auto t = gen.yield_tree();
-		const auto c = lal::properties::coloring(t);
+		const auto c = lal::properties::bipartite_coloring(t);
 		// make sure all colors are valid
 		if (not is_coloring_correct(t, c)) {
 			std::cerr << ERROR << '\n';
@@ -171,7 +171,7 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 
 			const auto n = G.get_num_nodes();
 
-			const auto c = lal::properties::coloring(G);
+			const auto c = lal::properties::bipartite_coloring(G);
 			// make sure all colors are valid
 			if (not is_coloring_correct(G, c)) {
 				std::cerr << ERROR << '\n';

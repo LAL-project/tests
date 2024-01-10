@@ -93,7 +93,7 @@ err_type exe_gen_arr_rand_bipartite(std::ifstream& fin) noexcept {
 		for (uint64_t nt = 0; nt < ntrees; ++nt) {
 			const lal::graphs::free_tree T = TreeGen.get_tree();
 			const lal::properties::bipartite_graph_coloring c =
-				lal::properties::coloring(T);
+				lal::properties::bipartite_coloring(T);
 
 			lal::generate::rand_bipartite_arrangements RandArr(T, 100);
 

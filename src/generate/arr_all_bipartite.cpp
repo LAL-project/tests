@@ -125,7 +125,7 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 		relabel_tree_vertices(edges, T, (i < nrelabs ? false : true), false);
 
 		const lal::properties::bipartite_graph_coloring c =
-			lal::properties::coloring(T);
+			lal::properties::bipartite_coloring(T);
 		const lal::numeric::integer formula = amount_bipartite(T, c);
 
 		uint64_t iterations = 0;
@@ -229,7 +229,7 @@ err_type exe_gen_arr_all_bipartite(std::ifstream& fin) noexcept {
 				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
 
 			const lal::properties::bipartite_graph_coloring c =
-				lal::properties::coloring(T);
+				lal::properties::bipartite_coloring(T);
 
 			const auto formula = bipartite::amount_bipartite(T, c);
 
