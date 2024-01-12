@@ -159,7 +159,7 @@ noexcept
 		{
 		if (not arrgmnt_check(tree, library_arr)) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    The arrangement produced by the algorithm is not correct.\n";
+			std::cerr << "    The arrangement produced by the algorithm does not pass the check.\n";
 			std::cerr << "        Size: " << library_arr.size() << '\n';
 			std::cerr << "        Arrangement:     " << library_arr.direct_as_vector() << '\n';
 			std::cerr << "        Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
