@@ -75,10 +75,8 @@ err_type exe_linarr_linear_arrangement(std::ifstream& fin) noexcept;
 err_type exe_linarr_dependency_flux(std::ifstream& fin) noexcept;
 err_type exe_linarr_chunking(std::ifstream& fin) noexcept;
 
-err_type exe_linarr_klevel(
-	std::ifstream& fin,
-	uint64_t level, const std::string& proc)
-	noexcept;
+err_type exe_linarr_klevel(std::ifstream& fin, uint64_t level, const std::string& proc)
+noexcept;
 
 err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept;
 err_type exe_linarr_Dmin_planar(std::ifstream& fin) noexcept;
@@ -89,7 +87,7 @@ err_type exe_linarr_DMax_projective(std::ifstream& fin) noexcept;
 err_type exe_linarr_DMax_projective_all_max_roots(std::ifstream& fin) noexcept;
 err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept;
 err_type exe_linarr_DMax_bipartite(std::ifstream& fin) noexcept;
-err_type exe_linarr_DMax_1_thistle(std::ifstream& fin) noexcept;
+err_type exe_linarr_DMax_1_eq_thistle(std::ifstream& fin) noexcept;
 
 err_type exe_linarr_arrangement_validity(std::ifstream& fin) noexcept;
 

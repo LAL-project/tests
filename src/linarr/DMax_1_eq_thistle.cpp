@@ -63,7 +63,7 @@
 
 namespace lal {
 namespace linarr {
-enum class algorithms_DMax_1_thistle{
+enum class algorithms_DMax_1_eq_thistle {
 	AlemanyEstebanFerrer
 };
 }
@@ -72,13 +72,13 @@ enum class algorithms_DMax_1_thistle{
 namespace tests {
 namespace linarr {
 
-namespace dmax_1_thistle{
+namespace DMax_1_eq_thistle {
 
 template <class T>
-err_type examine_dmax_1_thistle
+err_type examine_DMax_1_eq_thistle
 (
 	const std::string& filename,
-	[[maybe_unused]] const lal::linarr::algorithms_DMax_1_thistle& algo
+	[[maybe_unused]] const lal::linarr::algorithms_DMax_1_eq_thistle& algo
 )
 noexcept
 {
@@ -126,9 +126,9 @@ noexcept
 	return err;
 }
 
-} // -- namespace dmax_1_thistle
+} // -- namespace DMax_1_eq_thistle
 
-err_type exe_linarr_DMax_1_thistle(std::ifstream& fin) noexcept {
+err_type exe_linarr_DMax_1_eq_thistle(std::ifstream& fin) noexcept {
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -154,9 +154,9 @@ err_type exe_linarr_DMax_1_thistle(std::ifstream& fin) noexcept {
 	}
 
 	std::string algo_name;
-	lal::linarr::algorithms_DMax_1_thistle algo_choice;
+	lal::linarr::algorithms_DMax_1_eq_thistle algo_choice;
 	if (algo == "AEF") {
-		algo_choice = lal::linarr::algorithms_DMax_1_thistle::AlemanyEstebanFerrer;
+		algo_choice = lal::linarr::algorithms_DMax_1_eq_thistle::AlemanyEstebanFerrer;
 		algo_name = "AEF";
 	}
 	else {
@@ -166,7 +166,7 @@ err_type exe_linarr_DMax_1_thistle(std::ifstream& fin) noexcept {
 	}
 
 	const auto err1 =
-		dmax_1_thistle::examine_dmax_1_thistle<lal::graphs::free_tree>
+		DMax_1_eq_thistle::examine_DMax_1_eq_thistle<lal::graphs::free_tree>
 		(inputs[0].first, algo_choice);
 
 	if (err1 != err_type::no_error) { return err1; }
