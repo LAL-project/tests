@@ -93,6 +93,9 @@ noexcept
 	if (key == "1_eq_thistle") {
 		return exe_linarr_DMax_1_eq_thistle(fin);
 	}
+	if (key == "1_le_thistle") {
+		return exe_linarr_DMax_1_le_thistle(fin);
+	}
 	if (key == "projective_all_roots") {
 		return exe_linarr_DMax_projective_all_max_roots(fin);
 	}

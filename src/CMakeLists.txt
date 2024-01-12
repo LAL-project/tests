@@ -215,6 +215,7 @@ add_executable(
 		linarr/C_list.cpp
 		linarr/D.cpp
 		linarr/DMax_1_eq_thistle.cpp
+		linarr/DMax_1_le_thistle.cpp
 		linarr/DMax_bipartite.cpp
 		linarr/DMax_planar.cpp
 		linarr/DMax_projective_all_roots.cpp

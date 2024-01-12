@@ -90,6 +90,7 @@ SOURCES += \
 	C_list.cpp \
 	D.cpp \
 	DMax_1_eq_thistle.cpp \
+	DMax_1_le_thistle.cpp \
 	DMax_bipartite.cpp \
 	DMax_planar.cpp \
 	DMax_projective.cpp \
