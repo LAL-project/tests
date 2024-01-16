@@ -95,7 +95,7 @@ noexcept
 		(
 			// solver
 			[&](const lal::graphs::free_tree& t) {
-				return lal::linarr::max_sum_edge_lengths_le_1_thistle(t, c);
+				return lal::linarr::max_sum_edge_lengths_1_le_thistle(t, c);
 			},
 			// tree_eval
 			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
