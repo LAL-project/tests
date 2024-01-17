@@ -59,36 +59,37 @@
 #include "common/std_utils.hpp"
 
 #define check_and_process_arrangement(c, coloring)							\
-if (not lal::linarr::is_bipartite(T, coloring, arr)) {						\
-	std::cerr << ERROR << '\n';												\
-	std::cerr << "    In check: " << c << '\n';								\
-	std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';	\
-	std::cerr << "    For tree:\n";											\
-	std::cerr << T << '\n';													\
-	std::cerr << T.get_head_vector() << '\n';								\
-	return err_type::test_execution;										\
-}																			\
-++iterations;																\
-list_arrs.insert(arr);
+	if (not lal::linarr::is_bipartite(T, coloring, arr)) {						\
+		std::cerr << ERROR << '\n';												\
+		std::cerr << "    In check: " << c << '\n';								\
+		std::cerr << "    Arrangement:         " << arr.direct_as_vector() << '\n';\
+		std::cerr << "    Inverse Arrangement: " << arr.inverse_as_vector() << '\n';\
+		std::cerr << "    For tree:\n";											\
+		std::cerr << T << '\n';													\
+		std::cerr << T.get_head_vector() << '\n';								\
+		return err_type::test_execution;										\
+	}																			\
+	++iterations;																\
+	list_arrs.insert(arr);
 
 #define final_check(c)													\
-if (formula != iterations or formula != list_arrs.size()) {				\
-	std::cerr << ERROR << '\n';											\
-	std::cerr << "    In check: " << c << '\n';							\
-	std::cerr << "    Number of projective arrangements generated\n";	\
-	std::cerr << "    does not agree with the formula.\n";				\
-	std::cerr << "        formula= " << formula << '\n';				\
-	std::cerr << "        iterations= " << iterations << '\n';			\
-	std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
-	std::cerr << "    List of arrangements:\n";							\
-	for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v.direct_as_vector() << '\n';		\
-	}																	\
-	std::cerr << "    For tree:\n";										\
-	std::cerr << T << '\n';												\
-	std::cerr << T.get_head_vector() << '\n';							\
-	return err_type::test_execution;									\
-}
+	if (formula != iterations or formula != list_arrs.size()) {				\
+		std::cerr << ERROR << '\n';											\
+		std::cerr << "    In check: " << c << '\n';							\
+		std::cerr << "    Number of bipartite arrangements generated\n";	\
+		std::cerr << "    does not agree with the formula.\n";				\
+		std::cerr << "        formula= " << formula << '\n';				\
+		std::cerr << "        iterations= " << iterations << '\n';			\
+		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
+		std::cerr << "    List of arrangements:\n";							\
+		for (const auto& v : list_arrs) {									\
+			std::cerr << "        " << v.inverse_as_vector() << '\n';		\
+		}																	\
+		std::cerr << "    For tree:\n";										\
+		std::cerr << T << '\n';												\
+		std::cerr << T.get_head_vector() << '\n';							\
+		return err_type::test_execution;									\
+	}
 
 namespace tests {
 namespace generate {
@@ -107,6 +108,8 @@ inline lal::numeric::integer amount_bipartite(
 noexcept
 {
 	const auto n = T.get_num_nodes();
+	if (n == 1) { return 1; }
+
 	static constexpr auto blue = lal::properties::bipartite_graph_coloring::blue;
 	static constexpr auto red = lal::properties::bipartite_graph_coloring::red;
 	uint64_t n_blue = 0;
@@ -115,7 +118,7 @@ noexcept
 		n_blue += c.get_color_of(u) == blue;
 		n_red += c.get_color_of(u) == red;
 	}
-	return factorial(n_blue)*factorial(n_red);
+	return 2*factorial(n_blue)*factorial(n_red);
 }
 
 inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcept {
@@ -228,6 +231,8 @@ err_type exe_gen_arr_all_bipartite(std::ifstream& fin) noexcept {
 			const lal::graphs::free_tree T =
 				std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
 
+			std::cout << T << '\n';
+
 			const lal::properties::bipartite_graph_coloring c =
 				lal::properties::bipartite_coloring(T);
 
@@ -237,7 +242,7 @@ err_type exe_gen_arr_all_bipartite(std::ifstream& fin) noexcept {
 			std::size_t iterations = 0;
 			for (lal::generate::all_bipartite_arrangements ArrGen(T); not ArrGen.end(); ArrGen.next()) {
 				const auto arr = ArrGen.get_arrangement();
-				std::cout << iterations << ") " << arr.direct_as_vector() << '\n';
+				std::cout << iterations << ") " << arr.inverse_as_vector() << '\n';
 
 				check_and_process_arrangement("Exhaustive enumeration (displayed)", c);
 			}

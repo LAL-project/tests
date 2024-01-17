@@ -61,8 +61,9 @@
 #define check_and_process_arrangement(c)									\
 	if (not lal::linarr::is_planar(T, arr)) {								\
 		std::cerr << ERROR << '\n';											\
-		std::cerr << "    In check: " << c << '\n';							\
-		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';	\
+		std::cerr << "    Arrangement is not planar: " << c << '\n';		\
+		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';\
+		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << T << '\n';												\
 		std::cerr << T.get_head_vector() << '\n';							\
@@ -75,14 +76,14 @@
 	if (formula != iterations or formula != list_arrs.size()) {				\
 		std::cerr << ERROR << '\n';											\
 		std::cerr << "    In check: " << c << '\n';							\
-		std::cerr << "    Number of projective arrangements generated\n";	\
+		std::cerr << "    Number of planar arrangements generated\n";		\
 		std::cerr << "    does not agree with the formula.\n";				\
 		std::cerr << "        formula= " << formula << '\n';				\
 		std::cerr << "        iterations= " << iterations << '\n';			\
 		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
 		std::cerr << "    List of arrangements:\n";							\
 		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v.direct_as_vector() << '\n';			\
+		std::cerr << "        " << v.inverse_as_vector() << '\n';			\
 		}																	\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << T << '\n';												\
@@ -221,7 +222,7 @@ err_type exe_gen_arr_all_planar(std::ifstream& fin) noexcept {
 			std::size_t iterations = 0;
 			for (lal::generate::all_planar_arrangements ArrGen(T); not ArrGen.end(); ArrGen.next()) {
 				const auto arr = ArrGen.get_arrangement();
-				std::cout << iterations << ") " << arr.direct_as_vector() << '\n';
+				std::cout << iterations << ") " << arr.inverse_as_vector() << '\n';
 
 				check_and_process_arrangement("Exhaustive enumeration (displayed)");
 			}

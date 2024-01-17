@@ -79,7 +79,7 @@ err_type exe_gen_arr_rand_projective(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_projective(rT, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation (get) of random arrangement failed with error:\n";
+					std::cerr << "    Random arrangement generated (get) is not projective:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";
@@ -94,7 +94,7 @@ err_type exe_gen_arr_rand_projective(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_projective(rT, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation (yield) of random arrangement failed with error:\n";
+					std::cerr << "    Random arrangement generated (yield) is not projective:\n";
 					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
 					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 					std::cerr << "    For tree:\n";

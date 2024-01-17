@@ -63,7 +63,7 @@
 	if (not lal::linarr::is_arrangement(T, arr)) {							\
 		std::cerr << ERROR << '\n';											\
 		std::cerr << "    In check: " << c << '\n';							\
-		std::cerr << "    Generation of arrangement failed with error:\n";	\
+		std::cerr << "    Object generated is not an arrangement:\n";		\
 		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n'; \
 		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n'; \
 		std::cerr << "    For tree:\n";										\
