@@ -47,6 +47,7 @@
 // lal includes
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/integer_output.hpp>
+#include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_projective_arrangements.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
@@ -78,10 +79,10 @@ inline lal::numeric::integer amount_projective(const lal::graphs::rooted_tree& r
 inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noexcept {
 	std::vector<lal::edge> edges = rT.get_edges();
 
-#define check_arrangement													\
+#define check_and_process_arrangement(c)									\
 	if (not lal::linarr::is_projective(rT, arr)) {							\
 		std::cerr << ERROR << '\n';											\
-		std::cerr << "    Generation of arrangement failed with error:\n";	\
+		std::cerr << "    Arrangement is not projective:\n";				\
 		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';	\
 		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';\
 		std::cerr << "    For tree:\n";										\
@@ -91,17 +92,18 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 	++iterations;															\
 	list_arrs.insert(arr);
 
-#define final_check															\
+#define final_check(c)														\
 	if (formula != iterations or formula != list_arrs.size()) {				\
 		std::cerr << ERROR << '\n';											\
+		std::cerr << "    In check: " << c << '\n';							\
 		std::cerr << "    Number of projective arrangements generated\n";	\
 		std::cerr << "    does not agree with the formula.\n";				\
 		std::cerr << "        formula= " << formula << '\n';				\
 		std::cerr << "        iterations= " << iterations << '\n';			\
 		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
-		std::cerr << "    List of arrangements:\n";							\
+		std::cerr << "    List of (inverse) arrangements:\n";				\
 		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v.direct_as_vector() << '\n';\
+		std::cerr << "        " << v.inverse_as_vector() << '\n';			\
 		}																	\
 		std::cerr << "    For tree:\n";										\
 		std::cerr << rT << '\n';											\
@@ -127,9 +129,9 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 			ArrGen.next();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 1");
 		}
-		final_check;
+		final_check("Usage 1");
 		}
 
 		// USAGE 2
@@ -141,9 +143,9 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 			const lal::linear_arrangement arr = ArrGen.get_arrangement();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 2");
 		}
-		final_check;
+		final_check("Usage 2");
 		}
 
 		// USAGE 3
@@ -155,9 +157,9 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 			const lal::linear_arrangement arr = ArrGen.yield_arrangement();
 
 			// Do some sanity checks.
-			check_arrangement;
+			check_and_process_arrangement("Usage 3");
 		}
-		final_check;
+		final_check("Usage 3");
 		}
 	}
 	return err_type::no_error;
@@ -166,20 +168,63 @@ inline err_type test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noex
 } // -- namespace projective
 
 err_type exe_gen_arr_all_projective(std::ifstream& fin) noexcept {
+	const std::set<std::string> allowed_modes({"automatic", "manual"});
 
-	uint64_t n, nrelabs;
-	while (fin >> n >> nrelabs) {
-		// do 'ntrees' trees of 'n' vertices
-		lal::generate::all_ulab_rooted_trees TreeGen(n);
+	std::string mode;
+	fin >> mode;
 
-		while (not TreeGen.end()) {
-			lal::graphs::rooted_tree rT = TreeGen.get_tree();
-			TreeGen.next();
+	if (allowed_modes.find(mode) == allowed_modes.end()) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Invalid mode '" << mode << "'.\n";
+		std::cerr << "    Expected one of:\n";
+		for (const auto& s : allowed_modes) {
+			std::cerr << "    - " << s << '\n';
+		}
+		return err_type::test_format;
+	}
 
-			const err_type e = projective::test_a_tree(rT, nrelabs);
-			if (e != err_type::no_error) {
-				return e;
+	if (mode == "automatic") {
+		uint64_t n, nrelabs;
+		while (fin >> n >> nrelabs) {
+			// do 'ntrees' trees of 'n' vertices
+			lal::generate::all_ulab_rooted_trees TreeGen(n);
+
+			while (not TreeGen.end()) {
+				lal::graphs::rooted_tree rT = TreeGen.get_tree();
+				TreeGen.next();
+
+				const err_type e = projective::test_a_tree(rT, nrelabs);
+				if (e != err_type::no_error) {
+					return e;
+				}
 			}
+		}
+	}
+	else if (mode == "manual") {
+		std::string line;
+		getline(fin, line);
+
+		while (getline(fin, line)) {
+			std::cout << "---------------\n";
+			lal::head_vector hv;
+			std::stringstream ss(line);
+			uint64_t k;
+			while (ss >> k) { hv.push_back(k); }
+
+			const lal::graphs::rooted_tree rT =
+				lal::graphs::from_head_vector_to_rooted_tree(hv);
+
+			const auto formula = projective::amount_projective(rT);
+
+			std::set<lal::linear_arrangement> list_arrs;
+			std::size_t iterations = 0;
+			for (lal::generate::all_projective_arrangements ArrGen(rT); not ArrGen.end(); ArrGen.next()) {
+				const auto arr = ArrGen.get_arrangement();
+				std::cout << iterations << ") " << arr.inverse_as_vector() << '\n';
+
+				check_and_process_arrangement("Exhaustive enumeration (displayed)");
+			}
+			final_check("Exhaustive enumeration (displayed)");
 		}
 	}
 
