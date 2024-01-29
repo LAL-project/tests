@@ -1,4 +1,4 @@
-TYPE linarr-DMax-1_le_thistle
+TYPE linarr-DMax-1_eq_thistle
 INPUTS 1
 inputs/linarr/optimal_linearizations/DMax/1_eq_thistle/16.1 *
 
