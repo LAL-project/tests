@@ -897,9 +897,6 @@ echo "    Log file: '$log_file'"
 
 echo "$(date +"%Y/%m/%d.%T")    Started test execution of group '$exe_group'." >> $log_file
 
-echo "$(date +"%Y/%m/%d.%T")" >> $log_file
-echo "$(date +"%Y/%m/%d.%T")" >> $log_file
-echo "$(date +"%Y/%m/%d.%T")" >> $log_file
 if [ $EXECUTE_FROM_GROUP == 1 ]; then
 	if [ "$exe_group" == "all" ]; then
 		for g in "detail" "generate" "graphs" "io" "linarr" "memory" "numeric" "properties" "utilities"; do
