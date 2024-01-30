@@ -92,6 +92,7 @@ SOURCES += \
 	bipartite_coloring.cpp \
 	caterpillar_distance.cpp \
 	diameter.cpp \
+	exe_properties_branchless_paths.cpp \
 	expected_D_planar.cpp \
 	expected_D_projective.cpp \
 	expvar_C.cpp \

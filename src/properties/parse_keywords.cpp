@@ -119,6 +119,9 @@ noexcept
 	if (key == "bipartite_coloring") {
 		return exe_properties_bipartite_coloring(fin);
 	}
+	if (key == "branchless_paths") {
+		return exe_properties_branchless_paths(fin);
+	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
