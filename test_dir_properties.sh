@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# properties_centre tests
+properties_branchless_paths_DIRS=(\
+	"properties/branchless_paths" "properties/branchless_paths" \
+	)
+
 # properties_coloring tests
 properties_coloring_DIRS=(\
 	"properties/coloring" "properties/coloring" \
@@ -89,6 +94,7 @@ properties_DIRS=(\
 	"${properties_basic_DIRS[@]}" \
 	"${properties_exp_var_D_DIRS[@]}" \
 	"${properties_exp_var_C_DIRS[@]}" \
+	"${properties_branchless_paths_DIRS[@]}" \
 	"${properties_coloring_DIRS[@]}" \
 	"${properties_centre_DIRS[@]}" \
 	"${properties_centroid_DIRS[@]}" \

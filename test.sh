@@ -182,6 +182,7 @@ function show_usage() {
 	echo "            properties_centre : execute centre tests"
 	echo "            properties_centroid : execute centroid tests"
 	echo "            properties_diameter : execute diameter tests"
+	echo "            properties_branchless_paths : execute branchless paths tests"
 	echo "            properties_exp_var_C : execute tests for the expectation and variance of C"
 	echo "                properties_exp_var_C_no_Q : execute tests for the expectation and variance of C (w/o Q)"
 	echo "                properties_exp_var_C_Q : execute tests for the expectation and variance of C (w/ Q)"

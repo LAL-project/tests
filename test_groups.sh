@@ -124,6 +124,7 @@ groups_list=(\
 			"properties_exp_D_planar" \
 			"properties_exp_var_D_unconstrained" \
 		"properties_coloring" \
+		"properties_branchless_paths" \
 		"properties_centre" \
 		"properties_centroid" \
 		"properties_diameter" \
