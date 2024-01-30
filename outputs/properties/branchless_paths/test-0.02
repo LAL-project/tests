@@ -1,0 +1,21 @@
+-------------
+Tree:
+0:
+1:
+-------------
+Total paths: 0
+-------------
+Tree:
+0: 1
+1: 0
+-------------
+Total paths: 1
+0)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 1
+    Second endpoint:      1 -- degree: 1
+    Lowest lexicographic: 3
+    Is antenna:           1
+    Vertex sequence:      0 1
+Test finished without apparent errors.

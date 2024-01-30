@@ -1,0 +1,49 @@
+TYPE properties-branchless_paths
+
+	free
+	
+	init 6
+	
+	print_tree
+	print_paths
+	
+	add_edge 0 1
+	add_edge 4 5
+	
+	print_tree
+	print_paths
+	
+	add_edge 0 2
+	add_edge 4 3
+	
+	print_tree
+	print_paths
+	
+	add_edge 0 4
+	
+	print_tree
+	print_paths
+
+	clear
+	init 6
+	
+	add_edge 0 1
+	add_edge 2 1
+	add_edge 1 4
+	add_edge 4 5
+	add_edge 5 3
+	
+	print_tree
+	print_paths
+
+	clear
+	init 6
+	
+	add_edge 0 1
+	add_edge 2 1
+	add_edge 1 4
+	add_edge 4 3
+	add_edge 3 5
+	
+	print_tree
+	print_paths

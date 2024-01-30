@@ -1,0 +1,141 @@
+-------------
+Tree:
+0: 1 2 4
+1: 0
+2: 0
+3: 4 6 7
+4: 0 3 5
+5: 4
+6: 3
+7: 3
+-------------
+Total paths: 7
+0)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 3
+    Second endpoint:      1 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      0 1
+1)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 3
+    Second endpoint:      2 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      0 2
+2)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 3
+    Second endpoint:      4 -- degree: 3
+    Lowest lexicographic: 9
+    Is antenna:           0
+    Vertex sequence:      0 4
+3)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       3 -- degree: 3
+    Second endpoint:      4 -- degree: 3
+    Lowest lexicographic: 9
+    Is antenna:           0
+    Vertex sequence:      3 4
+4)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       3 -- degree: 3
+    Second endpoint:      6 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      3 6
+5)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       3 -- degree: 3
+    Second endpoint:      7 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      3 7
+6)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       4 -- degree: 3
+    Second endpoint:      5 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      4 5
+-------------
+Tree:
+0: 1
+1: 0 2 4
+2: 1
+3: 7
+4: 1 5
+5: 4 6
+6: 5 7
+7: 3 6
+-------------
+Total paths: 3
+0)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 1
+    Second endpoint:      1 -- degree: 3
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      0 1
+1)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       1 -- degree: 3
+    Second endpoint:      2 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      1 2
+2)
+    Number of vertices:   6
+    Number of edges:      5
+    First endpoint:       1 -- degree: 3
+    Second endpoint:      3 -- degree: 1
+    Lowest lexicographic: 4
+    Is antenna:           1
+    Vertex sequence:      1 4 5 6 7 3
+-------------
+Tree:
+0: 1
+1: 0 2 4
+2: 1
+3: 6 7
+4: 1 5
+5: 4 6
+6: 3 5
+7: 3
+-------------
+Total paths: 3
+0)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       0 -- degree: 1
+    Second endpoint:      1 -- degree: 3
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      0 1
+1)
+    Number of vertices:   2
+    Number of edges:      1
+    First endpoint:       1 -- degree: 3
+    Second endpoint:      2 -- degree: 1
+    Lowest lexicographic: 9
+    Is antenna:           1
+    Vertex sequence:      1 2
+2)
+    Number of vertices:   6
+    Number of edges:      5
+    First endpoint:       1 -- degree: 3
+    Second endpoint:      7 -- degree: 1
+    Lowest lexicographic: 3
+    Is antenna:           1
+    Vertex sequence:      1 4 5 6 3 7
+Test finished without apparent errors.
