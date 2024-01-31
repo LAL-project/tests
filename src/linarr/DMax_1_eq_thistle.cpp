@@ -89,13 +89,11 @@ noexcept
 		return err_type::io;
 	}
 
-	lal::properties::bipartite_graph_coloring c;
-
 	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
 	(
 		// solver
 		[&](const lal::graphs::free_tree& t) {
-			return lal::linarr::max_sum_edge_lengths_1_eq_thistle(t, c);
+			return lal::linarr::max_sum_edge_lengths_1_eq_thistle(t);
 		},
 		// tree_eval
 		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
@@ -118,9 +116,7 @@ noexcept
 			return lal::graphs::from_head_vector_to_free_tree(v).first;
 		},
 		// tree_initializer
-		[&](const lal::graphs::free_tree& t) {
-			c = lal::properties::bipartite_coloring(t);
-		},
+		[&](const lal::graphs::free_tree&) { },
 		input_file
 	);
 	return err;
