@@ -165,6 +165,12 @@ linarr_Dmin_Comparison_DIRS=(\
 	"${linarr_Dmin_Comparison_Plan_vs_Unc_DIRS[@]}" \
 	"${linarr_Dmin_Comparison_Unc_vs_Unc_DIRS[@]}" \
 	)
+linarr_Dmin_Bipartite_AEF_DIRS=(\
+	"linarr/D/Dmin/bipartite/AEF" "linarr/D/Dmin/bipartite" \
+	)
+linarr_Dmin_Bipartite_DIRS=(\
+	"${linarr_Dmin_Bipartite_AEF_DIRS[@]}" \
+	)
 linarr_Dmin_Unconstrained_YS_DIRS=(\
 	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/" \
 	)
@@ -179,6 +185,7 @@ linarr_Dmin_DIRS=(\
 	"${linarr_Dmin_Projective_DIRS[@]}" \
 	"${linarr_Dmin_Planar_DIRS[@]}" \
 	"${linarr_Dmin_Comparison_DIRS[@]}" \
+	"${linarr_Dmin_Bipartite_DIRS[@]}" \
 	"${linarr_Dmin_Unconstrained_DIRS[@]}" \
 	)
 

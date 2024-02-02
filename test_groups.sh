@@ -83,6 +83,8 @@ groups_list=(\
 			"linarr_Dmin_Planar" \
 				"linarr_Dmin_Planar_AEF" \
 				"linarr_Dmin_Planar_HS" \
+			"linarr_Dmin_Bipartite" \
+				"linarr_Dmin_Bipartite_AEF" \
 			"linarr_Dmin_Unconstrained" \
 				"linarr_Dmin_Unconstrained_YS" \
 				"linarr_Dmin_Unconstrained_FC" \
@@ -122,6 +124,7 @@ groups_list=(\
 		"properties_exp_var_D" \
 			"properties_exp_D_projective" \
 			"properties_exp_D_planar" \
+			"properties_exp_D_bipartite" \
 			"properties_exp_var_D_unconstrained" \
 		"properties_coloring" \
 		"properties_branchless_paths" \

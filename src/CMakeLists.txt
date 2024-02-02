@@ -221,6 +221,7 @@ add_executable(
 		linarr/DMax_projective_all_roots.cpp
 		linarr/DMax_projective.cpp
 		linarr/Dmin_comparison.cpp
+		linarr/Dmin_bipartite.cpp
 		linarr/Dmin_planar.cpp
 		linarr/Dmin_projective.cpp
 		linarr/Dmin_unconstrained.cpp
@@ -287,10 +288,12 @@ add_executable(
 		properties/parse_keywords.hpp
 		
 		properties/bipartite_coloring.cpp
+		properties/branchless_path_find.cpp
 		properties/caterpillar_distance.cpp
 		properties/centre.cpp
 		properties/centroid.cpp
 		properties/diameter.cpp
+		properties/expected_D_bipartite.cpp
 		properties/expected_D_planar.cpp
 		properties/expected_D_projective.cpp
 		properties/expvar_C.cpp

@@ -95,6 +95,7 @@ SOURCES += \
 	DMax_planar.cpp \
 	DMax_projective.cpp \
 	DMax_projective_all_roots.cpp \
+	Dmin_bipartite.cpp \
 	Dmin_comparison.cpp \
 	Dmin_planar.cpp \
 	Dmin_projective.cpp \

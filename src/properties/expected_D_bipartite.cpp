@@ -58,7 +58,7 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept
+err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept
 {
 
 	uint64_t n;
@@ -68,26 +68,11 @@ err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept
 	while (fin >> hv[0]) {
 		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
 
-		lal::graphs::rooted_tree T = lal::graphs::from_head_vector_to_rooted_tree(hv);
+		lal::graphs::free_tree T = lal::graphs::from_head_vector_to_free_tree(hv).first;
 
 		// calculate the same value with tree subsizes
 		const lal::numeric::rational value_no_sizes =
-			lal::properties::exp_sum_edge_lengths_projective_rational(T);
-
-		// calculate the same value with tree subsizes
-		T.calculate_size_subtrees();
-		const lal::numeric::rational value_sizes =
-			lal::properties::exp_sum_edge_lengths_projective_rational(T);
-
-		if (value_no_sizes != value_sizes) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    Value computed with tree subsizes in tree\n";
-			std::cerr << "    differs from the value computed without tree\n";
-			std::cerr << "    subsizes in the tree.\n";
-			std::cerr << "    With tree subsizes in tree: " << value_sizes << '\n';
-			std::cerr << "    Without tree subsizes in tree: " << value_no_sizes << '\n';
-			return err_type::test_execution;
-		}
+			lal::properties::exp_sum_edge_lengths_bipartite_rational(T);
 
 		std::string ground_truth_str;
 		fin >> ground_truth_str;

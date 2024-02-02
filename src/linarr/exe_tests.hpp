@@ -80,6 +80,7 @@ noexcept;
 
 err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept;
 err_type exe_linarr_Dmin_planar(std::ifstream& fin) noexcept;
+err_type exe_linarr_Dmin_bipartite(std::ifstream& fin) noexcept;
 err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept;
 err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept;
 

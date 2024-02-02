@@ -78,6 +78,9 @@ noexcept
 	if (key == "Planar") {
 		return call_expected_D_planar(keywords, i+1, fin);
 	}
+	if (key == "Bipartite") {
+		return exe_properties_expected_D_bipartite(fin);
+	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";

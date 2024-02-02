@@ -90,9 +90,10 @@ SOURCES += \
 	V_rla_C_brute_force_Q.cpp \
 	V_rla_C_brute_force_freqs.cpp \
 	bipartite_coloring.cpp \
+	branchless_path_find.cpp \
 	caterpillar_distance.cpp \
 	diameter.cpp \
-	exe_properties_branchless_paths.cpp \
+	expected_D_bipartite.cpp \
 	expected_D_planar.cpp \
 	expected_D_projective.cpp \
 	expvar_C.cpp \

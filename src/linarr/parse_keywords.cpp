@@ -66,6 +66,9 @@ noexcept
 	if (key == "Unconstrained") {
 		return exe_linarr_Dmin_unconstrained(fin);
 	}
+	if (key == "Bipartite") {
+		return exe_linarr_Dmin_bipartite(fin);
+	}
 	if (key == "comparison") {
 		return exe_linarr_Dmin_comparison(fin);
 	}
