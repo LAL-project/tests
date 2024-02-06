@@ -176,11 +176,11 @@ namespace detail {
 //     v2 is sorted by our algorithm
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
-template <class T, class It>
-err_type __check_sorting
-(
-	const std::string& algo, std::vector<T> v1,
-	const std::function<void (It begin, It end)>& sort_F,
+template <class T, typename Callable>
+err_type __check_sorting(
+	const std::string& algo,
+	std::vector<T> v1,
+	const Callable& sort_F,
 	bool incr
 )
 noexcept
@@ -223,10 +223,11 @@ noexcept
 // - n: upper bound of the values in the vector
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
+template <typename Callable>
 err_type check_sorting
 (
 	const std::string& algo, Ui s, Ui n,
-	const std::function<void (Ui_it begin, Ui_it end)>& sort_F,
+	const Callable& sort_F,
 	bool incr
 )
 noexcept
@@ -237,14 +238,11 @@ noexcept
 
 // -----------------------------------------------------------------------------
 
-template <
-	typename It,
-	typename T = typename std::iterator_traits<It>::value_type
->
+template <typename It, typename T, typename Callable>
 void here_counting_sort
 (
 	It begin, It end, const std::size_t n,
-	const std::function<std::size_t (const T&)>& key,
+	const Callable& key,
 	bool incr
 )
 noexcept
@@ -291,7 +289,7 @@ noexcept
 			struct_assign<>::assign(R[i], r[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t1,t1_vec_it>("counting_sort", R, sort1, incr);
+		return __check_sorting<t1>("counting_sort", R, sort1, incr);
 	}
 
 	if (k == 2) {
@@ -304,7 +302,7 @@ noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t2,t2_t>("counting_sort", R, sort2, incr);
+		return __check_sorting<t2>("counting_sort", R, sort2, incr);
 	}
 
 	if (k == 3) {
@@ -318,7 +316,7 @@ noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i], r3[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t3,t3_vec_it>("counting_sort", R, sort3, incr);
+		return __check_sorting<t3>("counting_sort", R, sort3, incr);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -431,7 +429,7 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 		[&](Ui_it begin, Ui_it end) -> void {
 			here_counting_sort<Ui_it, uint64_t>(begin, end, Max, key1, incr);
 		};
-		return __check_sorting<uint64_t,Ui_it>(
+		return __check_sorting<uint64_t>(
 			"counting_sort", values, sort1, incr
 		);
 	}
