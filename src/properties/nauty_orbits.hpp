@@ -40,53 +40,41 @@
  *
  ********************************************************************/
 
+#pragma once
+
 // C++ includes
-#include <iostream>
-#include <fstream>
+#include <vector>
 
 // lal includes
-#include <lal/graphs/undirected_graph.hpp>
+#include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/properties/hierarchical_distance.hpp>
-#include <lal/numeric/rational_output.hpp>
-#include <lal/io/basic_output.hpp>
-
-// common includes
-#include "common/definitions.hpp"
 
 namespace tests {
 namespace properties {
+namespace nauty_lib {
 
-err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept {
+std::vector<std::vector<lal::node>> compute_vertex_orbits
+(const lal::graphs::free_tree& t) noexcept;
 
-	uint64_t n;
-	while (fin >> n) {
-		std::cout << "----------------------------------------\n";
-		std::cout << "n= " << n << '\n';
+std::vector<std::vector<lal::node>> compute_vertex_orbits
+(const lal::graphs::rooted_tree& t) noexcept;
 
-		int i = 0;
-		lal::generate::all_ulab_free_trees TreeGen(n);
-		while (not TreeGen.end()) {
-			const lal::graphs::free_tree t = TreeGen.get_tree();
-			TreeGen.next();
+// -----------------------------------------------------------------------------
 
-			std::cout << i << ")\n";
+std::vector<std::vector<lal::edge>> compute_edge_orbits(
+	const lal::graphs::free_tree& t,
+	const std::vector<lal::edge>& edges,
+	const std::vector<std::size_t>& vertex_orbits
+)
+noexcept;
 
-			// for each lal::node, make a rooted tree at that lal::node
-			for (lal::node r = 0; r < t.get_num_nodes(); ++r) {
-				const lal::graphs::rooted_tree R(t, r);
-				const lal::numeric::rational mhd =
-					lal::properties::mean_hierarchical_distance_rational(R);
-				std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
-			}
+std::vector<std::vector<lal::edge>> compute_edge_orbits(
+	const lal::graphs::rooted_tree& t,
+	const std::vector<lal::edge>& edges,
+	const std::vector<std::size_t>& vertex_orbits
+)
+noexcept;
 
-			++i;
-		}
-	}
-
-	return err_type::no_error;
-}
-
+} // -- namespace nauty_lib
 } // -- namespace properties
 } // -- namespace tests

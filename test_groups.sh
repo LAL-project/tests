@@ -127,6 +127,7 @@ groups_list=(\
 			"properties_exp_D_bipartite" \
 			"properties_exp_var_D_unconstrained" \
 		"properties_coloring" \
+		"properties_orbits" \
 		"properties_branchless_paths" \
 		"properties_centre" \
 		"properties_centroid" \

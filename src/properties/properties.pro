@@ -60,6 +60,8 @@ PRE_TARGETDEPS += ../common/libcommon.a
 equals(ENVIR, "HOME") {
 	LAL_DIR = /home/lluis/Documents/projects/LAL-dev/latest/linear-arrangement-library
 	THIS_DIR = /home/lluis/Documents/projects/LAL-dev/latest/tests/src
+
+	LIBS += -lnauty
 }
 
 # configure cluster
@@ -69,6 +71,10 @@ equals(ENVIR, "CLUSTER") {
 
 	LAL_DIR = /home/usuaris/lalemany/LAL-dev/latest/linear-arrangement-library
 	THIS_DIR = /home/usuaris/lalemany/LAL-dev/latest/tests/src
+
+	NAUTY_DIR = /home/usuaris/lalemany/installations/nauty/27r3
+	INCLUDEPATH += $${NAUTY_DIR}/
+	LIBS += -L $${NAUTY_DIR}/lib -lnauty
 }
 
 CONFIG(debug, debug|release) {
@@ -100,6 +106,8 @@ SOURCES += \
 	expvar_D.cpp \
 	general.cpp \
 	main.cpp \
+	nauty_orbits.cpp \
+	orbits.cpp \
 	parse_keywords.cpp \
 	centre.cpp \
 	centroid.cpp
@@ -107,4 +115,5 @@ SOURCES += \
 HEADERS += \
 	C_rla_brute_force_algorithms.hpp \
 	exe_tests.hpp \
+	nauty_orbits.hpp \
 	parse_keywords.hpp
