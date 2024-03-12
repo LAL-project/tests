@@ -216,8 +216,9 @@ add_executable(
 		linarr/exe_tests.hpp
 		linarr/n_crossings_m2.hpp
 		linarr/parse_keywords.hpp
-		linarr/test_optimum_algorithm.hpp
+		linarr/test_optimum_algorithm_all.hpp
 		linarr/test_optimum_algorithm_one.hpp
+		linarr/test_optimum_algorithm.hpp
 		
 		linarr/arrangement_validity.cpp
 		linarr/C.cpp
@@ -230,8 +231,9 @@ add_executable(
 		linarr/DMax_planar.cpp
 		linarr/DMax_projective_all_roots.cpp
 		linarr/DMax_projective.cpp
-		linarr/Dmin_comparison.cpp
+		linarr/DMax_unconstrained_all.cpp
 		linarr/Dmin_bipartite.cpp
+		linarr/Dmin_comparison.cpp
 		linarr/Dmin_planar.cpp
 		linarr/Dmin_projective.cpp
 		linarr/Dmin_unconstrained.cpp

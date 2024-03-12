@@ -95,6 +95,7 @@ SOURCES += \
 	DMax_planar.cpp \
 	DMax_projective.cpp \
 	DMax_projective_all_roots.cpp \
+	DMax_unconstrained_all.cpp \
 	Dmin_bipartite.cpp \
 	Dmin_comparison.cpp \
 	Dmin_planar.cpp \
@@ -117,6 +118,7 @@ HEADERS += \
 	n_crossings_m2.hpp \
 	parse_keywords.hpp \
 	test_optimum_algorithm.hpp \
+	test_optimum_algorithm_all.hpp \
 	test_optimum_algorithm_one.hpp
 
 DISTFILES +=

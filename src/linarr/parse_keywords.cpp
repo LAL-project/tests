@@ -84,6 +84,9 @@ err_type call_linarr_DMax
 noexcept
 {
 	const std::string& key = keywords[i];
+	if (key == "Unconstrained_all") {
+		return exe_linarr_DMax_Unconstrained_all(fin);
+	}
 	if (key == "Projective") {
 		return exe_linarr_DMax_projective(fin);
 	}

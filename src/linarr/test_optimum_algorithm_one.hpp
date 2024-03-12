@@ -76,7 +76,7 @@ err_type test_optimum_algorithm(
 	// function that computes the solution
 	const Solver_f& solver,
 	// function that evaluates the input tree on a given arrangement
-	const TreeEval_f& tree_eval,
+	const TreeEval_f& arrgmnt_eval,
 	// function that tests the correctness of the resulting arrangement
 	const ArrgmntCheck_f& arrgmnt_check,
 	// function that converts the input data into a tree
@@ -134,7 +134,7 @@ noexcept
 				brute_force_arr.assign(u, pu);
 			}
 
-			const uint64_t check_value = tree_eval(tree, brute_force_arr);
+			const uint64_t check_value = arrgmnt_eval(tree, brute_force_arr);
 			// check correctness of input array
 			if (check_value != brute_force_value) {
 				std::cerr << ERROR << '\n';
@@ -174,7 +174,7 @@ noexcept
 
 		// ensure that value of D matches the evaluation of the arrangement
 		{
-		const uint64_t check_value = tree_eval(tree, library_arr);
+		const uint64_t check_value = arrgmnt_eval(tree, library_arr);
 		if (check_value != library_res.first) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    The value calculated by the library's algorithm does not\n";
