@@ -60,13 +60,10 @@
 namespace tests {
 namespace linarr {
 
-template <class T> using Solver =
-	std::function< std::pair<uint64_t, lal::linear_arrangement>(const T&) >;
-
 template <class T> using TreeEval =
 	std::function< uint64_t (const T&, const lal::linear_arrangement&) >;
 
-template <class T> using ArrgmtCheck =
+template <class T> using ArrgmntCheck =
 	std::function< bool (const T&, const lal::linear_arrangement&) >;
 
 template <class T> using InputConv =
@@ -75,23 +72,40 @@ template <class T> using InputConv =
 template <class T> using TreeInit =
 	std::function< void (T&) >;
 
-template <class T>
-err_type linarr_brute_force_testing(
+
+// Test the algorithms that return only ONE! arrangement
+namespace single_arrangement {
+
+template <class T> using Solver =
+	std::function< std::pair<uint64_t, lal::linear_arrangement>(const T&) >;
+
+template <
+	class T,
+	class FSolver, class FTreeEval, class FArrgmntCheck,
+	class FInputConv, class FTreeInit
+>
+err_type test_optimum_algorithm(
 	// function that computes the solution
-	const Solver<T>& solver,
+	const FSolver& solver,
 	// function that evaluates the input tree on a given arrangement
-	const TreeEval<T>& tree_eval,
+	const FTreeEval& tree_eval,
 	// function that tests the correctness of the resulting arrangement
-	const ArrgmtCheck<T>& arrgmnt_check,
+	const FArrgmntCheck& arrgmnt_check,
 	// function that converts the input data into a tree
-	const InputConv<T>& conv,
+	const FInputConv& conv,
 	// function that initializes the input tree
-	const TreeInit<T>& tree_initializer,
+	const FTreeInit& tree_initializer,
 	// the input stream
 	std::ifstream& fin
 )
 noexcept
 {
+	static_assert(std::is_constructible_v<Solver<T>, FSolver>);
+	static_assert(std::is_constructible_v<TreeEval<T>, FTreeEval>);
+	static_assert(std::is_constructible_v<ArrgmntCheck<T>, FArrgmntCheck>);
+	static_assert(std::is_constructible_v<InputConv<T>, FInputConv>);
+	static_assert(std::is_constructible_v<TreeInit<T>, FTreeInit>);
+
 	// read number of nodes
 	uint64_t n;
 	fin >> n;
@@ -207,6 +221,8 @@ noexcept
 	}
 	return tests::err_type::no_error;
 }
+
+} // -- namespace single_arrangement
 
 } // -- namespace linarr
 } // -- namespace tests

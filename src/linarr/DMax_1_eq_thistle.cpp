@@ -89,7 +89,7 @@ noexcept
 		return err_type::io;
 	}
 
-	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
+	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 	(
 		// solver
 		[&](const lal::graphs::free_tree& t) {
@@ -119,7 +119,6 @@ noexcept
 		[&](const lal::graphs::free_tree&) { },
 		input_file
 	);
-	return err;
 }
 
 } // -- namespace DMax_1_eq_thistle

@@ -184,7 +184,7 @@ err_type exe_linarr_Dmin_planar(std::ifstream& fin) noexcept {
 			return err_type::test_format;
 		}
 
-		err = tests::linarr::linarr_brute_force_testing<lal::graphs::free_tree>
+		err = single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 		(
 			[=](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths_planar(t, algo_choice);

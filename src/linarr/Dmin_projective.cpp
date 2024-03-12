@@ -80,7 +80,7 @@ noexcept
 		return err_type::io;
 	}
 
-	const auto err = linarr_brute_force_testing<lal::graphs::rooted_tree>
+	return single_arrangement::test_optimum_algorithm<lal::graphs::rooted_tree>
 	(
 		[&](const lal::graphs::rooted_tree& t) {
 			return lal::linarr::min_sum_edge_lengths_projective(t, algo);
@@ -97,11 +97,6 @@ noexcept
 		tree_initializer,
 		input_file
 	);
-	if (err != err_type::no_error) {
-		return err;
-	}
-
-	return err;
 }
 
 } // -- namespace dmin_projective

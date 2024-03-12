@@ -91,39 +91,38 @@ noexcept
 
 	lal::properties::bipartite_graph_coloring c;
 
-	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
-		(
-			// solver
-			[&](const lal::graphs::free_tree& t) {
-				return lal::linarr::max_sum_edge_lengths_1_le_thistle(t, c);
-			},
-			// tree_eval
-			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
-				return lal::linarr::sum_edge_lengths(t, arr);
-			},
-			// arrgmnt_check
-			[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
-				const auto n = t.get_num_nodes();
-				lal::detail::level_signature_per_vertex lev_seq(n);
-				lal::detail::calculate_level_signature(t, arr, lev_seq);
+	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
+	(
+		// solver
+		[&](const lal::graphs::free_tree& t) {
+			return lal::linarr::max_sum_edge_lengths_1_le_thistle(t, c);
+		},
+		// tree_eval
+		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+			return lal::linarr::sum_edge_lengths(t, arr);
+		},
+		// arrgmnt_check
+		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+			const auto n = t.get_num_nodes();
+			lal::detail::level_signature_per_vertex lev_seq(n);
+			lal::detail::calculate_level_signature(t, arr, lev_seq);
 
-				std::size_t num_thistles = 0;
-				for (lal::node_t u = 0ull; u < n; ++u) {
-					num_thistles += lal::detail::is_thistle_vertex(t, lev_seq, u);
-				}
-				return num_thistles <= 1;
-			},
-			// conv
-			[](const lal::head_vector& v) {
-				return lal::graphs::from_head_vector_to_free_tree(v).first;
-			},
-			// tree_initializer
-			[&](const lal::graphs::free_tree& t) {
-				c = lal::properties::bipartite_coloring(t);
-			},
-			input_file
-		);
-	return err;
+			std::size_t num_thistles = 0;
+			for (lal::node_t u = 0ull; u < n; ++u) {
+				num_thistles += lal::detail::is_thistle_vertex(t, lev_seq, u);
+			}
+			return num_thistles <= 1;
+		},
+		// conv
+		[](const lal::head_vector& v) {
+			return lal::graphs::from_head_vector_to_free_tree(v).first;
+		},
+		// tree_initializer
+		[&](const lal::graphs::free_tree& t) {
+			c = lal::properties::bipartite_coloring(t);
+		},
+		input_file
+	);
 }
 
 } // -- namespace DMax_1_le_thistle

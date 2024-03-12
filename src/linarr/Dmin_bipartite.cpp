@@ -89,7 +89,7 @@ noexcept
 
 	lal::properties::bipartite_graph_coloring c;
 
-	const auto err = linarr_brute_force_testing<lal::graphs::free_tree>
+	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 	(
 		// solver
 		[&](const lal::graphs::free_tree& t) {
@@ -113,7 +113,6 @@ noexcept
 		},
 		input_file
 	);
-	return err;
 }
 
 } // -- namespace Dmin_bipartite
