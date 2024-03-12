@@ -40,6 +40,8 @@
  *
  ********************************************************************/
 
+#pragma once
+
 // C++ includes
 #include <fstream>
 #include <vector>
