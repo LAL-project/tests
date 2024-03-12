@@ -144,11 +144,8 @@ err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 }
 
 template <typename func_Dmin>
-err_type test_class_algorithm(
-	const func_Dmin& A,
-	const std::string& algorithm,
-	std::ifstream& fin
-)
+err_type test_class_algorithm
+(const func_Dmin& A, const std::string& algorithm, std::ifstream& fin)
 noexcept
 {
 	std::string tree_class;
@@ -338,11 +335,8 @@ noexcept
 }
 
 template <typename func_Dmin>
-err_type test_tree_algorithm(
-	const func_Dmin& A,
-	const std::string& algorithm,
-	std::ifstream& fin
-)
+err_type test_tree_algorithm
+(const func_Dmin& A, const std::string& algorithm, std::ifstream& fin)
 noexcept
 {
 	// read number of vertices
@@ -403,10 +397,10 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
-			}
-		, input_file
+			},
+			input_file
 		);
 
 		input_file.close();
@@ -414,7 +408,7 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 	else if (what == "YS_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
 			},
 			"Shiloach",
@@ -424,7 +418,7 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 	else if (what == "YS_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach);
 			},
 			"Shiloach",
@@ -450,7 +444,7 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 
 		r =
 		dmin_unconstrained::test_bf_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			},
 			input_file
@@ -461,7 +455,7 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 	else if (what == "FC_class") {
 		r =
 		dmin_unconstrained::test_class_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			},
 			"Chung_2",
@@ -471,7 +465,7 @@ err_type exe_linarr_Dmin_unconstrained(std::ifstream& fin) noexcept {
 	else if (what == "FC_tree") {
 		r =
 		dmin_unconstrained::test_tree_algorithm(
-			[](const lal::graphs::free_tree& t) -> std::pair<uint64_t, lal::linear_arrangement> {
+			[](const lal::graphs::free_tree& t) {
 				return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2);
 			},
 			"Chung_2",

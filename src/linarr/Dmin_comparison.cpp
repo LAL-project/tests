@@ -112,17 +112,20 @@ err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept {
 	const std::set<std::string> allowed_algos({"Plan_AEF", "Plan_HS", "Unc_YS", "Unc_FC2"});
 
 	const auto Plan_HS =
-		[](const lal::graphs::free_tree& t) -> algo_result
-		{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::HochbergStallmann); };
+	[](const lal::graphs::free_tree& t)
+	{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::HochbergStallmann); };
+
 	const auto Plan_AEF =
-		[](const lal::graphs::free_tree& t) -> algo_result
-		{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer); };
+	[](const lal::graphs::free_tree& t)
+	{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer); };
+
 	const auto Unc_FC2 =
-		[](const lal::graphs::free_tree& t) -> algo_result
-		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
+	[](const lal::graphs::free_tree& t)
+	{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
+
 	const auto Unc_YS =
-		[](const lal::graphs::free_tree& t) -> algo_result
-		{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
+	[](const lal::graphs::free_tree& t)
+	{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
 
 	std::map<std::string, std::function<algo_result (const lal::graphs::free_tree&)> > ALGOS;
 	ALGOS["Plan_AEF"] = Plan_AEF;
