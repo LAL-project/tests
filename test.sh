@@ -165,6 +165,8 @@ function show_usage() {
 	echo "                    linarr_DMax_1_eq_thistle_AEF : execute MLA tests for 1-thistle MaxLA -- algorithm: AEF"
 	echo "                linarr_DMax_1_le_thistle : execute MLA tests for 1-thistle MaxLA"
 	echo "                    linarr_DMax_1_le_thistle_AEF : execute MLA tests for 1-thistle MaxLA -- algorithm: AEF"
+	echo "                linarr_DMax_Unconstrained_all : execute MLA tests for Unconstrained MaxLA (all arrangements)"
+	echo "                    linarr_DMax_Unconstrained_all_AEF : execute MLA tests for Unconstrained (all arrangements) -- algorithm: AEF"
 	echo "            linarr_syndepstruc_class : execute tests of classification of syntactic dependencies structures"
 	echo "            linarr_comp_dependency_flux : execute tests of dependency flux computation"
 	echo "            linarr_headedness : execute headedness tests"

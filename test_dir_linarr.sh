@@ -141,6 +141,7 @@ linarr_Dmin_Projective_DIRS=(\
 	"${linarr_Dmin_Projective_AEF_DIRS[@]}" \
 	"${linarr_Dmin_Projective_HS_DIRS[@]}" \
 	)
+
 linarr_Dmin_Planar_AEF_DIRS=(\
 	"linarr/D/Dmin/planar/AEF" "linarr/D/Dmin/planar" \
 	)
@@ -151,6 +152,7 @@ linarr_Dmin_Planar_DIRS=(\
 	"${linarr_Dmin_Planar_AEF_DIRS[@]}" \
 	"${linarr_Dmin_Planar_HS_DIRS[@]}" \
 	)
+
 linarr_Dmin_Comparison_Plan_vs_Plan_DIRS=(\
 	"linarr/D/Dmin/comparison/plan_plan" "linarr/D/Dmin/comparison/plan_plan" \
 	)
@@ -165,12 +167,14 @@ linarr_Dmin_Comparison_DIRS=(\
 	"${linarr_Dmin_Comparison_Plan_vs_Unc_DIRS[@]}" \
 	"${linarr_Dmin_Comparison_Unc_vs_Unc_DIRS[@]}" \
 	)
+
 linarr_Dmin_Bipartite_AEF_DIRS=(\
 	"linarr/D/Dmin/bipartite/AEF" "linarr/D/Dmin/bipartite" \
 	)
 linarr_Dmin_Bipartite_DIRS=(\
 	"${linarr_Dmin_Bipartite_AEF_DIRS[@]}" \
 	)
+
 linarr_Dmin_Unconstrained_YS_DIRS=(\
 	"linarr/D/Dmin/unconstrained/YS" "linarr/D/Dmin/unconstrained/" \
 	)
@@ -181,6 +185,7 @@ linarr_Dmin_Unconstrained_DIRS=(\
 	"${linarr_Dmin_Unconstrained_YS_DIRS[@]}" \
 	"${linarr_Dmin_Unconstrained_FC_DIRS[@]}" \
 	)
+
 linarr_Dmin_DIRS=(\
 	"${linarr_Dmin_Projective_DIRS[@]}" \
 	"${linarr_Dmin_Planar_DIRS[@]}" \
@@ -196,36 +201,49 @@ linarr_DMax_Projective_AEF_DIRS=(\
 linarr_DMax_Projective_DIRS=(\
 	"${linarr_DMax_Projective_AEF_DIRS[@]}" \
 	)
+
 linarr_DMax_Planar_AEF_DIRS=(\
 	"linarr/D/DMax/planar/AEF" "linarr/D/DMax/planar" \
 	)
 linarr_DMax_Planar_DIRS=(\
 	"${linarr_DMax_Planar_AEF_DIRS[@]}" \
 	)
+
 linarr_DMax_Bipartite_AEF_DIRS=(\
 	"linarr/D/DMax/bipartite/AEF" "linarr/D/DMax/bipartite" \
 	)
 linarr_DMax_Bipartite_DIRS=(\
 	"${linarr_DMax_Bipartite_AEF_DIRS[@]}" \
 	)
+
 linarr_DMax_1_eq_thistle_AEF_DIRS=(\
 	"linarr/D/DMax/1_eq_thistle/AEF" "linarr/D/DMax/1_eq_thistle" \
 	)
 linarr_DMax_1_eq_thistle_DIRS=(\
 	"${linarr_DMax_1_eq_thistle_AEF_DIRS[@]}" \
 	)
+
 linarr_DMax_1_le_thistle_AEF_DIRS=(\
 	"linarr/D/DMax/1_le_thistle/AEF" "linarr/D/DMax/1_le_thistle" \
 	)
 linarr_DMax_1_le_thistle_DIRS=(\
 	"${linarr_DMax_1_le_thistle_AEF_DIRS[@]}" \
 	)
+
+linarr_DMax_Unconstrained_all_AEF_DIRS=(\
+	"linarr/D/DMax/unconstrained/AEF" "linarr/D/DMax/unconstrained" \
+	)
+linarr_DMax_Unconstrained_all_DIRS=(\
+	"${linarr_DMax_Unconstrained_all_AEF_DIRS[@]}" \
+	)
+
 linarr_DMax_DIRS=(\
 	"${linarr_DMax_Projective_DIRS[@]}" \
 	"${linarr_DMax_Planar_DIRS[@]}" \
 	"${linarr_DMax_Bipartite_DIRS[@]}" \
 	"${linarr_DMax_1_eq_thistle_DIRS[@]}" \
 	"${linarr_DMax_1_le_thistle_DIRS[@]}" \
+	"${linarr_DMax_Unconstrained_all_DIRS[@]}" \
 	)
 
 # Classification of syntactic dependency structures

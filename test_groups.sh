@@ -99,6 +99,8 @@ groups_list=(\
 				"linarr_DMax_1_eq_thistle_AEF" \
 			"linarr_DMax_1_le_thistle" \
 				"linarr_DMax_1_le_thistle_AEF" \
+			"linarr_DMax_Unconstrained_all" \
+				"linarr_DMax_Unconstrained_all_AEF" \
 		"linarr_syndepstruc_class" \
 		"linarr_comp_dependency_flux" \
 		"linarr_headedness" \
