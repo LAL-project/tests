@@ -89,7 +89,7 @@ err_type test_optimum_algorithm(
 noexcept
 {
 	static_assert(std::is_constructible_v<Solver<tree_t>, Solver_f>);
-	static_assert(std::is_constructible_v<TreeEval<tree_t>, TreeEval_f>);
+	static_assert(std::is_constructible_v<ArrgmntEval<tree_t>, TreeEval_f>);
 	static_assert(std::is_constructible_v<ArrgmntCheck<tree_t>, ArrgmntCheck_f>);
 	static_assert(std::is_constructible_v<InputConv<tree_t>, InputConv_f>);
 	static_assert(std::is_constructible_v<TreeInit<tree_t>, TreeInit_f>);
