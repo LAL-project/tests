@@ -109,6 +109,15 @@ else()
 	message(FATAL_ERROR "Error: gmp library not found.")
 endif()
 
+# *****
+# NAUTY
+find_library(NAUTY_LIB nauty)
+if (NAUTY_LIB)
+	message(STATUS "Found nauty: ${NAUTY_LIB}")
+else()
+	message(FATAL_ERROR "Error: nauty library not found.")
+endif()
+
 # ******
 # OpenMP
 find_package(OpenMP REQUIRED)
@@ -285,6 +294,7 @@ add_executable(
 	properties
 		properties/C_rla_brute_force_algorithms.hpp
 		properties/exe_tests.hpp
+		properties/nauty_orbits.hpp
 		properties/parse_keywords.hpp
 		
 		properties/bipartite_coloring.cpp
@@ -301,6 +311,8 @@ add_executable(
 		properties/general.cpp
 		properties/main.cpp
 		properties/MHD_All_trees.cpp
+		properties/nauty_orbits.cpp
+		properties/orbits.cpp
 		properties/parse_keywords.cpp
 		properties/V_rla_C_brute_force_freqs.cpp
 		properties/V_rla_C_brute_force_Q.cpp
@@ -422,6 +434,7 @@ target_link_libraries(linarr		gmp)
 target_link_libraries(memory		gmp)
 target_link_libraries(numeric		gmp)
 target_link_libraries(properties	gmp)
+target_link_libraries(properties	nauty)
 target_link_libraries(tests			gmp)
 target_link_libraries(utilities		gmp)
 
