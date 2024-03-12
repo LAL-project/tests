@@ -66,7 +66,7 @@
 #include "common/parse_header.hpp"
 
 // linarr includes
-#include "linarr/linarr_brute_force_testing.hpp"
+#include "linarr/test_optimum_algorithm.hpp"
 #include "linarr/arrangement_check.hpp"
 
 typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;

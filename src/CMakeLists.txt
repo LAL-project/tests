@@ -205,9 +205,9 @@ add_executable(
 	linarr
 		linarr/arrangement_check.hpp
 		linarr/exe_tests.hpp
-		linarr/linarr_brute_force_testing.hpp
 		linarr/n_crossings_m2.hpp
 		linarr/parse_keywords.hpp
+		linarr/test_optimum_algorithm.hpp
 		
 		linarr/arrangement_validity.cpp
 		linarr/C.cpp
