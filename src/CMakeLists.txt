@@ -217,6 +217,7 @@ add_executable(
 		linarr/n_crossings_m2.hpp
 		linarr/parse_keywords.hpp
 		linarr/test_optimum_algorithm.hpp
+		linarr/test_optimum_algorithm_one.hpp
 		
 		linarr/arrangement_validity.cpp
 		linarr/C.cpp

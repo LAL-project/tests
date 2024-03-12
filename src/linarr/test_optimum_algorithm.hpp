@@ -44,18 +44,11 @@
 
 // C++ includes
 #include <functional>
-#include <iostream>
-#include <fstream>
 #include <vector>
 
 // lal includes
 #include <lal/linear_arrangement.hpp>
 #include <lal/graphs/output.hpp>
-
-// common includes
-#include "common/definitions.hpp"
-#include "common/test_utils.hpp"
-#include "common/std_utils.hpp"
 
 namespace tests {
 namespace linarr {
@@ -71,158 +64,6 @@ template <class T> using InputConv =
 
 template <class T> using TreeInit =
 	std::function< void (T&) >;
-
-
-// Test the algorithms that return only ONE! arrangement
-namespace single_arrangement {
-
-template <class T> using Solver =
-	std::function< std::pair<uint64_t, lal::linear_arrangement>(const T&) >;
-
-template <
-	class T,
-	class FSolver, class FTreeEval, class FArrgmntCheck,
-	class FInputConv, class FTreeInit
->
-err_type test_optimum_algorithm(
-	// function that computes the solution
-	const FSolver& solver,
-	// function that evaluates the input tree on a given arrangement
-	const FTreeEval& tree_eval,
-	// function that tests the correctness of the resulting arrangement
-	const FArrgmntCheck& arrgmnt_check,
-	// function that converts the input data into a tree
-	const FInputConv& conv,
-	// function that initializes the input tree
-	const FTreeInit& tree_initializer,
-	// the input stream
-	std::ifstream& fin
-)
-noexcept
-{
-	static_assert(std::is_constructible_v<Solver<T>, FSolver>);
-	static_assert(std::is_constructible_v<TreeEval<T>, FTreeEval>);
-	static_assert(std::is_constructible_v<ArrgmntCheck<T>, FArrgmntCheck>);
-	static_assert(std::is_constructible_v<InputConv<T>, FInputConv>);
-	static_assert(std::is_constructible_v<TreeInit<T>, FTreeInit>);
-
-	// read number of nodes
-	uint64_t n;
-	fin >> n;
-
-	if (n == 1) {
-		// nothing to do
-		return tests::err_type::no_error;
-	}
-
-	lal::head_vector tree_as_head_vector(n);
-	while (fin >> tree_as_head_vector[0]) {
-		// read head vector
-		for (uint64_t i = 1; i < n; ++i) {
-			fin >> tree_as_head_vector[i];
-		}
-
-		// construct tree
-		T tree = conv(tree_as_head_vector);
-		tree_initializer(tree);
-
-		// read value of D calculated by brute force
-		uint64_t brute_force_value;
-		fin >> brute_force_value;
-
-		// read input arrays and test their correctness
-		{
-		uint64_t n_classes;
-		fin >> n_classes;
-		for (uint64_t c = 0; c < n_classes; ++c) {
-			uint64_t mult; fin >> mult;	// multiplicity
-			char star; fin >> star;		// *
-
-			// arrangement
-			lal::linear_arrangement brute_force_arr(n);
-			lal::position pu;
-			for (lal::node u = 0; u < n; ++u) {
-				fin >> pu;
-				brute_force_arr.assign(u, pu);
-			}
-
-			const uint64_t check_value = tree_eval(tree, brute_force_arr);
-			// check correctness of input array
-			if (check_value != brute_force_value) {
-				std::cerr << ERROR << '\n';
-				std::cerr << "    Input value (calculated by brute force) does not\n";
-				std::cerr << "    agree with the evaluation of the tree at said arrangement\n";
-				std::cerr << "    calculated by brute force.\n";
-				std::cerr << "        Brute force arrangement:     " << brute_force_arr.direct_as_vector() << '\n';
-				std::cerr << "        Brute force Inv Arrangement: " << brute_force_arr.inverse_as_vector() << '\n';
-				std::cerr << "        Brute force value:           " << brute_force_value << '\n';
-				std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
-				std::cerr << "    For tree: \n";
-				std::cerr << tree << '\n';
-				std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
-				return tests::err_type::test_format;
-			}
-		}
-		}
-
-		// execute library's algorithm
-		const auto library_res = solver(tree);
-		const lal::linear_arrangement& library_arr = library_res.second;
-
-		// ensure that the arrangement is correctly built
-		{
-		if (not arrgmnt_check(tree, library_arr)) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    The arrangement produced by the algorithm does not pass the check.\n";
-			std::cerr << "        Size: " << library_arr.size() << '\n';
-			std::cerr << "        Arrangement:     " << library_arr.direct_as_vector() << '\n';
-			std::cerr << "        Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
-			std::cerr << "    For tree: \n";
-			std::cerr << tree << '\n';
-			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
-			return tests::err_type::test_execution;
-		}
-		}
-
-		// ensure that value of D matches the evaluation of the arrangement
-		{
-		const uint64_t check_value = tree_eval(tree, library_arr);
-		if (check_value != library_res.first) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    The value calculated by the library's algorithm does not\n";
-			std::cerr << "    agree with the evaluation of the tree at the arrangement\n";
-			std::cerr << "    that the library's algorithm calculated.\n";
-			std::cerr << "        Algorithm's Arrangement:     " << library_arr.direct_as_vector() << '\n';
-			std::cerr << "        Algorithm's Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
-			std::cerr << "        Algorithm's value:           " << library_res.first << '\n';
-			std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
-			std::cerr << "    For tree: \n";
-			std::cerr << tree << '\n';
-			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
-			return tests::err_type::test_execution;
-		}
-		}
-
-		// ensure that the value of D is actually minimum
-		if (library_res.first != brute_force_value) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    The value calculated by the library and by bruteforce do not agree.\n";
-			std::cerr << "    Library:\n";
-			std::cerr << "        Value:           " << library_res.first << '\n';
-			std::cerr << "        Arrangement:     " << library_arr.direct_as_vector() << '\n';
-			std::cerr << "        Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
-			std::cerr << "    bruteforce:\n";
-			std::cerr << "        Value:           " << brute_force_value << '\n';
-			std::cerr << "    For tree: \n";
-			std::cerr << tree << '\n';
-			std::cerr << "Head vector: " << tree.get_head_vector() << '\n';
-			return tests::err_type::test_execution;
-		}
-	}
-	return tests::err_type::no_error;
-}
-
-} // -- namespace single_arrangement
 
 } // -- namespace linarr
 } // -- namespace tests

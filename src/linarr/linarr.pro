@@ -116,6 +116,7 @@ HEADERS += \
 	exe_tests.hpp \
 	n_crossings_m2.hpp \
 	parse_keywords.hpp \
-	test_optimum_algorithm.hpp
+	test_optimum_algorithm.hpp \
+	test_optimum_algorithm_one.hpp
 
 DISTFILES +=

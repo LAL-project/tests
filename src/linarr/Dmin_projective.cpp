@@ -57,7 +57,7 @@
 #include "common/parse_header.hpp"
 
 // linarr includes
-#include "linarr/test_optimum_algorithm.hpp"
+#include "linarr/test_optimum_algorithm_one.hpp"
 
 namespace tests {
 namespace linarr {
