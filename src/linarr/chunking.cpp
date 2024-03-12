@@ -43,7 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <cassert>
 #include <set>
 
 // lal includes

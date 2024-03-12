@@ -42,12 +42,8 @@
 
 // C++ includes
 #include <functional>
-#include <algorithm>
 #include <iostream>
-#include <numeric>
 #include <fstream>
-#include <cassert>
-#include <queue>
 #include <set>
 
 // lal includes

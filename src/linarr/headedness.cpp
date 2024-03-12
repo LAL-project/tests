@@ -43,7 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <set>
 
 // lal includes
 #include <lal/graphs/directed_graph.hpp>
@@ -55,7 +54,6 @@
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
-#include "common/time.hpp"
 #include "common/parse_header.hpp"
 
 namespace tests {
