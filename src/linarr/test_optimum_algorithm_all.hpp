@@ -127,36 +127,36 @@ noexcept
 		tree_initializer(tree);
 
 		// read value of D calculated by brute force
-		uint64_t brute_force_value;
-		fin >> brute_force_value;
+		uint64_t file_opt_value;
+		fin >> file_opt_value;
 
 		// read and check correctness of all arrangements
 		std::size_t n_classes;
 		fin >> n_classes;
-		lal::detail::data_array<lal::linear_arrangement> all_arrs(n_classes);
+		lal::detail::data_array<lal::linear_arrangement> file_arrs(n_classes);
 
 		for (std::size_t c = 0; c < n_classes; ++c) {
 			uint64_t mult; fin >> mult;	// multiplicity
 			char star; fin >> star;		// *
 
 			// arrangement
-			all_arrs[c].resize(n);
+			file_arrs[c].resize(n);
 			lal::position pu;
 			for (lal::node u = 0; u < n; ++u) {
 				fin >> pu;
-				all_arrs[c].assign(u, pu);
+				file_arrs[c].assign(u, pu);
 			}
 
 			// check correctness of the arrangement
-			const uint64_t check_value = arrgmnt_eval(tree, all_arrs[c]);
-			if (check_value != brute_force_value) {
+			const uint64_t check_value = arrgmnt_eval(tree, file_arrs[c]);
+			if (check_value != file_opt_value) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Input value (calculated by brute force) does not\n";
 				std::cerr << "    agree with the evaluation of the tree at said arrangement\n";
 				std::cerr << "    calculated by brute force.\n";
-				std::cerr << "        Brute force arrangement:     " << all_arrs[c].direct_as_vector() << '\n';
-				std::cerr << "        Brute force Inv Arrangement: " << all_arrs[c].inverse_as_vector() << '\n';
-				std::cerr << "        Brute force value:           " << brute_force_value << '\n';
+				std::cerr << "        File arrangement:     " << file_arrs[c].direct_as_vector() << '\n';
+				std::cerr << "        File Inv Arrangement: " << file_arrs[c].inverse_as_vector() << '\n';
+				std::cerr << "        File value:           " << file_opt_value << '\n';
 				std::cerr << "        Evaluation at arrangement:   " << check_value << '\n';
 				std::cerr << "    For tree: \n";
 				std::cerr << tree << '\n';
@@ -202,15 +202,15 @@ noexcept
 			}
 
 			// ensure that the value of D is actually minimum
-			if (library_res.first != brute_force_value) {
+			if (library_res.first != file_opt_value) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    The value calculated by the library and by bruteforce do not agree.\n";
 				std::cerr << "    Library:\n";
 				std::cerr << "        Value:           " << library_res.first << '\n';
 				std::cerr << "        Arrangement:     " << library_arr.direct_as_vector() << '\n';
 				std::cerr << "        Inv Arrangement: " << library_arr.inverse_as_vector() << '\n';
-				std::cerr << "    bruteforce:\n";
-				std::cerr << "        Value:           " << brute_force_value << '\n';
+				std::cerr << "    File:\n";
+				std::cerr << "        Value:           " << file_opt_value << '\n';
 				std::cerr << "    For tree: \n";
 				std::cerr << tree << '\n';
 				std::cerr << "    Head vector: " << tree.get_head_vector() << '\n';
@@ -219,21 +219,21 @@ noexcept
 		}
 
 		// compare the result of the library with the data in the file
-		if (library_res.second.size() != all_arrs.size()) {
+		if (library_res.second.size() != file_arrs.size()) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    The library did not calculate all the arrangements.\n";
 			std::cerr << "    Library:\n";
-			std::cerr << "        Classes:         " << library_res.second.size() << '\n';
+			std::cerr << "        Classes: " << library_res.second.size() << '\n';
 			for (std::size_t i = 0; i < library_res.second.size(); ++i) {
 			const lal::linear_arrangement& arr = library_res.second[i];
 			std::cerr << "        (" << i << ")\n";
 			std::cerr << "            Arrangement:     " << arr.direct_as_vector() << '\n';
 			std::cerr << "            Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 			}
-			std::cerr << "    bruteforce:\n";
-			std::cerr << "        Classes:         " << all_arrs.size() << '\n';
-			for (std::size_t i = 0; i < all_arrs.size(); ++i) {
-			const lal::linear_arrangement& arr = all_arrs[i];
+			std::cerr << "    File:\n";
+			std::cerr << "        Classes: " << file_arrs.size() << '\n';
+			for (std::size_t i = 0; i < file_arrs.size(); ++i) {
+			const lal::linear_arrangement& arr = file_arrs[i];
 			std::cerr << "        (" << i << ")\n";
 			std::cerr << "            Arrangement:     " << arr.direct_as_vector() << '\n';
 			std::cerr << "            Inv Arrangement: " << arr.inverse_as_vector() << '\n';
@@ -249,8 +249,8 @@ noexcept
 			const lal::linear_arrangement& arr1 = library_res.second[i];
 
 			bool found = false;
-			for (std::size_t j = 0; j < all_arrs.size(); ++j) {
-				const lal::linear_arrangement& arr2 = all_arrs[j];
+			for (std::size_t j = 0; j < file_arrs.size(); ++j) {
+				const lal::linear_arrangement& arr2 = file_arrs[j];
 
 				if (arrgmnt_iso(tree, arr1, i, arr2, j)) {
 					found = true;
@@ -260,19 +260,24 @@ noexcept
 
 			if (not found) {
 				std::cerr << ERROR << '\n';
-
-				std::cerr << "    An arrangement calculated by the algorithm could be found in the list\n";
-				std::cerr << "    of arrangements in the file.\n";
+				std::cerr << "    Arrangement '" << i << "' calculated by the library's algorithm could not be\n";
+				std::cerr << "    found in the list of arrangements in the file.\n";
 				std::cerr << '\n';
-				std::cerr << "    Arrangement from the library:\n";
-				std::cerr << "        Arrangement:     " << arr1.direct_as_vector() << '\n';
-				std::cerr << "        Inv Arrangement: " << arr1.inverse_as_vector() << '\n';
-				std::cerr << "    List of arrangements in the file:\n";
-				for (std::size_t k = 0; k < all_arrs.size(); ++k) {
-				const lal::linear_arrangement& arr = all_arrs[k];
-				std::cerr << "    (" << k << ")\n";
-				std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
-				std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+				std::cerr << "    Library:\n";
+				std::cerr << "        Classes: " << library_res.second.size() << '\n';
+				for (std::size_t k = 0; k < library_res.second.size(); ++k) {
+				const lal::linear_arrangement& arr = library_res.second[k];
+				std::cerr << "        (" << k << ")\n";
+				std::cerr << "            Arrangement:     " << arr.direct_as_vector() << '\n';
+				std::cerr << "            Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+				}
+				std::cerr << "    File:\n";
+				std::cerr << "        Classes: " << file_arrs.size() << '\n';
+				for (std::size_t k = 0; k < file_arrs.size(); ++k) {
+				const lal::linear_arrangement& arr = file_arrs[k];
+				std::cerr << "        (" << k << ")\n";
+				std::cerr << "            Arrangement:     " << arr.direct_as_vector() << '\n';
+				std::cerr << "            Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 				}
 
 				std::cerr << "    For tree: \n";
