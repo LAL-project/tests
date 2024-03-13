@@ -91,6 +91,17 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 
 	const err_type r =
 	many_arrangements::test_optimum_algorithm<free_tree>(
+		// function to initialise a (free) tree
+		[&](free_tree& t) {
+			lev_sigs1.clear();
+			mlev_sigs1.clear();
+			lev_sigs2.clear();
+
+			const uint64_t n = t.get_num_nodes();
+			lev_sigs1.reserve(n);
+			mlev_sigs1.reserve(n);
+			lev_sigs2.reserve(n);
+		},
 		// calculate result
 		[&](const free_tree& t) {
 			if (t.get_num_nodes() < 15) {
@@ -105,47 +116,36 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 			return lal::linarr::sum_edge_lengths(t, arr);
 		},
 		// check correctness of "arrangement"
-		[](const free_tree& t, const arrgmnt& arr) {
-			return lal::linarr::is_arrangement(t, arr);
+		[&](const free_tree& t, const arrgmnt& arr) {
+			const bool is_arr = lal::linarr::is_arrangement(t, arr);
+			if (not is_arr) { return false; }
+
+			auto L = lal::detail::calculate_level_signature
+				<lal::detail::level_signature_type::per_position>(t, arr);
+
+			mlev_sigs1.push_back(lal::detail::mirror_level_signature(L));
+			lev_sigs1.push_back(std::move(L));
+
+			return lal::detail::is_level_signature_maximum(t, arr, lev_sigs1.back());
 		},
 		// convert what you read from input to a (free) tree
 		[](const std::vector<lal::node>& v) {
 			return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
 		},
-		// function to initialise a (free) tree
-		[&](free_tree& t) {
-			lev_sigs1.clear();
-			mlev_sigs1.clear();
-			lev_sigs2.clear();
-
-			const uint64_t n = t.get_num_nodes();
-			lev_sigs1.reserve(n);
-			mlev_sigs1.reserve(n);
-			lev_sigs2.reserve(n);
-		},
 		// isomorphism test
 		[&](
 			const free_tree& t,
-			const arrgmnt& arr1, std::size_t i,
+			[[maybe_unused]] const arrgmnt& arr1, std::size_t i,
 			const arrgmnt& arr2, std::size_t j
 		)
 		{
-			if (i >= lev_sigs1.size()) {
-				auto L = lal::detail::calculate_level_signature
-						 <lal::detail::level_signature_type::per_position>(t, arr1);
-
-				mlev_sigs1.push_back(lal::detail::mirror_level_signature(L));
-				lev_sigs1.push_back(std::move(L));
-			}
-
 			if (j >= lev_sigs2.size()) {
 				auto L = lal::detail::calculate_level_signature
 						 <lal::detail::level_signature_type::per_position>(t, arr2);
 				lev_sigs2.push_back(std::move(L));
 			}
 
-			return  (lev_sigs1[i] == lev_sigs2[j]) or
-				   (mlev_sigs1[i] == lev_sigs2[j]);
+			return (lev_sigs1[i] == lev_sigs2[j]) or (mlev_sigs1[i] == lev_sigs2[j]);
 		},
 		// where to read from
 		input_file
