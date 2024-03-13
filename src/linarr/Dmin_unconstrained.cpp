@@ -118,6 +118,8 @@ err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 {
 	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 	(
+		// function to initialise a (free) tree
+		[](lal::graphs::free_tree&) { },
 		// calculate result
 		[&](const lal::graphs::free_tree& t) {
 			return A(t);
@@ -134,8 +136,6 @@ err_type test_bf_algorithm(const func_Dmin& A, std::ifstream& fin) noexcept
 		[](const std::vector<lal::node>& v) {
 			return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
 		},
-		// function to initialise a (free) tree
-		[](lal::graphs::free_tree&) { },
 		// where to read from
 		fin
 	);

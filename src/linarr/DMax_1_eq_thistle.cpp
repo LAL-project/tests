@@ -91,6 +91,8 @@ noexcept
 
 	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 	(
+		// tree_initializer
+		[&](const lal::graphs::free_tree&) { },
 		// solver
 		[&](const lal::graphs::free_tree& t) {
 			return lal::linarr::max_sum_edge_lengths_1_eq_thistle(t);
@@ -115,8 +117,6 @@ noexcept
 		[](const lal::head_vector& v) {
 			return lal::graphs::from_head_vector_to_free_tree(v).first;
 		},
-		// tree_initializer
-		[&](const lal::graphs::free_tree&) { },
 		input_file
 	);
 }

@@ -192,6 +192,7 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 
 		err = single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
 		(
+			[](lal::graphs::free_tree&) { },
 			[=](const lal::graphs::free_tree& t) {
 				return lal::linarr::max_sum_edge_lengths_planar(t);
 			},
@@ -204,7 +205,6 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 			[](const std::vector<lal::node>& v) {
 				return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
 			},
-			[](lal::graphs::free_tree&) { },
 			input_file
 		);
 	}

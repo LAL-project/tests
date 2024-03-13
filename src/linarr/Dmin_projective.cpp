@@ -82,6 +82,7 @@ noexcept
 
 	return single_arrangement::test_optimum_algorithm<lal::graphs::rooted_tree>
 	(
+		tree_initializer,
 		[&](const lal::graphs::rooted_tree& t) {
 			return lal::linarr::min_sum_edge_lengths_projective(t, algo);
 		},
@@ -94,7 +95,6 @@ noexcept
 		[](const lal::head_vector& v) {
 			return lal::graphs::from_head_vector_to_rooted_tree(v);
 		},
-		tree_initializer,
 		input_file
 	);
 }

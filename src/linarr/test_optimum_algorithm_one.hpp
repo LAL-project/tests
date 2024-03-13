@@ -69,10 +69,12 @@ template <class T> using Solver =
 
 template <
 	class tree_t,
-	class Solver_f, class TreeEval_f, class ArrgmntCheck_f,
-	class InputConv_f, class TreeInit_f
+	class TreeInit_f, class Solver_f, class TreeEval_f,
+	class ArrgmntCheck_f, class InputConv_f
 >
 err_type test_optimum_algorithm(
+	// function that initializes the input tree
+	const TreeInit_f& tree_initializer,
 	// function that computes the solution
 	const Solver_f& solver,
 	// function that evaluates the input tree on a given arrangement
@@ -81,8 +83,6 @@ err_type test_optimum_algorithm(
 	const ArrgmntCheck_f& arrgmnt_check,
 	// function that converts the input data into a tree
 	const InputConv_f& conv,
-	// function that initializes the input tree
-	const TreeInit_f& tree_initializer,
 	// the input stream
 	std::ifstream& fin
 )
