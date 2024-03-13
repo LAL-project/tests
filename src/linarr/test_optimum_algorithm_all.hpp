@@ -82,6 +82,8 @@ template <
 	class InputConv_f, class TreeInit_f, class ArrgmntIso_f
 >
 err_type test_optimum_algorithm(
+	// function that initializes the input tree
+	const TreeInit_f& initialize_tree,
 	// function that computes the solution
 	const Solver_f& solver,
 	// function that evaluates the input tree on a given arrangement
@@ -90,8 +92,6 @@ err_type test_optimum_algorithm(
 	const ArrgmntCheck_f& arrgmnt_check,
 	// function that converts the input data into a tree
 	const InputConv_f& conv,
-	// function that initializes the input tree
-	const TreeInit_f& tree_initializer,
 	// function that tells whether or not two arrangements are isomorphic
 	const ArrgmntIso_f& arrgmnt_iso,
 	// the input stream
@@ -124,7 +124,7 @@ noexcept
 
 		// construct tree
 		tree_t tree = conv(tree_as_head_vector);
-		tree_initializer(tree);
+		initialize_tree(tree);
 
 		// read value of D calculated by brute force
 		uint64_t file_opt_value;
@@ -244,16 +244,20 @@ noexcept
 			return tests::err_type::test_execution;
 		}
 
+		lal::detail::data_array<char> matched(file_arrs.size(), 0);
+
 		// make sure the arrangements are isomorphic in both sets are isomorphic
 		for (std::size_t i = 0; i < library_res.second.size(); ++i) {
 			const lal::linear_arrangement& arr1 = library_res.second[i];
 
 			bool found = false;
 			for (std::size_t j = 0; j < file_arrs.size(); ++j) {
-				const lal::linear_arrangement& arr2 = file_arrs[j];
+				if (matched[j] == 1) { continue; }
 
+				const lal::linear_arrangement& arr2 = file_arrs[j];
 				if (arrgmnt_iso(tree, arr1, i, arr2, j)) {
 					found = true;
+					matched[j] = 1;
 					break;
 				}
 			}
