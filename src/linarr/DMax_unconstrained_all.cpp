@@ -48,15 +48,17 @@
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/graphs/free_tree.hpp>
+#include <lal/graphs/conversions.hpp>
 #include <lal/linarr/D/D.hpp>
 #include <lal/linarr/D/DMax.hpp>
 #include <lal/linarr/formal_constraints.hpp>
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/graphs/conversions.hpp>
+#include <lal/properties/branchless_path_find.hpp>
 
 #include <lal/detail/linarr/level_signature.hpp>
+#include <lal/detail/linarr/D/DMax/necessary_conditions.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -88,6 +90,7 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 	std::vector<lal::detail::level_signature_per_position> lev_sigs1;
 	std::vector<lal::detail::level_signature_per_position> mlev_sigs1;
 	std::vector<lal::detail::level_signature_per_position> lev_sigs2;
+	std::vector<lal::properties::branchless_path> bps;
 
 	const err_type r =
 	many_arrangements::test_optimum_algorithm<free_tree>(
@@ -101,6 +104,8 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 			lev_sigs1.reserve(n);
 			mlev_sigs1.reserve(n);
 			lev_sigs2.reserve(n);
+
+			bps = lal::properties::find_all_branchless_paths(t);
 		},
 		// calculate result
 		[&](const free_tree& t) {
@@ -124,9 +129,16 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 				<lal::detail::level_signature_type::per_position>(t, arr);
 
 			mlev_sigs1.push_back(lal::detail::mirror_level_signature(L));
-			lev_sigs1.push_back(std::move(L));
 
-			return lal::detail::is_level_signature_maximum(t, arr, lev_sigs1.back());
+			const bool condition =
+				lal::detail::is_level_signature_nonincreasing(t, L, arr) and
+				lal::detail::no_two_adjacent_vertices_have_same_level(t, L, arr) and
+				lal::detail::no_vertex_in_antenna_is_thistle(t, bps, L, arr) and
+				lal::detail::at_most_one_thistle_in_bridges(t, bps, L, arr);
+
+			// now we move L
+			lev_sigs1.push_back(std::move(L));
+			return condition;
 		},
 		// convert what you read from input to a (free) tree
 		[](const std::vector<lal::node>& v) {
