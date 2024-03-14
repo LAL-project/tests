@@ -512,7 +512,8 @@ function small_tests() {
 }
 
 function apply_group() {
-	local exe_group=$1		# execution group
+	# execution group
+	local exe_group=$1
 	
 	# if the group is valid, then execute it
 	echo "Executing group '$exe_group'"
