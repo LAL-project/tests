@@ -128,7 +128,6 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
-				/*
 				std::cout << "    Is antenna:           " << p.is_antenna(t) << '\n';
 				if (p.is_antenna(t)) {
 					if (t.get_degree(h1) != 1 and t.get_degree(h2) != 1) {
@@ -137,7 +136,6 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
-				*/
 				std::cout << "    Vertex sequence:     ";
 				for (lal::node u : p.get_vertex_sequence()) {
 					std::cout << ' ' << u;
