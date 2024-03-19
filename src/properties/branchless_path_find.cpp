@@ -53,7 +53,6 @@
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
 
 namespace tests {
 namespace properties {
@@ -96,8 +95,8 @@ err_type execute_program(std::ifstream& fin) noexcept {
 				std::cout << i << ")\n";
 				std::cout << "    Number of vertices:   " << p.get_num_nodes() << '\n';
 				std::cout << "    Number of edges:      " << p.get_num_edges() << '\n';
-				std::cout << "    First endpoint:       " << h1 << " -- degree: " << t.get_degree(h1) << '\n';
-				std::cout << "    Second endpoint:      " << h2 << " -- degree: " << t.get_degree(h2) << '\n';
+				std::cout << "    First endpoint:       " << h1 << /*" -- degree: " << t.get_degree(h1) << */'\n';
+				std::cout << "    Second endpoint:      " << h2 << /*" -- degree: " << t.get_degree(h2) << */'\n';
 				if (h1 == h2) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Singularity!\n";
@@ -156,7 +155,7 @@ err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept {
 		execute_program<lal::graphs::free_tree>(fin);
 	}
 	else if (mode == "rooted") {
-		execute_program<lal::graphs::free_tree>(fin);
+		execute_program<lal::graphs::rooted_tree>(fin);
 	}
 	else {
 		std::cerr << ERROR << '\n';
