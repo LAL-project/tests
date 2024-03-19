@@ -1,0 +1,57 @@
+-------------
+Tree:
+0: 1 6 11 16
+1: 0 2
+2: 1 3
+3: 2 4
+4: 3 5
+5: 4
+6: 0 7
+7: 6 8
+8: 7 9
+9: 8 10
+10: 9
+11: 0 12
+12: 11 13
+13: 12 14
+14: 13 15
+15: 14
+16: 0 17
+17: 16 18
+18: 17 19
+19: 18
+-------------
+Total paths: 4
+0)
+    Number of vertices:   6
+    Number of edges:      5
+    First endpoint:       0 -- degree: 4
+    Second endpoint:      5 -- degree: 1
+    Lowest lexicographic: 1
+    Is antenna:           1
+    Vertex sequence:      0 1 2 3 4 5
+1)
+    Number of vertices:   6
+    Number of edges:      5
+    First endpoint:       0 -- degree: 4
+    Second endpoint:      10 -- degree: 1
+    Lowest lexicographic: 6
+    Is antenna:           1
+    Vertex sequence:      0 6 7 8 9 10
+2)
+    Number of vertices:   6
+    Number of edges:      5
+    First endpoint:       0 -- degree: 4
+    Second endpoint:      15 -- degree: 1
+    Lowest lexicographic: 11
+    Is antenna:           1
+    Vertex sequence:      0 11 12 13 14 15
+3)
+    Number of vertices:   5
+    Number of edges:      4
+    First endpoint:       0 -- degree: 4
+    Second endpoint:      19 -- degree: 1
+    Lowest lexicographic: 16
+    Is antenna:           1
+    Vertex sequence:      0 16 17 18 19
+Test finished without apparent errors.
