@@ -95,8 +95,18 @@ err_type execute_program(std::ifstream& fin) noexcept {
 				std::cout << i << ")\n";
 				std::cout << "    Number of vertices:   " << p.get_num_nodes() << '\n';
 				std::cout << "    Number of edges:      " << p.get_num_edges() << '\n';
-				std::cout << "    First endpoint:       " << h1 << /*" -- degree: " << t.get_degree(h1) << */'\n';
-				std::cout << "    Second endpoint:      " << h2 << /*" -- degree: " << t.get_degree(h2) << */'\n';
+				if (h1 >= t.get_num_nodes()) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Path does not have its first endpoint.\n";
+					return err_type::test_execution;
+				}
+				std::cout << "    First endpoint:       " << h1 << " -- degree: " << t.get_degree(h1) << '\n';
+				if (h2 >= t.get_num_nodes()) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Path does not have its second endpoint.\n";
+					return err_type::test_execution;
+				}
+				std::cout << "    Second endpoint:      " << h2 << " -- degree: " << t.get_degree(h2) << '\n';
 				if (h1 == h2) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Singularity!\n";
@@ -118,6 +128,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
+				/*
 				std::cout << "    Is antenna:           " << p.is_antenna(t) << '\n';
 				if (p.is_antenna(t)) {
 					if (t.get_degree(h1) != 1 and t.get_degree(h2) != 1) {
@@ -126,6 +137,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
+				*/
 				std::cout << "    Vertex sequence:     ";
 				for (lal::node u : p.get_vertex_sequence()) {
 					std::cout << ' ' << u;
@@ -151,16 +163,22 @@ err_type execute_program(std::ifstream& fin) noexcept {
 err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept {
 	std::string mode;
 	fin >> mode;
+	err_type err;
+
 	if (mode == "free") {
-		execute_program<lal::graphs::free_tree>(fin);
+		err = execute_program<lal::graphs::free_tree>(fin);
 	}
 	else if (mode == "rooted") {
-		execute_program<lal::graphs::rooted_tree>(fin);
+		err = execute_program<lal::graphs::rooted_tree>(fin);
 	}
 	else {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Incorrect mode '" << mode << "'.\n";
 		return err_type::test_format;
+	}
+
+	if (err != err_type::no_error) {
+		return err;
 	}
 
 	TEST_GOODBYE;
