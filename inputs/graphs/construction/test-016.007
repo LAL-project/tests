@@ -1,0 +1,32 @@
+TYPE graphs-construction
+
+	create_graph ftree ft 8
+	add_edge ft 0 1 false true
+	add_edge ft 0 2 false true
+	add_edge ft 0 3 false true
+	add_edge ft 0 4 false true
+	add_edge ft 1 5 false true
+	add_edge ft 1 6 false true
+	add_edge ft 1 7 false true
+	output_graph ft
+	assert is_tree ft
+	
+	create_graph rtree rt 10
+	add_edges rt
+		9
+		0 1		1 2		2 3
+		3 4		4 5		5 6
+		6 7		7 8		8 9
+		true true
+	set_root rt 0
+	output_graph rt
+	
+	init_rtree_from_ftree_copy rt ft 0 true true
+	
+	output_graph rt
+	
+	assert has_root rt
+	assert is_tree rt
+	assert subtree_sizes_not_valid rt
+	
+	output_graph ft

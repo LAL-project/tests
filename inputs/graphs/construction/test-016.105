@@ -1,0 +1,91 @@
+TYPE graphs-construction
+
+	create_graph ftree T0 7
+	add_edge T0 0 1 false true
+	add_edge T0 0 2 false true
+	add_edge T0 1 3 false true
+	add_edge T0 1 4 false true
+	add_edge T0 2 5 false true
+	add_edge T0 2 6 false true
+	output_graph T0
+	assert is_tree T0
+	create_graph ftree T3 7
+	add_edge T3 0 1 false true
+	add_edge T3 0 2 false true
+	add_edge T3 1 3 false true
+	add_edge T3 1 4 false true
+	add_edge T3 2 5 false true
+	add_edge T3 2 6 false true
+	output_graph T3
+	assert is_tree T3
+	
+	
+	ftree_to_rtree_move RT1 T0 0
+	output_graph RT1
+	assert is_rooted RT1
+	assert has_root RT1
+	assert is_tree RT1
+	assert num_edges RT1 6
+	assert exists_edge RT1 0 1
+	assert exists_edge RT1 1 3
+	assert exists_edge RT1 1 4
+	assert exists_edge RT1 0 2
+	assert exists_edge RT1 2 5
+	assert exists_edge RT1 2 6
+	assert not_exists_edge RT1 1 5
+	assert not_exists_edge RT1 1 6
+	assert not_exists_edge RT1 2 3
+	assert not_exists_edge RT1 2 4
+	assert not_exists_edge RT1 0 3
+	assert not_exists_edge RT1 0 4
+	assert not_exists_edge RT1 0 5
+	assert not_exists_edge RT1 0 6
+	assert in_degree RT1 0 0
+	assert in_degree RT1 1 1
+	assert in_degree RT1 2 1
+	assert in_degree RT1 3 1
+	assert in_degree RT1 4 1
+	assert in_degree RT1 5 1
+	assert in_degree RT1 6 1
+	assert out_degree RT1 0 2
+	assert out_degree RT1 1 2
+	assert out_degree RT1 2 2
+	assert out_degree RT1 3 0
+	assert out_degree RT1 4 0
+	assert out_degree RT1 5 0
+	assert out_degree RT1 6 0
+	
+	ftree_to_rtree_move RT3 T3 3
+	output_graph RT3
+	assert is_rooted RT3
+	assert has_root RT3
+	assert is_tree RT3
+	assert num_edges RT3 6
+	assert exists_edge RT3 3 1
+	assert exists_edge RT3 1 4
+	assert exists_edge RT3 1 0
+	assert exists_edge RT1 0 2
+	assert exists_edge RT1 2 5
+	assert exists_edge RT1 2 6
+	assert not_exists_edge RT3 0 1
+	assert not_exists_edge RT3 1 3
+	assert in_degree RT3 0 1
+	assert in_degree RT3 1 1
+	assert in_degree RT3 2 1
+	assert in_degree RT3 3 0
+	assert in_degree RT3 4 1
+	assert in_degree RT3 5 1
+	assert in_degree RT3 6 1
+	assert out_degree RT3 0 1
+	assert out_degree RT3 1 2
+	assert out_degree RT3 2 2
+	assert out_degree RT3 3 1
+	assert out_degree RT3 4 0
+	assert out_degree RT3 5 0
+	assert out_degree RT3 6 0
+	
+	
+	assert num_nodes T0 0
+	assert num_edges T0 0
+	assert num_nodes T3 0
+	assert num_edges T3 0
