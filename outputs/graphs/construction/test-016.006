@@ -1,5 +1,5 @@
 -----------------------------
-Contents of graph 'g'
+Contents of graph 'ft'
 0: 1 2 3 4
 1: 0 5 6 7
 2: 0
@@ -10,7 +10,7 @@ Contents of graph 'g'
 7: 1
 -----------------------------
 -----------------------------
-Contents of graph 'DRT_1'
+Contents of graph 'rt1'
 out:
 *0: 1 2 3 4
  1: 5 6 7
@@ -31,7 +31,7 @@ in:
  7: 1
 -----------------------------
 -----------------------------
-Contents of graph 'DRT_2'
+Contents of graph 'rt2'
 out:
  0: 2 3 4
 *1: 0 5 6 7
