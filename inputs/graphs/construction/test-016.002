@@ -5,11 +5,15 @@ TYPE graphs-construction
 	assert num_edges G 0
 	add_edge G 0 1 false true
 	add_edge G 1 2 false true
-	assert num_edges G 2
 	output_graph G
+	assert num_edges G 2
+	assert is_tree G
 	
 	ftree_to_rtree_copy DRT_1 G 0
 	output_graph DRT_1
+	assert is_rooted DRT_1
+	assert has_root DRT_1
+	assert is_tree DRT_1
 	assert num_edges DRT_1 2
 	assert exists_edge DRT_1 0 1
 	assert exists_edge DRT_1 1 2
@@ -26,6 +30,9 @@ TYPE graphs-construction
 	
 	ftree_to_rtree_copy DRT_2 G 1
 	output_graph DRT_2
+	assert is_rooted DRT_2
+	assert has_root DRT_2
+	assert is_tree DRT_2
 	assert num_edges DRT_2 2
 	assert not_exists_edge DRT_2 0 1
 	assert exists_edge DRT_2 1 2
@@ -42,6 +49,8 @@ TYPE graphs-construction
 	
 	ftree_to_rtree_copy DRT_3 G 2
 	output_graph DRT_3
+	assert has_root DRT_3
+	assert is_tree DRT_3
 	assert num_edges DRT_3 2
 	assert not_exists_edge DRT_3 0 1
 	assert not_exists_edge DRT_3 1 2

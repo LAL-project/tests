@@ -8,6 +8,7 @@ TYPE graphs-construction
 		3 4
 		true true
 	output_graph t1
+	assert is_tree t1
 	output_head_vector t1 0
 	output_head_vector t1 1
 	output_head_vector t1 2
