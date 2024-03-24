@@ -1,5 +1,5 @@
 -----------------------------
-Contents of graph 'T0'
+Contents of graph 'ft0'
 0: 1 2 3 4
 1: 0 5 6 7
 2: 0
@@ -10,7 +10,7 @@ Contents of graph 'T0'
 7: 1
 -----------------------------
 -----------------------------
-Contents of graph 'T1'
+Contents of graph 'ft1'
 0: 1 2 3 4
 1: 0 5 6 7
 2: 0
@@ -21,7 +21,7 @@ Contents of graph 'T1'
 7: 1
 -----------------------------
 -----------------------------
-Contents of graph 'RT0'
+Contents of graph 'rt0'
 out:
 *0: 1 2 3 4
  1: 5 6 7
@@ -42,7 +42,7 @@ in:
  7: 1
 -----------------------------
 -----------------------------
-Contents of graph 'RT1'
+Contents of graph 'rt1'
 out:
  0: 2 3 4
 *1: 0 5 6 7

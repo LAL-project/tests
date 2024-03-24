@@ -1,21 +1,21 @@
 TYPE graphs-construction
 
-	create_graph ftree T0 0
-	ftree_to_rtree_move dT0 T0 0
-	output_graph T0
-	output_graph dT0
+	create_graph ftree ft0 0
+	ftree_to_rtree_move rt0 ft0 0
+	output_graph ft0
+	output_graph rt0
 	
-	assert num_nodes T0 0
-	assert num_edges T0 0
+	assert num_nodes ft0 0
+	assert num_edges ft0 0
 	
-	create_graph ftree T1 1
-	ftree_to_rtree_move dT1 T1 0
-	assert root_is_valid dT1
-	output_graph T1
-	output_graph dT1
+	create_graph ftree ft1 1
+	ftree_to_rtree_move rt1 ft1 0
+	assert root_is_valid rt1
+	output_graph ft1
+	output_graph rt1
 	
-	assert num_nodes T1 0
-	assert num_edges T1 0
+	assert num_nodes ft1 0
+	assert num_edges ft1 0
 	
-	assert num_nodes dT1 0
-	assert num_edges dT1 0
+	assert num_nodes rt1 0
+	assert num_edges rt1 0
