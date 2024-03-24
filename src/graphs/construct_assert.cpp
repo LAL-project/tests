@@ -704,8 +704,7 @@ noexcept
 	else if (assert_what == ASSERT_TREE_IS_ROOTED) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_IS_ROOTED, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_IS_ROOTED, graph_type(g1), tree_types);
+		assert_correct_graph_type(ASSERT_TREE_IS_ROOTED, graph_type(g1), rooted_tree_types);
 		if (not mfunction_trees(g1, is_rooted())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_IS_ROOTED);
