@@ -92,6 +92,8 @@
 #define FUNC_FTREE_CALCULATE_TREE_TYPE "calculate_tree_type"
 #define FUNC_FTREE_TO_RTREE_COPY "ftree_to_rtree_copy"
 #define FUNC_FTREE_TO_RTREE_MOVE "ftree_to_rtree_move"
+#define FUNC_INIT_RTREE_FROM_FTREE_COPY "init_rtree_from_ftree_copy"
+#define FUNC_INIT_RTREE_FROM_FTREE_MOVE "init_rtree_from_ftree_move"
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
@@ -640,6 +642,26 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 		}
 
 		// RTREE
+		else if (option == FUNC_INIT_RTREE_FROM_FTREE_COPY) {
+			fin >> g1 >> g2 >> u >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_INIT_RTREE_FROM_FTREE_COPY, g1);
+			assert_exists_variable(FUNC_INIT_RTREE_FROM_FTREE_COPY, g2);
+			assert_correct_graph_type(FUNC_INIT_RTREE_FROM_FTREE_COPY, graph_type(g1), rooted_tree_types);
+			assert_correct_graph_type(FUNC_INIT_RTREE_FROM_FTREE_COPY, graph_type(g2), free_tree_types);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean1);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean2);
+			rtreevars[g1].init_rooted(ftreevars[g2], u, Boolean1 == "true", Boolean2 == "true");
+		}
+		else if (option == FUNC_INIT_RTREE_FROM_FTREE_MOVE) {
+			fin >> g1 >> g2 >> u >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_INIT_RTREE_FROM_FTREE_MOVE, g1);
+			assert_exists_variable(FUNC_INIT_RTREE_FROM_FTREE_MOVE, g2);
+			assert_correct_graph_type(FUNC_INIT_RTREE_FROM_FTREE_MOVE, graph_type(g1), rooted_tree_types);
+			assert_correct_graph_type(FUNC_INIT_RTREE_FROM_FTREE_MOVE, graph_type(g2), free_tree_types);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_MOVE, Boolean1);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_MOVE, Boolean2);
+			rtreevars[g1].init_rooted(std::move(ftreevars[g2]), u, Boolean1 == "true", Boolean2 == "true");
+		}
 		else if (option == FUNC_FROM_HEAD_VECTOR_TO_RTREE) {
 			fin >> g1;
 			assert_not_exists_variable(FUNC_FROM_HEAD_VECTOR_TO_RTREE, g1);
