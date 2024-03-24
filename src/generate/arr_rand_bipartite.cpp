@@ -54,7 +54,6 @@
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
 
 namespace tests {

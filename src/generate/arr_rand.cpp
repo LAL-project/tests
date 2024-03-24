@@ -43,7 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <set>
 
 // lal includes
 #include <lal/graphs/output.hpp>
@@ -55,7 +54,6 @@
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
 
 namespace tests {
