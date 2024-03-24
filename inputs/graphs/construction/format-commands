@@ -292,6 +292,11 @@ TREES
 ROOTED TREES
 ============
 
+** init_rtree_from_ftree_copy RT FT root true/false true/false
+** init_rtree_from_ftree_move RT FT root true/false true/false
+	Initializes a rooted tree RT from a free tree FT. Normalizes and checks normalization
+	according to the last two Boolean values.
+
 ** set_root TREE NODE
 	Sets the root NODE to TREE.
 
