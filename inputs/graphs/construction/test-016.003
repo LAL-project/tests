@@ -12,7 +12,7 @@ TYPE graphs-construction
 	add_edge G 8 9 false true
 	output_graph G
 	
-	ftree_to_rtree DRT_1 G 0
+	ftree_to_rtree_copy DRT_1 G 0
 	output_graph DRT_1
 	assert num_edges DRT_1 9
 	assert exists_edge DRT_1 0 1
@@ -45,7 +45,7 @@ TYPE graphs-construction
 	assert out_degree DRT_1 8 1
 	assert out_degree DRT_1 9 0
 	
-	ftree_to_rtree DRT_2 G 5
+	ftree_to_rtree_copy DRT_2 G 5
 	output_graph DRT_2
 	assert num_edges DRT_2 9
 	assert not_exists_edge DRT_2 0 1
@@ -83,7 +83,7 @@ TYPE graphs-construction
 	assert out_degree DRT_2 8 1
 	assert out_degree DRT_2 9 0
 	
-	ftree_to_rtree DRT_3 G 7
+	ftree_to_rtree_copy DRT_3 G 7
 	output_graph DRT_3
 	assert num_edges DRT_3 9
 	assert not_exists_edge DRT_3 0 1

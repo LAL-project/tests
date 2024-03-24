@@ -48,7 +48,6 @@
 #include <string>
 #include <string>
 #include <map>
-#include <set>
 
 // lal includes
 #include <lal/graphs/conversions.hpp>
@@ -91,7 +90,8 @@
 #define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
 #define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
 #define FUNC_FTREE_CALCULATE_TREE_TYPE "calculate_tree_type"
-#define FUNC_FTREE_TO_RTREE "ftree_to_rtree"
+#define FUNC_FTREE_TO_RTREE_COPY "ftree_to_rtree_copy"
+#define FUNC_FTREE_TO_RTREE_MOVE "ftree_to_rtree_move"
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
@@ -622,12 +622,20 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			ftreevars[g1] = std::move(t_root.first);
 			gtypes[g1] = FTREE;
 		}
-		else if (option == FUNC_FTREE_TO_RTREE) {
+		else if (option == FUNC_FTREE_TO_RTREE_COPY) {
 			fin >> g1 >> g2 >> u;
-			assert_exists_variable(FUNC_FTREE_TO_RTREE, g2);
-			assert_not_exists_variable(FUNC_FTREE_TO_RTREE, g1);
-			assert_correct_graph_type(FUNC_FTREE_TO_RTREE, graph_type(g2), free_tree_types);
+			assert_exists_variable(FUNC_FTREE_TO_RTREE_COPY, g2);
+			assert_not_exists_variable(FUNC_FTREE_TO_RTREE_COPY, g1);
+			assert_correct_graph_type(FUNC_FTREE_TO_RTREE_COPY, graph_type(g2), free_tree_types);
 			rtreevars[g1] = lal::graphs::rooted_tree(ftreevars[g2], u);
+			gtypes[g1] = RTREE;
+		}
+		else if (option == FUNC_FTREE_TO_RTREE_MOVE) {
+			fin >> g1 >> g2 >> u;
+			assert_exists_variable(FUNC_FTREE_TO_RTREE_MOVE, g2);
+			assert_not_exists_variable(FUNC_FTREE_TO_RTREE_MOVE, g1);
+			assert_correct_graph_type(FUNC_FTREE_TO_RTREE_MOVE, graph_type(g2), free_tree_types);
+			rtreevars[g1] = lal::graphs::rooted_tree(std::move(ftreevars[g2]), u);
 			gtypes[g1] = RTREE;
 		}
 

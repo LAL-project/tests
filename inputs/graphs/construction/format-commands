@@ -269,7 +269,8 @@ TREES
 	N number of vertices
 	PARENT_1 PARENT_2 ... PARENT_N the head vector
 
-** ftree_to_rtree TREE_RESULT TREE ROOT_NODE
+** ftree_to_rtree_copy TREE_RESULT TREE ROOT_NODE
+** ftree_to_rtree_move TREE_RESULT TREE ROOT_NODE
 	Converts the tree TREE into a rooted tree TREE_RESULT taking
 	node ROOT_NODE as its root.
 
