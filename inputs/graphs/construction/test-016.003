@@ -12,13 +12,15 @@ TYPE graphs-construction
 	add_edge ft 8 9 false true
 	output_graph ft
 	assert is_tree ft
+	assert normalised ft
 	
-	ftree_to_rtree_copy rt1 ft 0
+	ftree_to_rtree_copy rt1 ft 0 false false
 	output_graph rt1
 	assert is_rooted rt1
 	assert has_root rt1
 	assert is_tree rt1
 	assert num_edges rt1 9
+	assert normalised rt1
 	assert exists_edge rt1 0 1
 	assert exists_edge rt1 1 2
 	assert exists_edge rt1 2 3
@@ -49,12 +51,13 @@ TYPE graphs-construction
 	assert out_degree rt1 8 1
 	assert out_degree rt1 9 0
 	
-	ftree_to_rtree_copy rt2 ft 5
+	ftree_to_rtree_copy rt2 ft 5 false false
 	output_graph rt2
 	assert is_rooted rt2
 	assert has_root rt2
 	assert is_tree rt2
 	assert num_edges rt2 9
+	assert normalised rt2
 	assert not_exists_edge rt2 0 1
 	assert not_exists_edge rt2 1 2
 	assert not_exists_edge rt2 2 3
@@ -90,12 +93,13 @@ TYPE graphs-construction
 	assert out_degree rt2 8 1
 	assert out_degree rt2 9 0
 	
-	ftree_to_rtree_copy rt3 ft 7
+	ftree_to_rtree_copy rt3 ft 7 false false
 	output_graph rt3
 	assert is_rooted rt3
 	assert has_root rt3
 	assert is_tree rt3
 	assert num_edges rt3 9
+	assert normalised rt3
 	assert not_exists_edge rt3 0 1
 	assert not_exists_edge rt3 1 2
 	assert not_exists_edge rt3 2 3

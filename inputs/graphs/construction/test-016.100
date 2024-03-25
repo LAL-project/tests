@@ -1,7 +1,7 @@
 TYPE graphs-construction
 
 	create_graph ftree ft0 0
-	ftree_to_rtree_move rt0 ft0 0
+	ftree_to_rtree_move rt0 ft0 0 false false
 	output_graph ft0
 	output_graph rt0
 	
@@ -9,7 +9,7 @@ TYPE graphs-construction
 	assert num_edges ft0 0
 	
 	create_graph ftree ft1 1
-	ftree_to_rtree_move rt1 ft1 0
+	ftree_to_rtree_move rt1 ft1 0 false false
 	assert root_is_valid rt1
 	output_graph ft1
 	output_graph rt1

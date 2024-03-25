@@ -18,7 +18,7 @@ TYPE graphs-construction
 	
 	
 	
-	ftree_to_rtree_move rt0 ft0 0
+	ftree_to_rtree_move rt0 ft0 0 false false
 	output_graph rt0
 	assert is_rooted rt0
 	assert has_root rt0
@@ -33,7 +33,7 @@ TYPE graphs-construction
 	assert out_degree rt0 1 0
 	assert is_rooted rt0
 	
-	ftree_to_rtree_move rt1 ft1 1
+	ftree_to_rtree_move rt1 ft1 1 false false
 	output_graph rt1
 	assert is_rooted rt1
 	assert has_root rt1

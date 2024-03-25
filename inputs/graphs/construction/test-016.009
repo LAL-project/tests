@@ -10,6 +10,7 @@ TYPE graphs-construction
 	add_edge ft 1 7 false true
 	output_graph ft
 	assert is_tree ft
+	assert normalised ft
 	
 	calculate_tree_type ft
 	assert tree_type_valid ft
@@ -24,6 +25,7 @@ TYPE graphs-construction
 		true true
 	set_root rt 0
 	output_graph rt
+	assert normalised rt
 	
 	init_rtree_from_ftree_copy rt ft 0 true true
 	
@@ -33,6 +35,7 @@ TYPE graphs-construction
 	assert is_tree rt
 	assert subtree_sizes_not_valid rt
 	assert tree_type_valid rt
+	assert normalised rt
 	
 	output_graph ft
 	
