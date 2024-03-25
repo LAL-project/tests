@@ -1,0 +1,60 @@
+TYPE graphs-construction
+
+	create_graph ftree ft 8
+	add_edge ft 0 1 false true
+	add_edge ft 0 2 false true
+	assert normalised ft
+	add_edge ft 0 4 false true
+	add_edge ft 0 3 false true
+	assert not_normalised ft
+	add_edge ft 1 5 false true
+	add_edge ft 1 6 false true
+	add_edge ft 1 7 false true
+	assert not_normalised ft
+	output_graph ft
+	assert is_tree ft
+	
+	calculate_tree_type ft
+	assert tree_type_valid ft
+	
+	/* 1 */
+	
+	create_graph rtree rt0 10
+	add_edges rt0
+		4
+		0 1
+		0 2
+		0 4
+		0 3
+		false true
+	set_root rt0 0
+	output_graph rt0
+	assert not_normalised rt0
+	
+	init_rtree_from_ftree_copy rt0 ft 0 false false
+	output_graph rt0
+	assert not_normalised rt0
+	assert tree_type_valid rt0
+	
+	assert tree_type_valid ft
+	
+	/* 2 */
+	
+	create_graph rtree rt1 10
+	add_edges rt1
+		4
+		0 1
+		0 2
+		0 4
+		0 3
+		true true
+	set_root rt1 0
+	output_graph rt1
+	assert normalised rt1
+	
+	init_rtree_from_ftree_copy rt1 ft 0 false false
+	output_graph rt1
+	assert not_normalised rt1
+	assert tree_type_valid rt1
+	
+	assert tree_type_valid ft
