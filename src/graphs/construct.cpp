@@ -625,19 +625,25 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			gtypes[g1] = FTREE;
 		}
 		else if (option == FUNC_FTREE_TO_RTREE_COPY) {
-			fin >> g1 >> g2 >> u;
+			fin >> g1 >> g2 >> u >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_FTREE_TO_RTREE_COPY, g2);
 			assert_not_exists_variable(FUNC_FTREE_TO_RTREE_COPY, g1);
 			assert_correct_graph_type(FUNC_FTREE_TO_RTREE_COPY, graph_type(g2), free_tree_types);
-			rtreevars[g1] = lal::graphs::rooted_tree(ftreevars[g2], u);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean1);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean2);
+			rtreevars[g1] =
+				lal::graphs::rooted_tree(ftreevars[g2], u, Boolean1 == "true", Boolean2 == "true");
 			gtypes[g1] = RTREE;
 		}
 		else if (option == FUNC_FTREE_TO_RTREE_MOVE) {
-			fin >> g1 >> g2 >> u;
+			fin >> g1 >> g2 >> u >> Boolean1 >> Boolean2;
 			assert_exists_variable(FUNC_FTREE_TO_RTREE_MOVE, g2);
 			assert_not_exists_variable(FUNC_FTREE_TO_RTREE_MOVE, g1);
 			assert_correct_graph_type(FUNC_FTREE_TO_RTREE_MOVE, graph_type(g2), free_tree_types);
-			rtreevars[g1] = lal::graphs::rooted_tree(std::move(ftreevars[g2]), u);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean1);
+			assert_correct_boolean(FUNC_INIT_RTREE_FROM_FTREE_COPY, Boolean2);
+			rtreevars[g1] =
+				lal::graphs::rooted_tree(std::move(ftreevars[g2]), u, Boolean1 == "true", Boolean2 == "true");
 			gtypes[g1] = RTREE;
 		}
 
