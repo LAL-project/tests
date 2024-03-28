@@ -40,6 +40,9 @@
  *
  ********************************************************************/
 
+// C includes
+#include <omp.h>
+
 // C++ includes
 #include <filesystem>
 #include <algorithm>
@@ -221,13 +224,25 @@ err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 	const auto inputs = read_input_list(fin);
 	if (inputs.size() > 0) {
 
+		err_type errs[4];
+		for (int i = 0; i < 4; ++i) {
+			errs[i] = err_type::no_error;
+		}
+
+		#pragma omp parallel for num_threads(4) schedule(dynamic)
 		for (std::size_t i = 0; i < inputs.size(); ++i) {
 			const std::string& f = inputs[i].first;
 			const err_type e = syntree_class::parse_single_file(f);
 			if (e != err_type::no_error) {
 				// the complete error message is already
 				// issued inside the function "parse_files"
-				return e;
+				errs[ omp_get_thread_num() ] = e;
+			}
+		}
+
+		for (int i = 0; i < 4; ++i) {
+			if (errs[i] != err_type::no_error) {
+				return errs[i];
 			}
 		}
 	}
