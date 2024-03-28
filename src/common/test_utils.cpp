@@ -42,11 +42,9 @@
 
 // C++ includes
 #include <algorithm>
-#include <iostream>
 #include <fstream>
 #include <random>
 #include <string>
-#include <set>
 // lal includes
 #include <lal/basic_types.hpp>
 #include <lal/graphs/free_tree.hpp>
