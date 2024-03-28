@@ -77,6 +77,7 @@ INCLUDEPATH += $${THIS_DIR}
 
 SOURCES += \
 	io_wrapper.cpp \
+	parse_header.cpp \
 	parse_keywords.cpp \
 	test_utils.cpp
 

@@ -42,18 +42,78 @@
 
 #pragma once
 
+// C++ includes
+#include <iostream>
+#include <fstream>
+
 // common includes
 #include "common/definitions.hpp"
 
 namespace tests {
 
-input_list read_input_list(std::ifstream& fin) noexcept;
+input_list read_input_list(std::ifstream& fin) noexcept {
+	{
+	std::string INPUT; fin >> INPUT;
+	if (INPUT != "INPUT" and INPUT != "INPUTS") {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    INPUT keyword is neither 'INPUT' or 'INPUTS'.\n";
+		std::cerr << "    INPUT: '" << INPUT << "'.\n";
+		return {};
+	}
+	}
+
+	std::size_t n_inputs;
+	fin >> n_inputs;
+
+	input_list inputs(n_inputs);
+	for (std::size_t i = 0; i < n_inputs; ++i) {
+		fin >> inputs[i].first >> inputs[i].second;
+	}
+	return inputs;
+}
 
 void mark_wrong_keyword(
 	const std::vector<std::string>& keywords,
 	const std::vector<std::size_t>& k,
 	const std::string& tab
 )
-noexcept;
+noexcept
+{
+	std::cerr << tab;
+	// sure 'keywords' has at least one keyword
+	for (std::size_t i = 0; i < keywords.size(); ++i) {
+		if (keywords[i].length() >= 2) {
+			std::cerr << keywords[i] << " ";
+		}
+		else {
+			std::cerr << keywords[i] << "  ";
+		}
+	}
+	std::cerr << '\n';
+
+	// display the /\ where needed
+	std::size_t it = 0;
+	std::cerr << tab;
+	for (std::size_t i = 0; i < keywords.size(); ++i) {
+		std::size_t l = keywords[i].length();
+		if (it < k.size()) {
+			if (k[it] != i) {
+				std::cerr << std::string(l, ' ') << " ";
+				if (l < 2) { std::cerr << " "; }
+			}
+			else {
+				std::cerr << "/\\";
+				if (l > 2) {
+					std::cerr << std::string(l - 2, ' ') << " ";
+				}
+				else {
+					std::cerr << "   ";
+				}
+				++it;
+			}
+		}
+	}
+	std::cerr << '\n';
+}
 
 } // -- namespace tests

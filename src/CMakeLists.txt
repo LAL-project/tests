@@ -137,6 +137,7 @@ add_library(
 		common/tree_validity_check.hpp
 		
 		common/io_wrapper.cpp
+		common/parse_header.cpp
 		common/parse_keywords.cpp
 		common/test_utils.cpp
 )
