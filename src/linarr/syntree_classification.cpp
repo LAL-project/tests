@@ -74,14 +74,14 @@ std::string sdtt_to_string(const syndeptree_type& t) noexcept {
 }
 
 std::pair<syndeptree_type, bool> std_to_syntreetype(const std::string& s) noexcept {
-if (s == "prj") { return std::make_pair(syndeptree_type::projective, true); }
-if (s == "pla") { return std::make_pair(syndeptree_type::planar, true); }
-if (s == "1ec") { return std::make_pair(syndeptree_type::EC1, true); }
-if (s == "wg1") { return std::make_pair(syndeptree_type::WG1, true); }
-if (s == "mh4") { return std::make_pair(syndeptree_type::unknown, false); }
-if (s == "mh5") { return std::make_pair(syndeptree_type::unknown, false); }
+	if (s == "prj") { return std::make_pair(syndeptree_type::projective, true); }
+	if (s == "pla") { return std::make_pair(syndeptree_type::planar, true); }
+	if (s == "1ec") { return std::make_pair(syndeptree_type::EC1, true); }
+	if (s == "wg1") { return std::make_pair(syndeptree_type::WG1, true); }
+	if (s == "mh4") { return std::make_pair(syndeptree_type::unknown, false); }
+	if (s == "mh5") { return std::make_pair(syndeptree_type::unknown, false); }
 
-return std::make_pair(syndeptree_type::unknown, true);
+	return std::make_pair(syndeptree_type::unknown, true);
 }
 
 lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept {
@@ -184,7 +184,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 			for (std::size_t i = 0; i < LAL_classes.size(); ++i) {
 				if (LAL_classes[i]) {
 					std::cout << "        "
-						  << sdtt_to_string(static_cast<syndeptree_type>(i))
+						 << sdtt_to_string(static_cast<syndeptree_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << '\n';
 				}
