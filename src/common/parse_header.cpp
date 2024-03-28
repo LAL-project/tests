@@ -40,8 +40,6 @@
  *
  ********************************************************************/
 
-#pragma once
-
 // C++ includes
 #include <iostream>
 #include <fstream>
