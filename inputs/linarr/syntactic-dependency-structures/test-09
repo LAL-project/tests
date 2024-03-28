@@ -1,12 +1,12 @@
 TYPE linarr-syntree_classification
-
-	graphs/syntactic-dependency-structures/sen-09--0
-	graphs/syntactic-dependency-structures/sen-09--1
-	graphs/syntactic-dependency-structures/sen-09--2
-	graphs/syntactic-dependency-structures/sen-09--3
-	graphs/syntactic-dependency-structures/sen-09--4
-	graphs/syntactic-dependency-structures/sen-09--5
-	graphs/syntactic-dependency-structures/sen-09--6
-	graphs/syntactic-dependency-structures/sen-09--7
-	graphs/syntactic-dependency-structures/sen-09--8
-	graphs/syntactic-dependency-structures/sen-09--9
+INPUTS 10
+	graphs/syntactic-dependency-structures/sen-09--0 *
+	graphs/syntactic-dependency-structures/sen-09--1 *
+	graphs/syntactic-dependency-structures/sen-09--2 *
+	graphs/syntactic-dependency-structures/sen-09--3 *
+	graphs/syntactic-dependency-structures/sen-09--4 *
+	graphs/syntactic-dependency-structures/sen-09--5 *
+	graphs/syntactic-dependency-structures/sen-09--6 *
+	graphs/syntactic-dependency-structures/sen-09--7 *
+	graphs/syntactic-dependency-structures/sen-09--8 *
+	graphs/syntactic-dependency-structures/sen-09--9 *

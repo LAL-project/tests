@@ -55,6 +55,7 @@
 
 // common includes
 #include "common/definitions.hpp"
+#include "common/parse_header.hpp"
 
 namespace tests {
 namespace linarr {
@@ -200,14 +201,19 @@ err_type parse_single_file(const std::string& file) noexcept {
 
 err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 
-	std::string f;
-	while (fin >> f) {
-		const err_type e = syntree_class::parse_single_file(f);
-		if (e != err_type::no_error) {
-			// the complete error message is already
-			// issued inside the function "parse_files"
-			return e;
+	const auto inputs = read_input_list(fin);
+	if (inputs.size() > 0) {
+
+		for (std::size_t i = 0; i < inputs.size(); ++i) {
+			const std::string& f = inputs[i].first;
+			const err_type e = syntree_class::parse_single_file(f);
+			if (e != err_type::no_error) {
+				// the complete error message is already
+				// issued inside the function "parse_files"
+				return e;
+			}
 		}
+
 	}
 
 	TEST_GOODBYE;
