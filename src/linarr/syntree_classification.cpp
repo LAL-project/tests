@@ -128,25 +128,28 @@ noexcept
 	return classes;
 }
 
-err_type parse_single_file(const std::string& file) noexcept {
-
-	if (not std::filesystem::exists(file)) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    File '" << file << "' does not exist.\n";
-		return err_type::io;
-	}
-
-	std::ifstream F;
-	F.open(file);
-
+err_type parse_single_file(const std::string& file, std::ifstream& F) noexcept {
 	std::string line;
-	std::size_t lineno = 1;
-	getline(F, line); // skip header
+	std::size_t lineno = (file == "inline" ? 4 : 1);
+
+	if (file == "inline") {
+		getline(F, line); // skip blank line
+		getline(F, line); // skip header
+		getline(F, line); // skip header
+	}
+	else {
+		getline(F, line); // skip header
+	}
 
 	while (getline(F, line)) {
 		++lineno;
 
-		std::size_t semicolon = line.find(';');
+		while (line == "" or line == "\t") {
+			getline(F, line);
+			++lineno;
+		}
+
+		const std::size_t semicolon = line.find(';');
 		if (semicolon == std::string::npos) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Input line is not correctly formatted.\n";
@@ -157,7 +160,7 @@ err_type parse_single_file(const std::string& file) noexcept {
 
 		// parse line
 		const std::string treestr = line.substr(0, semicolon);
-		const std::string classlist = line.substr(semicolon+1, line.length()-semicolon);
+		const std::string classlist = line.substr(semicolon + 1, line.length() - semicolon);
 
 		// parse data in line
 		const lal::graphs::rooted_tree T = parse_tree_in_line(treestr);
@@ -175,19 +178,21 @@ err_type parse_single_file(const std::string& file) noexcept {
 			std::cerr << "    Ground truth classes:\n";
 			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
-					std::cout << "        "
-							  << sdtt_to_string(static_cast<syndeptree_type>(i))
-						 << (not LAL_classes[i] ? "  <--- missing" : "")
-						 << '\n';
+					std::cout
+						<< "        "
+						<< sdtt_to_string(static_cast<syndeptree_type>(i))
+						<< (not LAL_classes[i] ? "  <--- missing" : "")
+						<< '\n';
 				}
 			}
 			std::cerr << "    LAL's classes:\n";
 			for (std::size_t i = 0; i < LAL_classes.size(); ++i) {
 				if (LAL_classes[i]) {
-					std::cout << "        "
-						 << sdtt_to_string(static_cast<syndeptree_type>(i))
-						 << (not ground_classes[i] ? "  <--- incorrect" : "")
-						 << '\n';
+					std::cout
+						<< "        "
+						<< sdtt_to_string(static_cast<syndeptree_type>(i))
+						<< (not ground_classes[i] ? "  <--- incorrect" : "")
+						<< '\n';
 				}
 			}
 			return err_type::test_execution;
@@ -195,6 +200,18 @@ err_type parse_single_file(const std::string& file) noexcept {
 	}
 
 	return err_type::no_error;
+}
+
+err_type parse_single_file(const std::string& file) noexcept {
+	if (not std::filesystem::exists(file)) {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    File '" << file << "' does not exist.\n";
+		return err_type::io;
+	}
+
+	std::ifstream F;
+	F.open(file);
+	return parse_single_file(file, F);
 }
 
 } // -- namespace syntree_class
@@ -213,7 +230,14 @@ err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 				return e;
 			}
 		}
-
+	}
+	else {
+		const err_type e = syntree_class::parse_single_file("inline", fin);
+		if (e != err_type::no_error) {
+			// the complete error message is already
+			// issued inside the function "parse_files"
+			return e;
+		}
 	}
 
 	TEST_GOODBYE;
