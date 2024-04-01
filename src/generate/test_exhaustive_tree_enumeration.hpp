@@ -42,8 +42,7 @@
 
 #pragma once
 
-#include <iostream>
-
+// common includes
 #include "common/definitions.hpp"
 
 namespace tests {
