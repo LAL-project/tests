@@ -204,15 +204,18 @@ err_type call_test_exhaustive(uint64_t n1, uint64_t n2, uint64_t R) noexcept {
 
 err_type exe_gen_trees_alf(std::ifstream& fin) noexcept {
 
+	uint64_t R;
+	fin >> R;
+
 	uint64_t n1, n2;
 	while (fin >> n1 >> n2) {
 		{
-		const auto err = alf::call_test_exhaustive<true>(n1, n2, 2);
+		const auto err = alf::call_test_exhaustive<true>(n1, n2, R);
 		if (err != err_type::no_error) { return err; }
 		}
 
 		{
-		const auto err = alf::call_test_exhaustive<false>(n1, n2, 2);
+		const auto err = alf::call_test_exhaustive<false>(n1, n2, R);
 		if (err != err_type::no_error) { return err; }
 		}
 	}

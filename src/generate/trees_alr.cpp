@@ -164,15 +164,18 @@ noexcept
 
 err_type exe_gen_trees_alr(std::ifstream& fin) noexcept {
 
+	uint64_t R;
+	fin >> R;
+
 	uint64_t n1, n2;
 	while (fin >> n1 >> n2) {
 		{
-		const auto err = alr::call_test_exhaustive<true>(n1, n2, 2);
+		const auto err = alr::call_test_exhaustive<true>(n1, n2, R);
 		if (err != err_type::no_error) { return err; }
 		}
 
 		{
-		const auto err = alr::call_test_exhaustive<false>(n1, n2, 2);
+		const auto err = alr::call_test_exhaustive<false>(n1, n2, R);
 		if (err != err_type::no_error) { return err; }
 		}
 	}
