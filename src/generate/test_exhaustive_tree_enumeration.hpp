@@ -55,8 +55,12 @@ template <
 	typename extra_params
 >
 inline
-err_type test_exhaustive_enumeration_of_trees
-(uint64_t n1, uint64_t n2, const Callable& f, const extra_params& ep)
+err_type test_exhaustive_enumeration_of_trees(
+	uint64_t n1, uint64_t n2,
+	const Callable& f,
+	const extra_params& ep,
+	uint64_t R
+)
 noexcept
 {
 	gen_t TreeGen;
@@ -69,7 +73,7 @@ noexcept
 			TreeGen.init(n);
 		}
 
-		for (std::size_t i = 0; i < 2; ++i) {
+		for (std::size_t i = 0; i < R; ++i) {
 			const auto err = f(n, TreeGen, ep);
 			if (err != tests::err_type::no_error) { return err; }
 			TreeGen.reset();

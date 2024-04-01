@@ -204,25 +204,31 @@ noexcept
 }
 
 template <bool init>
-err_type call_test_exhaustive(uint64_t n1, uint64_t n2, const extra_params& ep) noexcept {
+err_type call_test_exhaustive(
+	uint64_t n1, uint64_t n2,
+	const extra_params& ep,
+	uint64_t R
+)
+noexcept
+{
 	{
 	const auto err =
 		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
-		(n1, n2, test_for_n_while, ep);
+		(n1, n2, test_for_n_while, ep, R);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
 		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
-		(n1, n2, test_for_n_for, ep);
+		(n1, n2, test_for_n_for, ep, R);
 	if (err != err_type::no_error) { return err; }
 	}
 
 	{
 	const auto err =
 		test_exhaustive_enumeration_of_trees<init, lal::generate::all_ulab_free_trees>
-		(n1, n2, test_for_n_yield, ep);
+		(n1, n2, test_for_n_yield, ep, R);
 	if (err != err_type::no_error) { return err; }
 	}
 	return err_type::no_error;
@@ -286,12 +292,12 @@ err_type exe_gen_trees_auf(std::ifstream& fin) noexcept {
 	uint64_t n1, n2;
 	while (fin >> n1 >> n2) {
 		{
-		const auto err = auf::call_test_exhaustive<true>(n1, n2, params);
+		const auto err = auf::call_test_exhaustive<true>(n1, n2, params, 2);
 		if (err != err_type::no_error) { return err; }
 		}
 
 		{
-		const auto err = auf::call_test_exhaustive<false>(n1, n2, params);
+		const auto err = auf::call_test_exhaustive<false>(n1, n2, params, 2);
 		if (err != err_type::no_error) { return err; }
 		}
 	}
