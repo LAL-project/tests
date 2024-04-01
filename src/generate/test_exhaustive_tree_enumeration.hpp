@@ -72,6 +72,8 @@ noexcept
 		else {
 			TreeGen.init(n);
 		}
+		TreeGen.deactivate_all_postprocessing_actions();
+		TreeGen.set_calculate_tree_type(true);
 
 		for (std::size_t i = 0; i < R; ++i) {
 			const auto err = f(n, TreeGen, ep);
