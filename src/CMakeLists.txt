@@ -77,24 +77,17 @@ if (NOT DEFINED LAL_DEV_DIR)
 	message(STATUS "    Make sure it is an absolute path!")
 	message(FATAL_ERROR "Please, read the last few lines and follow the instructions given.")
 else()
-	if (NOT DEFINED LAL_DEV_DIR)
-		message(STATUS "Path to the root directory of the linear arrangement library not given.")
-		message(STATUS "    Use -DLAL_DEV_DIR=/path/to/the/library")
-		message(STATUS "Rerun 'cmake' with the appropriate arguments")
-		message(FATAL_ERROR "Please, read the last few lines and follow the instructions given.")
+	if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+		message(STATUS "Link against laldebug (debug compilation of lal)")
+		set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-debug)
+		set(LAL_LIB_NAME lal)
 	else()
-		if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-			message(STATUS "Link against laldebug (debug compilation of lal)")
-			set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-debug)
-			set(LAL_LIB_NAME lal)
-		else()
-			message(STATUS "Link against lal (release compilation of lal)")
-			set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-release)
-			set(LAL_LIB_NAME laloptimized)
-		endif()
-		message(STATUS "    LAL_LIB_DIR:  ${LAL_LIB_DIR}")
-		message(STATUS "    LAL_LIB_NAME: ${LAL_LIB_NAME}")
+		message(STATUS "Link against lal (release compilation of lal)")
+		set(LAL_LIB_DIR ${LAL_DEV_DIR}/lal-release)
+		set(LAL_LIB_NAME laloptimized)
 	endif()
+	message(STATUS "    LAL_LIB_DIR:  ${LAL_LIB_DIR}")
+	message(STATUS "    LAL_LIB_NAME: ${LAL_LIB_NAME}")
 endif()
 
 # ----------------------
@@ -414,9 +407,6 @@ target_link_libraries(tests			${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.dll)
 target_link_libraries(utilities 	${LAL_LIB_DIR}/lib${LAL_LIB_NAME}.dll)
 endif (WIN32)
 
-# ******************************************************************************
-# COMPILATION FLAGS
-
 # OpenMP
 target_link_libraries(detail		${OpenMP_CXX_LIBRARIES})
 target_link_libraries(generate		${OpenMP_CXX_LIBRARIES})
@@ -455,6 +445,9 @@ target_link_libraries(utilities		gmp)
 
 # nauty
 target_link_libraries(properties	nauty)
+
+# ******************************************************************************
+# COMPILATION FLAGS
 
 # Optimisation and warning flags
 add_compiler_flag(-Wall)
