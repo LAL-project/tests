@@ -450,9 +450,11 @@ target_link_libraries(linarr		gmp)
 target_link_libraries(memory		gmp)
 target_link_libraries(numeric		gmp)
 target_link_libraries(properties	gmp)
-target_link_libraries(properties	nauty)
 target_link_libraries(tests			gmp)
 target_link_libraries(utilities		gmp)
+
+# nauty
+target_link_libraries(properties	nauty)
 
 # Optimisation and warning flags
 add_compiler_flag(-Wall)
