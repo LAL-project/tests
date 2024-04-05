@@ -855,6 +855,12 @@ if [ $compile -eq 1 ]; then
 		cd $wd
 	else
 		cd $exe_directory
+		
+		cd ../common
+		make -j4
+		cd $wd
+		
+		cd $exe_directory
 		make -j4
 		cd $wd
 	fi
