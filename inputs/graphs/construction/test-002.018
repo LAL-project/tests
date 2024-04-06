@@ -1,0 +1,193 @@
+TYPE graphs-construction
+
+	create_graph ftree t 10
+	assert num_nodes t 10
+	assert num_edges t 0
+	
+	add_edge_bulk t 0 1
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 1
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	finish_bulk_add t true true
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 1 2
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 1 3
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 0 4
+	
+	assert num_nodes_component t 0 2
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	finish_bulk_add t true true
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 5 6
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 6 7
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 6 8
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	finish_bulk_add t true true
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 4
+	assert num_nodes_component t 6 4
+	assert num_nodes_component t 7 4
+	assert num_nodes_component t 8 4
+	assert num_nodes_component t 9 1
+	
+	add_edge_bulk t 7 9
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 4
+	assert num_nodes_component t 6 4
+	assert num_nodes_component t 7 4
+	assert num_nodes_component t 8 4
+	assert num_nodes_component t 9 1
+	
+	finish_bulk_add t true true
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 5
+	assert num_nodes_component t 6 5
+	assert num_nodes_component t 7 5
+	assert num_nodes_component t 8 5
+	assert num_nodes_component t 9 5
+	
+	add_edge_bulk t 4 9
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 5
+	assert num_nodes_component t 6 5
+	assert num_nodes_component t 7 5
+	assert num_nodes_component t 8 5
+	assert num_nodes_component t 9 5
+	
+	assert num_edges t 9
+	
+	finish_bulk_add t true true
+	assert normalised t
+	
+	output_graph t
+
+	assert num_nodes_component t 0 10
+	assert num_nodes_component t 1 10
+	assert num_nodes_component t 2 10
+	assert num_nodes_component t 3 10
+	assert num_nodes_component t 4 10
+	assert num_nodes_component t 5 10
+	assert num_nodes_component t 6 10
+	assert num_nodes_component t 7 10
+	assert num_nodes_component t 8 10
+	assert num_nodes_component t 9 10
+
