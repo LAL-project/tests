@@ -6,8 +6,9 @@ The format of the test files' names is as follows. All test files start with
 
      test-
 
-Then follows the "family number" of the test. This is a three-digit number.
-Finally, a three-digit number indicating the test number within the family.
+Then follows the "family number" of the test 'xxx'; this is a three-digit number.
+Then follows a dot '.' and another three-digit number 'yyy' indicating the test
+number within the family.
 
 
               Test number
@@ -15,32 +16,12 @@ Finally, a three-digit number indicating the test number within the family.
                   |
                  ---
         test-xxx.yyy
-          ---
-           |
+             ---
+              |
 
-       Family test
-           number
+         Family test
+            number
 
-
-Family test numbers
--------------------
-
-   Type of test
-     |
-     --
-     xxx
-       -
-       |
-
-    Type of graph
-
-Codes and types of graphs
--------------------------
-
-	0: ugraph
-	1: dgraph
-	2: ftree
-	3: rtree
 
 We are currently using the following names:
 
