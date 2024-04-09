@@ -69,36 +69,45 @@
 #define FUNC_GRAPH_INIT "init_graph"
 #define FUNC_GRAPH_ASSIGN "assign"
 #define FUNC_GRAPH_ADD_EDGE "add_edge"
+#define FUNC_GRAPH_ADD_EDGES "add_edges"
 #define FUNC_GRAPH_ADD_EDGE_BULK "add_edge_bulk"
 #define FUNC_GRAPH_FINISH_BULK_ADD "finish_bulk_add"
-#define FUNC_GRAPH_REMOVE_NODE "remove_node"
-#define FUNC_GRAPH_ADD_EDGES "add_edges"
-#define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_REMOVE_EDGE "remove_edge"
 #define FUNC_GRAPH_REMOVE_EDGES "remove_edges"
+#define FUNC_GRAPH_REMOVE_EDGE_BULK "remove_edge_bulk"
+#define FUNC_GRAPH_FINISH_BULK_REMOVE "finish_bulk_remove"
 #define FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO "remove_edges_incident_to"
+#define FUNC_GRAPH_REMOVE_NODE "remove_node"
+#define FUNC_GRAPH_SET_EDGES "set_edges"
 #define FUNC_GRAPH_NORMALISE "normalise"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
 #define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
-#define FUNC_OUTPUT_EDGES "output_E"
+#define FUNC_GRAPH_OUTPUT_EDGES "output_E"
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
-#define FUNC_OUTPUT_Q "output_Q"
-#define FUNC_Q_SIZE "size_Q"
+#define FUNC_GRAPH_OUTPUT_Q "output_Q"
+#define FUNC_GRAPH_Q_SIZE "size_Q"
+
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
+
 #define FUNC_TREE_OUTPUT_HEAD_VECTOR "output_head_vector"
 #define FUNC_TREE_OUTPUT_HEAD_VECTOR_ARR "output_head_vector_with_arrangement"
-#define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
-#define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
+#define FUNC_TREE_FINISH_BULK_ADD_COMPLETE "finish_bulk_add_complete"
+#define FUNC_TREE_FINISH_BULK_REMOVE_COMPLETE "finish_bulk_remove_complete"
+
 #define FUNC_FTREE_CALCULATE_TREE_TYPE "calculate_tree_type"
 #define FUNC_FTREE_TO_RTREE_COPY "ftree_to_rtree_copy"
 #define FUNC_FTREE_TO_RTREE_MOVE "ftree_to_rtree_move"
-#define FUNC_INIT_RTREE_FROM_FTREE_COPY "init_rtree_from_ftree_copy"
-#define FUNC_INIT_RTREE_FROM_FTREE_MOVE "init_rtree_from_ftree_move"
+
 #define FUNC_RTREE_SET_ROOT "set_root"
 #define FUNC_RTREE_CALC_SIZE_SUBTREE "calculate_size_subtrees"
 #define FUNC_RTREE_RETRIEVE_SUBTREE "retrieve_subtree"
 #define FUNC_RTREE_DIR_TO_UNDIR "rtree_to_ftree"
 #define FUNC_RTREE_OUTPUT_SIZE_SUBTREES "output_size_subtrees"
+
+#define FUNC_FROM_HEAD_VECTOR_TO_FTREE "from_head_vector_to_free_tree"
+#define FUNC_FROM_HEAD_VECTOR_TO_RTREE "from_head_vector_to_rooted_tree"
+#define FUNC_INIT_RTREE_FROM_FTREE_COPY "init_rtree_from_ftree_copy"
+#define FUNC_INIT_RTREE_FROM_FTREE_MOVE "init_rtree_from_ftree_move"
 
 namespace tests {
 namespace graphs {
@@ -248,7 +257,7 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			assert_exists_variable(FUNC_GRAPH_ADD_EDGE, g1);
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_ADD_EDGE, Boolean2);
-			if_mfunction(g1, add_edge(u, v, Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, add_edge(u, v, Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGE_BULK) {
 			fin >> g1 >> u >> v;
@@ -260,7 +269,7 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			assert_exists_variable(FUNC_GRAPH_FINISH_BULK_ADD, g1);
 			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_ADD, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_ADD, Boolean2);
-			if_mfunction(g1, finish_bulk_add(Boolean1 == "true", Boolean2 == "true"))
+			if_mfunction(g1, finish_bulk_add(Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_ADD_EDGES) {
 			fin >> g1 >> n_edges;
@@ -288,6 +297,20 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean1);
 			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE, Boolean2);
 			if_mfunction(g1, remove_edge(u, v, Boolean1 == "true", Boolean2 == "true"));
+		}
+		else if (option == FUNC_GRAPH_REMOVE_EDGE_BULK) {
+			fin >> g1 >> u >> v;
+			assert_exists_variable(FUNC_GRAPH_REMOVE_EDGE_BULK, g1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE_BULK, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_REMOVE_EDGE_BULK, Boolean2);
+			if_mfunction(g1, remove_edge_bulk(u, v));
+		}
+		else if (option == FUNC_GRAPH_FINISH_BULK_REMOVE) {
+			fin >> g1 >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_GRAPH_FINISH_BULK_REMOVE, g1);
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_REMOVE, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_REMOVE, Boolean2);
+			if_mfunction(g1, finish_bulk_remove(Boolean1 == "true", Boolean2 == "true"));
 		}
 		else if (option == FUNC_GRAPH_REMOVE_EDGES) {
 			fin >> g1 >> n_edges;
@@ -413,9 +436,9 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 				return err_type::test_execution;
 			}
 		}
-		else if (option == FUNC_OUTPUT_EDGES) {
+		else if (option == FUNC_GRAPH_OUTPUT_EDGES) {
 			fin >> g1;
-			assert_exists_variable(FUNC_OUTPUT_EDGES, g1);
+			assert_exists_variable(FUNC_GRAPH_OUTPUT_EDGES, g1);
 			if (graph_type(g1) == DGRAPH) {
 				for (lal::iterators::E_iterator e_it(dgraphvars[g1]); not e_it.end(); e_it.next()) {
 					const lal::edge e = e_it.get_edge();
@@ -493,9 +516,9 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 				return err_type::test_execution;
 			}
 		}
-		else if (option == FUNC_OUTPUT_Q) {
+		else if (option == FUNC_GRAPH_OUTPUT_Q) {
 			fin >> g1;
-			assert_exists_variable(FUNC_OUTPUT_Q, g1);
+			assert_exists_variable(FUNC_GRAPH_OUTPUT_Q, g1);
 
 			if (graph_type(g1) == DGRAPH) {
 				for (lal::iterators::Q_iterator q_it(dgraphvars[g1]); not q_it.end(); q_it.next()) {
@@ -516,9 +539,9 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 				}
 			}
 		}
-		else if (option == FUNC_Q_SIZE) {
+		else if (option == FUNC_GRAPH_Q_SIZE) {
 			fin >> g1;
-			assert_exists_variable(FUNC_Q_SIZE, g1);
+			assert_exists_variable(FUNC_GRAPH_Q_SIZE, g1);
 
 			std::cout <<
 				(graph_type(g1) == DGRAPH ?
@@ -600,6 +623,24 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 			else if (graph_type(g1) == RTREE) {
 				rtreevars[g1].calculate_tree_type();
 			}
+		}
+		else if (option == FUNC_TREE_FINISH_BULK_ADD_COMPLETE) {
+			fin >> g1 >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_TREE_FINISH_BULK_ADD_COMPLETE, g1);
+			assert_correct_boolean(FUNC_TREE_FINISH_BULK_ADD_COMPLETE, Boolean1);
+			assert_correct_boolean(FUNC_TREE_FINISH_BULK_ADD_COMPLETE, Boolean2);
+			assert_correct_graph_type
+				(FUNC_TREE_FINISH_BULK_ADD_COMPLETE, graph_type(g1), tree_types);
+			if_mfunction_trees(g1, finish_bulk_add_complete(Boolean1 == "true", Boolean2 == "true"));
+		}
+		else if (option == FUNC_TREE_FINISH_BULK_REMOVE_COMPLETE) {
+			fin >> g1 >> Boolean1 >> Boolean2;
+			assert_exists_variable(FUNC_GRAPH_FINISH_BULK_REMOVE, g1);
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_REMOVE, Boolean1);
+			assert_correct_boolean(FUNC_GRAPH_FINISH_BULK_REMOVE, Boolean2);
+			assert_correct_graph_type
+				(FUNC_TREE_FINISH_BULK_ADD_COMPLETE, graph_type(g1), tree_types);
+			if_mfunction_trees(g1, finish_bulk_remove_complete(Boolean1 == "true", Boolean2 == "true"));
 		}
 
 		// UTREE
