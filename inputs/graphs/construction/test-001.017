@@ -1,0 +1,87 @@
+TYPE graphs-construction
+
+	create_graph dgraph g1 6
+	
+	assert num_nodes g1 6
+	assert num_edges g1 0
+	
+	add_edges g1 10
+		5 0 5 1 5 2 5 3 5 4
+		0 1 1 2 2 3 3 4 4 0
+		true true
+	
+	output_graph g1
+	
+	assert normalised g1
+	assert num_edges g1 10
+	assert exists_edge g1 5 0
+	assert not_exists_edge g1 0 5
+	assert exists_edge g1 5 1
+	assert exists_edge g1 5 2
+	assert exists_edge g1 5 3
+	assert exists_edge g1 5 4
+	assert exists_edge g1 0 1
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 3
+	assert exists_edge g1 3 4
+	assert exists_edge g1 4 0
+	
+	remove_edge_bulk g1 0 1
+	finish_bulk_remove g1 false true
+	
+	output_graph g1
+	
+	assert normalised g1
+	assert num_edges g1 9
+	assert exists_edge g1 5 0
+	assert not_exists_edge g1 0 5
+	assert exists_edge g1 5 1
+	assert exists_edge g1 5 2
+	assert exists_edge g1 5 3
+	assert exists_edge g1 5 4
+	assert not_exists_edge g1 0 1
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 3
+	assert exists_edge g1 3 4
+	assert exists_edge g1 4 0
+	
+	remove_edge_bulk g1 4 0
+	remove_edge_bulk g1 5 0
+	finish_bulk_remove g1 false true
+	
+	output_graph g1
+	
+	assert normalised g1
+	assert num_edges g1 7
+	assert not_exists_edge g1 5 0
+	assert exists_edge g1 5 1
+	assert exists_edge g1 5 2
+	assert exists_edge g1 5 3
+	assert exists_edge g1 5 4
+	assert not_exists_edge g1 0 1
+	assert exists_edge g1 1 2
+	assert exists_edge g1 2 3
+	assert exists_edge g1 3 4
+	assert not_exists_edge g1 4 0
+	
+	remove_edge_bulk g1 1 2
+	remove_edge_bulk g1 5 1
+	remove_edge_bulk g1 2 3
+	remove_edge_bulk g1 5 3
+	remove_edge_bulk g1 5 4
+	finish_bulk_remove g1 false true
+	
+	output_graph g1
+	
+	assert normalised g1
+	assert num_edges g1 2
+	assert not_exists_edge g1 5 0
+	assert not_exists_edge g1 5 1
+	assert exists_edge g1 5 2
+	assert not_exists_edge g1 5 3
+	assert not_exists_edge g1 5 4
+	assert not_exists_edge g1 0 1
+	assert not_exists_edge g1 1 2
+	assert not_exists_edge g1 2 3
+	assert exists_edge g1 3 4
+	assert not_exists_edge g1 4 0
