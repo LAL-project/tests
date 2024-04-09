@@ -1,0 +1,158 @@
+TYPE graphs-construction
+
+	create_graph rtree t 10
+	
+	assert num_nodes t 10
+	assert num_edges t 0
+	
+	set_edges t 9
+		1 0
+		1 2 3 1 3 4 5 3
+		5 6 5 7 7 8 8 9
+		true true
+	set_root t 5
+	
+	output_graph t
+	
+	assert is_tree t
+	assert has_root t
+	
+	assert normalised t
+	assert num_edges t 9
+	assert exists_edge t 1 0
+	assert exists_edge t 1 2
+	assert exists_edge t 3 1
+	assert exists_edge t 3 4
+	assert exists_edge t 5 3
+	assert exists_edge t 5 6
+	assert exists_edge t 5 7
+	assert exists_edge t 7 8
+	assert exists_edge t 8 9
+	
+	assert num_nodes_component t 0 10
+	assert num_nodes_component t 1 10
+	assert num_nodes_component t 2 10
+	assert num_nodes_component t 3 10
+	assert num_nodes_component t 4 10
+	assert num_nodes_component t 5 10
+	assert num_nodes_component t 6 10
+	assert num_nodes_component t 7 10
+	assert num_nodes_component t 8 10
+	assert num_nodes_component t 9 10
+	
+	remove_edge_bulk t 5 3
+	finish_bulk_remove t true true
+	
+	output_graph t
+	
+	assert normalised t
+	assert num_edges t 8
+	assert exists_edge t 1 0
+	assert exists_edge t 1 2
+	assert exists_edge t 3 1
+	assert exists_edge t 3 4
+	assert not_exists_edge t 5 3
+	assert exists_edge t 5 6
+	assert exists_edge t 5 7
+	assert exists_edge t 7 8
+	assert exists_edge t 8 9
+	
+	assert num_nodes_component t 0 5
+	assert num_nodes_component t 1 5
+	assert num_nodes_component t 2 5
+	assert num_nodes_component t 3 5
+	assert num_nodes_component t 4 5
+	assert num_nodes_component t 5 5
+	assert num_nodes_component t 6 5
+	assert num_nodes_component t 7 5
+	assert num_nodes_component t 8 5
+	assert num_nodes_component t 9 5
+	
+	remove_edge_bulk t 1 0
+	remove_edge_bulk t 8 9
+	finish_bulk_remove t true true
+	
+	output_graph t
+	
+	assert normalised t
+	assert num_edges t 6
+	assert not_exists_edge t 1 0
+	assert exists_edge t 1 2
+	assert exists_edge t 3 1
+	assert exists_edge t 3 4
+	assert not_exists_edge t 5 3
+	assert exists_edge t 5 6
+	assert exists_edge t 5 7
+	assert exists_edge t 7 8
+	assert not_exists_edge t 8 9
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 4
+	assert num_nodes_component t 2 4
+	assert num_nodes_component t 3 4
+	assert num_nodes_component t 4 4
+	assert num_nodes_component t 5 4
+	assert num_nodes_component t 6 4
+	assert num_nodes_component t 7 4
+	assert num_nodes_component t 8 4
+	assert num_nodes_component t 9 1
+	
+	remove_edge_bulk t 1 2
+	remove_edge_bulk t 3 4
+	remove_edge_bulk t 7 8
+	remove_edge_bulk t 5 6
+	finish_bulk_remove t true true
+	
+	output_graph t
+	
+	assert normalised t
+	assert num_edges t 2
+	assert not_exists_edge t 1 0
+	assert not_exists_edge t 1 2
+	assert exists_edge t 3 1
+	assert not_exists_edge t 3 4
+	assert not_exists_edge t 5 3
+	assert not_exists_edge t 5 6
+	assert exists_edge t 5 7
+	assert not_exists_edge t 7 8
+	assert not_exists_edge t 8 9
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 2
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 2
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 2
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 2
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
+	
+	remove_edge_bulk t 3 1
+	remove_edge_bulk t 5 7
+	finish_bulk_remove t true true
+	
+	output_graph t
+	
+	assert normalised t
+	assert num_edges t 0
+	assert not_exists_edge t 1 0
+	assert not_exists_edge t 1 2
+	assert not_exists_edge t 3 1
+	assert not_exists_edge t 3 4
+	assert not_exists_edge t 5 3
+	assert not_exists_edge t 5 6
+	assert not_exists_edge t 5 7
+	assert not_exists_edge t 7 8
+	assert not_exists_edge t 8 9
+	
+	assert num_nodes_component t 0 1
+	assert num_nodes_component t 1 1
+	assert num_nodes_component t 2 1
+	assert num_nodes_component t 3 1
+	assert num_nodes_component t 4 1
+	assert num_nodes_component t 5 1
+	assert num_nodes_component t 6 1
+	assert num_nodes_component t 7 1
+	assert num_nodes_component t 8 1
+	assert num_nodes_component t 9 1
