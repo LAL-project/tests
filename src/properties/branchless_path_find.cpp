@@ -93,27 +93,27 @@ err_type execute_program(std::ifstream& fin) noexcept {
 				const lal::node h1 = p.get_h1();
 				const lal::node h2 = p.get_h2();
 				std::cout << i << ")\n";
-				std::cout << "    Number of vertices:   " << p.get_num_nodes() << '\n';
-				std::cout << "    Number of edges:      " << p.get_num_edges() << '\n';
+				std::cout << "    Number of vertices:      " << p.get_num_nodes() << '\n';
+				std::cout << "    Number of edges:         " << p.get_num_edges() << '\n';
 				if (h1 >= t.get_num_nodes()) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Path does not have its first endpoint.\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    First endpoint:       " << h1 << " -- degree: " << t.get_degree(h1) << '\n';
+				std::cout << "    First endpoint:          " << h1 << " -- degree: " << t.get_degree(h1) << '\n';
 				if (h2 >= t.get_num_nodes()) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Path does not have its second endpoint.\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    Second endpoint:      " << h2 << " -- degree: " << t.get_degree(h2) << '\n';
+				std::cout << "    Second endpoint:         " << h2 << " -- degree: " << t.get_degree(h2) << '\n';
 				if (h1 == h2) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Singularity!\n";
 					std::cerr << "    h1 is equal to h2!\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    Lowest lexicographic: " << p.get_lowest_lexicographic() << '\n';
+				std::cout << "    Lowest lexicographic:    " << p.get_lowest_lexicographic() << '\n';
 				if (p.get_num_nodes() <= 2) {
 					if (p.get_lowest_lexicographic() < t.get_num_nodes()) {
 						std::cerr << ERROR << '\n';
@@ -128,7 +128,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
-				std::cout << "    Is antenna:           " << p.is_antenna(t) << '\n';
+				std::cout << "    Is antenna:              " << p.is_antenna(t) << '\n';
 				if (p.is_antenna(t)) {
 					if (t.get_degree(h1) != 1 and t.get_degree(h2) != 1) {
 						std::cerr << ERROR << '\n';
@@ -136,7 +136,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						return err_type::test_execution;
 					}
 				}
-				std::cout << "    Vertex sequence:     ";
+				std::cout << "    Vertex sequence:        ";
 				for (lal::node u : p.get_vertex_sequence()) {
 					std::cout << ' ' << u;
 
@@ -148,6 +148,37 @@ err_type execute_program(std::ifstream& fin) noexcept {
 							return err_type::test_execution;
 						}
 					}
+					else {
+						if (t.get_degree(u) == 2) {
+							std::cerr << ERROR << '\n';
+							std::cerr << "    Degree of hub vertex '" << u << "' is 2, but it should not be.\n";
+							return err_type::test_execution;
+						}
+					}
+
+					if (not p.has_node(u)) {
+						std::cerr << ERROR << '\n';
+						std::cerr << "    Vertex '" << u << "' is in the vertex sequence but 'not in the path'.\n";
+						return err_type::test_execution;
+					}
+				}
+				std::cout << '\n';
+				std::cout << "    Position of each vertex:";
+				for (lal::node u = 0; u < t.get_num_nodes(); ++u) {
+
+					std::cout << ' ';
+					if (p.has_node(u)) {
+						std::cout << p.position(u);
+						if (p.position(u) >= t.get_num_nodes()) {
+							std::cerr << ERROR << '\n';
+							std::cerr << "    Position of vertex '" << u << "' is invalid.\n";
+							return err_type::test_execution;
+						}
+					}
+					else {
+						std::cout << 'x';
+					}
+
 				}
 				std::cout << '\n';
 			}
