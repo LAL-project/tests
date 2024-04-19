@@ -23,35 +23,39 @@ Tree:
 -------------
 Total paths: 4
 0)
-    Number of vertices:   6
-    Number of edges:      5
-    First endpoint:       0 -- degree: 4
-    Second endpoint:      5 -- degree: 1
-    Lowest lexicographic: 1
-    Is antenna:           1
-    Vertex sequence:      0 1 2 3 4 5
+    Number of vertices:      6
+    Number of edges:         5
+    First endpoint:          0 -- degree: 4
+    Second endpoint:         5 -- degree: 1
+    Lowest lexicographic:    1
+    Is antenna:              1
+    Vertex sequence:         0 1 2 3 4 5
+    Position of each vertex: 0 1 2 3 4 5 x x x x x x x x x x x x x x
 1)
-    Number of vertices:   6
-    Number of edges:      5
-    First endpoint:       0 -- degree: 4
-    Second endpoint:      10 -- degree: 1
-    Lowest lexicographic: 6
-    Is antenna:           1
-    Vertex sequence:      0 6 7 8 9 10
+    Number of vertices:      6
+    Number of edges:         5
+    First endpoint:          0 -- degree: 4
+    Second endpoint:         10 -- degree: 1
+    Lowest lexicographic:    6
+    Is antenna:              1
+    Vertex sequence:         0 6 7 8 9 10
+    Position of each vertex: 0 x x x x x 1 2 3 4 5 x x x x x x x x x
 2)
-    Number of vertices:   6
-    Number of edges:      5
-    First endpoint:       0 -- degree: 4
-    Second endpoint:      15 -- degree: 1
-    Lowest lexicographic: 11
-    Is antenna:           1
-    Vertex sequence:      0 11 12 13 14 15
+    Number of vertices:      6
+    Number of edges:         5
+    First endpoint:          0 -- degree: 4
+    Second endpoint:         15 -- degree: 1
+    Lowest lexicographic:    11
+    Is antenna:              1
+    Vertex sequence:         0 11 12 13 14 15
+    Position of each vertex: 0 x x x x x x x x x x 1 2 3 4 5 x x x x
 3)
-    Number of vertices:   5
-    Number of edges:      4
-    First endpoint:       0 -- degree: 4
-    Second endpoint:      19 -- degree: 1
-    Lowest lexicographic: 16
-    Is antenna:           1
-    Vertex sequence:      0 16 17 18 19
+    Number of vertices:      5
+    Number of edges:         4
+    First endpoint:          0 -- degree: 4
+    Second endpoint:         19 -- degree: 1
+    Lowest lexicographic:    16
+    Is antenna:              1
+    Vertex sequence:         0 16 17 18 19
+    Position of each vertex: 0 x x x x x x x x x x x x x x x 1 2 3 4
 Test finished without apparent errors.
