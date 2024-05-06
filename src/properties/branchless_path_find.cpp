@@ -168,8 +168,8 @@ err_type execute_program(std::ifstream& fin) noexcept {
 
 					std::cout << ' ';
 					if (p.has_node(u)) {
-						std::cout << p.position(u);
-						if (p.position(u) >= t.get_num_nodes()) {
+						std::cout << p.get_position(u);
+						if (p.get_position(u) >= t.get_num_nodes()) {
 							std::cerr << ERROR << '\n';
 							std::cerr << "    Position of vertex '" << u << "' is invalid.\n";
 							return err_type::test_execution;
