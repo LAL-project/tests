@@ -70,7 +70,7 @@ noexcept
 {
 	const auto max_distance_from_source =
 	[](const tree_t& t, lal::node a) {
-		lal::detail::data_array<uint64_t> dis(t.get_num_nodes(), 0);
+		lal::detail::array<uint64_t> dis(t.get_num_nodes(), 0);
 		uint64_t max_dist = 0;
 
 		lal::detail::BFS bfs(t);

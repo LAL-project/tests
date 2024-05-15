@@ -50,7 +50,7 @@
 // lal includes
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
-#include <lal/detail/data_array.hpp>
+#include <lal/detail/array.hpp>
 
 // nauty includes
 #include <nauty/gtools.h>
@@ -224,7 +224,7 @@ std::vector<std::vector<lal::edge>> compute_edge_orbits(
 )
 noexcept
 {
-	lal::detail::data_array<char> edge_used(t.get_num_nodes() - 1, 0);
+	lal::detail::array<char> edge_used(t.get_num_nodes() - 1, 0);
 	std::vector<std::vector<lal::edge>> edge_orbits;
 	edge_orbits.reserve(t.get_num_nodes() - 1);
 

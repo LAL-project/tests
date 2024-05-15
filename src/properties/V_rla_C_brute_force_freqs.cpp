@@ -52,7 +52,7 @@
 
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
-#include <lal/detail/data_array.hpp>
+#include <lal/detail/array.hpp>
 
 enum class frequency_type : int8_t {
 	invalid,

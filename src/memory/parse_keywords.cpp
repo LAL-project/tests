@@ -58,10 +58,10 @@ noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "data_array") {
-		return exe_memory_detail_data_array(fin);
+		return exe_memory_detail_array(fin);
 	}
 	if (key == "linear_queue") {
-		return exe_memory_detail_linear_queue(fin);
+		return exe_memory_detail_queue_array(fin);
 	}
 
 	std::cerr << ERROR << '\n';

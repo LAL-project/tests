@@ -142,7 +142,7 @@ noexcept
 	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	lal::detail::array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
 	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
@@ -167,7 +167,7 @@ noexcept
 	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	lal::detail::array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
 	std::size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -191,7 +191,7 @@ noexcept
 	lal::numeric::integer gen = 0;
 
 	// store the trees so we can test for uniqueness
-	lal::detail::data_array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
+	lal::detail::array<lal::graphs::free_tree> all_free_trees(UFT[n].to_uint());
 	std::size_t it = 0;
 
 	while (not TreeGen.end()) {

@@ -115,7 +115,7 @@ noexcept
 	// number of generated trees
 	lal::numeric::integer gen = 0;
 
-	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	lal::detail::array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
 	std::size_t it = 0;
 
 	while (not TreeGen.end()) {
@@ -136,7 +136,7 @@ noexcept
 	// number of generated trees
 	lal::numeric::integer gen = 0;
 
-	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	lal::detail::array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
 	std::size_t it = 0;
 
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -156,7 +156,7 @@ noexcept
 	// number of generated trees
 	lal::numeric::integer gen = 0;
 
-	lal::detail::data_array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
+	lal::detail::array<lal::graphs::rooted_tree> all_rooted_trees(URT[n].to_uint());
 	std::size_t it = 0;
 
 	while (not TreeGen.end()) {

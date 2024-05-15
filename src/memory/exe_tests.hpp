@@ -52,8 +52,6 @@
 
 // C++ includes
 #include <fstream>
-#include <vector>
-#include <string>
 
 // common includes
 #include "common/definitions.hpp"
@@ -63,8 +61,8 @@ namespace memory {
 
 err_type exe_memory_graphs(std::ifstream& fin) noexcept;
 err_type exe_memory_numeric(std::ifstream& fin) noexcept;
-err_type exe_memory_detail_data_array(std::ifstream& fin) noexcept;
-err_type exe_memory_detail_linear_queue(std::ifstream& fin) noexcept;
+err_type exe_memory_detail_array(std::ifstream& fin) noexcept;
+err_type exe_memory_detail_queue_array(std::ifstream& fin) noexcept;
 
 } // -- namespace memory
 } // -- namespace tests

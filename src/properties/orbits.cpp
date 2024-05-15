@@ -63,7 +63,7 @@ typedef std::vector<orbit> orbit_set;
 bool equal(const orbit_set& LAL, const orbit_set& nauty) noexcept {
 	if (LAL.size() != nauty.size()) { return false; }
 
-	lal::detail::data_array<char> nauty_matched(nauty.size(), 0);
+	lal::detail::array<char> nauty_matched(nauty.size(), 0);
 
 	for (std::size_t i = 0; i < LAL.size(); ++i) {
 		bool matched = false;

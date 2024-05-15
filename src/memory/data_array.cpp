@@ -43,10 +43,9 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <map>
 
 // lal includes
-#include <lal/detail/data_array.hpp>
+#include <lal/detail/array.hpp>
 using namespace lal::detail;
 
 // common includes
@@ -62,7 +61,7 @@ using namespace lal::detail;
 namespace tests {
 namespace memory {
 
-namespace lal_data_array {
+namespace lal_array {
 
 #if defined MOVE
 void test_move_constructor() noexcept {
@@ -70,36 +69,36 @@ void test_move_constructor() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(0);
+	array<int> A(0);
 	output_array(A);
-	data_array<int> B(std::move(A));
-	output_array(A);
-	output_array(B);
-	}
-
-	{
-	begin_case;
-	data_array<int> A(0, 333);
-	output_array(A);
-	data_array<int> B(std::move(A));
+	array<int> B(std::move(A));
 	output_array(A);
 	output_array(B);
 	}
 
 	{
 	begin_case;
-	data_array<int> A(5, 100);
+	array<int> A(0, 333);
 	output_array(A);
-	data_array<int> B(std::move(A));
+	array<int> B(std::move(A));
 	output_array(A);
 	output_array(B);
 	}
 
 	{
 	begin_case;
-	data_array<int> A(10, 1);
+	array<int> A(5, 100);
 	output_array(A);
-	data_array<int> B(std::move(A));
+	array<int> B(std::move(A));
+	output_array(A);
+	output_array(B);
+	}
+
+	{
+	begin_case;
+	array<int> A(10, 1);
+	output_array(A);
+	array<int> B(std::move(A));
 	output_array(A);
 	output_array(B);
 	}
@@ -107,11 +106,11 @@ void test_move_constructor() noexcept {
 
 void test_move_assignment() noexcept {
 	begin_function;
-	data_array<int> TO(0);
+	array<int> TO(0);
 
 	{
 	begin_case;
-	data_array<int> A(0);
+	array<int> A(0);
 	output_array(A);
 	TO = std::move(A);
 	output_array(A);
@@ -124,7 +123,7 @@ void test_move_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(0, 333);
+	array<int> A(0, 333);
 	output_array(A);
 	TO = std::move(A);
 	output_array(A);
@@ -137,7 +136,7 @@ void test_move_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(5, 100);
+	array<int> A(5, 100);
 	output_array(A);
 	TO = std::move(A);
 	output_array(A);
@@ -150,7 +149,7 @@ void test_move_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(10, 1);
+	array<int> A(10, 1);
 	output_array(A);
 	TO = std::move(A);
 	output_array(A);
@@ -169,36 +168,36 @@ void test_copy_constructor() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(0);
+	array<int> A(0);
 	output_array(A);
-	data_array<int> B(A);
-	output_array(A);
-	output_array(B);
-	}
-
-	{
-	begin_case;
-	data_array<int> A(0, 333);
-	output_array(A);
-	data_array<int> B(A);
+	array<int> B(A);
 	output_array(A);
 	output_array(B);
 	}
 
 	{
 	begin_case;
-	data_array<int> A(5, 100);
+	array<int> A(0, 333);
 	output_array(A);
-	data_array<int> B(A);
+	array<int> B(A);
 	output_array(A);
 	output_array(B);
 	}
 
 	{
 	begin_case;
-	data_array<int> A(10, 1);
+	array<int> A(5, 100);
 	output_array(A);
-	data_array<int> B(A);
+	array<int> B(A);
+	output_array(A);
+	output_array(B);
+	}
+
+	{
+	begin_case;
+	array<int> A(10, 1);
+	output_array(A);
+	array<int> B(A);
 	output_array(A);
 	output_array(B);
 	}
@@ -210,16 +209,16 @@ public:
 		A.resize(10, 5);
 	}
 
-	data_array<int> A;
+	array<int> A;
 };
 
 void test_copy_assignment() noexcept {
 	begin_function;
-	data_array<int> TO(0);
+	array<int> TO(0);
 
 	{
 	begin_case;
-	data_array<int> A(0);
+	array<int> A(0);
 	output_array(A);
 	TO = A;
 	output_array(A);
@@ -232,7 +231,7 @@ void test_copy_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(0, 333);
+	array<int> A(0, 333);
 	output_array(A);
 	TO = A;
 	output_array(A);
@@ -245,7 +244,7 @@ void test_copy_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(5, 100);
+	array<int> A(5, 100);
 	output_array(A);
 	TO = A;
 	output_array(A);
@@ -258,7 +257,7 @@ void test_copy_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A(10, 1);
+	array<int> A(10, 1);
 	output_array(A);
 	TO = A;
 	output_array(A);
@@ -271,15 +270,15 @@ void test_copy_assignment() noexcept {
 
 	{
 	begin_case;
-	data_array<int> A;
+	array<int> A;
 	output_array(A);
-	A = data_array<int>(10, 5);
+	A = array<int>(10, 5);
 	output_array(A);
 	}
 
 	{
 	begin_case;
-	data_array<int> A;
+	array<int> A;
 	output_array(A);
 	A.resize(10, 5);
 	output_array(A);
@@ -299,7 +298,7 @@ template <bool clear>
 void test_resize_fill() noexcept {
 	begin_function;
 
-	data_array<int> d;
+	array<int> d;
 
 	begin_case;
 	d.resize(1, 1);
@@ -335,20 +334,20 @@ void test_resize_fill() noexcept {
 
 }
 
-err_type exe_memory_detail_data_array(std::ifstream&) noexcept {
+err_type exe_memory_detail_array(std::ifstream&) noexcept {
 
 #if defined MOVE
-	lal_data_array::test_move_constructor();
-	lal_data_array::test_move_assignment();
+	lal_array::test_move_constructor();
+	lal_array::test_move_assignment();
 #endif
 
 #if defined COPY
-	lal_data_array::test_copy_constructor();
-	lal_data_array::test_copy_assignment();
+	lal_array::test_copy_constructor();
+	lal_array::test_copy_assignment();
 #endif
 
-	lal_data_array::test_resize_fill<false>();
-	lal_data_array::test_resize_fill<true>();
+	lal_array::test_resize_fill<false>();
+	lal_array::test_resize_fill<true>();
 
 	TEST_GOODBYE;
 	return err_type::no_error;

@@ -130,7 +130,7 @@ err_type check_from_code(std::ifstream& fin) noexcept {
 			const auto library_res = lal::linarr::max_sum_edge_lengths_projective_roots(t);
 
 			// Brute force result
-			lal::detail::data_array<uint64_t> brute_force_res(n);
+			lal::detail::array<uint64_t> brute_force_res(n);
 			for (lal::node u = 0; u < n; ++u) {
 				lal::graphs::rooted_tree rt(t, u);
 				rt.calculate_size_subtrees();

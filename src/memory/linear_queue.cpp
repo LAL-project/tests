@@ -43,11 +43,10 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <map>
 
 // lal includes
-#include <lal/detail/data_array.hpp>
-#include <lal/detail/linear_queue.hpp>
+#include <lal/detail/array.hpp>
+#include <lal/detail/queue_array.hpp>
 using namespace lal::detail;
 
 // common includes
@@ -63,7 +62,7 @@ using namespace lal::detail;
 namespace tests {
 namespace memory {
 
-namespace lal_linear_queue {
+namespace lal_queue_array {
 
 struct S {
 	std::string m_s;
@@ -101,7 +100,7 @@ void test_move_push() noexcept {
 
 	{
 	begin_case;
-	linear_queue<S> q;
+	queue_array<S> q;
 	std::cout << "Initializing...\n";
 	q.init(10);
 
@@ -115,7 +114,7 @@ void test_move_push() noexcept {
 
 	{
 	begin_case;
-	linear_queue<S> q;
+	queue_array<S> q;
 	std::cout << "Initializing...\n";
 	q.init(10);
 
@@ -145,7 +144,7 @@ void test_move_pop() noexcept {
 
 	{
 	begin_case;
-	linear_queue<S> q;
+	queue_array<S> q;
 	std::cout << "Initializing...\n";
 	q.init(10);
 
@@ -170,7 +169,7 @@ void test_copy_push() noexcept {
 
 	{
 	begin_case;
-	linear_queue<S> q;
+	queue_array<S> q;
 	std::cout << "Initializing...\n";
 	q.init(10);
 
@@ -202,7 +201,7 @@ void test_copy_pop() noexcept {
 
 	{
 	begin_case;
-	linear_queue<S> q;
+	queue_array<S> q;
 	std::cout << "Initializing...\n";
 	q.init(10);
 
@@ -221,21 +220,21 @@ void test_copy_pop() noexcept {
 }
 #endif
 
-} // -- namespace lal_linear_queue
+} // -- namespace lal_queue_array
 
-err_type exe_memory_detail_linear_queue(std::ifstream&) noexcept {
+err_type exe_memory_detail_queue_array(std::ifstream&) noexcept {
 
 #if defined MOVE
-	lal_linear_queue::test_move_push();
-	lal_linear_queue::test_move_pop();
+	lal_queue_array::test_move_push();
+	lal_queue_array::test_move_pop();
 #endif
 
 #if defined COPY
-	lal_linear_queue::test_copy_push();
-	lal_linear_queue::test_copy_pop();
+	lal_queue_array::test_copy_push();
+	lal_queue_array::test_copy_pop();
 #endif
 
-	linear_queue<int> q;
+	queue_array<int> q;
 	q.init(10);
 	q.push(1);
 	q.push(2);

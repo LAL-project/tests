@@ -133,7 +133,7 @@ noexcept
 		// read and check correctness of all arrangements
 		std::size_t n_classes;
 		fin >> n_classes;
-		lal::detail::data_array<lal::linear_arrangement> file_arrs(n_classes);
+		lal::detail::array<lal::linear_arrangement> file_arrs(n_classes);
 
 		for (std::size_t c = 0; c < n_classes; ++c) {
 			uint64_t mult; fin >> mult;	// multiplicity
@@ -244,7 +244,7 @@ noexcept
 			return tests::err_type::test_execution;
 		}
 
-		lal::detail::data_array<char> matched(file_arrs.size(), 0);
+		lal::detail::array<char> matched(file_arrs.size(), 0);
 
 		// make sure the arrangements are isomorphic in both sets are isomorphic
 		for (std::size_t i = 0; i < library_res.second.size(); ++i) {
