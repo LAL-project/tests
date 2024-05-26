@@ -86,6 +86,7 @@
 #define FUNC_GRAPH_CHECK_Q_IT "check_Q_iterator"
 #define FUNC_GRAPH_OUTPUT_Q "output_Q"
 #define FUNC_GRAPH_Q_SIZE "size_Q"
+#define FUNC_GRAPH_GET_CCS "get_connected_components"
 
 #define FUNC_DGRAPH_TO_UGRAPH "dgraph_to_ugraph"
 
@@ -549,6 +550,35 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 					lal::properties::num_pairs_independent_edges_integer(ugraphvars[g1]))
 			<< '\n';
 
+		}
+		else if (option == FUNC_GRAPH_GET_CCS) {
+			fin >> g1;
+			assert_exists_variable(FUNC_GRAPH_GET_CCS, g1);
+
+			if (graph_type(g1) == UGRAPH or graph_type(g1) == FTREE) {
+				const std::vector<lal::graphs::undirected_graph> res =
+					ugraphvars[g1].get_connected_components();
+
+				std::size_t i = 0;
+				for (const auto& g : res) {
+					std::cout << "----\n";
+					std::cout << i << ")\n";
+					std::cout << g << '\n';
+					++i;
+				}
+			}
+			else if (graph_type(g1) == DGRAPH or graph_type(g1) == RTREE) {
+				const std::vector<lal::graphs::directed_graph> res =
+					dgraphvars[g1].get_connected_components();
+
+				std::size_t i = 0;
+				for (const auto& g : res) {
+					std::cout << "----\n";
+					std::cout << i << ")\n";
+					std::cout << g << '\n';
+					++i;
+				}
+			}
 		}
 
 		// DGRAPH
