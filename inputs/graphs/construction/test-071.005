@@ -1,0 +1,11 @@
+TYPE graphs-construction
+
+	create_graph dgraph g 10
+	add_edge g 0 1 true true
+	add_edge g 2 1 true true
+	add_edge g 3 2 true true
+	add_edge g 4 1 true true
+	add_edge g 5 6 true true
+	output_graph g
+	get_connected_components g
+

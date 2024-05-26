@@ -1,0 +1,14 @@
+TYPE graphs-construction
+
+	create_graph ugraph g 10
+	add_edge g 0 1 true true
+	add_edge g 4 5 true true
+	add_edge g 4 6 true true
+	add_edge g 4 7 true true
+	add_edge g 5 6 true true
+	add_edge g 6 7 true true
+	add_edge g 5 8 true true
+	add_edge g 7 9 true true
+	output_graph g
+	get_connected_components g
+

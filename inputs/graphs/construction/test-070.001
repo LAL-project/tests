@@ -1,0 +1,36 @@
+TYPE graphs-construction
+
+	create_graph ugraph g0 3
+	add_edge g0 0 1 true true
+	output_graph g0
+	get_connected_components g0
+	
+	
+	create_graph ugraph g1 4
+	add_edge g1 0 1 true true
+	add_edge g1 2 3 true true
+	output_graph g1
+	get_connected_components g1
+	
+	
+	create_graph ugraph g2 5
+	add_edge g2 0 1 true true
+	add_edge g2 2 3 true true
+	output_graph g2
+	get_connected_components g2
+	
+	
+	create_graph ugraph g12 4
+	add_edge g12 0 1 true true
+	add_edge g12 1 2 true true
+	add_edge g12 2 3 true true
+	output_graph g12
+	get_connected_components g12
+	
+	
+	create_graph ugraph g22 5
+	add_edge g22 0 1 true true
+	add_edge g22 1 2 true true
+	add_edge g22 2 3 true true
+	output_graph g22
+	get_connected_components g22

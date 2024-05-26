@@ -85,6 +85,9 @@ COMMANDS AVAILABLE
 	If the graphs are rooted trees, then the command requires an extra
 	Boolean parameter true/false.
 
+** get_connected_components GRAPH true/false true/false
+	Outputs all connected components of the input graph GRAPH
+
 +++++++++++++++++++++++++++++++++++++++++
 
 ** assert

@@ -1,0 +1,14 @@
+TYPE graphs-construction
+
+	create_graph ugraph g0 0
+	output_graph g0
+	get_connected_components g0
+	
+	create_graph ugraph g1 1
+	output_graph g1
+	get_connected_components g1
+	
+	create_graph ugraph g2 2
+	output_graph g2
+	get_connected_components g2
+	
