@@ -138,7 +138,7 @@ noexcept
 	)
 	{
 		for (std::size_t i = 0; i < chunks.size(); ++i) {
-			const auto& c = chunks.get_chunk(i);
+			const auto& c = chunks[i];
 			if (not are_nodes_contiguous(c.get_nodes(), arr)) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "Nodes of chunk " << i << " are not contiguous in the arrangement\n";
