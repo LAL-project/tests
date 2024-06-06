@@ -40,18 +40,14 @@
  *
  ********************************************************************/
 
-#pragma once
-
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be recompiled.
- */
-
 // C++ includes
+#include <iostream>
 #include <fstream>
+// lal includes
+#include <lal/graphs/undirected_graph.hpp>
+#include <lal/graphs/directed_graph.hpp>
+#include <lal/graphs/output.hpp>
+#include <lal/properties/connected_components_compute.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -59,22 +55,71 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_general(std::ifstream& fin) noexcept;
-err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept;
-err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept;
-err_type exe_properties_orbits(std::ifstream& fin) noexcept;
-err_type exe_properties_ExpVar_C(std::ifstream& fin) noexcept;
-err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept;
-err_type exe_properties_centre(std::ifstream& fin) noexcept;
-err_type exe_properties_centroid(std::ifstream& fin) noexcept;
-err_type exe_properties_connected_components(std::ifstream& fin) noexcept;
-err_type exe_properties_diameter(std::ifstream& fin) noexcept;
-err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept;
-err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept;
+template <class graph_t>
+void run_tests(std::ifstream& fin) noexcept {
+	uint64_t n;
+	while (fin >> n) {
+		std::cout << "=====================\n";
+
+		graph_t g(n);
+
+		std::size_t num_edges;
+		fin >> num_edges;
+
+		for (std::size_t i = 0; i < num_edges; ++i) {
+			lal::node u, v;
+			fin >> u >> v;
+			g.add_edge_bulk(u, v);
+		}
+		g.finish_bulk_add();
+
+		const auto ccs = lal::properties::compute_connected_components(g);
+		for (lal::node u = 0; u < n; ++u) {
+			std::cout
+				<< u
+				<< " is in connected component "
+				<< ccs.get_cc_node(u)
+				<< " and is vertex "
+				<< ccs.get_label_graph_node_to_cc_node(u)
+				<< " within its component\n";
+		}
+
+		for (std::size_t i = 0; i < ccs.size(); ++i) {
+			std::cout << "---------------------\n";
+			std::cout << ccs[i] << '\n';
+
+			const auto ni = ccs[i].get_num_nodes();
+			for (lal::node u = 0; u < ni; ++u) {
+				std::cout
+					<< "    "
+					<< u
+					<< " in the connected component is "
+					<< ccs.get_label_cc_node_to_graph_node(i, u)
+					<< " in the original graph\n";
+			}
+		}
+	}
+}
+
+err_type exe_properties_connected_components(std::ifstream& fin) noexcept {
+	std::string graph_type;
+	fin >> graph_type;
+
+	if (graph_type == "undirected") {
+		run_tests<lal::graphs::undirected_graph>(fin);
+	}
+	else if (graph_type == "directed") {
+		run_tests<lal::graphs::directed_graph>(fin);
+	}
+	else {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Unhandled graph type '" << graph_type << "'\n";
+		return err_type::test_format;
+	}
+
+	TEST_GOODBYE;
+	return err_type::no_error;
+}
 
 } // -- namespace properties
 } // -- namespace tests

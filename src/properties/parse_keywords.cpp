@@ -116,6 +116,9 @@ noexcept
 	if (key == "centroid") {
 		return exe_properties_centroid(fin);
 	}
+	if (key == "connected_components") {
+		return exe_properties_connected_components(fin);
+	}
 	if (key == "diameter") {
 		return exe_properties_diameter(fin);
 	}

@@ -98,6 +98,7 @@ SOURCES += \
 	bipartite_coloring.cpp \
 	branchless_path_find.cpp \
 	caterpillar_distance.cpp \
+	connected_components.cpp \
 	diameter.cpp \
 	expected_D_bipartite.cpp \
 	expected_D_planar.cpp \
