@@ -133,6 +133,7 @@ groups_list=(\
 		"properties_branchless_paths" \
 		"properties_centre" \
 		"properties_centroid" \
+		"properties_connected_components" \
 		"properties_diameter" \
 		"properties_maximum_subtrees" \
 			"properties_maximum_subtrees_caterpillar" \

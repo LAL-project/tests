@@ -20,6 +20,11 @@ properties_centre_DIRS=(\
 	"properties/centre" "properties/centre" \
 	)
 
+# maximum subtrees
+properties_connected_components_DIRS=(\
+	"properties/connected_components" "properties/connected_components" \
+	)
+
 # properties_centre tests
 properties_centroid_DIRS=(\
 	"properties/centroid" "properties/centroid" \
@@ -109,6 +114,7 @@ properties_DIRS=(\
 	"${properties_coloring_DIRS[@]}" \
 	"${properties_centre_DIRS[@]}" \
 	"${properties_centroid_DIRS[@]}" \
+	"${properties_connected_components_DIRS[@]}" \
 	"${properties_diameter_DIRS[@]}" \
 	"${properties_maximum_subtrees_DIRS[@]}" \
 	)

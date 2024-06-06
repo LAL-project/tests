@@ -185,6 +185,7 @@ function show_usage() {
 	echo "            properties_coloring : execute coloring tests"
 	echo "            properties_centre : execute centre tests"
 	echo "            properties_centroid : execute centroid tests"
+	echo "            properties_connected_components : execute connected components tests"
 	echo "            properties_diameter : execute diameter tests"
 	echo "            properties_branchless_paths : execute branchless paths tests"
 	echo "            properties_orbits : execute vertex orbits tests"
