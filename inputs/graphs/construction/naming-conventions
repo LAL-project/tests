@@ -61,4 +61,5 @@ We are currently using the following names:
 	063: sizes of rtree (of the tree and of the subtrees)
 	
 	070: retrieval of connected components of an undirected graph
+	071: retrieval of connected components of a directed graph
 	073: retrieve subtree of a rooted tree
