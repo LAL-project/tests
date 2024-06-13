@@ -46,6 +46,7 @@
 #include <fstream>
 // lal includes
 #include <lal/linarr/dependency_flux.hpp>
+#include <lal/linarr/dependency_flux_compute.hpp>
 #include <lal/graphs/conversions.hpp>
 #include <lal/graphs/output.hpp>
 
