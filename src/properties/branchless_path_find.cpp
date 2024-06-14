@@ -49,7 +49,7 @@
 #include <lal/graphs/output.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/all_ulab_free_trees.hpp>
-#include <lal/properties/branchless_path_find.hpp>
+#include <lal/properties/branchless_paths_compute.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -86,7 +86,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 			std::cout << "-------------\n";
 		}
 		else if (command == "print_paths") {
-			const std::vector<bp> bps = lal::properties::find_all_branchless_paths(t);
+			const std::vector<bp> bps = lal::properties::branchless_paths_compute(t);
 			std::cout << "Total paths: " << bps.size() << '\n';
 			for (std::size_t i = 0; i < bps.size(); ++i) {
 				const bp& p = bps[i];

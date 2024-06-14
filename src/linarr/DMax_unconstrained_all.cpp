@@ -41,7 +41,6 @@
  ********************************************************************/
 
 // C++ includes
-#include <filesystem>
 #include <fstream>
 
 // lal includes
@@ -55,7 +54,7 @@
 #include <lal/numeric/integer.hpp>
 #include <lal/numeric/rational.hpp>
 #include <lal/io/basic_output.hpp>
-#include <lal/properties/branchless_path_find.hpp>
+#include <lal/properties/branchless_paths_compute.hpp>
 
 #include <lal/detail/linarr/level_signature.hpp>
 #include <lal/detail/linarr/D/DMax/necessary_conditions.hpp>
@@ -105,7 +104,7 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 			mlev_sigs1.reserve(n);
 			lev_sigs2.reserve(n);
 
-			bps = lal::properties::find_all_branchless_paths(t);
+			bps = lal::properties::branchless_paths_compute(t);
 		},
 		// calculate result
 		[&](const free_tree& t) {
