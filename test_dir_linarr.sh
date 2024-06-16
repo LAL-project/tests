@@ -126,8 +126,8 @@ linarr_chunking_Macutek_DIRS=(\
 	"linarr/chunking/macutek" "linarr/chunking/macutek" \
 	)
 linarr_chunking_DIRS=(\
-	"${linarr_chunk_anderson_DIRS[@]}" \
-	"${linarr_chunk_macutek_DIRS[@]}" \
+	"${linarr_chunking_Anderson_DIRS[@]}" \
+	"${linarr_chunking_Macutek_DIRS[@]}" \
 	)
 
 # Dmin tests
