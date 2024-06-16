@@ -1,2 +1,9 @@
+chunk 0: 0 1 2 3
+chunk 1: 4 5
+chunk 2: 6
+chunk 3: 7 8
+chunk 4: 9 10
+chunk 5: 11 12
+chunk 6: 13 14
 3 1 0 3 4 5 5
 Test finished without apparent errors.
