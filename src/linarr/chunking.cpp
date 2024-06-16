@@ -69,13 +69,21 @@ void output_head_vector(const lal::head_vector& hv) noexcept {
 
 void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
 	for (std::size_t i = 0; i < chunks.size(); ++i) {
-		std::cout << "chunk " << i << ':';
+		std::cout << i << ":\n";
 		const lal::linarr::chunk& chunk = chunks[i];
 
+		if (not chunk.has_parent_node()) {
+			std::cout << "\t!\n";
+		}
+		else {
+			std::cout << "\tpar: " << chunk.get_parent_node() << '\n';
+		}
+
+		std::cout << "\tnod:";
 		const auto& nodes = chunk.get_nodes();
-		for (std::size_t j = 0; j < nodes.size(); ++j) {
-			std::cout << ' ' << nodes[j];
-			if (chunk.has_parent_node() and chunk.get_parent_node() == nodes[j]) {
+		for (lal::node v : nodes) {
+			std::cout << ' ' << v;
+			if (chunk.has_root_node() and chunk.get_root_node() == v) {
 				std::cout << '*';
 			}
 		}
@@ -161,6 +169,24 @@ noexcept
 				error = true;
 			}
 		}
+	}
+
+	// ensure the chunk's root and its parent are adjacent in the tree
+	{
+	for (std::size_t i = 0; i < chunks.size(); ++i) {
+		const auto& c = chunks[i];
+		if (c.has_parent_node() and c.has_root_node()) {
+			const lal::node parent = c.get_parent_node();
+			const lal::node root = c.get_root_node();
+			if (not rt.has_edge(parent, root)) {
+				std::cerr << ERROR << '\n';
+				std::cerr << "Parent of chunk: " << parent << '\n';
+				std::cerr << "Root of chunk:   " << root<< '\n';
+				std::cerr << "Are not adjacent in the tree.\n";
+				error = true;
+			}
+		}
+	}
 	}
 	
 	if (error) {
@@ -262,6 +288,7 @@ noexcept
 			const lal::graphs::rooted_tree chunked_rt =
 				lal::linarr::make_tree_from_chunk_sequence(chunks);
 			
+			std::cout << "===\n";
 			output_chunks(chunks);
 			output_head_vector(chunked_rt.get_head_vector());
 			
