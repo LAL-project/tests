@@ -67,6 +67,22 @@ void output_head_vector(const lal::head_vector& hv) noexcept {
 	std::cout << '\n';
 }
 
+void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
+	for (std::size_t i = 0; i < chunks.size(); ++i) {
+		std::cout << "chunk " << i << ':';
+		const lal::linarr::chunk& chunk = chunks[i];
+
+		const auto& nodes = chunk.get_nodes();
+		for (std::size_t j = 0; j < nodes.size(); ++j) {
+			std::cout << ' ' << nodes[j];
+			if (chunk.has_parent_node() and chunk.get_parent_node() == nodes[j]) {
+				std::cout << '*';
+			}
+		}
+		std::cout << '\n';
+	}
+}
+
 bool are_nodes_contiguous(
 	const std::vector<lal::node>& node_set,
 	const lal::linear_arrangement& arr
@@ -220,6 +236,7 @@ noexcept
 	const lal::graphs::rooted_tree chunked_rt =
 		lal::linarr::make_tree_from_chunk_sequence(chunks);
 	
+	output_chunks(chunks);
 	output_head_vector(chunked_rt.get_head_vector());
 	
 	return test_chunked_tree(rt, arr, chunked_rt, chunks, algo);
@@ -245,6 +262,7 @@ noexcept
 			const lal::graphs::rooted_tree chunked_rt =
 				lal::linarr::make_tree_from_chunk_sequence(chunks);
 			
+			output_chunks(chunks);
 			output_head_vector(chunked_rt.get_head_vector());
 			
 			const auto err = test_chunked_tree(rt, arr, chunked_rt, chunks, algo);
