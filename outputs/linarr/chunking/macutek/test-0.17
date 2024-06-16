@@ -1,4 +1,8 @@
-chunk 0: 0 1
-chunk 1: 2 3 4
+0:
+	par: 4
+	nod: 0 1*
+1:
+	!
+	nod: 2 3 4
 2 0
 Test finished without apparent errors.

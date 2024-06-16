@@ -1,7 +1,17 @@
-chunk 0: 0
-chunk 1: 1
-chunk 2: 2
-chunk 3: 3
-chunk 4: 4
+0:
+	par: 3
+	nod: 0*
+1:
+	par: 3
+	nod: 1*
+2:
+	par: 4
+	nod: 2*
+3:
+	par: 4
+	nod: 3*
+4:
+	!
+	nod: 4
 4 4 5 5 0
 Test finished without apparent errors.
