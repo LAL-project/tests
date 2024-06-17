@@ -6,7 +6,7 @@
 	nod: 1*
 2:
 	!
-	nod: 2
+	nod: 2*
 3:
 	par: 0
 	nod: 3*

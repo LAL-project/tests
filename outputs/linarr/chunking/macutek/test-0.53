@@ -3,6 +3,6 @@
 	nod: 0*
 1:
 	!
-	nod: 1 2 3
+	nod: 1 2* 3
 2 0
 Test finished without apparent errors.

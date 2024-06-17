@@ -3,7 +3,7 @@
 	nod: 0*
 1:
 	!
-	nod: 1
+	nod: 1*
 2:
 	par: 1
 	nod: 2 3*

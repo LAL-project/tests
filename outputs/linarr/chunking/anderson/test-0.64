@@ -1,8 +1,10 @@
+Hey!
+Hey!
 0:
 	par: 3
 	nod: 0 1 2*
 1:
 	!
-	nod: 3
+	nod: 3*
 2 0
 Test finished without apparent errors.

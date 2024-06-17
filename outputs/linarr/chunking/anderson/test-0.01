@@ -1,9 +1,13 @@
+Hey!
+Hey!
+Hey!
+Hey!
 0:
 	par: 4
 	nod: 0 1* 2
 1:
 	!
-	nod: 3 4
+	nod: 3 4*
 2:
 	par: 9
 	nod: 5 6 7 8*
