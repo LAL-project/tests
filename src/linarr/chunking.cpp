@@ -180,11 +180,16 @@ noexcept
 			const lal::node root = c.get_root_node();
 			if (not rt.has_edge(parent, root)) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "Parent of chunk: " << parent << '\n';
-				std::cerr << "Root of chunk:   " << root<< '\n';
+				std::cerr << "Parent of chunk (" << i << "): " << parent << '\n';
+				std::cerr << "Root of chunk (" << i << "):   " << root<< '\n';
 				std::cerr << "Are not adjacent in the tree.\n";
 				error = true;
 			}
+		}
+		if (not c.has_root_node()) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "Chunk (" << i << ") does not have a root vertex\n";
+			error = true;
 		}
 	}
 	}
