@@ -103,18 +103,18 @@ noexcept
 			ku*(A[s][v] + A[t][v]) +
 			kv*(A[s][u] + A[t][u]);
 
-		const lal::neighbourhood& ns = g.get_neighbours(s);
+		const lal::neighbourhood& ns = g.get_neighbors(s);
 		for (const lal::node& ws : ns) {
 			if (ws == t or ws == u or ws == v) { continue; }
 			n_paths_5 += A[u][ws] + A[v][ws];
 			pair_C3_L2 += A[t][ws];
 		}
-		const lal::neighbourhood& nt = g.get_neighbours(t);
+		const lal::neighbourhood& nt = g.get_neighbors(t);
 		for (const lal::node& wt : nt) {
 			if (wt == s or wt == u or wt == v) { continue; }
 			n_paths_5 += A[u][wt] + A[v][wt];
 		}
-		const lal::neighbourhood& nu = g.get_neighbours(u);
+		const lal::neighbourhood& nu = g.get_neighbors(u);
 		for (const lal::node& wu : nu) {
 			if (wu == s or wu == t or wu == v) { continue; }
 			pair_C3_L2 += A[v][wu];

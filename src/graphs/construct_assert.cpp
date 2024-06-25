@@ -64,8 +64,8 @@
 
 #define ASSERT_GRAPH_EQUAL_GRAPHS "equal_graphs"
 #define ASSERT_GRAPH_NOT_EQUAL_GRAPHS "not_equal_graphs"
-#define ASSERT_GRAPH_IS_NORMALISED "normalised"
-#define ASSERT_GRAPH_NOT_NORMALISED "not_normalised"
+#define ASSERT_GRAPH_IS_NORMALISED "normalized"
+#define ASSERT_GRAPH_NOT_NORMALISED "not_normalized"
 #define ASSERT_GRAPH_EXISTS_EDGE "exists_edge"
 #define ASSERT_GRAPH_NOT_EXISTS_EDGE "not_exists_edge"
 #define ASSERT_GRAPH_NUM_NODES "num_nodes"
@@ -78,9 +78,9 @@
 #define ASSERT_GRAPH_NOT_DIRECTED "not_directed"
 #define ASSERT_GRAPH_DEGREE "degree"
 #define ASSERT_GRAPH_FULL_DEGREE "full_degree"
-#define ASSERT_UGRAPH_NEIGHBOURS_ARE "neighbours_are"
-#define ASSERT_DGRAPH_IN_NEIGHBOURS_ARE "in_neighbours_are"
-#define ASSERT_DGRAPH_OUT_NEIGHBOURS_ARE "out_neighbours_are"
+#define ASSERT_UGRAPH_neighbors_ARE "neighbors_are"
+#define ASSERT_DGRAPH_IN_neighbors_ARE "in_neighbors_are"
+#define ASSERT_DGRAPH_OUT_neighbors_ARE "out_neighbors_are"
 #define ASSERT_DGRAPH_IN_DEGREE "in_degree"
 #define ASSERT_DGRAPH_OUT_DEGREE "out_degree"
 #define ASSERT_TREE_IS_TREE "is_tree"
@@ -161,10 +161,10 @@ noexcept
 	else if (assert_what == ASSERT_GRAPH_IS_NORMALISED) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_GRAPH_IS_NORMALISED, g1);
-		if (not mfunction(g1, is_normalised())) {
+		if (not mfunction(g1, is_normalized())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_IS_NORMALISED);
-			std::cerr << "    Graph '" << g1 << "' is not normalised.\n";
+			std::cerr << "    Graph '" << g1 << "' is not normalized.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -173,10 +173,10 @@ noexcept
 	else if (assert_what == ASSERT_GRAPH_NOT_NORMALISED) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_GRAPH_NOT_NORMALISED, g1);
-		if (mfunction(g1, is_normalised())) {
+		if (mfunction(g1, is_normalized())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NOT_NORMALISED);
-			std::cerr << "    Graph '" << g1 << "' is normalised.\n";
+			std::cerr << "    Graph '" << g1 << "' is normalized.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -382,23 +382,23 @@ noexcept
 	}
 
 	// UNDIRECTED GRAPHS
-	else if (assert_what == ASSERT_UGRAPH_NEIGHBOURS_ARE) {
+	else if (assert_what == ASSERT_UGRAPH_neighbors_ARE) {
 		fin >> g1 >> u >> n;
-		assert_exists_variable(ASSERT_UGRAPH_NEIGHBOURS_ARE, g1);
+		assert_exists_variable(ASSERT_UGRAPH_neighbors_ARE, g1);
 		assert_correct_graph_type
-			(ASSERT_UGRAPH_NEIGHBOURS_ARE, graph_type(g1), undirected_types);
+			(ASSERT_UGRAPH_neighbors_ARE, graph_type(g1), undirected_types);
 
 		std::vector<lal::node> node_list(n);
 		for (lal::node& neigh : node_list) { fin >> neigh; }
 
-		auto neighs = mfunction_undir_graphs(g1, get_neighbours(u));
+		auto neighs = mfunction_undir_graphs(g1, get_neighbors(u));
 
 		sort(neighs.begin(), neighs.end());
 		sort(node_list.begin(), node_list.end());
 		if (neighs != node_list) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_UGRAPH_NEIGHBOURS_ARE);
-			std::cerr << "    The list of neighbours of lal::node " << u << " of graph "
+			message_in_func(ASSERT_UGRAPH_neighbors_ARE);
+			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
 				 << g1 << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -411,22 +411,22 @@ noexcept
 	}
 
 	// DIRECTED GRAPHS
-	else if (assert_what == ASSERT_DGRAPH_IN_NEIGHBOURS_ARE) {
+	else if (assert_what == ASSERT_DGRAPH_IN_neighbors_ARE) {
 		fin >> g1 >> u >> n;
-		assert_exists_variable(ASSERT_DGRAPH_IN_NEIGHBOURS_ARE, g1);
+		assert_exists_variable(ASSERT_DGRAPH_IN_neighbors_ARE, g1);
 		assert_correct_graph_type
-			(ASSERT_DGRAPH_IN_NEIGHBOURS_ARE, graph_type(g1), directed_types);
+			(ASSERT_DGRAPH_IN_neighbors_ARE, graph_type(g1), directed_types);
 		std::vector<lal::node> node_list(n);
 		for (lal::node& neigh : node_list) { fin >> neigh; }
 		sort(node_list.begin(), node_list.end());
 
-		auto actual_neighs = mfunction_dir_graphs(g1, get_in_neighbours(u));
+		auto actual_neighs = mfunction_dir_graphs(g1, get_in_neighbors(u));
 		sort(actual_neighs.begin(), actual_neighs.end());
 
 		if (actual_neighs != node_list) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_DGRAPH_IN_NEIGHBOURS_ARE);
-			std::cerr << "    The list of neighbours of lal::node " << u << " of graph "
+			message_in_func(ASSERT_DGRAPH_IN_neighbors_ARE);
+			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
 				 << g1 << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -434,29 +434,29 @@ noexcept
 			std::cerr << "   ";
 			for (lal::node neigh : node_list) { std::cerr << " " << neigh; }
 			std::cerr << '\n';
-			std::cerr << "    Actual in-neighbours:\n";
+			std::cerr << "    Actual in-neighbors:\n";
 			std::cerr << "   ";
 			for (lal::node neigh : actual_neighs) { std::cerr << " " << neigh; }
 			std::cerr << '\n';
 			return err_type::test_execution;
 		}
 	}
-	else if (assert_what == ASSERT_DGRAPH_OUT_NEIGHBOURS_ARE) {
+	else if (assert_what == ASSERT_DGRAPH_OUT_neighbors_ARE) {
 		fin >> g1 >> u >> n;
-		assert_exists_variable(ASSERT_DGRAPH_OUT_NEIGHBOURS_ARE, g1);
+		assert_exists_variable(ASSERT_DGRAPH_OUT_neighbors_ARE, g1);
 		assert_correct_graph_type
-			(ASSERT_DGRAPH_OUT_NEIGHBOURS_ARE, graph_type(g1), directed_types);
+			(ASSERT_DGRAPH_OUT_neighbors_ARE, graph_type(g1), directed_types);
 		std::vector<lal::node> node_list(n);
 		for (lal::node& neigh : node_list) { fin >> neigh; }
 		sort(node_list.begin(), node_list.end());
 
-		auto actual_neighs = mfunction_dir_graphs(g1, get_out_neighbours(u));
+		auto actual_neighs = mfunction_dir_graphs(g1, get_out_neighbors(u));
 		sort(actual_neighs.begin(), actual_neighs.end());
 
 		if (actual_neighs != node_list) {
 			std::cerr << ERROR << '\n';
-			message_in_func(ASSERT_DGRAPH_IN_NEIGHBOURS_ARE);
-			std::cerr << "    The list of neighbours of lal::node " << u << " of graph "
+			message_in_func(ASSERT_DGRAPH_IN_neighbors_ARE);
+			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
 				 << g1 << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -464,7 +464,7 @@ noexcept
 			std::cerr << "   ";
 			for (lal::node neigh : node_list) { std::cerr << " " << neigh; }
 			std::cerr << '\n';
-			std::cerr << "    Actual out-neighbours:\n";
+			std::cerr << "    Actual out-neighbors:\n";
 			std::cerr << "   ";
 			for (lal::node neigh : actual_neighs) { std::cerr << " " << neigh; }
 			std::cerr << '\n';

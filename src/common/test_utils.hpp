@@ -65,25 +65,25 @@ std::string read_output_string(std::ifstream& fin) noexcept;
 
 void shuffle_graph_edges(
 	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G,
-	bool normalise = false, bool check = false
+	bool normalize = false, bool check = false
 )
 noexcept;
 
 void relabel_graph_vertices(
 	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G,
-	bool normalise = false, bool check = false
+	bool normalize = false, bool check = false
 )
 noexcept;
 
 void relabel_tree_vertices(
 	std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T,
-	bool normalise = false, bool check = false
+	bool normalize = false, bool check = false
 )
 noexcept;
 
 void relabel_tree_vertices(
 	std::vector<lal::edge>& edges, lal::graphs::free_tree& T,
-	bool normalise = false, bool check = false
+	bool normalize = false, bool check = false
 )
 noexcept;
 

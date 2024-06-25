@@ -57,7 +57,7 @@ noexcept
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge> E;
 	for (lal::node s = 0; s < n; ++s) {
-	for (auto t : g.get_out_neighbours(s)) {
+	for (auto t : g.get_out_neighbors(s)) {
 		lal::edge st(s,t);
 		if (g.is_undirected()) {
 			if (s > t) { std::swap(st.first, st.second); }
@@ -73,7 +73,7 @@ noexcept
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge> E;
 	for (lal::node s = 0; s < n; ++s) {
-	for (auto t : g.get_neighbours(s)) {
+	for (auto t : g.get_neighbors(s)) {
 		lal::edge st(s,t);
 		if (g.is_undirected()) {
 			if (s > t) { std::swap(st.first, st.second); }
@@ -99,10 +99,10 @@ noexcept
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge_pair> Q;
 	for (lal::node s = 0; s < n; ++s) {
-	for (lal::node t : g.get_neighbours(s)) {
+	for (lal::node t : g.get_neighbors(s)) {
 
 		for (lal::node u = s + 1; u < n; ++u) {
-		for (lal::node v : g.get_neighbours(u)) {
+		for (lal::node v : g.get_neighbors(u)) {
 
 			// s != u and t != u
 			if (s == v or s == u) { continue; }
@@ -131,10 +131,10 @@ noexcept
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge_pair> Q;
 	for (lal::node s = 0; s < n; ++s) {
-	for (lal::node t : g.get_out_neighbours(s)) {
+	for (lal::node t : g.get_out_neighbors(s)) {
 
 		for (lal::node u = s + 1; u < n; ++u) {
-		for (lal::node v : g.get_out_neighbours(u)) {
+		for (lal::node v : g.get_out_neighbors(u)) {
 
 			// s != u and t != u
 			if (s == v or s == u) { continue; }

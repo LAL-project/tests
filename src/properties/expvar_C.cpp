@@ -82,25 +82,25 @@ void output_ExpVar_C_formula_Q(const lal::graphs::undirected_graph& g) noexcept 
 }
 
 err_type output_ExpVar_C_formula_no_Q(lal::graphs::undirected_graph& g, bool reuse) noexcept {
-	g.normalise();
+	g.normalize();
 	const lal::numeric::rational Vr = lal::properties::var_num_crossings_rational(g, reuse);
 
 	{
 	std::vector<lal::edge> edges = g.get_edges();
 	const std::size_t max_iters = 50;
 	std::size_t iters = 0;
-	while (g.is_normalised() and iters < max_iters) {
+	while (g.is_normalized() and iters < max_iters) {
 		shuffle_graph_edges(edges, g, false, true);
 		++iters;
 	}
 
-	const lal::numeric::rational Vr_nonnormalised = lal::properties::var_num_crossings_rational(g, reuse);
-	if (Vr_nonnormalised != Vr) {
+	const lal::numeric::rational Vr_nonnormalized = lal::properties::var_num_crossings_rational(g, reuse);
+	if (Vr_nonnormalized != Vr) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Variance obtained with a normalised graph differs from\n";
-		std::cerr << "    the variance obtained with a non-normalised graph.\n";
-		std::cerr << "    Normalised variance:     " << Vr << '\n';
-		std::cerr << "    Non-normalised variance: " << Vr_nonnormalised << '\n';
+		std::cerr << "    Variance obtained with a normalized graph differs from\n";
+		std::cerr << "    the variance obtained with a non-normalized graph.\n";
+		std::cerr << "    Normalized variance:     " << Vr << '\n';
+		std::cerr << "    Non-normalized variance: " << Vr_nonnormalized << '\n';
 		// mess the output so that the tester does not skip any error
 		std::cout << "-1\n";
 		return err_type::test_execution;
@@ -167,8 +167,8 @@ noexcept
 			const lal::graphs::free_tree rand_tree = TreeGen.get_tree();
 			forest.disjoint_union(rand_tree);
 		}
-		if (not forest.is_normalised()) {
-			forest.normalise();
+		if (not forest.is_normalized()) {
+			forest.normalize();
 		}
 
 		const lal::numeric::rational Vr_bf = nonLAL_variance_C_freqs_rational(forest);

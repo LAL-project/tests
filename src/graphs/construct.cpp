@@ -79,7 +79,7 @@
 #define FUNC_GRAPH_REMOVE_EDGES_INCIDENT_TO "remove_edges_incident_to"
 #define FUNC_GRAPH_REMOVE_NODE "remove_node"
 #define FUNC_GRAPH_SET_EDGES "set_edges"
-#define FUNC_GRAPH_NORMALISE "normalise"
+#define FUNC_GRAPH_NORMALISE "normalize"
 #define FUNC_GRAPH_DISJ_UNION "disjoint_union"
 #define FUNC_GRAPH_CHECK_EDGE_IT "check_edge_iterator"
 #define FUNC_GRAPH_OUTPUT_EDGES "output_E"
@@ -334,7 +334,7 @@ err_type exe_construction_test(std::ifstream& fin) noexcept {
 		else if (option == FUNC_GRAPH_NORMALISE) {
 			fin >> g1;
 			assert_exists_variable(FUNC_GRAPH_NORMALISE, g1);
-			if_mfunction(g1, normalise());
+			if_mfunction(g1, normalize());
 		}
 		else if (option == FUNC_GRAPH_DISJ_UNION) {
 			fin >> g1 >> g2 >> g3;

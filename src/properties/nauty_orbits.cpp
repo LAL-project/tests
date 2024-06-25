@@ -113,7 +113,7 @@ noexcept
 	// construct graph
 
 	for (lal::node u = 0; u < t.get_num_nodes(); ++u) {
-		for (lal::node k : t.get_neighbours(u)) {
+		for (lal::node k : t.get_neighbors(u)) {
 			ADDELEMENT(GRAPHROW(g,u,m), k);
 		}
 	}

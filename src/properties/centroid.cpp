@@ -64,12 +64,12 @@ noexcept
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
-	for (const lal::node v : t.get_out_neighbours(u)) {
+	for (const lal::node v : t.get_out_neighbors(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}
 	}
-	for (const lal::node v : t.get_in_neighbours(u)) {
+	for (const lal::node v : t.get_in_neighbors(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}
@@ -83,7 +83,7 @@ noexcept
 {
 	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
-	for (const lal::node v : t.get_neighbours(u)) {
+	for (const lal::node v : t.get_neighbors(u)) {
 		if (sizes[v] > size_cc/2) {
 			return false;
 		}

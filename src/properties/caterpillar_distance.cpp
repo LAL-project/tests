@@ -110,21 +110,21 @@ bool single_checks(const tree_t& t, const str_t& cat_struct) noexcept {
 
 			bool has_neighbour = false;
 			if constexpr (std::is_base_of_v<lal::graphs::free_tree, tree_t>) {
-				for (lal::node v : t.get_neighbours(u)) {
+				for (lal::node v : t.get_neighbors(u)) {
 					has_neighbour = has_neighbour or (v == path[i + 1]);
 				}
 			}
 			else {
-				for (lal::node v : t.get_in_neighbours(u)) {
+				for (lal::node v : t.get_in_neighbors(u)) {
 					has_neighbour = has_neighbour or (v == path[i + 1]);
 				}
-				for (lal::node v : t.get_out_neighbours(u)) {
+				for (lal::node v : t.get_out_neighbors(u)) {
 					has_neighbour = has_neighbour or (v == path[i + 1]);
 				}
 			}
 			if (not has_neighbour) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    None of the neighbours of '" << u << "' is '" << path[i + 1] << "'\n";
+				std::cerr << "    None of the neighbors of '" << u << "' is '" << path[i + 1] << "'\n";
 				return false;
 			}
 		}

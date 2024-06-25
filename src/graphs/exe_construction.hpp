@@ -67,10 +67,10 @@ bool equal_graphs(const G& g1, const G& g2) noexcept
 	const auto get_neighs =
 	[](const G& g, lal::node u) {
 		if constexpr (std::is_base_of_v<lal::graphs::directed_graph, G>) {
-			return g.get_out_neighbours(u);
+			return g.get_out_neighbors(u);
 		}
 		else {
-			return g.get_neighbours(u);
+			return g.get_neighbors(u);
 		}
 	};
 
@@ -86,7 +86,7 @@ bool equal_graphs(const G& g1, const G& g2) noexcept
 		if (n2.size() != sn2.size()) { return false; }
 		if (sn1 != sn2) { return false; }
 	}
-	if (g1.is_normalised() != g2.is_normalised()) { return false; }
+	if (g1.is_normalized() != g2.is_normalized()) { return false; }
 	return true;
 }
 
