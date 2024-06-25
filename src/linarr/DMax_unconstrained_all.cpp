@@ -93,7 +93,7 @@ err_type exe_linarr_DMax_Unconstrained_all(std::ifstream& fin) noexcept {
 
 	const err_type r =
 	many_arrangements::test_optimum_algorithm<free_tree>(
-		// function to initialise a (free) tree
+		// function to initialize a (free) tree
 		[&](free_tree& t) {
 			lev_sigs1.clear();
 			mlev_sigs1.clear();

@@ -101,7 +101,7 @@ noexcept
 	DYNALLOC1(int,perm,perm_sz,n,"dreadnaut");
 	DYNALLOC1(set,active,active_sz,m,"dreadnaut");
 
-	// initialise nauty's graph
+	// initialize nauty's graph
 
 	DYNALLOC2(graph,g,g_sz,n,m,"dreadnaut");
 	int v;
@@ -161,7 +161,7 @@ noexcept
 		return {};
 	}
 
-	// initialise memory to calculate orbits
+	// initialize memory to calculate orbits
 	std::vector<int> workperm(n);
 	for (int i = n; --i >= 0;) {
 		workperm[i] = 0;
