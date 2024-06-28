@@ -122,7 +122,7 @@ noexcept
 			T.clear();
 			T = std::move(lal::graphs::from_head_vector_to_free_tree(linear_sequence).first);
 
-			algo_flux = lal::linarr::compute_flux(T);
+			algo_flux = lal::linarr::dependency_flux_compute(T);
 			input_flux.resize(n - 1);
 			S = n - 1;
 		}

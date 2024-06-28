@@ -96,12 +96,12 @@ err_type test_exhaustive(std::ifstream& fin) noexcept {
 		while (not gen.end()) {
 			const lal::graphs::free_tree t = gen.get_tree();
 
-			orbit_set LAL = lal::properties::compute_vertex_orbits(t);
+			orbit_set LAL = lal::properties::vertex_orbits_compute(t);
 			for (orbit& o : LAL) {
 				std::sort(o.begin(), o.end());
 			}
 
-			orbit_set nauty = nauty_lib::compute_vertex_orbits(t);
+			orbit_set nauty = nauty_lib::vertex_orbits_compute(t);
 			for (orbit& o : nauty) {
 				std::sort(o.begin(), o.end());
 			}
@@ -147,12 +147,12 @@ err_type test_random(std::ifstream& fin) noexcept {
 		for (std::size_t i = 0; i < R; ++i) {
 			const lal::graphs::free_tree t = gen.get_tree();
 
-			orbit_set LAL = lal::properties::compute_vertex_orbits(t);
+			orbit_set LAL = lal::properties::vertex_orbits_compute(t);
 			for (orbit& o : LAL) {
 				std::sort(o.begin(), o.end());
 			}
 
-			orbit_set nauty = nauty_lib::compute_vertex_orbits(t);
+			orbit_set nauty = nauty_lib::vertex_orbits_compute(t);
 			for (orbit& o : nauty) {
 				std::sort(o.begin(), o.end());
 			}

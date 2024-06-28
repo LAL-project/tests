@@ -53,7 +53,7 @@ namespace tests {
 namespace properties {
 namespace nauty_lib {
 
-std::vector<std::vector<lal::node>> compute_vertex_orbits
+std::vector<std::vector<lal::node>> vertex_orbits_compute
 (const lal::graphs::free_tree& t) noexcept;
 
 std::vector<std::vector<lal::node>> compute_vertex_orbits
