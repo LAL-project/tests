@@ -22,14 +22,14 @@ COMMANDS AVAILABLE
 	Allowed strings:
 		- edge_list
 		- head_vector
-	The Boolean value true/false is used to normalise the graph.
+	The Boolean value true/false is used to normalize the graph.
 
 ** output_graph GRAPH
 	Outputs a graph to standard output
 
 ** add_edge GRAPH VERTEX1 VERTEX2 true/false true/false
 	Adds an edge to a graph. Normalises (or not) the graph. After the addition,
-	check if the result is normalised or not.
+	check if the result is normalized or not.
 
 ** add_edge_bulk GRAPH VERTEX1 VERTEX2
 	Adds an edge to a graph in bulk mode.
@@ -39,23 +39,23 @@ COMMANDS AVAILABLE
 
 ** add_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
 	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
-	check if the result is normalised or not.
+	check if the result is normalized or not.
 
 ** set_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
 	Adds N edges to a graph. Normalises (or not) the graph. After the addition,
-	check if the result is normalised or not.
+	check if the result is normalized or not.
 
 ** remove_edge GRAPH VERTEX1 VERTEX2 true/false true/false
 	Removes an edge from a graph. Normalises (or not) the graph. After the removal,
-	check if the result is normalised or not.
+	check if the result is normalized or not.
 	
 ** remove_edges GRAPH N VERTEX1 VERTEX2 ... VERTEX_{2n-1} VERTEX_{2n} true/false true/false
 	Removes N edges from a graph. Normalises (or not) the graph. After the removal,
-	check if the result is normalised or not.
+	check if the result is normalized or not.
 
 ** remove_edges_incident_to GRAPH N true/false true/false
 	Removes the edges from a graph that are incident to a given vertex. Normalises
-	(or not) the graph. After the removal, check if the result is normalised or not.
+	(or not) the graph. After the removal, check if the result is normalized or not.
 
 ** check_edge_iterator GRAPH
 	Builds the list of edges for a graph and asserts that is the same
@@ -71,7 +71,7 @@ COMMANDS AVAILABLE
 ** output_Q GRAPH
 	Outputs the list of pairs of independent edges of the graph.
 
-** normalise GRAPH
+** normalize GRAPH
 	Normalise a graph
 	
 ** assign GRAPH1 GRAPH2
@@ -101,14 +101,14 @@ COMMANDS AVAILABLE
 		asserts that two graphs are equal (here "equal" is not the
 		same as "isomorphic"!)
 	
-	-- neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
-		asserts that the neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	-- neighbors_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the neighbors of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
 	
-	-- normalised GRAPH
-		asserts that a graph IS normalised
+	-- normalized GRAPH
+		asserts that a graph IS normalized
 	
-	-- not_normalised GRAPH
-		asserts that a graph IS NOT normalised
+	-- not_normalized GRAPH
+		asserts that a graph IS NOT normalized
 	
 	-- exists_edge GRAPH VERTEX1 VERTEX2
 		asserts that a given edge exists
@@ -154,11 +154,11 @@ COMMANDS AVAILABLE
 	DIRECTED GRAPHS (including rooted trees)
 	===============
 	
-	-- in_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
-		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	-- in_neighbors_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the in-neighbors of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
 	
-	-- out_neighbours_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
-		asserts that the in-neighbours of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
+	-- out_neighbors_are GRAPH VERTEX0 N VERTEX1 ... VERTEXN
+		asserts that the in-neighbors of VERTEX0 in graph GRAPH are VERTEX1 ... VERTEXN
 	
 	-- full_degree GRAPH NODE d
 		asserts that the in-degree plus out-degree equals d.

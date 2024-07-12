@@ -13,7 +13,7 @@ TYPE graphs-construction
 	
 	output_graph t
 	
-	assert normalised t
+	assert normalized t
 	assert num_edges t 9
 	assert exists_edge t 0 1
 	assert exists_edge t 1 2
@@ -41,7 +41,7 @@ TYPE graphs-construction
 	
 	output_graph t
 	
-	assert normalised t
+	assert normalized t
 	assert num_edges t 8
 	assert exists_edge t 0 1
 	assert exists_edge t 1 2
@@ -70,7 +70,7 @@ TYPE graphs-construction
 	
 	output_graph t
 	
-	assert normalised t
+	assert normalized t
 	assert num_edges t 6
 	assert not_exists_edge t 0 1
 	assert exists_edge t 1 2
@@ -101,7 +101,7 @@ TYPE graphs-construction
 	
 	output_graph t
 	
-	assert normalised t
+	assert normalized t
 	assert num_edges t 2
 	assert not_exists_edge t 0 1
 	assert not_exists_edge t 1 2
@@ -130,7 +130,7 @@ TYPE graphs-construction
 	
 	output_graph t
 	
-	assert normalised t
+	assert normalized t
 	assert num_edges t 0
 	assert not_exists_edge t 0 1
 	assert not_exists_edge t 1 2

@@ -10,7 +10,7 @@ TYPE graphs-construction
 	add_edge ft 1 7 false true
 	output_graph ft
 	assert is_tree ft
-	assert normalised ft
+	assert normalized ft
 	
 	ftree_to_rtree_copy rt1 ft 0 false false
 	output_graph rt1
@@ -18,7 +18,7 @@ TYPE graphs-construction
 	assert has_root rt1
 	assert is_tree rt1
 	assert num_edges rt1 7
-	assert normalised rt1
+	assert normalized rt1
 	assert exists_edge rt1 0 1
 	assert exists_edge rt1 0 2
 	assert exists_edge rt1 0 3
@@ -56,7 +56,7 @@ TYPE graphs-construction
 	assert has_root rt2
 	assert is_tree rt2
 	assert num_edges rt2 7
-	assert normalised rt2
+	assert normalized rt2
 	assert exists_edge rt2 1 0
 	assert exists_edge rt2 0 2
 	assert exists_edge rt2 0 3

@@ -7,7 +7,7 @@ TYPE graphs-construction
 	add_edge g1 3 2 false true
 	add_edge g1 1 4 false true
 	add_edge g1 0 4 false true
-	assert not_normalised g1
+	assert not_normalized g1
 	assert num_edges g1 6
 	assert elements_Q_are g1 6
 		0 1 2 3
@@ -24,7 +24,7 @@ TYPE graphs-construction
 	add_edge g2 3 2 true true
 	add_edge g2 1 4 true true
 	add_edge g2 0 4 true true
-	assert normalised g2
+	assert normalized g2
 	assert num_edges g2 6
 	assert elements_Q_are g1 6
 		0 1 2 3
@@ -43,7 +43,7 @@ TYPE graphs-construction
 		1 4
 		0 4
 		false true
-	assert not_normalised g3
+	assert not_normalized g3
 	assert num_edges g3 6
 	assert elements_Q_are g1 6
 		0 1 2 3
@@ -62,7 +62,7 @@ TYPE graphs-construction
 		1 4
 		0 4
 		true true
-	assert normalised g4
+	assert normalized g4
 	assert num_edges g4 6
 	assert elements_Q_are g1 6
 		0 1 2 3

@@ -1,7 +1,7 @@
 TYPE graphs-construction
 
 	read_graph rtree g1 graphs/exhaustive-trees/rooted/004-0001.head_vector head_vector true
-	assert normalised g1
+	assert normalized g1
 	assert num_nodes g1 4
 	assert num_edges g1 3
 	check_edge_iterator g1
@@ -10,7 +10,7 @@ TYPE graphs-construction
 	assert has_root g1
 	
 	read_graph rtree g2 graphs/exhaustive-trees/rooted/011-0050.head_vector head_vector true
-	assert normalised g2
+	assert normalized g2
 	assert num_nodes g2 11
 	assert num_edges g2 10
 	check_edge_iterator g2
@@ -19,7 +19,7 @@ TYPE graphs-construction
 	assert has_root g2
 	
 	read_graph rtree g3 graphs/exhaustive-trees/rooted/007-0010.head_vector head_vector true
-	assert normalised g3
+	assert normalized g3
 	assert num_nodes g3 7
 	assert num_edges g3 6
 	check_edge_iterator g3

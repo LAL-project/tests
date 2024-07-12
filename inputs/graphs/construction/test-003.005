@@ -17,7 +17,7 @@ TYPE graphs-construction
 	add_edge t 2 3 false true
 	add_edge t 3 4 false true
 	assert is_tree t
-	assert normalised t
+	assert normalized t
 	
 	assert subtree_sizes_not_valid t
 	

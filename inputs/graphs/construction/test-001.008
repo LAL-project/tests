@@ -2,21 +2,21 @@ TYPE graphs-construction
 
 	create_graph dgraph g 10
 	
-	/* graph is normalised -- still normalise it */
+	/* graph is normalized -- still normalize it */
 	add_edge g 0 5 true true
-	assert normalised g
+	assert normalized g
 	
-	/* graph is normalised -- still, do not normalise it */
+	/* graph is normalized -- still, do not normalize it */
 	add_edge g 0 6 false true
-	assert normalised g
+	assert normalized g
 	
-	/* graph is not normalised -- do not normalise */
+	/* graph is not normalized -- do not normalize */
 	add_edge g 0 1 false true
-	assert not_normalised g
+	assert not_normalized g
 	
-	/* graph is not normalised -- normalise it */
+	/* graph is not normalized -- normalize it */
 	add_edge g 3 4 true true
-	assert normalised g
+	assert normalized g
 	
 	output_graph g
 	
@@ -27,22 +27,22 @@ TYPE graphs-construction
 	/*
 	Make two copies of g and insert the same edge to each
 	copy with check and without check. The resulting graphs
-	should be normalised.
+	should be normalized.
 	*/
 	
-	/* graph is normalised -- but do not check */
+	/* graph is normalized -- but do not check */
 	create_graph dgraph g1 10
 	assign g1 g
 	add_edge g1 7 8 false false
-	/* by definition, the result can't be normalised */
-	assert not_normalised g1
+	/* by definition, the result can't be normalized */
+	assert not_normalized g1
 	output_graph g1
 	
-	/* graph is normalised -- and check */
+	/* graph is normalized -- and check */
 	create_graph dgraph g2 10
 	assign g2 g
 	add_edge g2 7 8 false true
-	assert normalised g2
+	assert normalized g2
 	output_graph g2
 
 	/* ----------------------- */
@@ -58,22 +58,22 @@ TYPE graphs-construction
 	/*
 	Make two copies of g and insert the same edge to each
 	copy with check and without check. The resulting graphs
-	should not be normalised.
+	should not be normalized.
 	*/
 	
-	/* graph is not normalised -- but do not check */
+	/* graph is not normalized -- but do not check */
 	create_graph dgraph g3 10
 	assign g3 g
 	add_edge g3 6 7 false false
-	/* by definition, the result can't be normalised */
-	assert not_normalised g3
+	/* by definition, the result can't be normalized */
+	assert not_normalized g3
 	output_graph g3
 	
-	/* graph is not normalised -- and check */
+	/* graph is not normalized -- and check */
 	create_graph dgraph g4 10
 	assign g4 g
 	add_edge g4 6 7 false true
-	assert not_normalised g4
+	assert not_normalized g4
 	output_graph g4
 
 	

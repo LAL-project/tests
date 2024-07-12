@@ -17,12 +17,12 @@ TYPE graphs-construction
 	assert exists_edge g 4 0
 	assert num_edges g 3
 	
-	normalise g
+	normalize g
 	output_graph g
 	
 	finish_bulk_add g true true
 	assert num_edges g 3
-	assert normalised g
+	assert normalized g
 	
 	output_graph g
 	
@@ -43,6 +43,6 @@ TYPE graphs-construction
 	
 	finish_bulk_add g true true
 	assert num_edges g 7
-	assert normalised g
+	assert normalized g
 	
 	output_graph g

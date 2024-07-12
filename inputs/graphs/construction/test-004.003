@@ -12,14 +12,14 @@ TYPE graphs-construction
 		2 3
 		1 3
 		0 3
-		true true  /* do not normalise */
+		true true  /* do not normalize */
 	assert not_exists_edge g1 1 2
 	output_graph g1
-	assert normalised g1
+	assert normalized g1
 	
 	disjoint_union G G g1
 	assert not_exists_edge g1 1 2
-	assert normalised G
+	assert normalized G
 	
 	/* -- create another small subgraph */
 	create_graph ugraph g2 4
@@ -30,13 +30,13 @@ TYPE graphs-construction
 		0 2
 		2 3
 		1 2
-		true true  /* do not normalise */
+		true true  /* do not normalize */
 	assert exists_edge g2 1 2
 	output_graph g2
-	assert normalised g2
+	assert normalized g2
 	
 	disjoint_union G G g2
-	assert normalised G
+	assert normalized G
 	
 	/* Although graph g2 has edge 1 2, graph G should not*/
 	assert not_exists_edge G 1 2

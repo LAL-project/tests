@@ -10,7 +10,7 @@ TYPE graphs-construction
 	add_edge ft 1 7 false true
 	output_graph ft
 	assert is_tree ft
-	assert normalised ft
+	assert normalized ft
 	
 	create_graph rtree rt 10
 	add_edges rt
@@ -23,7 +23,7 @@ TYPE graphs-construction
 	output_graph rt
 	calculate_size_subtrees rt
 	output_size_subtrees rt
-	assert normalised rt
+	assert normalized rt
 	
 	assert subtree_sizes_valid rt
 	
@@ -34,6 +34,6 @@ TYPE graphs-construction
 	assert has_root rt
 	assert is_tree rt
 	assert subtree_sizes_not_valid rt
-	assert normalised rt
+	assert normalized rt
 	
 	output_graph ft

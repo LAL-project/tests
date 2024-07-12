@@ -14,10 +14,10 @@ TYPE graphs-construction
 	add_edge g 9 1 false true
 	output_graph g
 	
-	assert not_normalised g
+	assert not_normalized g
 	remove_edge g 0 3 true true
 	output_graph g
-	assert normalised g
+	assert normalized g
 	
 	
 	
@@ -35,10 +35,10 @@ TYPE graphs-construction
 	add_edge h 9 1 false true
 	output_graph h
 	
-	assert not_normalised h
+	assert not_normalized h
 	remove_edge h 0 3 false true
 	output_graph h
-	assert not_normalised h
+	assert not_normalized h
 	
 	
 	
@@ -56,7 +56,7 @@ TYPE graphs-construction
 	add_edge f 4 1 false true
 	output_graph f
 	
-	assert not_normalised f
+	assert not_normalized f
 	remove_edge f 0 3 true true
 	output_graph f
-	assert normalised f
+	assert normalized f

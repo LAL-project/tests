@@ -124,7 +124,7 @@ TYPE graphs-construction
 	assert num_edges t10 9
 	
 	finish_bulk_add t10 true true
-	assert normalised t10
+	assert normalized t10
 	
 	output_graph t10
 

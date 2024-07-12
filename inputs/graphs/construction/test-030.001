@@ -1,7 +1,7 @@
 TYPE graphs-construction
 
 	read_graph ugraph g graphs/er/050-0.50 edge_list true
-	assert normalised g
+	assert normalized g
 	assert num_edges g 631
 	assert num_nodes g 50
 	

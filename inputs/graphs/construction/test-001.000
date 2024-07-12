@@ -1,7 +1,7 @@
 TYPE graphs-construction
 
 	create_graph dgraph g0 0
-	assert normalised g0
+	assert normalized g0
 	assert num_edges g0 0
 	output_graph g0
 	
@@ -10,9 +10,9 @@ TYPE graphs-construction
 	add_edge g1 0 1 false true
 	assert num_nodes g1 5
 	assert num_edges g1 2
-	assert not_normalised g1
-	normalise g1
-	assert normalised g1
+	assert not_normalized g1
+	normalize g1
+	assert normalized g1
 	output_graph g1
 	
 	create_graph dgraph g2 0
@@ -21,7 +21,7 @@ TYPE graphs-construction
 	assert equal_graphs g2 g1
 	assert num_nodes g2 5
 	assert num_edges g2 2
-	assert normalised g2
+	assert normalized g2
 	assert equal_graphs g1 g2
 	assert equal_graphs g2 g1
 	output_graph g2
@@ -42,7 +42,7 @@ TYPE graphs-construction
 	add_edge g4 0 2 false true
 	add_edge g4 3 0 false true
 	output_graph g4
-	assert not_normalised g4
-	normalise g4
-	assert normalised g4
+	assert not_normalized g4
+	normalize g4
+	assert normalized g4
 	output_graph g4

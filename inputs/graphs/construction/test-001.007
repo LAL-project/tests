@@ -20,7 +20,7 @@ TYPE graphs-construction
 		0 2
 		false true
 	output_graph g
-	assert not_normalised g
+	assert not_normalized g
 	
 	
 	create_graph dgraph f 10
@@ -43,7 +43,7 @@ TYPE graphs-construction
 		0 2
 		true true
 	output_graph f
-	assert normalised f
+	assert normalized f
 	
 	
 	
@@ -67,4 +67,4 @@ TYPE graphs-construction
 		0 3
 		false true
 	output_graph h
-	assert normalised h
+	assert normalized h

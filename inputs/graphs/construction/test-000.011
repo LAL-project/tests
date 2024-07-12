@@ -11,9 +11,9 @@ TYPE graphs-construction
 		5 0
 		true true
 	output_graph g1
-	assert normalised g1
+	assert normalized g1
 	remove_edges_incident_to g1 0 true true
-	assert normalised g1
+	assert normalized g1
 	assert num_edges g1 0
 	output_graph g1
 	

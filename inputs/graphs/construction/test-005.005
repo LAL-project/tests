@@ -8,22 +8,22 @@ TYPE graphs-construction
 		3 4
 		4 0
 		false true
-	assert normalised g1
+	assert normalized g1
 	
 	create_graph dgraph g2 5
 	add_edges g2 2
 		0 2
 		1 4
 		false true
-	assert normalised g2
+	assert normalized g2
 	
 	create_graph dgraph G 0
 	disjoint_union G G g1
 	disjoint_union G G g2
-	assert normalised G
+	assert normalized G
 	
 	create_graph dgraph H 0
 	disjoint_union H g1 g2
-	assert normalised H
+	assert normalized H
 	
 	assert equal_graphs G H

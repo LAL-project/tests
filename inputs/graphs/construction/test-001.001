@@ -21,4 +21,4 @@ TYPE graphs-construction
 	assert not_exists_edge g 4 2
 	assert not_exists_edge g 4 3
 	
-	assert normalised g
+	assert normalized g

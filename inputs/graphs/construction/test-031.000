@@ -1,7 +1,7 @@
 TYPE graphs-construction
 
 	read_graph dgraph g graphs/linear-tree/010 edge_list true
-	assert normalised g
+	assert normalized g
 	assert num_edges g 9
 	assert num_nodes g 10
 	
