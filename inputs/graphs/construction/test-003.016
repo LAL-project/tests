@@ -20,7 +20,11 @@ TYPE graphs-construction
 	assert num_nodes_component t 4 6
 	assert num_nodes_component t 5 6
 	
+	assert has_root t
+	assert is_tree t
 	remove_node t 0 false true true
+	assert not_has_root t
+	assert is_not_tree t
 	output_graph t
 	
 	assert num_nodes_component t 0 1

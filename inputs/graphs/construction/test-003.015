@@ -23,7 +23,10 @@ TYPE graphs-construction
 	output_graph t1
 	
 	output "HEY 1"
+	assert has_root t1
+	assert is_tree t1
 	remove_node t1 0 true true true
+	assert not_has_root t1
 	assert is_tree t1
 	output_graph t1
 	
