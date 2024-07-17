@@ -1,6 +1,7 @@
+===============================
 A total of 1 errors were found for treebank file 'graphs/treebank_samples/treebank_non_existent'.
-    * At line: 0
-      What:    Error: Treebank 'graphs/treebank_samples/treebank_non_existent' does not exist.
+Problems with the treebank file: 'Error: Treebank 'graphs/treebank_samples/treebank_non_existent' does not exist.'.
+===============================
 A total of 60 errors were found for treebank file 'graphs/treebank_samples/treebank_1'.
     * At line: 1
       What:    Error: Value at position '1' (value: 'n') is not a valid non-negative integer number.
@@ -103,508 +104,279 @@ A total of 60 errors were found for treebank file 'graphs/treebank_samples/treeb
     * At line: 38
       What:    Error: Wrong number of roots: 0.
     * At line: 39
-      What:    Error: Number at position '0' (value: 2) is out of bounds.
+      What:    Error: Head index at position '0' (value: 2) is out of bounds.
     * At line: 39
       What:    Error: Wrong number of roots: 0.
     * At line: 40
-      What:    Error: Number at position '0' (value: 3) is out of bounds.
+      What:    Error: Head index at position '0' (value: 3) is out of bounds.
     * At line: 40
       What:    Error: Wrong number of roots: 0.
     * At line: 41
-      What:    Error: Number at position '0' (value: 4) is out of bounds.
+      What:    Error: Head index at position '0' (value: 4) is out of bounds.
     * At line: 41
       What:    Error: Wrong number of roots: 0.
     * At line: 42
-      What:    Error: Number at position '0' (value: 5) is out of bounds.
+      What:    Error: Head index at position '0' (value: 5) is out of bounds.
     * At line: 42
       What:    Error: Wrong number of roots: 0.
     * At line: 43
-      What:    Error: Number at position '0' (value: 6) is out of bounds.
+      What:    Error: Head index at position '0' (value: 6) is out of bounds.
     * At line: 43
       What:    Error: Wrong number of roots: 0.
+===============================
 A total of 0 errors were found for treebank file 'graphs/treebank_samples/treebank_all_correct'.
+===============================
 A total of 121 errors were found for treebank dataset 'graphs/treebank_samples/main_file'.
+-------------------------------
     * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '1' (value: 'n') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '2' (value: 'k2') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '3' (value: 'Dmin') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 2
-      What:                  Error: Value at position '2' (value: '-1') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '1' (value: '-1') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '2' (value: '-2') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '3' (value: '-3') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 4
-      What:                  Error: Value at position '3' (value: 'z') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 4
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 5
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 6
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 7
-      What:                  Error: Value at position '6' (value: 'b') is not a valid non-negative integer number.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Vertex '2' is isolated.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '4'; should be '5'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 10
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 10
-      What:                  Error: Vertex '4' is isolated.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Vertex '4' is isolated.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Wrong number of edges. Number of vertices is '16'. Number of edges is '14'; should be '15'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Vertex '2' is isolated.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '1'; should be '2'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 21
-      What:                  Error: found a self-loop at position '2'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 23
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 25
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 26
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 27
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 28
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 29
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: Wrong number of edges. Number of vertices is '2'. Number of edges is '2'; should be '1'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '3'; should be '2'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: Wrong number of edges. Number of vertices is '4'. Number of edges is '4'; should be '3'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: Wrong number of edges. Number of vertices is '5'. Number of edges is '5'; should be '4'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '6'; should be '5'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: Wrong number of edges. Number of vertices is '7'. Number of edges is '7'; should be '6'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 38
-      What:                  Error: found a self-loop at position '1'.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 38
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 39
-      What:                  Error: Number at position '0' (value: 2) is out of bounds.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 39
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 40
-      What:                  Error: Number at position '0' (value: 3) is out of bounds.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 40
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 41
-      What:                  Error: Number at position '0' (value: 4) is out of bounds.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 41
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 42
-      What:                  Error: Number at position '0' (value: 5) is out of bounds.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 42
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 43
-      What:                  Error: Number at position '0' (value: 6) is out of bounds.
-    * Line within main file: 1
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 43
-      What:                  Error: Wrong number of roots: 0.
+      At treebank file:      treebank_1
+        + At line: 1
+          What:    Error: Value at position '1' (value: 'n') is not a valid non-negative integer number.
+        + At line: 1
+          What:    Error: Value at position '2' (value: 'k2') is not a valid non-negative integer number.
+        + At line: 1
+          What:    Error: Value at position '3' (value: 'Dmin') is not a valid non-negative integer number.
+        + At line: 2
+          What:    Error: Value at position '2' (value: '-1') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '1' (value: '-1') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '2' (value: '-2') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '3' (value: '-3') is not a valid non-negative integer number.
+        + At line: 4
+          What:    Error: Value at position '3' (value: 'z') is not a valid non-negative integer number.
+        + At line: 4
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 5
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 6
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 7
+          What:    Error: Value at position '6' (value: 'b') is not a valid non-negative integer number.
+        + At line: 8
+          What:    Error: Wrong number of roots: 2.
+        + At line: 8
+          What:    Error: Vertex '2' is isolated.
+        + At line: 8
+          What:    Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '4'; should be '5'.
+        + At line: 10
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 10
+          What:    Error: Vertex '4' is isolated.
+        + At line: 11
+          What:    Error: Wrong number of roots: 2.
+        + At line: 11
+          What:    Error: Vertex '4' is isolated.
+        + At line: 11
+          What:    Error: Wrong number of edges. Number of vertices is '16'. Number of edges is '14'; should be '15'.
+        + At line: 15
+          What:    Error: Wrong number of roots: 2.
+        + At line: 15
+          What:    Error: Vertex '2' is isolated.
+        + At line: 15
+          What:    Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '1'; should be '2'.
+        + At line: 21
+          What:    Error: found a self-loop at position '2'.
+        + At line: 23
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 25
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 26
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 27
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 28
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 29
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 30
+          What:    Error: Wrong number of roots: 0.
+        + At line: 30
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 30
+          What:    Error: Wrong number of edges. Number of vertices is '2'. Number of edges is '2'; should be '1'.
+        + At line: 31
+          What:    Error: Wrong number of roots: 0.
+        + At line: 31
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 31
+          What:    Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '3'; should be '2'.
+        + At line: 32
+          What:    Error: Wrong number of roots: 0.
+        + At line: 32
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 32
+          What:    Error: Wrong number of edges. Number of vertices is '4'. Number of edges is '4'; should be '3'.
+        + At line: 33
+          What:    Error: Wrong number of roots: 0.
+        + At line: 33
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 33
+          What:    Error: Wrong number of edges. Number of vertices is '5'. Number of edges is '5'; should be '4'.
+        + At line: 34
+          What:    Error: Wrong number of roots: 0.
+        + At line: 34
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 34
+          What:    Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '6'; should be '5'.
+        + At line: 35
+          What:    Error: Wrong number of roots: 0.
+        + At line: 35
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 35
+          What:    Error: Wrong number of edges. Number of vertices is '7'. Number of edges is '7'; should be '6'.
+        + At line: 38
+          What:    Error: found a self-loop at position '1'.
+        + At line: 38
+          What:    Error: Wrong number of roots: 0.
+        + At line: 39
+          What:    Error: Head index at position '0' (value: 2) is out of bounds.
+        + At line: 39
+          What:    Error: Wrong number of roots: 0.
+        + At line: 40
+          What:    Error: Head index at position '0' (value: 3) is out of bounds.
+        + At line: 40
+          What:    Error: Wrong number of roots: 0.
+        + At line: 41
+          What:    Error: Head index at position '0' (value: 4) is out of bounds.
+        + At line: 41
+          What:    Error: Wrong number of roots: 0.
+        + At line: 42
+          What:    Error: Head index at position '0' (value: 5) is out of bounds.
+        + At line: 42
+          What:    Error: Wrong number of roots: 0.
+        + At line: 43
+          What:    Error: Head index at position '0' (value: 6) is out of bounds.
+        + At line: 43
+          What:    Error: Wrong number of roots: 0.
+-------------------------------
     * Line within main file: 2
-      At treebank file:      graphs/treebank_samples/treebank_non_existent
-      At treebank file line: 0
-      What:                  Treebank file does not exist
+      At treebank file:      treebank_non_existent
+    Problems with the treebank file: 'Error: Treebank 'graphs/treebank_samples/treebank_non_existent' does not exist.'.
+-------------------------------
+    * Line within main file: 3
+      At treebank file:      treebank_all_correct
+-------------------------------
     * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '1' (value: 'n') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '2' (value: 'k2') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 1
-      What:                  Error: Value at position '3' (value: 'Dmin') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 2
-      What:                  Error: Value at position '2' (value: '-1') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '1' (value: '-1') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '2' (value: '-2') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 3
-      What:                  Error: Value at position '3' (value: '-3') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 4
-      What:                  Error: Value at position '3' (value: 'z') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 4
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 5
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 6
-      What:                  Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 7
-      What:                  Error: Value at position '6' (value: 'b') is not a valid non-negative integer number.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Vertex '2' is isolated.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 8
-      What:                  Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '4'; should be '5'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 10
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 10
-      What:                  Error: Vertex '4' is isolated.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Vertex '4' is isolated.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 11
-      What:                  Error: Wrong number of edges. Number of vertices is '16'. Number of edges is '14'; should be '15'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Wrong number of roots: 2.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Vertex '2' is isolated.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 15
-      What:                  Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '1'; should be '2'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 21
-      What:                  Error: found a self-loop at position '2'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 23
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 25
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 26
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 27
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 28
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 29
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 30
-      What:                  Error: Wrong number of edges. Number of vertices is '2'. Number of edges is '2'; should be '1'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 31
-      What:                  Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '3'; should be '2'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 32
-      What:                  Error: Wrong number of edges. Number of vertices is '4'. Number of edges is '4'; should be '3'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 33
-      What:                  Error: Wrong number of edges. Number of vertices is '5'. Number of edges is '5'; should be '4'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 34
-      What:                  Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '6'; should be '5'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: The graph described is not a tree, i.e., it has cycles.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 35
-      What:                  Error: Wrong number of edges. Number of vertices is '7'. Number of edges is '7'; should be '6'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 38
-      What:                  Error: found a self-loop at position '1'.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 38
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 39
-      What:                  Error: Number at position '0' (value: 2) is out of bounds.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 39
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 40
-      What:                  Error: Number at position '0' (value: 3) is out of bounds.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 40
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 41
-      What:                  Error: Number at position '0' (value: 4) is out of bounds.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 41
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 42
-      What:                  Error: Number at position '0' (value: 5) is out of bounds.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 42
-      What:                  Error: Wrong number of roots: 0.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 43
-      What:                  Error: Number at position '0' (value: 6) is out of bounds.
-    * Line within main file: 4
-      At treebank file:      graphs/treebank_samples/treebank_1
-      At treebank file line: 43
-      What:                  Error: Wrong number of roots: 0.
+      At treebank file:      treebank_1
+        + At line: 1
+          What:    Error: Value at position '1' (value: 'n') is not a valid non-negative integer number.
+        + At line: 1
+          What:    Error: Value at position '2' (value: 'k2') is not a valid non-negative integer number.
+        + At line: 1
+          What:    Error: Value at position '3' (value: 'Dmin') is not a valid non-negative integer number.
+        + At line: 2
+          What:    Error: Value at position '2' (value: '-1') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '1' (value: '-1') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '2' (value: '-2') is not a valid non-negative integer number.
+        + At line: 3
+          What:    Error: Value at position '3' (value: '-3') is not a valid non-negative integer number.
+        + At line: 4
+          What:    Error: Value at position '3' (value: 'z') is not a valid non-negative integer number.
+        + At line: 4
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 5
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 6
+          What:    Error: Value at position '5' (value: 'a') is not a valid non-negative integer number.
+        + At line: 7
+          What:    Error: Value at position '6' (value: 'b') is not a valid non-negative integer number.
+        + At line: 8
+          What:    Error: Wrong number of roots: 2.
+        + At line: 8
+          What:    Error: Vertex '2' is isolated.
+        + At line: 8
+          What:    Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '4'; should be '5'.
+        + At line: 10
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 10
+          What:    Error: Vertex '4' is isolated.
+        + At line: 11
+          What:    Error: Wrong number of roots: 2.
+        + At line: 11
+          What:    Error: Vertex '4' is isolated.
+        + At line: 11
+          What:    Error: Wrong number of edges. Number of vertices is '16'. Number of edges is '14'; should be '15'.
+        + At line: 15
+          What:    Error: Wrong number of roots: 2.
+        + At line: 15
+          What:    Error: Vertex '2' is isolated.
+        + At line: 15
+          What:    Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '1'; should be '2'.
+        + At line: 21
+          What:    Error: found a self-loop at position '2'.
+        + At line: 23
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 25
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 26
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 27
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 28
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 29
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 30
+          What:    Error: Wrong number of roots: 0.
+        + At line: 30
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 30
+          What:    Error: Wrong number of edges. Number of vertices is '2'. Number of edges is '2'; should be '1'.
+        + At line: 31
+          What:    Error: Wrong number of roots: 0.
+        + At line: 31
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 31
+          What:    Error: Wrong number of edges. Number of vertices is '3'. Number of edges is '3'; should be '2'.
+        + At line: 32
+          What:    Error: Wrong number of roots: 0.
+        + At line: 32
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 32
+          What:    Error: Wrong number of edges. Number of vertices is '4'. Number of edges is '4'; should be '3'.
+        + At line: 33
+          What:    Error: Wrong number of roots: 0.
+        + At line: 33
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 33
+          What:    Error: Wrong number of edges. Number of vertices is '5'. Number of edges is '5'; should be '4'.
+        + At line: 34
+          What:    Error: Wrong number of roots: 0.
+        + At line: 34
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 34
+          What:    Error: Wrong number of edges. Number of vertices is '6'. Number of edges is '6'; should be '5'.
+        + At line: 35
+          What:    Error: Wrong number of roots: 0.
+        + At line: 35
+          What:    Error: The graph described is not a tree, i.e., it has cycles.
+        + At line: 35
+          What:    Error: Wrong number of edges. Number of vertices is '7'. Number of edges is '7'; should be '6'.
+        + At line: 38
+          What:    Error: found a self-loop at position '1'.
+        + At line: 38
+          What:    Error: Wrong number of roots: 0.
+        + At line: 39
+          What:    Error: Head index at position '0' (value: 2) is out of bounds.
+        + At line: 39
+          What:    Error: Wrong number of roots: 0.
+        + At line: 40
+          What:    Error: Head index at position '0' (value: 3) is out of bounds.
+        + At line: 40
+          What:    Error: Wrong number of roots: 0.
+        + At line: 41
+          What:    Error: Head index at position '0' (value: 4) is out of bounds.
+        + At line: 41
+          What:    Error: Wrong number of roots: 0.
+        + At line: 42
+          What:    Error: Head index at position '0' (value: 5) is out of bounds.
+        + At line: 42
+          What:    Error: Wrong number of roots: 0.
+        + At line: 43
+          What:    Error: Head index at position '0' (value: 6) is out of bounds.
+        + At line: 43
+          What:    Error: Wrong number of roots: 0.
