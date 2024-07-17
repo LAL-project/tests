@@ -1,0 +1,25 @@
+TYPE graphs-construction
+
+	create_graph rtree t 3
+	add_edges t 2
+		2 0
+		2 1
+		true true
+	
+	output "t: Before removal"
+	output_graph t
+	remove_node t 2 true true true
+	output "t: After removal"
+	output_graph t
+	
+	output "t: Before removal"
+	output_graph t
+	remove_node t 1 true true true
+	output "t: After removal"
+	output_graph t
+	
+	output "t: Before removal"
+	output_graph t
+	remove_node t 0 true true true
+	output "t: After removal"
+	output_graph t

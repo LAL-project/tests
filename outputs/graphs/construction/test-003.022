@@ -1,0 +1,57 @@
+t: Before removal
+-----------------------------
+Contents of graph 't'
+out:
+0:
+1:
+2: 0 1
+in:
+0: 2
+1: 2
+2:
+-----------------------------
+t: After removal
+-----------------------------
+Contents of graph 't'
+out:
+0:
+1:
+in:
+0:
+1:
+-----------------------------
+t: Before removal
+-----------------------------
+Contents of graph 't'
+out:
+0:
+1:
+in:
+0:
+1:
+-----------------------------
+t: After removal
+-----------------------------
+Contents of graph 't'
+out:
+0:
+in:
+0:
+-----------------------------
+t: Before removal
+-----------------------------
+Contents of graph 't'
+out:
+0:
+in:
+0:
+-----------------------------
+t: After removal
+-----------------------------
+Contents of graph 't'
+out:
+
+in:
+
+-----------------------------
+Test finished without apparent errors.
