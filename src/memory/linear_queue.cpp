@@ -98,6 +98,7 @@ struct S {
 void test_move_push() noexcept {
 	begin_function;
 
+
 	{
 	begin_case;
 	queue_array<S> q;
