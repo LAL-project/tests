@@ -44,7 +44,6 @@
 #include <iostream>
 
 // common includes
-#include "common/test_utils.hpp"
 #include "common/definitions.hpp"
 
 // lal includes
@@ -55,7 +54,6 @@ namespace tests {
 namespace graphs {
 
 err_type exe_graphs_graph_literals(std::ifstream&) noexcept {
-
 	{
 	std::cout << "Free tree and root (" << __LINE__ << ")\n";
 	const std::pair<lal::graphs::free_tree, lal::node> ftree_and_root
