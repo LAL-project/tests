@@ -40,11 +40,10 @@
  *
  ********************************************************************/
 
+// C++ includes
 #if defined DEBUG
 #include <cassert>
 #endif
-
-// C++ includes
 #include <vector>
 
 // lal includes
@@ -66,6 +65,7 @@ std::vector<std::vector<lal::node>> vertex_orbits_compute
 (const lal::graphs::free_tree& t)
 noexcept
 {
+
 	graph *g = NULL;
 	std::size_t g_sz = 0;
 
