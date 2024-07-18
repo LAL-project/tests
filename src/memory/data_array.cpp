@@ -67,6 +67,7 @@ namespace lal_array {
 void test_move_constructor() noexcept {
 	begin_function;
 
+
 	{
 	begin_case;
 	array<int> A(0);
