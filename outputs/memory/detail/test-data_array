@@ -1,5 +1,5 @@
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_move_constructor()
+function: void tests::memory::lal_array::test_move_constructor()
 -----------------------------------
 case starting at line: 72
 74:: Empty
@@ -21,7 +21,7 @@ case starting at line: 99
 103:: Empty
 104::  1 1 1 1 1 1 1 1 1 1
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_move_assignment()
+function: void tests::memory::lal_array::test_move_assignment()
 -----------------------------------
 case starting at line: 113
 115:: Empty
@@ -51,7 +51,7 @@ case starting at line: 152
 160::  1 1 1 1 1 1 1 1 1 1
 161:: Empty
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_copy_constructor()
+function: void tests::memory::lal_array::test_copy_constructor()
 -----------------------------------
 case starting at line: 171
 173:: Empty
@@ -73,7 +73,7 @@ case starting at line: 198
 202::  1 1 1 1 1 1 1 1 1 1
 203::  1 1 1 1 1 1 1 1 1 1
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_copy_assignment()
+function: void tests::memory::lal_array::test_copy_assignment()
 -----------------------------------
 case starting at line: 221
 223:: Empty
@@ -115,7 +115,7 @@ case starting at line: 289
 291:: Empty
 293::  5 5 5 5 5 5 5 5 5 5
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_resize_fill() [with bool clear = false]
+function: void tests::memory::lal_array::test_resize_fill() [with bool clear = false]
 -----------------------------------
 case starting at line: 304
 306::  1
@@ -132,7 +132,7 @@ case starting at line: 322
 case starting at line: 328
 331::  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
 +++++++++++++++++++++++++++++++++
-function: void tests::memory::lal_data_array::test_resize_fill() [with bool clear = true]
+function: void tests::memory::lal_array::test_resize_fill() [with bool clear = true]
 -----------------------------------
 case starting at line: 304
 306::  1
