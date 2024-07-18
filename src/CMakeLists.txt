@@ -107,8 +107,20 @@ endif()
 find_library(NAUTY_LIB nauty)
 if (NAUTY_LIB)
 	message(STATUS "Found nauty: ${NAUTY_LIB}")
+	set(AUTOMATIC_NAUTY 1)
 else()
-	message(FATAL_ERROR "Error: nauty library not found.")
+	set(AUTOMATIC_NAUTY 0)
+	if (NOT DEFINED NAUTY_DIR)
+		message(FATAL_ERROR "Error: nauty library not found and no paths were provided.")
+		message(FATAL_ERROR "Indicate path to nauty library with:")
+		message(FATAL_ERROR "    -DNAUTY_DIR")
+	else()
+		set(NAUTY_LIB_DIR ${NAUTY_DIR}/lib)
+		set(NAUTY_INC_DIR ${NAUTY_DIR}/)
+		message(STATUS "    NAUTY_LIB_DIR: ${NAUTY_LIB_DIR}")
+		message(STATUS "    NAUTY_INC_DIR: ${NAUTY_INC_DIR}")
+	endif()
+	
 endif()
 
 # ******
@@ -299,6 +311,7 @@ add_executable(
 		properties/caterpillar_distance.cpp
 		properties/centre.cpp
 		properties/centroid.cpp
+		properties/connected_components.cpp
 		properties/diameter.cpp
 		properties/expected_D_bipartite.cpp
 		properties/expected_D_planar.cpp
@@ -444,7 +457,12 @@ target_link_libraries(tests			gmp)
 target_link_libraries(utilities		gmp)
 
 # nauty
-target_link_libraries(properties	nauty)
+if ("${AUTOMATIC_NAUTY}" STREQUAL "1")
+	target_link_libraries(properties	nauty)
+else()
+	target_link_libraries(properties					${NAUTY_LIB_DIR}/libnauty.a)
+	target_include_directories(properties	PUBLIC		${NAUTY_INC_DIR})
+endif()
 
 # ******************************************************************************
 # COMPILATION FLAGS
