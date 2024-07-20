@@ -1,7 +1,3 @@
-Hey!
-Hey!
-Hey!
-Hey!
 0:
 	par: 4
 	nod: 1* 0 2
