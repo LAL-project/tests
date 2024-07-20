@@ -14,7 +14,6 @@ Total paths: 5
     Number of edges:         1
     First endpoint:          0 -- degree: 3
     Second endpoint:         1 -- degree: 1
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         0 1
     Position of each vertex: 0 1 x x x x x
@@ -23,7 +22,6 @@ Total paths: 5
     Number of edges:         1
     First endpoint:          0 -- degree: 3
     Second endpoint:         2 -- degree: 1
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         0 2
     Position of each vertex: 0 x 1 x x x x
@@ -32,7 +30,6 @@ Total paths: 5
     Number of edges:         1
     First endpoint:          0 -- degree: 3
     Second endpoint:         4 -- degree: 3
-    Lowest lexicographic:    8
     Is antenna:              0
     Vertex sequence:         0 4
     Position of each vertex: 0 x x x 1 x x
@@ -50,7 +47,6 @@ Total paths: 5
     Number of edges:         1
     First endpoint:          4 -- degree: 3
     Second endpoint:         5 -- degree: 1
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         4 5
     Position of each vertex: x x x x 0 1 x
@@ -70,7 +66,6 @@ Total paths: 3
     Number of edges:         1
     First endpoint:          0 -- degree: 1
     Second endpoint:         1 -- degree: 3
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         0 1
     Position of each vertex: 0 1 x x x x x
@@ -79,7 +74,6 @@ Total paths: 3
     Number of edges:         1
     First endpoint:          1 -- degree: 3
     Second endpoint:         2 -- degree: 1
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         1 2
     Position of each vertex: x 0 1 x x x x
@@ -108,7 +102,6 @@ Total paths: 3
     Number of edges:         1
     First endpoint:          0 -- degree: 1
     Second endpoint:         1 -- degree: 3
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         0 1
     Position of each vertex: 0 1 x x x x x
@@ -117,7 +110,6 @@ Total paths: 3
     Number of edges:         1
     First endpoint:          1 -- degree: 3
     Second endpoint:         2 -- degree: 1
-    Lowest lexicographic:    8
     Is antenna:              1
     Vertex sequence:         1 2
     Position of each vertex: x 0 1 x x x x

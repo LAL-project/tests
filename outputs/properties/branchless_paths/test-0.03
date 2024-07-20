@@ -17,7 +17,6 @@ Total paths: 1
     Number of edges:         1
     First endpoint:          0 -- degree: 1
     Second endpoint:         1 -- degree: 1
-    Lowest lexicographic:    4
     Is antenna:              1
     Vertex sequence:         0 1
     Position of each vertex: 0 1 x
@@ -49,7 +48,6 @@ Total paths: 1
     Number of edges:         1
     First endpoint:          0 -- degree: 1
     Second endpoint:         2 -- degree: 1
-    Lowest lexicographic:    4
     Is antenna:              1
     Vertex sequence:         0 2
     Position of each vertex: 0 x 1

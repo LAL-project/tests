@@ -42,7 +42,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          0 -- degree: 1
     Second endpoint:         19 -- degree: 9
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         0 19
     Position of each vertex: 0 x x x x x x x x x x x x x x x x x x 1 x x x x x x x x x x x x x x x
@@ -51,7 +50,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          1 -- degree: 1
     Second endpoint:         8 -- degree: 5
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         1 8
     Position of each vertex: x 0 x x x x x x 1 x x x x x x x x x x x x x x x x x x x x x x x x x x
@@ -60,7 +58,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          3 -- degree: 1
     Second endpoint:         6 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         3 6
     Position of each vertex: x x x 0 x x 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x
@@ -69,7 +66,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          4 -- degree: 1
     Second endpoint:         6 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         4 6
     Position of each vertex: x x x x 0 x 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x
@@ -78,7 +74,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          5 -- degree: 1
     Second endpoint:         6 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         5 6
     Position of each vertex: x x x x x 0 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x
@@ -96,7 +91,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          7 -- degree: 1
     Second endpoint:         8 -- degree: 5
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         7 8
     Position of each vertex: x x x x x x x 0 1 x x x x x x x x x x x x x x x x x x x x x x x x x x
@@ -105,7 +99,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          8 -- degree: 5
     Second endpoint:         12 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         8 12
     Position of each vertex: x x x x x x x x 0 x x x 1 x x x x x x x x x x x x x x x x x x x x x x
@@ -114,7 +107,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          8 -- degree: 5
     Second endpoint:         19 -- degree: 9
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         8 19
     Position of each vertex: x x x x x x x x 0 x x x x x x x x x x 1 x x x x x x x x x x x x x x x
@@ -123,7 +115,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          9 -- degree: 1
     Second endpoint:         12 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         9 12
     Position of each vertex: x x x x x x x x x 0 x x 1 x x x x x x x x x x x x x x x x x x x x x x
@@ -132,7 +123,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          10 -- degree: 1
     Second endpoint:         12 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         10 12
     Position of each vertex: x x x x x x x x x x 0 x 1 x x x x x x x x x x x x x x x x x x x x x x
@@ -141,7 +131,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          11 -- degree: 1
     Second endpoint:         12 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         11 12
     Position of each vertex: x x x x x x x x x x x 0 1 x x x x x x x x x x x x x x x x x x x x x x
@@ -150,7 +139,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          13 -- degree: 1
     Second endpoint:         19 -- degree: 9
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         13 19
     Position of each vertex: x x x x x x x x x x x x x 0 x x x x x 1 x x x x x x x x x x x x x x x
@@ -159,7 +147,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          14 -- degree: 1
     Second endpoint:         16 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         14 16
     Position of each vertex: x x x x x x x x x x x x x x 0 x 1 x x x x x x x x x x x x x x x x x x
@@ -168,7 +155,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          15 -- degree: 1
     Second endpoint:         16 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         15 16
     Position of each vertex: x x x x x x x x x x x x x x x 0 1 x x x x x x x x x x x x x x x x x x
@@ -186,7 +172,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          16 -- degree: 4
     Second endpoint:         19 -- degree: 9
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         16 19
     Position of each vertex: x x x x x x x x x x x x x x x x 0 x x 1 x x x x x x x x x x x x x x x
@@ -195,7 +180,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          19 -- degree: 9
     Second endpoint:         20 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         19 20
     Position of each vertex: x x x x x x x x x x x x x x x x x x x 0 1 x x x x x x x x x x x x x x
@@ -204,7 +188,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          19 -- degree: 9
     Second endpoint:         21 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         19 21
     Position of each vertex: x x x x x x x x x x x x x x x x x x x 0 x 1 x x x x x x x x x x x x x
@@ -213,7 +196,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          19 -- degree: 9
     Second endpoint:         22 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         19 22
     Position of each vertex: x x x x x x x x x x x x x x x x x x x 0 x x 1 x x x x x x x x x x x x
@@ -222,7 +204,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          19 -- degree: 9
     Second endpoint:         28 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         19 28
     Position of each vertex: x x x x x x x x x x x x x x x x x x x 0 x x x x x x x x 1 x x x x x x
@@ -231,7 +212,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          19 -- degree: 9
     Second endpoint:         34 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         19 34
     Position of each vertex: x x x x x x x x x x x x x x x x x x x 0 x x x x x x x x x x x x x x 1
@@ -240,7 +220,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          23 -- degree: 1
     Second endpoint:         25 -- degree: 5
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         23 25
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x 0 x 1 x x x x x x x x x
@@ -249,7 +228,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          24 -- degree: 1
     Second endpoint:         25 -- degree: 5
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         24 25
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x 0 1 x x x x x x x x x
@@ -258,7 +236,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          25 -- degree: 5
     Second endpoint:         26 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         25 26
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x 0 1 x x x x x x x x
@@ -267,7 +244,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          25 -- degree: 5
     Second endpoint:         27 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         25 27
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x 0 x 1 x x x x x x x
@@ -276,7 +252,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          25 -- degree: 5
     Second endpoint:         28 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         25 28
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x 0 x x 1 x x x x x x
@@ -285,7 +260,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          28 -- degree: 4
     Second endpoint:         32 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              0
     Vertex sequence:         28 32
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x x x x 0 x x x 1 x x
@@ -294,7 +268,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          28 -- degree: 4
     Second endpoint:         33 -- degree: 1
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         28 33
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x x x x 0 x x x x 1 x
@@ -303,7 +276,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          29 -- degree: 1
     Second endpoint:         32 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         29 32
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x x x x x 0 x x 1 x x
@@ -312,7 +284,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          30 -- degree: 1
     Second endpoint:         32 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         30 32
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x 0 x 1 x x
@@ -321,7 +292,6 @@ Total paths: 32
     Number of edges:         1
     First endpoint:          31 -- degree: 1
     Second endpoint:         32 -- degree: 4
-    Lowest lexicographic:    36
     Is antenna:              1
     Vertex sequence:         31 32
     Position of each vertex: x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x 0 1 x x
