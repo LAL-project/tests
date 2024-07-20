@@ -113,16 +113,18 @@ err_type execute_program(std::ifstream& fin) noexcept {
 					std::cerr << "    h1 is equal to h2!\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    Lowest lexicographic:    " << p.get_lowest_lexicographic() << '\n';
+				if (p.has_lowest_lexicographic()) {
+					std::cout << "    Lowest lexicographic:    " << p.get_lowest_lexicographic() << '\n';
+				}
 				if (p.get_num_nodes() <= 2) {
-					if (p.get_lowest_lexicographic() < t.get_num_nodes()) {
+					if (p.has_lowest_lexicographic()) {
 						std::cerr << ERROR << '\n';
 						std::cerr << "    Path has a lower lexicographic internal vertex but it should not have any.\n";
 						return err_type::test_execution;
 					}
 				}
 				else {
-					if (p.get_lowest_lexicographic() >= t.get_num_nodes()) {
+					if (not p.has_lowest_lexicographic()) {
 						std::cerr << ERROR << '\n';
 						std::cerr << "    Path does not have a lower lexicographic internal vertex but it should have one.\n";
 						return err_type::test_execution;
