@@ -138,11 +138,9 @@ noexcept
 			for (auto& v : input_flux) {
 				uint64_t k;
 				fin >> k;
-				v.get_dependencies().resize(k);
-				auto& deps = v.get_dependencies();
-				for (uint64_t i = 0; i < k; ++i) {
-					fin >> deps[i].first >> deps[i].second;
-				}
+				std::vector<lal::edge> deps(k);
+				for (lal::edge& e : deps) { fin >> e.first >> e.second; }
+				v.set_dependencies(std::move(deps));
 			}
 
 			// test dependencies

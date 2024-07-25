@@ -69,8 +69,8 @@ void output_head_vector(const lal::head_vector& hv) noexcept {
 
 void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
 	for (std::size_t i = 0; i < chunks.size(); ++i) {
-		std::cout << i << ":\n";
 		const lal::linarr::chunk& chunk = chunks[i];
+		std::cout << i << ":\n";
 
 		if (not chunk.has_parent_node()) {
 			std::cout << "\t!\n";
@@ -91,10 +91,8 @@ void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
 	}
 }
 
-bool are_nodes_contiguous(
-	const std::vector<lal::node>& node_set,
-	const lal::linear_arrangement& arr
-)
+bool are_nodes_contiguous
+(const std::vector<lal::node>& node_set, const lal::linear_arrangement& arr)
 noexcept
 {
 	std::set<lal::position> positions;
@@ -116,7 +114,8 @@ noexcept
 	return true;
 }
 
-err_type test_chunked_tree(
+err_type test_chunked_tree
+(
 	const lal::graphs::rooted_tree& rt,
 	const lal::linear_arrangement& arr,
 	const lal::graphs::rooted_tree& chunked_rt,
@@ -197,7 +196,7 @@ noexcept
 	if (error) {
 		std::cerr << "=================================\n";
 		std::cerr << "Chunks: " << chunks.size() << '\n';
-		for (const auto& c : chunks.get_chunks()) {
+		for (const lal::linarr::chunk& c : chunks) {
 			std::cerr << "---------------------------------\n";
 			std::cerr << "    Size: " << c.get_nodes().size() << '\n';
 			std::cerr
