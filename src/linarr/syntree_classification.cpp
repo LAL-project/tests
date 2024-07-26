@@ -65,7 +65,7 @@ namespace linarr {
 
 namespace syntree_class {
 
-typedef lal::linarr::syntactic_dependency_tree syndeptree_type;
+typedef lal::linarr::syntactic_dependency_tree_type syndeptree_type;
 
 std::string sdtt_to_string(const syndeptree_type& t) noexcept {
 	switch (t) {
