@@ -73,7 +73,7 @@ void run_tests(std::ifstream& fin) noexcept {
 		}
 		g.finish_bulk_add();
 
-		const auto ccs = lal::properties::compute_connected_components(g);
+		const auto ccs = lal::properties::connected_components_compute(g);
 		for (lal::node u = 0; u < n; ++u) {
 			std::cout
 				<< u
