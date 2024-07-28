@@ -101,6 +101,9 @@ noexcept
 	else if (key == "auf") {
 		return exe_gen_trees_auf(fin);
 	}
+	else if (key == "aufb") {
+		return exe_gen_trees_aufb(fin);
+	}
 	else if (key == "aur") {
 		return exe_gen_trees_aur(fin);
 	}

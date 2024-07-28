@@ -70,6 +70,7 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_alf(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_alr(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_auf(std::ifstream& fin) noexcept;
+err_type exe_gen_trees_aufb(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_aur(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_rlf(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_rlr(std::ifstream& fin) noexcept;

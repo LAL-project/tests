@@ -99,6 +99,7 @@ SOURCES += \
 	trees_alf.cpp \
 	trees_alr.cpp \
 	trees_auf.cpp \
+	trees_aufb.cpp \
 	trees_aur.cpp \
 	trees_rlf.cpp \
 	trees_rlr.cpp \
