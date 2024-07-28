@@ -79,6 +79,7 @@ function show_usage() {
 	echo "                    generate_trees_alr : execute generation (All Labelled Rooted) tests"
 	echo "                    generate_trees_auf : execute generation (All Unlabelled Free) tests"
 	echo "                    generate_trees_aur : execute generation (All Unlabelled Rooted) tests"
+	echo "                    generate_trees_aufb : execute generation (All Unlabelled Free Bistar) tests"
 	echo "                generate_trees_rand : execute tests for random generation of trees"
 	echo "                    generate_trees_rlf : execute generation (Rand Labelled Free) tests"
 	echo "                    generate_trees_rlr : execute generation (Rand Labelled Rooted) tests"

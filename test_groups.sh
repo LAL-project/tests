@@ -12,6 +12,7 @@ groups_list=(\
 			"generate_trees_alr" \
 			"generate_trees_auf" \
 			"generate_trees_aur" \
+			"generate_trees_aufb" \
 		"generate_trees_rand" \
 			"generate_trees_rlf" \
 			"generate_trees_rlr" \

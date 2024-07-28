@@ -15,6 +15,11 @@ generate_trees_auf_DIRS=(\
 	"generate/trees/all_ulab_free" "generate/trees/all_ulab_free" \
 	)
 
+# generate (all unlabelled free bistar) tests : auf
+generate_trees_aufb_DIRS=(\
+	"generate/trees/all_ulab_free_bistar" "generate/trees/all_ulab_free_bistar" \
+	)
+
 # generate (all unlabelled rooted) tests : aur
 generate_trees_aur_DIRS=(\
 	"generate/trees/all_ulab_rooted" "generate/trees/all_ulab_rooted" \
@@ -46,6 +51,7 @@ generate_trees_all_DIRS=(\
 	"${generate_trees_alr_DIRS[@]}" \
 	"${generate_trees_auf_DIRS[@]}" \
 	"${generate_trees_aur_DIRS[@]}" \
+	"${generate_trees_aufb_DIRS[@]}" \
 	)
 generate_trees_rand_DIRS=(\
 	"${generate_trees_rlf_DIRS[@]}" \
