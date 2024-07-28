@@ -2,4 +2,4 @@ TYPE graphs-tree_types
 
 	0 1 2 3 4;linear,caterpillar
 	0 1 2 3 3;quasistar,bistar,spider,caterpillar
-	0 1 1 1 1;star,spider,caterpillar
+	0 1 1 1 1;star,spider,caterpillar,quasistar,bistar
