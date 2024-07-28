@@ -184,19 +184,19 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 			std::cerr << "    Line's content: '" << line << "'\n";
 			std::cerr << "    Tree:\n";
 			std::cerr << fT << '\n';
-			std::cerr << "    Ground truth classes:\n";
+			std::cerr << "    Ground truth classes (in the file):\n";
 			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
-					std::cout << "        "
+					std::cerr << "        "
 						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
 						 << (not LAL_types[i] ? "  <--- missing" : "")
 						 << '\n';
 				}
 			}
-			std::cerr << "    LAL's classes:\n";
+			std::cerr << "    LAL's classes (given by the library):\n";
 			for (std::size_t i = 0; i < LAL_types.size(); ++i) {
 				if (LAL_types[i]) {
-					std::cout << "        "
+					std::cerr << "        "
 						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
 						 << (not ground_classes[i] ? "  <--- incorrect" : "")
 						 << '\n';
