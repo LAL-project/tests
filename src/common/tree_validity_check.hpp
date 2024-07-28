@@ -49,9 +49,6 @@
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 
-// common includes
-#include "definitions.hpp"
-
 namespace tests {
 
 /* FREE TREES */
