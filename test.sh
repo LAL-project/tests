@@ -298,43 +298,44 @@ function check_res_no_valgrind() {
 		
 		echo -e "\e[1;3;31mOutput base file does not exist\e[0m Skipping comparison..."
 		echo "$(date +"%Y/%m/%d.%T")            Warning: when executing test $test_name -- Output base file does not exist. Skipping comparison..." >> $log_file
+		return
+	fi
+	
+	# replace Windows-like endlines with Linux-like endlines
+	local prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
+	
+	# If the output is incorrect, store it into a file.
+	
+	# Check whether there were errors or not. If there were,
+	# issue an error message and stop. If there were not,
+	# check the output produced.
+	
+	if [ -s $temp_test_err ]; then
+		echo -en "\e[1;4;31mErrors were produced\e[0m "
+		echo "See errors in $test_err"
+		mv $temp_test_err $test_err
+		echo "$prog_out" > $test_out
 		
+		echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> $log_file
+		return
+	fi
+	
+	# no errors were produced -- remove the error file
+	rm $temp_test_err
+	
+	# test whether the "normal" output produced is empty or not
+	local BASE_CONTENTS=$(cat $base_out_file)
+	
+	local DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
+	if [ ! -z "$DIFF" ]; then
+		echo -en "\e[1;4;31mDifferent outputs\e[0m "
+		echo "See result in $test_out"
+		echo "$prog_out" > $test_out
+		echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Output of test differs from base output" >> $log_file
 	else
-		# replace Windows-like endlines with Linux-like endlines
-		local prog_out=$(echo "$prog_out" | sed 's/\n\r/\n/g')
-		
-		# If the output is incorrect, store it into a file.
-		
-		# Check whether there were errors or not. If there were,
-		# issue an error message and stop. If there were not,
-		# check the output produced.
-		
-		if [ -s $temp_test_err ]; then
-			echo -en "\e[1;4;31mErrors were produced\e[0m "
-			echo "See errors in $test_err"
-			mv $temp_test_err $test_err
-			echo "$prog_out" > $test_out
-			
-			echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Errors were produced" >> $log_file
-		else
-			# no errors were produced -- remove the error file
-			rm $temp_test_err
-			
-			# test whether the "normal" output produced is empty or not
-			local BASE_CONTENTS=$(cat $base_out_file)
-			
-			local DIFF=$(diff <(echo "$BASE_CONTENTS") <(echo "$prog_out"))
-			if [ ! -z "$DIFF" ]; then
-				echo -en "\e[1;4;31mDifferent outputs\e[0m "
-				echo "See result in $test_out"
-				echo "$prog_out" > $test_out
-				echo "$(date +"%Y/%m/%d.%T")            Error: when executing test $test_name -- Output of test differs from base output" >> $log_file
-			else
-				# output produced by library is
-				# equal to the output made by hand
-				echo -e "\e[1;1;32mOk\e[0m"
-			fi
-		fi
+		# output produced by library is
+		# equal to the output made by hand
+		echo -e "\e[1;1;32mOk\e[0m"
 	fi
 }
 
@@ -413,7 +414,7 @@ function execute_group() {
 			
 			# Execute the program NOW
 			local PROG_OUT=$($EXECUTION_COMMAND -i $input_group/$f 2> $storage/$TEST_ERR.$ID.tmp)
-
+			
 			# increment the amount of tests executed by 1
 			nth_test=$(($nth_test + 1))
 			
@@ -881,8 +882,6 @@ fi
 # requested, make the command appropriately.
 if [ $use_valgrind == 1 ]; then
 	EXECUTION_COMMAND="valgrind -q --leak-check=full $EXECUTION_COMMAND"
-else
-	EXECUTION_COMMAND="$EXECUTION_COMMAND"
 fi
 
 ################################################################################
