@@ -51,6 +51,7 @@
 // lal includes
 #include <lal/detail/sorting/insertion_sort.hpp>
 #include <lal/detail/sorting/bit_sort.hpp>
+#include <lal/detail/sorting/sorting_types.hpp>
 #include <lal/detail/sorting/counting_sort.hpp>
 
 // common includes
@@ -249,11 +250,11 @@ noexcept
 {
 	const std::size_t size = static_cast<std::size_t>(std::distance(begin,end));
 	if (incr) {
-		lal::detail::sorting::counting_sort<T,lal::detail::sorting::non_decreasing_t>
+		lal::detail::sorting::counting_sort<T,lal::detail::sorting::sort_type::non_decreasing>
 		(begin, end, n, size, key);
 	}
 	else {
-		lal::detail::sorting::counting_sort<T,lal::detail::sorting::non_increasing_t>
+		lal::detail::sorting::counting_sort<T, lal::detail::sorting::sort_type::non_increasing>
 		(begin, end, n, size, key);
 	}
 }
