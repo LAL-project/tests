@@ -46,6 +46,7 @@
 // lal includes
 #include <lal/linarr/D/D.hpp>
 #include <lal/linear_arrangement.hpp>
+#include <lal/linarr/formal_constraints.hpp>
 
 // common includes
 #include "common/std_utils.hpp"
@@ -59,18 +60,30 @@ bool check_correctness_arr(
 	const std::pair<uint64_t, lal::linear_arrangement>& res,
 	const std::string& error_header,
 	const std::string& algorithm,
-	bool (*check_arrangement)(const tree_t&, const lal::linear_arrangement&)
+	bool (*check_property_of_arrangement)(const tree_t&, const lal::linear_arrangement&)
 )
 noexcept
 {
 	const lal::linear_arrangement& arr = res.second;
 
-	/* ensure planarity of arrangement */
-	if (not check_arrangement(tree, arr)) {
+	if (not lal::linarr::is_arrangement(tree, arr)) {
 		std::cerr << error_header << '\n';
-		std::cerr << "    The arrangement produced by the library is not an actual\n";
+		std::cerr << "    The object produced by the library is not an actual arrangement.\n";
 		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "    arrangement or is not planar.\n";
+		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
+		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+		std::cerr << "    For tree: \n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
+		std::cerr << tree << '\n';
+		return false;
+	}
+
+	/* ensure a property of arrangement */
+	if (not check_property_of_arrangement(tree, arr)) {
+		std::cerr << error_header << '\n';
+		std::cerr << "    The arrangement produced by the library does not satisfy the property.\n";
+		std::cerr << "    Algorithm executed: " << algorithm << '\n';
 		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
 		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
 		std::cerr << "    For tree: \n";
