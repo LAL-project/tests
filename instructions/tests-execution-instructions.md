@@ -7,7 +7,7 @@ Tests can be run by the user to ensure that the library works correctly in their
 
 ## Automatic execution of the tests
 
-Running the tests is simple. They have been classified into different categories, each stored in a different folder within the main directory [inputs](https://github.com/lluisalemanypuig/LAL-tests/blob/master/inputs). The tester executable is run using a given test, and its output should be compared to the corresponding output stored in the [outputs](https://github.com/lluisalemanypuig/LAL-tests/blob/master/outputs) directory. However, we provide a script that automatises this procedure. One can run it by issuing the command:
+Running the tests is simple. They have been classified into different categories, each stored in a different folder within the main directory [inputs](https://github.com/LAL-project/tests/blob/master/inputs). The tester executable is run using a given test, and its output should be compared to the corresponding output stored in the [outputs](https://github.com/LAL-project/tests/blob/master/outputs) directory. However, we provide a script that automatises this procedure. One can run it by issuing the command:
 
 	./test.sh --input=i --output=o
 
@@ -37,7 +37,7 @@ In all the commands above, the script assumes that LAL is to be tested in ```DEB
 
 ### Memory leak testing
 
-If one wishes to, [LAL](https://github.com/lluisalemanypuig/linear-arrangement-library/) can be tested for memory leaks. However, there are some steps that must be taken beforehand:
+If one wishes to, [LAL](https://github.com/LAL-project/linear-arrangement-library/) can be tested for memory leaks. However, there are some steps that must be taken beforehand:
 
 1. Compile and install the library in ```DEBUG``` mode as explained in the corresponding instructions file.
 
