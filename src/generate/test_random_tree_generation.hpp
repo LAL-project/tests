@@ -3,7 +3,7 @@
  * Tests of the Linear Arrangement Library - Programs used to test the
  * algorithms in the linear arrangement library.
  *
- * Copyright (C) 2019 - 2024
+ * Copyright (C) 2019 - 2025
  *
  * This file is part of Tests of the Linear Arrangement Library. The full code
  * is available at:
