@@ -53,19 +53,26 @@ typedef uint64_t bigint;
 namespace tests {
 namespace properties {
 
-void compute_data_gen_graphs_Q
-(
-	const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q,
-	bigint& Qs, bigint& Kg,
-	bigint& n_paths_4, bigint& n_cycles_4, bigint& graphlet,
-	bigint& n_paths_5, bigint& pair_C3_L2,
-	bigint& Phi_1, bigint& Phi_2,
-	bigint& Lambda_1, bigint& Lambda_2
-)
-noexcept
+void compute_data_gen_graphs_Q(
+	const lal::graphs::undirected_graph& g,
+	const std::vector<lal::edge_pair>& Q,
+	bigint& Qs,
+	bigint& Kg,
+	bigint& n_paths_4,
+	bigint& n_cycles_4,
+	bigint& graphlet,
+	bigint& n_paths_5,
+	bigint& pair_C3_L2,
+	bigint& Phi_1,
+	bigint& Phi_2,
+	bigint& Lambda_1,
+	bigint& Lambda_2
+) noexcept
 {
 	// adjacency matrix
-	std::vector<std::vector<uint64_t>> A(g.get_num_nodes(), std::vector<uint64_t>(g.get_num_nodes(), 0ull));
+	std::vector<std::vector<uint64_t>> A(
+		g.get_num_nodes(), std::vector<uint64_t>(g.get_num_nodes(), 0ull)
+	);
 	for (lal::iterators::E_iterator e_it(g); not e_it.end(); e_it.next()) {
 		const lal::edge& e = e_it.get_edge();
 		A[e.first][e.second] = true;
@@ -83,40 +90,42 @@ noexcept
 		const bigint ku = g.get_degree(u);
 		const bigint kv = g.get_degree(v);
 
-		n_cycles_4 += A[s][v]*A[u][t] + A[s][u]*A[t][v];
+		n_cycles_4 += A[s][v] * A[u][t] + A[s][u] * A[t][v];
 
 		n_paths_4 += A[s][u] + A[s][v] + A[t][u] + A[t][v];
 
 		Kg += ks + kt + ku + kv;
-		Phi_2 += (ks + kt)*(ku + kv);
-		Phi_1 += (ks*kt + ku*kv);
+		Phi_2 += (ks + kt) * (ku + kv);
+		Phi_1 += (ks * kt + ku * kv);
 
-		graphlet += (A[t][u] + A[s][v])*(A[t][v] + A[s][u]);
+		graphlet += (A[t][u] + A[s][v]) * (A[t][v] + A[s][u]);
 
 		Lambda_2 +=
-			(A[s][u] + A[s][v] + A[t][u] + A[t][v])*
-			(ks + kt + ku + kv);
+			(A[s][u] + A[s][v] + A[t][u] + A[t][v]) * (ks + kt + ku + kv);
 
-		Lambda_1 +=
-			ks*(A[t][u] + A[t][v]) +
-			kt*(A[s][u] + A[s][v]) +
-			ku*(A[s][v] + A[t][v]) +
-			kv*(A[s][u] + A[t][u]);
+		Lambda_1 += ks * (A[t][u] + A[t][v]) + kt * (A[s][u] + A[s][v]) +
+					ku * (A[s][v] + A[t][v]) + kv * (A[s][u] + A[t][u]);
 
 		const lal::neighbourhood& ns = g.get_neighbors(s);
 		for (const lal::node& ws : ns) {
-			if (ws == t or ws == u or ws == v) { continue; }
+			if (ws == t or ws == u or ws == v) {
+				continue;
+			}
 			n_paths_5 += A[u][ws] + A[v][ws];
 			pair_C3_L2 += A[t][ws];
 		}
 		const lal::neighbourhood& nt = g.get_neighbors(t);
 		for (const lal::node& wt : nt) {
-			if (wt == s or wt == u or wt == v) { continue; }
+			if (wt == s or wt == u or wt == v) {
+				continue;
+			}
 			n_paths_5 += A[u][wt] + A[v][wt];
 		}
 		const lal::neighbourhood& nu = g.get_neighbors(u);
 		for (const lal::node& wu : nu) {
-			if (wu == s or wu == t or wu == v) { continue; }
+			if (wu == s or wu == t or wu == v) {
+				continue;
+			}
 			pair_C3_L2 += A[v][wu];
 		}
 	}
@@ -125,9 +134,9 @@ noexcept
 	n_cycles_4 /= 2;
 }
 
-lal::numeric::rational nonLAL_var_num_crossings_rational_Q
-(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q)
-noexcept
+lal::numeric::rational nonLAL_var_num_crossings_rational_Q(
+	const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q
+) noexcept
 {
 	const bigint m = g.get_num_edges();
 
@@ -163,33 +172,50 @@ noexcept
 	// (a_{su} + a_{tu} + a_{sv} + a_{tv})*(k_s + k_t + k_u + k_v)
 	bigint Lambda_2 = 0;
 
-	compute_data_gen_graphs_Q
-	(
-		g, Q,
-		Qs, Kg,
-		n_paths_4, n_cycles_4, graphlet,
-		n_paths_5, pair_C3_L2,
-		Phi_1, Phi_2,
-		Lambda_1, Lambda_2
+	compute_data_gen_graphs_Q(
+		g,
+		Q,
+		Qs,
+		Kg,
+		n_paths_4,
+		n_cycles_4,
+		graphlet,
+		n_paths_5,
+		pair_C3_L2,
+		Phi_1,
+		Phi_2,
+		Lambda_1,
+		Lambda_2
 	);
 
 	lal::numeric::integer J(0);
 
 	// V[C]
 	lal::numeric::rational V(0);
-	J.set_number((m + 2)*Qs);			V += lal::numeric::rational(2,45)*J;
-	J.set_number((2*m + 7)*n_paths_4);	V -= lal::numeric::rational(1,180)*J;
-	J.set_number(n_paths_5);			V -= lal::numeric::rational(1,180)*J;
-	J.set_number(Kg);					V += lal::numeric::rational(1,90)*J;
-	J.set_number(n_cycles_4);			V -= lal::numeric::rational(3,45)*J;
-	J.set_number(Lambda_1);				V -= lal::numeric::rational(1,60)*J;
-	J.set_number(Lambda_2);				V += lal::numeric::rational(1,180)*J;
-	J.set_number(Phi_2);				V += lal::numeric::rational(1,180)*J;
-	J.set_number(Phi_1);				V -= lal::numeric::rational(1,90)*J;
-	J.set_number(graphlet);				V += lal::numeric::rational(1,30)*J;
-	J.set_number(pair_C3_L2);			V += lal::numeric::rational(1,90)*J;
+	J.set_number((m + 2) * Qs);
+	V += lal::numeric::rational(2, 45) * J;
+	J.set_number((2 * m + 7) * n_paths_4);
+	V -= lal::numeric::rational(1, 180) * J;
+	J.set_number(n_paths_5);
+	V -= lal::numeric::rational(1, 180) * J;
+	J.set_number(Kg);
+	V += lal::numeric::rational(1, 90) * J;
+	J.set_number(n_cycles_4);
+	V -= lal::numeric::rational(3, 45) * J;
+	J.set_number(Lambda_1);
+	V -= lal::numeric::rational(1, 60) * J;
+	J.set_number(Lambda_2);
+	V += lal::numeric::rational(1, 180) * J;
+	J.set_number(Phi_2);
+	V += lal::numeric::rational(1, 180) * J;
+	J.set_number(Phi_1);
+	V -= lal::numeric::rational(1, 90) * J;
+	J.set_number(graphlet);
+	V += lal::numeric::rational(1, 30) * J;
+	J.set_number(pair_C3_L2);
+	V += lal::numeric::rational(1, 90) * J;
 	return V;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

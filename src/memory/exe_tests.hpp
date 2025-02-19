@@ -64,5 +64,5 @@ err_type exe_memory_numeric(std::ifstream& fin) noexcept;
 err_type exe_memory_detail_array(std::ifstream& fin) noexcept;
 err_type exe_memory_detail_queue_array(std::ifstream& fin) noexcept;
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

@@ -60,7 +60,8 @@ namespace properties {
 typedef lal::properties::branchless_path bp;
 
 template <class tree_t>
-err_type execute_program(std::ifstream& fin) noexcept {
+err_type execute_program(std::ifstream& fin) noexcept
+{
 	tree_t t;
 
 	std::string command;
@@ -77,7 +78,7 @@ err_type execute_program(std::ifstream& fin) noexcept {
 		else if (command == "add_edge") {
 			lal::node u, v;
 			fin >> u >> v;
-			t.add_edge(u,v);
+			t.add_edge(u, v);
 		}
 		else if (command == "print_tree") {
 			std::cout << "-------------\n";
@@ -86,27 +87,33 @@ err_type execute_program(std::ifstream& fin) noexcept {
 			std::cout << "-------------\n";
 		}
 		else if (command == "print_paths") {
-			const std::vector<bp> bps = lal::properties::branchless_paths_compute(t);
+			const std::vector<bp> bps =
+				lal::properties::branchless_paths_compute(t);
 			std::cout << "Total paths: " << bps.size() << '\n';
 			for (std::size_t i = 0; i < bps.size(); ++i) {
 				const bp& p = bps[i];
 				const lal::node h1 = p.get_h1();
 				const lal::node h2 = p.get_h2();
 				std::cout << i << ")\n";
-				std::cout << "    Number of vertices:      " << p.get_num_nodes() << '\n';
-				std::cout << "    Number of edges:         " << p.get_num_edges() << '\n';
+				std::cout << "    Number of vertices:      "
+						  << p.get_num_nodes() << '\n';
+				std::cout << "    Number of edges:         "
+						  << p.get_num_edges() << '\n';
 				if (h1 >= t.get_num_nodes()) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Path does not have its first endpoint.\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    First endpoint:          " << h1 << " -- degree: " << t.get_degree(h1) << '\n';
+				std::cout << "    First endpoint:          " << h1
+						  << " -- degree: " << t.get_degree(h1) << '\n';
 				if (h2 >= t.get_num_nodes()) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Path does not have its second endpoint.\n";
+					std::cerr
+						<< "    Path does not have its second endpoint.\n";
 					return err_type::test_execution;
 				}
-				std::cout << "    Second endpoint:         " << h2 << " -- degree: " << t.get_degree(h2) << '\n';
+				std::cout << "    Second endpoint:         " << h2
+						  << " -- degree: " << t.get_degree(h2) << '\n';
 				if (h1 == h2) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Singularity!\n";
@@ -114,27 +121,34 @@ err_type execute_program(std::ifstream& fin) noexcept {
 					return err_type::test_execution;
 				}
 				if (p.has_lowest_lexicographic()) {
-					std::cout << "    Lowest lexicographic:    " << p.get_lowest_lexicographic() << '\n';
+					std::cout << "    Lowest lexicographic:    "
+							  << p.get_lowest_lexicographic() << '\n';
 				}
 				if (p.get_num_nodes() <= 2) {
 					if (p.has_lowest_lexicographic()) {
 						std::cerr << ERROR << '\n';
-						std::cerr << "    Path has a lower lexicographic internal vertex but it should not have any.\n";
+						std::cerr
+							<< "    Path has a lower lexicographic internal "
+							   "vertex but it should not have any.\n";
 						return err_type::test_execution;
 					}
 				}
 				else {
 					if (not p.has_lowest_lexicographic()) {
 						std::cerr << ERROR << '\n';
-						std::cerr << "    Path does not have a lower lexicographic internal vertex but it should have one.\n";
+						std::cerr
+							<< "    Path does not have a lower lexicographic "
+							   "internal vertex but it should have one.\n";
 						return err_type::test_execution;
 					}
 				}
-				std::cout << "    Is antenna:              " << p.is_antenna(t) << '\n';
+				std::cout << "    Is antenna:              " << p.is_antenna(t)
+						  << '\n';
 				if (p.is_antenna(t)) {
 					if (t.get_degree(h1) != 1 and t.get_degree(h2) != 1) {
 						std::cerr << ERROR << '\n';
-						std::cerr << "    Path is said to be an antenna but non of its endpoints is a leaf.\n";
+						std::cerr << "    Path is said to be an antenna but "
+									 "non of its endpoints is a leaf.\n";
 						return err_type::test_execution;
 					}
 				}
@@ -145,22 +159,27 @@ err_type execute_program(std::ifstream& fin) noexcept {
 					if (u != h1 and u != h2) {
 						if (t.get_degree(u) != 2) {
 							std::cerr << ERROR << '\n';
-							std::cerr << "    Degree of internal path vertex '" << u << "' is not 2.\n";
-							std::cerr << "    Degree: " << t.get_degree(u) << ".\n";
+							std::cerr << "    Degree of internal path vertex '"
+									  << u << "' is not 2.\n";
+							std::cerr << "    Degree: " << t.get_degree(u)
+									  << ".\n";
 							return err_type::test_execution;
 						}
 					}
 					else {
 						if (t.get_degree(u) == 2) {
 							std::cerr << ERROR << '\n';
-							std::cerr << "    Degree of hub vertex '" << u << "' is 2, but it should not be.\n";
+							std::cerr << "    Degree of hub vertex '" << u
+									  << "' is 2, but it should not be.\n";
 							return err_type::test_execution;
 						}
 					}
 
 					if (not p.has_node(u)) {
 						std::cerr << ERROR << '\n';
-						std::cerr << "    Vertex '" << u << "' is in the vertex sequence but 'not in the path'.\n";
+						std::cerr << "    Vertex '" << u
+								  << "' is in the vertex sequence but 'not in "
+									 "the path'.\n";
 						return err_type::test_execution;
 					}
 				}
@@ -173,25 +192,25 @@ err_type execute_program(std::ifstream& fin) noexcept {
 						std::cout << p.get_position(u);
 						if (p.get_position(u) >= t.get_num_nodes()) {
 							std::cerr << ERROR << '\n';
-							std::cerr << "    Position of vertex '" << u << "' is invalid.\n";
+							std::cerr << "    Position of vertex '" << u
+									  << "' is invalid.\n";
 							return err_type::test_execution;
 						}
 					}
 					else {
 						std::cout << 'x';
 					}
-
 				}
 				std::cout << '\n';
 			}
 		}
-
 	}
 
 	return err_type::no_error;
 }
 
-err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept {
+err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept
+{
 	std::string mode;
 	fin >> mode;
 	err_type err;
@@ -216,5 +235,5 @@ err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

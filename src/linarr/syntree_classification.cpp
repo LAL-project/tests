@@ -67,46 +67,65 @@ namespace syntree_class {
 
 typedef lal::linarr::syntactic_dependency_tree_type syndeptree_type;
 
-std::string sdtt_to_string(const syndeptree_type& t) noexcept {
+std::string sdtt_to_string(const syndeptree_type& t) noexcept
+{
 	switch (t) {
 	case syndeptree_type::projective: return "prj";
-	case syndeptree_type::planar: return "pla";
-	case syndeptree_type::WG1: return "wg1";
-	case syndeptree_type::EC1: return "1ec";
-	default: return "none";
+	case syndeptree_type::planar:	  return "pla";
+	case syndeptree_type::WG1:		  return "wg1";
+	case syndeptree_type::EC1:		  return "1ec";
+	default:						  return "none";
 	}
 }
 
-std::pair<syndeptree_type, bool> std_to_syntreetype(const std::string& s) noexcept {
-	if (s == "prj") { return std::make_pair(syndeptree_type::projective, true); }
-	if (s == "pla") { return std::make_pair(syndeptree_type::planar, true); }
-	if (s == "1ec") { return std::make_pair(syndeptree_type::EC1, true); }
-	if (s == "wg1") { return std::make_pair(syndeptree_type::WG1, true); }
-	if (s == "mh4") { return std::make_pair(syndeptree_type::unknown, false); }
-	if (s == "mh5") { return std::make_pair(syndeptree_type::unknown, false); }
+std::pair<syndeptree_type, bool> std_to_syntreetype(const std::string& s
+) noexcept
+{
+	if (s == "prj") {
+		return std::make_pair(syndeptree_type::projective, true);
+	}
+	if (s == "pla") {
+		return std::make_pair(syndeptree_type::planar, true);
+	}
+	if (s == "1ec") {
+		return std::make_pair(syndeptree_type::EC1, true);
+	}
+	if (s == "wg1") {
+		return std::make_pair(syndeptree_type::WG1, true);
+	}
+	if (s == "mh4") {
+		return std::make_pair(syndeptree_type::unknown, false);
+	}
+	if (s == "mh5") {
+		return std::make_pair(syndeptree_type::unknown, false);
+	}
 
 	return std::make_pair(syndeptree_type::unknown, true);
 }
 
-lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept {
+lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept
+{
 	// read numbers in line
 	std::stringstream ss(s);
 	std::vector<uint64_t> L;
 	uint64_t v;
-	while (ss >> v) { L.push_back(v); }
+	while (ss >> v) {
+		L.push_back(v);
+	}
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
 std::array<bool, lal::linarr::__syntactic_dependency_tree_size>
-parse_ground_classes(std::string s)
-noexcept
+parse_ground_classes(std::string s) noexcept
 {
 	// classes vector
-	auto classes =
-		lal::detail::make_array_with_value<bool, lal::linarr::__syntactic_dependency_tree_size, false>();
+	auto classes = lal::detail::make_array_with_value<
+		bool,
+		lal::linarr::__syntactic_dependency_tree_size,
+		false>();
 
 	if (s.length() == 0) {
-	const syndeptree_type sdtt = std_to_syntreetype("none").first;
+		const syndeptree_type sdtt = std_to_syntreetype("none").first;
 		classes[static_cast<std::size_t>(sdtt)] = true;
 		return classes;
 	}
@@ -125,13 +144,14 @@ noexcept
 		}
 	}
 	if (n_accepted_classes == 0) {
-	const syndeptree_type sdtt = std_to_syntreetype("none").first;
+		const syndeptree_type sdtt = std_to_syntreetype("none").first;
 		classes[static_cast<std::size_t>(sdtt)] = true;
 	}
 	return classes;
 }
 
-err_type parse_single_file(const std::string& file, std::ifstream& F) noexcept {
+err_type parse_single_file(const std::string& file, std::ifstream& F) noexcept
+{
 	std::string line;
 	std::size_t lineno = (file == "inline" ? 4 : 1);
 
@@ -156,36 +176,40 @@ err_type parse_single_file(const std::string& file, std::ifstream& F) noexcept {
 		if (semicolon == std::string::npos) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Input line is not correctly formatted.\n";
-			std::cerr << "    In line: " << lineno << "' of file '" << file << "'.\n";
+			std::cerr << "    In line: " << lineno << "' of file '" << file
+					  << "'.\n";
 			std::cerr << "    Line '" << lineno << "' does not have the ';'.\n";
 			return err_type::test_format;
 		}
 
 		// parse line
 		const std::string treestr = line.substr(0, semicolon);
-		const std::string classlist = line.substr(semicolon + 1, line.length() - semicolon);
+		const std::string classlist =
+			line.substr(semicolon + 1, line.length() - semicolon);
 
 		// parse data in line
 		const lal::graphs::rooted_tree T = parse_tree_in_line(treestr);
 		const auto ground_classes = parse_ground_classes(classlist);
 
 		// classify tree
-		const auto LAL_classes = lal::linarr::syntactic_dependency_tree_classify(T);
+		const auto LAL_classes =
+			lal::linarr::syntactic_dependency_tree_classify(T);
 
 		// check result is correct
 		if (LAL_classes != ground_classes) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Classes detected by LAL are not a subset of the actual classes.\n";
-			std::cerr << "    In line '" << lineno << "' of file '" << file << "'.\n";
+			std::cerr << "    Classes detected by LAL are not a subset of the "
+						 "actual classes.\n";
+			std::cerr << "    In line '" << lineno << "' of file '" << file
+					  << "'.\n";
 			std::cerr << "    Line's content: " << line << '\n';
 			std::cerr << "    Ground truth classes:\n";
 			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
-					std::cout
-						<< "        "
-						<< sdtt_to_string(static_cast<syndeptree_type>(i))
-						<< (not LAL_classes[i] ? "  <--- missing" : "")
-						<< '\n';
+					std::cout << "        "
+							  << sdtt_to_string(static_cast<syndeptree_type>(i))
+							  << (not LAL_classes[i] ? "  <--- missing" : "")
+							  << '\n';
 				}
 			}
 			std::cerr << "    LAL's classes:\n";
@@ -205,7 +229,8 @@ err_type parse_single_file(const std::string& file, std::ifstream& F) noexcept {
 	return err_type::no_error;
 }
 
-err_type parse_single_file(const std::string& file) noexcept {
+err_type parse_single_file(const std::string& file) noexcept
+{
 	if (not std::filesystem::exists(file)) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    File '" << file << "' does not exist.\n";
@@ -217,9 +242,10 @@ err_type parse_single_file(const std::string& file) noexcept {
 	return parse_single_file(file, F);
 }
 
-} // -- namespace syntree_class
+} // namespace syntree_class
 
-err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
+err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept
+{
 
 	const auto inputs = read_input_list(fin);
 	if (inputs.size() > 0) {
@@ -229,14 +255,14 @@ err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 			errs[i] = err_type::no_error;
 		}
 
-		#pragma omp parallel for num_threads(4) schedule(dynamic)
+#pragma omp parallel for num_threads(4) schedule(dynamic)
 		for (std::size_t i = 0; i < inputs.size(); ++i) {
 			const std::string& f = inputs[i].first;
 			const err_type e = syntree_class::parse_single_file(f);
 			if (e != err_type::no_error) {
 				// the complete error message is already
 				// issued inside the function "parse_files"
-				errs[ omp_get_thread_num() ] = e;
+				errs[omp_get_thread_num()] = e;
 			}
 		}
 
@@ -259,5 +285,5 @@ err_type exe_linarr_syntree_classification(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

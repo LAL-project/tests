@@ -52,26 +52,24 @@ namespace linarr {
 
 template <class graph_t>
 uint64_t num_crossings_brute_force(
-	const graph_t& g,
-	const lal::linear_arrangement& pi
-)
-noexcept
+	const graph_t& g, const lal::linear_arrangement& pi
+) noexcept
 {
 	const std::vector<lal::edge> edges = g.get_edges();
 	uint64_t C = 0;
 
-#define sorted_by_pos(pA,pB) \
-	(pA < pB ? std::make_pair(pA,pB) : std::make_pair(pB,pA))
+#define sorted_by_pos(pA, pB)                                                  \
+	(pA < pB ? std::make_pair(pA, pB) : std::make_pair(pB, pA))
 
 	for (std::size_t i = 0; i < edges.size(); ++i) {
 		const lal::node_t s = edges[i].first;
 		const lal::node_t t = edges[i].second;
-		const auto [a,b] = sorted_by_pos(pi[s], pi[t]);
+		const auto [a, b] = sorted_by_pos(pi[s], pi[t]);
 
 		for (std::size_t j = i + 1; j < edges.size(); ++j) {
 			const lal::node_t u = edges[j].first;
 			const lal::node_t v = edges[j].second;
-			const auto [c,d] = sorted_by_pos(pi[u],pi[v]);
+			const auto [c, d] = sorted_by_pos(pi[u], pi[v]);
 
 			C += (c < a and a < d and d < b) or (a < c and c < b and b < d);
 		}
@@ -83,10 +81,8 @@ noexcept
 
 template <class graph_t>
 std::vector<uint64_t> num_crossings_brute_force(
-	const graph_t& g,
-	const std::vector<lal::linear_arrangement>& pis
-)
-noexcept
+	const graph_t& g, const std::vector<lal::linear_arrangement>& pis
+) noexcept
 {
 	std::vector<uint64_t> C(pis.size());
 	for (std::size_t i = 0; i < pis.size(); ++i) {
@@ -95,5 +91,5 @@ noexcept
 	return C;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

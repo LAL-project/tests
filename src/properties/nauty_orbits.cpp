@@ -61,9 +61,8 @@ namespace tests {
 namespace properties {
 namespace nauty_lib {
 
-std::vector<std::vector<lal::node>> vertex_orbits_compute
-(const lal::graphs::free_tree& t)
-noexcept
+std::vector<std::vector<lal::node>>
+vertex_orbits_compute(const lal::graphs::free_tree& t) noexcept
 {
 
 	graph *g = NULL;
@@ -95,26 +94,26 @@ noexcept
 
 	// allocate nauty's graph
 
-	DYNALLOC1(int,lab,lab_sz,n,"dreadnaut");
-	DYNALLOC1(int,ptn,ptn_sz,n,"dreadnaut");
-	DYNALLOC1(int,orbits,orbits_sz,n,"dreadnaut");
-	DYNALLOC1(int,perm,perm_sz,n,"dreadnaut");
-	DYNALLOC1(set,active,active_sz,m,"dreadnaut");
+	DYNALLOC1(int, lab, lab_sz, n, "dreadnaut");
+	DYNALLOC1(int, ptn, ptn_sz, n, "dreadnaut");
+	DYNALLOC1(int, orbits, orbits_sz, n, "dreadnaut");
+	DYNALLOC1(int, perm, perm_sz, n, "dreadnaut");
+	DYNALLOC1(set, active, active_sz, m, "dreadnaut");
 
 	// initialize nauty's graph
 
-	DYNALLOC2(graph,g,g_sz,n,m,"dreadnaut");
+	DYNALLOC2(graph, g, g_sz, n, m, "dreadnaut");
 	int v;
 	graph *gv;
 	for (v = 0, gv = g; v < n; ++v, gv += m) {
-		EMPTYSET(gv,m);
+		EMPTYSET(gv, m);
 	}
 
 	// construct graph
 
 	for (lal::node u = 0; u < t.get_num_nodes(); ++u) {
 		for (lal::node k : t.get_neighbors(u)) {
-			ADDELEMENT(GRAPHROW(g,u,m), k);
+			ADDELEMENT(GRAPHROW(g, u, m), k);
 		}
 	}
 
@@ -139,9 +138,9 @@ noexcept
 	options.usercanonproc = NULL;
 
 	if (options.getcanon) {
-		DYNALLOC2(graph,canong,canong_sz,n,m,"dreadnaut");
+		DYNALLOC2(graph, canong, canong_sz, n, m, "dreadnaut");
 	}
-	DYNALLOC1(setword,workspace,workspace_sz,2*m*worksize,"dreadnaut");
+	DYNALLOC1(setword, workspace, workspace_sz, 2 * m * worksize, "dreadnaut");
 
 	options.writeautoms = FALSE;
 	options.writemarkers = FALSE;
@@ -149,8 +148,18 @@ noexcept
 	// call nauty
 	statsblk stats;
 	nauty(
-		g,lab,ptn,NULL,orbits,&options,&stats,workspace,
-		2*m*worksize,m,n,canong
+		g,
+		lab,
+		ptn,
+		NULL,
+		orbits,
+		&options,
+		&stats,
+		workspace,
+		2 * m * worksize,
+		m,
+		n,
+		canong
 	);
 
 	if (stats.errstatus) {
@@ -189,13 +198,13 @@ noexcept
 		}
 	}
 
-	DYNFREE(g,g_sz);
-	DYNFREE(lab,lab_sz);
-	DYNFREE(ptn,ptn_sz);
-	DYNFREE(orbits,orbits_sz);
-	DYNFREE(perm,perm_sz);
-	DYNFREE(active,active_sz);
-	DYNFREE(workspace,workspace_sz);
+	DYNFREE(g, g_sz);
+	DYNFREE(lab, lab_sz);
+	DYNFREE(ptn, ptn_sz);
+	DYNFREE(orbits, orbits_sz);
+	DYNFREE(perm, perm_sz);
+	DYNFREE(active, active_sz);
+	DYNFREE(workspace, workspace_sz);
 
 	naugraph_freedyn();
 	nausparse_freedyn();
@@ -208,9 +217,8 @@ noexcept
 	return output_orbits;
 }
 
-std::vector<std::vector<lal::node>> compute_vertex_orbits
-(const lal::graphs::rooted_tree& t)
-noexcept
+std::vector<std::vector<lal::node>>
+compute_vertex_orbits(const lal::graphs::rooted_tree& t) noexcept
 {
 	return vertex_orbits_compute(t.to_free_tree());
 }
@@ -221,21 +229,24 @@ std::vector<std::vector<lal::edge>> compute_edge_orbits(
 	const lal::graphs::free_tree& t,
 	const std::vector<lal::edge>& edges,
 	const std::vector<std::size_t>& vertex_orbits
-)
-noexcept
+) noexcept
 {
 	lal::detail::array<char> edge_used(t.get_num_nodes() - 1, 0);
 	std::vector<std::vector<lal::edge>> edge_orbits;
 	edge_orbits.reserve(t.get_num_nodes() - 1);
 
 	for (std::size_t ei = 0; ei < edges.size(); ++ei) {
-		if (edge_used[ei] == 1) { continue; }
-		const auto [u,v] = edges[ei];
-		edge_orbits.push_back({{u,v}});
+		if (edge_used[ei] == 1) {
+			continue;
+		}
+		const auto [u, v] = edges[ei];
+		edge_orbits.push_back({{u, v}});
 
 		for (std::size_t ej = ei + 1; ej < edges.size(); ++ej) {
-			if (edge_used[ej] == 1) { continue; }
-			const auto [x,y] = edges[ej];
+			if (edge_used[ej] == 1) {
+				continue;
+			}
+			const auto [x, y] = edges[ej];
 
 			const bool same_ux = vertex_orbits[u] == vertex_orbits[x];
 			const bool same_uy = vertex_orbits[u] == vertex_orbits[y];
@@ -243,7 +254,7 @@ noexcept
 			const bool same_vy = vertex_orbits[v] == vertex_orbits[y];
 			if ((same_ux or same_uy) and (same_vx or same_vy)) {
 				edge_used[ej] = 1;
-				edge_orbits.back().push_back({x,y});
+				edge_orbits.back().push_back({x, y});
 			}
 		}
 	}
@@ -255,12 +266,11 @@ std::vector<std::vector<lal::edge>> compute_edge_orbits(
 	const lal::graphs::rooted_tree& t,
 	const std::vector<lal::edge>& edges,
 	const std::vector<std::size_t>& vertex_orbits
-)
-noexcept
+) noexcept
 {
 	return compute_edge_orbits(t.to_free_tree(), edges, vertex_orbits);
 }
 
-} // -- namespace nauty_lib
-} // -- namespace properties
-} // -- namespace tests
+} // namespace nauty_lib
+} // namespace properties
+} // namespace tests

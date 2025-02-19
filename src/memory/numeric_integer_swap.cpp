@@ -55,69 +55,70 @@
 namespace tests {
 namespace memory {
 
-err_type test_integer_swap() noexcept {
+err_type test_integer_swap() noexcept
+{
 	{
-	lal::numeric::integer i1;
-	lal::numeric::integer i2;
-	check_1v_1v(i1, 0, i2, 0);
-	i1.swap(i2);
-	check_1v_1v(i1, 0, i2, 0);
+		lal::numeric::integer i1;
+		lal::numeric::integer i2;
+		check_1v_1v(i1, 0, i2, 0);
+		i1.swap(i2);
+		check_1v_1v(i1, 0, i2, 0);
 	}
 	{
-	lal::numeric::integer i1;
-	lal::numeric::integer i2;
-	check_1v_1v(i1, 0, i2, 0);
-	i2.swap(i1);
-	check_1v_1v(i1, 0, i2, 0);
-	}
-
-	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::integer i2;
-	check_1v_1v(i1, 50, i2, 0);
-	i1.swap(i2);
-	check_1v_1v(i1, 0, i2, 50);
-	}
-	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::integer i2;
-	check_1v_1v(i1, 50, i2, 0);
-	i2.swap(i1);
-	check_1v_1v(i1, 0, i2, 50);
+		lal::numeric::integer i1;
+		lal::numeric::integer i2;
+		check_1v_1v(i1, 0, i2, 0);
+		i2.swap(i1);
+		check_1v_1v(i1, 0, i2, 0);
 	}
 
 	{
-	lal::numeric::integer i1;
-	lal::numeric::integer i2 = 50;
-	check_1v_1v(i1, 0, i2, 50);
-	i1.swap(i2);
-	check_1v_1v(i1, 50, i2, 0);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2;
+		check_1v_1v(i1, 50, i2, 0);
+		i1.swap(i2);
+		check_1v_1v(i1, 0, i2, 50);
 	}
 	{
-	lal::numeric::integer i1;
-	lal::numeric::integer i2 = 50;
-	check_1v_1v(i1, 0, i2, 50);
-	i2.swap(i1);
-	check_1v_1v(i1, 50, i2, 0);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2;
+		check_1v_1v(i1, 50, i2, 0);
+		i2.swap(i1);
+		check_1v_1v(i1, 0, i2, 50);
 	}
 
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::integer i2 = 2;
-	check_1v_1v(i1, 50, i2, 2);
-	i1.swap(i2);
-	check_1v_1v(i1, 2, i2, 50);
+		lal::numeric::integer i1;
+		lal::numeric::integer i2 = 50;
+		check_1v_1v(i1, 0, i2, 50);
+		i1.swap(i2);
+		check_1v_1v(i1, 50, i2, 0);
 	}
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::integer i2 = 2;
-	check_1v_1v(i1, 50, i2, 2);
-	i2.swap(i1);
-	check_1v_1v(i1, 2, i2, 50);
+		lal::numeric::integer i1;
+		lal::numeric::integer i2 = 50;
+		check_1v_1v(i1, 0, i2, 50);
+		i2.swap(i1);
+		check_1v_1v(i1, 50, i2, 0);
+	}
+
+	{
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2 = 2;
+		check_1v_1v(i1, 50, i2, 2);
+		i1.swap(i2);
+		check_1v_1v(i1, 2, i2, 50);
+	}
+	{
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2 = 2;
+		check_1v_1v(i1, 50, i2, 2);
+		i2.swap(i1);
+		check_1v_1v(i1, 2, i2, 50);
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

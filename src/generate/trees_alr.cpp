@@ -65,37 +65,38 @@ namespace generate {
 namespace alr {
 struct extra_params { };
 
-#define process																\
-	const rtree_check err = test_validity_tree(n, T);						\
-	if (err != rtree_check::correct) {										\
-		std::cerr << ERROR << '\n';											\
-		std::cerr << "    Tree of index " << gen << " is not correct.\n";	\
-		std::cerr << "    Error: " << tree_check_to_string(err) << '\n';	\
-		std::cerr << T << '\n';												\
-		return err_type::test_execution;									\
-	}																		\
-	/* compute 'statistics' */												\
+#define process                                                                \
+	const rtree_check err = test_validity_tree(n, T);                          \
+	if (err != rtree_check::correct) {                                         \
+		std::cerr << ERROR << '\n';                                            \
+		std::cerr << "    Tree of index " << gen << " is not correct.\n";      \
+		std::cerr << "    Error: " << tree_check_to_string(err) << '\n';       \
+		std::cerr << T << '\n';                                                \
+		return err_type::test_execution;                                       \
+	}                                                                          \
+	/* compute 'statistics' */                                                 \
 	gen += 1;
 
-#define check																				\
+#define check                                                                  \
 	/* Prüfer's formula: make sure that the generator made									\
 	   as many trees as n^(n - 1) <- note that we are dealing								\
 	   with labelled ROOTED trees!															\
-	   https://oeis.org/A000169/list */														\
-	const lal::numeric::integer nn(n);														\
-	const lal::numeric::integer total(n == 1 ? 1 : (nn.power(nn - 1)));						\
-	if (gen != total) {																		\
-		std::cerr << ERROR << '\n';															\
-		std::cerr << "    Exhaustive generation of labelled rooted trees\n";				\
-		std::cerr << "    Amount of trees of " << n << " vertices should be: " << total << '\n';\
-		std::cerr << "    But generated: " << gen << '\n';									\
-		std::cerr << "    For a size of " << n << " vertices\n";							\
-		return err_type::test_execution;													\
+	   https://oeis.org/A000169/list */          \
+	const lal::numeric::integer nn(n);                                         \
+	const lal::numeric::integer total(n == 1 ? 1 : (nn.power(nn - 1)));        \
+	if (gen != total) {                                                        \
+		std::cerr << ERROR << '\n';                                            \
+		std::cerr << "    Exhaustive generation of labelled rooted trees\n";   \
+		std::cerr << "    Amount of trees of " << n                            \
+				  << " vertices should be: " << total << '\n';                 \
+		std::cerr << "    But generated: " << gen << '\n';                     \
+		std::cerr << "    For a size of " << n << " vertices\n";               \
+		return err_type::test_execution;                                       \
 	}
 
-err_type test_for_n_while
-(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
-noexcept
+err_type
+test_for_n_while(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
+	noexcept
 {
 	uint64_t gen = 0;
 	while (not TreeGen.end()) {
@@ -107,9 +108,9 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type test_for_n_for
-(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
-noexcept
+err_type
+test_for_n_for(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
+	noexcept
 {
 	uint64_t gen = 0;
 	for (; not TreeGen.end(); TreeGen.next()) {
@@ -120,9 +121,9 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type test_for_n_yield
-(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
-noexcept
+err_type
+test_for_n_yield(uint64_t n, lal::generate::all_lab_rooted_trees& TreeGen, const extra_params&)
+	noexcept
 {
 	uint64_t gen = 0;
 	while (not TreeGen.end()) {
@@ -134,35 +135,47 @@ noexcept
 }
 
 template <bool init>
-err_type call_test_exhaustive(uint64_t n1, uint64_t n2, uint64_t R)
-noexcept
+err_type call_test_exhaustive(uint64_t n1, uint64_t n2, uint64_t R) noexcept
 {
 	{
-	const auto err =
-		test_exhaustive_enumeration_of_trees<init, lal::generate::all_lab_rooted_trees>
-		(n1, n2, test_for_n_while, extra_params{}, R);
-	if (err != err_type::no_error) { return err; }
+		const auto err = test_exhaustive_enumeration_of_trees<
+			init,
+			lal::generate::all_lab_rooted_trees>(
+			n1, n2, test_for_n_while, extra_params{}, R
+		);
+		if (err != err_type::no_error) {
+			return err;
+		}
 	}
 
 	{
-	const auto err =
-		test_exhaustive_enumeration_of_trees<init, lal::generate::all_lab_rooted_trees>
-		(n1, n2, test_for_n_for, extra_params{}, R);
-	if (err != err_type::no_error) { return err; }
+		const auto err = test_exhaustive_enumeration_of_trees<
+			init,
+			lal::generate::all_lab_rooted_trees>(
+			n1, n2, test_for_n_for, extra_params{}, R
+		);
+		if (err != err_type::no_error) {
+			return err;
+		}
 	}
 
 	{
-	const auto err =
-		test_exhaustive_enumeration_of_trees<init, lal::generate::all_lab_rooted_trees>
-		(n1, n2, test_for_n_yield, extra_params{}, R);
-	if (err != err_type::no_error) { return err; }
+		const auto err = test_exhaustive_enumeration_of_trees<
+			init,
+			lal::generate::all_lab_rooted_trees>(
+			n1, n2, test_for_n_yield, extra_params{}, R
+		);
+		if (err != err_type::no_error) {
+			return err;
+		}
 	}
 	return err_type::no_error;
 }
 
-} // -- namespace alr
+} // namespace alr
 
-err_type exe_gen_trees_alr(std::ifstream& fin) noexcept {
+err_type exe_gen_trees_alr(std::ifstream& fin) noexcept
+{
 
 	uint64_t R;
 	fin >> R;
@@ -170,13 +183,17 @@ err_type exe_gen_trees_alr(std::ifstream& fin) noexcept {
 	uint64_t n1, n2;
 	while (fin >> n1 >> n2) {
 		{
-		const auto err = alr::call_test_exhaustive<true>(n1, n2, R);
-		if (err != err_type::no_error) { return err; }
+			const auto err = alr::call_test_exhaustive<true>(n1, n2, R);
+			if (err != err_type::no_error) {
+				return err;
+			}
 		}
 
 		{
-		const auto err = alr::call_test_exhaustive<false>(n1, n2, R);
-		if (err != err_type::no_error) { return err; }
+			const auto err = alr::call_test_exhaustive<false>(n1, n2, R);
+			if (err != err_type::no_error) {
+				return err;
+			}
 		}
 	}
 
@@ -184,5 +201,5 @@ err_type exe_gen_trees_alr(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

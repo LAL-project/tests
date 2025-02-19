@@ -56,7 +56,8 @@ namespace tests {
 namespace properties {
 
 template <class graph_t>
-void run_tests(std::ifstream& fin) noexcept {
+void run_tests(std::ifstream& fin) noexcept
+{
 	uint64_t n;
 	while (fin >> n) {
 		std::cout << "=====================\n";
@@ -75,13 +76,10 @@ void run_tests(std::ifstream& fin) noexcept {
 
 		const auto ccs = lal::properties::connected_components_compute(g);
 		for (lal::node u = 0; u < n; ++u) {
-			std::cout
-				<< u
-				<< " is in connected component "
-				<< ccs.get_cc_node(u)
-				<< " and is vertex "
-				<< ccs.get_label_graph_node_to_cc_node(u)
-				<< " within its component\n";
+			std::cout << u << " is in connected component "
+					  << ccs.get_cc_node(u) << " and is vertex "
+					  << ccs.get_label_graph_node_to_cc_node(u)
+					  << " within its component\n";
 		}
 
 		for (std::size_t i = 0; i < ccs.size(); ++i) {
@@ -90,18 +88,16 @@ void run_tests(std::ifstream& fin) noexcept {
 
 			const auto ni = ccs[i].get_num_nodes();
 			for (lal::node u = 0; u < ni; ++u) {
-				std::cout
-					<< "    "
-					<< u
-					<< " in the connected component is "
-					<< ccs.get_label_cc_node_to_graph_node(i, u)
-					<< " in the original graph\n";
+				std::cout << "    " << u << " in the connected component is "
+						  << ccs.get_label_cc_node_to_graph_node(i, u)
+						  << " in the original graph\n";
 			}
 		}
 	}
 }
 
-err_type exe_properties_connected_components(std::ifstream& fin) noexcept {
+err_type exe_properties_connected_components(std::ifstream& fin) noexcept
+{
 	std::string graph_type;
 	fin >> graph_type;
 
@@ -121,5 +117,5 @@ err_type exe_properties_connected_components(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

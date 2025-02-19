@@ -117,12 +117,11 @@ err_type process_assert(
 	std::map<std::string, lal::graphs::rooted_tree>& rtreevars,
 	std::map<std::string, std::string>& gtypes,
 	std::ifstream& fin
-)
-noexcept
+) noexcept
 {
 	std::string g1, g2;
 	uint64_t n;
-	lal::node u,v;
+	lal::node u, v;
 
 	if (assert_what == ASSERT_GRAPH_EQUAL_GRAPHS) {
 		fin >> g1 >> g2;
@@ -133,7 +132,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_EQUAL_GRAPHS);
 			std::cerr << "    Graphs '" << g1 << "' and '" << g2 << "' "
-				 << "are not equal.\n";
+					  << "are not equal.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			std::cerr << "    Contents of " << g2 << ":\n";
@@ -150,7 +149,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NOT_EQUAL_GRAPHS);
 			std::cerr << "    Graphs '" << g1 << "' and '" << g2 << "' "
-				 << " are equal.\n";
+					  << " are equal.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			std::cerr << "    Contents of " << g2 << ":\n";
@@ -189,7 +188,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_EXISTS_EDGE);
 			std::cerr << "    Graph '" << g1 << "' does not have edge "
-				 << "(" << u << ", " << v << ").\n";
+					  << "(" << u << ", " << v << ").\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -202,7 +201,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NOT_EXISTS_EDGE);
 			std::cerr << "    Graph '" << g1 << "' has edge "
-				 << "(" << u << ", " << v << ").\n";
+					  << "(" << u << ", " << v << ").\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -214,9 +213,10 @@ noexcept
 		if (mfunction(g1, get_num_nodes()) != n) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NUM_NODES);
-			std::cerr << "    Graph '" << g1 << "' does not have " << n << " nodes.\n";
+			std::cerr << "    Graph '" << g1 << "' does not have " << n
+					  << " nodes.\n";
 			std::cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, get_num_nodes()) << " nodes.\n";
+					  << mfunction(g1, get_num_nodes()) << " nodes.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -228,10 +228,10 @@ noexcept
 		if (mfunction(g1, get_num_edges()) != n) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_NUM_EDGES);
-			std::cerr << "    Graph '" << g1 << "' does not have "
-				 << n << " edges.\n";
+			std::cerr << "    Graph '" << g1 << "' does not have " << n
+					  << " edges.\n";
 			std::cerr << "    Graph '" << g1 << "' has "
-				 << mfunction(g1, get_num_edges()) << " edges.\n";
+					  << mfunction(g1, get_num_edges()) << " edges.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -241,7 +241,9 @@ noexcept
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_GRAPH_EDGES_ARE, g1);
 		std::vector<lal::edge> edge_list(n);
-		for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
+		for (lal::edge& e : edge_list) {
+			fin >> e.first >> e.second;
+		}
 		sort(edge_list.begin(), edge_list.end());
 
 		std::vector<lal::edge> gv = ffunction(g1, enumerate_edges_brute_force);
@@ -250,7 +252,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_EDGES_ARE);
 			std::cerr << "    The edges in graph '" << g1
-				 << "' do not coincide with those in the list.\n";
+					  << "' do not coincide with those in the list.\n";
 			std::cerr << "    List (" << edge_list.size() << "):\n";
 			for (auto e : edge_list) {
 				std::cerr << "    " << edge_out(e);
@@ -271,8 +273,8 @@ noexcept
 		assert_exists_variable(ASSERT_GRAPH_ELEMENTS_Q_ARE, g1);
 		std::vector<lal::edge_pair> edge_pair_list(n);
 		for (lal::edge_pair& e : edge_pair_list) {
-			fin >> e.first.first >> e.first.second
-				>> e.second.first >> e.second.second;
+			fin >> e.first.first >> e.first.second >> e.second.first >>
+				e.second.second;
 			assert(not share_vertices(e));
 		}
 		sort(edge_pair_list.begin(), edge_pair_list.end());
@@ -283,7 +285,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_ELEMENTS_Q_ARE);
 			std::cerr << "    The edges in graph '" << g1
-				 << "' do not coincide with those in the list.\n";
+					  << "' do not coincide with those in the list.\n";
 			std::cerr << "    List (" << edge_pair_list.size() << "):\n";
 			for (auto e : edge_pair_list) {
 				std::cerr << "    " << edge_pair_out(e);
@@ -312,7 +314,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_IS_UNDIRECTED);
 			std::cerr << "    Graph '" << g1 << "' does not return undirected."
-				 << '\n';
+					  << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -345,7 +347,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_IS_DIRECTED);
 			std::cerr << "    Graph '" << g1 << "' does not return directed."
-				 << '\n';
+					  << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -371,10 +373,10 @@ noexcept
 		if (mfunction(g1, get_degree(u)) != v) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_DEGREE);
-			std::cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have degree " << v << '\n';
-			std::cerr << "    The vertex has degree: " << mfunction(g1, get_degree(u))
-				 << '\n';
+			std::cerr << "    The vertex '" << u << "' of graph '" << g1
+					  << "' does not have degree " << v << '\n';
+			std::cerr << "    The vertex has degree: "
+					  << mfunction(g1, get_degree(u)) << '\n';
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -385,11 +387,14 @@ noexcept
 	else if (assert_what == ASSERT_UGRAPH_neighbors_ARE) {
 		fin >> g1 >> u >> n;
 		assert_exists_variable(ASSERT_UGRAPH_neighbors_ARE, g1);
-		assert_correct_graph_type
-			(ASSERT_UGRAPH_neighbors_ARE, graph_type(g1), undirected_types);
+		assert_correct_graph_type(
+			ASSERT_UGRAPH_neighbors_ARE, graph_type(g1), undirected_types
+		);
 
 		std::vector<lal::node> node_list(n);
-		for (lal::node& neigh : node_list) { fin >> neigh; }
+		for (lal::node& neigh : node_list) {
+			fin >> neigh;
+		}
 
 		auto neighs = mfunction_undir_graphs(g1, get_neighbors(u));
 
@@ -398,13 +403,16 @@ noexcept
 		if (neighs != node_list) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_UGRAPH_neighbors_ARE);
-			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
-				 << g1 << " does not coincide with input.\n";
+			std::cerr << "    The list of neighbors of lal::node " << u
+					  << " of graph " << g1
+					  << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			std::cerr << "    Contents of list:\n";
 			std::cerr << "   ";
-			for (lal::node neigh : node_list) { std::cerr << " " << neigh; }
+			for (lal::node neigh : node_list) {
+				std::cerr << " " << neigh;
+			}
 			std::cerr << '\n';
 			return err_type::test_execution;
 		}
@@ -414,10 +422,13 @@ noexcept
 	else if (assert_what == ASSERT_DGRAPH_IN_neighbors_ARE) {
 		fin >> g1 >> u >> n;
 		assert_exists_variable(ASSERT_DGRAPH_IN_neighbors_ARE, g1);
-		assert_correct_graph_type
-			(ASSERT_DGRAPH_IN_neighbors_ARE, graph_type(g1), directed_types);
+		assert_correct_graph_type(
+			ASSERT_DGRAPH_IN_neighbors_ARE, graph_type(g1), directed_types
+		);
 		std::vector<lal::node> node_list(n);
-		for (lal::node& neigh : node_list) { fin >> neigh; }
+		for (lal::node& neigh : node_list) {
+			fin >> neigh;
+		}
 		sort(node_list.begin(), node_list.end());
 
 		auto actual_neighs = mfunction_dir_graphs(g1, get_in_neighbors(u));
@@ -426,17 +437,22 @@ noexcept
 		if (actual_neighs != node_list) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_DGRAPH_IN_neighbors_ARE);
-			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
-				 << g1 << " does not coincide with input.\n";
+			std::cerr << "    The list of neighbors of lal::node " << u
+					  << " of graph " << g1
+					  << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			std::cerr << "    Contents of input list:\n";
 			std::cerr << "   ";
-			for (lal::node neigh : node_list) { std::cerr << " " << neigh; }
+			for (lal::node neigh : node_list) {
+				std::cerr << " " << neigh;
+			}
 			std::cerr << '\n';
 			std::cerr << "    Actual in-neighbors:\n";
 			std::cerr << "   ";
-			for (lal::node neigh : actual_neighs) { std::cerr << " " << neigh; }
+			for (lal::node neigh : actual_neighs) {
+				std::cerr << " " << neigh;
+			}
 			std::cerr << '\n';
 			return err_type::test_execution;
 		}
@@ -444,10 +460,13 @@ noexcept
 	else if (assert_what == ASSERT_DGRAPH_OUT_neighbors_ARE) {
 		fin >> g1 >> u >> n;
 		assert_exists_variable(ASSERT_DGRAPH_OUT_neighbors_ARE, g1);
-		assert_correct_graph_type
-			(ASSERT_DGRAPH_OUT_neighbors_ARE, graph_type(g1), directed_types);
+		assert_correct_graph_type(
+			ASSERT_DGRAPH_OUT_neighbors_ARE, graph_type(g1), directed_types
+		);
 		std::vector<lal::node> node_list(n);
-		for (lal::node& neigh : node_list) { fin >> neigh; }
+		for (lal::node& neigh : node_list) {
+			fin >> neigh;
+		}
 		sort(node_list.begin(), node_list.end());
 
 		auto actual_neighs = mfunction_dir_graphs(g1, get_out_neighbors(u));
@@ -456,17 +475,22 @@ noexcept
 		if (actual_neighs != node_list) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_DGRAPH_IN_neighbors_ARE);
-			std::cerr << "    The list of neighbors of lal::node " << u << " of graph "
-				 << g1 << " does not coincide with input.\n";
+			std::cerr << "    The list of neighbors of lal::node " << u
+					  << " of graph " << g1
+					  << " does not coincide with input.\n";
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			std::cerr << "    Contents of input list:\n";
 			std::cerr << "   ";
-			for (lal::node neigh : node_list) { std::cerr << " " << neigh; }
+			for (lal::node neigh : node_list) {
+				std::cerr << " " << neigh;
+			}
 			std::cerr << '\n';
 			std::cerr << "    Actual out-neighbors:\n";
 			std::cerr << "   ";
-			for (lal::node neigh : actual_neighs) { std::cerr << " " << neigh; }
+			for (lal::node neigh : actual_neighs) {
+				std::cerr << " " << neigh;
+			}
 			std::cerr << '\n';
 			return err_type::test_execution;
 		}
@@ -475,15 +499,15 @@ noexcept
 	else if (assert_what == ASSERT_GRAPH_FULL_DEGREE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_GRAPH_FULL_DEGREE, g1);
-		assert_correct_graph_type
-			(ASSERT_GRAPH_FULL_DEGREE, graph_type(g1), directed_types);
-		const uint64_t fdegree =
-			mfunction_dir_graphs(g1, get_degree(u));
+		assert_correct_graph_type(
+			ASSERT_GRAPH_FULL_DEGREE, graph_type(g1), directed_types
+		);
+		const uint64_t fdegree = mfunction_dir_graphs(g1, get_degree(u));
 		if (fdegree != v) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_GRAPH_FULL_DEGREE);
-			std::cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have full degree " << v << '\n';
+			std::cerr << "    The vertex '" << u << "' of graph '" << g1
+					  << "' does not have full degree " << v << '\n';
 			std::cerr << "    The vertex has full degree: " << fdegree << '\n';
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
@@ -493,15 +517,16 @@ noexcept
 	else if (assert_what == ASSERT_DGRAPH_IN_DEGREE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_DGRAPH_IN_DEGREE, g1);
-		assert_correct_graph_type
-			(ASSERT_DGRAPH_IN_DEGREE, graph_type(g1), directed_types)
-		if (mfunction_dir_graphs(g1, get_in_degree(u)) != v) {
+		assert_correct_graph_type(
+			ASSERT_DGRAPH_IN_DEGREE, graph_type(g1), directed_types
+		) if (mfunction_dir_graphs(g1, get_in_degree(u)) != v)
+		{
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_DGRAPH_IN_DEGREE);
-			std::cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have in-degree " << v << '\n';
+			std::cerr << "    The vertex '" << u << "' of graph '" << g1
+					  << "' does not have in-degree " << v << '\n';
 			std::cerr << "    The vertex has in-degree: "
-				 << mfunction_dir_graphs(g1, get_in_degree(u)) << '\n';
+					  << mfunction_dir_graphs(g1, get_in_degree(u)) << '\n';
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -510,15 +535,16 @@ noexcept
 	else if (assert_what == ASSERT_DGRAPH_OUT_DEGREE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_DGRAPH_OUT_DEGREE, g1);
-		assert_correct_graph_type
-			(ASSERT_DGRAPH_OUT_DEGREE, graph_type(g1), directed_types);
+		assert_correct_graph_type(
+			ASSERT_DGRAPH_OUT_DEGREE, graph_type(g1), directed_types
+		);
 		if (mfunction_dir_graphs(g1, get_out_degree(u)) != v) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_DGRAPH_OUT_DEGREE);
-			std::cerr << "    The vertex '" << u << "' of graph '"
-				 << g1 << "' does not have out-degree " << v << '\n';
+			std::cerr << "    The vertex '" << u << "' of graph '" << g1
+					  << "' does not have out-degree " << v << '\n';
 			std::cerr << "    The vertex has out-degree: "
-				 << mfunction_dir_graphs(g1, get_out_degree(u)) << '\n';
+					  << mfunction_dir_graphs(g1, get_out_degree(u)) << '\n';
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -529,8 +555,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_IS_TREE) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_IS_TREE, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_IS_TREE, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_IS_TREE, graph_type(g1), tree_types
+		);
 		if (not mfunction_trees(g1, is_tree())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_IS_TREE);
@@ -541,8 +568,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_IS_NOT_TREE) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_IS_NOT_TREE, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_IS_NOT_TREE, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_IS_NOT_TREE, graph_type(g1), tree_types
+		);
 		if (mfunction_trees(g1, is_tree())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_IS_TREE);
@@ -553,14 +581,16 @@ noexcept
 	else if (assert_what == ASSERT_TREE_CAN_ADD_EDGE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_TREE_CAN_ADD_EDGE, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_CAN_ADD_EDGE, graph_type(g1), tree_types);
-		const bool can = mfunction_trees(g1, can_add_edge(u,v));
+		assert_correct_graph_type(
+			ASSERT_TREE_CAN_ADD_EDGE, graph_type(g1), tree_types
+		);
+		const bool can = mfunction_trees(g1, can_add_edge(u, v));
 		if (not can) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_CAN_ADD_EDGE);
-			std::cerr << "    Cannot add edge with vertices {" << u << "," << v << "} "
-				 << "to graph '" << g1 << "'\n";
+			std::cerr << "    Cannot add edge with vertices {" << u << "," << v
+					  << "} "
+					  << "to graph '" << g1 << "'\n";
 			std::cout << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -569,14 +599,15 @@ noexcept
 	else if (assert_what == ASSERT_TREE_CANT_ADD_EDGE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_TREE_CANT_ADD_EDGE, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_CANT_ADD_EDGE, graph_type(g1), tree_types);
-		const bool can = mfunction_trees(g1, can_add_edge(u,v));
+		assert_correct_graph_type(
+			ASSERT_TREE_CANT_ADD_EDGE, graph_type(g1), tree_types
+		);
+		const bool can = mfunction_trees(g1, can_add_edge(u, v));
 		if (can) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_CANT_ADD_EDGE);
 			std::cerr << "    Edge with vertices {" << u << "," << v << "} "
-				 << "can be added to graph '" << g1 << "'\n";
+					  << "can be added to graph '" << g1 << "'\n";
 			std::cout << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -585,10 +616,13 @@ noexcept
 	else if (assert_what == ASSERT_TREE_CAN_ADD_EDGES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_TREE_CAN_ADD_EDGES, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_CAN_ADD_EDGES, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_CAN_ADD_EDGES, graph_type(g1), tree_types
+		);
 		std::vector<lal::edge> edge_list(n);
-		for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
+		for (lal::edge& e : edge_list) {
+			fin >> e.first >> e.second;
+		}
 
 		const bool can = mfunction_trees(g1, can_add_edges(edge_list));
 		if (not can) {
@@ -596,7 +630,7 @@ noexcept
 			message_in_func(ASSERT_TREE_CAN_ADD_EDGES);
 			std::cerr << "    Cannot add edges\n";
 			for (auto e : edge_list) {
-			std::cerr << "        {" << e.first << "," << e.second << "}\n";
+				std::cerr << "        {" << e.first << "," << e.second << "}\n";
 			}
 			std::cerr << "    to graph '" << g1 << "'\n";
 			std::cout << "    Contents of '" << g1 << "':\n";
@@ -607,10 +641,13 @@ noexcept
 	else if (assert_what == ASSERT_TREE_CANT_ADD_EDGES) {
 		fin >> g1 >> n;
 		assert_exists_variable(ASSERT_TREE_CANT_ADD_EDGES, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_CANT_ADD_EDGES, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_CANT_ADD_EDGES, graph_type(g1), tree_types
+		);
 		std::vector<lal::edge> edge_list(n);
-		for (lal::edge& e : edge_list) { fin >> e.first >> e.second; }
+		for (lal::edge& e : edge_list) {
+			fin >> e.first >> e.second;
+		}
 
 		const bool can = mfunction_trees(g1, can_add_edges(edge_list));
 		if (can) {
@@ -618,7 +655,7 @@ noexcept
 			message_in_func(ASSERT_TREE_CANT_ADD_EDGES);
 			std::cerr << "    Cannot add edges\n";
 			for (auto e : edge_list) {
-			std::cerr << "        {" << e.first << "," << e.second << "}\n";
+				std::cerr << "        {" << e.first << "," << e.second << "}\n";
 			}
 			std::cerr << "    to graph '" << g1 << "'\n";
 			std::cout << "    Contents of '" << g1 << "':\n";
@@ -633,11 +670,11 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_SIZE_CC);
 			std::cerr << "    The component of vertex '" << u << "'"
-				 << " in '" << g1 << "' does not have "
-				 << n << " vertices.\n";
+					  << " in '" << g1 << "' does not have " << n
+					  << " vertices.\n";
 			std::cerr << "    It actually has: "
-				 << mfunction_trees(g1, get_num_nodes_component(u))
-				 << '\n';
+					  << mfunction_trees(g1, get_num_nodes_component(u))
+					  << '\n';
 			std::cerr << "    Contents of " << g1 << ":\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -650,9 +687,11 @@ noexcept
 		std::set<lal::node> representatives;
 		std::vector<lal::node> representative_per_node;
 
-		const auto check = [&](const auto& t) {
+		const auto check = [&](const auto& t)
+		{
 			const auto n_nodes = t.get_num_nodes();
-			representative_per_node = std::vector<lal::node>(n_nodes, n_nodes + 1);
+			representative_per_node =
+				std::vector<lal::node>(n_nodes, n_nodes + 1);
 
 			lal::detail::BFS bfs(t);
 			if (t.is_directed()) {
@@ -679,7 +718,8 @@ noexcept
 		if (representatives.size() == 0) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_REPRESENTATIVE_CC);
-			std::cerr << "    No vertices were found in the connected component.\n";
+			std::cerr
+				<< "    No vertices were found in the connected component.\n";
 			return err_type::test_execution;
 		}
 		else if (representatives.size() == 1) {
@@ -691,12 +731,11 @@ noexcept
 			message_in_func(ASSERT_TREE_REPRESENTATIVE_CC);
 			std::cerr << "    More than one representative was found.\n";
 			for (lal::node w = 0; w < representative_per_node.size(); ++w) {
-			if (representative_per_node[w] < representative_per_node.size()) {
-			std::cerr << "        Node "
-					  << w << " has representative: "
-					  << representative_per_node[w]
-					  << '\n';
-			}
+				if (representative_per_node[w] <
+					representative_per_node.size()) {
+					std::cerr << "        Node " << w << " has representative: "
+							  << representative_per_node[w] << '\n';
+				}
 			}
 			return err_type::test_execution;
 		}
@@ -704,7 +743,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_IS_ROOTED) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_IS_ROOTED, g1);
-		assert_correct_graph_type(ASSERT_TREE_IS_ROOTED, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_IS_ROOTED, graph_type(g1), rooted_tree_types
+		);
 		if (not mfunction_trees(g1, is_rooted())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_IS_ROOTED);
@@ -715,8 +756,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_IS_NOT_ROOTED) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_IS_NOT_ROOTED, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_IS_NOT_ROOTED, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_IS_NOT_ROOTED, graph_type(g1), tree_types
+		);
 		if (mfunction_trees(g1, is_rooted())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_IS_NOT_ROOTED);
@@ -727,8 +769,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_TYPE_VALID) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_TYPE_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_TYPE_VALID, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_TYPE_VALID, graph_type(g1), tree_types
+		);
 		if (not mfunction_trees(g1, is_tree_type_valid())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_TYPE_VALID);
@@ -739,8 +782,9 @@ noexcept
 	else if (assert_what == ASSERT_TREE_TYPE_NOT_VALID) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_TREE_TYPE_NOT_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_TREE_TYPE_NOT_VALID, graph_type(g1), tree_types);
+		assert_correct_graph_type(
+			ASSERT_TREE_TYPE_NOT_VALID, graph_type(g1), tree_types
+		);
 		if (mfunction_trees(g1, is_tree_type_valid())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_TREE_TYPE_NOT_VALID);
@@ -753,26 +797,30 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_SUBSTREE_SIZES_VALID) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_SUBSTREE_SIZES_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_SUBSTREE_SIZES_VALID, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_SUBSTREE_SIZES_VALID, graph_type(g1), rooted_tree_types
+		);
 		if (not mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SUBSTREE_SIZES_VALID);
-			std::cerr << "    Sizes of subtrees in tree '" << g1 << "' are not valid."
-				 << '\n';
+			std::cerr << "    Sizes of subtrees in tree '" << g1
+					  << "' are not valid." << '\n';
 			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID,
+			graph_type(g1),
+			rooted_tree_types
+		);
 		if (mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SUBSTREE_SIZES_NOT_VALID);
-			std::cerr << "    Sizes of subtrees in tree '" << g1 << "' are valid."
-				 << '\n';
+			std::cerr << "    Sizes of subtrees in tree '" << g1
+					  << "' are valid." << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -780,8 +828,9 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_ROOT_IS_VALID) {
 		fin >> g1 >> u;
 		assert_exists_variable(ASSERT_RTREE_ROOT_IS_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_ROOT_IS_VALID, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS_VALID, graph_type(g1), rooted_tree_types
+		);
 		if (not mfunction_rtrees(g1, is_root_valid(u))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_ROOT_IS_VALID);
@@ -793,8 +842,9 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_ROOT_IS_NOT_VALID) {
 		fin >> g1 >> u;
 		assert_exists_variable(ASSERT_RTREE_ROOT_IS_NOT_VALID, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_ROOT_IS_NOT_VALID, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS_NOT_VALID, graph_type(g1), rooted_tree_types
+		);
 		if (mfunction_rtrees(g1, is_root_valid(u))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_ROOT_IS_NOT_VALID);
@@ -807,8 +857,9 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_HAS_ROOT) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_HAS_ROOT, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_HAS_ROOT, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_HAS_ROOT, graph_type(g1), rooted_tree_types
+		);
 		if (not mfunction_rtrees(g1, has_root())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_HAS_ROOT);
@@ -819,8 +870,9 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_NOT_HAS_ROOT) {
 		fin >> g1;
 		assert_exists_variable(ASSERT_RTREE_NOT_HAS_ROOT, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_NOT_HAS_ROOT, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_NOT_HAS_ROOT, graph_type(g1), rooted_tree_types
+		);
 		if (mfunction_rtrees(g1, has_root())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_NOT_HAS_ROOT);
@@ -831,28 +883,32 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_ROOT_IS) {
 		fin >> g1 >> u;
 		assert_exists_variable(ASSERT_RTREE_ROOT_IS, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_ROOT_IS, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_ROOT_IS, graph_type(g1), rooted_tree_types
+		);
 		const lal::node R = mfunction_rtrees(g1, get_root());
 		if (R != u) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_ROOT_IS);
-			std::cerr << "    The root of tree '" << g1 << "' is not " << u << ".\n";
-			std::cerr << "    The root of tree '" << g1 << "' is " << R << ".\n";
+			std::cerr << "    The root of tree '" << g1 << "' is not " << u
+					  << ".\n";
+			std::cerr << "    The root of tree '" << g1 << "' is " << R
+					  << ".\n";
 			return err_type::test_execution;
 		}
 	}
 	else if (assert_what == ASSERT_RTREE_SIZE_SUBTREE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_RTREE_SIZE_SUBTREE, g1);
-		assert_correct_graph_type
-			(ASSERT_RTREE_SIZE_SUBTREE, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_SIZE_SUBTREE, graph_type(g1), rooted_tree_types
+		);
 		assert_is_rtree(g1, ASSERT_RTREE_SIZE_SUBTREE);
 		if (not mfunction_rtrees(g1, are_size_subtrees_valid())) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE);
-			std::cerr << "    Values of subtree's sizes in tree '"
-				 << g1 << "' need recalculating.\n";
+			std::cerr << "    Values of subtree's sizes in tree '" << g1
+					  << "' need recalculating.\n";
 			return err_type::test_execution;
 		}
 
@@ -861,7 +917,7 @@ noexcept
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SIZE_SUBTREE);
 			std::cerr << "    The size of subtree rooted at '" << u
-				 << "' is not '" << v << "'.\n";
+					  << "' is not '" << v << "'.\n";
 			std::cerr << "    The size of the subtree is: " << n << '\n';
 			std::cerr << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
@@ -871,8 +927,11 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_SUBSTREE_CONTAINS_NODE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE, g1);
-		assert_correct_graph_type
-		(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_SUBSTREE_CONTAINS_NODE,
+			graph_type(g1),
+			rooted_tree_types
+		);
 
 		assert_is_rtree(g1, ASSERT_RTREE_SUBSTREE_CONTAINS_NODE);
 		if (not mfunction_rtrees(g1, is_rooted_tree())) {
@@ -882,12 +941,11 @@ noexcept
 			return err_type::test_execution;
 		}
 
-		if (not mfunction_rtrees(g1, subtree_contains_node(u,v))) {
+		if (not mfunction_rtrees(g1, subtree_contains_node(u, v))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SUBSTREE_CONTAINS_NODE);
-			std::cerr
-				<< "    The subtree of '" << g1 << "' rooted at '" << u
-				<< "' does not contain '" << v << "'.\n";
+			std::cerr << "    The subtree of '" << g1 << "' rooted at '" << u
+					  << "' does not contain '" << v << "'.\n";
 			std::cerr << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -896,8 +954,11 @@ noexcept
 	else if (assert_what == ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE) {
 		fin >> g1 >> u >> v;
 		assert_exists_variable(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE, g1);
-		assert_correct_graph_type
-		(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE, graph_type(g1), rooted_tree_types);
+		assert_correct_graph_type(
+			ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE,
+			graph_type(g1),
+			rooted_tree_types
+		);
 
 		assert_is_rtree(g1, ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE);
 		if (not mfunction_rtrees(g1, is_rooted_tree())) {
@@ -907,12 +968,11 @@ noexcept
 			return err_type::test_execution;
 		}
 
-		if (mfunction_rtrees(g1, subtree_contains_node(u,v))) {
+		if (mfunction_rtrees(g1, subtree_contains_node(u, v))) {
 			std::cerr << ERROR << '\n';
 			message_in_func(ASSERT_RTREE_SUBSTREE_NOT_CONTAINS_NODE);
-			std::cerr
-				<< "    The subtree of '" << g1 << "' rooted at '" << u
-				<< "' contains '" << v << "'.\n";
+			std::cerr << "    The subtree of '" << g1 << "' rooted at '" << u
+					  << "' contains '" << v << "'.\n";
 			std::cerr << "    Contents of '" << g1 << "':\n";
 			output_graph(g1);
 			return err_type::test_execution;
@@ -926,5 +986,5 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace graphs
-} // -- namespace tests
+} // namespace graphs
+} // namespace tests

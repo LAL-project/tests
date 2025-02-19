@@ -51,10 +51,7 @@
  */
 
 // C++ includes
-#include <functional>
 #include <fstream>
-#include <vector>
-#include <string>
 
 // common includes
 #include "common/definitions.hpp"
@@ -66,5 +63,5 @@ err_type exe_graphs_construction(std::ifstream& fin) noexcept;
 err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept;
 err_type exe_graphs_graph_literals(std::ifstream& fin) noexcept;
 
-} // -- namespace graphs
-} // -- namespace tests
+} // namespace graphs
+} // namespace tests

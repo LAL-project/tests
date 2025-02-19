@@ -69,12 +69,12 @@
 namespace tests {
 namespace properties {
 
-lal::graphs::directed_graph make_rand_dgraph(const lal::graphs::undirected_graph& g)
-noexcept
+lal::graphs::directed_graph
+make_rand_dgraph(const lal::graphs::undirected_graph& g) noexcept
 {
 	// coin flips
 	std::default_random_engine gen(1234);
-	std::uniform_int_distribution<int> U(0,1);
+	std::uniform_int_distribution<int> U(0, 1);
 
 	// directed graph
 	lal::graphs::directed_graph dg(g.get_num_nodes());
@@ -105,13 +105,14 @@ noexcept
 }
 
 template <class G>
-void enum_E(const G& g) noexcept {
+void enum_E(const G& g) noexcept
+{
 	std::size_t total = 0;
 
 	std::cout << "Elements of E:\n";
 
 	for (lal::iterators::E_iterator e_it(g); not e_it.end(); e_it.next()) {
-		const auto [u,v] = e_it.get_edge();
+		const auto [u, v] = e_it.get_edge();
 		std::cout << "(" << u << "," << v << ")\n";
 		++total;
 	}
@@ -119,7 +120,8 @@ void enum_E(const G& g) noexcept {
 }
 
 template <class G>
-void enum_Q(const G& g) noexcept {
+void enum_Q(const G& g) noexcept
+{
 	std::size_t total = 0;
 
 	std::cout << "Elements of Q:\n";
@@ -129,10 +131,9 @@ void enum_Q(const G& g) noexcept {
 		const lal::edge& e1 = ep.first;
 		const lal::edge& e2 = ep.second;
 		std::cout << "("
-			 << "(" << e1.first << ", " << e1.second << "), "
-			 << "(" << e2.first << ", " << e2.second << ")"
-			 << ")"
-			 << '\n';
+				  << "(" << e1.first << ", " << e1.second << "), "
+				  << "(" << e2.first << ", " << e2.second << ")"
+				  << ")" << '\n';
 
 		++total;
 	}
@@ -140,8 +141,10 @@ void enum_Q(const G& g) noexcept {
 }
 
 template <class G>
-void Q_size(const G& g) noexcept {
-	const lal::numeric::integer Q = lal::properties::num_pairs_independent_edges_integer(g);
+void Q_size(const G& g) noexcept
+{
+	const lal::numeric::integer Q =
+		lal::properties::num_pairs_independent_edges_integer(g);
 	std::cout << "size of Q: " << Q << '\n';
 
 	const uint64_t dQ = lal::properties::num_pairs_independent_edges(g);
@@ -150,38 +153,44 @@ void Q_size(const G& g) noexcept {
 
 //
 
-void mmt_deg(const lal::graphs::undirected_graph& g, uint64_t p) noexcept {
-	std::cout << "(udir) <k^" << p << ">= "
-		 << lal::properties::moment_degree_rational(g, p)
-		 << '\n';
+void mmt_deg(const lal::graphs::undirected_graph& g, uint64_t p) noexcept
+{
+	std::cout << "(udir) <k^" << p
+			  << ">= " << lal::properties::moment_degree_rational(g, p) << '\n';
 }
 
-void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) noexcept {
-	std::cout << "( dir) <k^" << p << ">= "
-		 << lal::properties::moment_degree_rational(g, p)
-		 << '\n';
+void mmt_deg(const lal::graphs::directed_graph& g, uint64_t p) noexcept
+{
+	std::cout << "( dir) <k^" << p
+			  << ">= " << lal::properties::moment_degree_rational(g, p) << '\n';
 }
 
 //
 
-err_type mmt_in_deg
-(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p)
-noexcept
+err_type mmt_in_deg(
+	const lal::graphs::undirected_graph& uG,
+	const lal::graphs::directed_graph& dG,
+	uint64_t p
+) noexcept
 {
-	std::cout << "(graph) <k_out^" << p << ">= "
-		 << lal::properties::moment_in_degree_rational(dG, p)
-		 << '\n';
+	std::cout << "(graph) <k_out^" << p
+			  << ">= " << lal::properties::moment_in_degree_rational(dG, p)
+			  << '\n';
 
 	const bool is_tree_dG = lal::detail::is_graph_a_tree(dG);
 	const bool is_tree_uG = lal::detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Error in deciding whether a graph is a tree or not.\n";
+		std::cerr
+			<< "    Error in deciding whether a graph is a tree or not.\n";
 		std::cerr << "    It has been determined that an undirected graph uG\n";
-		std::cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however\n";
-		std::cerr << "    it has been determined that its oriented version dG\n";
-		std::cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence\n";
+		std::cerr << "    " << (is_tree_uG ? "is" : "is not")
+				  << " a tree, however\n";
+		std::cerr
+			<< "    it has been determined that its oriented version dG\n";
+		std::cerr << "    " << (is_tree_dG ? "is" : "is not")
+				  << " a tree, hence\n";
 		std::cerr << "    a contradiction.\n";
 		std::cerr << "    Is undirected a tree? " << is_tree_uG << '\n';
 		std::cerr << "    Is   directed a tree? " << is_tree_dG << '\n';
@@ -198,15 +207,17 @@ noexcept
 			const lal::graphs::rooted_tree T(uG, r);
 			const auto kin = lal::properties::moment_in_degree_rational(T, p);
 
-			std::cout << "(rtree at " << r << ") <k_in^" << p << ">= " << kin << '\n';
-			if (kin != lal::numeric::rational(n-1, n)) {
+			std::cout << "(rtree at " << r << ") <k_in^" << p << ">= " << kin
+					  << '\n';
+			if (kin != lal::numeric::rational(n - 1, n)) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Moment of in-degree is not equal to the expected value.\n";
-				std::cerr << "    Expected: " << lal::numeric::rational(n-1, n) << '\n';
+				std::cerr << "    Moment of in-degree is not equal to the "
+							 "expected value.\n";
+				std::cerr << "    Expected: "
+						  << lal::numeric::rational(n - 1, n) << '\n';
 				std::cerr << "    Received: " << kin << '\n';
 				return err_type::test_execution;
 			}
-
 		}
 	}
 	return err_type::no_error;
@@ -214,24 +225,30 @@ noexcept
 
 //
 
-err_type mmt_out_deg
-(const lal::graphs::undirected_graph& uG, const lal::graphs::directed_graph& dG, uint64_t p)
-noexcept
+err_type mmt_out_deg(
+	const lal::graphs::undirected_graph& uG,
+	const lal::graphs::directed_graph& dG,
+	uint64_t p
+) noexcept
 {
-	std::cout << "(graph) <k_out^" << p << ">= "
-		 << lal::properties::moment_out_degree_rational(dG, p)
-		 << '\n';
+	std::cout << "(graph) <k_out^" << p
+			  << ">= " << lal::properties::moment_out_degree_rational(dG, p)
+			  << '\n';
 
 	const bool is_tree_dG = lal::detail::is_graph_a_tree(dG);
 	const bool is_tree_uG = lal::detail::is_graph_a_tree(uG);
 
 	if (is_tree_dG != is_tree_uG) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Error in deciding whether a graph is a tree or not.\n";
+		std::cerr
+			<< "    Error in deciding whether a graph is a tree or not.\n";
 		std::cerr << "    It has been determined that an undirected graph uG\n";
-		std::cerr << "    " << (is_tree_uG ? "is" : "is not") << " a tree, however\n";
-		std::cerr << "    it has been determined that its oriented version dG\n";
-		std::cerr << "    " << (is_tree_dG ? "is" : "is not") << " a tree, hence\n";
+		std::cerr << "    " << (is_tree_uG ? "is" : "is not")
+				  << " a tree, however\n";
+		std::cerr
+			<< "    it has been determined that its oriented version dG\n";
+		std::cerr << "    " << (is_tree_dG ? "is" : "is not")
+				  << " a tree, hence\n";
 		std::cerr << "    a contradiction.\n";
 		std::cerr << "    Is undirected a tree? " << is_tree_uG << '\n';
 		std::cerr << "    Is   directed a tree? " << is_tree_dG << '\n';
@@ -247,8 +264,8 @@ noexcept
 			const lal::graphs::rooted_tree T(uG, r);
 
 			std::cout << "(rtree at " << r << ") <k_out^" << p << ">= "
-				 << lal::properties::moment_out_degree_rational(T, p)
-				 << '\n';
+					  << lal::properties::moment_out_degree_rational(T, p)
+					  << '\n';
 		}
 	}
 	return err_type::no_error;
@@ -256,30 +273,44 @@ noexcept
 
 //
 
-void hubiness_coefficient(const lal::graphs::undirected_graph& g) noexcept {
-	if (not lal::detail::is_graph_a_tree(g)) { return; }
+void hubiness_coefficient(const lal::graphs::undirected_graph& g) noexcept
+{
+	if (not lal::detail::is_graph_a_tree(g)) {
+		return;
+	}
 	if (g.get_num_nodes() > 3) {
 		lal::numeric::rational h = lal::properties::hubiness_rational(g);
 		std::cout << "hubiness= " << h << '\n';
 	}
 }
 
-void MHD(const lal::graphs::undirected_graph& g, lal::node r) noexcept {
-	if (not lal::detail::is_graph_a_tree(g)) { return; }
+void MHD(const lal::graphs::undirected_graph& g, lal::node r) noexcept
+{
+	if (not lal::detail::is_graph_a_tree(g)) {
+		return;
+	}
 	const lal::graphs::free_tree t(g);
 	const lal::graphs::rooted_tree R(t, r);
-	const lal::numeric::rational mhd = lal::properties::mean_hierarchical_distance_rational(R);
+	const lal::numeric::rational mhd =
+		lal::properties::mean_hierarchical_distance_rational(R);
 	std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
 }
 
-err_type exe_properties_general(std::ifstream& fin) noexcept {
-	const std::set<std::string> allowed_instructions({
-		"enumerate_E", "enumerate_E_rand_dir",
-		"enumerate_Q", "enumerate_Q_rand_dir",
-		"Q_size", "Q_size_rand_dir",
-		"mmt_deg", "mmt_in_deg", "mmt_out_deg",
-		"hubiness_coefficient", "Mean_Hierarchical_Distance"
-	});
+err_type exe_properties_general(std::ifstream& fin) noexcept
+{
+	const std::set<std::string> allowed_instructions(
+		{"enumerate_E",
+		 "enumerate_E_rand_dir",
+		 "enumerate_Q",
+		 "enumerate_Q_rand_dir",
+		 "Q_size",
+		 "Q_size_rand_dir",
+		 "mmt_deg",
+		 "mmt_in_deg",
+		 "mmt_out_deg",
+		 "hubiness_coefficient",
+		 "Mean_Hierarchical_Distance"}
+	);
 
 	const input_list inputs = read_input_list(fin);
 
@@ -299,10 +330,14 @@ err_type exe_properties_general(std::ifstream& fin) noexcept {
 		err_type r;
 
 		r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, uG);
-		if (r != err_type::no_error) { return r; }
+		if (r != err_type::no_error) {
+			return r;
+		}
 
 		r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, dG);
-		if (r != err_type::no_error) { return r; }
+		if (r != err_type::no_error) {
+			return r;
+		}
 
 		// this graph may have edges of the form
 		// (u,v)  ..  (v,u)
@@ -341,13 +376,17 @@ err_type exe_properties_general(std::ifstream& fin) noexcept {
 				uint64_t p;
 				ss >> p;
 				r = mmt_in_deg(uG, dG, p);
-				if (r != err_type::no_error) { return r; }
+				if (r != err_type::no_error) {
+					return r;
+				}
 			}
 			else if (ins == "mmt_out_deg") {
 				uint64_t p;
 				ss >> p;
 				r = mmt_out_deg(uG, dG, p);
-				if (r != err_type::no_error) { return r; }
+				if (r != err_type::no_error) {
+					return r;
+				}
 			}
 			else if (ins == "hubiness_coefficient") {
 				hubiness_coefficient(uG);
@@ -373,5 +412,5 @@ err_type exe_properties_general(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

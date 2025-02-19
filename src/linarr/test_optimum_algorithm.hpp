@@ -53,17 +53,19 @@
 namespace tests {
 namespace linarr {
 
-template <class tree_t> using ArrgmntEval =
-	std::function< uint64_t (const tree_t&, const lal::linear_arrangement&) >;
+template <class tree_t>
+using ArrgmntEval =
+	std::function<uint64_t(const tree_t&, const lal::linear_arrangement&)>;
 
-template <class tree_t> using ArrgmntCheck =
-	std::function< bool (const tree_t&, const lal::linear_arrangement&) >;
+template <class tree_t>
+using ArrgmntCheck =
+	std::function<bool(const tree_t&, const lal::linear_arrangement&)>;
 
-template <class tree_t> using InputConv =
-	std::function< tree_t (const std::vector<lal::node>&) >;
+template <class tree_t>
+using InputConv = std::function<tree_t(const std::vector<lal::node>&)>;
 
-template <class tree_t> using TreeInit =
-	std::function< void (tree_t&) >;
+template <class tree_t>
+using TreeInit = std::function<void(tree_t&)>;
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

@@ -52,94 +52,103 @@ namespace memory {
 //
 //
 
-void test_copy_rooted_tree() noexcept {
+void test_copy_rooted_tree() noexcept
+{
 	begin_function;
 
 	// copy constructor
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy constructor: 't2 <- t1'\n";
-	lal::graphs::rooted_tree t2 = t1;
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("t2", t2);
+		std::cout << "Copy constructor: 't2 <- t1'\n";
+		lal::graphs::rooted_tree t2 = t1;
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("t2", t2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
-	t1.set_root(3);
-	t1.calculate_size_subtrees();
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		t1.add_edges(std::vector<lal::edge>{
+			lal::edge(3, 1), lal::edge(3, 2), lal::edge(3, 0), lal::edge(2, 4)
+		});
+		t1.set_root(3);
+		t1.calculate_size_subtrees();
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy constructor: 't2 <- t1'\n";
-	lal::graphs::rooted_tree t2 = t1;
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("t2", t2);
+		std::cout << "Copy constructor: 't2 <- t1'\n";
+		lal::graphs::rooted_tree t2 = t1;
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("t2", t2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
-	t1.set_root(3);
-	t1.calculate_size_subtrees();
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		t1.add_edges(std::vector<lal::edge>{
+			lal::edge(3, 1), lal::edge(3, 2), lal::edge(3, 0), lal::edge(2, 4)
+		});
+		t1.set_root(3);
+		t1.calculate_size_subtrees();
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy constructor: 'v[0] <- t1'\n";
-	std::vector<lal::graphs::rooted_tree> v;
-	v.push_back(t1);
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("v[0]", v[0]);
+		std::cout << "Copy constructor: 'v[0] <- t1'\n";
+		std::vector<lal::graphs::rooted_tree> v;
+		v.push_back(t1);
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("v[0]", v[0]);
 	}
 
 	// copy operator
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy operator: 't2 <- t1'\n";
-	lal::graphs::rooted_tree t2;
-	t2 = t1;
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("t2", t2);
+		std::cout << "Copy operator: 't2 <- t1'\n";
+		lal::graphs::rooted_tree t2;
+		t2 = t1;
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("t2", t2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
-	t1.set_root(3);
-	t1.calculate_size_subtrees();
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		t1.add_edges(std::vector<lal::edge>{
+			lal::edge(3, 1), lal::edge(3, 2), lal::edge(3, 0), lal::edge(2, 4)
+		});
+		t1.set_root(3);
+		t1.calculate_size_subtrees();
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy operator: 't2 <- t1'\n";
-	lal::graphs::rooted_tree t2;
-	t2 = t1;
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("t2", t2);
+		std::cout << "Copy operator: 't2 <- t1'\n";
+		lal::graphs::rooted_tree t2;
+		t2 = t1;
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("t2", t2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::rooted_tree t1(5);
-	t1.add_edges(std::vector<lal::edge>{lal::edge(3,1), lal::edge(3,2), lal::edge(3,0), lal::edge(2,4)});
-	t1.set_root(3);
-	t1.calculate_size_subtrees();
-	output_rooted_tree_info("t1", t1);
+		begin_case;
+		lal::graphs::rooted_tree t1(5);
+		t1.add_edges(std::vector<lal::edge>{
+			lal::edge(3, 1), lal::edge(3, 2), lal::edge(3, 0), lal::edge(2, 4)
+		});
+		t1.set_root(3);
+		t1.calculate_size_subtrees();
+		output_rooted_tree_info("t1", t1);
 
-	std::cout << "Copy operator: 'v[0] <- t1'\n";
-	std::vector<lal::graphs::rooted_tree> v;
-	v.push_back(lal::graphs::rooted_tree());
-	v[0] = t1;
-	output_rooted_tree_info("t1", t1);
-	output_rooted_tree_info("v[0]", v[0]);
+		std::cout << "Copy operator: 'v[0] <- t1'\n";
+		std::vector<lal::graphs::rooted_tree> v;
+		v.push_back(lal::graphs::rooted_tree());
+		v[0] = t1;
+		output_rooted_tree_info("t1", t1);
+		output_rooted_tree_info("v[0]", v[0]);
 	}
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

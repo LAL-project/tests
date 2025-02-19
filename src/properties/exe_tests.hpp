@@ -71,10 +71,12 @@ err_type exe_properties_connected_components(std::ifstream& fin) noexcept;
 err_type exe_properties_diameter(std::ifstream& fin) noexcept;
 err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept;
 err_type exe_properties_expected_D_projective(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexcept;
-err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept;
+err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin
+) noexcept;
+err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin
+) noexcept;
 err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept;
 err_type exe_properties_branchless_paths(std::ifstream& fin) noexcept;
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

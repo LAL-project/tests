@@ -54,7 +54,8 @@ namespace tests {
 namespace properties {
 
 // parses the first keyword and calls the appropriate main type function
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept;
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+	noexcept;
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

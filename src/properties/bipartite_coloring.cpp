@@ -59,19 +59,20 @@
 namespace tests {
 namespace properties {
 
-#define output_error_graph(g, c)														\
-	{																					\
-	std::cerr << g << '\n';																\
-	std::cerr << "    Coloring:\n";														\
-	for (lal::node __u = 0; __u < n; ++__u) {											\
-		std::cerr << "        " << __u << " -> " << int(c.get_color_of(__u)) << '\n';	\
-	}																					\
+#define output_error_graph(g, c)                                               \
+	{                                                                          \
+		std::cerr << g << '\n';                                                \
+		std::cerr << "    Coloring:\n";                                        \
+		for (lal::node __u = 0; __u < n; ++__u) {                              \
+			std::cerr << "        " << __u << " -> "                           \
+					  << int(c.get_color_of(__u)) << '\n';                     \
+		}                                                                      \
 	}
 
 template <class graph_t>
-bool is_coloring_correct
-(const graph_t& g, const lal::properties::bipartite_graph_coloring& c)
-noexcept
+bool is_coloring_correct(
+	const graph_t& g, const lal::properties::bipartite_graph_coloring& c
+) noexcept
 {
 	for (lal::node u = 0; u < g.get_num_nodes(); ++u) {
 		if (not c.is_color_valid(u)) {
@@ -81,14 +82,15 @@ noexcept
 	return true;
 }
 
-#define output_error_graph_header(g, c, i, name)										\
-	{																					\
-	std::cerr << "    Graph (" << i << " -- " << inputs[i].first << ")\n";				\
-	output_error_graph(g, c);															\
+#define output_error_graph_header(g, c, i, name)                               \
+	{                                                                          \
+		std::cerr << "    Graph (" << i << " -- " << inputs[i].first << ")\n"; \
+		output_error_graph(g, c);                                              \
 	}
 
 template <class graph_t>
-err_type perform_manual_test(std::ifstream& fin) noexcept {
+err_type perform_manual_test(std::ifstream& fin) noexcept
+{
 	graph_t g;
 
 	lal::properties::bipartite_graph_coloring c;
@@ -102,7 +104,7 @@ err_type perform_manual_test(std::ifstream& fin) noexcept {
 		else if (option == "add_edge") {
 			lal::node u, v;
 			fin >> u >> v;
-			g.add_edge(u,v);
+			g.add_edge(u, v);
 		}
 		else if (option == "calculate_coloring") {
 			c = lal::properties::bipartite_coloring(g);
@@ -117,7 +119,8 @@ err_type perform_manual_test(std::ifstream& fin) noexcept {
 		else if (option == "output_coloring") {
 			std::cout << "Coloring:\n";
 			for (lal::node u = 0; u < g.get_num_nodes(); ++u) {
-				std::cout << "    color[" << u << "]= " << int(c.get_color_of(u)) << '\n';
+				std::cout << "    color[" << u
+						  << "]= " << int(c.get_color_of(u)) << '\n';
 			}
 		}
 		else if (option == "is_bipartite") {
@@ -133,7 +136,8 @@ err_type perform_manual_test(std::ifstream& fin) noexcept {
 }
 
 template <class gen_t>
-bool are_all_trees_bipartite(uint64_t n) noexcept {
+bool are_all_trees_bipartite(uint64_t n) noexcept
+{
 	gen_t gen(n);
 	gen.deactivate_all_postprocessing_actions();
 	while (not gen.end()) {
@@ -156,7 +160,8 @@ bool are_all_trees_bipartite(uint64_t n) noexcept {
 	return true;
 }
 
-err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
+err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 	std::string command;
 	fin >> command;
@@ -165,9 +170,12 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 		lal::graphs::undirected_graph G;
 		for (std::size_t i = 0; i < inputs.size(); ++i) {
 			G.clear();
-			const err_type r =
-				io_wrapper::read_graph(inputs[i].first, inputs[i].second, G, false);
-			if (r != err_type::no_error) { return r; }
+			const err_type r = io_wrapper::read_graph(
+				inputs[i].first, inputs[i].second, G, false
+			);
+			if (r != err_type::no_error) {
+				return r;
+			}
 
 			const auto n = G.get_num_nodes();
 
@@ -183,7 +191,8 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 			if (command == "assert_is_bipartite") {
 				if (not lal::properties::is_graph_bipartite(G, c)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Graph is not bipartite but it should be.\n";
+					std::cerr
+						<< "    Graph is not bipartite but it should be.\n";
 					output_error_graph_header(G, c, i, inputs[i].first);
 					return err_type::test_execution;
 				}
@@ -191,7 +200,8 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 			else if (command == "assert_is_not_bipartite") {
 				if (lal::properties::is_graph_bipartite(G, c)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Graph is not bipartite but it should be.\n";
+					std::cerr
+						<< "    Graph is not bipartite but it should be.\n";
 					output_error_graph_header(G, c, i, inputs[i].first);
 					return err_type::test_execution;
 				}
@@ -207,14 +217,17 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 		if (command == "check_all_free_trees") {
 			std::size_t n;
 			fin >> n;
-			if (not are_all_trees_bipartite<lal::generate::all_ulab_free_trees>(n)) {
+			if (not are_all_trees_bipartite<lal::generate::all_ulab_free_trees>(
+					n
+				)) {
 				return err_type::test_execution;
 			}
 		}
 		else if (command == "check_all_rooted_trees") {
 			std::size_t n;
 			fin >> n;
-			if (not are_all_trees_bipartite<lal::generate::all_ulab_rooted_trees>(n)) {
+			if (not are_all_trees_bipartite<
+					lal::generate::all_ulab_rooted_trees>(n)) {
 				return err_type::test_execution;
 			}
 		}
@@ -222,13 +235,15 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 			std::string graph_type;
 			fin >> graph_type;
 			if (graph_type == "undirected") {
-				const auto r = perform_manual_test<lal::graphs::undirected_graph>(fin);
+				const auto r =
+					perform_manual_test<lal::graphs::undirected_graph>(fin);
 				if (r != err_type::no_error) {
 					return r;
 				}
 			}
 			else if (graph_type == "directed") {
-				const auto r = perform_manual_test<lal::graphs::directed_graph>(fin);
+				const auto r =
+					perform_manual_test<lal::graphs::directed_graph>(fin);
 				if (r != err_type::no_error) {
 					return r;
 				}
@@ -245,5 +260,5 @@ err_type exe_properties_bipartite_coloring(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

@@ -59,7 +59,8 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
+err_type exe_gen_arr_rand(std::ifstream& fin) noexcept
+{
 
 	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
@@ -77,9 +78,14 @@ err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_arrangement(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation (get) of random arrangement failed with error:\n";
-					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+					std::cerr << "    Generation (get) of random arrangement "
+								 "failed with error:\n";
+					std::cerr
+						<< "    Arrangement:     " << arr.direct_as_vector()
+						<< '\n';
+					std::cerr
+						<< "    Inv Arrangement: " << arr.inverse_as_vector()
+						<< '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << T << '\n';
 					return err_type::test_execution;
@@ -92,9 +98,14 @@ err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_arrangement(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Generation (yield) of random arrangement failed with error:\n";
-					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+					std::cerr << "    Generation (yield) of random arrangement "
+								 "failed with error:\n";
+					std::cerr
+						<< "    Arrangement:     " << arr.direct_as_vector()
+						<< '\n';
+					std::cerr
+						<< "    Inv Arrangement: " << arr.inverse_as_vector()
+						<< '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << T << '\n';
 					return err_type::test_execution;
@@ -107,5 +118,5 @@ err_type exe_gen_arr_rand(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

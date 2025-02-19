@@ -70,39 +70,41 @@
 namespace tests {
 namespace memory {
 
-void test_generate() noexcept {
+void test_generate() noexcept
+{
 	begin_function
 
 	{
-	begin_case;
-	lal::generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	const lal::graphs::free_tree f = Gen.get_tree();
+		begin_case;
+		lal::generate::all_ulab_free_trees Gen(10);
+		Gen.next();
+		const lal::graphs::free_tree f = Gen.get_tree();
 	}
 
 	{
-	begin_case;
-	lal::generate::all_ulab_free_trees Gen(10);
-	Gen.next();
-	lal::graphs::free_tree f = Gen.get_tree();
+		begin_case;
+		lal::generate::all_ulab_free_trees Gen(10);
+		Gen.next();
+		lal::graphs::free_tree f = Gen.get_tree();
 	}
 
 	{
-	begin_case;
-	lal::generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	const lal::graphs::rooted_tree f = Gen.get_tree();
+		begin_case;
+		lal::generate::all_ulab_rooted_trees Gen(10);
+		Gen.next();
+		const lal::graphs::rooted_tree f = Gen.get_tree();
 	}
 
 	{
-	begin_case;
-	lal::generate::all_ulab_rooted_trees Gen(10);
-	Gen.next();
-	lal::graphs::rooted_tree f = Gen.get_tree();
+		begin_case;
+		lal::generate::all_ulab_rooted_trees Gen(10);
+		Gen.next();
+		lal::graphs::rooted_tree f = Gen.get_tree();
 	}
 }
 
-err_type exe_memory_graphs(std::ifstream&) noexcept {
+err_type exe_memory_graphs(std::ifstream&) noexcept
+{
 
 #if defined MOVE_UGRAPH
 	test_move_undirected_graph();
@@ -145,5 +147,5 @@ err_type exe_memory_graphs(std::ifstream&) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

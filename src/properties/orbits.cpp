@@ -60,8 +60,11 @@ namespace properties {
 typedef std::vector<lal::node> orbit;
 typedef std::vector<orbit> orbit_set;
 
-bool equal(const orbit_set& LAL, const orbit_set& nauty) noexcept {
-	if (LAL.size() != nauty.size()) { return false; }
+bool equal(const orbit_set& LAL, const orbit_set& nauty) noexcept
+{
+	if (LAL.size() != nauty.size()) {
+		return false;
+	}
 
 	lal::detail::array<char> nauty_matched(nauty.size(), 0);
 
@@ -70,10 +73,13 @@ bool equal(const orbit_set& LAL, const orbit_set& nauty) noexcept {
 
 		for (std::size_t j = 0; j < nauty.size() and not matched; ++j) {
 			// ignore nauty orbits that have been matched with a LAL orbit
-			if (nauty_matched[j] == 1) { continue; }
+			if (nauty_matched[j] == 1) {
+				continue;
+			}
 			// if the orbits do not have the same size, they cannot be equal
-			if (LAL[i].size() != nauty[j].size()) { continue; }
-
+			if (LAL[i].size() != nauty[j].size()) {
+				continue;
+			}
 
 			if (LAL[i] == nauty[j]) {
 				// these two orbits have been paired
@@ -82,13 +88,23 @@ bool equal(const orbit_set& LAL, const orbit_set& nauty) noexcept {
 			}
 		}
 
-		if (not matched) { return false; }
+		if (not matched) {
+			return false;
+		}
 	}
 
-	return std::all_of(nauty_matched.begin(), nauty_matched.end(), [](char c) { return c == 1; });
+	return std::all_of(
+		nauty_matched.begin(),
+		nauty_matched.end(),
+		[](char c)
+		{
+			return c == 1;
+		}
+	);
 }
 
-err_type test_exhaustive(std::ifstream& fin) noexcept {
+err_type test_exhaustive(std::ifstream& fin) noexcept
+{
 	uint64_t n;
 	while (fin >> n) {
 
@@ -115,7 +131,7 @@ err_type test_exhaustive(std::ifstream& fin) noexcept {
 				std::cerr << "LAL computed:\n";
 				for (const orbit& o : LAL) {
 					std::cerr << "    *";
-					for  (lal::node u : o) {
+					for (lal::node u : o) {
 						std::cerr << ' ' << u;
 					}
 					std::cerr << '\n';
@@ -124,7 +140,7 @@ err_type test_exhaustive(std::ifstream& fin) noexcept {
 				std::cerr << "nauty computed:\n";
 				for (const orbit& o : nauty) {
 					std::cerr << "    *";
-					for  (lal::node u : o) {
+					for (lal::node u : o) {
 						std::cerr << ' ' << u;
 					}
 					std::cerr << '\n';
@@ -139,7 +155,8 @@ err_type test_exhaustive(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-err_type test_random(std::ifstream& fin) noexcept {
+err_type test_random(std::ifstream& fin) noexcept
+{
 	uint64_t n, R;
 	while (fin >> n >> R) {
 
@@ -166,7 +183,7 @@ err_type test_random(std::ifstream& fin) noexcept {
 				std::cerr << "LAL computed:\n";
 				for (const orbit& o : LAL) {
 					std::cerr << "    *";
-					for  (lal::node u : o) {
+					for (lal::node u : o) {
 						std::cerr << ' ' << u;
 					}
 					std::cerr << '\n';
@@ -175,7 +192,7 @@ err_type test_random(std::ifstream& fin) noexcept {
 				std::cerr << "nauty computed:\n";
 				for (const orbit& o : nauty) {
 					std::cerr << "    *";
-					for  (lal::node u : o) {
+					for (lal::node u : o) {
 						std::cerr << ' ' << u;
 					}
 					std::cerr << '\n';
@@ -188,7 +205,8 @@ err_type test_random(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_properties_orbits(std::ifstream& fin) noexcept {
+err_type exe_properties_orbits(std::ifstream& fin) noexcept
+{
 	std::string mode;
 	fin >> mode;
 
@@ -211,5 +229,5 @@ err_type exe_properties_orbits(std::ifstream& fin) noexcept {
 	return r;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

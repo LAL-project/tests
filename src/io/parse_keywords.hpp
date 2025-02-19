@@ -54,7 +54,8 @@ namespace tests {
 namespace io {
 
 // parses the first keyword and calls the appropriate main type function
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept;
+err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
+	noexcept;
 
-} // -- namespace io
-} // -- namespace tests
+} // namespace io
+} // namespace tests

@@ -58,28 +58,32 @@ namespace tests {
 namespace io_wrapper {
 
 err_type read_graph(
-	const std::string& file, const std::string& format,
+	const std::string& file,
+	const std::string& format,
 	lal::graphs::undirected_graph& G,
 	bool normalize = true
 ) noexcept;
 
 err_type read_graph(
-	const std::string& file, const std::string& format,
+	const std::string& file,
+	const std::string& format,
 	lal::graphs::directed_graph& G,
 	bool normalize = true
 ) noexcept;
 
 err_type read_graph(
-	const std::string& file, const std::string& format,
+	const std::string& file,
+	const std::string& format,
 	lal::graphs::free_tree& G,
 	bool normalize = true
 ) noexcept;
 
 err_type read_graph(
-	const std::string& file, const std::string& format,
+	const std::string& file,
+	const std::string& format,
 	lal::graphs::rooted_tree& G,
 	bool normalize = true
 ) noexcept;
 
-} // -- namespace io_wrapper
-} // -- namespace tests
+} // namespace io_wrapper
+} // namespace tests

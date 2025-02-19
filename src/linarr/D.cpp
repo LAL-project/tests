@@ -61,10 +61,9 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_D(std::ifstream& fin) noexcept {
-	const std::set<std::string> allowed_procs(
-	{"D", "MDD"}
-	);
+err_type exe_linarr_D(std::ifstream& fin) noexcept
+{
+	const std::set<std::string> allowed_procs({"D", "MDD"});
 
 	const input_list inputs = read_input_list(fin);
 
@@ -77,12 +76,12 @@ err_type exe_linarr_D(std::ifstream& fin) noexcept {
 
 	lal::graphs::undirected_graph G;
 	{
-	const std::string& graph_name = inputs[0].first;
-	const std::string& graph_format = inputs[0].second;
-	const err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
-	if (r != err_type::no_error) {
-		return r;
-	}
+		const std::string& graph_name = inputs[0].first;
+		const std::string& graph_format = inputs[0].second;
+		const err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
+		if (r != err_type::no_error) {
+			return r;
+		}
 	}
 
 	std::string proc;
@@ -92,7 +91,7 @@ err_type exe_linarr_D(std::ifstream& fin) noexcept {
 		std::cerr << "    Wrong value for procedure type.\n";
 		std::cerr << "    Procedure '" << proc << "' was found.\n";
 		for (const std::string& p : allowed_procs) {
-		std::cerr << "    - " << p << '\n';
+			std::cerr << "    - " << p << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -120,12 +119,13 @@ err_type exe_linarr_D(std::ifstream& fin) noexcept {
 			std::cout << lal::linarr::sum_edge_lengths(G, pi) << '\n';
 		}
 		else if (proc == "MDD") {
-			std::cout << lal::linarr::mean_dependency_distance_rational(G, pi) << '\n';
+			std::cout << lal::linarr::mean_dependency_distance_rational(G, pi)
+					  << '\n';
 		}
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

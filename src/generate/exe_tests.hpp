@@ -77,5 +77,5 @@ err_type exe_gen_trees_rlr(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_ruf(std::ifstream& fin) noexcept;
 err_type exe_gen_trees_rur(std::ifstream& fin) noexcept;
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

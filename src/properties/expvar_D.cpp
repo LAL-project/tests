@@ -64,16 +64,20 @@ namespace properties {
 
 namespace ExpVar_D {
 
-void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) noexcept {
-	const lal::numeric::rational Vr = lal::properties::var_sum_edge_lengths_rational(g);
-	const lal::numeric::rational E1r = lal::properties::exp_sum_edge_lengths_rational(g);
-	const lal::numeric::rational E2r = Vr + E1r*E1r;
+void output_ExpVar_D_formula(const lal::graphs::undirected_graph& g) noexcept
+{
+	const lal::numeric::rational Vr =
+		lal::properties::var_sum_edge_lengths_rational(g);
+	const lal::numeric::rational E1r =
+		lal::properties::exp_sum_edge_lengths_rational(g);
+	const lal::numeric::rational E2r = Vr + E1r * E1r;
 	std::cout << E1r << "\t" << E2r << "\t" << Vr << "\t\n";
 }
 
-} // -- namespace ExpVar_D
+} // namespace ExpVar_D
 
-err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept {
+err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	std::string proc;
@@ -94,7 +98,8 @@ err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept {
 
 	lal::graphs::undirected_graph G;
 	for (std::size_t i = 0; i < inputs.size(); ++i) {
-		err_type r = io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
+		err_type r =
+			io_wrapper::read_graph(inputs[i].first, inputs[i].second, G);
 		if (r != err_type::no_error) {
 			return r;
 		}
@@ -105,5 +110,5 @@ err_type exe_properties_ExpVar_D(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

@@ -59,7 +59,8 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_headedness(std::ifstream& fin) noexcept {
+err_type exe_linarr_headedness(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -71,12 +72,12 @@ err_type exe_linarr_headedness(std::ifstream& fin) noexcept {
 
 	lal::graphs::directed_graph G;
 	{
-	const std::string& graph_name = inputs[0].first;
-	const std::string& graph_format = inputs[0].second;
-	err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
-	if (r != err_type::no_error) {
-		return r;
-	}
+		const std::string& graph_name = inputs[0].first;
+		const std::string& graph_format = inputs[0].second;
+		err_type r = io_wrapper::read_graph(graph_name, graph_format, G);
+		if (r != err_type::no_error) {
+			return r;
+		}
 	}
 
 	// linear arrangement
@@ -98,12 +99,13 @@ err_type exe_linarr_headedness(std::ifstream& fin) noexcept {
 		// output
 		std::cout << "[" << pi.inverse_as_vector() << "]: ";
 
-		const lal::numeric::rational h = lal::linarr::head_initial_rational(G, pi);
+		const lal::numeric::rational h =
+			lal::linarr::head_initial_rational(G, pi);
 		std::cout << h << '\n';
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

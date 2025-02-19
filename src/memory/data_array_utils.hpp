@@ -44,14 +44,14 @@
 
 #include "memory/common_utils.hpp"
 
-#define output_array(A)								\
-	if (A.size() == 0) {							\
-		std::cout << MLINE << "Empty\n";			\
-	}												\
-	else {											\
-		std::cout << MLINE;							\
-		for (std::size_t i = 0; i < A.size(); ++i) {\
-			std::cout << " " << A[i];				\
-		}											\
-		std::cout << '\n';							\
+#define output_array(A)                                                        \
+	if (A.size() == 0) {                                                       \
+		std::cout << MLINE << "Empty\n";                                       \
+	}                                                                          \
+	else {                                                                     \
+		std::cout << MLINE;                                                    \
+		for (std::size_t i = 0; i < A.size(); ++i) {                           \
+			std::cout << " " << A[i];                                          \
+		}                                                                      \
+		std::cout << '\n';                                                     \
 	}

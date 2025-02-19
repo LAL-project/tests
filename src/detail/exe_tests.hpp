@@ -66,5 +66,5 @@ err_type exe_detail_sorting(std::ifstream& fin) noexcept;
 err_type exe_detail_bfs(std::ifstream& fin) noexcept;
 err_type exe_detail_avl_functions(std::ifstream& fin) noexcept;
 
-} // -- namespace detail
-} // -- namespace tests
+} // namespace detail
+} // namespace tests

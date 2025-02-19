@@ -52,9 +52,9 @@
 namespace tests {
 namespace memory {
 
-err_type call_memory_detail
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_memory_detail(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "data_array") {
@@ -70,9 +70,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_memory
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_memory(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "graphs") {
@@ -82,7 +82,7 @@ noexcept
 		return exe_memory_numeric(fin);
 	}
 	if (key == "internal") {
-		return call_memory_detail(keywords, i+1, fin);
+		return call_memory_detail(keywords, i + 1, fin);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -91,8 +91,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "memory") {
@@ -105,5 +105,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

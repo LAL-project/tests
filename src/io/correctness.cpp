@@ -57,9 +57,12 @@ namespace io {
 
 static constexpr auto no_error = lal::io::treebank_file_error_type::no_error;
 
-err_type exe_io_correctness(std::ifstream& fin) noexcept {
+err_type exe_io_correctness(std::ifstream& fin) noexcept
+{
 
-	const std::set<std::string> allowed_file_types{"treebank", "treebank_dataset"};
+	const std::set<std::string> allowed_file_types{
+		"treebank", "treebank_dataset"
+	};
 
 	std::string file_type;
 	std::string file_path;
@@ -72,62 +75,68 @@ err_type exe_io_correctness(std::ifstream& fin) noexcept {
 			std::cerr << "    Wrong file type '" << file_type << "'.\n";
 			std::cerr << "    Allowed file types:\n";
 			for (const auto& v : allowed_file_types) {
-			std::cerr << "    - " << v << '\n';
+				std::cerr << "    - " << v << '\n';
 			}
 			return err_type::test_format;
 		}
 
 		if (file_type == "treebank") {
 			const auto errs = lal::io::check_correctness_treebank(file_path);
-			std::cout
-				<< "A total of " << errs.get_num_errors()
-				<< " errors were found for treebank file '"
-				<< file_path
-				<< "'.\n";
+			std::cout << "A total of " << errs.get_num_errors()
+					  << " errors were found for treebank file '" << file_path
+					  << "'.\n";
 			if (errs.get_num_errors() > 0) {
 				if (errs.get_treebank_error().get_error_type() != no_error) {
-					std::cout
-						<< "Problems with the treebank file: '"
-						<< errs.get_treebank_error().get_error_message()
-						<< "'.\n";
+					std::cout << "Problems with the treebank file: '"
+							  << errs.get_treebank_error().get_error_message()
+							  << "'.\n";
 				}
-				for (const auto& [line_number, error] : errs.get_head_vector_errors()) {
+				for (const auto& [line_number, error] :
+					 errs.get_head_vector_errors()) {
 					std::cout << "    * At line: " << line_number << '\n';
-					std::cout << "      What:    " << error.get_error_message() << '\n';
+					std::cout << "      What:    " << error.get_error_message()
+							  << '\n';
 				}
 			}
 		}
 		else {
-			const auto errors = lal::io::check_correctness_treebank_collection(file_path);
-			std::cout
-				<< "A total of "
-				<< errors.get_num_errors()
-				<< " errors were found for treebank dataset '"
-				<< file_path << "'.\n";
+			const auto errors =
+				lal::io::check_correctness_treebank_collection(file_path);
+			std::cout << "A total of " << errors.get_num_errors()
+					  << " errors were found for treebank dataset '"
+					  << file_path << "'.\n";
 
 			if (errors.get_num_errors() > 0) {
 				if (errors.get_treebank_error().get_error_type() != no_error) {
-					std::cout
-						<< "    "
-						<< "Problems with the treebank file: '"
-						<< errors.get_treebank_error().get_error_message()
-						<< "'.\n";
+					std::cout << "    "
+							  << "Problems with the treebank file: '"
+							  << errors.get_treebank_error().get_error_message()
+							  << "'.\n";
 				}
 
-				for (const auto& [line_number, treebank_filename, _, report] : errors.get_treebank_reports()) {
+				for (const auto& [line_number, treebank_filename, _, report] :
+					 errors.get_treebank_reports()) {
 					std::cout << "-------------------------------\n";
-					std::cout << "    * Line within main file: " << line_number << '\n';
-					std::cout << "      At treebank file:      " << treebank_filename << '\n';
+					std::cout << "    * Line within main file: " << line_number
+							  << '\n';
+					std::cout
+						<< "      At treebank file:      " << treebank_filename
+						<< '\n';
 
-					if (report.get_treebank_error().get_error_type() != no_error) {
+					if (report.get_treebank_error().get_error_type() !=
+						no_error) {
 						std::cout
 							<< "    Problems with the treebank file: '"
 							<< report.get_treebank_error().get_error_message()
 							<< "'.\n";
 					}
-					for (const auto& [treebank_line_number, error] : report.get_head_vector_errors()) {
-						std::cout << "        + At line: " << treebank_line_number << '\n';
-						std::cout << "          What:    " << error.get_error_message() << '\n';
+					for (const auto& [treebank_line_number, error] :
+						 report.get_head_vector_errors()) {
+						std::cout
+							<< "        + At line: " << treebank_line_number
+							<< '\n';
+						std::cout << "          What:    "
+								  << error.get_error_message() << '\n';
 					}
 				}
 			}
@@ -137,5 +146,5 @@ err_type exe_io_correctness(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace io
-} // -- namespace tests
+} // namespace io
+} // namespace tests

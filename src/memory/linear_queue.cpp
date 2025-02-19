@@ -66,28 +66,34 @@ namespace lal_queue_array {
 
 struct S {
 	std::string m_s;
-	S() noexcept {
+	S() noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 	}
-	S(std::string&& s) noexcept {
+	S(std::string&& s) noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 		m_s = std::move(s);
 	}
-	S(S&& s) noexcept {
+	S(S&& s) noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 		m_s = std::move(s.m_s);
 	}
-	S(const S& s) noexcept {
+	S(const S& s) noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 		m_s = s.m_s;
 	}
 
-	S& operator= (S&& s) noexcept {
+	S& operator= (S&& s) noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 		m_s = std::move(s.m_s);
 		return *this;
 	}
-	S& operator= (const S& s) noexcept {
+	S& operator= (const S& s) noexcept
+	{
 		std::cout << __PRETTY_FUNCTION__ << '\n';
 		m_s = s.m_s;
 		return *this;
@@ -95,135 +101,139 @@ struct S {
 };
 
 #if defined MOVE
-void test_move_push() noexcept {
+void test_move_push() noexcept
+{
 	begin_function;
 
-
 	{
-	begin_case;
-	queue_array<S> q;
-	std::cout << "Initializing...\n";
-	q.init(10);
+		begin_case;
+		queue_array<S> q;
+		std::cout << "Initializing...\n";
+		q.init(10);
 
-	std::cout << "push 'S{\"asdf\"}'...\n";
-	q.push(S{"asdf"});
-	std::cout << "push 'S{\"qwer\"}'...\n";
-	q.push(S("qwer"));
-	std::cout << "push '{\"zxcv\"}'...\n";
-	q.push({"zxcv"});
+		std::cout << "push 'S{\"asdf\"}'...\n";
+		q.push(S{"asdf"});
+		std::cout << "push 'S{\"qwer\"}'...\n";
+		q.push(S("qwer"));
+		std::cout << "push '{\"zxcv\"}'...\n";
+		q.push({"zxcv"});
 	}
 
 	{
-	begin_case;
-	queue_array<S> q;
-	std::cout << "Initializing...\n";
-	q.init(10);
+		begin_case;
+		queue_array<S> q;
+		std::cout << "Initializing...\n";
+		q.init(10);
 
-	S asdf("asdf");
-	S qwer("qwer");
-	S zxcv("zxcv");
+		S asdf("asdf");
+		S qwer("qwer");
+		S zxcv("zxcv");
 
-	std::cout << "Push 'asdf'\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	q.push(std::move(asdf));
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Push 'asdf'\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		q.push(std::move(asdf));
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 
-	std::cout << "Push 'qwer'\n";
-	std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
-	q.push(std::move(qwer));
-	std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
+		std::cout << "Push 'qwer'\n";
+		std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
+		q.push(std::move(qwer));
+		std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
 
-	std::cout << "Push 'zxcv'\n";
-	std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
-	q.push(std::move(zxcv));
-	std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
+		std::cout << "Push 'zxcv'\n";
+		std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
+		q.push(std::move(zxcv));
+		std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
 	}
 }
 
-void test_move_pop() noexcept {
+void test_move_pop() noexcept
+{
 	begin_function;
 
 	{
-	begin_case;
-	queue_array<S> q;
-	std::cout << "Initializing...\n";
-	q.init(10);
+		begin_case;
+		queue_array<S> q;
+		std::cout << "Initializing...\n";
+		q.init(10);
 
-	S asdf("asdf");
+		S asdf("asdf");
 
-	std::cout << "Push 'asdf'\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	q.push(std::move(asdf));
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Push 'asdf'\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		q.push(std::move(asdf));
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 
-	std::cout << "Pop queue\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	asdf = std::move(q.pop());
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Pop queue\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		asdf = std::move(q.pop());
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 	}
 }
 #endif
 
 #if defined COPY
-void test_copy_push() noexcept {
+void test_copy_push() noexcept
+{
 	begin_function;
 
 	{
-	begin_case;
-	queue_array<S> q;
-	std::cout << "Initializing...\n";
-	q.init(10);
+		begin_case;
+		queue_array<S> q;
+		std::cout << "Initializing...\n";
+		q.init(10);
 
-	S asdf("asdf");
-	S qwer("qwer");
-	S zxcv("zxcv");
+		S asdf("asdf");
+		S qwer("qwer");
+		S zxcv("zxcv");
 
-	std::cout << "Push 'asdf'\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	q.push(asdf);
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Push 'asdf'\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		q.push(asdf);
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 
-	std::cout << "Push 'qwer'\n";
-	std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
-	q.push(qwer);
-	std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
+		std::cout << "Push 'qwer'\n";
+		std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
+		q.push(qwer);
+		std::cout << "    string in 'qwer': '" << qwer.m_s << "'\n";
 
-	std::cout << "Push 'zxcv'\n";
-	std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
-	q.push(zxcv);
-	std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
+		std::cout << "Push 'zxcv'\n";
+		std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
+		q.push(zxcv);
+		std::cout << "    string in 'zxcv': '" << zxcv.m_s << "'\n";
 	}
 }
 
-void test_copy_pop() noexcept {
+void test_copy_pop() noexcept
+{
 	begin_function;
 
 	begin_function;
 
 	{
-	begin_case;
-	queue_array<S> q;
-	std::cout << "Initializing...\n";
-	q.init(10);
+		begin_case;
+		queue_array<S> q;
+		std::cout << "Initializing...\n";
+		q.init(10);
 
-	S asdf("asdf");
+		S asdf("asdf");
 
-	std::cout << "Push 'asdf'\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	q.push(std::move(asdf));
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Push 'asdf'\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		q.push(std::move(asdf));
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 
-	std::cout << "Pop queue\n";
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
-	asdf = q.pop();
-	std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		std::cout << "Pop queue\n";
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
+		asdf = q.pop();
+		std::cout << "    string in 'asdf': '" << asdf.m_s << "'\n";
 	}
 }
 #endif
 
-} // -- namespace lal_queue_array
+} // namespace lal_queue_array
 
-err_type exe_memory_detail_queue_array(std::ifstream&) noexcept {
+err_type exe_memory_detail_queue_array(std::ifstream&) noexcept
+{
 
 #if defined MOVE
 	lal_queue_array::test_move_push();
@@ -248,5 +258,5 @@ err_type exe_memory_detail_queue_array(std::ifstream&) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

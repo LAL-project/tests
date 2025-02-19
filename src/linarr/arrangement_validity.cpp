@@ -61,33 +61,34 @@ namespace tests {
 namespace linarr {
 
 template <class G>
-err_type test_arrangement(std::ifstream& fin) noexcept {
+err_type test_arrangement(std::ifstream& fin) noexcept
+{
 	G g;
 	{
-	uint64_t num_nodes = 0;
-	std::vector<lal::edge> edges;
-	int u;
-	while (fin >> u and u != -1) {
-		lal::node v;
-		fin >> v;
-		edges.push_back({u,v});
-		num_nodes = std::max(lal::node(u), num_nodes);
-		num_nodes = std::max(v, num_nodes);
-	}
-	num_nodes += 1;
+		uint64_t num_nodes = 0;
+		std::vector<lal::edge> edges;
+		int u;
+		while (fin >> u and u != -1) {
+			lal::node v;
+			fin >> v;
+			edges.push_back({u, v});
+			num_nodes = std::max(lal::node(u), num_nodes);
+			num_nodes = std::max(v, num_nodes);
+		}
+		num_nodes += 1;
 
-	g.init(num_nodes);
-	g.set_edges(edges);
+		g.init(num_nodes);
+		g.set_edges(edges);
 	}
 
 	lal::linear_arrangement arr;
 	{
-	std::vector<lal::node> inv_arr;
-	int p;
-	while (fin >> p and p != -1) {
-		inv_arr.push_back(static_cast<lal::node>(p));
-	}
-	arr = lal::linear_arrangement::from_inverse(inv_arr);
+		std::vector<lal::node> inv_arr;
+		int p;
+		while (fin >> p and p != -1) {
+			inv_arr.push_back(static_cast<lal::node>(p));
+		}
+		arr = lal::linear_arrangement::from_inverse(inv_arr);
 	}
 
 	std::string check;
@@ -116,9 +117,11 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 			const bool res = lal::linarr::is_arrangement(g, arr);
 			if (not res) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is not an arrangement of the input graph\n";
+				std::cerr << "    Input arrangement is not an arrangement of "
+							 "the input graph\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector()
+						  << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -128,9 +131,11 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 			const bool res = lal::linarr::is_arrangement(g, arr);
 			if (res) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is an arrangement of the input graph\n";
+				std::cerr << "    Input arrangement is an arrangement of the "
+							 "input graph\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector()
+						  << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -140,12 +145,13 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 			const bool res = lal::linarr::is_planar(g, arr);
 			if (not res) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is not a planar arrangement of the input graph\n";
+				std::cerr << "    Input arrangement is not a planar "
+							 "arrangement of the input graph\n";
 				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector()
+						  << '\n';
 				std::cerr << "    Number of crossings: "
-					 << lal::linarr::num_crossings(g, arr)
-					 << '\n';
+						  << lal::linarr::num_crossings(g, arr) << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -155,12 +161,13 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 			const bool res = lal::linarr::is_planar(g, arr);
 			if (res) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is a planar arrangement of the input graph\n";
+				std::cerr << "    Input arrangement is a planar arrangement of "
+							 "the input graph\n";
 				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
+				std::cerr << "    Arrangement: " << arr.direct_as_vector()
+						  << '\n';
 				std::cerr << "    Number of crossings: "
-					 << lal::linarr::num_crossings(g, arr)
-					 << '\n';
+						  << lal::linarr::num_crossings(g, arr) << '\n';
 				std::cerr << "    Graph:\n";
 				std::cerr << g << '\n';
 				return err_type::test_execution;
@@ -169,47 +176,51 @@ err_type test_arrangement(std::ifstream& fin) noexcept {
 		else if (check == "projective") {
 			if constexpr (not std::is_same_v<G, lal::graphs::rooted_tree>) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    This check is only allowed for rooted trees.\n";
+				std::cerr
+					<< "    This check is only allowed for rooted trees.\n";
 				return err_type::test_format;
 			}
 
 			if constexpr (std::is_same_v<G, lal::graphs::rooted_tree>) {
-			const bool res = lal::linarr::is_projective(g, arr);
-			if (not res) {
-				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is not a projective arrangement of the input graph\n";
-				std::cerr << "    ** but it should be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
-				std::cerr << "    Number of crossings: "
-					 << lal::linarr::num_crossings(g, arr)
-					 << '\n';
-				std::cerr << "    Graph:\n";
-				std::cerr << g << '\n';
-				return err_type::test_execution;
-			}
+				const bool res = lal::linarr::is_projective(g, arr);
+				if (not res) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Input arrangement is not a projective "
+								 "arrangement of the input graph\n";
+					std::cerr << "    ** but it should be!\n";
+					std::cerr << "    Arrangement: " << arr.direct_as_vector()
+							  << '\n';
+					std::cerr << "    Number of crossings: "
+							  << lal::linarr::num_crossings(g, arr) << '\n';
+					std::cerr << "    Graph:\n";
+					std::cerr << g << '\n';
+					return err_type::test_execution;
+				}
 			}
 		}
 		else if (check == "not_projective") {
 			if constexpr (not std::is_same_v<G, lal::graphs::rooted_tree>) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    This check is only allowed for rooted trees.\n";
+				std::cerr
+					<< "    This check is only allowed for rooted trees.\n";
 				return err_type::test_format;
 			}
 
 			if constexpr (std::is_same_v<G, lal::graphs::rooted_tree>) {
-			const bool res = lal::linarr::is_projective(g, arr);
-			if (res) {
-				std::cerr << ERROR << '\n';
-				std::cerr << "    Input arrangement is a projective arrangement of the input graph\n";
-				std::cerr << "    ** but it should not be!\n";
-				std::cerr << "    Arrangement: " << arr.direct_as_vector() << '\n';
-				std::cerr << "    Number of crossings: "
-					 << lal::linarr::num_crossings(g, arr)
-					 << '\n';
-				std::cerr << "    Graph:\n";
-				std::cerr << g << '\n';
-				return err_type::test_execution;
-			}
+				const bool res = lal::linarr::is_projective(g, arr);
+				if (res) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Input arrangement is a projective "
+								 "arrangement of the input graph\n";
+					std::cerr << "    ** but it should not be!\n";
+					std::cerr << "    Arrangement: " << arr.direct_as_vector()
+							  << '\n';
+					std::cerr << "    Number of crossings: "
+							  << lal::linarr::num_crossings(g, arr) << '\n';
+					std::cerr << "    Graph:\n";
+					std::cerr << g << '\n';
+					return err_type::test_execution;
+				}
 			}
 		}
 		else {
@@ -254,6 +265,5 @@ err_type exe_linarr_arrangement_validity(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
-
+} // namespace linarr
+} // namespace tests

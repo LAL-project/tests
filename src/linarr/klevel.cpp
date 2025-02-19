@@ -63,12 +63,11 @@
 namespace tests {
 namespace linarr {
 
-err_type exe_linarr_klevel(std::ifstream& fin, uint64_t level, const std::string& proc)
-noexcept
+err_type exe_linarr_klevel(
+	std::ifstream& fin, uint64_t level, const std::string& proc
+) noexcept
 {
-	const std::set<std::string> allowed_procs(
-		{"MDD"}
-	);
+	const std::set<std::string> allowed_procs({"MDD"});
 
 	const input_list inputs = read_input_list(fin);
 
@@ -78,7 +77,8 @@ noexcept
 		const std::string& graph_name = inputs[i].first;
 		const std::string& graph_format = inputs[i].second;
 
-		const err_type r = io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
+		const err_type r =
+			io_wrapper::read_graph(graph_name, graph_format, Gs[i]);
 		if (r != err_type::no_error) {
 			return r;
 		}
@@ -89,11 +89,13 @@ noexcept
 	fin >> n_linarrs;
 
 	// only valid values: 0, Gs.size()
-	if (not (n_linarrs == 0 or n_linarrs == Gs.size())) {
+	if (not(n_linarrs == 0 or n_linarrs == Gs.size())) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    The number of linear arrangements does not equal 0\n";
-		std::cerr << "    and it does not equal the amount of graphs given as input.\n";
-		std::cerr << "    Amount of graphs given as input: " << Gs.size() << '\n';
+		std::cerr << "    and it does not equal the amount of graphs given as "
+					 "input.\n";
+		std::cerr << "    Amount of graphs given as input: " << Gs.size()
+				  << '\n';
 		std::cerr << "    Number of linear arrangements: " << n_linarrs << '\n';
 		return err_type::test_format;
 	}
@@ -108,11 +110,11 @@ noexcept
 		for (std::size_t i = 0; i < n_linarrs; ++i) {
 			const uint64_t ni = Gs[i].get_num_nodes();
 
-			pis[i] = lal::linear_arrangement(ni );
+			pis[i] = lal::linear_arrangement(ni);
 
 			// read all ¡INVERSE! linear arrangement
 			lal::node u;
-			for (lal::position pu = 0; pu < ni ; ++pu) {
+			for (lal::position pu = 0; pu < ni; ++pu) {
 				fin >> u;
 				pis[i].assign(u, pu);
 			}
@@ -122,10 +124,12 @@ noexcept
 	if (proc == "MDD") {
 		lal::numeric::rational MDD;
 		if (level == 1) {
-			MDD = lal::linarr::mean_dependency_distance_1level_rational(Gs, pis);
+			MDD =
+				lal::linarr::mean_dependency_distance_1level_rational(Gs, pis);
 		}
 		else if (level == 2) {
-			MDD = lal::linarr::mean_dependency_distance_2level_rational(Gs, pis);
+			MDD =
+				lal::linarr::mean_dependency_distance_2level_rational(Gs, pis);
 		}
 
 		std::cout << MDD << '\n';
@@ -135,5 +139,5 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

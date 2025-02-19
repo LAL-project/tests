@@ -48,23 +48,23 @@
 #include <vector>
 #include <string>
 
-#define ERROR \
-	"Error [file " << std::filesystem::path(__FILE__).filename() << ", function '" \
-	<< __func__ << "', line " << __LINE__ << "]:"
+#define ERROR                                                                  \
+	"Error [file " << std::filesystem::path(__FILE__).filename()               \
+				   << ", function '" << __func__ << "', line " << __LINE__     \
+				   << "]:"
 
-#define ERROR_str \
+#define ERROR_str                                                              \
 	"Error [file " + std::string(std::filesystem::path(__FILE__).filename()) + \
-	", function '" + \
-	std::string(__func__) + "', line " + std::to_string(__LINE__) + "]:"
+		", function '" + std::string(__func__) + "', line " +                  \
+		std::to_string(__LINE__) + "]:"
 
 #define INVALID_KEYWORD "¡@/#/?234!"
 
-#define TEST_GOODBYE \
-	std::cout << "Test finished without apparent errors.\n";
+#define TEST_GOODBYE std::cout << "Test finished without apparent errors.\n";
 
 namespace tests {
 
-typedef std::vector<std::pair<std::string,std::string>> input_list;
+typedef std::vector<std::pair<std::string, std::string>> input_list;
 
 enum class err_type : int8_t {
 	/// The test completed successfully
@@ -97,4 +97,4 @@ enum class err_type : int8_t {
 	not_implemented
 };
 
-} // -- namespace tests
+} // namespace tests

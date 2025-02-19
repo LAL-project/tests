@@ -58,205 +58,205 @@
 namespace tests {
 namespace memory {
 
-err_type test_rational_move() noexcept {
+err_type test_rational_move() noexcept
+{
 	// move constructor
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::rational i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::rational i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::rational i2(std::move(i1));
-	check_0_1v(i1, i2, 50);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::rational i2(std::move(i1));
+		check_0_1v(i1, i2, 50);
 	}
 	{
-	lal::numeric::rational i1 = 1234;
-	std::vector<lal::numeric::rational> v;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 1234);
+		lal::numeric::rational i1 = 1234;
+		std::vector<lal::numeric::rational> v;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	for (std::size_t i = 0; i < 1000; ++i) {
-		lal::numeric::rational r1 = 1234;
-		v.push_back(std::move(r1));
-		check_0_1v(r1, v[i], 1234);
-	}
-	}
-	{
-	std::vector<lal::numeric::rational> v;
-	lal::numeric::integer i1 = 1234;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 1234);
+		std::vector<lal::numeric::rational> v;
+		for (std::size_t i = 0; i < 1000; ++i) {
+			lal::numeric::rational r1 = 1234;
+			v.push_back(std::move(r1));
+			check_0_1v(r1, v[i], 1234);
+		}
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	for (std::size_t i = 0; i < 1000; ++i) {
+		std::vector<lal::numeric::rational> v;
 		lal::numeric::integer i1 = 1234;
 		v.push_back(std::move(i1));
-		check_0_1v(i1, v[i], 1234);
-	}
-	}
-	{
-	lal::numeric::integer i1 = 12;
-	lal::numeric::integer i2 = 23;
-	lal::numeric::rational r(std::move(i1),std::move(i2));
-	check_00_1v(i1, i2, r, lal::numeric::rational("12/23"));
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	lal::numeric::rational r1 = integer_from_function();
-	check_1v(r1, lal::numeric::rational(std::string(iff_value)));
+		std::vector<lal::numeric::rational> v;
+		for (std::size_t i = 0; i < 1000; ++i) {
+			lal::numeric::integer i1 = 1234;
+			v.push_back(std::move(i1));
+			check_0_1v(i1, v[i], 1234);
+		}
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	for (std::size_t i = 0; i < 1000; ++i) {
-		v.push_back(rational_from_function());
-		check_1v(v[i], lal::numeric::rational(std::string(iff_value)));
-	}
+		lal::numeric::integer i1 = 12;
+		lal::numeric::integer i2 = 23;
+		lal::numeric::rational r(std::move(i1), std::move(i2));
+		check_00_1v(i1, i2, r, lal::numeric::rational("12/23"));
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	for (std::size_t i = 0; i < 1000; ++i) {
-		v.push_back(std::string(iff_value));
-		check_1v(v[i], lal::numeric::rational(std::string(iff_value)));
+		lal::numeric::rational r1 = integer_from_function();
+		check_1v(r1, lal::numeric::rational(std::string(iff_value)));
 	}
+	{
+		std::vector<lal::numeric::rational> v;
+		for (std::size_t i = 0; i < 1000; ++i) {
+			v.push_back(rational_from_function());
+			check_1v(v[i], lal::numeric::rational(std::string(iff_value)));
+		}
+	}
+	{
+		std::vector<lal::numeric::rational> v;
+		for (std::size_t i = 0; i < 1000; ++i) {
+			v.push_back(std::string(iff_value));
+			check_1v(v[i], lal::numeric::rational(std::string(iff_value)));
+		}
 	}
 
 	// move operator
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2;
-	check_1v_1(i1, 50, i2);
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
-	i1 = std::move(i2);
-	check_0_1v(i2, i1, 50);
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2;
+		check_1v_1(i1, 50, i2);
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
+		i1 = std::move(i2);
+		check_0_1v(i2, i1, 50);
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2 = 200;
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
-	i1 = std::move(i2);
-	check_0_1v(i2, i1, 50);
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2 = 200;
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
+		i1 = std::move(i2);
+		check_0_1v(i2, i1, 50);
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2 = 200;
-	check_1v_1v(i1, 50, i2, 200);
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
-	i1 = 3;
-	check_1v_1v(i1, 3, i2, 50);
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 3);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2 = 200;
+		check_1v_1v(i1, 50, i2, 200);
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
+		i1 = 3;
+		check_1v_1v(i1, 3, i2, 50);
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 3);
 	}
 
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::rational i2;
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::rational i2;
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 
 	{
-	lal::numeric::integer i1 = 50;
-	lal::numeric::rational i2 = 200;
-	i2 = std::move(i1);
-	check_0_1v(i1, i2, 50);
+		lal::numeric::integer i1 = 50;
+		lal::numeric::rational i2 = 200;
+		i2 = std::move(i1);
+		check_0_1v(i1, i2, 50);
 	}
 
 	{
-	std::vector<lal::numeric::rational> v;
-	v.push_back(lal::numeric::rational());
-	check_1v(v[0], 0);
-	lal::numeric::integer i1 = 1234;
-	v[0] = std::move(i1);
-	check_0_1v(i1, v[0], 1234);
+		std::vector<lal::numeric::rational> v;
+		v.push_back(lal::numeric::rational());
+		check_1v(v[0], 0);
+		lal::numeric::integer i1 = 1234;
+		v[0] = std::move(i1);
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	v.push_back(lal::numeric::rational());
-	check_1v(v[0], 0);
-	lal::numeric::rational i1 = 1234;
-	v[0] = std::move(i1);
-	check_0_1v(i1, v[0], 1234);
-	}
-
-	{
-	std::vector<lal::numeric::rational> v;
-	v.push_back(lal::numeric::integer());
-	check_1v(v[0], 0);
-	lal::numeric::rational i1 = 1234;
-	v[0] = std::move(i1);
-	check_0_1v(i1, v[0], 1234);
-	}
-	{
-	std::vector<lal::numeric::rational> v;
-	v.push_back(lal::numeric::integer(5678));
-	check_1v(v[0], 5678)
-	lal::numeric::rational i1 = 1234;
-	v[0] = std::move(i1);
-	check_0_1v(i1, v[0], 1234);
-	}
-	{
-	std::vector<lal::numeric::rational> v;
-	v.push_back(lal::numeric::rational(5678));
-	check_1v(v[0], 5678);
-	lal::numeric::rational i1 = 1234;
-	check_1v_1v(i1, 1234, v[0], 5678);
-	v[0] = std::move(i1);
-	check_0_1v(i1, v[0], 1234);
+		std::vector<lal::numeric::rational> v;
+		v.push_back(lal::numeric::rational());
+		check_1v(v[0], 0);
+		lal::numeric::rational i1 = 1234;
+		v[0] = std::move(i1);
+		check_0_1v(i1, v[0], 1234);
 	}
 
 	{
-	lal::numeric::rational i1 = 1234;
-	std::vector<lal::numeric::rational> v;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 1234);
+		std::vector<lal::numeric::rational> v;
+		v.push_back(lal::numeric::integer());
+		check_1v(v[0], 0);
+		lal::numeric::rational i1 = 1234;
+		v[0] = std::move(i1);
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	lal::numeric::integer i1 = 1234;
-	std::vector<lal::numeric::rational> v;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 1234);
+		std::vector<lal::numeric::rational> v;
+		v.push_back(lal::numeric::integer(5678));
+		check_1v(v[0], 5678) lal::numeric::rational i1 = 1234;
+		v[0] = std::move(i1);
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	lal::numeric::integer i1;
-	std::vector<lal::numeric::rational> v;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 0);
+		std::vector<lal::numeric::rational> v;
+		v.push_back(lal::numeric::rational(5678));
+		check_1v(v[0], 5678);
+		lal::numeric::rational i1 = 1234;
+		check_1v_1v(i1, 1234, v[0], 5678);
+		v[0] = std::move(i1);
+		check_0_1v(i1, v[0], 1234);
 	}
 
 	{
-	lal::numeric::rational i1 = 1234;
-	std::vector<lal::numeric::rational> v;
-	v.push_back(std::move(i1));
-	check_0_1v(i1, v[0], 1234);
-	i1 = std::move(v[0]);
-	check_1v_0(i1, 1234, v[0]);
+		lal::numeric::rational i1 = 1234;
+		std::vector<lal::numeric::rational> v;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[0], 1234);
 	}
 	{
-	std::vector<lal::numeric::rational> v;
-	lal::numeric::rational i1;
-	v.push_back(std::move(i1));
-	i1 = std::move(v[0]);
-	check_1v_0(i1, 0, v[0]);
+		lal::numeric::integer i1 = 1234;
+		std::vector<lal::numeric::rational> v;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[0], 1234);
+	}
+	{
+		lal::numeric::integer i1;
+		std::vector<lal::numeric::rational> v;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[0], 0);
+	}
+
+	{
+		lal::numeric::rational i1 = 1234;
+		std::vector<lal::numeric::rational> v;
+		v.push_back(std::move(i1));
+		check_0_1v(i1, v[0], 1234);
+		i1 = std::move(v[0]);
+		check_1v_0(i1, 1234, v[0]);
+	}
+	{
+		std::vector<lal::numeric::rational> v;
+		lal::numeric::rational i1;
+		v.push_back(std::move(i1));
+		i1 = std::move(v[0]);
+		check_1v_0(i1, 0, v[0]);
 	}
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

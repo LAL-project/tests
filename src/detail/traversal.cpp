@@ -62,9 +62,9 @@ namespace tests {
 namespace detail {
 
 template <class graph_t>
-err_type process_common_assertions
-(const graph_t& g, const std::string& assert_what, std::ifstream& fin)
-noexcept
+err_type process_common_assertions(
+	const graph_t& g, const std::string& assert_what, std::ifstream& fin
+) noexcept
 {
 	lal::node s, t;
 	if (assert_what == "is_reachable") {
@@ -72,7 +72,8 @@ noexcept
 		const bool is = lal::detail::is_node_reachable_from(g, s, t);
 		if (not is) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Vertex " << t << " is not reachable from " << s << '\n';
+			std::cerr << "    Vertex " << t << " is not reachable from " << s
+					  << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -81,7 +82,8 @@ noexcept
 		const bool is = lal::detail::is_node_reachable_from(g, s, t);
 		if (is) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Vertex " << t << " is reachable from " << s << '\n';
+			std::cerr << "    Vertex " << t << " is reachable from " << s
+					  << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -93,8 +95,9 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type process_assert(const lal::graphs::directed_graph& g, std::ifstream& fin)
-noexcept
+err_type process_assert(
+	const lal::graphs::directed_graph& g, std::ifstream& fin
+) noexcept
 {
 	std::string assert_what;
 	fin >> assert_what;
@@ -137,8 +140,9 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type process_assert(const lal::graphs::undirected_graph& g, std::ifstream& fin)
-noexcept
+err_type process_assert(
+	const lal::graphs::undirected_graph& g, std::ifstream& fin
+) noexcept
 {
 	std::string assert_what;
 	fin >> assert_what;
@@ -166,18 +170,20 @@ noexcept
 }
 
 template <class graph_t>
-err_type process_instruction(const graph_t& g, const std::string& command, std::ifstream& fin)
-noexcept
+err_type process_instruction(
+	const graph_t& g, const std::string& command, std::ifstream& fin
+) noexcept
 {
 	if (command == "output_graph") {
 		std::cout << g << '\n';
 	}
 	else if (command == "is_reachable") {
-
 	}
 	else if (command == "assert") {
 		const auto e = process_assert(g, fin);
-		if (e != err_type::no_error) { return e; }
+		if (e != err_type::no_error) {
+			return e;
+		}
 	}
 	else {
 		std::cerr << ERROR << '\n';
@@ -189,14 +195,15 @@ noexcept
 }
 
 template <class graph_t>
-err_type test_without_graph(std::ifstream& fin) noexcept {
+err_type test_without_graph(std::ifstream& fin) noexcept
+{
 	graph_t g;
 	std::string command;
 	while (fin >> command) {
 		if (command == "add_edge") {
-			lal::node u,v;
+			lal::node u, v;
 			fin >> u >> v;
-			g.add_edge(u,v);
+			g.add_edge(u, v);
 		}
 		else if (command == "init") {
 			uint64_t n;
@@ -218,25 +225,29 @@ err_type execute_utils_bfs_test(
 	const std::string& graph_name,
 	const std::string& graph_format,
 	std::ifstream& fin
-)
-noexcept
+) noexcept
 {
 	graph_t g;
 	err_type r1 = io_wrapper::read_graph(graph_name, graph_format, g);
-	if (r1 != err_type::no_error) { return r1; }
+	if (r1 != err_type::no_error) {
+		return r1;
+	}
 
 	std::string command;
 	while (fin >> command) {
 		r1 = process_instruction(g, command, fin);
-		if (r1 != err_type::no_error) { return r1; }
+		if (r1 != err_type::no_error) {
+			return r1;
+		}
 	}
 	return err_type::no_error;
 }
 
-err_type exe_detail_bfs(std::ifstream& fin) noexcept {
-	const std::set<std::string> allowed_options({
-		"sort_insertion", "sort_boolean"
-	});
+err_type exe_detail_bfs(std::ifstream& fin) noexcept
+{
+	const std::set<std::string> allowed_options(
+		{"sort_insertion", "sort_boolean"}
+	);
 
 	const input_list inputs = read_input_list(fin);
 
@@ -261,23 +272,29 @@ err_type exe_detail_bfs(std::ifstream& fin) noexcept {
 	if (inputs.size() == 1) {
 		const std::string& file_name = inputs[0].first;
 		const std::string& file_format = inputs[0].second;
-		r = (graph_type == "ugraph" ?
-			execute_utils_bfs_test<lal::graphs::undirected_graph>(file_name, file_format, fin) :
-			execute_utils_bfs_test<lal::graphs::directed_graph>(file_name, file_format, fin)
-		);
+		r =
+			(graph_type == "ugraph"
+				 ? execute_utils_bfs_test<lal::graphs::undirected_graph>(
+					   file_name, file_format, fin
+				   )
+				 : execute_utils_bfs_test<lal::graphs::directed_graph>(
+					   file_name, file_format, fin
+				   ));
 	}
 	else {
-		r = (graph_type == "ugraph" ?
-			test_without_graph<lal::graphs::undirected_graph>(fin) :
-			test_without_graph<lal::graphs::directed_graph>(fin)
-		);
+		r =
+			(graph_type == "ugraph"
+				 ? test_without_graph<lal::graphs::undirected_graph>(fin)
+				 : test_without_graph<lal::graphs::directed_graph>(fin));
 	}
 
-	if (r != err_type::no_error) { return r; }
+	if (r != err_type::no_error) {
+		return r;
+	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace detail
-} // -- namespace tests
+} // namespace detail
+} // namespace tests

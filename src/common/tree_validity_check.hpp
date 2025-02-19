@@ -61,24 +61,21 @@ enum class ftree_check : int8_t {
 	correct
 };
 
-inline
-std::string tree_check_to_string(const ftree_check& fc)
-noexcept
+inline std::string tree_check_to_string(const ftree_check& fc) noexcept
 {
 	switch (fc) {
 	case ftree_check::not_a_tree: return "Input free tree is not a tree.";
-	case ftree_check::diff_n_verts: return "Input free tree has an incorrect number of vertices.";
-	case ftree_check::diff_n_edges: return "Input free tree has an incorrect number of edges.";
-	default:
-		return "Input free tree seems to be correct.";
+	case ftree_check::diff_n_verts:
+		return "Input free tree has an incorrect number of vertices.";
+	case ftree_check::diff_n_edges:
+		return "Input free tree has an incorrect number of edges.";
+	default: return "Input free tree seems to be correct.";
 	}
 	return "";
 }
 
-inline
-ftree_check test_validity_tree
-(const uint64_t n, const lal::graphs::free_tree& T)
-noexcept
+inline ftree_check
+test_validity_tree(const uint64_t n, const lal::graphs::free_tree& T) noexcept
 {
 	if (not T.is_tree()) {
 		return ftree_check::not_a_tree;
@@ -104,26 +101,25 @@ enum class rtree_check : int8_t {
 	correct
 };
 
-inline
-std::string tree_check_to_string(const rtree_check& fc)
-noexcept
+inline std::string tree_check_to_string(const rtree_check& fc) noexcept
 {
 	switch (fc) {
 	case rtree_check::not_a_tree: return "Input rooted tree is not a tree.";
-	case rtree_check::diff_n_verts: return "Input rooted tree has an incorrect number of vertices.";
-	case rtree_check::diff_n_edges: return "Input rooted tree has an incorrect number of edges.";
-	case rtree_check::without_root: return "Input rooted tree does not have a root.";
-	case rtree_check::invalid_edges_orientation: return "Input rooted tree's edges are not oriented correctly.";
-	default:
-		return "Input rooted tree seems to be correct.";
+	case rtree_check::diff_n_verts:
+		return "Input rooted tree has an incorrect number of vertices.";
+	case rtree_check::diff_n_edges:
+		return "Input rooted tree has an incorrect number of edges.";
+	case rtree_check::without_root:
+		return "Input rooted tree does not have a root.";
+	case rtree_check::invalid_edges_orientation:
+		return "Input rooted tree's edges are not oriented correctly.";
+	default: return "Input rooted tree seems to be correct.";
 	}
 	return "";
 }
 
-inline
-rtree_check test_validity_tree
-(const uint64_t n, const lal::graphs::rooted_tree& T)
-noexcept
+inline rtree_check
+test_validity_tree(const uint64_t n, const lal::graphs::rooted_tree& T) noexcept
 {
 	if (not T.is_tree()) {
 		return rtree_check::not_a_tree;
@@ -140,4 +136,4 @@ noexcept
 	return rtree_check::correct;
 }
 
-} // -- namespace tests
+} // namespace tests

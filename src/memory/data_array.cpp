@@ -64,239 +64,245 @@ namespace memory {
 namespace lal_array {
 
 #if defined MOVE
-void test_move_constructor() noexcept {
+void test_move_constructor() noexcept
+{
 	begin_function;
 
-
 	{
-	begin_case;
-	array<int> A(0);
-	output_array(A);
-	array<int> B(std::move(A));
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(0);
+		output_array(A);
+		array<int> B(std::move(A));
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(0, 333);
-	output_array(A);
-	array<int> B(std::move(A));
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(0, 333);
+		output_array(A);
+		array<int> B(std::move(A));
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(5, 100);
-	output_array(A);
-	array<int> B(std::move(A));
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(5, 100);
+		output_array(A);
+		array<int> B(std::move(A));
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(10, 1);
-	output_array(A);
-	array<int> B(std::move(A));
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(10, 1);
+		output_array(A);
+		array<int> B(std::move(A));
+		output_array(A);
+		output_array(B);
 	}
 }
 
-void test_move_assignment() noexcept {
+void test_move_assignment() noexcept
+{
 	begin_function;
 	array<int> TO(0);
 
 	{
-	begin_case;
-	array<int> A(0);
-	output_array(A);
-	TO = std::move(A);
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(0);
+		output_array(A);
+		TO = std::move(A);
+		output_array(A);
+		output_array(TO);
 
-	A = std::move(TO);
-	output_array(A);
-	output_array(TO);
+		A = std::move(TO);
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(0, 333);
-	output_array(A);
-	TO = std::move(A);
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(0, 333);
+		output_array(A);
+		TO = std::move(A);
+		output_array(A);
+		output_array(TO);
 
-	A = std::move(TO);
-	output_array(A);
-	output_array(TO);
+		A = std::move(TO);
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(5, 100);
-	output_array(A);
-	TO = std::move(A);
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(5, 100);
+		output_array(A);
+		TO = std::move(A);
+		output_array(A);
+		output_array(TO);
 
-	A = std::move(TO);
-	output_array(A);
-	output_array(TO);
+		A = std::move(TO);
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(10, 1);
-	output_array(A);
-	TO = std::move(A);
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(10, 1);
+		output_array(A);
+		TO = std::move(A);
+		output_array(A);
+		output_array(TO);
 
-	A = std::move(TO);
-	output_array(A);
-	output_array(TO);
+		A = std::move(TO);
+		output_array(A);
+		output_array(TO);
 	}
 }
 #endif
 
 #if defined COPY
-void test_copy_constructor() noexcept {
+void test_copy_constructor() noexcept
+{
 	begin_function;
 
 	{
-	begin_case;
-	array<int> A(0);
-	output_array(A);
-	array<int> B(A);
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(0);
+		output_array(A);
+		array<int> B(A);
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(0, 333);
-	output_array(A);
-	array<int> B(A);
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(0, 333);
+		output_array(A);
+		array<int> B(A);
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(5, 100);
-	output_array(A);
-	array<int> B(A);
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(5, 100);
+		output_array(A);
+		array<int> B(A);
+		output_array(A);
+		output_array(B);
 	}
 
 	{
-	begin_case;
-	array<int> A(10, 1);
-	output_array(A);
-	array<int> B(A);
-	output_array(A);
-	output_array(B);
+		begin_case;
+		array<int> A(10, 1);
+		output_array(A);
+		array<int> B(A);
+		output_array(A);
+		output_array(B);
 	}
 }
 
 class class_with_array {
 public:
-	void init() {
+
+	void init()
+	{
 		A.resize(10, 5);
 	}
 
 	array<int> A;
 };
 
-void test_copy_assignment() noexcept {
+void test_copy_assignment() noexcept
+{
 	begin_function;
 	array<int> TO(0);
 
 	{
-	begin_case;
-	array<int> A(0);
-	output_array(A);
-	TO = A;
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(0);
+		output_array(A);
+		TO = A;
+		output_array(A);
+		output_array(TO);
 
-	A = TO;
-	output_array(A);
-	output_array(TO);
+		A = TO;
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(0, 333);
-	output_array(A);
-	TO = A;
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(0, 333);
+		output_array(A);
+		TO = A;
+		output_array(A);
+		output_array(TO);
 
-	A = TO;
-	output_array(A);
-	output_array(TO);
+		A = TO;
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(5, 100);
-	output_array(A);
-	TO = A;
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(5, 100);
+		output_array(A);
+		TO = A;
+		output_array(A);
+		output_array(TO);
 
-	A = TO;
-	output_array(A);
-	output_array(TO);
+		A = TO;
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A(10, 1);
-	output_array(A);
-	TO = A;
-	output_array(A);
-	output_array(TO);
+		begin_case;
+		array<int> A(10, 1);
+		output_array(A);
+		TO = A;
+		output_array(A);
+		output_array(TO);
 
-	A = TO;
-	output_array(A);
-	output_array(TO);
+		A = TO;
+		output_array(A);
+		output_array(TO);
 	}
 
 	{
-	begin_case;
-	array<int> A;
-	output_array(A);
-	A = array<int>(10, 5);
-	output_array(A);
+		begin_case;
+		array<int> A;
+		output_array(A);
+		A = array<int>(10, 5);
+		output_array(A);
 	}
 
 	{
-	begin_case;
-	array<int> A;
-	output_array(A);
-	A.resize(10, 5);
-	output_array(A);
+		begin_case;
+		array<int> A;
+		output_array(A);
+		A.resize(10, 5);
+		output_array(A);
 	}
 
 	{
-	begin_case;
-	class_with_array cwa;
-	output_array(cwa.A);
-	cwa.init();
-	output_array(cwa.A);
+		begin_case;
+		class_with_array cwa;
+		output_array(cwa.A);
+		cwa.init();
+		output_array(cwa.A);
 	}
 }
 #endif
 
 template <bool clear>
-void test_resize_fill() noexcept {
+void test_resize_fill() noexcept
+{
 	begin_function;
 
 	array<int> d;
@@ -305,37 +311,48 @@ void test_resize_fill() noexcept {
 	d.resize(1, 1);
 	output_array(d);
 
-	if constexpr (clear) { d.clear(); }
+	if constexpr (clear) {
+		d.clear();
+	}
 
 	begin_case;
 	d.resize(2, 2);
 	output_array(d);
 
-	if constexpr (clear) { d.clear(); }
+	if constexpr (clear) {
+		d.clear();
+	}
 
 	begin_case;
 	d.resize(10, 10);
 	output_array(d);
 
-	if constexpr (clear) { d.clear(); }
+	if constexpr (clear) {
+		d.clear();
+	}
 
 	begin_case;
 	d.resize(10, 10);
 	output_array(d);
 
-	if constexpr (clear) { d.clear(); }
+	if constexpr (clear) {
+		d.clear();
+	}
 
 	begin_case;
 	d.resize(20);
 	d.fill(20);
 	output_array(d);
 
-	if constexpr (clear) { d.clear(); }
+	if constexpr (clear) {
+		d.clear();
+	}
 }
 
-}
+} // namespace lal_array
 
-err_type exe_memory_detail_array(std::ifstream&) noexcept {
+err_type exe_memory_detail_array(std::ifstream&) noexcept
+{
 
 #if defined MOVE
 	lal_array::test_move_constructor();
@@ -354,5 +371,5 @@ err_type exe_memory_detail_array(std::ifstream&) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

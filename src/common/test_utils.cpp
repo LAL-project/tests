@@ -53,9 +53,12 @@
 namespace tests {
 
 bool command_is_comment(const std::string& s) noexcept
-{ return (s == "/*") or (s.find("/*") != std::string::npos); }
+{
+	return (s == "/*") or (s.find("/*") != std::string::npos);
+}
 
-void process_comment(std::ifstream& fin) noexcept {
+void process_comment(std::ifstream& fin) noexcept
+{
 	std::string comment;
 	do {
 		fin >> comment;
@@ -63,7 +66,8 @@ void process_comment(std::ifstream& fin) noexcept {
 	while (comment.find("*/") == std::string::npos);
 }
 
-std::string read_output_string(std::ifstream& fin) noexcept {
+std::string read_output_string(std::ifstream& fin) noexcept
+{
 
 	std::string total_message = "";
 	std::string msg;
@@ -92,7 +96,10 @@ std::string read_output_string(std::ifstream& fin) noexcept {
 
 #define to_uint64(x) static_cast<uint64_t>(x)
 
-void relabel_edges(const uint64_t n, std::vector<lal::edge>& edges, lal::node& r) noexcept {
+void relabel_edges(
+	const uint64_t n, std::vector<lal::edge>& edges, lal::node& r
+) noexcept
+{
 	std::mt19937 gen(1234);
 
 	std::vector<lal::node> relab(n);
@@ -103,7 +110,7 @@ void relabel_edges(const uint64_t n, std::vector<lal::edge>& edges, lal::node& r
 		std::shuffle(relab.begin(), relab.end(), gen);
 
 		// relabel each vertex according to 'relab'
-		for (auto& [s,t] : edges) {
+		for (auto& [s, t] : edges) {
 			s = relab[s];
 			t = relab[t];
 		}
@@ -111,9 +118,12 @@ void relabel_edges(const uint64_t n, std::vector<lal::edge>& edges, lal::node& r
 	}
 }
 
-void shuffle_graph_edges
-(std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G, bool normalize, bool check)
-noexcept
+void shuffle_graph_edges(
+	std::vector<lal::edge>& edges,
+	lal::graphs::undirected_graph& G,
+	bool normalize,
+	bool check
+) noexcept
 {
 	const uint64_t n = G.get_num_nodes();
 	std::mt19937 gen(1234);
@@ -129,9 +139,11 @@ noexcept
 }
 
 void relabel_graph_vertices(
-	std::vector<lal::edge>& edges, lal::graphs::undirected_graph& G, bool normalize, bool check
-)
-noexcept
+	std::vector<lal::edge>& edges,
+	lal::graphs::undirected_graph& G,
+	bool normalize,
+	bool check
+) noexcept
 {
 	const uint64_t n = G.get_num_nodes();
 	lal::node dummy = 0;
@@ -143,9 +155,11 @@ noexcept
 }
 
 void relabel_tree_vertices(
-	std::vector<lal::edge>& edges, lal::graphs::rooted_tree& T, bool normalize, bool check
-)
-noexcept
+	std::vector<lal::edge>& edges,
+	lal::graphs::rooted_tree& T,
+	bool normalize,
+	bool check
+) noexcept
 {
 	lal::node r = T.get_root();
 	relabel_edges(T.get_num_nodes(), edges, r);
@@ -156,9 +170,11 @@ noexcept
 }
 
 void relabel_tree_vertices(
-	std::vector<lal::edge>& edges, lal::graphs::free_tree& T, bool normalize, bool check
-)
-noexcept
+	std::vector<lal::edge>& edges,
+	lal::graphs::free_tree& T,
+	bool normalize,
+	bool check
+) noexcept
 {
 	lal::node dummy = 0;
 	relabel_edges(T.get_num_nodes(), edges, dummy);
@@ -168,4 +184,4 @@ noexcept
 	T.set_edges(edges, normalize, check);
 }
 
-} // -- namespace tests
+} // namespace tests

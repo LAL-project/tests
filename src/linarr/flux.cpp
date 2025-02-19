@@ -53,36 +53,39 @@
 // common includes
 #include "common/definitions.hpp"
 
-#define test_integral_field(FIELD, field_str)										\
-	for (std::size_t i = 0; i < S; ++i) {											\
-		if (input_flux[i].FIELD() != algo_flux[i].FIELD()) {						\
-			std::cerr << ERROR << '\n';												\
-			std::cerr << "    " << field_str << " do not agree at: " << i << '\n';	\
-			std::cerr << "    Input:     " << input_flux[i].FIELD() << '\n';		\
-			std::cerr << "    Algorithm: " << algo_flux[i].FIELD() << '\n';			\
-			std::cerr << "    At tree:   " << tree_idx << '\n';						\
-			return err_type::test_execution;										\
-		}																			\
+#define test_integral_field(FIELD, field_str)                                  \
+	for (std::size_t i = 0; i < S; ++i) {                                      \
+		if (input_flux[i].FIELD() != algo_flux[i].FIELD()) {                   \
+			std::cerr << ERROR << '\n';                                        \
+			std::cerr << "    " << field_str << " do not agree at: " << i      \
+					  << '\n';                                                 \
+			std::cerr << "    Input:     " << input_flux[i].FIELD() << '\n';   \
+			std::cerr << "    Algorithm: " << algo_flux[i].FIELD() << '\n';    \
+			std::cerr << "    At tree:   " << tree_idx << '\n';                \
+			return err_type::test_execution;                                   \
+		}                                                                      \
 	}
 
 #define hidden_stringize(x) #x
 #define stringize(x) hidden_std::stringize(x)
 
-#define parse_integral_field(FIELD)	\
-	for (auto& v : input_flux) { fin >> v.FIELD(); }
+#define parse_integral_field(FIELD)                                            \
+	for (auto& v : input_flux) {                                               \
+		fin >> v.FIELD();                                                      \
+	}
 
 namespace tests {
 namespace linarr {
 
 namespace test_flux {
-inline std::ostream& operator<< (std::ostream& out, const lal::edge& e) noexcept {
+inline std::ostream& operator<< (std::ostream& out, const lal::edge& e) noexcept
+{
 	out << "(" << e.first << "," << e.second << ")";
 	return out;
 }
 
-inline
-std::ostream& operator<< (std::ostream& out, const std::vector<lal::edge>& deps)
-noexcept
+inline std::ostream&
+operator<< (std::ostream& out, const std::vector<lal::edge>& deps) noexcept
 {
 	if (deps.size() > 0) {
 		out << deps[0];
@@ -92,11 +95,10 @@ noexcept
 	}
 	return out;
 }
-} // -- namespace test_flux
+} // namespace test_flux
 using namespace test_flux;
 
-err_type exe_linarr_dependency_flux(std::ifstream& fin)
-noexcept
+err_type exe_linarr_dependency_flux(std::ifstream& fin) noexcept
 {
 
 	std::string field;
@@ -117,10 +119,15 @@ noexcept
 #endif
 
 			std::vector<uint64_t> linear_sequence(n);
-			for (auto& v : linear_sequence) { fin >> v; }
+			for (auto& v : linear_sequence) {
+				fin >> v;
+			}
 
 			T.clear();
-			T = std::move(lal::graphs::from_head_vector_to_free_tree(linear_sequence).first);
+			T = std::move(
+				lal::graphs::from_head_vector_to_free_tree(linear_sequence)
+					.first
+			);
 
 			algo_flux = lal::linarr::dependency_flux_compute(T);
 			input_flux.resize(n - 1);
@@ -139,7 +146,9 @@ noexcept
 				uint64_t k;
 				fin >> k;
 				std::vector<lal::edge> deps(k);
-				for (lal::edge& e : deps) { fin >> e.first >> e.second; }
+				for (lal::edge& e : deps) {
+					fin >> e.first >> e.second;
+				}
 				v.set_dependencies(std::move(deps));
 			}
 
@@ -152,7 +161,8 @@ noexcept
 				std::sort(adeps.begin(), adeps.end());
 				if (ideps != adeps) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Dependencies do not agree at: " << i << '\n';
+					std::cerr << "    Dependencies do not agree at: " << i
+							  << '\n';
 					std::cerr << "    Input:     " << ideps << '\n';
 					std::cerr << "    Algorithm: " << adeps << '\n';
 					std::cerr << "    At tree:   " << tree_idx << '\n';
@@ -176,5 +186,5 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

@@ -66,8 +66,8 @@ namespace linarr {
 enum class algorithms_DMax_1_le_thistle {
 	AlemanyEstebanFerrer
 };
-}
-}
+} // namespace linarr
+} // namespace lal
 
 namespace tests {
 namespace linarr {
@@ -75,38 +75,40 @@ namespace linarr {
 namespace DMax_1_le_thistle {
 
 template <class T>
-err_type examine_DMax_1_le_thistle
-(
+err_type examine_DMax_1_le_thistle(
 	const std::string& filename,
 	[[maybe_unused]] const lal::linarr::algorithms_DMax_1_le_thistle& algo
-)
-noexcept
+) noexcept
 {
 	std::ifstream input_file(filename);
 	if (not input_file.is_open()) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Input file '" << filename << "' could not be opened.\n";
+		std::cerr << "    Input file '" << filename
+				  << "' could not be opened.\n";
 		return err_type::io;
 	}
 
 	lal::properties::bipartite_graph_coloring c;
 
-	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
-	(
+	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>(
 		// tree_initializer
-		[&](const lal::graphs::free_tree& t) {
+		[&](const lal::graphs::free_tree& t)
+		{
 			c = lal::properties::bipartite_coloring(t);
 		},
 		// solver
-		[&](const lal::graphs::free_tree& t) {
+		[&](const lal::graphs::free_tree& t)
+		{
 			return lal::linarr::max_sum_edge_lengths_1_le_thistle(t, c);
 		},
 		// tree_eval
-		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr)
+		{
 			return lal::linarr::sum_edge_lengths(t, arr);
 		},
 		// arrgmnt_check
-		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr)
+		{
 			const auto n = t.get_num_nodes();
 			lal::detail::level_signature_per_vertex lev_seq(n);
 			lal::detail::calculate_level_signature(t, arr, lev_seq);
@@ -118,16 +120,18 @@ noexcept
 			return num_thistles <= 1;
 		},
 		// conv
-		[](const lal::head_vector& v) {
+		[](const lal::head_vector& v)
+		{
 			return lal::graphs::from_head_vector_to_free_tree(v).first;
 		},
 		input_file
 	);
 }
 
-} // -- namespace DMax_1_le_thistle
+} // namespace DMax_1_le_thistle
 
-err_type exe_linarr_DMax_1_le_thistle(std::ifstream& fin) noexcept {
+err_type exe_linarr_DMax_1_le_thistle(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -155,7 +159,8 @@ err_type exe_linarr_DMax_1_le_thistle(std::ifstream& fin) noexcept {
 	std::string algo_name;
 	lal::linarr::algorithms_DMax_1_le_thistle algo_choice;
 	if (algo == "AEF") {
-		algo_choice = lal::linarr::algorithms_DMax_1_le_thistle::AlemanyEstebanFerrer;
+		algo_choice =
+			lal::linarr::algorithms_DMax_1_le_thistle::AlemanyEstebanFerrer;
 		algo_name = "AEF";
 	}
 	else {
@@ -165,14 +170,17 @@ err_type exe_linarr_DMax_1_le_thistle(std::ifstream& fin) noexcept {
 	}
 
 	const auto err1 =
-		DMax_1_le_thistle::examine_DMax_1_le_thistle<lal::graphs::free_tree>
-		(inputs[0].first, algo_choice);
+		DMax_1_le_thistle::examine_DMax_1_le_thistle<lal::graphs::free_tree>(
+			inputs[0].first, algo_choice
+		);
 
-	if (err1 != err_type::no_error) { return err1; }
+	if (err1 != err_type::no_error) {
+		return err1;
+	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

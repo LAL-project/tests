@@ -52,9 +52,9 @@
 namespace tests {
 namespace linarr {
 
-err_type call_linarr_Dmin
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_linarr_Dmin(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
@@ -79,9 +79,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_linarr_DMax
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_linarr_DMax(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Unconstrained_all") {
@@ -112,9 +112,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_linarr_klevel
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_linarr_klevel(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::set<std::string> allowed_levels({"1", "2"});
 	const std::set<std::string> allowed_procs({"MDD"});
@@ -128,11 +128,13 @@ noexcept
 		std::cerr << ERROR << '\n';
 		std::vector<std::size_t> what_keys;
 		if (not correct_level) {
-			std::cerr << "    Wrong keyword at " << i << ": '" << level << "'.\n";
+			std::cerr << "    Wrong keyword at " << i << ": '" << level
+					  << "'.\n";
 			what_keys.push_back(i);
 		}
 		if (not correct_key) {
-			std::cerr << "    Wrong keyword at " << i + 1 << ": '" << proc << "'.\n";
+			std::cerr << "    Wrong keyword at " << i + 1 << ": '" << proc
+					  << "'.\n";
 			what_keys.push_back(i + 1);
 		}
 		mark_wrong_keyword(keywords, what_keys, "    ");
@@ -144,9 +146,9 @@ noexcept
 	return exe_linarr_klevel(fin, level_int, proc);
 }
 
-err_type call_linarr_C
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_linarr_C(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	// There is no need to give more keywords.
 	// If, after this keyword, there are no more of them,
@@ -175,9 +177,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_linarr
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_linarr(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "compute_C") {
@@ -224,8 +226,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "linarr") {
@@ -238,5 +240,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

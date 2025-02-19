@@ -50,14 +50,18 @@
 #include <lal/linear_arrangement.hpp>
 
 template <typename T, typename U>
-std::ostream& operator<< (std::ostream& os, const std::pair<T,U>& p) noexcept {
+std::ostream& operator<< (std::ostream& os, const std::pair<T, U>& p) noexcept
+{
 	os << "(" << p.first << "," << p.second << ")";
 	return os;
 }
 
 template <typename T>
-std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) noexcept {
-	if (v.size() == 0) { return os; }
+std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) noexcept
+{
+	if (v.size() == 0) {
+		return os;
+	}
 	os << v[0];
 	for (std::size_t i = 1ull; i < v.size(); ++i) {
 		os << ' ' << v[i];
@@ -66,16 +70,16 @@ std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) noexcept {
 }
 
 template <typename T>
-std::istream& operator>> (std::istream& is, const std::vector<T>& v) noexcept {
+std::istream& operator>> (std::istream& is, const std::vector<T>& v) noexcept
+{
 	for (std::size_t i = 0ull; i < v.size(); ++i) {
 		is >> v[i];
 	}
 	return is;
 }
 
-inline
-std::ostream& operator<< (std::ostream& os, const lal::linear_arrangement& arr)
-noexcept
+inline std::ostream&
+operator<< (std::ostream& os, const lal::linear_arrangement& arr) noexcept
 {
 	if (arr.size() > 0) {
 		os << "(" << arr[lal::node_t{0ull}];

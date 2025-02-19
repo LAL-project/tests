@@ -52,86 +52,111 @@ namespace memory {
 //
 //
 
-void test_copy_undirected_graph() noexcept {
+void test_copy_undirected_graph() noexcept
+{
 	begin_function;
 
 	// copy constructor
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(10);
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(10);
+		output_graph("g1", g1);
 
-	std::cout << "Copy constructor: 'g2 <- g1'\n";
-	lal::graphs::undirected_graph g2 = g1;
-	output_graph("g1",g1);
-	output_graph("g2",g2);
+		std::cout << "Copy constructor: 'g2 <- g1'\n";
+		lal::graphs::undirected_graph g2 = g1;
+		output_graph("g1", g1);
+		output_graph("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 2),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Copy constructor: 'g2 <- g1'\n";
-	lal::graphs::undirected_graph g2 = g1;
-	output_graph("g1",g1);
-	output_graph("g2",g2);
+		std::cout << "Copy constructor: 'g2 <- g1'\n";
+		lal::graphs::undirected_graph g2 = g1;
+		output_graph("g1", g1);
+		output_graph("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 2),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Copy constructor: 'v[0] <- g1'\n";
-	std::vector<lal::graphs::undirected_graph> v;
-	v.push_back(g1);
-	output_graph("g1",g1);
-	output_graph("v[0]",v[0]);
+		std::cout << "Copy constructor: 'v[0] <- g1'\n";
+		std::vector<lal::graphs::undirected_graph> v;
+		v.push_back(g1);
+		output_graph("g1", g1);
+		output_graph("v[0]", v[0]);
 	}
 
 	// copy operator
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(10);
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(10);
+		output_graph("g1", g1);
 
-	std::cout << "Copy operator: 'g2 <- g1'\n";
-	lal::graphs::undirected_graph g2;
-	g2 = g1;
-	output_graph("g1",g1);
-	output_graph("g2",g2);
+		std::cout << "Copy operator: 'g2 <- g1'\n";
+		lal::graphs::undirected_graph g2;
+		g2 = g1;
+		output_graph("g1", g1);
+		output_graph("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 2),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Copy operator: 'g2 <- g1'\n";
-	lal::graphs::undirected_graph g2;
-	g2 = g1;
-	output_graph("g1",g1);
-	output_graph("g2",g2);
+		std::cout << "Copy operator: 'g2 <- g1'\n";
+		lal::graphs::undirected_graph g2;
+		g2 = g1;
+		output_graph("g1", g1);
+		output_graph("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,2), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 2),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Copy operator: 'v[0] <- g1'\n";
-	std::vector<lal::graphs::undirected_graph> v;
-	v.push_back(lal::graphs::undirected_graph());
-	v[0] = g1;
-	output_graph("g1",g1);
-	output_graph("v[0]",v[0]);
+		std::cout << "Copy operator: 'v[0] <- g1'\n";
+		std::vector<lal::graphs::undirected_graph> v;
+		v.push_back(lal::graphs::undirected_graph());
+		v[0] = g1;
+		output_graph("g1", g1);
+		output_graph("v[0]", v[0]);
 	}
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

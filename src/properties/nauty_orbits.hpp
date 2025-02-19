@@ -53,11 +53,11 @@ namespace tests {
 namespace properties {
 namespace nauty_lib {
 
-std::vector<std::vector<lal::node>> vertex_orbits_compute
-(const lal::graphs::free_tree& t) noexcept;
+std::vector<std::vector<lal::node>>
+vertex_orbits_compute(const lal::graphs::free_tree& t) noexcept;
 
-std::vector<std::vector<lal::node>> compute_vertex_orbits
-(const lal::graphs::rooted_tree& t) noexcept;
+std::vector<std::vector<lal::node>>
+compute_vertex_orbits(const lal::graphs::rooted_tree& t) noexcept;
 
 // -----------------------------------------------------------------------------
 
@@ -65,16 +65,14 @@ std::vector<std::vector<lal::edge>> compute_edge_orbits(
 	const lal::graphs::free_tree& t,
 	const std::vector<lal::edge>& edges,
 	const std::vector<std::size_t>& vertex_orbits
-)
-noexcept;
+) noexcept;
 
 std::vector<std::vector<lal::edge>> compute_edge_orbits(
 	const lal::graphs::rooted_tree& t,
 	const std::vector<lal::edge>& edges,
 	const std::vector<std::size_t>& vertex_orbits
-)
-noexcept;
+) noexcept;
 
-} // -- namespace nauty_lib
-} // -- namespace properties
-} // -- namespace tests
+} // namespace nauty_lib
+} // namespace properties
+} // namespace tests

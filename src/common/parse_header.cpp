@@ -49,15 +49,17 @@
 
 namespace tests {
 
-input_list read_input_list(std::ifstream& fin) noexcept {
+input_list read_input_list(std::ifstream& fin) noexcept
+{
 	{
-	std::string INPUT; fin >> INPUT;
-	if (INPUT != "INPUT" and INPUT != "INPUTS") {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    INPUT keyword is neither 'INPUT' or 'INPUTS'.\n";
-		std::cerr << "    INPUT: '" << INPUT << "'.\n";
-		return {};
-	}
+		std::string INPUT;
+		fin >> INPUT;
+		if (INPUT != "INPUT" and INPUT != "INPUTS") {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    INPUT keyword is neither 'INPUT' or 'INPUTS'.\n";
+			std::cerr << "    INPUT: '" << INPUT << "'.\n";
+			return {};
+		}
 	}
 
 	std::size_t n_inputs;
@@ -74,8 +76,7 @@ void mark_wrong_keyword(
 	const std::vector<std::string>& keywords,
 	const std::vector<std::size_t>& k,
 	const std::string& tab
-)
-noexcept
+) noexcept
 {
 	std::cerr << tab;
 	// sure 'keywords' has at least one keyword
@@ -97,7 +98,9 @@ noexcept
 		if (it < k.size()) {
 			if (k[it] != i) {
 				std::cerr << std::string(l, ' ') << " ";
-				if (l < 2) { std::cerr << " "; }
+				if (l < 2) {
+					std::cerr << " ";
+				}
 			}
 			else {
 				std::cerr << "/\\";
@@ -114,4 +117,4 @@ noexcept
 	std::cerr << '\n';
 }
 
-} // -- namespace tests
+} // namespace tests

@@ -51,9 +51,9 @@
 namespace tests {
 namespace generate {
 
-err_type call_generate_arrangements
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_generate_arrangements(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "all_projective") {
@@ -87,9 +87,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_generate_trees
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_generate_trees(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "alf") {
@@ -126,9 +126,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_generate
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_generate(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "trees") {
@@ -144,8 +144,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "generate") {
@@ -158,5 +158,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

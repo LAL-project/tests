@@ -59,7 +59,8 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
+err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept
+{
 	uint64_t n, ntrees, nit;
 	while (fin >> n >> ntrees >> nit) {
 		// do 'ntrees' trees of 'n' vertices
@@ -76,9 +77,14 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_planar(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Random arrangement generated (get) is not planar:\n";
-					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+					std::cerr << "    Random arrangement generated (get) is "
+								 "not planar:\n";
+					std::cerr
+						<< "    Arrangement:     " << arr.direct_as_vector()
+						<< '\n';
+					std::cerr
+						<< "    Inv Arrangement: " << arr.inverse_as_vector()
+						<< '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << T << '\n';
 					std::cerr << T.get_head_vector() << '\n';
@@ -92,9 +98,14 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
 				// Do some sanity checks.
 				if (not lal::linarr::is_planar(T, arr)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Random arrangement generated (yield) is not planar:\n";
-					std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n';
-					std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+					std::cerr << "    Random arrangement generated (yield) is "
+								 "not planar:\n";
+					std::cerr
+						<< "    Arrangement:     " << arr.direct_as_vector()
+						<< '\n';
+					std::cerr
+						<< "    Inv Arrangement: " << arr.inverse_as_vector()
+						<< '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << T.get_head_vector() << '\n';
 					return err_type::test_execution;
@@ -107,5 +118,5 @@ err_type exe_gen_arr_rand_planar(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

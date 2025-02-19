@@ -66,9 +66,12 @@ err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept
 
 	lal::head_vector hv(n);
 	while (fin >> hv[0]) {
-		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
+		for (uint64_t i = 1; i < n; ++i) {
+			fin >> hv[i];
+		}
 
-		lal::graphs::free_tree T = lal::graphs::from_head_vector_to_free_tree(hv).first;
+		lal::graphs::free_tree T =
+			lal::graphs::from_head_vector_to_free_tree(hv).first;
 
 		// calculate the same value with tree subsizes
 		const lal::numeric::rational value_no_sizes =
@@ -80,7 +83,8 @@ err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept
 		const lal::numeric::rational ground_truth(ground_truth_str);
 		if (value_no_sizes != ground_truth) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Value calculated with algorithm does not coincide with\n";
+			std::cerr << "    Value calculated with algorithm does not "
+						 "coincide with\n";
 			std::cerr << "    ground truth value.\n";
 			std::cerr << "    Algorithm: " << value_no_sizes << '\n';
 			std::cerr << "    Ground truth: " << ground_truth << '\n';
@@ -92,5 +96,5 @@ err_type exe_properties_expected_D_bipartite(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

@@ -60,7 +60,8 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexcept
+err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin
+) noexcept
 {
 
 	uint64_t n;
@@ -68,13 +69,16 @@ err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexce
 
 	lal::head_vector hv(n);
 	while (fin >> hv[0]) {
-		for (uint64_t i = 1; i < n; ++i) { fin >> hv[i]; }
+		for (uint64_t i = 1; i < n; ++i) {
+			fin >> hv[i];
+		}
 
 		const lal::graphs::free_tree T =
 			std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
 
 		// calculate the value with the algorithm
-		const auto algo_value = lal::properties::exp_sum_edge_lengths_planar_rational(T);
+		const auto algo_value =
+			lal::properties::exp_sum_edge_lengths_planar_rational(T);
 
 		std::string ground_truth_str;
 		fin >> ground_truth_str;
@@ -82,7 +86,8 @@ err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexce
 		const lal::numeric::rational ground_truth(ground_truth_str);
 		if (algo_value != ground_truth) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Value calculated with algorithm does not coincide with\n";
+			std::cerr << "    Value calculated with algorithm does not "
+						 "coincide with\n";
 			std::cerr << "    ground truth value.\n";
 			std::cerr << "    Algorithm: " << algo_value << '\n';
 			std::cerr << "    Ground truth: " << ground_truth << '\n';
@@ -96,18 +101,18 @@ err_type exe_properties_expected_D_planar_brute_force(std::ifstream& fin) noexce
 	return err_type::no_error;
 }
 
-lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t)
-noexcept
+lal::numeric::rational quadratic_E_pr_D(const lal::graphs::free_tree& t
+) noexcept
 {
 	const uint64_t n = t.get_num_nodes();
-	const lal::numeric::rational correction_factor((n - 1)*(n - 2), 6*n);
+	const lal::numeric::rational correction_factor((n - 1) * (n - 2), 6 * n);
 	lal::numeric::rational S = 0;
 	for (lal::node u = 0; u < n; ++u) {
 		lal::graphs::rooted_tree rt(t, u);
 		rt.calculate_size_subtrees();
 		S += lal::properties::exp_sum_edge_lengths_projective_rational(rt);
 	}
-	return correction_factor + S/n;
+	return correction_factor + S / n;
 }
 
 err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept
@@ -128,14 +133,18 @@ err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept
 					lal::properties::exp_sum_edge_lengths_planar_rational(t);
 
 				// quadratic time algorithm
-				const lal::numeric::rational quadratic_algo = quadratic_E_pr_D(t);
+				const lal::numeric::rational quadratic_algo =
+					quadratic_E_pr_D(t);
 
 				if (linear_algo != quadratic_algo) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Value calculated with O(n) algorithm differs from the\n";
-					std::cerr << "    value calculated with the O(n^2) algorithm.\n";
+					std::cerr << "    Value calculated with O(n) algorithm "
+								 "differs from the\n";
+					std::cerr
+						<< "    value calculated with the O(n^2) algorithm.\n";
 					std::cerr << "    Linear-time: " << linear_algo << '\n';
-					std::cerr << "    Quadratic-time: " << quadratic_algo << '\n';
+					std::cerr << "    Quadratic-time: " << quadratic_algo
+							  << '\n';
 					std::cerr << "    For tree of index: " << idx << '\n';
 					std::cerr << t << '\n';
 					return err_type::test_execution;
@@ -156,14 +165,18 @@ err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept
 					lal::properties::exp_sum_edge_lengths_planar_rational(t);
 
 				// quadratic time algorithm
-				const lal::numeric::rational quadratic_algo = quadratic_E_pr_D(t);
+				const lal::numeric::rational quadratic_algo =
+					quadratic_E_pr_D(t);
 
 				if (linear_algo != quadratic_algo) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Value calculated with O(n) algorithm differs from the\n";
-					std::cerr << "    value calculated with the O(n^2) algorithm.\n";
+					std::cerr << "    Value calculated with O(n) algorithm "
+								 "differs from the\n";
+					std::cerr
+						<< "    value calculated with the O(n^2) algorithm.\n";
 					std::cerr << "    Linear-time: " << linear_algo << '\n';
-					std::cerr << "    Quadratic-time: " << quadratic_algo << '\n';
+					std::cerr << "    Quadratic-time: " << quadratic_algo
+							  << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << t << '\n';
 					return err_type::test_execution;
@@ -176,5 +189,5 @@ err_type exe_properties_expected_D_planar_quadratic(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

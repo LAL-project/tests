@@ -68,69 +68,105 @@
 
 typedef std::pair<uint64_t, lal::linear_arrangement> algo_result;
 
-bool lt(const algo_result& r1, const algo_result& r2) noexcept { return r1.first < r2.first; }
-bool le(const algo_result& r1, const algo_result& r2) noexcept { return r1.first <= r2.first; }
-bool eq(const algo_result& r1, const algo_result& r2) noexcept { return r1.first == r2.first; }
-bool ge(const algo_result& r1, const algo_result& r2) noexcept { return r1.first >= r2.first; }
-bool gt(const algo_result& r1, const algo_result& r2) noexcept { return r1.first > r2.first; }
+bool lt(const algo_result& r1, const algo_result& r2) noexcept
+{
+	return r1.first < r2.first;
+}
+bool le(const algo_result& r1, const algo_result& r2) noexcept
+{
+	return r1.first <= r2.first;
+}
+bool eq(const algo_result& r1, const algo_result& r2) noexcept
+{
+	return r1.first == r2.first;
+}
+bool ge(const algo_result& r1, const algo_result& r2) noexcept
+{
+	return r1.first >= r2.first;
+}
+bool gt(const algo_result& r1, const algo_result& r2) noexcept
+{
+	return r1.first > r2.first;
+}
 
 namespace tests {
 namespace linarr {
 
-#define correct_algo_str(algo)												\
-{																			\
-	if (allowed_algos.find(algo) == allowed_algos.end()) {					\
-		std::cerr << ERROR << '\n';											\
-		std::cerr << "    Algorithm name '" << algo << "' is invalid.\n";	\
-		std::cerr << "    Must be one of:\n";								\
-		for (const std::string& s : allowed_algos) {						\
-		std::cerr << "        " << s << '\n';								\
-		}																	\
-		return err_type::test_format;										\
-	}																		\
-}
+#define correct_algo_str(algo)                                                 \
+	{                                                                          \
+		if (allowed_algos.find(algo) == allowed_algos.end()) {                 \
+			std::cerr << ERROR << '\n';                                        \
+			std::cerr << "    Algorithm name '" << algo << "' is invalid.\n";  \
+			std::cerr << "    Must be one of:\n";                              \
+			for (const std::string& s : allowed_algos) {                       \
+				std::cerr << "        " << s << '\n';                          \
+			}                                                                  \
+			return err_type::test_format;                                      \
+		}                                                                      \
+	}
 
-#define correct_comp_str(comp)											\
-{																		\
-	if (allowed_comps.find(comp) == allowed_comps.end()) {				\
-		std::cerr << ERROR << '\n';										\
-		std::cerr << "    Comparison '" << comp << "' is invalid.\n";	\
-		std::cerr << "    Must be one of:\n";							\
-		for (const std::string& s : allowed_comps) {					\
-		std::cerr << "        " << s << '\n';							\
-		}																\
-		return err_type::test_format;									\
-	}																	\
-}
+#define correct_comp_str(comp)                                                 \
+	{                                                                          \
+		if (allowed_comps.find(comp) == allowed_comps.end()) {                 \
+			std::cerr << ERROR << '\n';                                        \
+			std::cerr << "    Comparison '" << comp << "' is invalid.\n";      \
+			std::cerr << "    Must be one of:\n";                              \
+			for (const std::string& s : allowed_comps) {                       \
+				std::cerr << "        " << s << '\n';                          \
+			}                                                                  \
+			return err_type::test_format;                                      \
+		}                                                                      \
+	}
 
-err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept {
+err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept
+{
 
-	const std::set<std::string> allowed_algos({"Plan_AEF", "Plan_HS", "Unc_YS", "Unc_FC2"});
+	const std::set<std::string> allowed_algos(
+		{"Plan_AEF", "Plan_HS", "Unc_YS", "Unc_FC2"}
+	);
 
-	const auto Plan_HS =
-	[](const lal::graphs::free_tree& t)
-	{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::HochbergStallmann); };
+	const auto Plan_HS = [](const lal::graphs::free_tree& t)
+	{
+		return lal::linarr::min_sum_edge_lengths_planar(
+			t, lal::linarr::algorithms_Dmin_planar::HochbergStallmann
+		);
+	};
 
-	const auto Plan_AEF =
-	[](const lal::graphs::free_tree& t)
-	{ return lal::linarr::min_sum_edge_lengths_planar(t, lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer); };
+	const auto Plan_AEF = [](const lal::graphs::free_tree& t)
+	{
+		return lal::linarr::min_sum_edge_lengths_planar(
+			t, lal::linarr::algorithms_Dmin_planar::AlemanyEstebanFerrer
+		);
+	};
 
-	const auto Unc_FC2 =
-	[](const lal::graphs::free_tree& t)
-	{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Chung_2); };
+	const auto Unc_FC2 = [](const lal::graphs::free_tree& t)
+	{
+		return lal::linarr::min_sum_edge_lengths(
+			t, lal::linarr::algorithms_Dmin::Chung_2
+		);
+	};
 
-	const auto Unc_YS =
-	[](const lal::graphs::free_tree& t)
-	{ return lal::linarr::min_sum_edge_lengths(t, lal::linarr::algorithms_Dmin::Shiloach); };
+	const auto Unc_YS = [](const lal::graphs::free_tree& t)
+	{
+		return lal::linarr::min_sum_edge_lengths(
+			t, lal::linarr::algorithms_Dmin::Shiloach
+		);
+	};
 
-	std::map<std::string, std::function<algo_result (const lal::graphs::free_tree&)> > ALGOS;
+	std::map<
+		std::string,
+		std::function<algo_result(const lal::graphs::free_tree&)>>
+		ALGOS;
 	ALGOS["Plan_AEF"] = Plan_AEF;
 	ALGOS["Plan_HS"] = Plan_HS;
 	ALGOS["Unc_YS"] = Unc_YS;
 	ALGOS["Unc_FC2"] = Unc_FC2;
 
 	const std::set<std::string> allowed_comps({"<", "<=", "==", ">=", ">"});
-	std::map<std::string, std::function<bool (const algo_result&, const algo_result&)>> COMPS;
+	std::map<
+		std::string,
+		std::function<bool(const algo_result&, const algo_result&)>>
+		COMPS;
 	COMPS["<"] = lt;
 	COMPS["<="] = le;
 	COMPS["=="] = eq;
@@ -165,29 +201,33 @@ err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept {
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				const bool correct1 =
-					check_correctness_arr
-					(tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement);
+				const bool correct1 = check_correctness_arr(
+					tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement
+				);
 
-				const bool correct2 =
-					check_correctness_arr
-					(tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement);
+				const bool correct2 = check_correctness_arr(
+					tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement
+				);
 
-				if (not correct1 or not correct2) { return err_type::test_execution; }
+				if (not correct1 or not correct2) {
+					return err_type::test_execution;
+				}
 
 				if (not COMPS[comp](res1, res2)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Result of algorithm '" << algo1 << "' is not "
-						 << "'" << comp << "'"
-						 << " with respect to the result of algorithm "
-						 << "'" << algo2 << "'."
-						 << '\n';
+					std::cerr << "    Result of algorithm '" << algo1
+							  << "' is not "
+							  << "'" << comp << "'"
+							  << " with respect to the result of algorithm "
+							  << "'" << algo2 << "'." << '\n';
 					std::cerr << "    Algorithm: " << algo1 << '\n';
 					std::cerr << "        D= " << res1.first << '\n';
-					std::cerr << "        Arrangement: " << res1.second.direct_as_vector() << '\n';
+					std::cerr << "        Arrangement: "
+							  << res1.second.direct_as_vector() << '\n';
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
-					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
+					std::cerr << "        Arrangement: "
+							  << res2.second.direct_as_vector() << '\n';
 					std::cerr << " In tree:\n";
 					std::cerr << tree << '\n';
 					return err_type::test_execution;
@@ -205,33 +245,41 @@ err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept {
 				const auto res1 = ALGOS[algo1](tree);
 				const auto res2 = ALGOS[algo2](tree);
 
-				const bool correct1 =
-					check_correctness_arr
-					(tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement);
-				const bool correct2 =
-					check_correctness_arr
-					(tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement);
+				const bool correct1 = check_correctness_arr(
+					tree, res1, ERROR_str, algo1, lal::linarr::is_arrangement
+				);
+				const bool correct2 = check_correctness_arr(
+					tree, res2, ERROR_str, algo2, lal::linarr::is_arrangement
+				);
 
-				if (not correct1 or not correct2) { return err_type::test_execution; }
+				if (not correct1 or not correct2) {
+					return err_type::test_execution;
+				}
 
 				if (not COMPS[comp](res1, res2)) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Result of algorithm '" << algo1 << "' is not "
-						 << "'" << comp << "'"
-						 << " with respect to the result of algorithm "
-						 << "'" << algo2 << "'."
-						 << '\n';
+					std::cerr << "    Result of algorithm '" << algo1
+							  << "' is not "
+							  << "'" << comp << "'"
+							  << " with respect to the result of algorithm "
+							  << "'" << algo2 << "'." << '\n';
 					std::cerr << "    Algorithm: " << algo1 << '\n';
 					std::cerr << "        D= " << res1.first << '\n';
-					std::cerr << "        Arrangement:     " << res1.second.direct_as_vector() << '\n';
-					std::cerr << "        Inv Arrangement: " << res1.second.inverse_as_vector() << '\n';
+					std::cerr << "        Arrangement:     "
+							  << res1.second.direct_as_vector() << '\n';
+					std::cerr << "        Inv Arrangement: "
+							  << res1.second.inverse_as_vector() << '\n';
 					std::cerr << "    Algorithm: " << algo2 << '\n';
 					std::cerr << "        D= " << res2.first << '\n';
-					std::cerr << "        Arrangement: " << res2.second.direct_as_vector() << '\n';
-					std::cerr << "        Inv Arrangement: " << res2.second.inverse_as_vector() << '\n';
+					std::cerr << "        Arrangement: "
+							  << res2.second.direct_as_vector() << '\n';
+					std::cerr << "        Inv Arrangement: "
+							  << res2.second.inverse_as_vector() << '\n';
 					std::cerr << "    For tree: \n";
-					std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
-					std::cerr << "        Edge list: " << tree.get_edges() << '\n';
+					std::cerr << "        Head vector: ["
+							  << tree.get_head_vector(0) << "]\n";
+					std::cerr << "        Edge list: " << tree.get_edges()
+							  << '\n';
 					std::cerr << tree << '\n';
 					return err_type::test_execution;
 				}
@@ -243,5 +291,5 @@ err_type exe_linarr_Dmin_comparison(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

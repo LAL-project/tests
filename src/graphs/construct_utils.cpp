@@ -51,39 +51,46 @@
 namespace tests {
 namespace graphs {
 
-std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::directed_graph& g)
-noexcept
+std::vector<lal::edge>
+enumerate_edges_brute_force(const lal::graphs::directed_graph& g) noexcept
 {
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge> E;
 	for (lal::node s = 0; s < n; ++s) {
-	for (auto t : g.get_out_neighbors(s)) {
-		lal::edge st(s,t);
-		if (g.is_undirected()) {
-			if (s > t) { std::swap(st.first, st.second); }
+		for (auto t : g.get_out_neighbors(s)) {
+			lal::edge st(s, t);
+			if (g.is_undirected()) {
+				if (s > t) {
+					std::swap(st.first, st.second);
+				}
+			}
+			E.insert(st);
 		}
-		E.insert(st);
-	}}
+	}
 	return std::vector<lal::edge>(E.begin(), E.end());
 }
 
-std::vector<lal::edge> enumerate_edges_brute_force(const lal::graphs::undirected_graph& g)
-noexcept
+std::vector<lal::edge>
+enumerate_edges_brute_force(const lal::graphs::undirected_graph& g) noexcept
 {
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge> E;
 	for (lal::node s = 0; s < n; ++s) {
-	for (auto t : g.get_neighbors(s)) {
-		lal::edge st(s,t);
-		if (g.is_undirected()) {
-			if (s > t) { std::swap(st.first, st.second); }
+		for (auto t : g.get_neighbors(s)) {
+			lal::edge st(s, t);
+			if (g.is_undirected()) {
+				if (s > t) {
+					std::swap(st.first, st.second);
+				}
+			}
+			E.insert(st);
 		}
-		E.insert(st);
-	}}
+	}
 	return std::vector<lal::edge>(E.begin(), E.end());
 }
 
-bool share_vertices(const lal::edge_pair& st_uv) noexcept {
+bool share_vertices(const lal::edge_pair& st_uv) noexcept
+{
 	const lal::edge& st = st_uv.first;
 	const lal::edge& uv = st_uv.second;
 	const lal::node s = st.first;
@@ -93,69 +100,93 @@ bool share_vertices(const lal::edge_pair& st_uv) noexcept {
 	return s == u or s == v or t == u or t == v;
 }
 
-std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::undirected_graph& g)
-noexcept
+std::vector<lal::edge_pair>
+enumerate_Q_brute_force(const lal::graphs::undirected_graph& g) noexcept
 {
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge_pair> Q;
 	for (lal::node s = 0; s < n; ++s) {
-	for (lal::node t : g.get_neighbors(s)) {
+		for (lal::node t : g.get_neighbors(s)) {
 
-		for (lal::node u = s + 1; u < n; ++u) {
-		for (lal::node v : g.get_neighbors(u)) {
+			for (lal::node u = s + 1; u < n; ++u) {
+				for (lal::node v : g.get_neighbors(u)) {
 
-			// s != u and t != u
-			if (s == v or s == u) { continue; }
-			if (t == v or t == u) { continue; }
+					// s != u and t != u
+					if (s == v or s == u) {
+						continue;
+					}
+					if (t == v or t == u) {
+						continue;
+					}
 
-			// an undirected lal::edge should not be sorted
-			lal::edge st(s,t);
-			lal::edge uv(u,v);
-			if (g.is_undirected()) {
-				if (s > t) { std::swap(st.first, st.second); }
-				if (u > v) { std::swap(uv.first, uv.second); }
+					// an undirected lal::edge should not be sorted
+					lal::edge st(s, t);
+					lal::edge uv(u, v);
+					if (g.is_undirected()) {
+						if (s > t) {
+							std::swap(st.first, st.second);
+						}
+						if (u > v) {
+							std::swap(uv.first, uv.second);
+						}
+					}
+					// the pair should be sorted
+					if (st > uv) {
+						std::swap(st, uv);
+					}
+
+					// no common endpoints
+					Q.insert(lal::edge_pair(st, uv));
+				}
 			}
-			// the pair should be sorted
-			if (st > uv) { std::swap(st, uv); }
-
-			// no common endpoints
-			Q.insert( lal::edge_pair(st, uv) );
-		}}
-	}}
+		}
+	}
 	return std::vector<lal::edge_pair>(Q.begin(), Q.end());
 }
 
-std::vector<lal::edge_pair> enumerate_Q_brute_force(const lal::graphs::directed_graph& g)
-noexcept
+std::vector<lal::edge_pair>
+enumerate_Q_brute_force(const lal::graphs::directed_graph& g) noexcept
 {
 	const uint64_t n = g.get_num_nodes();
 	std::set<lal::edge_pair> Q;
 	for (lal::node s = 0; s < n; ++s) {
-	for (lal::node t : g.get_out_neighbors(s)) {
+		for (lal::node t : g.get_out_neighbors(s)) {
 
-		for (lal::node u = s + 1; u < n; ++u) {
-		for (lal::node v : g.get_out_neighbors(u)) {
+			for (lal::node u = s + 1; u < n; ++u) {
+				for (lal::node v : g.get_out_neighbors(u)) {
 
-			// s != u and t != u
-			if (s == v or s == u) { continue; }
-			if (t == v or t == u) { continue; }
+					// s != u and t != u
+					if (s == v or s == u) {
+						continue;
+					}
+					if (t == v or t == u) {
+						continue;
+					}
 
-			// an undirected lal::edge should not be sorted
-			lal::edge st(s,t);
-			lal::edge uv(u,v);
-			if (g.is_undirected()) {
-				if (s > t) { std::swap(st.first, st.second); }
-				if (u > v) { std::swap(uv.first, uv.second); }
+					// an undirected lal::edge should not be sorted
+					lal::edge st(s, t);
+					lal::edge uv(u, v);
+					if (g.is_undirected()) {
+						if (s > t) {
+							std::swap(st.first, st.second);
+						}
+						if (u > v) {
+							std::swap(uv.first, uv.second);
+						}
+					}
+					// the pair should be sorted
+					if (st > uv) {
+						std::swap(st, uv);
+					}
+
+					// no common endpoints
+					Q.insert(lal::edge_pair(st, uv));
+				}
 			}
-			// the pair should be sorted
-			if (st > uv) { std::swap(st, uv); }
-
-			// no common endpoints
-			Q.insert( lal::edge_pair(st, uv) );
-		}}
-	}}
+		}
+	}
 	return std::vector<lal::edge_pair>(Q.begin(), Q.end());
 }
 
-} // -- namespace graphs
-} // -- namespace tests
+} // namespace graphs
+} // namespace tests

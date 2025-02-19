@@ -55,23 +55,26 @@
 namespace tests {
 namespace generate {
 
-err_type exe_gen_trees_rlr(std::ifstream& fin) noexcept {
+err_type exe_gen_trees_rlr(std::ifstream& fin) noexcept
+{
 
 	uint64_t n1, n2;
 	int num_trees;
 	while (fin >> n1 >> n2 >> num_trees) {
-		test_random_generation_of_trees
-		<true, 100, lal::generate::rand_lab_rooted_trees>
-		(n1, n2, num_trees, std::cerr);
+		test_random_generation_of_trees<
+			true,
+			100,
+			lal::generate::rand_lab_rooted_trees>(n1, n2, num_trees, std::cerr);
 
-		test_random_generation_of_trees
-		<false, 100, lal::generate::rand_lab_rooted_trees>
-		(n1, n2, num_trees, std::cerr);
+		test_random_generation_of_trees<
+			false,
+			100,
+			lal::generate::rand_lab_rooted_trees>(n1, n2, num_trees, std::cerr);
 	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

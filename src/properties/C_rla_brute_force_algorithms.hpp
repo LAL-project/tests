@@ -62,8 +62,9 @@ namespace properties {
  * @param nthreads Number of threads. Default: 8.
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
-lal::numeric::rational nonLAL_variance_C_freqs_rational
-(const lal::graphs::undirected_graph& g) noexcept;
+lal::numeric::rational
+nonLAL_variance_C_freqs_rational(const lal::graphs::undirected_graph& g
+) noexcept;
 
 /*
  * @brief Computes the variance of the number of crossings of a graph.
@@ -75,8 +76,9 @@ lal::numeric::rational nonLAL_variance_C_freqs_rational
  * @param nthreads Number of threads. Default: 8.
  * @return Returns the exact value of \f$V_{rla}[C]\f$.
  */
-lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
-(const std::vector<lal::edge_pair>& Q) noexcept;
+lal::numeric::rational
+nonLAL_variance_C_freqs_Q_rational(const std::vector<lal::edge_pair>& Q
+) noexcept;
 
 /*
  * @brief Computes the variance of the number of crossings of a graph.
@@ -87,9 +89,9 @@ lal::numeric::rational nonLAL_variance_C_freqs_Q_rational
  * @param Q Set of pairs of independent edges \f$Q(G)\f$.
  * @return Returns the exact value of \f$V_{rla}[C]\f$ as a rational value.
  */
-lal::numeric::rational nonLAL_var_num_crossings_rational_Q
-(const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q)
-noexcept;
+lal::numeric::rational nonLAL_var_num_crossings_rational_Q(
+	const lal::graphs::undirected_graph& g, const std::vector<lal::edge_pair>& Q
+) noexcept;
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

@@ -68,42 +68,50 @@ namespace tests {
 namespace linarr {
 
 template <typename INT>
-inline constexpr bool common_endpoints(INT s1, INT d1, INT s2, INT d2) noexcept {
+constexpr inline bool common_endpoints(INT s1, INT d1, INT s2, INT d2) noexcept
+{
 	/*if (s1 == s2) { return true; }
 	if (s1 == s2 + d2) { return true; }
 	if (s1 + d1 == s2) { return true; }
 	if (s1 + d1 == s2 + d2) { return true; }*/
-	return (s1 == s2) or (s1 == s2 + d2) or (s1 + d1 == s2) or (s1 + d1 == s2 + d2);
+	return (s1 == s2) or (s1 == s2 + d2) or (s1 + d1 == s2) or
+		   (s1 + d1 == s2 + d2);
 }
 
-uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) noexcept {
+uint64_t alpha(uint64_t n, uint64_t d1, uint64_t d2) noexcept
+{
 	uint64_t c = 0;
 	for (uint64_t s1 = 1; s1 <= n; ++s1) {
-		if (s1 + d1 > n) { continue; }
+		if (s1 + d1 > n) {
+			continue;
+		}
 		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			//if (s2 + d2 > n) { continue; }
 			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
 			const bool cond1 = s2 + d2 > n;
-			const bool cond2 = common_endpoints(s1,d1, s2,d2);
+			const bool cond2 = common_endpoints(s1, d1, s2, d2);
 
 			// no common endpoints
 			const bool cross1 = s1 < s2 and s2 < s1 + d1 and s1 + d1 < s2 + d2;
 			const bool cross2 = s2 < s1 and s1 < s2 + d2 and s2 + d2 < s1 + d1;
-			c += (not cond1 and not cond2)*(cross1 or cross2);
+			c += (not cond1 and not cond2) * (cross1 or cross2);
 		}
 	}
 	return c;
 }
 
-uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) noexcept {
+uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) noexcept
+{
 	uint64_t c = 0;
 	for (uint64_t s1 = 1; s1 <= n; ++s1) {
-		if (s1 + d1 > n) { continue; }
+		if (s1 + d1 > n) {
+			continue;
+		}
 		for (uint64_t s2 = 1; s2 <= n; ++s2) {
 			//if (s2 + d2 > n) { continue; }
 			//if (common_endpoints(s1,d1, s2,d2)) { continue; }
 			const bool cond1 = s2 + d2 > n;
-			const bool cond2 = common_endpoints(s1,d1, s2,d2);
+			const bool cond2 = common_endpoints(s1, d1, s2, d2);
 
 			// no common endpoints
 			c += (not cond1 and not cond2);
@@ -113,13 +121,14 @@ uint64_t beta(uint64_t n, uint64_t d1, uint64_t d2) noexcept {
 }
 
 template <typename GRAPH>
-lal::numeric::rational E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi)
-noexcept
+lal::numeric::rational
+E_2Cd_brute_force(GRAPH& g, const lal::linear_arrangement& pi) noexcept
 {
 	lal::numeric::rational Ec2(0);
 	const uint64_t n = g.get_num_nodes();
 
-	for (lal::iterators::Q_iterator<GRAPH> q_it(g); not q_it.end(); q_it.next()) {
+	for (lal::iterators::Q_iterator<GRAPH> q_it(g); not q_it.end();
+		 q_it.next()) {
 		const lal::edge_pair st_uv = q_it.get_edge_pair();
 		const lal::edge st = st_uv.first;
 		const lal::edge uv = st_uv.second;
@@ -155,7 +164,8 @@ noexcept
 	return Ec2;
 }
 
-err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
+err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept
+{
 	const std::set<std::string> allowed_procs({"E_2[C|d]"});
 
 	const input_list inputs = read_input_list(fin);
@@ -170,13 +180,17 @@ err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
 	lal::graphs::undirected_graph uG;
 	lal::graphs::directed_graph dG;
 	{
-	const std::string& graph_name = inputs[0].first;
-	const std::string& graph_format = inputs[0].second;
-	err_type r;
-	r = io_wrapper::read_graph(graph_name, graph_format, uG);
-	if (r != err_type::no_error) { return r; }
-	r = io_wrapper::read_graph(graph_name, graph_format, dG);
-	if (r != err_type::no_error) { return r; }
+		const std::string& graph_name = inputs[0].first;
+		const std::string& graph_format = inputs[0].second;
+		err_type r;
+		r = io_wrapper::read_graph(graph_name, graph_format, uG);
+		if (r != err_type::no_error) {
+			return r;
+		}
+		r = io_wrapper::read_graph(graph_name, graph_format, dG);
+		if (r != err_type::no_error) {
+			return r;
+		}
 	}
 
 	std::string proc;
@@ -206,15 +220,19 @@ err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
 		}
 
 		// compute value using library and compare it with brute force method
-		const lal::numeric::rational ap_lib_u = lal::linarr::predicted_num_crossings_rational(uG, pi);
-		const lal::numeric::rational ap_lib_d = lal::linarr::predicted_num_crossings_rational(dG, pi);
+		const lal::numeric::rational ap_lib_u =
+			lal::linarr::predicted_num_crossings_rational(uG, pi);
+		const lal::numeric::rational ap_lib_d =
+			lal::linarr::predicted_num_crossings_rational(dG, pi);
 		if (ap_lib_d != ap_lib_u) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Library's values for directed and undirected graphs\n";
+			std::cerr
+				<< "    Library's values for directed and undirected graphs\n";
 			std::cerr << "    do not coincide.\n";
 			std::cerr << "        ap_lib_u= " << ap_lib_u << '\n';
 			std::cerr << "        ap_lib_d= " << ap_lib_d << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: ["
+					  << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 
@@ -222,21 +240,25 @@ err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
 		const lal::numeric::rational ap_bf_d = E_2Cd_brute_force(dG, pi);
 		if (ap_lib_d != ap_lib_u) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Brute force values for directed and undirected graphs\n";
+			std::cerr << "    Brute force values for directed and undirected "
+						 "graphs\n";
 			std::cerr << "    do not coincide.\n";
 			std::cerr << "        ap_bf_u= " << ap_bf_u << '\n';
 			std::cerr << "        ap_bf_d= " << ap_bf_d << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: ["
+					  << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 
 		if (ap_lib_u != ap_bf_u) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    The value of E_2[C|d] using the library is not equal to the\n";
+			std::cerr << "    The value of E_2[C|d] using the library is not "
+						 "equal to the\n";
 			std::cerr << "    brute force value.\n";
 			std::cerr << "        Library's value: " << ap_lib_u << '\n';
 			std::cerr << "        Brute force's value: " << ap_bf_u << '\n';
-			std::cerr << "    For (inverse) linear arrangement: [" << pi.inverse_as_vector() << "]\n";
+			std::cerr << "    For (inverse) linear arrangement: ["
+					  << pi.inverse_as_vector() << "]\n";
 			return err_type::test_execution;
 		}
 	}
@@ -245,5 +267,5 @@ err_type exe_linarr_approx_Exp_C(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace common
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

@@ -54,9 +54,9 @@
 #include "common/definitions.hpp"
 #include "detail/parse_keywords.hpp"
 
-tests::err_type get_type_keyword
-(const std::string& filename, std::ifstream& fin, std::string& type)
-noexcept
+tests::err_type get_type_keyword(
+	const std::string& filename, std::ifstream& fin, std::string& type
+) noexcept
 {
 	std::string field;
 	fin >> field;
@@ -74,7 +74,7 @@ noexcept
 }
 
 void get_keywords(const std::string& type, std::vector<std::string>& keywords)
-noexcept
+	noexcept
 {
 	bool finish = false;
 
@@ -82,12 +82,14 @@ noexcept
 	do {
 		std::size_t new_dash_pos = type.find("-", dash_pos);
 		if (new_dash_pos != std::string::npos) {
-			std::string keyword = type.substr(dash_pos, new_dash_pos - dash_pos);
+			std::string keyword =
+				type.substr(dash_pos, new_dash_pos - dash_pos);
 			keywords.push_back(keyword);
 			dash_pos = new_dash_pos + 1;
 		}
 		else {
-			std::string keyword = type.substr(dash_pos, type.length() - dash_pos);
+			std::string keyword =
+				type.substr(dash_pos, type.length() - dash_pos);
 			keywords.push_back(keyword);
 			finish = true;
 		}
@@ -95,7 +97,8 @@ noexcept
 	while (not finish);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	// error checking
 	if (argc == 1) {
 		std::cerr << ERROR << '\n';
@@ -115,7 +118,8 @@ int main(int argc, char *argv[]) {
 	}
 	if (strcmp(argv[1], "-i") != 0 and strcmp(argv[1], "--input") != 0) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Unrecognised parameter '" << std::string(argv[1]) << "'. Use\n";
+		std::cerr << "    Unrecognised parameter '" << std::string(argv[1])
+				  << "'. Use\n";
 		std::cerr << "        ./tests -i\n";
 		std::cerr << "        ./tests --input\n";
 		std::cerr << "    to specify an input test file.\n";
@@ -150,15 +154,24 @@ int main(int argc, char *argv[]) {
 		std::cerr << "Exiting with error type: ";
 		switch (r) {
 		case tests::err_type::io: std::cerr << "io_error"; break;
-		case tests::err_type::test_execution: std::cerr << "test_execution"; break;
-		case tests::err_type::invalid_param: std::cerr << "invalid_param"; break;
-		case tests::err_type::wrong_keyword: std::cerr << "wrong_keyword"; break;
-		case tests::err_type::not_implemented: std::cerr << "not_implemented"; break;
-		case tests::err_type::test_format: std::cerr << "test_format"; break;
+		case tests::err_type::test_execution:
+			std::cerr << "test_execution";
+			break;
+		case tests::err_type::invalid_param:
+			std::cerr << "invalid_param";
+			break;
+		case tests::err_type::wrong_keyword:
+			std::cerr << "wrong_keyword";
+			break;
+		case tests::err_type::not_implemented:
+			std::cerr << "not_implemented";
+			break;
+		case tests::err_type::test_format:	std::cerr << "test_format"; break;
 		case tests::err_type::graph_format: std::cerr << "graph_format"; break;
-		case tests::err_type::too_many_keywords: std::cerr << "too_many_keywords"; break;
-		default:
-			;
+		case tests::err_type::too_many_keywords:
+			std::cerr << "too_many_keywords";
+			break;
+		default:;
 		}
 
 		std::cerr << '\n';

@@ -52,9 +52,9 @@
 namespace tests {
 namespace io {
 
-err_type call_io
-(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_io(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "correctness") {
@@ -67,8 +67,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "io") {
@@ -81,5 +81,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace io
-} // -- namespace tests
+} // namespace io
+} // namespace tests

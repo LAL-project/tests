@@ -58,33 +58,39 @@
 #include "common/definitions.hpp"
 #include "common/test_utils.hpp"
 
-bool is_centroidal
-(const lal::graphs::rooted_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes)
-noexcept
+bool is_centroidal(
+	const lal::graphs::rooted_tree& t,
+	uint64_t size_cc,
+	lal::node u,
+	uint64_t *sizes
+) noexcept
 {
-	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
+	memset(sizes, 0, t.get_num_nodes() * sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
 	for (const lal::node v : t.get_out_neighbors(u)) {
-		if (sizes[v] > size_cc/2) {
+		if (sizes[v] > size_cc / 2) {
 			return false;
 		}
 	}
 	for (const lal::node v : t.get_in_neighbors(u)) {
-		if (sizes[v] > size_cc/2) {
+		if (sizes[v] > size_cc / 2) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool is_centroidal
-(const lal::graphs::free_tree& t, uint64_t size_cc, lal::node u, uint64_t *sizes)
-noexcept
+bool is_centroidal(
+	const lal::graphs::free_tree& t,
+	uint64_t size_cc,
+	lal::node u,
+	uint64_t *sizes
+) noexcept
 {
-	memset(sizes, 0, t.get_num_nodes()*sizeof(uint64_t));
+	memset(sizes, 0, t.get_num_nodes() * sizeof(uint64_t));
 	lal::detail::get_size_subtrees(t, u, sizes);
 	for (const lal::node v : t.get_neighbors(u)) {
-		if (sizes[v] > size_cc/2) {
+		if (sizes[v] > size_cc / 2) {
 			return false;
 		}
 	}
@@ -92,24 +98,28 @@ noexcept
 }
 
 template <class T>
-std::pair<lal::node,lal::node> straightforward_centroid(const T& t, lal::node x)
-noexcept
+std::pair<lal::node, lal::node>
+straightforward_centroid(const T& t, lal::node x) noexcept
 {
 	const uint64_t n = t.get_num_nodes();
 
 	uint64_t size_cc = 0;
 	std::vector<lal::node> reachable;
 	{
-	lal::detail::BFS<T> bfs(t);
-	bfs.set_use_rev_edges(t.is_rooted());
-	bfs.set_process_current(
-	[&](const auto&, lal::node s) -> void { reachable.push_back(s); ++size_cc; }
-	);
-	bfs.start_at(x);
+		lal::detail::BFS<T> bfs(t);
+		bfs.set_use_rev_edges(t.is_rooted());
+		bfs.set_process_current(
+			[&](const auto&, lal::node s) -> void
+			{
+				reachable.push_back(s);
+				++size_cc;
+			}
+		);
+		bfs.start_at(x);
 	}
 
 	// allocate memory
-	uint64_t *sizes = static_cast<uint64_t *>(malloc(n*sizeof(uint64_t)));
+	uint64_t *sizes = static_cast<uint64_t *>(malloc(n * sizeof(uint64_t)));
 
 	lal::node u1, u2;
 	u1 = u2 = n;
@@ -117,22 +127,28 @@ noexcept
 	for (const lal::node u : reachable) {
 		const bool cc = is_centroidal(t, size_cc, u, sizes);
 		if (cc) {
-			if (u1 == n) { u1 = u; }
-			else { u2 = u; }
+			if (u1 == n) {
+				u1 = u;
+			}
+			else {
+				u2 = u;
+			}
 		}
 	}
 
 	free(sizes);
-	return (u1 < u2 ? std::make_pair(u1,u2) : std::make_pair(u2,u1));
+	return (u1 < u2 ? std::make_pair(u1, u2) : std::make_pair(u2, u1));
 }
 
 bool are_centroids_equal(
 	const lal::graphs::tree& t,
-	const std::pair<lal::node,lal::node>& c1, const std::pair<lal::node,lal::node>& c2
-)
-noexcept
+	const std::pair<lal::node, lal::node>& c1,
+	const std::pair<lal::node, lal::node>& c2
+) noexcept
 {
-	if (c1.first != c2.first) { return false; }
+	if (c1.first != c2.first) {
+		return false;
+	}
 	if (c1.second < t.get_num_nodes()) {
 		return c1.second == c2.second;
 	}
@@ -143,7 +159,8 @@ namespace tests {
 namespace properties {
 
 template <class TREE_TYPE>
-err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
+err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept
+{
 	TREE_TYPE t;
 	uint64_t n;
 
@@ -174,7 +191,9 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 			fin >> s;
 			const auto centroid = lal::detail::retrieve_centroid(t, s);
 			std::cout << "centroid: " << centroid.first;
-			if (centroid.second < t.get_num_nodes()) { std::cout << " " << centroid.second; }
+			if (centroid.second < t.get_num_nodes()) {
+				std::cout << " " << centroid.second;
+			}
 			std::cout << '\n';
 		}
 		else if (option == "centroid_is") {
@@ -205,12 +224,14 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 				fin >> u >> v;
 				if (u > v) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    The first vertex must be smaller than the second.\n";
+					std::cerr << "    The first vertex must be smaller than "
+								 "the second.\n";
 					return err_type::test_format;
 				}
 				if (u == v) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    The two vertices are the same: " << u << " <-> " << v << ".\n";
+					std::cerr << "    The two vertices are the same: " << u
+							  << " <-> " << v << ".\n";
 					return err_type::test_format;
 				}
 
@@ -218,7 +239,8 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Centroids do not coincide.\n";
 					std::cerr << "    Started at: " << start_at << '\n';
-					std::cerr << "    LAL: " << centroid.first << " " << centroid.second << '\n';
+					std::cerr << "    LAL: " << centroid.first << " "
+							  << centroid.second << '\n';
 					std::cerr << "    Brute force: " << u << " " << v << '\n';
 					std::cerr << "    For tree:\n";
 					std::cerr << t << '\n';
@@ -227,9 +249,9 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 			}
 			else {
 				std::cerr << ERROR << '\n';
-				std::cerr
-					<< "    Centroid size has to be either 1 or 2. Instead, received '"
-					<< centroid_size << "'.\n";
+				std::cerr << "    Centroid size has to be either 1 or 2. "
+							 "Instead, received '"
+						  << centroid_size << "'.\n";
 				return err_type::test_format;
 			}
 		}
@@ -237,9 +259,9 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 			std::cout << t << '\n';
 		}
 		else if (option == "remove_edge") {
-			lal::node u,v;
+			lal::node u, v;
 			fin >> u >> v;
-			t.remove_edge(u,v);
+			t.remove_edge(u, v);
 		}
 		else {
 			std::cerr << ERROR << '\n';
@@ -251,12 +273,11 @@ err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept {
 }
 
 template <class tree_t>
-err_type test_correctness(const tree_t& T) noexcept {
+err_type test_correctness(const tree_t& T) noexcept
+{
 	const uint64_t n = T.get_num_nodes();
-	const auto lib_result =
-		lal::detail::find_centroidal_vertex
-			<lal::detail::centroid_results::full_centroid_plus_subtree_sizes>
-			(T, 0);
+	const auto lib_result = lal::detail::find_centroidal_vertex<
+		lal::detail::centroid_results::full_centroid_plus_subtree_sizes>(T, 0);
 
 	const auto lib_centroid = lib_result.first;
 	const auto easy_centroid = straightforward_centroid(T, 0);
@@ -301,8 +322,9 @@ err_type test_correctness(const tree_t& T) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_full_utils_centroid(const std::string& graph_type, std::ifstream& fin)
-noexcept
+err_type exe_full_utils_centroid(
+	const std::string& graph_type, std::ifstream& fin
+) noexcept
 {
 	std::string how;
 	fin >> how;
@@ -313,30 +335,30 @@ noexcept
 		return err_type::test_format;
 	}
 
-#define exe_exhaustive(G, n)					\
-{												\
-	for (G Gen(n); not Gen.end(); Gen.next()) {	\
-		const auto T = Gen.get_tree();			\
-		const auto err = test_correctness(T);	\
-		if (err != err_type::no_error) {		\
-			return err;							\
-		}										\
-	}											\
-}
+#define exe_exhaustive(G, n)                                                   \
+	{                                                                          \
+		for (G Gen(n); not Gen.end(); Gen.next()) {                            \
+			const auto T = Gen.get_tree();                                     \
+			const auto err = test_correctness(T);                              \
+			if (err != err_type::no_error) {                                   \
+				return err;                                                    \
+			}                                                                  \
+		}                                                                      \
+	}
 
-#define exe_random(G, n)						\
-{												\
-	uint64_t N;									\
-	fin >> N;									\
-	G Gen(n);									\
-	for (uint64_t i = 0; i < N; ++i) {			\
-		const auto T = Gen.get_tree();			\
-		const auto err = test_correctness(T);	\
-		if (err != err_type::no_error) {		\
-			return err;							\
-		}										\
-	}											\
-}
+#define exe_random(G, n)                                                       \
+	{                                                                          \
+		uint64_t N;                                                            \
+		fin >> N;                                                              \
+		G Gen(n);                                                              \
+		for (uint64_t i = 0; i < N; ++i) {                                     \
+			const auto T = Gen.get_tree();                                     \
+			const auto err = test_correctness(T);                              \
+			if (err != err_type::no_error) {                                   \
+				return err;                                                    \
+			}                                                                  \
+		}                                                                      \
+	}
 
 	uint64_t n;
 	while (fin >> n) {
@@ -360,7 +382,8 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_properties_centroid(std::ifstream& fin) noexcept {
+err_type exe_properties_centroid(std::ifstream& fin) noexcept
+{
 
 	std::string mode, graph_type;
 	fin >> mode >> graph_type;
@@ -380,13 +403,12 @@ err_type exe_properties_centroid(std::ifstream& fin) noexcept {
 	}
 
 	const err_type err =
-	(mode == "manual" ?
-		(graph_type == "ftree" ?
-		exe_commands_utils_centroid<lal::graphs::free_tree>(fin) :
-		exe_commands_utils_centroid<lal::graphs::rooted_tree>(fin))
-		:
-		exe_full_utils_centroid(graph_type, fin)
-	);
+		(mode == "manual"
+			 ? (graph_type == "ftree"
+					? exe_commands_utils_centroid<lal::graphs::free_tree>(fin)
+					: exe_commands_utils_centroid<lal::graphs::rooted_tree>(fin)
+			   )
+			 : exe_full_utils_centroid(graph_type, fin));
 
 	if (err != err_type::no_error) {
 		// avoid TEST_GOODBYE;
@@ -397,5 +419,5 @@ err_type exe_properties_centroid(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

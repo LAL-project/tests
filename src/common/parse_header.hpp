@@ -53,7 +53,6 @@ void mark_wrong_keyword(
 	const std::vector<std::string>& keywords,
 	const std::vector<std::size_t>& k,
 	const std::string& tab
-)
-noexcept;
+) noexcept;
 
-} // -- namespace tests
+} // namespace tests

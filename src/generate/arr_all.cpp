@@ -59,58 +59,67 @@
 #include "common/test_utils.hpp"
 #include "common/std_utils.hpp"
 
-#define check_and_process_arrangement(c)									\
-	if (not lal::linarr::is_arrangement(T, arr)) {							\
-		std::cerr << ERROR << '\n';											\
-		std::cerr << "    In check: " << c << '\n';							\
-		std::cerr << "    Object generated is not an arrangement:\n";		\
-		std::cerr << "    Arrangement:     " << arr.direct_as_vector() << '\n'; \
-		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector() << '\n'; \
-		std::cerr << "    For tree:\n";										\
-		std::cerr << T << '\n';												\
-		std::cerr << T.get_head_vector() << '\n';							\
-		return err_type::test_execution;									\
-	}																		\
-	++iterations;															\
+#define check_and_process_arrangement(c)                                       \
+	if (not lal::linarr::is_arrangement(T, arr)) {                             \
+		std::cerr << ERROR << '\n';                                            \
+		std::cerr << "    In check: " << c << '\n';                            \
+		std::cerr << "    Object generated is not an arrangement:\n";          \
+		std::cerr << "    Arrangement:     " << arr.direct_as_vector()         \
+				  << '\n';                                                     \
+		std::cerr << "    Inv Arrangement: " << arr.inverse_as_vector()        \
+				  << '\n';                                                     \
+		std::cerr << "    For tree:\n";                                        \
+		std::cerr << T << '\n';                                                \
+		std::cerr << T.get_head_vector() << '\n';                              \
+		return err_type::test_execution;                                       \
+	}                                                                          \
+	++iterations;                                                              \
 	list_arrs.insert(arr);
 
-#define final_check(c)														\
-	if (formula != iterations or formula != list_arrs.size()) {				\
-		std::cerr << ERROR << '\n';											\
-		std::cerr << "    In check: " << c << '\n';							\
-		std::cerr << "    Number of projective arrangements generated\n";	\
-		std::cerr << "    does not agree with the formula.\n";				\
-		std::cerr << "        formula= " << formula << '\n';				\
-		std::cerr << "        iterations= " << iterations << '\n';			\
-		std::cerr << "        unique amount= " << list_arrs.size() << '\n';	\
-		std::cerr << "    List of arrangements:\n";							\
-		for (const auto& v : list_arrs) {									\
-		std::cerr << "        " << v.direct_as_vector() << '\n';\
-		}																	\
-		std::cerr << "    For tree:\n";										\
-		std::cerr << T << '\n';												\
-		std::cerr << T.get_head_vector() << '\n';							\
-		return err_type::test_execution;									\
+#define final_check(c)                                                         \
+	if (formula != iterations or formula != list_arrs.size()) {                \
+		std::cerr << ERROR << '\n';                                            \
+		std::cerr << "    In check: " << c << '\n';                            \
+		std::cerr << "    Number of projective arrangements generated\n";      \
+		std::cerr << "    does not agree with the formula.\n";                 \
+		std::cerr << "        formula= " << formula << '\n';                   \
+		std::cerr << "        iterations= " << iterations << '\n';             \
+		std::cerr << "        unique amount= " << list_arrs.size() << '\n';    \
+		std::cerr << "    List of arrangements:\n";                            \
+		for (const auto& v : list_arrs) {                                      \
+			std::cerr << "        " << v.direct_as_vector() << '\n';           \
+		}                                                                      \
+		std::cerr << "    For tree:\n";                                        \
+		std::cerr << T << '\n';                                                \
+		std::cerr << T.get_head_vector() << '\n';                              \
+		return err_type::test_execution;                                       \
 	}
 
 namespace tests {
 namespace generate {
 namespace unconstrained {
 
-inline lal::numeric::integer factorial(uint64_t f) noexcept {
-	if (f == 0) { return 1; }
+inline lal::numeric::integer factorial(uint64_t f) noexcept
+{
+	if (f == 0) {
+		return 1;
+	}
 	const lal::numeric::integer f1 = factorial(f - 1);
-	return f1*f;
+	return f1 * f;
 }
 
-inline lal::numeric::integer amount_planar(const lal::graphs::free_tree& T) noexcept {
+inline lal::numeric::integer amount_planar(const lal::graphs::free_tree& T
+) noexcept
+{
 	return factorial(T.get_num_nodes());
 }
 
-inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcept {
+inline err_type
+test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcept
+{
 	std::vector<lal::edge> edges = T.get_edges();
 
-	for (uint64_t i = 0; i < 2*nrelabs; ++i) {
+	for (uint64_t i = 0; i < 2 * nrelabs; ++i) {
 		relabel_tree_vertices(edges, T, (i < nrelabs ? false : true), false);
 
 		uint64_t iterations = 0;
@@ -124,14 +133,14 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 		ArrGen.reset();
 		list_arrs.clear();
 		{
-		while (not ArrGen.end()) {
-			const lal::linear_arrangement arr = ArrGen.get_arrangement();
-			ArrGen.next();
+			while (not ArrGen.end()) {
+				const lal::linear_arrangement arr = ArrGen.get_arrangement();
+				ArrGen.next();
 
-			// Do some sanity checks.
-			check_and_process_arrangement("Usage 1");
-		}
-		final_check("Usage 1");
+				// Do some sanity checks.
+				check_and_process_arrangement("Usage 1");
+			}
+			final_check("Usage 1");
 		}
 
 		// USAGE 2
@@ -139,13 +148,13 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 		ArrGen.reset();
 		list_arrs.clear();
 		{
-		for (; not ArrGen.end(); ArrGen.next()) {
-			const lal::linear_arrangement arr = ArrGen.get_arrangement();
+			for (; not ArrGen.end(); ArrGen.next()) {
+				const lal::linear_arrangement arr = ArrGen.get_arrangement();
 
-			// Do some sanity checks.
-			check_and_process_arrangement("Usage 2");
-		}
-		final_check("Usage 2");
+				// Do some sanity checks.
+				check_and_process_arrangement("Usage 2");
+			}
+			final_check("Usage 2");
 		}
 
 		// USAGE 3
@@ -153,21 +162,22 @@ inline err_type test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcep
 		ArrGen.reset();
 		list_arrs.clear();
 		{
-		while (not ArrGen.end()) {
-			const lal::linear_arrangement arr = ArrGen.yield_arrangement();
+			while (not ArrGen.end()) {
+				const lal::linear_arrangement arr = ArrGen.yield_arrangement();
 
-			// Do some sanity checks.
-			check_and_process_arrangement("Usage 3");
-		}
-		final_check("Usage 3");
+				// Do some sanity checks.
+				check_and_process_arrangement("Usage 3");
+			}
+			final_check("Usage 3");
 		}
 	}
 	return err_type::no_error;
 }
 
-} // -- namespace unconstrained
+} // namespace unconstrained
 
-err_type exe_gen_arr_all(std::ifstream& fin) noexcept {
+err_type exe_gen_arr_all(std::ifstream& fin) noexcept
+{
 	uint64_t n, nrelabs;
 	while (fin >> n >> nrelabs) {
 		// do all trees of 'n' vertices
@@ -188,5 +198,5 @@ err_type exe_gen_arr_all(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

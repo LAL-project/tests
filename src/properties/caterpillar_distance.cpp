@@ -62,84 +62,94 @@ namespace tests {
 namespace properties {
 
 template <class tree_t, class str_t>
-bool couple_checks(const tree_t& t, const str_t& cat_struct1, const str_t& cat_struct2) noexcept {
+bool couple_checks(
+	const tree_t& t, const str_t& cat_struct1, const str_t& cat_struct2
+) noexcept
+{
 	[[maybe_unused]] const auto n = t.get_num_nodes();
 
 	// equal distances
 	{
-	const uint64_t d = std::get<0>(cat_struct1);
-	const uint64_t dr = std::get<0>(cat_struct2);
-	if (d != dr) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Distance when using free tree:   " << d << '\n';
-		std::cerr << "    Distance when using rooted tree: " << dr << '\n';
-		return false;
-	}
+		const uint64_t d = std::get<0>(cat_struct1);
+		const uint64_t dr = std::get<0>(cat_struct2);
+		if (d != dr) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "    Distance when using free tree:   " << d << '\n';
+			std::cerr << "    Distance when using rooted tree: " << dr << '\n';
+			return false;
+		}
 	}
 
 	return true;
 }
 
 template <class tree_t, class str_t>
-bool single_checks(const tree_t& t, const str_t& cat_struct) noexcept {
+bool single_checks(const tree_t& t, const str_t& cat_struct) noexcept
+{
 	[[maybe_unused]] const auto n = t.get_num_nodes();
 
 	const uint64_t d = std::get<0>(cat_struct);
 
 	// make sure the distance makes sense
 	{
-	std::size_t num_verts_in_caterpillar = 0;
-	for (char c : std::get<2>(cat_struct)) {
-		num_verts_in_caterpillar += lal::detail::to_uint64(c);
-	}
-	if (num_verts_in_caterpillar != n - d) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "    Distance and size of the caterpillar do not agree.\n";
-		std::cerr << "    Distance:         " << d << '\n';
-		std::cerr << "    Caterpillar size: " << num_verts_in_caterpillar << '\n';
-		return false;
-	}
+		std::size_t num_verts_in_caterpillar = 0;
+		for (char c : std::get<2>(cat_struct)) {
+			num_verts_in_caterpillar += lal::detail::to_uint64(c);
+		}
+		if (num_verts_in_caterpillar != n - d) {
+			std::cerr << ERROR << '\n';
+			std::cerr
+				<< "    Distance and size of the caterpillar do not agree.\n";
+			std::cerr << "    Distance:         " << d << '\n';
+			std::cerr << "    Caterpillar size: " << num_verts_in_caterpillar
+					  << '\n';
+			return false;
+		}
 	}
 
 	// make sure the path returned is actually a path
 	{
-	const auto correct_path =
-	[&](const auto path) {
-		for (std::size_t i = 0; i < path.size() - 1; ++i) {
-			const auto u = path[i];
+		const auto correct_path = [&](const auto path)
+		{
+			for (std::size_t i = 0; i < path.size() - 1; ++i) {
+				const auto u = path[i];
 
-			bool has_neighbour = false;
-			if constexpr (std::is_base_of_v<lal::graphs::free_tree, tree_t>) {
-				for (lal::node v : t.get_neighbors(u)) {
-					has_neighbour = has_neighbour or (v == path[i + 1]);
+				bool has_neighbour = false;
+				if constexpr (std::is_base_of_v<
+								  lal::graphs::free_tree,
+								  tree_t>) {
+					for (lal::node v : t.get_neighbors(u)) {
+						has_neighbour = has_neighbour or (v == path[i + 1]);
+					}
+				}
+				else {
+					for (lal::node v : t.get_in_neighbors(u)) {
+						has_neighbour = has_neighbour or (v == path[i + 1]);
+					}
+					for (lal::node v : t.get_out_neighbors(u)) {
+						has_neighbour = has_neighbour or (v == path[i + 1]);
+					}
+				}
+				if (not has_neighbour) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    None of the neighbors of '" << u
+							  << "' is '" << path[i + 1] << "'\n";
+					return false;
 				}
 			}
-			else {
-				for (lal::node v : t.get_in_neighbors(u)) {
-					has_neighbour = has_neighbour or (v == path[i + 1]);
-				}
-				for (lal::node v : t.get_out_neighbors(u)) {
-					has_neighbour = has_neighbour or (v == path[i + 1]);
-				}
-			}
-			if (not has_neighbour) {
-				std::cerr << ERROR << '\n';
-				std::cerr << "    None of the neighbors of '" << u << "' is '" << path[i + 1] << "'\n";
-				return false;
-			}
+			return true;
+		};
+		if (not correct_path(std::get<1>(cat_struct))) {
+			return false;
 		}
-		return true;
-	};
-	if (not correct_path(std::get<1>(cat_struct))) {
-		return false;
-	}
 	}
 
 	return true;
 }
 
 template <class tree_t>
-auto exe_single_tree(const tree_t& t) noexcept {
+auto exe_single_tree(const tree_t& t) noexcept
+{
 	using namespace lal::detail::maximum_subtrees::caterpillar;
 
 	const auto n = t.get_num_nodes();
@@ -148,32 +158,26 @@ auto exe_single_tree(const tree_t& t) noexcept {
 	std::cout << "Distance: " << std::get<0>(cat_struct) << '\n';
 
 	for (lal::node u = 0; u < n - 1; ++u) {
-		std::cout
-			<< std::setw( 1 + int(std::log10(u == 0 ? 1 : u)) )
-			<< u
-			<< ' ';
+		std::cout << std::setw(1 + int(std::log10(u == 0 ? 1 : u))) << u << ' ';
 	}
-	std::cout
-		<< std::setw( 1 + int(std::log10(n - 1 == 0 ? 1 : n - 1)) )
-		<< n - 1;
+	std::cout << std::setw(1 + int(std::log10(n - 1 == 0 ? 1 : n - 1)))
+			  << n - 1;
 	std::cout << '\n';
 
 	for (lal::node u = 0; u < n - 1; ++u) {
-		std::cout
-			<< std::setw( 1 + int(std::log10(u == 0 ? 1 : u)) )
-			<< int(std::get<2>(cat_struct)[u])
-			<< ' ';
+		std::cout << std::setw(1 + int(std::log10(u == 0 ? 1 : u)))
+				  << int(std::get<2>(cat_struct)[u]) << ' ';
 	}
-	std::cout
-		<< std::setw( 1 + int(std::log10(n - 1 == 0 ? 1 : n - 1)) )
-		<< int(std::get<2>(cat_struct)[n - 1]);
+	std::cout << std::setw(1 + int(std::log10(n - 1 == 0 ? 1 : n - 1)))
+			  << int(std::get<2>(cat_struct)[n - 1]);
 
 	std::cout << '\n';
 
 	return cat_struct;
 }
 
-err_type input_mode(std::ifstream& fin) noexcept {
+err_type input_mode(std::ifstream& fin) noexcept
+{
 	std::string format;
 	fin >> format;
 	if (format != "edge_list" and format != "head_vector") {
@@ -185,13 +189,16 @@ err_type input_mode(std::ifstream& fin) noexcept {
 	uint64_t n;
 	fin >> n;
 
-	const auto t = [&]() {
+	const auto t = [&]()
+	{
 		if (format == "head_vector") {
 			lal::head_vector hv(n);
 			for (std::size_t i = 0; i < hv.size(); ++i) {
 				fin >> hv[i];
 			}
-			return std::move(lal::graphs::from_head_vector_to_free_tree(hv).first);
+			return std::move(
+				lal::graphs::from_head_vector_to_free_tree(hv).first
+			);
 		}
 		else if (format == "edge_list") {
 			std::vector<lal::edge> edges(n - 1);
@@ -226,27 +233,28 @@ err_type input_mode(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-err_type automatic_caterpillar_mode(std::ifstream& fin) noexcept {
+err_type automatic_caterpillar_mode(std::ifstream& fin) noexcept
+{
 	using namespace lal::detail::maximum_subtrees::caterpillar;
 
 	uint64_t n;
 
-#define check																\
-	if (t.is_of_tree_type(lal::graphs::tree_type::caterpillar)) {			\
-		if (dist != 0) {													\
-			std::cerr << "Error! Non-zero caterpillar distance for\n";		\
-			std::cerr << "    caterpillar input tree:\n";					\
-			std::cerr << t << '\n';											\
-			return err_type::test_execution;								\
-		}																	\
-	}																		\
-	else {																	\
-		if (dist == 0) {													\
-			std::cerr << "Error! Zero caterpillar distance for\n";			\
-			std::cerr << "    non-caterpillar input tree:\n";				\
-			std::cerr << t << '\n';											\
-			return err_type::test_execution;								\
-		}																	\
+#define check                                                                  \
+	if (t.is_of_tree_type(lal::graphs::tree_type::caterpillar)) {              \
+		if (dist != 0) {                                                       \
+			std::cerr << "Error! Non-zero caterpillar distance for\n";         \
+			std::cerr << "    caterpillar input tree:\n";                      \
+			std::cerr << t << '\n';                                            \
+			return err_type::test_execution;                                   \
+		}                                                                      \
+	}                                                                          \
+	else {                                                                     \
+		if (dist == 0) {                                                       \
+			std::cerr << "Error! Zero caterpillar distance for\n";             \
+			std::cerr << "    non-caterpillar input tree:\n";                  \
+			std::cerr << t << '\n';                                            \
+			return err_type::test_execution;                                   \
+		}                                                                      \
 	}
 
 	while (fin >> n) {
@@ -258,15 +266,15 @@ err_type automatic_caterpillar_mode(std::ifstream& fin) noexcept {
 
 			// the tree has no valid tree type
 			{
-			const auto dist = max_subtree<result::distance>(t);
-			t.calculate_tree_type();
-			check;
+				const auto dist = max_subtree<result::distance>(t);
+				t.calculate_tree_type();
+				check;
 			}
 
 			// the tree has valid tree type
 			{
-			const auto dist = max_subtree<result::distance>(t);
-			check;
+				const auto dist = max_subtree<result::distance>(t);
+				check;
 			}
 		}
 	}
@@ -285,7 +293,7 @@ err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept
 		std::cerr << "    Wrong mode '" << mode << "'\n";
 		std::cerr << "    Allowed modes:\n";
 		for (const auto& m : allowed_modes) {
-		std::cerr << "    - " << m << '\n';
+			std::cerr << "    - " << m << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -309,5 +317,5 @@ err_type exe_properties_caterpillar_distance(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

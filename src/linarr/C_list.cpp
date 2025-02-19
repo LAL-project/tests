@@ -62,18 +62,18 @@
 namespace tests {
 namespace linarr {
 
-#define output_arr_graph												\
-	std::cerr << "    For linear arrangement function " << i << ":\n";	\
-	std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';	\
-	std::cerr << "    For (directed) graph\n";							\
-	std::cerr << dG << '\n';											\
-	std::cerr << "    For (undirected) graph\n";						\
-	std::cerr << uG << '\n';											\
+#define output_arr_graph                                                       \
+	std::cerr << "    For linear arrangement function " << i << ":\n";         \
+	std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';     \
+	std::cerr << "    For (directed) graph\n";                                 \
+	std::cerr << dG << '\n';                                                   \
+	std::cerr << "    For (undirected) graph\n";                               \
+	std::cerr << uG << '\n';
 
 err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 {
 	const std::set<std::string> allowed_procs(
-	{"bruteforce", "dyn_prog", "ladder", "stack_based"}
+		{"bruteforce", "dyn_prog", "ladder", "stack_based"}
 	);
 
 	const input_list inputs = read_input_list(fin);
@@ -88,26 +88,30 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 	lal::graphs::undirected_graph uG;
 	lal::graphs::directed_graph dG;
 	{
-	const std::string& graph_name = inputs[0].first;
-	const std::string& graph_format = inputs[0].second;
-	err_type r;
-	r = io_wrapper::read_graph(graph_name, graph_format, uG);
-	if (r != err_type::no_error) { return r; }
+		const std::string& graph_name = inputs[0].first;
+		const std::string& graph_format = inputs[0].second;
+		err_type r;
+		r = io_wrapper::read_graph(graph_name, graph_format, uG);
+		if (r != err_type::no_error) {
+			return r;
+		}
 
-	r = io_wrapper::read_graph(graph_name, graph_format, dG);
-	if (r != err_type::no_error) { return r; }
+		r = io_wrapper::read_graph(graph_name, graph_format, dG);
+		if (r != err_type::no_error) {
+			return r;
+		}
 	}
 
 	std::string proc;
 	fin >> proc;
 
 	if (allowed_procs.find(proc) == allowed_procs.end()) {
-		std::cerr <<ERROR << '\n';
+		std::cerr << ERROR << '\n';
 		std::cerr << "    Wrong value for procedure type.\n";
 		std::cerr << "    Procedure '" << proc << "' was found.\n";
 		std::cerr << "    Valid values:\n";
 		for (const std::string& p : allowed_procs) {
-		std::cerr << "    - " << p << '\n';
+			std::cerr << "    - " << p << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -119,8 +123,9 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 	fin >> n_linarrs;
 
 	// linear arrangements
-	std::vector<lal::linear_arrangement> arrangements
-			(n_linarrs, lal::linear_arrangement(n));
+	std::vector<lal::linear_arrangement> arrangements(
+		n_linarrs, lal::linear_arrangement(n)
+	);
 
 	uint64_t single_upper_bound;
 	std::vector<uint64_t> list_upper_bounds(n_linarrs, 0);
@@ -141,8 +146,10 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 		fin >> single_upper_bound;
 	}
 
-	const std::vector<uint64_t> uCbfs = num_crossings_brute_force(uG, arrangements);
-	const std::vector<uint64_t> dCbfs = num_crossings_brute_force(dG, arrangements);
+	const std::vector<uint64_t> uCbfs =
+		num_crossings_brute_force(uG, arrangements);
+	const std::vector<uint64_t> dCbfs =
+		num_crossings_brute_force(dG, arrangements);
 	for (uint64_t i = 0; i < n_linarrs; ++i) {
 		if (uCbfs[i] != dCbfs[i]) {
 			std::cerr << ERROR << '\n';
@@ -150,17 +157,24 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 			std::cerr << "        uCbfs: " << uCbfs[i] << '\n';
 			std::cerr << "        dCbfs: " << dCbfs[i] << '\n';
 			std::cerr << "    For linear arrangement " << i << ":\n";
-			std::cerr << "        " << arrangements[i].direct_as_vector() << '\n';
+			std::cerr << "        " << arrangements[i].direct_as_vector()
+					  << '\n';
 			return err_type::test_execution;
 		}
 	}
 	// uCbfs == dCbfs
 
-	const auto choose_algo =
-	[](const std::string& name) {
-		if (name == "dyn_prog") { return lal::linarr::algorithms_C::dynamic_programming; }
-		if (name == "ladder") { return lal::linarr::algorithms_C::ladder; }
-		if (name == "stack_based") { return lal::linarr::algorithms_C::stack_based; }
+	const auto choose_algo = [](const std::string& name)
+	{
+		if (name == "dyn_prog") {
+			return lal::linarr::algorithms_C::dynamic_programming;
+		}
+		if (name == "ladder") {
+			return lal::linarr::algorithms_C::ladder;
+		}
+		if (name == "stack_based") {
+			return lal::linarr::algorithms_C::stack_based;
+		}
 		return lal::linarr::algorithms_C::brute_force;
 	}(proc);
 
@@ -172,20 +186,30 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 		dCs = num_crossings_list(dG, arrangements, choose_algo);
 	}
 	else if (upper_bound_type == 1) {
-		uCs = is_num_crossings_lesseq_than_list(uG, arrangements, single_upper_bound, choose_algo);
-		dCs = is_num_crossings_lesseq_than_list(dG, arrangements, single_upper_bound, choose_algo);
+		uCs = is_num_crossings_lesseq_than_list(
+			uG, arrangements, single_upper_bound, choose_algo
+		);
+		dCs = is_num_crossings_lesseq_than_list(
+			dG, arrangements, single_upper_bound, choose_algo
+		);
 	}
 	else if (upper_bound_type == 2) {
-		uCs = is_num_crossings_lesseq_than_list(uG, arrangements, list_upper_bounds, choose_algo);
-		dCs = is_num_crossings_lesseq_than_list(dG, arrangements, list_upper_bounds, choose_algo);
+		uCs = is_num_crossings_lesseq_than_list(
+			uG, arrangements, list_upper_bounds, choose_algo
+		);
+		dCs = is_num_crossings_lesseq_than_list(
+			dG, arrangements, list_upper_bounds, choose_algo
+		);
 	}
 
 	for (uint64_t i = 0; i < n_linarrs; ++i) {
 		if (dCs[i] != uCs[i]) {
 			std::cerr << ERROR << '\n';
 			std::cerr << "    Number of crossings do not coincide\n";
-			std::cerr << "        " << proc << " (undirected): " << uCs[i] << '\n';
-			std::cerr << "        " << proc << " (directed): " << dCs[i] << '\n';
+			std::cerr << "        " << proc << " (undirected): " << uCs[i]
+					  << '\n';
+			std::cerr << "        " << proc << " (directed): " << dCs[i]
+					  << '\n';
 			output_arr_graph;
 			return err_type::test_execution;
 		}
@@ -209,18 +233,23 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 			if (uCbfs[i] > single_upper_bound) {
 				if (uCs[i] <= list_upper_bounds[i]) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Expected number of crossings to be > upper_bound.\n";
+					std::cerr << "    Expected number of crossings to be > "
+								 "upper_bound.\n";
 					std::cerr << "    Instead, received: " << uCs[i] << '\n';
-					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
-					std::cerr << "    Upper bound: " << single_upper_bound << '\n';
+					std::cerr << "    Actual number of crossings: " << uCbfs[i]
+							  << '\n';
+					std::cerr << "    Upper bound: " << single_upper_bound
+							  << '\n';
 					output_arr_graph;
 					return err_type::test_execution;
 				}
 			}
 			else if (uCs[i] != uCbfs[i]) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
-				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "    Number of crossings obtained with the "
+							 "algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings "
+							 "obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbfs[i] << '\n';
 				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
 				output_arr_graph;
@@ -233,18 +262,23 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 			if (uCbfs[i] > list_upper_bounds[i]) {
 				if (uCs[i] <= list_upper_bounds[i]) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Expected number of crossings to be > upper_bound.\n";
+					std::cerr << "    Expected number of crossings to be > "
+								 "upper_bound.\n";
 					std::cerr << "    Instead, received: " << uCs[i] << '\n';
-					std::cerr << "    Actual number of crossings: " << uCbfs[i] << '\n';
-					std::cerr << "    Upper bound: " << list_upper_bounds[i] << '\n';
+					std::cerr << "    Actual number of crossings: " << uCbfs[i]
+							  << '\n';
+					std::cerr << "    Upper bound: " << list_upper_bounds[i]
+							  << '\n';
 					output_arr_graph;
 					return err_type::test_execution;
 				}
 			}
 			else if (uCs[i] != uCbfs[i]) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
-				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "    Number of crossings obtained with the "
+							 "algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings "
+							 "obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbfs[i] << '\n';
 				std::cerr << "        " << proc << ": " << uCs[i] << '\n';
 				output_arr_graph;
@@ -257,5 +291,5 @@ err_type exe_linarr_C_list(std::ifstream& fin, char upper_bound_type) noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

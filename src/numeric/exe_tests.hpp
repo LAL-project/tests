@@ -67,5 +67,5 @@ err_type exe_numeric_integer_manual(std::ifstream& fin) noexcept;
 err_type exe_numeric_rational(std::ifstream& fin) noexcept;
 err_type exe_numeric_rational_manual(std::ifstream& fin) noexcept;
 
-} // -- namespace numeric
-} // -- namespace tests
+} // namespace numeric
+} // namespace tests

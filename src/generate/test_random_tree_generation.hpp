@@ -48,16 +48,10 @@
 namespace tests {
 namespace generate {
 
-template <
-	bool use_constructor,
-	int seed,
-	class Gen,
-	class errstream
->
-inline
-err_type test_random_generation_of_trees
-(uint64_t n1, uint64_t n2, int num_trees, errstream& errs)
-noexcept
+template <bool use_constructor, int seed, class Gen, class errstream>
+inline err_type test_random_generation_of_trees(
+	uint64_t n1, uint64_t n2, int num_trees, errstream& errs
+) noexcept
 {
 
 	Gen TreeGen;
@@ -88,5 +82,5 @@ noexcept
 	return tests::err_type::no_error;
 }
 
-} // -- namespace generate
-} // -- namespace tests
+} // namespace generate
+} // namespace tests

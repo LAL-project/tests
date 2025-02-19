@@ -64,5 +64,5 @@ namespace utilities {
 
 err_type exe_utilities_tree_isomorphism(std::ifstream& fin) noexcept;
 
-} // -- namespace utilities
-} // -- namespace tests
+} // namespace utilities
+} // namespace tests

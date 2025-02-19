@@ -52,9 +52,10 @@
 
 namespace tests {
 
-err_type get_type_keyword
-(const std::string& filename, std::ifstream& fin, std::string& type) noexcept;
+err_type get_type_keyword(
+	const std::string& filename, std::ifstream& fin, std::string& type
+) noexcept;
 
 std::vector<std::string> get_keywords(const std::string& type) noexcept;
 
-} // -- namespace tests
+} // namespace tests

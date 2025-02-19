@@ -52,86 +52,111 @@ namespace memory {
 //
 //
 
-void test_copy_ugraph_into_ftree() noexcept {
+void test_copy_ugraph_into_ftree() noexcept
+{
 	begin_function;
 
 	// move constructor
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(1);
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(1);
+		output_graph("g1", g1);
 
-	std::cout << "Move constructor: 'g2 <- g1'\n";
-	lal::graphs::free_tree g2 = g1;
-	output_graph("g1",g1);
-	output_free_tree_info("g2",g2);
+		std::cout << "Move constructor: 'g2 <- g1'\n";
+		lal::graphs::free_tree g2 = g1;
+		output_graph("g1", g1);
+		output_free_tree_info("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,3), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 3),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Move constructor: 'g2 <- g1'\n";
-	lal::graphs::free_tree g2 = g1;
-	output_graph("g1",g1);
-	output_free_tree_info("g2",g2);
+		std::cout << "Move constructor: 'g2 <- g1'\n";
+		lal::graphs::free_tree g2 = g1;
+		output_graph("g1", g1);
+		output_free_tree_info("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,3), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 3),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Move constructor: 'v[0] <- g1'\n";
-	std::vector<lal::graphs::free_tree> v;
-	v.push_back(g1);
-	output_graph("g1",g1);
-	output_free_tree_info("v[0]",v[0]);
+		std::cout << "Move constructor: 'v[0] <- g1'\n";
+		std::vector<lal::graphs::free_tree> v;
+		v.push_back(g1);
+		output_graph("g1", g1);
+		output_free_tree_info("v[0]", v[0]);
 	}
 
 	// move operator
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(1);
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(1);
+		output_graph("g1", g1);
 
-	std::cout << "Move operator: 'g2 <- g1'\n";
-	lal::graphs::free_tree g2;
-	g2 = g1;
-	output_graph("g1",g1);
-	output_free_tree_info("g2",g2);
+		std::cout << "Move operator: 'g2 <- g1'\n";
+		lal::graphs::free_tree g2;
+		g2 = g1;
+		output_graph("g1", g1);
+		output_free_tree_info("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,3), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 3),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Move operator: 'g2 <- g1'\n";
-	lal::graphs::free_tree g2;
-	g2 = g1;
-	output_graph("g1",g1);
-	output_free_tree_info("g2",g2);
+		std::cout << "Move operator: 'g2 <- g1'\n";
+		lal::graphs::free_tree g2;
+		g2 = g1;
+		output_graph("g1", g1);
+		output_free_tree_info("g2", g2);
 	}
 
 	{
-	begin_case;
-	lal::graphs::undirected_graph g1(6);
-	g1.add_edges(std::vector<lal::edge>{lal::edge(0,1), lal::edge(0,2), lal::edge(1,3), lal::edge(1,5), lal::edge(2,4)});
-	output_graph("g1",g1);
+		begin_case;
+		lal::graphs::undirected_graph g1(6);
+		g1.add_edges(std::vector<lal::edge>{
+			lal::edge(0, 1),
+			lal::edge(0, 2),
+			lal::edge(1, 3),
+			lal::edge(1, 5),
+			lal::edge(2, 4)
+		});
+		output_graph("g1", g1);
 
-	std::cout << "Move operator: 'v[0] <- g1'\n";
-	std::vector<lal::graphs::free_tree> v;
-	v.push_back(lal::graphs::free_tree());
-	v[0] = g1;
-	output_graph("g1",g1);
-	output_free_tree_info("v[0]",v[0]);
+		std::cout << "Move operator: 'v[0] <- g1'\n";
+		std::vector<lal::graphs::free_tree> v;
+		v.push_back(lal::graphs::free_tree());
+		v[0] = g1;
+		output_graph("g1", g1);
+		output_free_tree_info("v[0]", v[0]);
 	}
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

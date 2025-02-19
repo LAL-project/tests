@@ -69,17 +69,16 @@ enum class algorithms_DMax_planar {
 	AlemanyEstebanFerrer
 };
 
-}
-}
+} // namespace linarr
+} // namespace lal
 
 namespace tests {
 namespace linarr {
 
 namespace dmax_planar {
 
-std::pair<uint64_t,lal::linear_arrangement> DMax_planar_quadratic
-(const lal::graphs::free_tree& t)
-noexcept
+std::pair<uint64_t, lal::linear_arrangement>
+DMax_planar_quadratic(const lal::graphs::free_tree& t) noexcept
 {
 	uint64_t DMax_planar = std::numeric_limits<uint64_t>::min();
 	lal::linear_arrangement arr;
@@ -101,39 +100,50 @@ err_type check_tree(
 	const lal::graphs::free_tree& T,
 	const std::string& algo_name,
 	[[maybe_unused]] const lal::linarr::algorithms_DMax_planar& algo
-)
-noexcept
+) noexcept
 {
 	const auto DMax_planar_library =
 		lal::linarr::max_sum_edge_lengths_planar(T);
 
-	const auto DMax_planar_quadratic =
-		dmax_planar::DMax_planar_quadratic(T);
+	const auto DMax_planar_quadratic = dmax_planar::DMax_planar_quadratic(T);
 
 	// check correctness of library's result
-	const bool correct1 =
-		check_correctness_arr
-		(T, DMax_planar_library, ERROR_str, "Library (" + algo_name + ") planar",
-		 lal::linarr::is_planar);
+	const bool correct1 = check_correctness_arr(
+		T,
+		DMax_planar_library,
+		ERROR_str,
+		"Library (" + algo_name + ") planar",
+		lal::linarr::is_planar
+	);
 
-	if (not correct1) { return err_type::test_execution; }
+	if (not correct1) {
+		return err_type::test_execution;
+	}
 
 	// check correctness of quadratic's result
-	const bool correct2 =
-		check_correctness_arr
-		(T, DMax_planar_quadratic, ERROR_str, "Quadratic planar",
-		 lal::linarr::is_planar);
+	const bool correct2 = check_correctness_arr(
+		T,
+		DMax_planar_quadratic,
+		ERROR_str,
+		"Quadratic planar",
+		lal::linarr::is_planar
+	);
 
-	if (not correct2) { return err_type::test_execution; }
+	if (not correct2) {
+		return err_type::test_execution;
+	}
 
 	if (DMax_planar_quadratic.first != DMax_planar_library.first) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    The library produced a result that does not correspond to\n";
+		std::cerr << "    The library produced a result that does not "
+					 "correspond to\n";
 		std::cerr << "    quadratic algorithm's result.\n";
 		std::cerr << "    Library: " << DMax_planar_library.first << '\n';
-		std::cerr << "        Arrangement: " << DMax_planar_library.second.direct_as_vector() << '\n';
+		std::cerr << "        Arrangement: "
+				  << DMax_planar_library.second.direct_as_vector() << '\n';
 		std::cerr << "    Quadratic: " << DMax_planar_quadratic.first << '\n';
-		std::cerr << "        Arrangement: " << DMax_planar_quadratic.second.direct_as_vector() << '\n';
+		std::cerr << "        Arrangement: "
+				  << DMax_planar_quadratic.second.direct_as_vector() << '\n';
 		std::cerr << "    For tree:\n";
 		std::cerr << T << '\n';
 		return err_type::test_execution;
@@ -141,11 +151,13 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace dmax_planar
+} // namespace dmax_planar
 
-err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
+err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept
+{
 	const std::set<std::string> allowed_algos({"AEF", "quadratic"});
-	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"});
+	const std::set<std::string> allowed_quadratic_modes({"exhaustive", "random"}
+	);
 
 	const input_list inputs = read_input_list(fin);
 
@@ -156,7 +168,7 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 		std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
 		std::cerr << "    Allowed algorithms:\n";
 		for (const auto& s : allowed_algos) {
-		std::cerr << "    - " << s << '\n';
+			std::cerr << "    - " << s << '\n';
 		}
 		return err_type::test_format;
 	}
@@ -166,7 +178,8 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 	if (algo == "AEF") {
 		if (inputs.size() != 1) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Exactly one input files are allowed in this test.\n";
+			std::cerr
+				<< "    Exactly one input files are allowed in this test.\n";
 			std::cerr << "    Instead, " << inputs.size() << " were given.\n";
 			return err_type::test_format;
 		}
@@ -174,15 +187,15 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 		std::ifstream input_file(inputs[0].first);
 		if (not input_file.is_open()) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Input file '"
-					  << inputs[0].first
+			std::cerr << "    Input file '" << inputs[0].first
 					  << "' could not be opened.\n";
 			return err_type::io;
 		}
 
 		[[maybe_unused]] lal::linarr::algorithms_DMax_planar algo_choice;
 		if (algo == "AEF") {
-			algo_choice = lal::linarr::algorithms_DMax_planar::AlemanyEstebanFerrer;
+			algo_choice =
+				lal::linarr::algorithms_DMax_planar::AlemanyEstebanFerrer;
 		}
 		else {
 			std::cerr << ERROR << '\n';
@@ -190,23 +203,33 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 			return err_type::test_format;
 		}
 
-		err = single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
-		(
-			[](lal::graphs::free_tree&) { },
-			[=](const lal::graphs::free_tree& t) {
-				return lal::linarr::max_sum_edge_lengths_planar(t);
-			},
-			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
-				return lal::linarr::sum_edge_lengths(t, arr);
-			},
-			[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
-				return lal::linarr::is_planar(t, arr);
-			},
-			[](const std::vector<lal::node>& v) {
-				return std::move(lal::graphs::from_head_vector_to_free_tree(v).first);
-			},
-			input_file
-		);
+		err =
+			single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>(
+				[](lal::graphs::free_tree&)
+				{
+				},
+				[=](const lal::graphs::free_tree& t)
+				{
+					return lal::linarr::max_sum_edge_lengths_planar(t);
+				},
+				[](const lal::graphs::free_tree& t,
+				   const lal::linear_arrangement& arr)
+				{
+					return lal::linarr::sum_edge_lengths(t, arr);
+				},
+				[](const lal::graphs::free_tree& t,
+				   const lal::linear_arrangement& arr)
+				{
+					return lal::linarr::is_planar(t, arr);
+				},
+				[](const std::vector<lal::node>& v)
+				{
+					return std::move(
+						lal::graphs::from_head_vector_to_free_tree(v).first
+					);
+				},
+				input_file
+			);
 	}
 	else if (algo == "quadratic") {
 		if (inputs.size() != 0) {
@@ -218,12 +241,14 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 
 		std::string mode;
 		fin >> mode;
-		if (allowed_quadratic_modes.find(mode) == allowed_quadratic_modes.end()) {
+		if (allowed_quadratic_modes.find(mode) ==
+			allowed_quadratic_modes.end()) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Unrecognized mode for quadratic algorithm '" << mode << "'.\n";
+			std::cerr << "    Unrecognized mode for quadratic algorithm '"
+					  << mode << "'.\n";
 			std::cerr << "    Allowed modes:\n";
 			for (const auto& s : allowed_quadratic_modes) {
-			std::cerr << "    - " << s << '\n';
+				std::cerr << "    - " << s << '\n';
 			}
 			return err_type::test_format;
 		}
@@ -234,7 +259,7 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 			std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
 			std::cerr << "    Allowed algorithms:\n";
 			for (const auto& s : allowed_algos) {
-			std::cerr << "    - " << s << '\n';
+				std::cerr << "    - " << s << '\n';
 			}
 			return err_type::test_format;
 		}
@@ -242,7 +267,8 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 		std::string algo_name;
 		lal::linarr::algorithms_DMax_planar algo_choice;
 		if (algo == "AEF") {
-			algo_choice = lal::linarr::algorithms_DMax_planar::AlemanyEstebanFerrer;
+			algo_choice =
+				lal::linarr::algorithms_DMax_planar::AlemanyEstebanFerrer;
 			algo_name = "AEF";
 		}
 		else {
@@ -290,5 +316,5 @@ err_type exe_linarr_DMax_planar(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

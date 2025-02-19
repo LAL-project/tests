@@ -64,24 +64,24 @@ namespace properties {
 
 // this is a very simple algorithm to calculate the centre
 template <class tree_t>
-uint64_t straightforward_diameter
-(const tree_t& tree, lal::node u)
-noexcept
+uint64_t straightforward_diameter(const tree_t& tree, lal::node u) noexcept
 {
-	const auto max_distance_from_source =
-	[](const tree_t& t, lal::node a) {
+	const auto max_distance_from_source = [](const tree_t& t, lal::node a)
+	{
 		lal::detail::array<uint64_t> dis(t.get_num_nodes(), 0);
 		uint64_t max_dist = 0;
 
 		lal::detail::BFS bfs(t);
 		if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, tree_t>) {
-		bfs.set_use_rev_edges(true);
+			bfs.set_use_rev_edges(true);
 		}
-		bfs.set_process_neighbour
-		([&](const auto&, lal::node v, lal::node w, bool) {
-			dis[w] = dis[v] + 1;
-			max_dist = std::max(max_dist, dis[w]);
-		});
+		bfs.set_process_neighbour(
+			[&](const auto&, lal::node v, lal::node w, bool)
+			{
+				dis[w] = dis[v] + 1;
+				max_dist = std::max(max_dist, dis[w]);
+			}
+		);
 
 		bfs.start_at(a);
 		return max_dist;
@@ -92,7 +92,9 @@ noexcept
 	uint64_t max_dist = 0;
 	const auto cc_u = tree.get_component_representative(u);
 	for (lal::node v = 0; v < n; ++v) {
-		if (tree.get_component_representative(v) != cc_u) { continue; }
+		if (tree.get_component_representative(v) != cc_u) {
+			continue;
+		}
 
 		max_dist = std::max(max_dist, max_distance_from_source(tree, v));
 	}
@@ -100,7 +102,8 @@ noexcept
 }
 
 template <class tree_t>
-err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept {
+err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept
+{
 	tree_t t;
 	uint64_t n;
 
@@ -145,9 +148,13 @@ err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept {
 
 			if (user_diameter != library_diameter) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Calculations of diameters do not agree at vertex '" << s << "'.\n";
-				std::cerr << "        Library diameter= " << library_diameter << ".\n";
-				std::cerr << "        User diameter=    " << user_diameter << ".\n";
+				std::cerr
+					<< "    Calculations of diameters do not agree at vertex '"
+					<< s << "'.\n";
+				std::cerr << "        Library diameter= " << library_diameter
+						  << ".\n";
+				std::cerr << "        User diameter=    " << user_diameter
+						  << ".\n";
 				return err_type::test_format;
 			}
 		}
@@ -155,9 +162,9 @@ err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept {
 			std::cout << t << '\n';
 		}
 		else if (option == "remove_edge") {
-			lal::node u,v;
+			lal::node u, v;
 			fin >> u >> v;
-			t.remove_edge(u,v);
+			t.remove_edge(u, v);
 		}
 		else {
 			std::cerr << ERROR << '\n';
@@ -168,9 +175,9 @@ err_type exe_commands_utils_diameter(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-err_type exe_full_utils_diameter
-(const std::string& graph_type, std::ifstream& fin)
-noexcept
+err_type exe_full_utils_diameter(
+	const std::string& graph_type, std::ifstream& fin
+) noexcept
 {
 	std::string how;
 	fin >> how;
@@ -181,39 +188,39 @@ noexcept
 		return err_type::test_format;
 	}
 
-#define test_correctness(T)											\
-{																	\
-	const auto lib_diam = lal::detail::tree_diameter(T, 0);			\
-	const auto easy_diam = straightforward_diameter(T, 0);			\
-	if (lib_diam != easy_diam) {									\
-		std::cerr << ERROR << '\n';									\
-		std::cerr << "    Diameters differ.\n";						\
-		std::cerr << "    Library: " << lib_diam << '\n';			\
-		std::cerr << "    Straightforward: " << easy_diam << '\n';	\
-		std::cerr << "    For tree:\n";								\
-		std::cerr << T << '\n';										\
-		return err_type::test_execution;							\
-	}																\
-}
+#define test_correctness(T)                                                    \
+	{                                                                          \
+		const auto lib_diam = lal::detail::tree_diameter(T, 0);                \
+		const auto easy_diam = straightforward_diameter(T, 0);                 \
+		if (lib_diam != easy_diam) {                                           \
+			std::cerr << ERROR << '\n';                                        \
+			std::cerr << "    Diameters differ.\n";                            \
+			std::cerr << "    Library: " << lib_diam << '\n';                  \
+			std::cerr << "    Straightforward: " << easy_diam << '\n';         \
+			std::cerr << "    For tree:\n";                                    \
+			std::cerr << T << '\n';                                            \
+			return err_type::test_execution;                                   \
+		}                                                                      \
+	}
 
-#define exe_exhaustive(G, n)					\
-{												\
-	for (G Gen(n); not Gen.end(); Gen.next()) {	\
-		const auto T = Gen.get_tree();			\
-		test_correctness(T)						\
-	}											\
-}
+#define exe_exhaustive(G, n)                                                   \
+	{                                                                          \
+		for (G Gen(n); not Gen.end(); Gen.next()) {                            \
+			const auto T = Gen.get_tree();                                     \
+			test_correctness(T)                                                \
+		}                                                                      \
+	}
 
-#define exe_random(G, n)				\
-{										\
-	uint64_t N;							\
-	fin >> N;							\
-	G Gen(n);							\
-	for (uint64_t i = 0; i < N; ++i) {	\
-		const auto T = Gen.get_tree();	\
-		test_correctness(T)				\
-	}									\
-}
+#define exe_random(G, n)                                                       \
+	{                                                                          \
+		uint64_t N;                                                            \
+		fin >> N;                                                              \
+		G Gen(n);                                                              \
+		for (uint64_t i = 0; i < N; ++i) {                                     \
+			const auto T = Gen.get_tree();                                     \
+			test_correctness(T)                                                \
+		}                                                                      \
+	}
 
 	uint64_t n;
 	while (fin >> n) {
@@ -237,7 +244,8 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_properties_diameter(std::ifstream& fin) noexcept {
+err_type exe_properties_diameter(std::ifstream& fin) noexcept
+{
 
 	std::string mode, graph_type;
 	fin >> mode >> graph_type;
@@ -257,13 +265,12 @@ err_type exe_properties_diameter(std::ifstream& fin) noexcept {
 	}
 
 	const err_type err =
-	(mode == "manual" ?
-		(graph_type == "ftree" ?
-		exe_commands_utils_diameter<lal::graphs::free_tree>(fin) :
-		exe_commands_utils_diameter<lal::graphs::rooted_tree>(fin))
-		:
-		exe_full_utils_diameter(graph_type, fin)
-	);
+		(mode == "manual"
+			 ? (graph_type == "ftree"
+					? exe_commands_utils_diameter<lal::graphs::free_tree>(fin)
+					: exe_commands_utils_diameter<lal::graphs::rooted_tree>(fin)
+			   )
+			 : exe_full_utils_diameter(graph_type, fin));
 
 	if (err != err_type::no_error) {
 		// avoid TEST_GOODBYE;
@@ -274,5 +281,5 @@ err_type exe_properties_diameter(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

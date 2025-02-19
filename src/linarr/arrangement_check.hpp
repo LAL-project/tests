@@ -61,19 +61,22 @@ bool check_correctness_arr(
 	const std::string& error_header,
 	const std::string& algorithm,
 	bool (*check_property_of_arrangement)(const tree_t&, const lal::linear_arrangement&)
-)
-noexcept
+) noexcept
 {
 	const lal::linear_arrangement& arr = res.second;
 
 	if (not lal::linarr::is_arrangement(tree, arr)) {
 		std::cerr << error_header << '\n';
-		std::cerr << "    The object produced by the library is not an actual arrangement.\n";
+		std::cerr << "    The object produced by the library is not an actual "
+					 "arrangement.\n";
 		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
-		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+		std::cerr << "        Arrangement:     " << arr.direct_as_vector()
+				  << '\n';
+		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector()
+				  << '\n';
 		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0)
+				  << "]\n";
 		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 		std::cerr << tree << '\n';
 		return false;
@@ -82,12 +85,16 @@ noexcept
 	/* ensure a property of arrangement */
 	if (not check_property_of_arrangement(tree, arr)) {
 		std::cerr << error_header << '\n';
-		std::cerr << "    The arrangement produced by the library does not satisfy the property.\n";
+		std::cerr << "    The arrangement produced by the library does not "
+					 "satisfy the property.\n";
 		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "        Arrangement:     " << arr.direct_as_vector() << '\n';
-		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector() << '\n';
+		std::cerr << "        Arrangement:     " << arr.direct_as_vector()
+				  << '\n';
+		std::cerr << "        Inv Arrangement: " << arr.inverse_as_vector()
+				  << '\n';
 		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0)
+				  << "]\n";
 		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 		std::cerr << tree << '\n';
 		return false;
@@ -98,12 +105,15 @@ noexcept
 		std::cerr << error_header << '\n';
 		std::cerr << "    Value of D returned by method is incorrect.\n";
 		std::cerr << "    Algorithm executed: " << algorithm << '\n';
-		std::cerr << "    Arrangement:     " << res.second.direct_as_vector() << '\n';
-		std::cerr << "    Inv Arrangement: " << res.second.inverse_as_vector() << '\n';
+		std::cerr << "    Arrangement:     " << res.second.direct_as_vector()
+				  << '\n';
+		std::cerr << "    Inv Arrangement: " << res.second.inverse_as_vector()
+				  << '\n';
 		std::cerr << "    Value of D returned: " << res.first << '\n';
 		std::cerr << "    Actual value of D:   " << D << '\n';
 		std::cerr << "    For tree: \n";
-		std::cerr << "        Head vector: [" << tree.get_head_vector(0) << "]\n";
+		std::cerr << "        Head vector: [" << tree.get_head_vector(0)
+				  << "]\n";
 		std::cerr << "        Edge list: " << tree.get_edges() << '\n';
 		std::cerr << tree << '\n';
 		return false;
@@ -111,5 +121,5 @@ noexcept
 	return true;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

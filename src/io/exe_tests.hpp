@@ -64,5 +64,5 @@ namespace io {
 
 err_type exe_io_correctness(std::ifstream& fin) noexcept;
 
-} // -- namespace io
-} // -- namespace tests
+} // namespace io
+} // namespace tests

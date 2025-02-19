@@ -62,32 +62,58 @@ namespace graphs {
 
 namespace tree_type_class {
 
-lal::graphs::tree_type string_to_tt(const std::string& s) noexcept {
-	if (s == "empty") { return lal::graphs::tree_type::empty; }
-	if (s == "singleton") { return lal::graphs::tree_type::singleton; }
-	if (s == "linear") { return lal::graphs::tree_type::linear; }
-	if (s == "star") { return lal::graphs::tree_type::star; }
-	if (s == "quasistar") { return lal::graphs::tree_type::quasistar; }
-	if (s == "bistar") { return lal::graphs::tree_type::bistar; }
-	if (s == "caterpillar") { return lal::graphs::tree_type::caterpillar; }
-	if (s == "spider") { return lal::graphs::tree_type::spider; }
-	if (s == "two_linear") { return lal::graphs::tree_type::two_linear; }
-	if (s == "unknown") { return lal::graphs::tree_type::unknown; }
+lal::graphs::tree_type string_to_tt(const std::string& s) noexcept
+{
+	if (s == "empty") {
+		return lal::graphs::tree_type::empty;
+	}
+	if (s == "singleton") {
+		return lal::graphs::tree_type::singleton;
+	}
+	if (s == "linear") {
+		return lal::graphs::tree_type::linear;
+	}
+	if (s == "star") {
+		return lal::graphs::tree_type::star;
+	}
+	if (s == "quasistar") {
+		return lal::graphs::tree_type::quasistar;
+	}
+	if (s == "bistar") {
+		return lal::graphs::tree_type::bistar;
+	}
+	if (s == "caterpillar") {
+		return lal::graphs::tree_type::caterpillar;
+	}
+	if (s == "spider") {
+		return lal::graphs::tree_type::spider;
+	}
+	if (s == "two_linear") {
+		return lal::graphs::tree_type::two_linear;
+	}
+	if (s == "unknown") {
+		return lal::graphs::tree_type::unknown;
+	}
 	std::cerr << ERROR << '\n';
-	std::cerr << "    String '" << s << "' could not be converted into a tree type.\n";
+	std::cerr << "    String '" << s
+			  << "' could not be converted into a tree type.\n";
 	return lal::graphs::tree_type::unknown;
 }
 
-std::vector<uint64_t> parse_treestr(const std::string& s) noexcept {
+std::vector<uint64_t> parse_treestr(const std::string& s) noexcept
+{
 	// read numbers in line
 	std::stringstream ss(s);
 	std::vector<uint64_t> L;
 	uint64_t v;
-	while (ss >> v) { L.push_back(v); }
+	while (ss >> v) {
+		L.push_back(v);
+	}
 	return L;
 }
 
-std::vector<bool> parse_classes_tt(std::string s) noexcept {
+std::vector<bool> parse_classes_tt(std::string s) noexcept
+{
 	// classes vector
 	std::vector<bool> classes(lal::graphs::__tree_type_size, false);
 	bool read_sth = false;
@@ -103,15 +129,17 @@ std::vector<bool> parse_classes_tt(std::string s) noexcept {
 	}
 
 	if (not read_sth) {
-		const std::size_t idx = static_cast<std::size_t>(string_to_tt("unknown"));
+		const std::size_t idx =
+			static_cast<std::size_t>(string_to_tt("unknown"));
 		classes[idx] = true;
 	}
 	return classes;
 }
 
-} // -- namespace tree_type_class
+} // namespace tree_type_class
 
-err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
+err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept
+{
 
 	std::string line;
 	std::size_t lineno = 3;
@@ -133,10 +161,12 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 
 		// parse line
 		const std::string treestr = line.substr(0, semicolon);
-		const std::string classlist = line.substr(semicolon+1, line.length()-semicolon);
+		const std::string classlist =
+			line.substr(semicolon + 1, line.length() - semicolon);
 
 		// ground truth classification
-		const std::vector<bool> ground_classes = tree_type_class::parse_classes_tt(classlist);
+		const std::vector<bool> ground_classes =
+			tree_type_class::parse_classes_tt(classlist);
 
 		// parse data in line
 		const auto L = tree_type_class::parse_treestr(treestr);
@@ -155,27 +185,33 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 		// check result is correct
 		if (rClasses != fClasses) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Classes found at the two trees are not the same.\n";
+			std::cerr
+				<< "    Classes found at the two trees are not the same.\n";
 			std::cerr << "    Rooted tree:\n";
 			for (const std::string& s : rClasses) {
-			std::cerr << "        " << s
-				 << (std::binary_search(fClasses.begin(), fClasses.end(), s) ?
-						 "" : " <--- not in the free tree")
-				 << '\n';
+				std::cerr
+					<< "        " << s
+					<< (std::binary_search(fClasses.begin(), fClasses.end(), s)
+							? ""
+							: " <--- not in the free tree")
+					<< '\n';
 			}
 			std::cerr << "    Free tree:\n";
 			for (const std::string& s : rClasses) {
-			std::cerr << "        " << s
-				 << (std::binary_search(rClasses.begin(), rClasses.end(), s) ?
-						 "" : " <--- not in the rooted tree")
-				 << '\n';
+				std::cerr
+					<< "        " << s
+					<< (std::binary_search(rClasses.begin(), rClasses.end(), s)
+							? ""
+							: " <--- not in the rooted tree")
+					<< '\n';
 			}
 			return err_type::test_execution;
 		}
 
 		std::vector<bool> LAL_types(lal::graphs::__tree_type_size, false);
 		for (const std::string& s : fClasses) {
-			LAL_types[ static_cast<std::size_t>(tree_type_class::string_to_tt(s)) ] = true;
+			LAL_types[static_cast<std::size_t>(tree_type_class::string_to_tt(s)
+			)] = true;
 		}
 
 		if (LAL_types != ground_classes) {
@@ -188,18 +224,23 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 			for (std::size_t i = 0; i < ground_classes.size(); ++i) {
 				if (ground_classes[i]) {
 					std::cerr << "        "
-						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
-						 << (not LAL_types[i] ? "  <--- missing" : "")
-						 << '\n';
+							  << lal::detail::tree_type_string(
+									 static_cast<lal::graphs::tree_type>(i)
+								 )
+							  << (not LAL_types[i] ? "  <--- missing" : "")
+							  << '\n';
 				}
 			}
 			std::cerr << "    LAL's classes (given by the library):\n";
 			for (std::size_t i = 0; i < LAL_types.size(); ++i) {
 				if (LAL_types[i]) {
-					std::cerr << "        "
-						 << lal::detail::tree_type_string(static_cast<lal::graphs::tree_type>(i))
-						 << (not ground_classes[i] ? "  <--- incorrect" : "")
-						 << '\n';
+					std::cerr
+						<< "        "
+						<< lal::detail::tree_type_string(
+							   static_cast<lal::graphs::tree_type>(i)
+						   )
+						<< (not ground_classes[i] ? "  <--- incorrect" : "")
+						<< '\n';
 				}
 			}
 			return err_type::test_execution;
@@ -210,5 +251,5 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace graphs
-} // -- namespace tests
+} // namespace graphs
+} // namespace tests

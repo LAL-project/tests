@@ -55,15 +55,17 @@ namespace tests {
 namespace io_wrapper {
 
 template <class graph_t>
-err_type __read_graph(const std::string& file, const std::string& format, graph_t& g, bool norm)
-noexcept
+err_type __read_graph(
+	const std::string& file, const std::string& format, graph_t& g, bool norm
+) noexcept
 {
 
 	if (format == "edge_list" or format == "edge-list") {
 		auto r = lal::io::read_edge_list<graph_t>(file, norm, false);
 		if (not r) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    When attempting to read an lal::edge-list-formatted\n";
+			std::cerr
+				<< "    When attempting to read an lal::edge-list-formatted\n";
 			std::cerr << "    graph from file: '" << file << "'.\n";
 			return err_type::io;
 		}
@@ -73,15 +75,13 @@ noexcept
 	}
 
 	if (format == "head_vector") {
-		if constexpr (
-			std::is_base_of_v<lal::graphs::rooted_tree, graph_t> or
-			std::is_base_of_v<lal::graphs::free_tree, graph_t>
-		)
-		{
+		if constexpr (std::is_base_of_v<lal::graphs::rooted_tree, graph_t> or
+					  std::is_base_of_v<lal::graphs::free_tree, graph_t>) {
 			auto r = lal::io::read_head_vector<graph_t>(file, norm, false);
 			if (not r) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    When attempting to read an lal::edge-list-formatted\n";
+				std::cerr << "    When attempting to read an "
+							 "lal::edge-list-formatted\n";
 				std::cerr << "    graph from file: '" << file << "'.\n";
 				return err_type::io;
 			}
@@ -91,7 +91,8 @@ noexcept
 		}
 		else {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Type of graph is not allowed when reading a head vector file.\n";
+			std::cerr << "    Type of graph is not allowed when reading a head "
+						 "vector file.\n";
 			return err_type::test_format;
 		}
 	}
@@ -101,32 +102,44 @@ noexcept
 	return err_type::test_format;
 }
 
-err_type read_graph
-(const std::string& file, const std::string& format, lal::graphs::undirected_graph& G, bool norm)
-noexcept
+err_type read_graph(
+	const std::string& file,
+	const std::string& format,
+	lal::graphs::undirected_graph& G,
+	bool norm
+) noexcept
 {
 	return __read_graph(file, format, G, norm);
 }
-err_type read_graph
-(const std::string& file, const std::string& format, lal::graphs::directed_graph& G, bool norm)
-noexcept
-{
-	return __read_graph(file, format, G, norm);
-}
-
-err_type read_graph
-(const std::string& file, const std::string& format, lal::graphs::free_tree& G, bool norm)
-noexcept
-{
-	return __read_graph(file, format, G, norm);
-}
-
-err_type read_graph
-(const std::string& file, const std::string& format, lal::graphs::rooted_tree& G, bool norm)
-noexcept
+err_type read_graph(
+	const std::string& file,
+	const std::string& format,
+	lal::graphs::directed_graph& G,
+	bool norm
+) noexcept
 {
 	return __read_graph(file, format, G, norm);
 }
 
-} // -- namespace io_wrapper
-} // -- namespace tests
+err_type read_graph(
+	const std::string& file,
+	const std::string& format,
+	lal::graphs::free_tree& G,
+	bool norm
+) noexcept
+{
+	return __read_graph(file, format, G, norm);
+}
+
+err_type read_graph(
+	const std::string& file,
+	const std::string& format,
+	lal::graphs::rooted_tree& G,
+	bool norm
+) noexcept
+{
+	return __read_graph(file, format, G, norm);
+}
+
+} // namespace io_wrapper
+} // namespace tests

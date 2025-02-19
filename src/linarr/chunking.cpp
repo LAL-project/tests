@@ -59,7 +59,8 @@
 namespace tests {
 namespace linarr {
 
-void output_head_vector(const lal::head_vector& hv) noexcept {
+void output_head_vector(const lal::head_vector& hv) noexcept
+{
 	std::cout << hv[0];
 	for (std::size_t i = 1; i < hv.size(); ++i) {
 		std::cout << ' ' << hv[i];
@@ -67,7 +68,8 @@ void output_head_vector(const lal::head_vector& hv) noexcept {
 	std::cout << '\n';
 }
 
-void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
+void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept
+{
 	for (std::size_t i = 0; i < chunks.size(); ++i) {
 		const lal::linarr::chunk& chunk = chunks[i];
 		std::cout << i << ":\n";
@@ -91,15 +93,15 @@ void output_chunks(const lal::linarr::chunk_sequence& chunks) noexcept {
 	}
 }
 
-bool are_nodes_contiguous
-(const std::vector<lal::node>& node_set, const lal::linear_arrangement& arr)
-noexcept
+bool are_nodes_contiguous(
+	const std::vector<lal::node>& node_set, const lal::linear_arrangement& arr
+) noexcept
 {
 	std::set<lal::position> positions;
 	for (lal::node_t v : node_set) {
-		positions.insert( arr[v] );
+		positions.insert(arr[v]);
 	}
-	
+
 	auto it = positions.begin();
 	lal::position prev = *it;
 	++it;
@@ -110,19 +112,17 @@ noexcept
 		}
 		prev = current;
 	}
-	
+
 	return true;
 }
 
-err_type test_chunked_tree
-(
+err_type test_chunked_tree(
 	const lal::graphs::rooted_tree& rt,
 	const lal::linear_arrangement& arr,
 	const lal::graphs::rooted_tree& chunked_rt,
 	const lal::linarr::chunk_sequence& chunks,
 	lal::linarr::algorithms_chunking algo
-)
-noexcept
+) noexcept
 {
 	bool error = false;
 	if (not chunked_rt.is_rooted_tree()) {
@@ -130,41 +130,40 @@ noexcept
 		std::cerr << "Chunked tree is not a rooted tree.\n";
 		error = true;
 	}
-	
+
 	if (chunked_rt.get_num_nodes() != chunks.size()) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "Number of vertices of chunked tree is different from the number of chunks.\n";
+		std::cerr << "Number of vertices of chunked tree is different from the "
+					 "number of chunks.\n";
 		std::cerr << "    vertices: " << chunked_rt.get_num_nodes() << '\n';
 		std::cerr << "    chunks:   " << chunks.size() << '\n';
 		error = true;
 	}
-	
+
 	{
-	// exactly one chunk has no parent vertex
-	int num_chunks_with_no_parent = 0;
-	for (const auto& c : chunks.get_chunks()) {
-		if (not c.has_parent_node()) {
-			++num_chunks_with_no_parent;
+		// exactly one chunk has no parent vertex
+		int num_chunks_with_no_parent = 0;
+		for (const auto& c : chunks.get_chunks()) {
+			if (not c.has_parent_node()) {
+				++num_chunks_with_no_parent;
+			}
+		}
+		if (num_chunks_with_no_parent > 1) {
+			std::cerr << ERROR << '\n';
+			std::cerr << "More than one chunk has no parent node\n";
+			error = true;
 		}
 	}
-	if (num_chunks_with_no_parent > 1) {
-		std::cerr << ERROR << '\n';
-		std::cerr << "More than one chunk has no parent node\n";
-		error = true;
-	}
-	}
-	
+
 	// ensure that chunks are contiguous
-	if (
-		algo == lal::linarr::algorithms_chunking::Anderson or
-		algo == lal::linarr::algorithms_chunking::Macutek
-	)
-	{
+	if (algo == lal::linarr::algorithms_chunking::Anderson or
+		algo == lal::linarr::algorithms_chunking::Macutek) {
 		for (std::size_t i = 0; i < chunks.size(); ++i) {
 			const auto& c = chunks[i];
 			if (not are_nodes_contiguous(c.get_nodes(), arr)) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "Nodes of chunk " << i << " are not contiguous in the arrangement\n";
+				std::cerr << "Nodes of chunk " << i
+						  << " are not contiguous in the arrangement\n";
 				error = true;
 			}
 		}
@@ -172,37 +171,41 @@ noexcept
 
 	// ensure the chunk's root and its parent are adjacent in the tree
 	{
-	for (std::size_t i = 0; i < chunks.size(); ++i) {
-		const auto& c = chunks[i];
-		if (c.has_parent_node() and c.has_root_node()) {
-			const lal::node parent = c.get_parent_node();
-			const lal::node root = c.get_root_node();
-			if (not rt.has_edge(parent, root)) {
+		for (std::size_t i = 0; i < chunks.size(); ++i) {
+			const auto& c = chunks[i];
+			if (c.has_parent_node() and c.has_root_node()) {
+				const lal::node parent = c.get_parent_node();
+				const lal::node root = c.get_root_node();
+				if (not rt.has_edge(parent, root)) {
+					std::cerr << ERROR << '\n';
+					std::cerr << "Parent of chunk (" << i << "): " << parent
+							  << '\n';
+					std::cerr << "Root of chunk (" << i << "):   " << root
+							  << '\n';
+					std::cerr << "Are not adjacent in the tree.\n";
+					error = true;
+				}
+			}
+			if (not c.has_root_node()) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "Parent of chunk (" << i << "): " << parent << '\n';
-				std::cerr << "Root of chunk (" << i << "):   " << root<< '\n';
-				std::cerr << "Are not adjacent in the tree.\n";
+				std::cerr << "Chunk (" << i
+						  << ") does not have a root vertex\n";
 				error = true;
 			}
 		}
-		if (not c.has_root_node()) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "Chunk (" << i << ") does not have a root vertex\n";
-			error = true;
-		}
 	}
-	}
-	
+
 	if (error) {
 		std::cerr << "=================================\n";
 		std::cerr << "Chunks: " << chunks.size() << '\n';
 		for (const lal::linarr::chunk& c : chunks) {
 			std::cerr << "---------------------------------\n";
 			std::cerr << "    Size: " << c.get_nodes().size() << '\n';
-			std::cerr
-				<< "    Chunk parent: "
-				<< (c.has_parent_node() ? std::to_string(c.get_parent_node()) : "*")
-				<< '\n';
+			std::cerr << "    Chunk parent: "
+					  << (c.has_parent_node()
+							  ? std::to_string(c.get_parent_node())
+							  : "*")
+					  << '\n';
 			std::cerr << "    Nodes:";
 			for (auto u : c.get_nodes()) {
 				std::cerr << ' ' << u;
@@ -212,7 +215,8 @@ noexcept
 		std::cerr << "=================================\n";
 		std::cerr << "Mapping:\n";
 		for (lal::node u = 0; u < rt.get_num_nodes(); ++u) {
-			std::cerr << "    map[" << u << "]= " << chunks.get_chunk_index(u) << '\n';
+			std::cerr << "    map[" << u << "]= " << chunks.get_chunk_index(u)
+					  << '\n';
 		}
 		std::cerr << "=================================\n";
 		std::cerr << "Arrangement:\n";
@@ -221,7 +225,7 @@ noexcept
 		}
 		return err_type::test_execution;
 	}
-	
+
 	return err_type::no_error;
 }
 
@@ -229,8 +233,7 @@ void read_manual_input(
 	std::ifstream& fin,
 	lal::graphs::rooted_tree& rt,
 	lal::linear_arrangement& arr
-)
-noexcept
+) noexcept
 {
 	uint64_t n;
 	fin >> n;
@@ -251,52 +254,51 @@ noexcept
 }
 
 err_type test_algo_manual(
-	std::ifstream& fin,
-	const lal::linarr::algorithms_chunking& algo
-)
-noexcept
+	std::ifstream& fin, const lal::linarr::algorithms_chunking& algo
+) noexcept
 {
 	lal::graphs::rooted_tree rt;
 	lal::linear_arrangement arr;
 	read_manual_input(fin, rt, arr);
-	
+
 	const lal::linarr::chunk_sequence chunks =
 		lal::linarr::chunk_syntactic_dependency_tree_as_sequence(rt, arr, algo);
-	
+
 	const lal::graphs::rooted_tree chunked_rt =
 		lal::linarr::make_tree_from_chunk_sequence(chunks);
-	
+
 	output_chunks(chunks);
 	output_head_vector(chunked_rt.get_head_vector());
-	
+
 	return test_chunked_tree(rt, arr, chunked_rt, chunks, algo);
 }
 
 err_type test_algo_automatic(
-	std::ifstream& fin,
-	const lal::linarr::algorithms_chunking& algo
-)
-noexcept
+	std::ifstream& fin, const lal::linarr::algorithms_chunking& algo
+) noexcept
 {
 	uint64_t n, R;
-	
+
 	while (fin >> n >> R) {
 		lal::generate::rand_lab_rooted_trees gen(n, 1234);
 		for (uint64_t r = 0; r < R; ++r) {
 			const auto rt = gen.get_tree();
 			const auto arr = lal::linear_arrangement::identity(n);
-			
+
 			const lal::linarr::chunk_sequence chunks =
-				lal::linarr::chunk_syntactic_dependency_tree_as_sequence(rt, arr, algo);
-			
+				lal::linarr::chunk_syntactic_dependency_tree_as_sequence(
+					rt, arr, algo
+				);
+
 			const lal::graphs::rooted_tree chunked_rt =
 				lal::linarr::make_tree_from_chunk_sequence(chunks);
-			
+
 			std::cout << "===\n";
 			output_chunks(chunks);
 			output_head_vector(chunked_rt.get_head_vector());
-			
-			const auto err = test_chunked_tree(rt, arr, chunked_rt, chunks, algo);
+
+			const auto err =
+				test_chunked_tree(rt, arr, chunked_rt, chunks, algo);
 			if (err != err_type::no_error) {
 				return err;
 			}
@@ -306,15 +308,16 @@ noexcept
 	return err_type::no_error;
 }
 
-err_type exe_linarr_chunking(std::ifstream& fin) noexcept {
+err_type exe_linarr_chunking(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	std::string what_algo;
 	fin >> what_algo;
-	
+
 	std::string what_mode;
 	fin >> what_mode;
-	
+
 	lal::linarr::algorithms_chunking algo;
 	if (what_algo == "Anderson") {
 		algo = lal::linarr::algorithms_chunking::Anderson;
@@ -337,11 +340,13 @@ err_type exe_linarr_chunking(std::ifstream& fin) noexcept {
 		r = test_algo_automatic(fin, algo);
 	}
 
-	if (r != err_type::no_error) { return r; }
+	if (r != err_type::no_error) {
+		return r;
+	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

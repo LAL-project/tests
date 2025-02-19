@@ -64,18 +64,19 @@ typedef std::tuple<Ui> t1;
 typedef std::vector<t1> t1_vec;
 typedef t1_vec::iterator t1_vec_it;
 
-typedef std::tuple<Ui,Ui> t2;
+typedef std::tuple<Ui, Ui> t2;
 typedef std::vector<t2> t2_vec;
 typedef t2_vec::iterator t2_t;
 
-typedef std::tuple<Ui,Ui,Ui> t3;
+typedef std::tuple<Ui, Ui, Ui> t3;
 typedef std::vector<t3> t3_vec;
 typedef t3_vec::iterator t3_vec_it;
 
 // -----------------------------------------------------------------------------
 
 // size, values in range [0,n)
-static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) noexcept {
+static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) noexcept
+{
 	// always use the same seed
 	std::mt19937 gen(1234);
 
@@ -100,13 +101,16 @@ static inline std::vector<Ui> random_vector_unique(Ui s, Ui n) noexcept {
 
 // -----------------------------------------------------------------------------
 
-static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) noexcept {
+static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) noexcept
+{
 	// always use the same seed
 	std::mt19937 gen(1234);
 	std::uniform_int_distribution<Ui> U(0, n);
 	// random vector
 	std::vector<Ui> R(s);
-	for (std::size_t i = 0; i < R.size(); ++i) { R[i] = U(gen); }
+	for (std::size_t i = 0; i < R.size(); ++i) {
+		R[i] = U(gen);
+	}
 	return R;
 }
 
@@ -115,54 +119,45 @@ static inline std::vector<Ui> random_vector_multiple(Ui s, Ui n) noexcept {
 template <std::size_t idx = 0>
 struct struct_output {
 
-	template <typename V1, typename ... Params>
-	static constexpr void output(const std::tuple<V1, Params...>& t, std::ostream& out)
-	noexcept
+	template <typename V1, typename... Params>
+	static constexpr void
+	output(const std::tuple<V1, Params...>& t, std::ostream& out) noexcept
 	{
 		out << " " << std::get<idx>(t);
 
 		if constexpr (idx < sizeof...(Params)) {
-			struct_output<idx+1>::output(t, out);
+			struct_output<idx + 1>::output(t, out);
 		}
 	}
 
-	static constexpr void output(const Ui& t, std::ostream& out) noexcept {
+	static constexpr void output(const Ui& t, std::ostream& out) noexcept
+	{
 		out << " " << t;
 	}
-
 };
 
 template <std::size_t idx = 0>
 struct struct_assign {
 
 	template <typename Tuple, typename V1, typename... Params>
-	static void assign(
-		Tuple& t,
-		const V1& v1, const Params&... params
-	)
-	noexcept
+	static void assign(Tuple& t, const V1& v1, const Params&...params) noexcept
 	{
 		std::get<idx>(t) = v1;
 
 		if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
-			struct_assign<idx+1>::assign(t, params...);
+			struct_assign<idx + 1>::assign(t, params...);
 		}
 	}
 
 	template <typename Tuple, typename V1, typename... Params>
-	static void assign(
-		Tuple& t,
-		V1&& v1, Params&&... params
-	)
-	noexcept
+	static void assign(Tuple& t, V1&& v1, Params&&...params) noexcept
 	{
 		std::get<idx>(t) = std::move(v1);
 
 		if constexpr (idx < std::tuple_size_v<Tuple> - 1) {
-			struct_assign<idx+1>::assign(t, params...);
+			struct_assign<idx + 1>::assign(t, params...);
 		}
 	}
-
 };
 
 // -----------------------------------------------------------------------------
@@ -183,8 +178,7 @@ err_type __check_sorting(
 	std::vector<T> v1,
 	const Callable& sort_F,
 	bool incr
-)
-noexcept
+) noexcept
 {
 	// sort with our algorithm
 	sort_F(v1.begin(), v1.end());
@@ -203,13 +197,17 @@ noexcept
 		std::cerr << "    Sorting algorithm '" << algo << "' is not correct.\n";
 		std::cerr << "    Vector sorted with '" << algo << "':\n";
 		std::cerr << "    ";
-		for (auto k : v1) { struct_output<>::output(k, std::cerr); }
+		for (auto k : v1) {
+			struct_output<>::output(k, std::cerr);
+		}
 		std::cerr << '\n';
 
 		std::sort(v1.begin(), v1.end());
 		std::cerr << "    Vector sorted with std::sort:\n";
 		std::cerr << "    ";
-		for (auto k : v1) { struct_output<>::output(k, std::cerr); }
+		for (auto k : v1) {
+			struct_output<>::output(k, std::cerr);
+		}
 		std::cerr << '\n';
 		return err_type::test_execution;
 	}
@@ -225,13 +223,9 @@ noexcept
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
 template <typename Callable>
-err_type check_sorting
-(
-	const std::string& algo, Ui s, Ui n,
-	const Callable& sort_F,
-	bool incr
-)
-noexcept
+err_type check_sorting(
+	const std::string& algo, Ui s, Ui n, const Callable& sort_F, bool incr
+) noexcept
 {
 	const std::vector<Ui> R = random_vector_unique(s, n);
 	return __check_sorting(algo, R, sort_F, incr);
@@ -240,44 +234,52 @@ noexcept
 // -----------------------------------------------------------------------------
 
 template <typename It, typename T, typename Callable>
-void here_counting_sort
-(
-	It begin, It end, const std::size_t n,
-	const Callable& key,
-	bool incr
-)
-noexcept
+void here_counting_sort(
+	It begin, It end, const std::size_t n, const Callable& key, bool incr
+) noexcept
 {
-	const std::size_t size = static_cast<std::size_t>(std::distance(begin,end));
+	const std::size_t size =
+		static_cast<std::size_t>(std::distance(begin, end));
 	if (incr) {
-		lal::detail::sorting::counting_sort<T,lal::detail::sorting::sort_type::non_decreasing>
-		(begin, end, n, size, key);
+		lal::detail::sorting::
+			counting_sort<T, lal::detail::sorting::sort_type::non_decreasing>(
+				begin, end, n, size, key
+			);
 	}
 	else {
-		lal::detail::sorting::counting_sort<T, lal::detail::sorting::sort_type::non_increasing>
-		(begin, end, n, size, key);
+		lal::detail::sorting::
+			counting_sort<T, lal::detail::sorting::sort_type::non_increasing>(
+				begin, end, n, size, key
+			);
 	}
 }
 
 // check sorting of vectors of tuples
-err_type check_counting_sort
-(const bool incr, Ui k, Ui s, Ui n)
-noexcept
+err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 {
-	const auto key1 = [](const t1& t) -> std::size_t { return std::get<0>(t); };
-	const auto key2 = [](const t2& t) -> std::size_t { return std::get<0>(t); };
-	const auto key3 = [](const t3& t) -> std::size_t { return std::get<0>(t); };
+	const auto key1 = [](const t1& t) -> std::size_t
+	{
+		return std::get<0>(t);
+	};
+	const auto key2 = [](const t2& t) -> std::size_t
+	{
+		return std::get<0>(t);
+	};
+	const auto key3 = [](const t3& t) -> std::size_t
+	{
+		return std::get<0>(t);
+	};
 
-	const auto sort1 =
-	[&](t1_vec_it begin, t1_vec_it end) -> void {
+	const auto sort1 = [&](t1_vec_it begin, t1_vec_it end) -> void
+	{
 		here_counting_sort<t1_vec_it, t1>(begin, end, n, key1, incr);
 	};
-	const auto sort2 =
-	[&](t2_t begin, t2_t end) -> void {
+	const auto sort2 = [&](t2_t begin, t2_t end) -> void
+	{
 		here_counting_sort<t2_t, t2>(begin, end, n, key2, incr);
 	};
-	const auto sort3 =
-	[&](t3_vec_it begin, t3_vec_it end) -> void {
+	const auto sort3 = [&](t3_vec_it begin, t3_vec_it end) -> void
+	{
 		here_counting_sort<t3_vec_it, t3>(begin, end, n, key3, incr);
 	};
 
@@ -325,16 +327,22 @@ noexcept
 	return err_type::test_format;
 }
 
-err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept {
+err_type
+exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
+{
 	if (option == "insertion_sort_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
-		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
+		auto this_sort = [&](Ui_it begin, Ui_it end) -> void
+		{
 			lal::detail::sorting::insertion_sort(begin, end);
 		};
 		for (Ui k = 0; k < R; ++k) {
-			const err_type e = check_sorting("insertion", s, n, this_sort, true);
-			if (e != err_type::no_error) { return e; }
+			const err_type e =
+				check_sorting("insertion", s, n, this_sort, true);
+			if (e != err_type::no_error) {
+				return e;
+			}
 		}
 		return err_type::no_error;
 	}
@@ -346,13 +354,17 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 	if (option == "bit_sort_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
-		auto this_sort = [&](Ui_it begin, Ui_it end) -> void {
-			lal::detail::sorting::bit_sort<Ui>
-			(begin, end, static_cast<std::size_t>(std::distance(begin, end)));
+		auto this_sort = [&](Ui_it begin, Ui_it end) -> void
+		{
+			lal::detail::sorting::bit_sort<Ui>(
+				begin, end, static_cast<std::size_t>(std::distance(begin, end))
+			);
 		};
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e = check_sorting("bit", s, n, this_sort, true);
-			if (e != err_type::no_error) { return e; }
+			if (e != err_type::no_error) {
+				return e;
+			}
 		}
 		return err_type::no_error;
 	}
@@ -364,9 +376,14 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 		fin >> R >> s >> n;
 		// bit array
 		std::vector<char> seen(n, 0);
-		auto bsm = [&](Ui_it begin, Ui_it end) -> void {
-			lal::detail::sorting::bit_sort_mem<Ui>
-			(begin, end, static_cast<std::size_t>(std::distance(begin, end)), &seen[0]);
+		auto bsm = [&](Ui_it begin, Ui_it end) -> void
+		{
+			lal::detail::sorting::bit_sort_mem<Ui>(
+				begin,
+				end,
+				static_cast<std::size_t>(std::distance(begin, end)),
+				&seen[0]
+			);
 		};
 		// execute test
 		for (Ui k = 0; k < R; ++k) {
@@ -377,7 +394,9 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 				std::cerr << "    Memory array 'seen' contains true values.\n";
 				return err_type::test_execution;
 			}
-			if (e != err_type::no_error) { return e; }
+			if (e != err_type::no_error) {
+				return e;
+			}
 		}
 		return err_type::no_error;
 	}
@@ -389,7 +408,8 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 		fin >> order;
 		if (order != "increasing" and order != "decreasing") {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Order std::string '" << order << "' is not valid.\n";
+			std::cerr << "    Order std::string '" << order
+					  << "' is not valid.\n";
 			return err_type::test_format;
 		}
 		const bool incr = order == "increasing";
@@ -400,7 +420,9 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 		// execute test
 		for (Ui rep = 0; rep < R; ++rep) {
 			const err_type e = check_counting_sort(incr, k, s, n);
-			if (e != err_type::no_error) { return e; }
+			if (e != err_type::no_error) {
+				return e;
+			}
 		}
 		return err_type::no_error;
 	}
@@ -410,7 +432,8 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 		fin >> order;
 		if (order != "increasing" and order != "decreasing") {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Order std::string '" << order << "' is not valid.\n";
+			std::cerr << "    Order std::string '" << order
+					  << "' is not valid.\n";
 			return err_type::test_format;
 		}
 		const bool incr = order == "increasing";
@@ -425,14 +448,15 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 			Max = std::max(Max, v);
 		}
 
-		auto key1 = [](const uint64_t& t) -> std::size_t { return t; };
-		auto sort1 =
-		[&](Ui_it begin, Ui_it end) -> void {
+		auto key1 = [](const uint64_t& t) -> std::size_t
+		{
+			return t;
+		};
+		auto sort1 = [&](Ui_it begin, Ui_it end) -> void
+		{
 			here_counting_sort<Ui_it, uint64_t>(begin, end, Max, key1, incr);
 		};
-		return __check_sorting<uint64_t>(
-			"counting_sort", values, sort1, incr
-		);
+		return __check_sorting<uint64_t>("counting_sort", values, sort1, incr);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -440,18 +464,23 @@ err_type exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcep
 	return err_type::test_format;
 }
 
-err_type exe_detail_sorting(std::ifstream& fin) noexcept {
-	const std::set<std::string> allowed_options({
-		"insertion_sort_rand",
-		"bit_sort_rand", "bit_sort_mem_rand",
-		"counting_sort_rand", "counting_sort_nrand"
-	});
+err_type exe_detail_sorting(std::ifstream& fin) noexcept
+{
+	const std::set<std::string> allowed_options(
+		{"insertion_sort_rand",
+		 "bit_sort_rand",
+		 "bit_sort_mem_rand",
+		 "counting_sort_rand",
+		 "counting_sort_nrand"}
+	);
 
 	std::string option;
 	while (fin >> option) {
 		if (allowed_options.find(option) != allowed_options.end()) {
 			const err_type e = exe_rand_sorting(option, fin);
-			if (e != err_type::no_error) { return e; }
+			if (e != err_type::no_error) {
+				return e;
+			}
 		}
 		else {
 			std::cerr << ERROR << '\n';
@@ -468,5 +497,5 @@ err_type exe_detail_sorting(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace detail
-} // -- namespace tests
+} // namespace detail
+} // namespace tests

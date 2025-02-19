@@ -58,7 +58,8 @@
 namespace tests {
 namespace properties {
 
-err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept {
+err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept
+{
 
 	uint64_t n;
 	while (fin >> n) {
@@ -78,7 +79,8 @@ err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept {
 				const lal::graphs::rooted_tree R(t, r);
 				const lal::numeric::rational mhd =
 					lal::properties::mean_hierarchical_distance_rational(R);
-				std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd << '\n';
+				std::cout << "Mean_Hierarchical_Distance(" << r << ")= " << mhd
+						  << '\n';
 			}
 
 			++i;
@@ -88,5 +90,5 @@ err_type exe_properties_MHD_All_trees(std::ifstream& fin) noexcept {
 	return err_type::no_error;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

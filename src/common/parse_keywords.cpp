@@ -51,8 +51,9 @@
 
 namespace tests {
 
-err_type get_type_keyword(const std::string& filename, std::ifstream& fin, std::string& type)
-noexcept
+err_type get_type_keyword(
+	const std::string& filename, std::ifstream& fin, std::string& type
+) noexcept
 {
 	std::string field;
 	fin >> field;
@@ -69,7 +70,8 @@ noexcept
 	return err_type::no_error;
 }
 
-std::vector<std::string> get_keywords(const std::string& type) noexcept {
+std::vector<std::string> get_keywords(const std::string& type) noexcept
+{
 	std::vector<std::string> keywords;
 	bool finish = false;
 
@@ -81,7 +83,9 @@ std::vector<std::string> get_keywords(const std::string& type) noexcept {
 			dash_pos = new_dash_pos + 1;
 		}
 		else {
-			keywords.emplace_back(type.substr(dash_pos, type.length() - dash_pos));
+			keywords.emplace_back(
+				type.substr(dash_pos, type.length() - dash_pos)
+			);
 			finish = true;
 		}
 	}
@@ -90,4 +94,4 @@ std::vector<std::string> get_keywords(const std::string& type) noexcept {
 	return keywords;
 }
 
-} // -- namespace tests
+} // namespace tests

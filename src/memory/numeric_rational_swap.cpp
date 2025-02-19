@@ -55,61 +55,62 @@
 namespace tests {
 namespace memory {
 
-err_type test_rational_swap() noexcept {
+err_type test_rational_swap() noexcept
+{
 	{
-	lal::numeric::rational i1;
-	lal::numeric::rational i2;
-	i1.swap(i2);
-	check_1v_1v(i1, 0, i2, 0);
+		lal::numeric::rational i1;
+		lal::numeric::rational i2;
+		i1.swap(i2);
+		check_1v_1v(i1, 0, i2, 0);
 	}
 	{
-	lal::numeric::rational i1;
-	lal::numeric::rational i2;
-	i2.swap(i1);
-	check_1v_1v(i1, 0, i2, 0);
-	}
-
-	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2;
-	i1.swap(i2);
-	check_1v_1v(i1, 0, i2, 50);
-	}
-	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2;
-	i2.swap(i1);
-	check_1v_1v(i1, 0, i2, 50);
+		lal::numeric::rational i1;
+		lal::numeric::rational i2;
+		i2.swap(i1);
+		check_1v_1v(i1, 0, i2, 0);
 	}
 
 	{
-	lal::numeric::rational i1;
-	lal::numeric::rational i2 = 50;
-	i1.swap(i2);
-	check_1v_1v(i1, 50, i2, 0);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2;
+		i1.swap(i2);
+		check_1v_1v(i1, 0, i2, 50);
 	}
 	{
-	lal::numeric::rational i1;
-	lal::numeric::rational i2 = 50;
-	i2.swap(i1);
-	check_1v_1v(i1, 50, i2, 0);
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2;
+		i2.swap(i1);
+		check_1v_1v(i1, 0, i2, 50);
 	}
 
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2 = 2;
-	i1.swap(i2);
-	check_1v_1v(i1, 2, i2, 50);
+		lal::numeric::rational i1;
+		lal::numeric::rational i2 = 50;
+		i1.swap(i2);
+		check_1v_1v(i1, 50, i2, 0);
 	}
 	{
-	lal::numeric::rational i1 = 50;
-	lal::numeric::rational i2 = 2;
-	i2.swap(i1);
-	check_1v_1v(i1, 2, i2, 50);
+		lal::numeric::rational i1;
+		lal::numeric::rational i2 = 50;
+		i2.swap(i1);
+		check_1v_1v(i1, 50, i2, 0);
+	}
+
+	{
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2 = 2;
+		i1.swap(i2);
+		check_1v_1v(i1, 2, i2, 50);
+	}
+	{
+		lal::numeric::rational i1 = 50;
+		lal::numeric::rational i2 = 2;
+		i2.swap(i1);
+		check_1v_1v(i1, 2, i2, 50);
 	}
 
 	return err_type::no_error;
 }
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

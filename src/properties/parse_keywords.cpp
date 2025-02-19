@@ -51,8 +51,9 @@
 namespace tests {
 namespace properties {
 
-err_type call_expected_D_planar(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_expected_D_planar(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "brute_force") {
@@ -68,15 +69,16 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_expected_D(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_expected_D(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "Projective") {
 		return exe_properties_expected_D_projective(fin);
 	}
 	if (key == "Planar") {
-		return call_expected_D_planar(keywords, i+1, fin);
+		return call_expected_D_planar(keywords, i + 1, fin);
 	}
 	if (key == "Bipartite") {
 		return exe_properties_expected_D_bipartite(fin);
@@ -88,8 +90,9 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_properties(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_properties(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "general") {
@@ -108,7 +111,7 @@ noexcept
 		return exe_properties_ExpVar_D(fin);
 	}
 	if (key == "expected_D") {
-		return call_expected_D(keywords, i+1, fin);
+		return call_expected_D(keywords, i + 1, fin);
 	}
 	if (key == "centre") {
 		return exe_properties_centre(fin);
@@ -138,8 +141,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "properties") {
@@ -152,5 +155,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace properties
-} // -- namespace tests
+} // namespace properties
+} // namespace tests

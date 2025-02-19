@@ -55,11 +55,13 @@
 namespace tests {
 namespace memory {
 
-inline lal::numeric::integer integer_from_function() noexcept {
+inline lal::numeric::integer integer_from_function() noexcept
+{
 	return lal::numeric::integer(std::string(iff_value));
 }
 
-inline lal::numeric::rational rational_from_function() noexcept {
+inline lal::numeric::rational rational_from_function() noexcept
+{
 	return lal::numeric::rational(std::string(iff_value));
 }
 
@@ -71,5 +73,5 @@ err_type test_rational_copy() noexcept;
 err_type test_rational_swap() noexcept;
 err_type test_rational_move() noexcept;
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

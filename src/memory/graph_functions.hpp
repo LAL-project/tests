@@ -60,5 +60,5 @@ void test_copy_free_tree() noexcept;
 void test_move_rooted_tree() noexcept;
 void test_copy_rooted_tree() noexcept;
 
-} // -- namespace memory
-} // -- namespace tests
+} // namespace memory
+} // namespace tests

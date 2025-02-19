@@ -52,8 +52,9 @@
 namespace tests {
 namespace utilities {
 
-err_type call_utilities(const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin)
-noexcept
+err_type call_utilities(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "tree_isomorphism") {
@@ -66,8 +67,8 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-err_type call_main(const std::vector<std::string>& keywords, std::ifstream& fin)
-noexcept
+err_type
+call_main(const std::vector<std::string>& keywords, std::ifstream& fin) noexcept
 {
 	const std::string& key = keywords[0];
 	if (key == "utilities") {
@@ -80,5 +81,5 @@ noexcept
 	return err_type::wrong_keyword;
 }
 
-} // -- namespace utilities
-} // -- namespace tests
+} // namespace utilities
+} // namespace tests

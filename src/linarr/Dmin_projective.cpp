@@ -65,43 +65,48 @@ namespace linarr {
 namespace dmin_projective {
 
 template <class T>
-err_type examine_Dmin_projective
-(
+err_type examine_Dmin_projective(
 	const std::string& filename,
 	const TreeInit<T>& tree_initializer,
 	const lal::linarr::algorithms_Dmin_projective& algo
-)
-noexcept
+) noexcept
 {
 	std::ifstream input_file(filename);
 	if (not input_file.is_open()) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Input file '" << filename << "' could not be opened.\n";
+		std::cerr << "    Input file '" << filename
+				  << "' could not be opened.\n";
 		return err_type::io;
 	}
 
-	return single_arrangement::test_optimum_algorithm<lal::graphs::rooted_tree>
-	(
+	return single_arrangement::test_optimum_algorithm<lal::graphs::rooted_tree>(
 		tree_initializer,
-		[&](const lal::graphs::rooted_tree& t) {
+		[&](const lal::graphs::rooted_tree& t)
+		{
 			return lal::linarr::min_sum_edge_lengths_projective(t, algo);
 		},
-		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
+		[](const lal::graphs::rooted_tree& t,
+		   const lal::linear_arrangement& arr)
+		{
 			return lal::linarr::sum_edge_lengths(t, arr);
 		},
-		[](const lal::graphs::rooted_tree& t, const lal::linear_arrangement& arr) {
+		[](const lal::graphs::rooted_tree& t,
+		   const lal::linear_arrangement& arr)
+		{
 			return lal::linarr::is_projective(t, arr);
 		},
-		[](const lal::head_vector& v) {
+		[](const lal::head_vector& v)
+		{
 			return lal::graphs::from_head_vector_to_rooted_tree(v);
 		},
 		input_file
 	);
 }
 
-} // -- namespace dmin_projective
+} // namespace dmin_projective
 
-err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept {
+err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -121,41 +126,45 @@ err_type exe_linarr_Dmin_projective(std::ifstream& fin) noexcept {
 		std::cerr << "    Unrecognized algorithm '" << algo << "'.\n";
 		std::cerr << "    Allowed algorithms:\n";
 		for (const auto& s : allowed_algos) {
-		std::cerr << "    - " << s << '\n';
+			std::cerr << "    - " << s << '\n';
 		}
 		return err_type::test_format;
 	}
 
-	const auto algo_id = (
-		algo == "AEF" ?
-		lal::linarr::algorithms_Dmin_projective::AlemanyEstebanFerrer :
-		lal::linarr::algorithms_Dmin_projective::HochbergStallmann
-	);
+	const auto algo_id =
+		(algo == "AEF"
+			 ? lal::linarr::algorithms_Dmin_projective::AlemanyEstebanFerrer
+			 : lal::linarr::algorithms_Dmin_projective::HochbergStallmann);
 
 	const auto err1 =
-	dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>
-	(
-		inputs[0].first,
-		[](lal::graphs::rooted_tree& t) {
-			t.calculate_size_subtrees();
-		},
-		algo_id
-	);
-	if (err1 != err_type::no_error) { return err1; }
+		dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>(
+			inputs[0].first,
+			[](lal::graphs::rooted_tree& t)
+			{
+				t.calculate_size_subtrees();
+			},
+			algo_id
+		);
+	if (err1 != err_type::no_error) {
+		return err1;
+	}
 
 	// do not calculate size subtrees so as to be able to test it
 	const auto err2 =
-	dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>
-	(
-		inputs[0].first,
-		[](lal::graphs::rooted_tree&) { },
-		algo_id
-	);
-	if (err2 != err_type::no_error) { return err2; }
+		dmin_projective::examine_Dmin_projective<lal::graphs::rooted_tree>(
+			inputs[0].first,
+			[](lal::graphs::rooted_tree&)
+			{
+			},
+			algo_id
+		);
+	if (err2 != err_type::no_error) {
+		return err2;
+	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

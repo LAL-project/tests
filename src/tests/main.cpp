@@ -52,7 +52,8 @@
 #include "common/definitions.hpp"
 #include "common/parse_keywords.hpp"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	// error checking
 	if (argc == 1) {
 		std::cerr << ERROR << '\n';
@@ -72,7 +73,8 @@ int main(int argc, char *argv[]) {
 	}
 	if (strcmp(argv[1], "-i") != 0 and strcmp(argv[1], "--input") != 0) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Unrecognised parameter '" << std::string(argv[1]) << "'. Use\n";
+		std::cerr << "    Unrecognised parameter '" << std::string(argv[1])
+				  << "'. Use\n";
 		std::cerr << "        ./tests -i\n";
 		std::cerr << "        ./tests --input\n";
 		std::cerr << "    to specify an input test file.\n";

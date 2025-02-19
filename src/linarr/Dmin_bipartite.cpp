@@ -64,8 +64,8 @@ namespace linarr {
 enum class algorithms_Dmin_bipartite {
 	AlemanyEstebanFerrer
 };
-}
-}
+} // namespace linarr
+} // namespace lal
 
 namespace tests {
 namespace linarr {
@@ -73,51 +73,55 @@ namespace linarr {
 namespace Dmin_bipartite {
 
 template <class T>
-err_type examine_Dmin_bipartite
-(
+err_type examine_Dmin_bipartite(
 	const std::string& filename,
 	[[maybe_unused]] const lal::linarr::algorithms_Dmin_bipartite& algo
-)
-noexcept
+) noexcept
 {
 	std::ifstream input_file(filename);
 	if (not input_file.is_open()) {
 		std::cerr << ERROR << '\n';
-		std::cerr << "    Input file '" << filename << "' could not be opened.\n";
+		std::cerr << "    Input file '" << filename
+				  << "' could not be opened.\n";
 		return err_type::io;
 	}
 
 	lal::properties::bipartite_graph_coloring c;
 
-	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>
-	(
+	return single_arrangement::test_optimum_algorithm<lal::graphs::free_tree>(
 		// tree_initializer
-		[&](const lal::graphs::free_tree& t) {
+		[&](const lal::graphs::free_tree& t)
+		{
 			c = lal::properties::bipartite_coloring(t);
 		},
 		// solver
-		[&](const lal::graphs::free_tree& t) {
+		[&](const lal::graphs::free_tree& t)
+		{
 			return lal::linarr::min_sum_edge_lengths_bipartite(t, c);
 		},
 		// tree_eval
-		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+		[](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr)
+		{
 			return lal::linarr::sum_edge_lengths(t, arr);
 		},
 		// arrgmnt_check
-		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr) {
+		[&](const lal::graphs::free_tree& t, const lal::linear_arrangement& arr)
+		{
 			return lal::linarr::is_bipartite(t, c, arr);
 		},
 		// conv
-		[](const lal::head_vector& v) {
+		[](const lal::head_vector& v)
+		{
 			return lal::graphs::from_head_vector_to_free_tree(v).first;
 		},
 		input_file
 	);
 }
 
-} // -- namespace Dmin_bipartite
+} // namespace Dmin_bipartite
 
-err_type exe_linarr_Dmin_bipartite(std::ifstream& fin) noexcept {
+err_type exe_linarr_Dmin_bipartite(std::ifstream& fin) noexcept
+{
 	const input_list inputs = read_input_list(fin);
 
 	if (inputs.size() != 1) {
@@ -145,7 +149,8 @@ err_type exe_linarr_Dmin_bipartite(std::ifstream& fin) noexcept {
 	std::string algo_name;
 	lal::linarr::algorithms_Dmin_bipartite algo_choice;
 	if (algo == "AEF") {
-		algo_choice = lal::linarr::algorithms_Dmin_bipartite::AlemanyEstebanFerrer;
+		algo_choice =
+			lal::linarr::algorithms_Dmin_bipartite::AlemanyEstebanFerrer;
 		algo_name = "AEF";
 	}
 	else {
@@ -155,14 +160,17 @@ err_type exe_linarr_Dmin_bipartite(std::ifstream& fin) noexcept {
 	}
 
 	const auto err1 =
-		Dmin_bipartite::examine_Dmin_bipartite<lal::graphs::free_tree>
-		(inputs[0].first, algo_choice);
+		Dmin_bipartite::examine_Dmin_bipartite<lal::graphs::free_tree>(
+			inputs[0].first, algo_choice
+		);
 
-	if (err1 != err_type::no_error) { return err1; }
+	if (err1 != err_type::no_error) {
+		return err1;
+	}
 
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests

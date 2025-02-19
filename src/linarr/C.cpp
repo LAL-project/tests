@@ -65,20 +65,19 @@
 namespace tests {
 namespace linarr {
 
-#define output_arr_graph												\
-	std::cerr << "    For linear arrangement function " << i << ":\n";	\
-	std::cerr << "        " << pi.inverse_as_vector() << '\n';			\
-	std::cerr << "    For (directed) graph\n";							\
-	std::cerr << dG << '\n';											\
-	std::cerr << "    For (undirected) graph\n";						\
-	std::cerr << uG << '\n';											\
+#define output_arr_graph                                                       \
+	std::cerr << "    For linear arrangement function " << i << ":\n";         \
+	std::cerr << "        " << pi.inverse_as_vector() << '\n';                 \
+	std::cerr << "    For (directed) graph\n";                                 \
+	std::cerr << dG << '\n';                                                   \
+	std::cerr << "    For (undirected) graph\n";                               \
+	std::cerr << uG << '\n';
 
-err_type exe_linarr_C(std::ifstream& fin, bool has_upper_bound)
-noexcept
+err_type exe_linarr_C(std::ifstream& fin, bool has_upper_bound) noexcept
 {
-	std::set<std::string> allowed_procs({
-		"bruteforce", "dyn_prog", "ladder", "stack_based"
-	});
+	std::set<std::string> allowed_procs(
+		{"bruteforce", "dyn_prog", "ladder", "stack_based"}
+	);
 
 	const input_list inputs = read_input_list(fin);
 
@@ -92,13 +91,17 @@ noexcept
 	lal::graphs::undirected_graph uG;
 	lal::graphs::directed_graph dG;
 	{
-	const std::string& graph_name = inputs[0].first;
-	const std::string& graph_format = inputs[0].second;
-	err_type r;
-	r = io_wrapper::read_graph(graph_name, graph_format, uG);
-	if (r != err_type::no_error) { return r; }
-	r = io_wrapper::read_graph(graph_name, graph_format, dG);
-	if (r != err_type::no_error) { return r; }
+		const std::string& graph_name = inputs[0].first;
+		const std::string& graph_format = inputs[0].second;
+		err_type r;
+		r = io_wrapper::read_graph(graph_name, graph_format, uG);
+		if (r != err_type::no_error) {
+			return r;
+		}
+		r = io_wrapper::read_graph(graph_name, graph_format, dG);
+		if (r != err_type::no_error) {
+			return r;
+		}
 	}
 
 	std::string proc;
@@ -131,8 +134,10 @@ noexcept
 		const uint64_t dCbf = num_crossings_brute_force(dG, pi);
 		if (uCbf != dCbf) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Number of crossings calculated by bruteforce do not coincide.\n";
-			std::cerr << "    Comparing results for directed and undirected graphs.\n";
+			std::cerr << "    Number of crossings calculated by bruteforce do "
+						 "not coincide.\n";
+			std::cerr << "    Comparing results for directed and undirected "
+						 "graphs.\n";
 			std::cerr << "    uCbf= " << uCbf << '\n';
 			std::cerr << "    dCbf= " << dCbf << '\n';
 			output_arr_graph;
@@ -140,11 +145,17 @@ noexcept
 		}
 
 		uint64_t uC = 0, dC = 0;
-		const auto choose_algo =
-		[](const std::string& name) {
-			if (name == "dyn_prog") { return lal::linarr::algorithms_C::dynamic_programming; }
-			if (name == "ladder") { return lal::linarr::algorithms_C::ladder; }
-			if (name == "stack_based") { return lal::linarr::algorithms_C::stack_based; }
+		const auto choose_algo = [](const std::string& name)
+		{
+			if (name == "dyn_prog") {
+				return lal::linarr::algorithms_C::dynamic_programming;
+			}
+			if (name == "ladder") {
+				return lal::linarr::algorithms_C::ladder;
+			}
+			if (name == "stack_based") {
+				return lal::linarr::algorithms_C::stack_based;
+			}
 			return lal::linarr::algorithms_C::brute_force;
 		}(proc);
 
@@ -161,7 +172,8 @@ noexcept
 
 		if (uC != dC) {
 			std::cerr << ERROR << '\n';
-			std::cerr << "    Number of crossings for the directed graph does not\n";
+			std::cerr
+				<< "    Number of crossings for the directed graph does not\n";
 			std::cerr << "    coincide with the undirected graph.\n";
 			std::cerr << "    uC= " << uC << '\n';
 			std::cerr << "    dC= " << dC << '\n';
@@ -173,9 +185,11 @@ noexcept
 			if (uCbf > upper_bound) {
 				if (uC <= upper_bound) {
 					std::cerr << ERROR << '\n';
-					std::cerr << "    Expected number of crossings to be > upper_bound.\n";
+					std::cerr << "    Expected number of crossings to be > "
+								 "upper_bound.\n";
 					std::cerr << "    Instead, received: " << uC << '\n';
-					std::cerr << "    Actual number of crossings: " << uCbf << '\n';
+					std::cerr << "    Actual number of crossings: " << uCbf
+							  << '\n';
 					std::cerr << "    Upper bound: " << upper_bound << '\n';
 					output_arr_graph;
 					return err_type::test_execution;
@@ -183,8 +197,10 @@ noexcept
 			}
 			else if (uC != uCbf) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
-				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "    Number of crossings obtained with the "
+							 "algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings "
+							 "obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
 				output_arr_graph;
@@ -194,8 +210,10 @@ noexcept
 		else {
 			if (uC != uCbf) {
 				std::cerr << ERROR << '\n';
-				std::cerr << "    Number of crossings obtained with the algorithm does not\n";
-				std::cerr << "    coincide with the number of crossings obtained by brute force.\n";
+				std::cerr << "    Number of crossings obtained with the "
+							 "algorithm does not\n";
+				std::cerr << "    coincide with the number of crossings "
+							 "obtained by brute force.\n";
 				std::cerr << "        brute force: " << uCbf << '\n';
 				std::cerr << "        " << proc << ": " << uC << '\n';
 				output_arr_graph;
@@ -208,5 +226,5 @@ noexcept
 	return err_type::no_error;
 }
 
-} // -- namespace linarr
-} // -- namespace tests
+} // namespace linarr
+} // namespace tests
