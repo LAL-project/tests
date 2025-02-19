@@ -3,7 +3,7 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-LAL_VERSION = latest
+LAL_VERSION = 24.10
 
 isEmpty(ENVIR) {
 	ENVIR = "HOME"

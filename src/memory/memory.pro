@@ -3,6 +3,8 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+LAL_VERSION = 24.10
+
 isEmpty(ENVIR) {
 	ENVIR = "HOME"
 }
@@ -58,8 +60,8 @@ PRE_TARGETDEPS += ../common/libcommon.a
 
 # configure home
 equals(ENVIR, "HOME") {
-	LAL_DIR = $$(HOME)/Documents/projects/LAL-dev/latest/linear-arrangement-library
-	THIS_DIR = $$(HOME)/Documents/projects/LAL-dev/latest/tests/src
+	LAL_DIR = $$(HOME)/Documents/projects/LAL-dev/$${LAL_VERSION}/linear-arrangement-library
+	THIS_DIR = $$(HOME)/Documents/projects/LAL-dev/$${LAL_VERSION}/tests/src
 }
 
 # configure cluster
@@ -67,8 +69,8 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXX = /home/soft/gcc-11.3/bin/g++
 	QMAKE_LINK = /home/soft/gcc-11.3/bin/g++
 
-	LAL_DIR = $$(HOME)/LAL-dev/latest/linear-arrangement-library
-	THIS_DIR = $$(HOME)/LAL-dev/latest/tests/src
+	LAL_DIR = $$(HOME)/LAL-dev/$${LAL_VERSION}/linear-arrangement-library
+	THIS_DIR = $$(HOME)/LAL-dev/$${LAL_VERSION}/tests/src
 }
 
 CONFIG(debug, debug|release) {
