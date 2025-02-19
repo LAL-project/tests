@@ -103,55 +103,48 @@ err_type resolve_comp_integer(
 {
 	if (op == "==") {
 		if (val1 != val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "!=") {
 		if (val1 == val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 		if (val2 == val1) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">=") {
 		if (val1 < val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else if (op == ">") {
 		if (val1 <= val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<=") {
 		if (val1 > val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else if (op == "<") {
 		if (val1 >= val2) {
-			comparison_error(
-				op, var1, var2, val1, val2
-			) return err_type::test_execution;
+			comparison_error(op, var1, var2, val1, val2);
+			return err_type::test_execution;
 		}
 	}
 	else {
 		std::cerr << ERROR << '\n';
-		message_in_func("comparison " + op) std::cerr
-			<< "    Operator is not one of ==, !=, >=, >, <=, <\n";
+		message_in_func("comparison " + op);
+		std::cerr << "    Operator is not one of ==, !=, >=, >, <=, <\n";
 		std::cerr << "    Operator is: " << op << '\n';
 		return err_type::test_format;
 	}
@@ -167,9 +160,10 @@ err_type comp_integer(
 	std::string var1, var2;
 	fin >> var1 >> op_comp >> var2;
 
-	assert_exists_variable(var1) assert_exists_variable(var2)
+	assert_exists_variable(var1);
+	assert_exists_variable(var2);
 
-		const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 	const lal::numeric::integer& val2 = get_var_value(integer_vars, var2);
 	return resolve_comp_integer(var1, var2, val1, op_comp, val2);
 }
@@ -184,9 +178,9 @@ err_type comp_integer_lit(
 	int64_t val2;
 	fin >> var1 >> op_comp >> val2;
 
-	assert_exists_variable(var1)
+	assert_exists_variable(var1);
 
-		const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 	return resolve_comp_integer(var1, "literal", val1, op_comp, val2);
 }
 
@@ -233,11 +227,11 @@ err_type op_integer(
 	std::string var0, var1, var2;
 	fin >> var0 >> var1 >> op >> var2;
 
-	assert_exists_variable(var0) assert_exists_variable(var1)
-		assert_exists_variable(var2)
+	assert_exists_variable(var0);
+	assert_exists_variable(var1);
+	assert_exists_variable(var2);
 
-			const lal::numeric::integer& val1 =
-				get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 	const lal::numeric::integer& val2 = get_var_value(integer_vars, var2);
 
 	const lal::numeric::integer R = resolve_integer_operation(val1, op, val2);
@@ -255,9 +249,10 @@ err_type op_integer_lit(
 	int64_t val2;
 	fin >> var0 >> var1 >> op >> val2;
 
-	assert_exists_variable(var0) assert_exists_variable(var1)
+	assert_exists_variable(var0);
+	assert_exists_variable(var1);
 
-		const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
+	const lal::numeric::integer& val1 = get_var_value(integer_vars, var1);
 
 	const lal::numeric::integer R = resolve_integer_operation(val1, op, val2);
 	integer_vars[var0] = R;
@@ -277,16 +272,14 @@ err_type exe_numeric_integer(std::ifstream& fin) noexcept
 	while (fin >> command) {
 		if (command == "let") {
 			fin >> var_name >> format;
-			assert_correct_format("let", format)
+			assert_correct_format("let", format);
 
-				if (format == "int")
-			{
+			if (format == "int") {
 				int64_t val;
 				fin >> val;
 				integer_vars[var_name] = val;
 			}
-			else if (format == "string")
-			{
+			else if (format == "string") {
 				std::string val;
 				fin >> val;
 				integer_vars[var_name] = lal::numeric::integer(val);
@@ -294,15 +287,16 @@ err_type exe_numeric_integer(std::ifstream& fin) noexcept
 		}
 		else if (command == "assign") {
 			fin >> var_name;
-			assert_exists_variable(var_name) int64_t value;
+			assert_exists_variable(var_name);
+			int64_t value;
 			fin >> value;
 			integer_vars[var_name] = value;
 		}
 		else if (command == "print") {
 			fin >> var_name;
-			assert_exists_variable(var_name) std::cout
-				<< var_name << "= " << get_var_value(integer_vars, var_name)
-				<< '\n';
+			assert_exists_variable(var_name);
+			std::cout << var_name << "= "
+					  << get_var_value(integer_vars, var_name) << '\n';
 		}
 		else if (command == "compare") {
 			err = comp_integer(integer_vars, fin);

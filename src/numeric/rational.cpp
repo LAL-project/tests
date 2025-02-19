@@ -144,8 +144,8 @@ err_type resolve_comp_rational(
 	}
 	else {
 		std::cerr << ERROR << '\n';
-		message_in_func("comparison " + op) std::cerr
-			<< "    Operator is not one of ==, !=, >=, >, <=, <\n";
+		message_in_func("comparison " + op);
+		std::cerr << "    Operator is not one of ==, !=, >=, >, <=, <\n";
 		std::cerr << "    Operator is: " << op << '\n';
 		return err_type::test_format;
 	}
@@ -163,9 +163,10 @@ err_type comp_rational(
 	std::string var1, var2;
 	fin >> var1 >> op_comp >> var2;
 
-	assert_exists_variable(var1) assert_exists_variable(var2)
+	assert_exists_variable(var1);
+	assert_exists_variable(var2);
 
-		lal::numeric::integer ival1;
+	lal::numeric::integer ival1;
 	lal::numeric::rational rval1;
 	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") {
@@ -215,23 +216,19 @@ err_type comp_rational_lit(
 	int64_t val2;
 	fin >> var1 >> op_comp >> val2;
 
-	assert_exists_variable(var1)
+	assert_exists_variable(var1);
 
-		lal::numeric::integer ival1;
+	lal::numeric::integer ival1;
 	lal::numeric::rational rval1;
 	const std::string& type1 = var_type(var1);
 	if (type1 == "integer") {
 		ival1 = get_var_value(integer_vars, var1);
+		return resolve_comp_rational(var1, "literal", ival1, op_comp, val2);
 	}
 	else {
 		rval1 = get_var_value(rational_vars, var1);
+		return resolve_comp_rational(var1, "literal", rval1, op_comp, val2);
 	}
-
-	return (
-		type1 == "integer"
-			? resolve_comp_rational(var1, "literal", ival1, op_comp, val2)
-			: resolve_comp_rational(var1, "literal", rval1, op_comp, val2)
-	);
 }
 
 template <typename U>
@@ -302,11 +299,11 @@ err_type operation(
 	std::string var0, var1, var2;
 	fin >> var0 >> var1 >> op >> var2;
 
-	assert_exists_variable(var0) assert_exists_variable(var1)
-		assert_exists_variable(var2)
+	assert_exists_variable(var0);
+	assert_exists_variable(var1);
+	assert_exists_variable(var2);
 
-			lal::numeric::integer ival1,
-		ival2;
+	lal::numeric::integer ival1, ival2;
 	lal::numeric::rational rval1, rval2;
 
 	const std::string& type1 = var_type(var1);
@@ -362,9 +359,10 @@ err_type op_rational_lit(
 	int64_t val2;
 	fin >> var0 >> var1 >> op >> val2;
 
-	assert_exists_variable(var0) assert_exists_variable(var1)
+	assert_exists_variable(var0);
+	assert_exists_variable(var1);
 
-		lal::numeric::integer ival1;
+	lal::numeric::integer ival1;
 	lal::numeric::rational rval1;
 
 	const std::string& type1 = var_type(var1);
@@ -476,20 +474,25 @@ err_type exe_numeric_rational(std::ifstream& fin) noexcept
 	while (fin >> command) {
 		if (command == "let") {
 			fin >> var_name >> var_type >> format;
-			assert_correct_var_type("let", var_type)
-				assert_correct_format("let", format)
+			assert_correct_var_type("let", var_type);
+			assert_correct_format("let", format);
 
-					vtypes[var_name] = var_type;
+			vtypes[var_name] = var_type;
 			if (var_type == "integer") {
 				if (format == "int") {
 					int64_t val;
 					fin >> val;
 					integer_vars[var_name] = val;
 				}
-				else if (format == "std::string") {
+				else if (format == "string") {
 					std::string val;
 					fin >> val;
 					integer_vars[var_name] = lal::numeric::integer(val);
+				}
+				else {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Wrong format '" << format << "'.\n";
+					return err_type::test_format;
 				}
 			}
 			else {
@@ -503,23 +506,28 @@ err_type exe_numeric_rational(std::ifstream& fin) noexcept
 					fin >> val;
 					rational_vars[var_name] = lal::numeric::rational(val);
 				}
+				else {
+					std::cerr << ERROR << '\n';
+					std::cerr << "    Wrong format '" << format << "'.\n";
+					return err_type::test_format;
+				}
 			}
 		}
 		else if (command == "assign") {
 			fin >> var_name;
-			assert_exists_variable(var_name) std::string value;
+			assert_exists_variable(var_name);
+			std::string value;
 			fin >> value;
 			rational_vars[var_name] = lal::numeric::rational(value);
 		}
 		else if (command == "print") {
 			fin >> var_name;
-			assert_exists_variable(var_name) if (vtypes[var_name] == "rational")
-			{
+			assert_exists_variable(var_name);
+			if (vtypes[var_name] == "rational") {
 				std::cout << var_name << "= "
 						  << get_var_value(rational_vars, var_name) << '\n';
 			}
-			else
-			{
+			else {
 				std::cout << var_name << "= "
 						  << get_var_value(integer_vars, var_name) << '\n';
 			}
