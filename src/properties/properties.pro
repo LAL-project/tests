@@ -2,8 +2,7 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
-
-LAL_VERSION = latest
+CONFIG += c++23
 
 isEmpty(ENVIR) {
 	ENVIR = "HOME"
@@ -13,7 +12,7 @@ isEmpty(ADDRESS_SANITIZER) {
     ADDRESS_SANITIZER = "NO"
 }
 
-QMAKE_CXXFLAGS += -std=c++17 -fPIC -fopenmp
+QMAKE_CXXFLAGS += -std=c++23 -fPIC -fopenmp
 QMAKE_CXXFLAGS +=			\
 	-Wall					\
 	-Wextra					\ # reasonable and standard
