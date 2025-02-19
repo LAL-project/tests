@@ -96,4 +96,5 @@ SOURCES += \
 
 HEADERS += \
 	exe_tests.hpp \
-	parse_keywords.hpp
+	parse_keywords.hpp \
+	requirements.hpp
