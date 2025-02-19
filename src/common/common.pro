@@ -4,6 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 CONFIG += c++23
 
+LAL_VERSION = latest
+
 isEmpty(ENVIR) {
 	ENVIR = "HOME"
 }
@@ -60,8 +62,8 @@ LIBS += -lgmp -fopenmp -lpthread
 
 # configure home
 equals(ENVIR, "HOME") {
-	LAL_DIR = $$(HOME)/Documents/projects/LAL-dev/latest/linear-arrangement-library
-	THIS_DIR = $$(HOME)/Documents/projects/LAL-dev/latest/tests/src
+	LAL_DIR = $$(HOME)/Documents/projects/LAL-dev/$${LAL_VERSION}/linear-arrangement-library
+	THIS_DIR = $$(HOME)/Documents/projects/LAL-dev/$${LAL_VERSION}/tests/src
 }
 
 # configure cluster
@@ -69,8 +71,8 @@ equals(ENVIR, "CLUSTER") {
 	QMAKE_CXX = /home/soft/gcc-11.3/bin/g++
 	QMAKE_LINK = /home/soft/gcc-11.3/bin/g++
 
-	LAL_DIR = $$(HOME)/LAL-dev/latest/linear-arrangement-library
-	THIS_DIR = $$(HOME)/LAL-dev/latest/tests/src
+	LAL_DIR = $$(HOME)/LAL-dev/$${LAL_VERSION}/linear-arrangement-library
+	THIS_DIR = $$(HOME)/LAL-dev/$${LAL_VERSION}/tests/src
 }
 
 INCLUDEPATH += $${LAL_DIR}

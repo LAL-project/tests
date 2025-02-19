@@ -4,6 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 CONFIG += c++23
 
+LAL_VERSION = latest
+
 isEmpty(ENVIR) {
 	ENVIR = "HOME"
 }
