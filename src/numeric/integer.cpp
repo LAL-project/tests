@@ -350,58 +350,124 @@ err_type exe_numeric_integer_manual(std::ifstream&) noexcept
 	}
 
 	lal::numeric::integer k(3);
-	check_result("k + 3", k + 3, 6);
+	
 	check_result("3 + k", 3 + k, 6);
+	check_result("3 + k", lal::numeric::integer{3} + k, 6);
+	check_result("(-3) + k", (-3) + k, 0);
+	check_result("(-3) + k", lal::numeric::integer{-3} + k, 0);
+	
+	check_result("3 + (-k)", 3 + (-k), 0);
+	check_result("3 + (-k)", lal::numeric::integer{3} + (-k), 0);
+	check_result("(-3) + (-k)", (-3) + (-k), -6);
+	check_result("(-3) + (-k)", lal::numeric::integer{-3} + (-k), -6);
+	
+	check_result("k + 3", k + 3, 6);
+	check_result("k + 3", k + lal::numeric::integer{3}, 6);
+	check_result("k + (-3)", k + (-3), 0);
+	check_result("k + (-3)", k + lal::numeric::integer{-3}, 0);
+	
+	check_result("(-k) + 3", (-k) + 3, 0);
+	check_result("(-k) + 3", (-k) + lal::numeric::integer{3}, 0);
+	check_result("(-k) + (-3)", (-k) + (-3), -6);
+	check_result("(-k) + (-3)", (-k) + lal::numeric::integer{-3}, -6);
+	
 	check_result("k - 3", k - 3, 0);
+	check_result("k - 3", k - lal::numeric::integer{3}, 0);
 	check_result("k - (-3)", k - (-3), 6);
+	check_result("k - (-3)", k - lal::numeric::integer{-3}, 6);
+	
+	check_result("(-k) - 3", (-k) - 3, -6);
+	check_result("(-k) - 3", (-k) - lal::numeric::integer{3}, -6);
+	check_result("(-k) - (-3)", (-k) - (-3), 0);
+	check_result("(-k) - (-3)", (-k) - lal::numeric::integer{-3}, 0);
+	
 	check_result("3 - k", 3 - k, 0);
+	check_result("3 - k", lal::numeric::integer{-3} - k, -6);
+	check_result("3 - k", -lal::numeric::integer{3} - k, -6);
 	check_result("3 - (-k)", 3 - (-k), 6);
+	check_result("3 - (-k)", lal::numeric::integer{3} - (-k), 6);
+	
+	check_result("-3 - k", -3 - k, -6);
+	check_result("-3 - k", lal::numeric::integer{-3} - k, -6);
+	check_result("-3 - k", -lal::numeric::integer{3} - k, -6);
+	check_result("-3 - (-k)", -3 - (-k), 0);
+	check_result("-3 - (-k)", lal::numeric::integer{-3} - (-k), 0);
+	check_result("-3 - (-k)", -lal::numeric::integer{3} - (-k), 0);
+	
 	check_result("k*3", k * 3, 9);
+	check_result("k*3", k * lal::numeric::integer{3}, 9);
 	check_result("k*(-3)", k * (-3), -9);
+	check_result("k*(-3)", k * lal::numeric::integer{-3}, -9);
+	
 	check_result("(-k)*3", (-k) * 3, -9);
+	check_result("(-k)*3", (-k) * lal::numeric::integer{3}, -9);
 	check_result("(-k)*(-3)", (-k) * (-3), 9);
+	check_result("(-k)*(-3)", (-k) * lal::numeric::integer{-3}, 9);
+	
 	check_result("3*k", 3 * k, 9);
+	check_result("3*k", 3 * lal::numeric::integer{k}, 9);
 	check_result("(-3)*k", (-3) * k, -9);
+	check_result("(-3)*k", lal::numeric::integer{-3} * k, -9);
+	
 	check_result("3*(-k)", 3 * (-k), -9);
+	check_result("3*(-k)", lal::numeric::integer{3} * (-k), -9);
 	check_result("(-3)*(-k)", (-3) * (-k), 9);
+	check_result("(-3)*(-k)", lal::numeric::integer{-3} * (-k), 9);
+	
 	check_result("k/3", k / 3, 1);
+	check_result("k/3", k / lal::numeric::integer{3}, 1);
 	check_result("k/(-3)", k / (-3), -1);
+	check_result("k/(-3)", k / lal::numeric::integer{-3}, -1);
+	
 	check_result("(-k)/3", (-k) / 3, -1);
+	check_result("(-k)/3", (-k) / lal::numeric::integer{3}, -1);
 	check_result("(-k)/(-3)", (-k) / (-3), 1);
+	check_result("(-k)/(-3)", (-k) / lal::numeric::integer{-3}, 1);
+	
 	check_result("3/k", 3 / k, 1);
+	check_result("3/k", lal::numeric::integer{3} / k, 1);
 	check_result("(-3)/k", (-3) / k, -1);
+	check_result("(-3)/k", lal::numeric::integer{-3} / k, -1);
+	
 	check_result("3/(-k)", 3 / (-k), -1);
+	check_result("3/(-k)", lal::numeric::integer{3} / (-k), -1);
 	check_result("(-3)/(-k)", (-3) / (-k), 1);
+	check_result("(-3)/(-k)", lal::numeric::integer{-3} / (-k), 1);
 
 	check_result("18/k", 18 / k, 6);
+	check_result("18/k", lal::numeric::integer{18} / k, 6);
 	check_result("18/integer(1234)", 18 / lal::numeric::integer(1234), 0);
+	check_result(
+		"18/integer(1234)",
+		lal::numeric::integer{18} / lal::numeric::integer(1234),
+		0
+	);
 
 	k = 6;
-	check_result("k + 3", k + 3, 9);
-	check_result("3 + k", 3 + k, 9);
-	check_result("k - 3", k - 3, 3);
-	check_result("k - (-3)", k - (-3), 9);
-	check_result("3 - k", 3 - k, -3);
-	check_result("3 - (-k)", 3 - (-k), 9);
-	check_result("k*3", k * 3, 18);
-	check_result("k*(-3)", k * (-3), -18);
-	check_result("(-k)*3", (-k) * 3, -18);
-	check_result("(-k)*(-3)", (-k) * (-3), 18);
-	check_result("3*k", 3 * k, 18);
-	check_result("(-3)*k", (-3) * k, -18);
-	check_result("3*(-k)", 3 * (-k), -18);
-	check_result("(-3)*(-k)", (-3) * (-k), 18);
+	
 	check_result("k/3", k / 3, 2);
+	check_result("k/3", k / lal::numeric::integer{3}, 2);
 	check_result("k/(-3)", k / (-3), -2);
+	check_result("k/(-3)", k / lal::numeric::integer{-3}, -2);
+	
 	check_result("(-k)/3", (-k) / 3, -2);
+	check_result("(-k)/3", (-k) / lal::numeric::integer{3}, -2);
 	check_result("(-k)/(-3)", (-k) / (-3), 2);
+	check_result("(-k)/(-3)", (-k) / lal::numeric::integer{-3}, 2);
+	
 	check_result("3/k", 3 / k, 0);
+	check_result("3/k", lal::numeric::integer{3} / k, 0);
 	check_result("(-3)/k", (-3) / k, 0);
+	check_result("(-3)/k", lal::numeric::integer{-3} / k, 0);
+	
 	check_result("3/(-k)", 3 / (-k), 0);
+	check_result("3/(-k)", lal::numeric::integer{3} / (-k), 0);
 	check_result("(-3)/(-k)", (-3) / (-k), 0);
+	check_result("(-3)/(-k)", lal::numeric::integer{-3} / (-k), 0);
 
 	check_result("18/k", 18 / k, 3);
-
+	check_result("18/k", lal::numeric::integer{18} / k, 3);
+	
 	TEST_GOODBYE;
 	return err_type::no_error;
 }
