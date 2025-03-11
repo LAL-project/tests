@@ -116,6 +116,20 @@ err_type test_integer_swap() noexcept
 		i2.swap(i1);
 		check_1v_1v(i1, 2, i2, 50);
 	}
+	{
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2 = 2;
+		lal::numeric::integer i3 = std::move(i2);
+		i1.swap(i2);
+		check_0_1v(i1, i2, 50);
+	}
+	{
+		lal::numeric::integer i1 = 50;
+		lal::numeric::integer i2 = 2;
+		lal::numeric::integer i3 = std::move(i2);
+		i2.swap(i1);
+		check_0_1v(i1, i2, 50);
+	}
 
 	return err_type::no_error;
 }

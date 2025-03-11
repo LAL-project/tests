@@ -108,6 +108,20 @@ err_type test_rational_swap() noexcept
 		i2.swap(i1);
 		check_1v_1v(i1, 2, i2, 50);
 	}
+	{
+		lal::numeric::rational r1 = 50;
+		lal::numeric::rational r2 = 2;
+		lal::numeric::rational r3 = std::move(r2);
+		r1.swap(r2);
+		check_0_1v(r1, r2, 50);
+	}
+	{
+		lal::numeric::rational r1 = 50;
+		lal::numeric::rational r2 = 2;
+		lal::numeric::rational r3 = std::move(r2);
+		r2.swap(r1);
+		check_0_1v(r1, r2, 50);
+	}
 
 	return err_type::no_error;
 }
