@@ -55,7 +55,7 @@ namespace tests {
 namespace io_wrapper {
 
 template <class graph_t>
-err_type __read_graph(
+err_type _read_graph(
 	const std::string& file, const std::string& format, graph_t& g, bool norm
 ) noexcept
 {
@@ -109,7 +109,7 @@ err_type read_graph(
 	bool norm
 ) noexcept
 {
-	return __read_graph(file, format, G, norm);
+	return _read_graph(file, format, G, norm);
 }
 err_type read_graph(
 	const std::string& file,
@@ -118,7 +118,7 @@ err_type read_graph(
 	bool norm
 ) noexcept
 {
-	return __read_graph(file, format, G, norm);
+	return _read_graph(file, format, G, norm);
 }
 
 err_type read_graph(
@@ -128,7 +128,7 @@ err_type read_graph(
 	bool norm
 ) noexcept
 {
-	return __read_graph(file, format, G, norm);
+	return _read_graph(file, format, G, norm);
 }
 
 err_type read_graph(
@@ -138,7 +138,7 @@ err_type read_graph(
 	bool norm
 ) noexcept
 {
-	return __read_graph(file, format, G, norm);
+	return _read_graph(file, format, G, norm);
 }
 
 } // namespace io_wrapper

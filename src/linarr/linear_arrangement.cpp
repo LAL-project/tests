@@ -310,7 +310,7 @@ void case_5() noexcept
 	}
 }
 
-void __case_6(
+void _case_6(
 	std::size_t n, const std::vector<std::pair<lal::node_t, lal::node_t>>& v
 ) noexcept
 {
@@ -331,13 +331,13 @@ void case_6() noexcept
 	begin_function;
 
 	begin_case;
-	__case_6(5, {{0ull, 1ull}, {0ull, 2ull}, {0ull, 3ull}, {0ull, 4ull}});
+	_case_6(5, {{0ull, 1ull}, {0ull, 2ull}, {0ull, 3ull}, {0ull, 4ull}});
 
 	begin_case;
-	__case_6(5, {{1ull, 0ull}, {2ull, 3ull}, {0ull, 4ull}, {1ull, 3ull}});
+	_case_6(5, {{1ull, 0ull}, {2ull, 3ull}, {0ull, 4ull}, {1ull, 3ull}});
 
 	begin_case;
-	__case_6(5, {{1ull, 0ull}, {2ull, 3ull}, {0ull, 4ull}, {1ull, 3ull}});
+	_case_6(5, {{1ull, 0ull}, {2ull, 3ull}, {0ull, 4ull}, {1ull, 3ull}});
 }
 
 err_type case_7() noexcept

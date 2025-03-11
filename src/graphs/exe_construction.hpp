@@ -458,9 +458,9 @@ static const std::vector<std::string> all_types({UGRAPH, DGRAPH, FTREE, RTREE});
 	}
 
 #define rooted_tree_type_to_string(t)                                          \
-	[](rooted_tree::rooted_tree_type __t) -> std::string                       \
+	[](rooted_tree::rooted_tree_type _t) -> std::string                        \
 	{                                                                          \
-		switch (__t) {                                                         \
+		switch (_t) {                                                          \
 		case rooted_tree::rooted_tree_type::arborescence:                      \
 			return "arborescence";                                             \
 		case rooted_tree::rooted_tree_type::anti_arborescence:                 \

@@ -115,13 +115,13 @@ lal::graphs::rooted_tree parse_tree_in_line(const std::string& s) noexcept
 	return lal::graphs::from_head_vector_to_rooted_tree(L);
 }
 
-std::array<bool, lal::linarr::__syntactic_dependency_tree_size>
+std::array<bool, lal::linarr::_syntactic_dependency_tree_size>
 parse_ground_classes(std::string s) noexcept
 {
 	// classes vector
 	auto classes = lal::detail::make_array_with_value<
 		bool,
-		lal::linarr::__syntactic_dependency_tree_size,
+		lal::linarr::_syntactic_dependency_tree_size,
 		false>();
 
 	if (s.length() == 0) {

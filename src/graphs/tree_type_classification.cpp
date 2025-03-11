@@ -115,7 +115,7 @@ std::vector<uint64_t> parse_treestr(const std::string& s) noexcept
 std::vector<bool> parse_classes_tt(std::string s) noexcept
 {
 	// classes vector
-	std::vector<bool> classes(lal::graphs::__tree_type_size, false);
+	std::vector<bool> classes(lal::graphs::_tree_type_size, false);
 	bool read_sth = false;
 
 	// parse classes in std::string
@@ -208,7 +208,7 @@ err_type exe_graphs_tree_type_classification(std::ifstream& fin) noexcept
 			return err_type::test_execution;
 		}
 
-		std::vector<bool> LAL_types(lal::graphs::__tree_type_size, false);
+		std::vector<bool> LAL_types(lal::graphs::_tree_type_size, false);
 		for (const std::string& s : fClasses) {
 			LAL_types[static_cast<std::size_t>(tree_type_class::string_to_tt(s)
 			)] = true;

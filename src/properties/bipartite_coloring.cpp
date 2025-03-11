@@ -53,7 +53,6 @@
 // common includes
 #include "common/io_wrapper.hpp"
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
 #include "common/parse_header.hpp"
 
 namespace tests {
@@ -63,9 +62,9 @@ namespace properties {
 	{                                                                          \
 		std::cerr << g << '\n';                                                \
 		std::cerr << "    Coloring:\n";                                        \
-		for (lal::node __u = 0; __u < n; ++__u) {                              \
-			std::cerr << "        " << __u << " -> "                           \
-					  << int(c.get_color_of(__u)) << '\n';                     \
+		for (lal::node _u = 0; _u < n; ++_u) {                                 \
+			std::cerr << "        " << _u << " -> " << int(c.get_color_of(_u)) \
+					  << '\n';                                                 \
 		}                                                                      \
 	}
 

@@ -173,7 +173,7 @@ namespace detail {
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
 template <class T, typename Callable>
-err_type __check_sorting(
+err_type _check_sorting(
 	const std::string& algo,
 	std::vector<T> v1,
 	const Callable& sort_F,
@@ -228,7 +228,7 @@ err_type check_sorting(
 ) noexcept
 {
 	const std::vector<Ui> R = random_vector_unique(s, n);
-	return __check_sorting(algo, R, sort_F, incr);
+	return _check_sorting(algo, R, sort_F, incr);
 }
 
 // -----------------------------------------------------------------------------
@@ -292,7 +292,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t1>("counting_sort", R, sort1, incr);
+		return _check_sorting<t1>("counting_sort", R, sort1, incr);
 	}
 
 	if (k == 2) {
@@ -305,7 +305,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t2>("counting_sort", R, sort2, incr);
+		return _check_sorting<t2>("counting_sort", R, sort2, incr);
 	}
 
 	if (k == 3) {
@@ -319,7 +319,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i], r3[i]);
 		}
 		// check sorting algorithm
-		return __check_sorting<t3>("counting_sort", R, sort3, incr);
+		return _check_sorting<t3>("counting_sort", R, sort3, incr);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -456,7 +456,7 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 		{
 			here_counting_sort<Ui_it, uint64_t>(begin, end, Max, key1, incr);
 		};
-		return __check_sorting<uint64_t>("counting_sort", values, sort1, incr);
+		return _check_sorting<uint64_t>("counting_sort", values, sort1, incr);
 	}
 
 	std::cerr << ERROR << '\n';
