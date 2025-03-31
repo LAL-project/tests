@@ -41,13 +41,11 @@
  ********************************************************************/
 
 // C++ includes
-#include <functional>
 #include <iostream>
 #include <utility>
 #include <fstream>
 #include <string>
-#include <random>
-#include <set>
+
 // lal includes
 #include <lal/detail/avl.hpp>
 

@@ -46,6 +46,7 @@
 #include <fstream>
 #include <cassert>
 #include <queue>
+
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>

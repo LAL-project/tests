@@ -40,12 +40,10 @@
  *
  ********************************************************************/
 
-// C includes
-#include <string.h>
-
 // C++ includes
 #include <filesystem>
 #include <iostream>
+#include <cstring>
 #include <fstream>
 #include <string>
 #include <vector>

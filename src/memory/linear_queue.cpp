@@ -53,7 +53,7 @@ using namespace lal::detail;
 #include "common/definitions.hpp"
 
 // memory includes
-#include "memory/data_array_utils.hpp"
+#include "memory/common_utils.hpp"
 
 #define MOVE
 #define COPY

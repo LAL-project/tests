@@ -41,7 +41,6 @@
  ********************************************************************/
 
 // C++ includes
-#include <functional>
 #include <iostream>
 #include <fstream>
 

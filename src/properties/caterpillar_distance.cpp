@@ -43,7 +43,7 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <random>
+#include <cmath>
 #include <set>
 
 // lal includes
@@ -56,7 +56,6 @@
 
 // common includes
 #include "common/definitions.hpp"
-#include "common/test_utils.hpp"
 
 namespace tests {
 namespace properties {

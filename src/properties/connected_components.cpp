@@ -43,6 +43,7 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
+
 // lal includes
 #include <lal/graphs/undirected_graph.hpp>
 #include <lal/graphs/directed_graph.hpp>

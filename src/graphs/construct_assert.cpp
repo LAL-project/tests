@@ -40,12 +40,10 @@
  *
  ********************************************************************/
 
-// C includes
-#include <assert.h>
-
 // C++ includes
 #include <algorithm>
 #include <iostream>
+#include <cassert>
 #include <fstream>
 #include <string>
 #include <map>

@@ -43,11 +43,11 @@
 #include "C_rla_brute_force_algorithms.hpp"
 
 // C includes
-#include <assert.h>
-#include <string.h>
 #include <omp.h>
 
 // C++ includes
+#include <cassert>
+#include <cstring>
 #include <vector>
 
 // lal includes

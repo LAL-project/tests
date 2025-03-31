@@ -44,7 +44,6 @@
 
 // C++ includes
 #include <iostream>
-#include <vector>
 
 // lal includes
 #include <lal/numeric/integer_output.hpp>

@@ -44,7 +44,6 @@
 
 // C++ includes
 #include <chrono>
-#include <thread>
 
 namespace tests {
 namespace timing {

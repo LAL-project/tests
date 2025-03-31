@@ -43,8 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <random>
-#include <set>
 
 // lal includes
 #include <lal/graphs/output.hpp>

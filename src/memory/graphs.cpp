@@ -43,7 +43,6 @@
 // C++ includes
 #include <iostream>
 #include <fstream>
-#include <map>
 
 // lal includes
 #include <lal/generate/all_ulab_free_trees.hpp>
@@ -53,7 +52,7 @@
 #include "common/definitions.hpp"
 
 // memory includes
-#include "memory/graph_utils.hpp"
+#include "memory/common_utils.hpp"
 #include "memory/graph_functions.hpp"
 
 #define MOVE_UGRAPH

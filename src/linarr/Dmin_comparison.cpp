@@ -61,7 +61,6 @@
 // common includes
 #include "common/definitions.hpp"
 #include "common/std_utils.hpp"
-#include "common/test_utils.hpp"
 
 // linarr includes
 #include "linarr/arrangement_check.hpp"
