@@ -36,6 +36,9 @@ groups_list=(\
 	\
 	"detail" \
 		"detail_sorting" \
+			"detail_sorting_insertion" \
+			"detail_sorting_bit" \
+			"detail_sorting_counting" \
 		"detail_traversal" \
 		"detail_avl" \
 	\

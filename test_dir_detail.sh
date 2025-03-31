@@ -1,8 +1,20 @@
 #!/bin/bash
 
 # sorting tests
+detail_sorting_insertion_DIRS=(\
+	"detail/sorting/insertion_sort" "detail/sorting/insertion_sort" \
+	)
+detail_sorting_bit_DIRS=(\
+	"detail/sorting/bit_sort" "detail/sorting/bit_sort" \
+	)
+detail_sorting_counting_DIRS=(\
+	"detail/sorting/counting_sort" "detail/sorting/counting_sort" \
+	)
+
 detail_sorting_DIRS=(\
-	"detail/sorting" "detail/sorting" \
+	"${detail_sorting_insertion_DIRS[@]}" \
+	"${detail_sorting_bit_DIRS[@]}" \
+	"${detail_sorting_counting_DIRS[@]}" \
 	)
 
 # detail_traversal tests
