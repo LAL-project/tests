@@ -159,10 +159,10 @@ bool are_centroids_equal(
 namespace tests {
 namespace properties {
 
-template <class TREE_TYPE>
+template <class tree_t>
 err_type exe_commands_utils_centroid(std::ifstream& fin) noexcept
 {
-	TREE_TYPE t;
+	tree_t t;
 	uint64_t n;
 
 	std::string option;
