@@ -175,32 +175,42 @@ err_type check_sorting_vector(
 	const std::string& algo, std::vector<T> v, const Callable& sort_F, bool incr
 ) noexcept
 {
-	// sort with our algorithm
-	sort_F(v.begin(), v.end());
+
+	auto v1 = v;
+	auto v2 = v;
+
+	std::sort(v1.begin(), v1.end());
+	sort_F(v2.begin(), v2.end());
 
 	bool is_sorted;
 	if (incr) {
-		is_sorted = std::is_sorted(v.begin(), v.end());
+		is_sorted = v1 == v2;
 	}
 	else {
-		std::reverse(v.begin(), v.end());
-		is_sorted = std::is_sorted(v.begin(), v.end());
+		std::reverse(v1.begin(), v1.end());
+		is_sorted = v1 == v2;
 	}
 
 	if (not is_sorted) {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Sorting algorithm '" << algo << "' is not correct.\n";
-		std::cerr << "    Vector sorted with '" << algo << "':\n";
+		std::cerr << "    Original data:\n";
 		std::cerr << "    ";
 		for (const auto& k : v) {
 			struct_output<>::output(k, std::cerr);
 		}
 		std::cerr << '\n';
 
-		std::sort(v.begin(), v.end());
-		std::cerr << "    Vector sorted with std::sort:\n";
+		std::cerr << "    Data sorted with std::sort:\n";
 		std::cerr << "    ";
-		for (auto k : v) {
+		for (const auto& k : v1) {
+			struct_output<>::output(k, std::cerr);
+		}
+		std::cerr << '\n';
+
+		std::cerr << "    Data sorted with '" << algo << "':\n";
+		std::cerr << "    ";
+		for (const auto& k : v2) {
 			struct_output<>::output(k, std::cerr);
 		}
 		std::cerr << '\n';
