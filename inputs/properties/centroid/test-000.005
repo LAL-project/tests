@@ -1,0 +1,22 @@
+TYPE properties-centroid
+
+	manual ftree
+	init 10
+	add_edges 4
+	2 3
+	6 9
+	6 7
+	7 8
+	
+	centroid_is 0 1 0
+	centroid_is 1 1 1
+	centroid_is 2 2 2 3
+	centroid_is 3 2 2 3
+	centroid_is 4 1 4
+	centroid_is 5 1 5
+	
+	centroid_is 6 2 6 7
+	centroid_is 7 2 6 7
+	centroid_is 8 2 6 7
+	centroid_is 9 2 6 7
+	
