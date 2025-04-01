@@ -5,6 +5,10 @@ FORMAT OF COMMANDS
 
 	Sorts the 's' random values within the range [0,n] INCREASINGLY. The random values are generated 'R' times.
 
++ insertion_sort_nrand n a_1 .. a_n:
+	
+	Sorts the values a_1 ... a_n increasingly
+
 + bit_sort_rand R s n:
 
 	Sorts the 's' random values within the range [0,n] INCREASINGLY. The random values are generated 'R' times.
