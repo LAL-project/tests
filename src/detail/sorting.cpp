@@ -167,29 +167,24 @@ namespace detail {
 
 // Sort two vectors and compare them.
 // - algo: name of the sorting algorithm (for debugging purposes)
-// - v1, v2: the same vectors.
-//     v1 is sorted by "std::sort"
-//     v2 is sorted by our algorithm
+// - v1: the vector to be sorted
 // - sort_F: our sorting algorithm
 // - incr: should the sorting be done in increasing order?
 template <class T, typename Callable>
-err_type _check_sorting(
-	const std::string& algo,
-	std::vector<T> v1,
-	const Callable& sort_F,
-	bool incr
+err_type check_sorting_vector(
+	const std::string& algo, std::vector<T> v, const Callable& sort_F, bool incr
 ) noexcept
 {
 	// sort with our algorithm
-	sort_F(v1.begin(), v1.end());
+	sort_F(v.begin(), v.end());
 
 	bool is_sorted;
 	if (incr) {
-		is_sorted = std::is_sorted(v1.begin(), v1.end());
+		is_sorted = std::is_sorted(v.begin(), v.end());
 	}
 	else {
-		std::reverse(v1.begin(), v1.end());
-		is_sorted = std::is_sorted(v1.begin(), v1.end());
+		std::reverse(v.begin(), v.end());
+		is_sorted = std::is_sorted(v.begin(), v.end());
 	}
 
 	if (not is_sorted) {
@@ -197,15 +192,15 @@ err_type _check_sorting(
 		std::cerr << "    Sorting algorithm '" << algo << "' is not correct.\n";
 		std::cerr << "    Vector sorted with '" << algo << "':\n";
 		std::cerr << "    ";
-		for (auto k : v1) {
+		for (const auto& k : v) {
 			struct_output<>::output(k, std::cerr);
 		}
 		std::cerr << '\n';
 
-		std::sort(v1.begin(), v1.end());
+		std::sort(v.begin(), v.end());
 		std::cerr << "    Vector sorted with std::sort:\n";
 		std::cerr << "    ";
-		for (auto k : v1) {
+		for (auto k : v) {
 			struct_output<>::output(k, std::cerr);
 		}
 		std::cerr << '\n';
@@ -228,7 +223,7 @@ err_type check_sorting(
 ) noexcept
 {
 	const std::vector<Ui> R = random_vector_unique(s, n);
-	return _check_sorting(algo, R, sort_F, incr);
+	return check_sorting_vector(algo, R, sort_F, incr);
 }
 
 // -----------------------------------------------------------------------------
@@ -292,7 +287,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r[i]);
 		}
 		// check sorting algorithm
-		return _check_sorting<t1>("counting_sort", R, sort1, incr);
+		return check_sorting_vector<t1>("counting_sort", R, sort1, incr);
 	}
 
 	if (k == 2) {
@@ -305,7 +300,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i]);
 		}
 		// check sorting algorithm
-		return _check_sorting<t2>("counting_sort", R, sort2, incr);
+		return check_sorting_vector<t2>("counting_sort", R, sort2, incr);
 	}
 
 	if (k == 3) {
@@ -319,7 +314,7 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 			struct_assign<>::assign(R[i], r1[i], r2[i], r3[i]);
 		}
 		// check sorting algorithm
-		return _check_sorting<t3>("counting_sort", R, sort3, incr);
+		return check_sorting_vector<t3>("counting_sort", R, sort3, incr);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -330,16 +325,20 @@ err_type check_counting_sort(const bool incr, Ui k, Ui s, Ui n) noexcept
 err_type
 exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 {
+	auto insertion_sort = [](Ui_it begin, Ui_it end) -> void
+	{
+		lal::detail::sorting::insertion_sort(begin, end);
+	};
+
+	/* INSERTION SORT */
+
 	if (option == "insertion_sort_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
-		auto this_sort = [&](Ui_it begin, Ui_it end) -> void
-		{
-			lal::detail::sorting::insertion_sort(begin, end);
-		};
+
 		for (Ui k = 0; k < R; ++k) {
 			const err_type e =
-				check_sorting("insertion", s, n, this_sort, true);
+				check_sorting("insertion", s, n, insertion_sort, true);
 			if (e != err_type::no_error) {
 				return e;
 			}
@@ -347,11 +346,25 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 		return err_type::no_error;
 	}
 
+	else if (option == "insertion_sort_nrand") {
+		uint64_t n;
+		fin >> n;
+
+		std::vector<uint64_t> values(n);
+		for (auto& v : values) {
+			fin >> v;
+		}
+
+		return check_sorting_vector<uint64_t>(
+			"insertion", values, insertion_sort, true
+		);
+	}
+
 	/* BIT SORT */
 
 	// --- without memory
 
-	if (option == "bit_sort_rand") {
+	else if (option == "bit_sort_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		auto this_sort = [&](Ui_it begin, Ui_it end) -> void
@@ -371,7 +384,7 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 
 	// --- with memory
 
-	if (option == "bit_sort_mem_rand") {
+	else if (option == "bit_sort_mem_rand") {
 		Ui R, s, n;
 		fin >> R >> s >> n;
 		// bit array
@@ -403,7 +416,7 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 
 	/* COUNTING SORT */
 
-	if (option == "counting_sort_rand") {
+	else if (option == "counting_sort_rand") {
 		std::string order;
 		fin >> order;
 		if (order != "increasing" and order != "decreasing") {
@@ -427,7 +440,7 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 		return err_type::no_error;
 	}
 
-	if (option == "counting_sort_nrand") {
+	else if (option == "counting_sort_nrand") {
 		std::string order;
 		fin >> order;
 		if (order != "increasing" and order != "decreasing") {
@@ -456,7 +469,9 @@ exe_rand_sorting(const std::string& option, std::ifstream& fin) noexcept
 		{
 			here_counting_sort<Ui_it, uint64_t>(begin, end, Max, key1, incr);
 		};
-		return _check_sorting<uint64_t>("counting_sort", values, sort1, incr);
+		return check_sorting_vector<uint64_t>(
+			"counting_sort", values, sort1, incr
+		);
 	}
 
 	std::cerr << ERROR << '\n';
@@ -468,6 +483,7 @@ err_type exe_detail_sorting(std::ifstream& fin) noexcept
 {
 	const std::set<std::string> allowed_options(
 		{"insertion_sort_rand",
+		 "insertion_sort_nrand",
 		 "bit_sort_rand",
 		 "bit_sort_mem_rand",
 		 "counting_sort_rand",
