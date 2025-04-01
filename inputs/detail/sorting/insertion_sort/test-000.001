@@ -2,6 +2,7 @@ TYPE detail-sorting
 
 	insertion_sort_nrand 1 1
 	
+	insertion_sort_nrand 2 7 9
 	insertion_sort_nrand 2 9 7
 	insertion_sort_nrand 2 2 1
 	insertion_sort_nrand 2 1 2
