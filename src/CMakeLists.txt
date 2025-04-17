@@ -487,7 +487,8 @@ add_compiler_flag(-Wduplicated-branches)
 add_compiler_flag(-Wlogical-op)
 add_compiler_flag(-Wuseless-cast)
 add_compiler_flag(-Wrestrict)
-add_compiler_flag(-D__LAL_DEBUG_AVL)
+add_compiler_flag(-LAL_DEBUG_AVL)
+add_compiler_flag(-DLAL_REGISTER_BIBLIOGRAPHY)
 
 # OpenMP
 add_compiler_flag(${OpenMP_CXX_FLAGS})
