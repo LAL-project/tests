@@ -144,6 +144,16 @@ groups_list=(\
 	\
 	"utilities" \
 		"utilities_isomorphism" \
-		"utilities_isomorphism_small" \
-		"utilities_isomorphism_big" \
+		"utilities_isomorphism_free" \
+		"utilities_isomorphism_free_small" \
+		"utilities_isomorphism_free_large" \
+		"utilities_isomorphism_rooted" \
+		"utilities_isomorphism_rooted_small" \
+		"utilities_isomorphism_rooted_SMALL_small" \
+		"utilities_isomorphism_rooted_LARGE_small" \
+		"utilities_isomorphism_rooted_large" \
+		"utilities_isomorphism_rooted_SMALL_large" \
+		"utilities_isomorphism_rooted_LARGE_large" \
+		"utilities_isomorphism_SMALL" \
+		"utilities_isomorphism_LARGE" \
 	)

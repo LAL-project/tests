@@ -1,0 +1,7 @@
+TYPE utilities-tree_isomorphism
+
+	automatic
+	rooted positive exhaustive SMALL
+	10 100
+	11 100
+	12 100

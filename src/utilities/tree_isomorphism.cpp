@@ -53,7 +53,10 @@
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
 #include <lal/generate/rand_ulab_rooted_trees.hpp>
-#include <lal/utilities/tree_isomorphism.hpp>
+
+#include <lal/detail/utilities/tree_isomorphism.hpp>
+#include <lal/detail/utilities/tree_isomorphism_small.hpp>
+#include <lal/detail/utilities/tree_isomorphism_large.hpp>
 
 // common includes
 #include "common/definitions.hpp"
@@ -101,6 +104,8 @@ void read_rooted(std::ifstream& fin, T& t) noexcept
 	t.set_root(r);
 }
 
+namespace manual {
+
 err_type free_isomorphism_test(std::ifstream& fin) noexcept
 {
 	const auto sbi = read_should_be_or_not(fin);
@@ -116,7 +121,7 @@ err_type free_isomorphism_test(std::ifstream& fin) noexcept
 		read_free(fin, t2);
 
 		const bool calculated_isomorphism =
-			lal::utilities::are_trees_isomorphic(t1, t2);
+			lal::detail::are_trees_isomorphic(t1, t2);
 		std::cout << "Are isomorphic? " << std::boolalpha
 				  << calculated_isomorphism << '\n';
 
@@ -138,6 +143,24 @@ err_type free_isomorphism_test(std::ifstream& fin) noexcept
 
 err_type rooted_isomorphism_test(std::ifstream& fin) noexcept
 {
+	std::string algorithm;
+	fin >> algorithm;
+	if (algorithm != "SMALL" and algorithm != "LARGE") {
+		std::cerr << ERROR << '\n';
+		std::cerr << "    Invalid algorithm '" << algorithm << "'.\n";
+		std::cerr << "    Must be one of: SMALL/LARGE\n";
+		return err_type::test_format;
+	}
+
+	const auto f = [&](const lal::graphs::rooted_tree& t1,
+					   const lal::graphs::rooted_tree& t2) -> bool
+	{
+		if (algorithm == "SMALL") {
+			return lal::detail::are_rooted_trees_isomorphic_small(t1, t2);
+		}
+		return lal::detail::are_rooted_trees_isomorphic_large(t1, t2);
+	};
+
 	const auto sbi = read_should_be_or_not(fin);
 	if (not sbi.has_value()) {
 		return err_type::test_format;
@@ -150,8 +173,8 @@ err_type rooted_isomorphism_test(std::ifstream& fin) noexcept
 		read_rooted(fin, t1);
 		read_rooted(fin, t2);
 
-		const bool calculated_isomorphism =
-			lal::utilities::are_trees_isomorphic(t1, t2);
+		const bool calculated_isomorphism = f(t1, t2);
+
 		std::cout << "Are isomorphic? " << std::boolalpha
 				  << calculated_isomorphism << '\n';
 
@@ -188,13 +211,33 @@ err_type exe_utils_tree_iso_manual(std::ifstream& fin) noexcept
 	);
 }
 
+} // namespace manual
+
 // -----------------------------------------------------------------------------
+
+namespace automatic {
 
 // ground truth: ISOMORPHIC
 
 template <class tree_t, class gen_t>
 err_type pos_exh_test(std::ifstream& fin) noexcept
 {
+	std::string algorithm;
+	fin >> algorithm;
+
+	const auto f = [&](const auto& t1, const auto& t2) -> bool
+	{
+		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
+			return lal::detail::are_trees_isomorphic(t1, t2);
+		}
+		else {
+			if (algorithm == "SMALL") {
+				return lal::detail::are_rooted_trees_isomorphic_small(t1, t2);
+			}
+			return lal::detail::are_rooted_trees_isomorphic_large(t1, t2);
+		}
+	};
+
 	tree_t relab_tree;
 
 	uint64_t n, N_relabs;
@@ -215,8 +258,7 @@ err_type pos_exh_test(std::ifstream& fin) noexcept
 				relab_tree.clear();
 				relabel_tree_vertices(edges_cur, relab_tree, true, true);
 
-				const bool r =
-					lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
+				const bool r = f(cur_tree, relab_tree);
 
 				if (not r) {
 					std::cerr << ERROR << '\n';
@@ -237,6 +279,22 @@ err_type pos_exh_test(std::ifstream& fin) noexcept
 template <class tree_t, class gen_t>
 err_type pos_rand_test(std::ifstream& fin) noexcept
 {
+	std::string algorithm;
+	fin >> algorithm;
+
+	const auto f = [&](const auto& t1, const auto& t2) -> bool
+	{
+		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
+			return lal::detail::are_trees_isomorphic(t1, t2);
+		}
+		else {
+			if (algorithm == "SMALL") {
+				return lal::detail::are_rooted_trees_isomorphic_small(t1, t2);
+			}
+			return lal::detail::are_rooted_trees_isomorphic_large(t1, t2);
+		}
+	};
+
 	uint64_t n, N_trees, N_relabs;
 	fin >> n >> N_trees >> N_relabs;
 
@@ -256,8 +314,8 @@ err_type pos_rand_test(std::ifstream& fin) noexcept
 			relab_tree.clear();
 			relabel_tree_vertices(edges_cur, relab_tree, true, true);
 
-			const bool r =
-				lal::utilities::are_trees_isomorphic(cur_tree, relab_tree);
+			const bool r = f(cur_tree, relab_tree);
+
 			if (not r) {
 				std::cerr << ERROR << '\n';
 				std::cerr << "    Isomorphism test returned false on "
@@ -278,29 +336,24 @@ err_type pos_rand_test(std::ifstream& fin) noexcept
 template <class tree_t, class gen_t>
 err_type neg_exh_test(std::ifstream& fin) noexcept
 {
+	std::string algorithm;
+	fin >> algorithm;
+
+	const auto f = [&](const auto& t1, const auto& t2) -> bool
+	{
+		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
+			return lal::detail::are_trees_isomorphic(t1, t2);
+		}
+		else {
+			if (algorithm == "SMALL") {
+				return lal::detail::are_rooted_trees_isomorphic_small(t1, t2);
+			}
+			return lal::detail::are_rooted_trees_isomorphic_large(t1, t2);
+		}
+	};
+
 	uint64_t n, N_relabs;
 	fin >> n >> N_relabs;
-
-	if constexpr (std::is_base_of<lal::graphs::undirected_graph, tree_t>::
-					  value) {
-		if (n > 21) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    Using n>21 (n=" << n
-					  << ") is going to freeze the computer.\n";
-			std::cerr << "    Aborting.\n";
-			return err_type::test_execution;
-		}
-	}
-	else if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::
-						   value) {
-		if (n > 18) {
-			std::cerr << ERROR << '\n';
-			std::cerr << "    Using n>18 (n=" << n
-					  << ") is going to freeze the computer.\n";
-			std::cerr << "    Aborting.\n";
-			return err_type::test_execution;
-		}
-	}
 
 	std::vector<tree_t> all_trees;
 	gen_t Gen(n);
@@ -325,8 +378,7 @@ err_type neg_exh_test(std::ifstream& fin) noexcept
 			for (uint64_t l = 0; l < N_relabs; ++l) {
 				relabel_tree_vertices(edges_tj, relab_tree, true, true);
 
-				const bool r =
-					lal::utilities::are_trees_isomorphic(ti, relab_tree);
+				const bool r = f(ti, relab_tree);
 				if (r) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Isomorphism test returned true on "
@@ -413,11 +465,12 @@ err_type exe_utils_tree_iso_auto(std::ifstream& fin) noexcept
 	);
 }
 
+} // namespace automatic
+
 // -----------------------------------------------------------------------------
 
 err_type exe_utilities_tree_isomorphism(std::ifstream& fin) noexcept
 {
-
 	std::string mode;
 	fin >> mode;
 	if (mode != "manual" and mode != "automatic") {
@@ -429,10 +482,10 @@ err_type exe_utilities_tree_isomorphism(std::ifstream& fin) noexcept
 
 	err_type r;
 	if (mode == "manual") {
-		r = exe_utils_tree_iso_manual(fin);
+		r = manual::exe_utils_tree_iso_manual(fin);
 	}
 	else {
-		r = exe_utils_tree_iso_auto(fin);
+		r = automatic::exe_utils_tree_iso_auto(fin);
 	}
 
 	if (r == err_type::no_error) {

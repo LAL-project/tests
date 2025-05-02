@@ -1,9 +1,11 @@
 TYPE utilities-tree_isomorphism
 
 	manual
-	free
-	LARGE
+	rooted
+	SMALL
 	
 	ISOMORPHIC
 	
 	1
+	0
+	0
