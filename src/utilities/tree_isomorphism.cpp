@@ -107,7 +107,7 @@ err_type free_isomorphism_test(std::ifstream& fin) noexcept
 	if (not sbi.has_value()) {
 		return err_type::test_format;
 	}
-	const bool should_be_isomorphic = *sbi;
+	const bool expected_isomorphism = *sbi;
 
 	uint64_t n;
 	while (fin >> n) {
@@ -115,20 +115,21 @@ err_type free_isomorphism_test(std::ifstream& fin) noexcept
 		read_free(fin, t1);
 		read_free(fin, t2);
 
-		const bool are_iso = lal::utilities::are_trees_isomorphic(t1, t2);
-		std::cout << "Are isomorphic? " << std::boolalpha << are_iso << '\n';
+		const bool calculated_isomorphism =
+			lal::utilities::are_trees_isomorphic(t1, t2);
+		std::cout << "Are isomorphic? " << std::boolalpha
+				  << calculated_isomorphism << '\n';
 
-		if (should_be_isomorphic and not are_iso) {
+		if (expected_isomorphism != calculated_isomorphism) {
 			std::cerr << ERROR << '\n';
-			std::cerr
-				<< "    The trees should be isomorphic but they are NOT!\n";
-			return err_type::test_execution;
-		}
-
-		if (not should_be_isomorphic and are_iso) {
-			std::cerr << ERROR << '\n';
-			std::cerr
-				<< "    The trees should not be isomorphic but they are!\n";
+			std::cerr << "    Library function result: "
+					  << calculated_isomorphism << '\n';
+			std::cerr << "    Expected result: " << expected_isomorphism
+					  << '\n';
+			std::cerr << "Tree 1:\n";
+			std::cerr << "·    "_tab << t1 << '\n';
+			std::cerr << "Tree 2:\n";
+			std::cerr << "·    "_tab << t2 << '\n';
 			return err_type::test_execution;
 		}
 	}
@@ -141,7 +142,7 @@ err_type rooted_isomorphism_test(std::ifstream& fin) noexcept
 	if (not sbi.has_value()) {
 		return err_type::test_format;
 	}
-	const bool should_be_isomorphic = *sbi;
+	const bool expected_isomorphism = *sbi;
 
 	uint64_t n;
 	while (fin >> n) {
@@ -149,20 +150,21 @@ err_type rooted_isomorphism_test(std::ifstream& fin) noexcept
 		read_rooted(fin, t1);
 		read_rooted(fin, t2);
 
-		const bool are_iso = lal::utilities::are_trees_isomorphic(t1, t2);
-		std::cout << "Are isomorphic? " << std::boolalpha << are_iso << '\n';
+		const bool calculated_isomorphism =
+			lal::utilities::are_trees_isomorphic(t1, t2);
+		std::cout << "Are isomorphic? " << std::boolalpha
+				  << calculated_isomorphism << '\n';
 
-		if (should_be_isomorphic and not are_iso) {
+		if (expected_isomorphism != calculated_isomorphism) {
 			std::cerr << ERROR << '\n';
-			std::cerr
-				<< "    The trees should be isomorphic but they are NOT!\n";
-			return err_type::test_execution;
-		}
-
-		if (not should_be_isomorphic and are_iso) {
-			std::cerr << ERROR << '\n';
-			std::cerr
-				<< "    The trees should not be isomorphic but they are!\n";
+			std::cerr << "    Library function result: "
+					  << calculated_isomorphism << '\n';
+			std::cerr << "    Expected result: " << expected_isomorphism
+					  << '\n';
+			std::cerr << "Tree 1:\n";
+			std::cerr << "·    "_tab << t1 << '\n';
+			std::cerr << "Tree 2:\n";
+			std::cerr << "·    "_tab << t2 << '\n';
 			return err_type::test_execution;
 		}
 	}
