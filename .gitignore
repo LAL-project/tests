@@ -30,3 +30,6 @@ info_build-debug-11.4.0/
 info_build-debug-12.3/
 info_build-debug-13.1/
 
+.out.*
+.err.*
+.vgd.*
