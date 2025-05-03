@@ -4,7 +4,7 @@ TYPE utilities-tree_isomorphism-free
 	rooted
 	string
 	
-	NOT_ISOMORPHIC
+	NON_ISOMORPHIC
 	
 	6
 	0 2 1 2 2 3 3 4 3 5    0

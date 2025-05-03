@@ -4,7 +4,7 @@ TYPE utilities-tree_isomorphism-free
 	rooted
 	tuple
 	
-	NOT_ISOMORPHIC
+	NON_ISOMORPHIC
 	
 	4
 	0 1 1 2 2 3    0
