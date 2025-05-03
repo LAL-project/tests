@@ -1,0 +1,11 @@
+TYPE utilities-tree_isomorphism-free
+
+	manual
+	rooted
+	string
+	
+	ISOMORPHIC
+	
+	1
+	0
+	0

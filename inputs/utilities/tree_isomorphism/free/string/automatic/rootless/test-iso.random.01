@@ -1,0 +1,9 @@
+TYPE utilities-tree_isomorphism-rooted-free
+
+	automatic
+	rootless
+	string
+	ISOMORPHIC random
+	100 100 100
+	200 100 100
+	500 100 100

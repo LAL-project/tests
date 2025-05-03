@@ -1,0 +1,11 @@
+TYPE utilities-tree_isomorphism-free
+
+	manual
+	rootless
+	tuple
+	
+	ISOMORPHIC
+	
+	2
+	0 1
+	1 0

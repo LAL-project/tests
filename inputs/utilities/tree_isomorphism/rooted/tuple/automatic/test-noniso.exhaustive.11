@@ -1,0 +1,6 @@
+TYPE utilities-tree_isomorphism-rooted
+
+	automatic
+	tuple
+	NON_ISOMORPHIC exhaustive
+	11 100

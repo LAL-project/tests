@@ -1,0 +1,9 @@
+TYPE utilities-tree_isomorphism-rooted-free
+
+	automatic
+	rootless
+	string
+	ISOMORPHIC exhaustive
+	10 100
+	11 100
+	12 100
