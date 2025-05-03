@@ -66,6 +66,7 @@ static constexpr auto tuple_algo = lal::detail::isomorphism::algorithm::tuple;
 namespace tests {
 namespace utilities {
 
+namespace rooted {
 namespace manual {
 
 template <lal::detail::isomorphism::algorithm algo, bool rooted>
@@ -299,6 +300,7 @@ err_type exe_utilities_tree_isomorphism_rooted(
 }
 
 } // namespace automatic
+} // namespace rooted
 
 err_type exe_utilities_tree_isomorphism_rooted(std::ifstream& fin) noexcept
 {
@@ -322,10 +324,14 @@ err_type exe_utilities_tree_isomorphism_rooted(std::ifstream& fin) noexcept
 
 	err_type r;
 	if (mode == "manual") {
-		r = manual::exe_utilities_tree_isomorphism_rooted(algorithm, fin);
+		r = rooted::manual::exe_utilities_tree_isomorphism_rooted(
+			algorithm, fin
+		);
 	}
 	else {
-		r = automatic::exe_utilities_tree_isomorphism_rooted(algorithm, fin);
+		r = rooted::automatic::exe_utilities_tree_isomorphism_rooted(
+			algorithm, fin
+		);
 	}
 
 	if (r == err_type::no_error) {

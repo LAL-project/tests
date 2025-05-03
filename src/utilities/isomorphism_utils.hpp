@@ -56,14 +56,14 @@ inline std::optional<bool> read_should_be_or_not(std::ifstream& fin) noexcept
 	if (should_what == "ISOMORPHIC") {
 		return true;
 	}
-	if (should_what == "NOT_ISOMORPHIC") {
+	if (should_what == "NON_ISOMORPHIC") {
 		return false;
 	}
 
 	std::cerr << ERROR << '\n';
 	std::cerr << "    String '" << should_what
 			  << "' is not a valid identifier of the test.\n";
-	std::cerr << "    Should be either: 'ISOMORPHIC' or 'NOT_ISOMORPHIC'.\n";
+	std::cerr << "    Should be either: 'ISOMORPHIC' or 'NON_ISOMORPHIC'.\n";
 	return {};
 }
 

@@ -66,6 +66,7 @@ static constexpr auto tuple_algo = lal::detail::isomorphism::algorithm::tuple;
 namespace tests {
 namespace utilities {
 
+namespace free {
 namespace manual {
 
 template <lal::detail::isomorphism::algorithm algo, bool rooted>
@@ -116,8 +117,14 @@ err_type free_test(std::ifstream& fin) noexcept
 					  << '\n';
 			std::cerr << "Tree 1:\n";
 			std::cerr << "·    "_tab << t1 << '\n';
+			if constexpr (rooted) {
+				std::cerr << "    * root: " << r1 << '\n';
+			}
 			std::cerr << "Tree 2:\n";
 			std::cerr << "·    "_tab << t2 << '\n';
+			if constexpr (rooted) {
+				std::cerr << "    * root: " << r2 << '\n';
+			}
 			return err_type::test_execution;
 		}
 	}
@@ -160,14 +167,6 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 
 	std::mt19937 gen(1234);
 
-	std::string algorithm;
-	fin >> algorithm;
-
-	const auto f = [&](const auto& t1, const auto& t2) -> bool
-	{
-		return lal::detail::are_trees_isomorphic<algo, false>(t1, t2);
-	};
-
 	lal::graphs::free_tree relab_tree;
 
 	uint64_t n, N_relabs;
@@ -183,7 +182,9 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 				relab_tree.clear();
 				relabel_tree_vertices(n, edges_cur, relab_tree, gen);
 
-				const bool r = f(cur_tree, relab_tree);
+				const bool r = lal::detail::are_trees_isomorphic<algo, false>(
+					cur_tree, relab_tree
+				);
 
 				if (not r) {
 					std::cerr << ERROR << '\n';
@@ -208,14 +209,6 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 
 	std::mt19937 gen(1234);
 
-	std::string algorithm;
-	fin >> algorithm;
-
-	const auto f = [&](const auto& t1, const auto& t2) -> bool
-	{
-		return lal::detail::are_trees_isomorphic<algo, false>(t1, t2);
-	};
-
 	uint64_t n, N_trees, N_relabs;
 	fin >> n >> N_trees >> N_relabs;
 
@@ -230,7 +223,9 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 			relab_tree.clear();
 			relabel_tree_vertices(n, edges_cur, relab_tree, gen);
 
-			const bool r = f(cur_tree, relab_tree);
+			const bool r = lal::detail::are_trees_isomorphic<algo, false>(
+				cur_tree, relab_tree
+			);
 
 			if (not r) {
 				std::cerr << ERROR << '\n';
@@ -254,14 +249,6 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 
 	std::mt19937 gen(1234);
 
-	std::string algorithm;
-	fin >> algorithm;
-
-	const auto f = [&](const auto& t1, const auto& t2) -> bool
-	{
-		return lal::detail::are_trees_isomorphic<algo, false>(t1, t2);
-	};
-
 	uint64_t n, N_relabs;
 	fin >> n >> N_relabs;
 
@@ -283,7 +270,9 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 			for (uint64_t l = 0; l < N_relabs; ++l) {
 				relabel_tree_vertices(n, edges_tj, relab_tree, gen);
 
-				const bool r = f(ti, relab_tree);
+				const bool r = lal::detail::are_trees_isomorphic<algo, false>(
+					ti, relab_tree
+				);
 				if (r) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Isomorphism test returned true on "
@@ -329,9 +318,6 @@ template <lal::detail::isomorphism::algorithm algo>
 err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
-
-	std::string algorithm;
-	fin >> algorithm;
 
 	const auto f = [&](const auto& t1,
 					   const lal::node r1,
@@ -386,9 +372,6 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
 
-	std::string algorithm;
-	fin >> algorithm;
-
 	const auto f = [&](const auto& t1,
 					   const lal::node r1,
 					   const auto& t2,
@@ -440,17 +423,6 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
 
-	std::string algorithm;
-	fin >> algorithm;
-
-	const auto f = [&](const auto& t1,
-					   const lal::node r1,
-					   const auto& t2,
-					   const lal::node r2) -> bool
-	{
-		return lal::detail::are_trees_isomorphic<algo, false>(t1, r1, t2, r2);
-	};
-
 	uint64_t n, N;
 	fin >> n >> N;
 
@@ -480,7 +452,9 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 					relab_r_tree.to_free_tree(false, false);
 				const lal::node r2 = relab_r_tree.get_root();
 
-				const bool res = f(ti_free, ti.get_root(), relab_tree, r2);
+				const bool res = lal::detail::are_trees_isomorphic<algo, false>(
+					ti_free, ti.get_root(), relab_tree, r2
+				);
 				if (res) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Isomorphism test returned true on "
@@ -567,6 +541,7 @@ err_type exe_utilities_tree_isomorphism_free(
 }
 
 } // namespace automatic
+} // namespace free
 
 err_type exe_utilities_tree_isomorphism_free(std::ifstream& fin) noexcept
 {
@@ -599,12 +574,12 @@ err_type exe_utilities_tree_isomorphism_free(std::ifstream& fin) noexcept
 
 	err_type r;
 	if (mode == "manual") {
-		r = manual::exe_utilities_tree_isomorphism_free(
+		r = free::manual::exe_utilities_tree_isomorphism_free(
 			tree_type, algorithm, fin
 		);
 	}
 	else {
-		r = automatic::exe_utilities_tree_isomorphism_free(
+		r = free::automatic::exe_utilities_tree_isomorphism_free(
 			tree_type, algorithm, fin
 		);
 	}
