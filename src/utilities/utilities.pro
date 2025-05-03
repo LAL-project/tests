@@ -93,8 +93,10 @@ DEPENDPATH += $${LAL_DIR}
 SOURCES += \
 	main.cpp \
 	parse_keywords.cpp \
-	tree_isomorphism.cpp
+	tree_isomorphism_free.cpp \
+	tree_isomorphism_rooted.cpp
 
 HEADERS += \
 	exe_tests.hpp \
+	isomorphism_utils.hpp \
 	parse_keywords.hpp

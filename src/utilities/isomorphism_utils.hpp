@@ -31,36 +31,60 @@
  *         Jordi Girona St 1-3, Campus Nord UPC, 08034 Barcelona.   CATALONIA, SPAIN
  *         Webpage: https://cqllab.upc.edu/people/lalemany/
  *
- *     Ramon Ferrer i Cancho (rferrericancho@cs.upc.edu)
- *         LQMC (Quantitative, Mathematical, and Computational Linguisitcs)
- *         CQL (Complexity and Quantitative Linguistics Lab)
- *         Office 220, Omega building
- *         Jordi Girona St 1-3, Campus Nord UPC, 08034 Barcelona.   CATALONIA, SPAIN
- *         Webpage: https://cqllab.upc.edu/people/rferrericancho/
- *
  ********************************************************************/
 
 #pragma once
 
-/* This file contains the definition of the different functions used for
- * testing the library.
- *
- * This file is not to be included by any of the implemented tests, as adding
- * a new function to this file will make ALL the corresponding .cpp files to
- * be recompiled.
- */
-
 // C++ includes
+#include <optional>
+#include <iostream>
 #include <fstream>
 
-// common includes
+// lal includes
+#include <lal/basic_types.hpp>
+
+// custom includes
 #include "common/definitions.hpp"
 
 namespace tests {
 namespace utilities {
 
-err_type exe_utilities_tree_isomorphism_free(std::ifstream& fin) noexcept;
-err_type exe_utilities_tree_isomorphism_rooted(std::ifstream& fin) noexcept;
+inline std::optional<bool> read_should_be_or_not(std::ifstream& fin) noexcept
+{
+	std::string should_what;
+	fin >> should_what;
+	if (should_what == "ISOMORPHIC") {
+		return true;
+	}
+	if (should_what == "NOT_ISOMORPHIC") {
+		return false;
+	}
+
+	std::cerr << ERROR << '\n';
+	std::cerr << "    String '" << should_what
+			  << "' is not a valid identifier of the test.\n";
+	std::cerr << "    Should be either: 'ISOMORPHIC' or 'NOT_ISOMORPHIC'.\n";
+	return {};
+}
+
+template <class tree_t>
+inline void read_free(std::ifstream& fin, tree_t& t) noexcept
+{
+	std::vector<lal::edge> edges(t.get_num_nodes() - 1);
+	for (auto& e : edges) {
+		fin >> e.first >> e.second;
+	}
+	t.add_edges(edges);
+}
+
+template <class tree_t>
+inline void read_rooted(std::ifstream& fin, tree_t& t) noexcept
+{
+	read_free(fin, t);
+	lal::node r;
+	fin >> r;
+	t.set_root(r);
+}
 
 } // namespace utilities
 } // namespace tests

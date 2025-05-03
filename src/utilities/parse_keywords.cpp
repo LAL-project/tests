@@ -51,13 +51,31 @@
 namespace tests {
 namespace utilities {
 
+err_type call_isomorphism(
+	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
+) noexcept
+{
+	const std::string& key = keywords[i];
+	if (key == "free") {
+		return exe_utilities_tree_isomorphism_free(fin);
+	}
+	else if (key == "rooted") {
+		return exe_utilities_tree_isomorphism_rooted(fin);
+	}
+
+	std::cerr << ERROR << '\n';
+	std::cerr << "    Unhandled keyword at " << i << ": '" << key << "'.\n";
+	mark_wrong_keyword(keywords, {i}, "    ");
+	return err_type::wrong_keyword;
+}
+
 err_type call_utilities(
 	const std::vector<std::string>& keywords, std::size_t i, std::ifstream& fin
 ) noexcept
 {
 	const std::string& key = keywords[i];
 	if (key == "tree_isomorphism") {
-		return exe_utilities_tree_isomorphism(fin);
+		return call_isomorphism(keywords, i + 1, fin);
 	}
 
 	std::cerr << ERROR << '\n';
