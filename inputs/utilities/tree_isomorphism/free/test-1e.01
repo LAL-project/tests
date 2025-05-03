@@ -1,7 +1,7 @@
 TYPE utilities-tree_isomorphism
 
 	automatic
-	free positive exhaustive LARGE
+	free positive exhaustive
 	13 1000
 	14 1000
 	15 1000
