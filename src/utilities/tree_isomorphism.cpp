@@ -121,7 +121,8 @@ err_type free_isomorphism_test(std::ifstream& fin) noexcept
 		read_free(fin, t2);
 
 		const bool calculated_isomorphism =
-			lal::detail::are_trees_isomorphic(t1, t2);
+			lal::detail::are_trees_isomorphic<false>(t1, t2);
+
 		std::cout << "Are isomorphic? " << std::boolalpha
 				  << calculated_isomorphism << '\n';
 
@@ -228,7 +229,7 @@ err_type pos_exh_test(std::ifstream& fin) noexcept
 	const auto f = [&](const auto& t1, const auto& t2) -> bool
 	{
 		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
-			return lal::detail::are_trees_isomorphic(t1, t2);
+			return lal::detail::are_trees_isomorphic<false>(t1, t2);
 		}
 		else {
 			if (algorithm == "SMALL") {
@@ -248,8 +249,10 @@ err_type pos_exh_test(std::ifstream& fin) noexcept
 			Gen.next();
 
 			std::vector<lal::edge> edges_cur = cur_tree.get_edges();
-			if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::
-							  value) {
+			if constexpr (std::is_base_of_v<
+							  lal::graphs::directed_graph,
+							  tree_t>) {
+
 				relab_tree.init(n);
 				relab_tree.set_root(cur_tree.get_root());
 			}
@@ -285,7 +288,7 @@ err_type pos_rand_test(std::ifstream& fin) noexcept
 	const auto f = [&](const auto& t1, const auto& t2) -> bool
 	{
 		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
-			return lal::detail::are_trees_isomorphic(t1, t2);
+			return lal::detail::are_trees_isomorphic<false>(t1, t2);
 		}
 		else {
 			if (algorithm == "SMALL") {
@@ -304,8 +307,8 @@ err_type pos_rand_test(std::ifstream& fin) noexcept
 	for (uint64_t t = 0; t < N_trees; ++t) {
 		const tree_t cur_tree = Gen.get_tree();
 		std::vector<lal::edge> edges_cur = cur_tree.get_edges();
-		if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::
-						  value) {
+		if constexpr (std::is_base_of_v<lal::graphs::directed_graph, tree_t>) {
+
 			relab_tree.init(n);
 			relab_tree.set_root(cur_tree.get_root());
 		}
@@ -342,7 +345,7 @@ err_type neg_exh_test(std::ifstream& fin) noexcept
 	const auto f = [&](const auto& t1, const auto& t2) -> bool
 	{
 		if constexpr (std::is_same_v<tree_t, lal::graphs::free_tree>) {
-			return lal::detail::are_trees_isomorphic(t1, t2);
+			return lal::detail::are_trees_isomorphic<false>(t1, t2);
 		}
 		else {
 			if (algorithm == "SMALL") {
@@ -369,8 +372,10 @@ err_type neg_exh_test(std::ifstream& fin) noexcept
 
 			const tree_t& tj = all_trees[j];
 			std::vector<lal::edge> edges_tj = tj.get_edges();
-			if constexpr (std::is_base_of<lal::graphs::directed_graph, tree_t>::
-							  value) {
+			if constexpr (std::is_base_of_v<
+							  lal::graphs::directed_graph,
+							  tree_t>) {
+
 				relab_tree.init(n);
 				relab_tree.set_root(tj.get_root());
 			}
