@@ -98,37 +98,34 @@ std::string read_output_string(std::ifstream& fin) noexcept
 #define to_uint64(x) static_cast<uint64_t>(x)
 
 void relabel_edges(
-	const uint64_t n, std::vector<lal::edge>& edges, lal::node& r
+	const uint64_t n,
+	std::vector<lal::edge>& edges,
+	lal::node& r,
+	std::mt19937& gen
 ) noexcept
 {
-	std::mt19937 gen(1234);
-
 	std::vector<lal::node> relab(n);
 	std::iota(relab.begin(), relab.end(), 0);
 
-	// relabel 'n' times
-	for (uint64_t i = 0; i < n; ++i) {
-		std::shuffle(relab.begin(), relab.end(), gen);
+	std::shuffle(relab.begin(), relab.end(), gen);
 
-		// relabel each vertex according to 'relab'
-		for (auto& [s, t] : edges) {
-			s = relab[s];
-			t = relab[t];
-		}
-		r = relab[r];
+	// relabel each vertex according to 'relab'
+	for (auto& [s, t] : edges) {
+		s = relab[s];
+		t = relab[t];
 	}
+	r = relab[r];
 }
 
 void shuffle_graph_edges(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::undirected_graph& G,
+	std::mt19937& gen,
 	bool normalize,
 	bool check
 ) noexcept
 {
-	const uint64_t n = G.get_num_nodes();
-	std::mt19937 gen(1234);
-
 	// shuffle 'n' times
 	for (uint64_t i = 0; i < n; ++i) {
 		std::shuffle(edges.begin(), edges.end(), gen);
@@ -140,15 +137,16 @@ void shuffle_graph_edges(
 }
 
 void relabel_graph_vertices(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::undirected_graph& G,
+	std::mt19937& gen,
 	bool normalize,
 	bool check
 ) noexcept
 {
-	const uint64_t n = G.get_num_nodes();
 	lal::node dummy = 0;
-	relabel_edges(G.get_num_nodes(), edges, dummy);
+	relabel_edges(n, edges, dummy, gen);
 
 	G.clear();
 	G.init(n);
@@ -156,32 +154,36 @@ void relabel_graph_vertices(
 }
 
 void relabel_tree_vertices(
+	const uint64_t n,
+	lal::node r,
 	std::vector<lal::edge>& edges,
 	lal::graphs::rooted_tree& T,
+	std::mt19937& gen,
 	bool normalize,
 	bool check
 ) noexcept
 {
-	lal::node r = T.get_root();
-	relabel_edges(T.get_num_nodes(), edges, r);
+	relabel_edges(n, edges, r, gen);
 
 	T.clear();
-	T.init(edges.size() + 1);
+	T.init(n);
 	T.set_edges(edges, normalize, check);
 }
 
 void relabel_tree_vertices(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::free_tree& T,
+	std::mt19937& gen,
 	bool normalize,
 	bool check
 ) noexcept
 {
 	lal::node dummy = 0;
-	relabel_edges(T.get_num_nodes(), edges, dummy);
+	relabel_edges(n, edges, dummy, gen);
 
 	T.clear();
-	T.init(edges.size() + 1);
+	T.init(n);
 	T.set_edges(edges, normalize, check);
 }
 

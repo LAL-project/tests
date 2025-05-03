@@ -132,10 +132,18 @@ inline lal::numeric::integer amount_bipartite(
 inline err_type
 test_a_tree(lal::graphs::free_tree& T, uint64_t nrelabs) noexcept
 {
+	std::mt19937 gen(1234);
 	std::vector<lal::edge> edges = T.get_edges();
 
 	for (uint64_t i = 0; i < 2 * nrelabs; ++i) {
-		relabel_tree_vertices(edges, T, (i < nrelabs ? false : true), false);
+		relabel_tree_vertices(
+			T.get_num_nodes(),
+			edges,
+			T,
+			gen,
+			(i < nrelabs ? false : true),
+			false
+		);
 
 		const lal::properties::bipartite_graph_coloring c =
 			lal::properties::bipartite_coloring(T);

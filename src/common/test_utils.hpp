@@ -44,6 +44,7 @@
 
 // C++ includes
 #include <fstream>
+#include <random>
 #include <vector>
 #include <string>
 
@@ -64,29 +65,38 @@ std::string read_output_string(std::ifstream& fin) noexcept;
 /* ----- Utilities related to the library -- not so much to the tests ------- */
 
 void shuffle_graph_edges(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::undirected_graph& G,
+	std::mt19937& gen,
 	bool normalize = false,
 	bool check = false
 ) noexcept;
 
 void relabel_graph_vertices(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::undirected_graph& G,
+	std::mt19937& gen,
 	bool normalize = false,
 	bool check = false
 ) noexcept;
 
 void relabel_tree_vertices(
+	const uint64_t n,
+	lal::node r,
 	std::vector<lal::edge>& edges,
 	lal::graphs::rooted_tree& T,
+	std::mt19937& gen,
 	bool normalize = false,
 	bool check = false
 ) noexcept;
 
 void relabel_tree_vertices(
+	const uint64_t n,
 	std::vector<lal::edge>& edges,
 	lal::graphs::free_tree& T,
+	std::mt19937& gen,
 	bool normalize = false,
 	bool check = false
 ) noexcept;

@@ -91,6 +91,8 @@ err_type output_ExpVar_C_formula_no_Q(
 	lal::graphs::undirected_graph& g, bool reuse
 ) noexcept
 {
+	std::mt19937 gen(1234);
+
 	g.normalize();
 	const lal::numeric::rational Vr =
 		lal::properties::var_num_crossings_rational(g, reuse);
@@ -100,7 +102,7 @@ err_type output_ExpVar_C_formula_no_Q(
 		const std::size_t max_iters = 50;
 		std::size_t iters = 0;
 		while (g.is_normalized() and iters < max_iters) {
-			shuffle_graph_edges(edges, g, false, true);
+			shuffle_graph_edges(g.get_num_nodes(), edges, g, gen, false, true);
 			++iters;
 		}
 

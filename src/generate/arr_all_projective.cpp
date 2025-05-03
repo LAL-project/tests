@@ -85,8 +85,6 @@ amount_projective(const lal::graphs::rooted_tree& rT) noexcept
 inline err_type
 test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noexcept
 {
-	std::vector<lal::edge> edges = rT.get_edges();
-
 #define check_and_process_arrangement(c)                                       \
 	if (not lal::linarr::is_projective(rT, arr)) {                             \
 		std::cerr << ERROR << '\n';                                            \
@@ -120,8 +118,19 @@ test_a_tree(lal::graphs::rooted_tree& rT, uint64_t nrelabs) noexcept
 		return err_type::test_execution;                                       \
 	}
 
+	std::mt19937 gen(1234);
+	std::vector<lal::edge> edges = rT.get_edges();
+
 	for (uint64_t i = 0; i < 2 * nrelabs; ++i) {
-		relabel_tree_vertices(edges, rT, (i < nrelabs ? false : true), false);
+		relabel_tree_vertices(
+			rT.get_num_nodes(),
+			rT.get_root(),
+			edges,
+			rT,
+			gen,
+			(i < nrelabs ? false : true),
+			false
+		);
 
 		uint64_t iterations = 0;
 		std::set<lal::linear_arrangement> list_arrs;
