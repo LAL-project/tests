@@ -218,6 +218,8 @@ function show_usage() {
 	echo "                    utilities_isomorphism_rooted_large : large tests"
 	echo "                    utilities_isomorphism_rooted_SMALL_large : large tests of SMALL algorithm"
 	echo "                    utilities_isomorphism_rooted_LARGE_large : large tests of LARGE algorithm"
+	echo "                    utilities_isomorphism_rooted_SMALL : tests of SMALL algorithm on rooted trees"
+	echo "                    utilities_isomorphism_rooted_LARGE : tests of LARGE algorithm on rooted trees"
 	echo "                utilities_isomorphism_SMALL : execute all tests for the SMALL algorithm"
 	echo "                utilities_isomorphism_LARGE : execute all tests for the LARGE algorithm"
 	echo ""	

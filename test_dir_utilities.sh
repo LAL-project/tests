@@ -36,6 +36,15 @@ utilities_isomorphism_rooted_SMALL_DIRS=(\
 	"${utilities_isomorphism_rooted_SMALL_large_DIRS[@]}" \
 	)
 
+utilities_isomorphism_rooted_small_DIRS=(\
+	"${utilities_isomorphism_rooted_LARGE_small_DIRS[@]}" \
+	"${utilities_isomorphism_rooted_SMALL_small_DIRS[@]}" \
+	)
+utilities_isomorphism_rooted_large_DIRS=(\
+	"${utilities_isomorphism_rooted_LARGE_large_DIRS[@]}" \
+	"${utilities_isomorphism_rooted_SMALL_large_DIRS[@]}" \
+	)
+
 utilities_isomorphism_rooted_DIRS=(\
 	"${utilities_isomorphism_rooted_LARGE_DIRS[@]}" \
 	"${utilities_isomorphism_rooted_SMALL_DIRS[@]}" \

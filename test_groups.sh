@@ -154,6 +154,8 @@ groups_list=(\
 		"utilities_isomorphism_rooted_large" \
 		"utilities_isomorphism_rooted_SMALL_large" \
 		"utilities_isomorphism_rooted_LARGE_large" \
+		"utilities_isomorphism_rooted_SMALL" \
+		"utilities_isomorphism_rooted_LARGE" \
 		"utilities_isomorphism_SMALL" \
 		"utilities_isomorphism_LARGE" \
 	)
