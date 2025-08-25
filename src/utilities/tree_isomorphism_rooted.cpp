@@ -60,16 +60,64 @@
 
 #define to_uint64(x) static_cast<uint64_t>(x)
 
-static constexpr auto string_algo = lal::detail::isomorphism::algorithm::string;
-static constexpr auto tuple_algo = lal::detail::isomorphism::algorithm::tuple;
-
 namespace tests {
 namespace utilities {
+
+enum class custom_iso_algos {
+	string,
+	tuple
+};
+
+template <custom_iso_algos algo, typename tree_t>
+bool run_test(
+	const tree_t& t1, const lal::node r1, const tree_t& t2, const lal::node r2
+)
+{
+	if constexpr (algo == custom_iso_algos::string) {
+		return lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::string,
+			false>(t1, r1, t2, r2);
+	}
+	else {
+		const bool res1 = lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::tuple_small,
+			false>(t1, r1, t2, r2);
+		const bool res2 = lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::tuple_large,
+			false>(t1, r1, t2, r2);
+		if (res1 != res2) {
+			std::cerr << ERROR << '\n';
+		}
+		return res1;
+	}
+}
+
+template <custom_iso_algos algo, typename tree_t>
+bool run_test(const tree_t& t1, const tree_t& t2)
+{
+	if constexpr (algo == custom_iso_algos::string) {
+		return lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::string,
+			false>(t1, t2);
+	}
+	else {
+		const bool res1 = lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::tuple_small,
+			false>(t1, t2);
+		const bool res2 = lal::detail::are_trees_isomorphic<
+			lal::detail::isomorphism::algorithm::tuple_large,
+			false>(t1, t2);
+		if (res1 != res2) {
+			std::cerr << ERROR << '\n';
+		}
+		return res1;
+	}
+}
 
 namespace rooted {
 namespace manual {
 
-template <lal::detail::isomorphism::algorithm algo, bool rooted>
+template <custom_iso_algos algo, bool rooted>
 err_type rooted_test(std::ifstream& fin) noexcept
 {
 	const auto sbi = read_should_be_or_not(fin);
@@ -86,8 +134,7 @@ err_type rooted_test(std::ifstream& fin) noexcept
 		lal::graphs::rooted_tree t2(n);
 		read_rooted(fin, t2);
 
-		const bool calculated_isomorphism =
-			lal::detail::are_trees_isomorphic<algo, false>(t1, t2);
+		const bool calculated_isomorphism = run_test<algo>(t1, t2);
 
 		std::cout << "Are isomorphic? " << std::boolalpha
 				  << calculated_isomorphism << '\n';
@@ -113,10 +160,10 @@ err_type exe_utilities_tree_isomorphism_rooted(
 ) noexcept
 {
 	if (algorithm == "string") {
-		return rooted_test<string_algo, false>(fin);
+		return rooted_test<custom_iso_algos::string, false>(fin);
 	}
 	else {
-		return rooted_test<tuple_algo, false>(fin);
+		return rooted_test<custom_iso_algos::tuple, false>(fin);
 	}
 }
 
@@ -124,7 +171,7 @@ err_type exe_utilities_tree_isomorphism_rooted(
 
 namespace automatic {
 
-template <lal::detail::isomorphism::algorithm algo>
+template <custom_iso_algos algo>
 err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -147,9 +194,7 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 					n, cur_tree.get_root(), edges_cur, relab_tree, gen
 				);
 
-				const bool res = lal::detail::are_trees_isomorphic<algo, false>(
-					cur_tree, relab_tree
-				);
+				const bool res = run_test<algo>(cur_tree, relab_tree);
 
 				if (not res) {
 					std::cerr << ERROR << '\n';
@@ -167,7 +212,7 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <lal::detail::isomorphism::algorithm algo>
+template <custom_iso_algos algo>
 err_type positive_random_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -186,9 +231,7 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 				n, cur_tree.get_root(), edges_cur, relab_tree, gen
 			);
 
-			const bool res = lal::detail::are_trees_isomorphic<algo, false>(
-				cur_tree, relab_tree
-			);
+			const bool res = run_test<algo>(cur_tree, relab_tree);
 
 			if (not res) {
 				std::cerr << ERROR << '\n';
@@ -205,7 +248,7 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <lal::detail::isomorphism::algorithm algo>
+template <custom_iso_algos algo>
 err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -232,9 +275,7 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 					n, tj.get_root(), edges_tj, relab_tree, gen
 				);
 
-				const bool res = lal::detail::are_trees_isomorphic<algo, false>(
-					ti, relab_tree
-				);
+				const bool res = run_test<algo>(ti, relab_tree);
 				if (res) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Isomorphism test returned true on "
@@ -251,7 +292,7 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <lal::detail::isomorphism::algorithm algo>
+template <custom_iso_algos algo>
 err_type rooted_tests(
 	const bool expected_isomorphism,
 	const std::string& inspection,
@@ -292,10 +333,14 @@ err_type exe_utilities_tree_isomorphism_rooted(
 	}
 
 	if (algorithm == "string") {
-		return rooted_tests<string_algo>(expected_isomorphism, inspection, fin);
+		return rooted_tests<custom_iso_algos::string>(
+			expected_isomorphism, inspection, fin
+		);
 	}
 	else {
-		return rooted_tests<tuple_algo>(expected_isomorphism, inspection, fin);
+		return rooted_tests<custom_iso_algos::tuple>(
+			expected_isomorphism, inspection, fin
+		);
 	}
 }
 
