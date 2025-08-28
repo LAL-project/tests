@@ -63,61 +63,29 @@
 namespace tests {
 namespace utilities {
 
-enum class custom_iso_algos {
-	string,
-	tuple
-};
-
-template <custom_iso_algos algo, typename tree_t>
+template <lal::detail::isomorphism::algorithm algo, typename tree_t>
 bool run_test(
 	const tree_t& t1, const lal::node r1, const tree_t& t2, const lal::node r2
 )
 {
-	if constexpr (algo == custom_iso_algos::string) {
-		return lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::string,
-			false>(t1, r1, t2, r2);
-	}
-	else {
-		const bool res1 = lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::tuple_small,
-			false>(t1, r1, t2, r2);
-		const bool res2 = lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::tuple_large,
-			false>(t1, r1, t2, r2);
-		if (res1 != res2) {
-			std::cerr << ERROR << '\n';
-		}
-		return res1;
-	}
+
+	return lal::detail::are_trees_isomorphic<
+		lal::detail::isomorphism::algorithm::string,
+		false>(t1, r1, t2, r2);
 }
 
-template <custom_iso_algos algo, typename tree_t>
+template <lal::detail::isomorphism::algorithm algo, typename tree_t>
 bool run_test(const tree_t& t1, const tree_t& t2)
 {
-	if constexpr (algo == custom_iso_algos::string) {
-		return lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::string,
-			false>(t1, t2);
-	}
-	else {
-		const bool res1 = lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::tuple_small,
-			false>(t1, t2);
-		const bool res2 = lal::detail::are_trees_isomorphic<
-			lal::detail::isomorphism::algorithm::tuple_large,
-			false>(t1, t2);
-		if (res1 != res2) {
-			std::cerr << ERROR << '\n';
-		}
-		return res1;
-	}
+	return lal::detail::are_trees_isomorphic<
+		lal::detail::isomorphism::algorithm::string,
+		false>(t1, t2);
 }
 
 namespace rooted {
 namespace manual {
 
-template <custom_iso_algos algo, bool rooted>
+template <lal::detail::isomorphism::algorithm algo, bool rooted>
 err_type rooted_test(std::ifstream& fin) noexcept
 {
 	const auto sbi = read_should_be_or_not(fin);
@@ -160,18 +128,28 @@ err_type exe_utilities_tree_isomorphism_rooted(
 ) noexcept
 {
 	if (algorithm == "string") {
-		return rooted_test<custom_iso_algos::string, false>(fin);
+		return rooted_test<lal::detail::isomorphism::algorithm::string, false>(
+			fin
+		);
 	}
-	else {
-		return rooted_test<custom_iso_algos::tuple, false>(fin);
+	else if (algorithm == "tuple_small") {
+		return rooted_test<
+			lal::detail::isomorphism::algorithm::tuple_small,
+			false>(fin);
 	}
+	else if (algorithm == "tuple_large") {
+		return rooted_test<
+			lal::detail::isomorphism::algorithm::tuple_large,
+			false>(fin);
+	}
+	return err_type::test_format;
 }
 
 } // namespace manual
 
 namespace automatic {
 
-template <custom_iso_algos algo>
+template <lal::detail::isomorphism::algorithm algo>
 err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -212,7 +190,7 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <custom_iso_algos algo>
+template <lal::detail::isomorphism::algorithm algo>
 err_type positive_random_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -248,7 +226,7 @@ err_type positive_random_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <custom_iso_algos algo>
+template <lal::detail::isomorphism::algorithm algo>
 err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 {
 	std::mt19937 gen(1234);
@@ -292,7 +270,7 @@ err_type negative_exhaustive_test(std::ifstream& fin) noexcept
 	return err_type::no_error;
 }
 
-template <custom_iso_algos algo>
+template <lal::detail::isomorphism::algorithm algo>
 err_type rooted_tests(
 	const bool expected_isomorphism,
 	const std::string& inspection,
@@ -333,15 +311,21 @@ err_type exe_utilities_tree_isomorphism_rooted(
 	}
 
 	if (algorithm == "string") {
-		return rooted_tests<custom_iso_algos::string>(
+		return rooted_tests<lal::detail::isomorphism::algorithm::string>(
 			expected_isomorphism, inspection, fin
 		);
 	}
-	else {
-		return rooted_tests<custom_iso_algos::tuple>(
+	else if (algorithm == "tuple_small") {
+		return rooted_tests<lal::detail::isomorphism::algorithm::tuple_small>(
 			expected_isomorphism, inspection, fin
 		);
 	}
+	else if (algorithm == "tuple_large") {
+		return rooted_tests<lal::detail::isomorphism::algorithm::tuple_large>(
+			expected_isomorphism, inspection, fin
+		);
+	}
+	return err_type::test_format;
 }
 
 } // namespace automatic
@@ -360,7 +344,8 @@ err_type exe_utilities_tree_isomorphism_rooted(std::ifstream& fin) noexcept
 
 	std::string algorithm;
 	fin >> algorithm;
-	if (algorithm != "string" and algorithm != "tuple") {
+	if (algorithm != "string" and algorithm != "tuple_small" and
+		algorithm != "tuple_large") {
 		std::cerr << ERROR << '\n';
 		std::cerr << "    Invalid algorithm '" << mode << "'.\n";
 		std::cerr << "    Must be one of: string/tuple\n";
