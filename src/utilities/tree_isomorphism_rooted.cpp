@@ -158,8 +158,6 @@ err_type positive_exhaustive_test(std::ifstream& fin) noexcept
 	uint64_t n, N;
 	while (fin >> n >> N) {
 
-		std::cout << n << " " << N << '\n';
-
 		lal::generate::all_ulab_rooted_trees Gen(n);
 		while (not Gen.end()) {
 			const lal::graphs::rooted_tree cur_tree = Gen.get_tree();
