@@ -1,8 +1,0 @@
-TYPE utilities-tree_isomorphism-rooted
-
-	automatic
-	tuple
-	ISOMORPHIC random
-	50 100 100
-	60 100 100
-	70 100 100

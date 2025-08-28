@@ -1,7 +1,0 @@
-TYPE utilities-tree_isomorphism-free
-
-	automatic
-	rooted
-	tuple
-	NON_ISOMORPHIC exhaustive
-	13 100

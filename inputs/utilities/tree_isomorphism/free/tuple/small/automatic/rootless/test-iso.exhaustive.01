@@ -1,0 +1,9 @@
+TYPE utilities-tree_isomorphism-free
+
+	automatic
+	rootless
+	tuple_small
+	ISOMORPHIC exhaustive
+	13 500
+	14 500
+	15 500

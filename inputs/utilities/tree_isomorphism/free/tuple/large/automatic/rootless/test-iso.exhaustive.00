@@ -1,0 +1,9 @@
+TYPE utilities-tree_isomorphism-free
+
+	automatic
+	rootless
+	tuple_large
+	ISOMORPHIC exhaustive
+	10 100
+	11 100
+	12 100

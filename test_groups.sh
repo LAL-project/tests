@@ -156,27 +156,42 @@ groups_list=(\
 		"utilities_isomorphism_free_string_manual_positive" \
 		"utilities_isomorphism_free_string_manual_positive_rootless" \
 		"utilities_isomorphism_free_string_manual_positive_rooted" \
-		"utilities_isomorphism_free_tuple" \
-		"utilities_isomorphism_free_tuple_automatic" \
-		"utilities_isomorphism_free_tuple_automatic_rootless" \
-		"utilities_isomorphism_free_tuple_automatic_rooted" \
-		"utilities_isomorphism_free_tuple_manual" \
-		"utilities_isomorphism_free_tuple_manual_negative" \
-		"utilities_isomorphism_free_tuple_manual_negative_rootless" \
-		"utilities_isomorphism_free_tuple_manual_negative_rooted" \
-		"utilities_isomorphism_free_tuple_manual_positive" \
-		"utilities_isomorphism_free_tuple_manual_positive_rootless" \
-		"utilities_isomorphism_free_tuple_manual_positive_rooted" \
+		"utilities_isomorphism_free_tuple_small" \
+		"utilities_isomorphism_free_tuple_small_automatic" \
+		"utilities_isomorphism_free_tuple_small_automatic_rootless" \
+		"utilities_isomorphism_free_tuple_small_automatic_rooted" \
+		"utilities_isomorphism_free_tuple_small_manual" \
+		"utilities_isomorphism_free_tuple_small_manual_negative" \
+		"utilities_isomorphism_free_tuple_small_manual_negative_rootless" \
+		"utilities_isomorphism_free_tuple_small_manual_negative_rooted" \
+		"utilities_isomorphism_free_tuple_small_manual_positive" \
+		"utilities_isomorphism_free_tuple_small_manual_positive_rootless" \
+		"utilities_isomorphism_free_tuple_small_manual_positive_rooted" \
+		"utilities_isomorphism_free_tuple_large" \
+		"utilities_isomorphism_free_tuple_large_automatic" \
+		"utilities_isomorphism_free_tuple_large_automatic_rootless" \
+		"utilities_isomorphism_free_tuple_large_automatic_rooted" \
+		"utilities_isomorphism_free_tuple_large_manual" \
+		"utilities_isomorphism_free_tuple_large_manual_negative" \
+		"utilities_isomorphism_free_tuple_large_manual_negative_rootless" \
+		"utilities_isomorphism_free_tuple_large_manual_negative_rooted" \
+		"utilities_isomorphism_free_tuple_large_manual_positive" \
+		"utilities_isomorphism_free_tuple_large_manual_positive_rootless" \
+		"utilities_isomorphism_free_tuple_large_manual_positive_rooted" \
 		"utilities_isomorphism_rooted" \
 		"utilities_isomorphism_rooted_string" \
 		"utilities_isomorphism_rooted_string_manual" \
 		"utilities_isomorphism_rooted_string_manual_positive" \
 		"utilities_isomorphism_rooted_string_manual_negative" \
 		"utilities_isomorphism_rooted_string_automatic" \
-		"utilities_isomorphism_rooted_tuple" \
-		"utilities_isomorphism_rooted_tuple_manual" \
-		"utilities_isomorphism_rooted_tuple_manual_positive" \
-		"utilities_isomorphism_rooted_tuple_manual_negative" \
-		"utilities_isomorphism_rooted_tuple_automatic" \
-		
+		"utilities_isomorphism_rooted_tuple_small" \
+		"utilities_isomorphism_rooted_tuple_small_manual" \
+		"utilities_isomorphism_rooted_tuple_small_manual_positive" \
+		"utilities_isomorphism_rooted_tuple_small_manual_negative" \
+		"utilities_isomorphism_rooted_tuple_small_automatic" \
+		"utilities_isomorphism_rooted_tuple_large" \
+		"utilities_isomorphism_rooted_tuple_large_manual" \
+		"utilities_isomorphism_rooted_tuple_large_manual_positive" \
+		"utilities_isomorphism_rooted_tuple_large_manual_negative" \
+		"utilities_isomorphism_rooted_tuple_large_automatic" \
 	)
