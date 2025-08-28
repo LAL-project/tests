@@ -158,11 +158,11 @@ utilities_isomorphism_rooted_string_DIRS=(\
 	)
 
 utilities_isomorphism_rooted_tuple_small_manual_positive_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_small/manual/positive" "utilities/tree_isomorphism/rooted/tuple_small/manual/positive"
+	"utilities/tree_isomorphism/rooted/tuple/small/manual/positive" "utilities/tree_isomorphism/rooted/tuple/small/manual/positive"
 	)
 
 utilities_isomorphism_rooted_tuple_small_manual_negative_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_small/manual/negative" "utilities/tree_isomorphism/rooted/tuple_small/manual/negative"
+	"utilities/tree_isomorphism/rooted/tuple/small/manual/negative" "utilities/tree_isomorphism/rooted/tuple/small/manual/negative"
 	)
 
 utilities_isomorphism_rooted_tuple_small_manual_DIRS=(\
@@ -171,7 +171,7 @@ utilities_isomorphism_rooted_tuple_small_manual_DIRS=(\
 	)
 
 utilities_isomorphism_rooted_tuple_small_automatic_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_small/automatic" "utilities/tree_isomorphism/rooted/tuple_small/automatic"
+	"utilities/tree_isomorphism/rooted/tuple/small/automatic" "utilities/tree_isomorphism/rooted/tuple/small/automatic"
 	)
 
 utilities_isomorphism_rooted_tuple_small_DIRS=(\
@@ -180,11 +180,11 @@ utilities_isomorphism_rooted_tuple_small_DIRS=(\
 	)
 
 utilities_isomorphism_rooted_tuple_large_manual_positive_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_large/manual/positive" "utilities/tree_isomorphism/rooted/tuple_large/manual/positive"
+	"utilities/tree_isomorphism/rooted/tuple/large/manual/positive" "utilities/tree_isomorphism/rooted/tuple/large/manual/positive"
 	)
 
 utilities_isomorphism_rooted_tuple_large_manual_negative_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_large/manual/negative" "utilities/tree_isomorphism/rooted/tuple_large/manual/negative"
+	"utilities/tree_isomorphism/rooted/tuple/large/manual/negative" "utilities/tree_isomorphism/rooted/tuple/large/manual/negative"
 	)
 
 utilities_isomorphism_rooted_tuple_large_manual_DIRS=(\
@@ -193,7 +193,7 @@ utilities_isomorphism_rooted_tuple_large_manual_DIRS=(\
 	)
 
 utilities_isomorphism_rooted_tuple_large_automatic_DIRS=(\
-	"utilities/tree_isomorphism/rooted/tuple_large/automatic" "utilities/tree_isomorphism/rooted/tuple_large/automatic"
+	"utilities/tree_isomorphism/rooted/tuple/large/automatic" "utilities/tree_isomorphism/rooted/tuple/large/automatic"
 	)
 
 utilities_isomorphism_rooted_tuple_large_DIRS=(\
