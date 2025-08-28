@@ -246,16 +246,16 @@ void here_counting_sort(
 	const std::size_t size =
 		static_cast<std::size_t>(std::distance(begin, end));
 	if (incr) {
-		lal::detail::sorting::
-			counting_sort<T, lal::detail::sorting::sort_type::non_decreasing>(
-				begin, end, n, size, key
-			);
+		lal::detail::sorting::counting_sort<
+			lal::detail::sorting::sort_type::non_decreasing>(
+			begin, end, n, size, key
+		);
 	}
 	else {
-		lal::detail::sorting::
-			counting_sort<T, lal::detail::sorting::sort_type::non_increasing>(
-				begin, end, n, size, key
-			);
+		lal::detail::sorting::counting_sort<
+			lal::detail::sorting::sort_type::non_increasing>(
+			begin, end, n, size, key
+		);
 	}
 }
 
