@@ -224,7 +224,7 @@ err_type exe_commands_utils_centre(std::ifstream& fin) noexcept
 			const auto centre = lal::detail::retrieve_centre(t, s);
 			std::cout << "centre: " << centre.first;
 			if (centre.second < t.get_num_nodes()) {
-				std::cout << " " << centre.second;
+				std::cout << ' ' << centre.second;
 			}
 			std::cout << '\n';
 		}
@@ -262,9 +262,19 @@ err_type exe_commands_utils_centre(std::ifstream& fin) noexcept
 					return err_type::test_format;
 				}
 
-				if (centre.first != u and centre.second != v) {
+				if (not are_centres_equal(centre_size, centre, {u, v})) {
 					std::cerr << ERROR << '\n';
 					std::cerr << "    Centres do not coincide.\n";
+					std::cerr << "    Library: " << centre.first;
+					if (centre.second < n) {
+						std::cerr << ' ' << centre.second;
+					}
+					std::cerr << '\n';
+					std::cerr << "    Straightforward: " << u;
+					if (v < n) {
+						std::cerr << ' ' << v;
+					}
+					std::cerr << '\n';
 					return err_type::test_execution;
 				}
 			}
@@ -317,12 +327,12 @@ err_type exe_full_utils_centre(
 			std::cerr << "    Centres differ.\n";                              \
 			std::cerr << "    Library: " << lib_centre.first;                  \
 			if (lib_centre.second < n) {                                       \
-				std::cerr << " " << lib_centre.second;                         \
+				std::cerr << ' ' << lib_centre.second;                         \
 			}                                                                  \
 			std::cerr << '\n';                                                 \
 			std::cerr << "    Straightforward: " << easy_centre.first;         \
 			if (easy_centre.second < n) {                                      \
-				std::cerr << " " << easy_centre.second;                        \
+				std::cerr << ' ' << easy_centre.second;                        \
 			}                                                                  \
 			std::cerr << '\n';                                                 \
 			std::cerr << "    For tree:\n";                                    \
