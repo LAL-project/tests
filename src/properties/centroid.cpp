@@ -110,7 +110,7 @@ straightforward_centroid(const T& t, lal::node x) noexcept
 		lal::detail::BFS<T> bfs(t);
 		bfs.set_use_rev_edges(t.is_rooted());
 		bfs.set_process_current(
-			[&](const auto&, lal::node s) -> void
+			[&](const lal::node s) -> void
 			{
 				reachable.push_back(s);
 				++size_cc;

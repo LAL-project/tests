@@ -74,7 +74,7 @@ uint64_t straightforward_diameter(const tree_t& tree, lal::node u) noexcept
 			bfs.set_use_rev_edges(true);
 		}
 		bfs.set_process_neighbour(
-			[&](const auto&, lal::node v, lal::node w, bool)
+			[&](const lal::node v, const lal::node w, const bool)
 			{
 				dis[w] = dis[v] + 1;
 				max_dist = std::max(max_dist, dis[w]);

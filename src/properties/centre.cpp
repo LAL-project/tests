@@ -111,7 +111,7 @@ straightforward_centre(const T& tree, lal::node u) noexcept
 	lal::node v = n + 1;
 
 	bfs.set_process_neighbour(
-		[&](const auto&, lal::node s, lal::node t, bool)
+		[&](const lal::node s, const lal::node t, const bool)
 		{
 			dists[t] = dists[s] + 1;
 			if (max_dist < dists[t]) {
@@ -141,12 +141,15 @@ straightforward_centre(const T& tree, lal::node u) noexcept
 
 	max_dist = 0;
 	std::vector<lal::node> longest_path;
+
+#if defined DEBUG
 	lal::node w = n + 1;
+#endif
 
 	bfs.clear_visited();
 	bfs.clear_queue();
 	bfs.set_process_neighbour(
-		[&](const auto&, lal::node s, lal::node t, bool)
+		[&](const lal::node s, const lal::node t, const bool)
 		{
 			dists[t] = dists[s] + 1;
 
@@ -155,7 +158,11 @@ straightforward_centre(const T& tree, lal::node u) noexcept
 
 			if (max_dist < dists[t]) {
 				max_dist = dists[t];
+
+#if defined DEBUG
 				w = t;
+#endif
+
 				longest_path = paths[t];
 			}
 		}
