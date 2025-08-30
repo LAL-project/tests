@@ -1,0 +1,12 @@
+TYPE properties-centre
+
+	manual ftree
+	init 7
+	add_edges 6
+		0 1
+		0 4
+		0 6
+		1 2
+		2 3
+		4 5
+	centre_is 0 2 0 1
