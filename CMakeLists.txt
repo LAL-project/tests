@@ -81,7 +81,7 @@ function(configure_object thing)
 		define_symbol(${thing} -D_GLIBCXX_DEBUG)
 	else()
 		define_symbol(${thing} -UDEBUG)
-		add_release_flag(${thing} -fstrict-aliasing)
+		add_compile_flag(${thing} -fstrict-aliasing)
 	endif()
 
 	if (ENABLE_ASAN)
