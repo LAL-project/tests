@@ -854,46 +854,11 @@ if [ $compile -eq 1 ]; then
 	wd=$PWD
 	CMAKE_BUILD=0
 	
-	cd $exe_directory
-	if [ -f cmake_install.cmake ]; then
-		CMAKE_BUILD=1
-	fi
-	cd $wd
-	
-	if [ $CMAKE_BUILD == 1 ]; then
-		# choose the execution directory and file for a cmake-based build
-		
-		if [ $EXECUTE_FROM_INPUT == 1 ]; then
-			IFS='/' read -ra keywords <<< "$input_dir"
-			EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
-		else
-			if [ "$exe_group" == "all" ]; then
-				EXECUTABLE_FILE="$exe_directory/tests"
-			else
-				IFS='_' read -ra keywords <<< "$exe_group"
-				EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
-			fi
-		fi
+	if [ "$exe_group" == "all" ]; then
+		EXECUTABLE_FILE="$exe_directory/src/tests/tests"
 	else
-		# choose the execution directory and file for a qmake-based build
-		
-		if [ $EXECUTE_FROM_INPUT == 1 ]; then
-			IFS='/' read -ra keywords <<< "$input_dir"
-			
-			exe_directory="$exe_directory/${keywords[0]}"
-			EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
-		else
-			if [ "$exe_group" == "all" ] || [ "$exe_group" == "small-tests" ]; then
-				exe_directory="$exe_directory/tests"
-				EXECUTABLE_FILE="$exe_directory/tests"
-			else
-				echo "exe_group: $exe_group"
-				IFS='_' read -ra keywords <<< "$exe_group"
-				echo "KEYWORDS: ${keywords[0]}"
-				exe_directory="$exe_directory/${keywords[0]}"
-				EXECUTABLE_FILE="$exe_directory/${keywords[0]}"
-			fi
-		fi
+		IFS='_' read -ra keywords <<< "$exe_group"
+		EXECUTABLE_FILE="$exe_directory/src/${keywords[0]}/${keywords[0]}"
 	fi
 	
 	all_or_small=0
@@ -901,23 +866,9 @@ if [ $compile -eq 1 ]; then
 		all_or_small=1
 	fi
 	
-	if [ $CMAKE_BUILD == 0 ] && [ $EXECUTE_FROM_INPUT == 0 ] && [ $all_or_small == 1 ]; then
-		
-		cd $exe_directory
-		cd ..
-		make -j4
-		cd $wd
-	else
-		cd $exe_directory
-		
-		cd ../common
-		make -j4
-		cd $wd
-		
-		cd $exe_directory
-		make -j4
-		cd $wd
-	fi
+	cd $exe_directory
+	make -j4
+	cd $wd
 fi
 
 EXECUTION_COMMAND=""
