@@ -42,6 +42,7 @@
 #include <lal/graphs/free_tree.hpp>
 #include <lal/graphs/rooted_tree.hpp>
 #include <lal/graphs/output.hpp>
+using namespace lal::utilities::decorator_operators;
 #include <lal/generate/all_ulab_free_trees.hpp>
 #include <lal/generate/all_ulab_rooted_trees.hpp>
 #include <lal/generate/rand_ulab_free_trees.hpp>
@@ -129,12 +130,12 @@ err_type free_test(std::ifstream& fin) noexcept
 			std::cerr << "    Expected result: " << expected_isomorphism
 					  << '\n';
 			std::cerr << "Tree 1:\n";
-			std::cerr << "·    "_tab << t1 << '\n';
+			std::cerr << "·    " + t1 << '\n';
 			if constexpr (rooted) {
 				std::cerr << "    * root: " << r1 << '\n';
 			}
 			std::cerr << "Tree 2:\n";
-			std::cerr << "·    "_tab << t2 << '\n';
+			std::cerr << "·    " + t2 << '\n';
 			if constexpr (rooted) {
 				std::cerr << "    * root: " << r2 << '\n';
 			}
